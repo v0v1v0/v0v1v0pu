@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_common_names</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the common names of two vectors</h2>
+
+<h3>Description</h3>
+
+<p>This function prints and returns the common <code>names</code> of two vectors. The
+two vectors don't have to be the same length.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_common_names(vec1, vec2, vector.names.str = "nodes", with.gt = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vec1</code></td>
+<td>
+<p>vector with <code>names</code> attribute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vec2</code></td>
+<td>
+<p>vector with <code>names</code> attribute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vector.names.str</code></td>
+<td>
+<p>string. Used for printing, it tell us what are the
+<code>names</code> of the two vectors (use plural form). Default value: "nodes".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>with.gt</code></td>
+<td>
+<p>logical. Determines if the "&gt;" sign will be appended for nice
+printing in an R notebook (use with the chuck option <em>results = 'asis'</em>).
+Default value: TRUE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the character vector of the common names. If there is only one name
+in common, the <code>vector.names.str</code> gets the last character stripped for
+readability. If there is no common names, it returns FALSE.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pretty_print_vector_values</code>, <code>pretty_print_string</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">vec1 = c(1,1,1)
+vec2 = c(1,2)
+names(vec1) = c("a","b","c")
+names(vec2) = c("c","b")
+
+common.names = get_common_names(vec1, vec2)
+
+</code></pre>
+
+
+</div>

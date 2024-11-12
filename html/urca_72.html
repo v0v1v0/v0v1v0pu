@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.df</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Augmented-Dickey-Fuller Unit Root Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs the augmented Dickey-Fuller unit root test. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ur.df(y, type = c("none", "drift", "trend"), lags = 1,
+      selectlags = c("Fixed", "AIC", "BIC")) 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vector to be tested for a unit root.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Test type, either <code>"none"</code>, <code>"drift"</code>  or
+<code>"trend"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lags</code></td>
+<td>
+<p>Number of lags for endogenous variable to be included.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>selectlags</code></td>
+<td>
+<p>Lag selection can be achieved according to the
+Akaike <code>"AIC"</code> or the Bayes <code>"BIC"</code> information
+criteria. The maximum number of lags considered is set by
+<code>lags</code>. The default is to use a <code>"fixed"</code> lag length set
+by <code>lags</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function <code>ur.df()</code> computes the augmented Dickey-Fuller
+test. If type is set to <code>"none"</code> neither an intercept nor a trend
+is included in the test regression. If it is set to <code>"drift"</code> an
+intercept is added and if it is set to <code>"trend"</code> both an intercept
+and a trend is added. The critical values are taken from Hamilton
+(1994) and Dickey and Fuller(1981).
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ur.df</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Dickey, D. A. and Fuller, W. A. (1979), Distributions of the
+Estimators For Autoregressive Time Series with a Unit Root,
+<em>Journal of the American Statistical Association</em>,  <b>75</b>,
+427–431.
+</p>
+<p>Dickey, D. A. and Fuller, W. A. (1981), Likelihood Ratio Statistics
+for Autoregressive Time Series with a Unit Root, <em>Econometrica</em>,
+<b>49</b>, 1057–1072.
+</p>
+<p>Hamilton (1994), <em>Time Series Analysis</em>, Princeton University Press.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.df-class</code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Raotbl3)
+attach(Raotbl3)
+lc.df &lt;- ur.df(y=lc, lags=3, type='trend')
+summary(lc.df)
+</code></pre>
+
+
+</div>

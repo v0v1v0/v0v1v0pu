@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>oracledb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Performance of an Oracle database used for online transaction processing</h2>
+
+<h3>Description</h3>
+
+<p>A dataset containing performance data for an Oracle OLTP database measured
+between 8:00am and 8:00pm on January, 19th 2012. The measurements were
+recorded for two minute intervals during this time and a timestamp indicates
+the end of the measurement interval. The performance metrics were taken from
+the <code>v$sysmetric</code> family of system performance views.
+</p>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 360 rows on 8 variables
+</p>
+
+
+<h3>Details</h3>
+
+<p>The Oracle database was running on a 4-way server.
+</p>
+<p>The data frame contains different types of measurements:
+</p>
+
+<ul>
+<li>
+<p> Variables of the "time" type are expressed in seconds per second.
+</p>
+</li>
+<li>
+<p> Variables of the "rate" type are expressed in events per second.
+</p>
+</li>
+<li>
+<p> Variables of the "util" type are expressed as a percentage.
+</p>
+</li>
+</ul>
+<p>The data frame contains the following variables:
+</p>
+
+<ul>
+<li> <p><code>timestamp</code> The end of the two minute interval for which the
+remaining variables contain the measurements.
+</p>
+</li>
+<li> <p><code>db_time</code> The time spent inside the database either working on
+a CPU or waiting  (I/O, locks, buffer waits ...). This time is expressed
+as seconds per second, so two sessions working for exactly one second
+each will contribute a total of two seconds per second of <code>db_time</code>.
+In Oracle this value is also known as <em>Average Active Sessions</em>
+(AAS).
+</p>
+</li>
+<li> <p><code>cpu_time</code> The CPU time used during the interval. This is also
+expressed as seconds per second. A 4-way machine has a theoretical
+capacity of four CPU seconds per second.
+</p>
+</li>
+<li> <p><code>call_rate</code> The number of user calls (logins, parses, or
+execute calls) per second.
+</p>
+</li>
+<li> <p><code>exec_rate</code> The number of statement executions per second.
+</p>
+</li>
+<li> <p><code>lio_rate</code> The number of logical I/Os per second. A logical
+I/O is the Oracle term for a cache hit in the database buffer cache.
+This metric does not indicate if an additional physical I/O was
+necessary to load the buffer from disk.
+</p>
+</li>
+<li> <p><code>txn_rate</code> The number of database transactions per second.
+</p>
+</li>
+<li> <p><code>cpu_util</code> The CPU utilization of the database server in
+percent. This was also measured from within the database.
+</p>
+</li>
+</ul>
+</div>

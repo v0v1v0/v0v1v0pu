@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>repair_environments</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Repair Environment Chains</h2>
+
+<h3>Description</h3>
+
+<p>In theory should never be needed, but use in case you get errors about
+corrupted environments.  You should only use this if you get an error
+telling you to use it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">repair_environments(x, interactive.mode = interactive())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>either a unitizer, or a store id (see <code>unitize</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interactive.mode</code></td>
+<td>
+<p>logical(1L) whether to run in interactive mode (
+request user input when needed) or not (error if user input is required,
+e.g. if all tests do not pass).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If you pass a store id this will re-save the repaired <code>unitizer</code> to
+the location specified by the store id.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>unitizer</code> object
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>unitize</code>
+</p>
+
+
+</div>

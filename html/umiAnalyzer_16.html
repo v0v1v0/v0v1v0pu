@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>generateVCF</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate VCF file from UMI sample or UMI experiment object</h2>
+
+<h3>Description</h3>
+
+<p>Generate VCF file from UMI sample or UMI experiment object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">generateVCF(object, outDir = getwd(), outFile, printAll = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Requires a UMI sample or UMI experiment object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outDir</code></td>
+<td>
+<p>String. Output directory, defaults to working directory.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outFile</code></td>
+<td>
+<p>String. Name of the output file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>printAll</code></td>
+<td>
+<p>Logical. Should all or only trusted variant be printed?</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A VCF file
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+library(umiAnalyzer)
+
+main &lt;- system.file("extdata", package = "umiAnalyzer")
+
+simsen &lt;- createUmiExperiment(main)
+
+simsen &lt;- filterUmiObject(simsen)
+
+generateVCF(simsen,'simsen.vcf', printAll = FALSE, save = FALSE)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

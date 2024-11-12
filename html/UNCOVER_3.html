@@ -1,0 +1,154 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.IBIS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot various outputs of IBIS</h2>
+
+<h3>Description</h3>
+
+<p>Allows visualisation of many aspects of IBIS, including
+co-variate, posterior and diagnostic plots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'IBIS'
+plot(x, type = "samples", plot_var = NULL, diagnostic_x_axis = "full", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object of class <code>"IBIS"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Can be one of; <code>"samples"</code> for posterior visualisation,
+<code>"fitted"</code> for co-variate visualisation or <code>"diagnostics"</code> for diagnostic
+plots. See details. Defaults to <code>"samples"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_var</code></td>
+<td>
+<p>Vector specifying which columns (or associated logistic
+regression coefficients) of the co-variate matrix should be plotted. Does not
+apply when <code>type=="diagnostics"</code>. Defaults to all columns being selected.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diagnostic_x_axis</code></td>
+<td>
+<p>Only applies if <code style="white-space: pre;">⁠"type=="diagnostics"⁠</code>. Either
+<code>"full"</code> (default) for all observations indices to be plotted on the x-axis
+or <code>"minimal"</code> for only some observations indices to be plotted on the
+x-axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments to be passed to methods</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>type=="samples"</code>, the resulting plot will be a ggpairs plot
+giving the coefficient densities in the diagonal, points plots of the
+posterior samples in the lower triangle and contour plots in the upper
+triangle.
+</p>
+<p>If <code style="white-space: pre;">⁠"type=="fitted"⁠</code>, the resulting plot will be a ggpairs plot. The
+diagonal entries will be two density plots, one for training data predicted
+to have response 0 by the model (red) and one for training data predicted
+to have response 1 by the model (green). The off-diagonal elements are
+scatter-plots of the observations, given a label according to their actual
+response and a colour scale based on their predicted response. If
+<code>length(plot_var)==1</code> then the co-variate variable is plotted against it's
+index and a density plot is not provided. If <code>length(plot_var)==1</code> then the
+density plot and the scatter-plot are combined. If a predicted class (0 or
+</p>
+
+<ol><li>
+<p> contains less than two data points the density will not be plotted.
+</p>
+</li></ol>
+<p>If <code>"type==diagnostics"</code>, the resulting plot will be a combination of three
+plots; one tracking the log Bayesian evidence as observations are added to
+the posterior, one tracking the effective sample size of the particles for
+each step of the SMC sampler and one tracking the acceptance rate of the
+Metropolis-Hastings step when a resample-move is triggered. See
+Emerson and Aslett (2023) and Chopin (2002) for more details. Multiple
+Metropolis-Hastings steps can be performed when a resample-move step is
+triggered, and so for the acceptance rate plot observations are suffixed
+with "." and then the index of current Metropolis-Hastings step. For example
+the x-axis label for the acceptance rate of the 2nd Metropolis-Hastings step
+which was triggered by adding observation 1 to the posterior would be
+labelled "1.2". When the training data for the <code>"IBIS"</code> object created is
+large setting <code>diagnostic_x_axis=="minimal"</code> is recommended as it gives a
+more visually appealing output.
+</p>
+
+
+<h3>Value</h3>
+
+<p>No return value, called for side effects
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Emerson, S.R. and Aslett, L.J.M. (2023). Joint cohort and prediction
+modelling through graphical structure analysis (to be released)
+</p>
+</li>
+<li>
+<p> Chopin, N. (2002). A sequential particle filter method for
+static models. Biometrika, 89(3), 539-552, <a href="https://doi.org/10.1093/biomet/89.3.539">doi:10.1093/biomet/89.3.539</a>
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>IBIS.logreg()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+require(graphics)
+# First we generate a co-variate matrix X and binary response vector y
+CM &lt;- matrix(rnorm(200),100,2)
+rv &lt;- sample(0:1,100,replace=TRUE)
+
+# Now we can obtain 1000 samples from the posterior from a standard
+# multivariate normal prior and plot the results
+out &lt;- IBIS.logreg(X = CM,y = rv)
+plot(out,type = "samples")
+plot(out,type = "fitted")
+plot(out,type = "diagnostics",diagnostic_x_axis = "minimal")
+
+# If we only wanted to view the second co-variate
+plot(out,type = "samples",plot_var = 2)
+plot(out,type = "fitted",plot_var = 2)
+
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>is_homo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>U-statistic based homogeneity test</h2>
+
+<h3>Description</h3>
+
+<p>Homogeneity test based on the statistic <code>bn</code>. The test assesses whether there exists a data partition
+for which group separation is statistically significant according to the U-test. The null hypothesis
+is overall sample homogeneity, and a sample is considered homogeneous if it cannot be divided into
+two statistically significant subgroups.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">is_homo(md = NULL, data = NULL, rep = 10)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>md</code></td>
+<td>
+<p>Matrix of distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data matrix. Each row represents an observation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rep</code></td>
+<td>
+<p>Number of times to repeat optimization procedure. Important for problems with
+multiple optima.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is the homogeneity test of Cybis et al. (2017) extended to account for groups of size 1.
+The test is performed through two steps: an optimization procedure that finds the data partition that
+maximizes the standardized Bn and a test for the resulting maximal partition. Should be used in high dimension small sample size settings.
+</p>
+<p>Either <code>data</code> or <code>md</code> should be provided.
+If data are entered directly, Bn will be computed considering the squared Euclidean distance.
+</p>
+<p>Variance of <code>bn</code> is estimated through resampling, and thus, p-values may vary a bit in different runs.
+</p>
+<p>For more detail see Cybis, Gabriela B., Marcio Valk, and Sílvia RC Lopes. "Clustering and classification problems in genetics through U-statistics."
+Journal of Statistical Computation and Simulation 88.10 (2018)
+and Valk, Marcio, and Gabriela Bettella Cybis. "U-statistical inference for hierarchical clustering." Journal of Computational and Graphical Statistics 30(1) (2021).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with the following elements:</p>
+
+<dl>
+<dt>minFobj</dt>
+<dd>
+<p>Test statistic. Minimum of the objective function for optimization (-stdBn).</p>
+</dd>
+<dt>group1</dt>
+<dd>
+<p>Elements in group 1 in the maximal partition. (obs: this is not the best
+partition for the data, see <code>uclust</code>)</p>
+</dd>
+<dt>group2</dt>
+<dd>
+<p>Elements in group 2 in the maximal partition.</p>
+</dd>
+<dt>p.MaxTest</dt>
+<dd>
+<p>P-value for the homogeneity test.</p>
+</dd>
+<dt>Rep.Fobj</dt>
+<dd>
+<p>Values for the minimum objective function on all <code>rep</code> optimization runs.</p>
+</dd>
+<dt>bootB</dt>
+<dd>
+<p>Resampling variance estimate for partitions with groups of size n/2 (or (n-1)/2 and (n+1)/2 if n is odd).</p>
+</dd>
+<dt>bootB1</dt>
+<dd>
+<p>Resampling variance estimate for partitions with one group of size 1.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = matrix(rnorm(500000),nrow=50)  #creating homogeneous Gaussian dataset
+res = is_homo(data=x)
+
+x[1:30,] = x[1:30,]+0.15   #Heterogeneous dataset (first 30 samples have different mean)
+res = is_homo(data=x)
+
+md = as.matrix(dist(x)^2)   #squared Euclidean distances for the same data
+res = is_homo(md)
+
+# Multidimensional sacling plot of distance matrix
+fit &lt;- cmdscale(md, eig = TRUE, k = 2)
+x &lt;- fit$points[, 1]
+y &lt;- fit$points[, 2]
+plot(x,y, main=paste("Homogeneity test: p-value =",res$p.MaxTest))
+
+</code></pre>
+
+
+</div>

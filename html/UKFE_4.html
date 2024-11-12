@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AMImport</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Import an annual maximum (AMAX) sample from NRFA peak flow .AM files</h2>
+
+<h3>Description</h3>
+
+<p>Imports the peak flows and dates from from NRFA peak flow .AM files, exluding the rejected years
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">AMImport(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the file path for the .AM file</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>File paths for importing data require forward slashes. On some operating systems, such as windows, the copy and pasted file paths will have backward slashes and would need to be changed accordingly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with columns; Date and Flow
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Import an AMAX sample and display the first six rows in the console
+## Not run: AM.4003 &lt;- AMImport("C:/Data/NRFAPeakFlow_v11/Suitable for QMED/4003.AM")
+## Not run: head(AM.4003)]
+</code></pre>
+
+
+</div>

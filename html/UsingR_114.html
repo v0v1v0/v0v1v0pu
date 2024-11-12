@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>salmon.rate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulated Data on Rate of Recruitment for Salmon</h2>
+
+<h3>Description</h3>
+
+<p>The Ricker model is used to model the relationship of recruitment of a
+salmon species versus the number of spawners. The model has two
+parameters, a rate of growth at small numbers and a decay rate at large
+numbers. This data set is simulated data for 83 different recordings
+using parameters found in a paper by Chen and Holtby.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(salmon.rate)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The format is:
+83 numbers on decay rates.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The Ricker model for recruitment modeled by spawner count </p>
+<p style="text-align: center;"><code class="reqn">R_t =
+  S_t e^{a - bS_t}</code>
+</p>
+<p> The paramter <code class="reqn">b</code> is a decay rate
+for large values of <code class="reqn">S</code>. In the paper by Chen and Holtby, they
+studied 83 datasets and found that <code class="reqn">b</code> is log-normally distributed. The
+data is simulated from their values to illustrate a log normal
+distribution.
+</p>
+
+
+<h3>Source</h3>
+
+<p>These values are from D.G. Chen and L. Blair Holtby, “A regional
+meta-model for stock recruitment analysis using an empirical
+Bayesian approach”, found at <a href="https://iphc.int/">https://iphc.int/</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(salmon.rate)
+hist(log(salmon.rate))
+</code></pre>
+
+
+</div>

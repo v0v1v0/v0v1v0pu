@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>makeScales</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Title</h2>
+
+<h3>Description</h3>
+
+<p>Title
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">makeScales(data, scales, append = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataframe containing the variables (the items).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scales</code></td>
+<td>
+<p>A list of character vectors with the items in each scale,
+where each vectors' name is the name of the scale.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>append</code></td>
+<td>
+<p>Whether to return the dataframe including the new variables
+(<code>TRUE</code>), or a dataframe with only those new variables (<code>FALSE</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Either a dataframe with the newly created variables, or the
+supplied dataframe with the newly created variables appended.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### First generate a list with the scales
+scales &lt;- list(scale1 = c('mpg', 'cyl'), scale2 = c('disp', 'hp'));
+
+### Create the scales and add them to the dataframe
+makeScales(mtcars, scales);
+</code></pre>
+
+
+</div>

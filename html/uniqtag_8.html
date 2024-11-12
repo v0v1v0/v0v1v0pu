@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uniqtag</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Abbreviate strings to short, unique identifiers.</h2>
+
+<h3>Description</h3>
+
+<p>Abbreviate strings to unique substrings of <code>k</code> characters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uniqtag(xs, k = 9, uniq = make_unique_all_or_none, sep = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>xs</code></td>
+<td>
+<p>a character vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>the size of the identifier, an integer</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uniq</code></td>
+<td>
+<p>a function to make the abbreviations unique, such as make_unique, make_unique_duplicates, make_unique_all_or_none, make_unique_all, make.unique, or to disable this function, identity or NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>a character string used to separate a duplicate string from its sequence number</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For each string in a set of strings, determine a unique tag that is a substring of fixed size <code>k</code> unique to that string, if it has one. If no such unique substring exists, the least frequent substring is used. If multiple unique substrings exist, the lexicographically smallest substring is used. This lexicographically smallest substring of size <code>k</code> is called the UniqTag of that string.
+</p>
+<p>The lexicographically smallest substring depend on the locale's sort order.
+You may wish to first call <code>Sys.setlocale("LC_COLLATE", "C")</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>a character vector of the UniqTags of the strings <code>x</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>abbreviate, locales, make.unique
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">Sys.setlocale("LC_COLLATE", "C")
+states &lt;- sub(" ", "", state.name)
+uniqtags &lt;- uniqtag(states)
+uniqtags4 &lt;- uniqtag(states, k = 4)
+uniqtags3 &lt;- uniqtag(states, k = 3)
+uniqtags3x &lt;- uniqtag(states, k = 3, uniq = make_unique)
+table(nchar(states))
+table(nchar(uniqtags))
+table(nchar(uniqtags4))
+table(nchar(uniqtags3))
+table(nchar(uniqtags3x))
+uniqtags3[grep("-", uniqtags3x)]
+</code></pre>
+
+
+</div>

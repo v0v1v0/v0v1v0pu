@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>WungLcv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Ungauged pool weighted linear coefficient of variation (Lcv)</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the ungauged weighted Lcv from a pooling group
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">WungLcv(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>pooling group derived with the Pool() function</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Weighting method as according to Science Report: SC050050 - Improving the FEH statistical procedures for flood frequency estimation
+</p>
+
+
+<h3>Value</h3>
+
+<p>the ungauged weighted Lcv from a pooling group
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get some CDs, form an ungauged pooling group, and estimate ungauged Lcv
+CDs.27051 &lt;- GetCDs(27051)
+Pool.27051 &lt;- Pool(CDs.27051, exclude = 27051)
+WungLcv(Pool.27051)
+</code></pre>
+
+
+</div>

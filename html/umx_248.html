@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_scale</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Scale data columns, skipping non-scalable columns</h2>
+
+<h3>Description</h3>
+
+<p><code>umx_scale</code> applies scale to the columns of a data.frame. By default it scales all numeric columns,
+and is smart enough to skip non-scalable columns (strings, factors, etc.).
+</p>
+<p>You can also select which columns to convert.
+This is useful when you want to avoid numeric columns which are actually factors.
+</p>
+<p><em>note</em>: By default, the attributes which scale adds ("scaled:center" and
+"scaled:scale" removed to leave nice numeric columns. Set <code>attr= TRUE</code> to preserve these.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_scale(
+  df,
+  varsToScale = NULL,
+  coerce = FALSE,
+  attr = FALSE,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>A dataframe to scale (or a numeric vector)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>varsToScale</code></td>
+<td>
+<p>(leave blank to scale all)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coerce</code></td>
+<td>
+<p>Whether to coerce non-numerics to numeric (Defaults to FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attr</code></td>
+<td>
+<p>to strip off the attributes scale creates (FALSE by default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Whether to report which columns were scaled (default FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> new dataframe with scaled variables
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>umx_scale_wide_twin_data scale
+</p>
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(twinData)
+# note: this example is here to remind us why scaling independently for each 
+# twin would be very bad! Use  umx_scale_wide_twin_data() instead!
+df = umx_scale(twinData, varsToScale = c("wt1", "wt2"))
+df = umx_scale(twinData,  attr= TRUE)
+plot(wt1 ~ wt2, data = df)
+</code></pre>
+
+
+</div>

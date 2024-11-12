@@ -1,0 +1,202 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ca.jo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Johansen Procedure for VAR</h2>
+
+<h3>Description</h3>
+
+<p>Conducts the Johansen procedure on a given data set. The
+<code>"trace"</code> or <code>"eigen"</code> statistics are reported and the
+matrix of eigenvectors as well as the loading matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ca.jo(x, type = c("eigen", "trace"), ecdet = c("none", "const", "trend"), K = 2,
+spec=c("longrun", "transitory"), season = NULL, dumvar = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Data matrix to be investigated for cointegration.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>The test to be conducted, either ‘<code>eigen</code>’ or
+‘<code>trace</code>’.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ecdet</code></td>
+<td>
+<p>Character, ‘<code>none</code>’ for no intercept in cointegration,
+‘<code>const</code>’ for constant term in cointegration and
+‘<code>trend</code>’ for trend variable in cointegration.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p>The lag order of the series (levels) in the VAR.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spec</code></td>
+<td>
+<p>Determines the specification of the VECM, see details below.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>season</code></td>
+<td>
+<p>If seasonal dummies should be included, the data
+frequency must be set accordingly, <em>i.e</em> ‘4’ for quarterly
+data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dumvar</code></td>
+<td>
+<p>If dummy variables should be included, a matrix with
+row dimension equal to <code>x</code> can be provided.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Given a general VAR of the form:
+</p>
+<p style="text-align: center;"><code class="reqn">\bold{X}_t = \bold{\Pi}_1 \bold{X}_{t-1} + \dots + \bold{\Pi}_k
+    \bold{X}_{t-k} + \bold{\mu} + \bold{\Phi D}_t + \bold{\varepsilon}_t
+    , \quad (t = 1, \dots, T),</code>
+</p>
+
+<p>the following two specifications of a VECM exist:
+</p>
+<p style="text-align: center;"><code class="reqn">\Delta \bold{X}_t = \bold{\Gamma}_1 \Delta \bold{X}_{t-1} +
+    \dots + \bold{\Gamma}_{k-1} \Delta \bold{X}_{t-k+1} + \bold{\Pi
+    X}_{t-k} + \bold{\mu} + \bold{\Phi D}_t + \bold{\varepsilon}_t</code>
+</p>
+
+<p>where
+</p>
+<p style="text-align: center;"><code class="reqn">\bold{\Gamma}_i = - (\bold{I} - \bold{\Pi}_1 - \dots -
+    \bold{\Pi}_i), \quad (i = 1, \dots , k-1),</code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn">\bold{\Pi} = -(\bold{I} - \bold{\Pi}_1 - \dots - \bold{\Pi}_k)</code>
+</p>
+
+<p>The <code class="reqn">\bold{\Gamma}_i</code> matrices contain the cumulative long-run
+impacts, hence if <code>spec="longrun"</code> is choosen, the above VECM is
+estimated.
+</p>
+<p>The other VECM specification is of the form:
+</p>
+<p style="text-align: center;"><code class="reqn">\Delta \bold{X}_t = \bold{\Gamma}_1 \Delta \bold{X}_{t-1} +
+    \dots + \bold{\Gamma}_{k-1} \Delta \bold{X}_{t-k+1} + \bold{\Pi
+    X}_{t-1} + \bold{\mu} + \bold{\Phi D}_t + \bold{\varepsilon}_t</code>
+</p>
+
+<p>where
+</p>
+<p style="text-align: center;"><code class="reqn">\bold{\Gamma}_i = - (\bold{\Pi}_{i+1} + \dots + \bold{\Pi}_k),
+    \quad(i = 1, \dots , k-1),</code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn">\bold{\Pi} = -(\bold{I} - \bold{\Pi}_1 - \dots - \bold{\Pi}_k).</code>
+</p>
+
+<p>The <code class="reqn">\bold{\Pi}</code> matrix is the same as in the first specification.
+However, the <code class="reqn">\bold{\Gamma}_i</code> matrices now differ, in the sense
+that they measure transitory effects, hence by setting
+<code>spec="transitory"</code> the second VECM form is estimated. Please note
+that inferences drawn on <code class="reqn">\bold{\Pi}</code> will be the same, regardless
+which specification is choosen and that the explanatory power is the
+same, too. 
+</p>
+<p>If <code>"season"</code> is not NULL, centered seasonal dummy variables are
+included. 
+</p>
+<p>If <code>"dumvar"</code> is not NULL, a matrix of dummy variables is included
+in the VECM. Please note, that the number of rows of the matrix
+containing the dummy variables must be equal to the row number of
+<code>x</code>.
+</p>
+<p>Critical values are only reported for systems with less than
+11 variables and are taken from Osterwald-Lenum.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ca.jo</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1988), Statistical Analysis of Cointegration Vectors,
+<em>Journal of Economic Dynamics and Control</em>, <b>12</b>, 231–254.
+</p>
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+<p>Osterwald-Lenum, M. (1992), A Note with Quantiles of the Asymptotic
+Distribution of the Maximum Likelihood Cointegration Rank Test
+Statistics, <em>Oxford Bulletin of Economics and Statistics</em>,
+<b>55, 3</b>, 461–472.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>plotres</code>, <code>alrtest</code>, <code>ablrtest</code>,
+<code>blrtest</code>, <code>cajolst</code>, <code>cajools</code>,
+<code>lttest</code>, <code>ca.jo-class</code> and <code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.vecm &lt;- ca.jo(sjd, ecdet = "const", type="eigen", K=2, spec="longrun",
+season=4)
+summary(sjd.vecm)
+#
+data(finland)
+sjf &lt;- finland
+sjf.vecm &lt;- ca.jo(sjf, ecdet = "none", type="eigen", K=2,
+spec="longrun", season=4)
+summary(sjf.vecm)
+</code></pre>
+
+
+</div>

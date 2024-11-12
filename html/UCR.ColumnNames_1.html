@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UCR.OffenseNames</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uniform Crime Report Column Name Fixer</h2>
+
+<h3>Description</h3>
+
+<p>Uniform Crime Report Column Name Fixer
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UCR.OffenseNames(UCR_dataset)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>UCR_dataset</code></td>
+<td>
+<p>This is the data.frame containing data from the
+UCR "Offenses Known and Clearance by Arrest" dataset
+You may use any years from 1998-2014</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Returns the same data.frame as inputted but with column names corrected
+as per the UCR "Offenses Known and Clearance by Arrest" codebook for years
+1998-2014
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># This is an example data.frame with the same column names
+# as the real UCR dataset.
+example &lt;- data.frame(V1 = 1:10, V2 = 2:11, V8 = "example")
+names(example)
+example &lt;- UCR.OffenseNames(example)
+names(example)
+</code></pre>
+
+
+</div>

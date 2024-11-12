@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>param_remove</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove key-value pairs from query strings</h2>
+
+<h3>Description</h3>
+
+<p>URLs often have queries associated with them, particularly URLs for
+APIs, that look like <code>?key=value&amp;key=value&amp;key=value</code>. <code>param_remove</code>
+allows you to remove key/value pairs while leaving the rest of the URL intact.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">param_remove(urls, keys)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>urls</code></td>
+<td>
+<p>a vector of URLs. These should be decoded with <code>url_decode</code> but don't
+have to have been otherwise processed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keys</code></td>
+<td>
+<p>a vector of parameter keys to remove.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the original URLs but with the key/value pairs specified by <code>keys</code> removed.
+If the original URL is <code>NA</code>, <code>NA</code> will be returned; if a specified key is <code>NA</code>,
+nothing will be done with it.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>param_set</code> to modify values associated with keys, or <code>param_get</code>
+to retrieve those values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Remove multiple parameters from a URL
+param_remove(urls = "https://en.wikipedia.org/wiki/api.php?action=list&amp;type=query&amp;format=json",
+            keys = c("action","format"))
+</code></pre>
+
+
+</div>

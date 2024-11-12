@@ -1,0 +1,144 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>factorLoadingDiamondCIplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Two-dimensional visualisation of factor analyses</h2>
+
+<h3>Description</h3>
+
+<p>This function uses the <code>diamondPlot()</code> to visualise the results of
+a factor analyses. Because the factor loadings computed in factor analysis
+are point estimates, they may vary from sample to sample. The factor
+loadings for any given sample are usually not relevant; samples are but
+means to study populations, and so, researchers are usually interested in
+population values for the factor loadings. However, tables with lots of
+loadings can quickly become confusing and intimidating. This function aims
+to facilitate working with and interpreting factor analysis based on
+confidence intervals by visualising the factor loadings and their confidence
+intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">factorLoadingDiamondCIplot(
+  fa,
+  xlab = "Factor Loading",
+  colors = viridisPalette(max(2, fa$factors)),
+  labels = NULL,
+  theme = ggplot2::theme_bw(),
+  sortAlphabetically = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fa</code></td>
+<td>
+<p>The object produced by the <code>psych::fa()</code> function from the
+psych::psych package. It is important that the <code>n.iter</code> argument
+of <code>psych::fa()</code> was set to a realistic number, because otherwise, no
+confidence intervals will be available.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>The label for the x axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>The colors used for the factors. The default uses the discrete
+<code>viridis</code> palette, which is optimized for perceptual uniformity,
+maintaining its properties when printed in grayscale, and designed for
+colourblind readers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>The labels to use for the items (on the Y axis).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>The ggplot2 theme to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortAlphabetically</code></td>
+<td>
+<p>Whether to sort the items alphabetically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments will be passed to
+<code>ggDiamondLayer()</code>. This can be used to set, for example, the
+transparency (alpha value) of the diamonds to a lower value using e.g.
+<code>alpha=.5</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>ggplot2::ggplot()</code> plot with several
+<code>ggDiamondLayer()</code>s is returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>psych::fa()</code>ss, <code>meansDiamondPlot()</code>,
+<code>meanSDtoDiamondPlot()</code>, <code>diamondPlot()</code>,
+<code>ggDiamondLayer()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+### (Not run during testing because it takes too long and
+###  may generate warnings because of the bootstrapping of
+###  the confidence intervals)
+
+factorLoadingDiamondCIplot(psych::fa(psych::Bechtoldt,
+                                     nfactors=2,
+                                     n.iter=50,
+                                     n.obs=200));
+
+### And using a lower alpha value for the diamonds to
+### make them more transparent
+
+factorLoadingDiamondCIplot(psych::fa(psych::Bechtoldt,
+                                     nfactors=2,
+                                     n.iter=50,
+                                     n.obs=200),
+                           alpha=.5,
+                           size=1);
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

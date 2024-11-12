@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uptimerobot.account.details</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the account details for who is linked to the given API key</h2>
+
+<h3>Description</h3>
+
+<p><code>uptimerobot.account.details</code> returns a list or a vector with the account details connected to the given api key.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uptimerobot.account.details(api.key, unlist = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>api.key</code></td>
+<td>
+<p>string with a valid key for connecting to Uptimerobot API.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unlist</code></td>
+<td>
+<p>logical. Set to <code>TRUE</code> to unlist the output to a named vector, <code>FALSE</code> to get a named list.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list or a vector with the account details.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gabriele Baldassarre
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Let's assume the api.key is available into the environment variable KEY
+api.key &lt;- Sys.getenv("KEY", "")
+
+# Returns details as a list
+details.list &lt;- uptimerobot.account.details(api.key)
+
+# Returns details as a vector
+details.num &lt;- uptimerobot.account.details(api.key, unlist = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

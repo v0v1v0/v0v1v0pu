@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Song and lengths for U2 albums</h2>
+
+<h3>Description</h3>
+
+<p>Song titles and lengths of U2 albums from 1980 to 1997.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(u2)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The data is stored as  a list with names. Each list entry correspond
+to an album stored as a vector. The values of the vector are the song
+lengths in seconds and the names are the track titles.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Original data retrieved from http://www.u2station.com/u2ography.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(u2)
+sapply(u2,mean)			# average track length
+max(sapply(u2,max))		# longest track length
+sort(unlist(u2))		# lengths in sorted order
+</code></pre>
+
+
+</div>

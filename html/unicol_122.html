@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mpg</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Default colors of the Max-Planck-Gesellschaft (MPG), Germany</h2>
+
+<h3>Description</h3>
+
+<p><code>mpg</code> provides the default color palette 
+of the <a href="https://www.mpg.de/en">Max Planck Society</a>, Germany.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mpg
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 5.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The two primary colors are at the extreme positions of <code>mpg</code>: 
+</p>
+
+<ol>
+<li> <p><code>MPG green</code> (at <code>mpg[1]</code>): Defined as <code>Pantone 328</code>, <code>CMYK 100/0/57/30</code>, or <code>RGB 17/102/86</code>.
+</p>
+</li>
+<li> <p><code>MPG grey</code> (at <code>mpg[5]</code>): Defined as <code>Pantone 427</code>, <code>CMYK 0/0/6/15</code>, or <code>RGB 221/222/214</code>.
+</p>
+</li>
+</ol>
+<p>At <code>mpg[3]</code>, the color <code>"white"</code> was added to enable symmetrical color gradients. 
+See examples and the <code>ac</code> and <code>usecol</code> functions 
+for creating color gradients.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of colors (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>unicol</strong>, 2022-12-11.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Color definitions are based on 
+<a href="https://docplayer.org/2328711-Max-planck-institut-das-erscheinungsbild-der-max-planck-gesellschaft-4-ueberarbeitete-auflage.html">https://docplayer.org/2328711-Max-planck-institut-das-erscheinungsbild-der-max-planck-gesellschaft-4-ueberarbeitete-auflage.html</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for viewing and comparing color palettes; 
+<code>usecol</code> for using color palettes; 
+<code>simcol</code> for finding similar colors; 
+<code>newpal</code> for defining new color palettes; 
+<code>grepal</code> for finding named colors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">mpg
+unikn::seecol(mpg, main = "Colors of the Max Planck Society")  # view color palette 
+unikn::demopal(mpg, type = 1, main = "Using the MPG colors")
+
+# Extended version:
+mpg_11 &lt;- unikn::usecol(c(mpg, "black"), n = 11)
+unikn::demopal(mpg_11, type = 4, seed = 1, main = "An extended MPG palette")
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.UPG.Logit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print information for UPG.Logit objects</h2>
+
+<h3>Description</h3>
+
+<p><code>print</code> provides some basic information about a <code>UPG.Logit</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UPG.Logit'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object of class <code>UPG.Logit</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other print parameters.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Gregor Zens
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary.UPG.Logit</code> to summarize a <code>UPG.Logit</code> object and create tables.
+<code>predict.UPG.Logit</code> to predict probabilities using a <code>UPG.Logit</code> object.
+<code>plot.UPG.Logit</code> to plot a <code>UPG.Logit</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# estimate a logit model using example data
+library(UPG)
+data(lfp)
+y = lfp[,1]
+X = lfp[,-1]
+results.logit = UPG(y = y, X = X, model = "logit")
+print(results.logit)
+
+</code></pre>
+
+
+</div>

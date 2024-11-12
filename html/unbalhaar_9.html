@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>med</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Median</h2>
+
+<h3>Description</h3>
+
+<p>The function computes the median of a vector. Unlike <code>median</code>, it is guaranteed to
+return a value which is a component of the input vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">med(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>    a vector</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a scalar defined as <code>quantile(x, .5, type=3)[[1]]</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Piotr Fryzlewicz</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">med(1:4)
+median(1:4)
+</code></pre>
+
+
+</div>

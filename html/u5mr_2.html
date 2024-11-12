@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cambodia</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Aggregated summary birth histories derived from microdata</h2>
+
+<h3>Description</h3>
+
+<p>Fake summary data used to demonstrate the application of Cohort-derived and Period-derived methods
+developed by Rajaratnam et al in 2010.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(cambodia)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame
+</p>
+
+
+<h3>Details</h3>
+
+<div class="r"><pre>## codes used to derive the dataset `cambodia`
+
+## install.packages("tidyverse", dependencies = TRUE)
+## install.packages("devtools", dependencies = TRUE)
+## devtools::install_github("myominnoo/mStats")
+
+library(tidyverse)
+library(mStats)
+data(microdata)
+cambodia &lt;- microdata %&gt;%
+  filter(sex == 2) %&gt;%
+  filter(age &gt;= 15 &amp; age &lt; 50) %&gt;%
+  egen(age, seq(15, 45, 5), new_var = "agegroup") %&gt;%
+  generate(n, 1 * wtper) %&gt;%
+  replace(ceb, ceb * wtper) %&gt;%
+  replace(cd, cd * wtper) %&gt;%
+  group_by(iso3, svdate, agegroup) %&gt;%
+  summarise(women = sum(n),
+            child_born = sum(ceb),
+            child_dead = sum(cd)) %&gt;%
+  rename(agegrp = agegroup) %&gt;%
+  data.frame()
+</pre></div>
+
+
+<h3>Source</h3>
+
+<p><a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000253">PLoS MEDICINE</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Rajaratnam JK, Tran LN, Lopez AD, Murray CJL (2010) Measuring Under-Five Mortality: Validation of New Low-Cost Methods. PLOS Medicine 7(4): e1000253.
+(doi: <a href="https://doi.org/10.1371/journal.pmed.1000253">10.1371/journal.pmed.1000253</a>10.1371/journal.pmed.1000253)
+</p>
+
+
+</div>

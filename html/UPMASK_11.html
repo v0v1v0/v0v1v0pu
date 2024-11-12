@@ -1,0 +1,194 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>outerLoop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UPMASK outer loop</h2>
+
+<h3>Description</h3>
+
+<p><code>outerLoop</code> executes the UPMASK method's outer loop on a data frame, 
+and returns another data frame as output, with the id of the object and it's 
+classification as a stellar cluster member or not.
+</p>
+<p>The <code>outerLoop</code> perform cuts in the data if necessary (by calling 
+<code>performCuts</code>), take errors in the data table into account if the user request (by
+calling <code>innerLoop</code>), runs the inner loop (by calling <code>innerLoop</code>) until 
+convergence of the membership list or util the maximum number of iterations is reached.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">outerLoop(ocdata_full, positionDataIndexes=c(1,2),
+photometricDataIndexes=c(3,5,7,9,11,19,21,23,25,27),
+photometricErrorDataIndexes=c(4,6,8,10,12,20,22,24,26,28), threshold=1, maxIter=25, 
+plotIter=FALSE, verbose=FALSE, starsPerClust_kmeans=50, nstarts_kmeans=50, 
+finalXYCut=FALSE, autoCalibrated=FALSE, considerErrors=FALSE, run=0, 
+smartTableDB, nDimsToKeep=4, dimRed="PCA", scale=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ocdata_full</code></td>
+<td>
+<p>a data frame with the data to perform the analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>positionDataIndexes</code></td>
+<td>
+<p>an array of integers indicating the columns of the data frame containing the spatial position measurements</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>photometricDataIndexes</code></td>
+<td>
+<p>an array of integers with the column numbers containing photometric measurements (or any other measurement to go into the PCA step)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>photometricErrorDataIndexes</code></td>
+<td>
+<p>an array of integers with the column numbers containing the errors of the photometric measurements</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold</code></td>
+<td>
+<p>a double indicating the thresholding level for the random field analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxIter</code></td>
+<td>
+<p>an integer the maximum amount of iterations of the outer loop before giving up convergence (usually it is not necessary to modify this)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plotIter</code></td>
+<td>
+<p>a boolean indicating if the user wants to see iteration plots</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>a boolean indicating if the output to screen should be verbose</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>starsPerClust_kmeans</code></td>
+<td>
+<p>an integer with the average number of stars per k-means cluster</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstarts_kmeans</code></td>
+<td>
+<p>an integer the amount of random re-initializations of the k-means clustering method (usually it is not necessary to modify this)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>finalXYCut</code></td>
+<td>
+<p>a boolean indicating if a final cut in the XY space should be performed (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoCalibrated</code></td>
+<td>
+<p>a boolean indicating if the number of random field realizations for the clustering check in the position space should be autocalibrated (experimental code, defaults to FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>considerErrors</code></td>
+<td>
+<p>a boolean indicating if the errors should be taken into account</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>run</code></td>
+<td>
+<p>an integer greater than zero indicating the run number</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smartTableDB</code></td>
+<td>
+<p>a database connection to the smart look-up table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nDimsToKeep</code></td>
+<td>
+<p>an integer with the number of dimensions to consider (defaults to 4)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dimRed</code></td>
+<td>
+<p>a string with the dimensionality reduction method to use (defaults to PCA. The only other options are LaplacianEigenmaps or None)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale</code></td>
+<td>
+<p>a boolean indicating if the data should be scaled and centered</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with the id and class (member / not member) of each object at this run.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://dx.doi.org/10.1051/0004-6361/201321143">Krone-Martins, A. &amp; Moitinho, A., A&amp;A, v.561, p.A57, 2014</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Perform a one run of the outerLoop using a simulated open cluster with 
+# spatial and photometric data 
+# Load the data into a data frame
+fileName &lt;- "oc_12_500_1000_1.0_p019_0880_1_25km_120nR_withcolors.dat"
+inputFileName &lt;- system.file("extdata", fileName, package="UPMASK")
+ocData &lt;- read.table(inputFileName, header=TRUE)
+
+# Create the look up table
+library(RSQLite)
+stcon &lt;- create_smartTable()
+
+# Run the outer loop 
+posIdx &lt;- c(1,2)
+photIdx &lt;- c(3,5,7,9,11,19,21,23,25,27)
+photErrIdx &lt;- c(4,6,8,10,12,20,22,24,26,28)
+outerLoopRes &lt;- outerLoop(ocData, posIdx, photIdx, PhotErrIdx,
+                          starsPerClust_kmeans=25, verbose=TRUE, smartTableDB=stcon)
+
+# Clean the environment
+rm(list=c("inputFileName", "ocData", "posIdx", "photIdx", "photErrIdx", 
+          "outerLoopRes", "fileName"))
+dbDisconnect(stcon)
+
+## End(Not run) 
+ 
+</code></pre>
+
+
+</div>

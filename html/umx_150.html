@@ -1,0 +1,189 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummaryACE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Shows a compact, publication-style, summary of a umx Cholesky ACE model</h2>
+
+<h3>Description</h3>
+
+<p>Summarize a fitted Cholesky model returned by <code>umxACE()</code>. Can control digits, report comparison model fits,
+optionally show the Rg (genetic and environmental correlations), and show confidence intervals. the report parameter allows
+drawing the tables to a web browser where they may readily be copied into non-markdown programs like Word.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummaryACE(
+  model,
+  digits = 2,
+  comparison = NULL,
+  std = TRUE,
+  showRg = FALSE,
+  CIs = TRUE,
+  report = c("markdown", "html"),
+  file = getOption("umx_auto_plot"),
+  returnStd = FALSE,
+  extended = FALSE,
+  zero.print = ".",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an <code>mxModel()</code> to summarize.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>round to how many digits (default = 2).
+Defaults to NA = do not create plot output.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>you can run mxCompare on a comparison model (NULL).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the output (default = TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRg</code></td>
+<td>
+<p>= whether to show the genetic correlations (FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Whether to show Confidence intervals if they exist (TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>If "html", then open an html table of the results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file for figure: "name" = use the name of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStd</code></td>
+<td>
+<p>Whether to return the standardized form of the model (default = FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extended</code></td>
+<td>
+<p>how much to report (FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero.print</code></td>
+<td>
+<p>How to show zeros (".")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters to control model summary.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See documentation for other umx models here: <code>umxSummary()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxACE()</code>, <code>plot.MxModelACE()</code>, <code>umxModify()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(twinData)
+selDVs = c("bmi1", "bmi2")
+mzData = subset(twinData, zygosity == "MZFF")
+dzData = subset(twinData, zygosity == "DZFF")
+m1 = umxACE(selDVs = selDVs, dzData = dzData, mzData = mzData)
+umxSummary(m1)
+umxSummaryACE(m1, file = NA);
+umxSummaryACE(m1, file = "name", std = TRUE)
+stdFit = umxSummaryACE(m1, returnStd = TRUE);
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

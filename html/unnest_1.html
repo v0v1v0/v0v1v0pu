@@ -1,0 +1,152 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spec</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unnest spec</h2>
+
+<h3>Description</h3>
+
+<p>Unnest spec is a nested list with the same structure as the
+nested json. It specifies how the deeply nested lists ought to be
+unnested. <code>spec()</code> is a handy constructor for spec lists. <code>s()</code> is a
+shorthand alias for <code>spec()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">spec(
+  selector = NULL,
+  ...,
+  as = NULL,
+  children = NULL,
+  groups = NULL,
+  include = NULL,
+  exclude = NULL,
+  stack = NULL,
+  process = NULL,
+  default = NULL
+)
+
+s(
+  selector = NULL,
+  ...,
+  as = NULL,
+  children = NULL,
+  groups = NULL,
+  include = NULL,
+  exclude = NULL,
+  stack = NULL,
+  process = NULL,
+  default = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>selector</code></td>
+<td>
+<p>A shorthand syntax for an <code>include</code> parameter. Can be a list
+or a character vector.
+</p>
+
+<ol>
+<li>
+<p> When <code>selector</code> is a list or a character vector with length greater
+than 1, each element is an include parameter at the corresponding
+level. For example <code>s(c("a", "b"), ...)</code> is equivalent to <code>s(include = "a", s(include = "b", ...))</code>
+</p>
+</li>
+<li>
+<p> When <code>selector</code> is a character of length 1 and contains "/"
+characters it is split with "/" first. For instance <code>s(c("a", "b"), ...)</code>,
+<code>s("a/b", ...)</code> and <code>s("a", s("b", ...))</code> are all equivalent to the
+canonical <code>s(include = "a", s(include = "b", ...))</code>. Components consisting
+entirely of digits are converted to integers. For example <code style="white-space: pre;">⁠s("a/2/b" ...)⁠</code>
+is equivalent to <code>s("a", s(2, s("b", ...)))</code>
+</p>
+</li>
+<li>
+<p> Multiple <code>include</code> fields can be separated with <code style="white-space: pre;">⁠,⁠</code>. For example
+<code>s("a/b,c/d")</code> is equivalent to <code>s("a", s(include = c("b", "c"), s("d", ...)))</code>
+</p>
+</li>
+</ol>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as</code></td>
+<td>
+<p>name for this field in the extracted data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>children, ...</code></td>
+<td>
+<p>Unnamed list of children spec. <code>...</code> is merged into
+<code>children</code>. <code>children</code> is part of the canonical spec.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>groups</code></td>
+<td>
+<p>Named list of specs to be processed in parallel. The return
+value is a named list of unnested data.frames. The results is the same as
+when each spec is <code>unnest</code>ed separately except that <code>dedupe</code> parameter of
+<code>unnest()</code> will work across groups and execution is faster because the
+nested list is traversed once regardless of the number of groups.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include, exclude</code></td>
+<td>
+<p>A list, a numeric vector or a character vector
+specifying components to include or exclude. A list can combine numeric
+indexes and character elements to extract.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stack</code></td>
+<td>
+<p>Whether to stack this node (TRUE) or to spread it (FALSE). When
+<code>stack</code> is a string an index column is created with that name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>process</code></td>
+<td>
+<p>Extra processing step for this element. Either NULL for no
+processing (the default), "as_is" to return the entire element in a list
+column, "paste" to paste elements together into a character column.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>default</code></td>
+<td>
+<p>Default value to insert if the <code>include</code> specification hasn't
+matched.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>s()</code>: a canonical spec - a list consumed by C++ unnesting routines.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+s("a")
+s("a//c2")
+s("a/2/c2,cid")
+
+</code></pre>
+
+
+</div>

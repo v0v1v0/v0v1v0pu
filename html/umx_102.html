@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxGetParameters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get parameters from a model, with support for pattern matching!</h2>
+
+<h3>Description</h3>
+
+<p>umxGetParameters retrieves parameter labels from a model, like <code>omxGetParameters()</code>.
+However, it is supercharged with regular expressions, so you can get labels that match a pattern.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxGetParameters(
+  inputTarget,
+  regex = NA,
+  free = NA,
+  fetch = c("labels", "values", "free", "lbound", "ubound", "all"),
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputTarget</code></td>
+<td>
+<p>An object to get parameters from: could be a RAM <code>mxModel()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>A regular expression to filter the labels. Default (NA) returns all labels. If vector, treated as raw labels to find.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free</code></td>
+<td>
+<p>A Boolean determining whether to return only free parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fetch</code></td>
+<td>
+<p>What to return: "labels" (default) or "values", "free", "lbound", "ubound", or "all"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>How much feedback to give</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In addition, if regex contains a vector, this is treated as a list of raw labels to search for,
+and return if all are found.
+<em>note</em>: To return all labels, just leave regex as is.
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>omxGetParameters()</code>, <code>parameters()</code>
+</p>
+<p>Other Reporting Functions: 
+<code>umxAPA()</code>,
+<code>umxFactorScores()</code>,
+<code>umxGetLatents()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxParameters()</code>,
+<code>umx_aggregate()</code>,
+<code>umx_time()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+
+# Show all parameters
+umxGetParameters(m1)
+umxGetParameters(m1, free = TRUE)  # Only free parameters
+umxGetParameters(m1, free = FALSE) # Only fixed parameters
+# Complex regex pattern
+umxGetParameters(m1, regex = "x[1-3]_with_x[2-5]", free = TRUE)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

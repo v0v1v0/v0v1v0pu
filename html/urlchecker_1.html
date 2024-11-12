@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>url_check</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check urls in a package</h2>
+
+<h3>Description</h3>
+
+<p>Runs the <code>url_db_from_package_source</code> function in the tools package along
+with a function to check URLs in un-rendered Rmarkdown vignettes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">url_check(
+  path = ".",
+  db = NULL,
+  parallel = TRUE,
+  pool = curl::new_pool(),
+  progress = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>Path to the package</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>db</code></td>
+<td>
+<p>A url database</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>If <code>TRUE</code>, check the URLs in parallel</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pool</code></td>
+<td>
+<p>A multi handle created by <code>curl::new_pool()</code>. If <code>NULL</code> use a global pool.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>progress</code></td>
+<td>
+<p>Whether to show the progress bar for parallel checks</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>url_checker_db</code> object (invisibly). This is a <code>check_url_db</code> object
+with an added class with a custom print method.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+url_check("my_pkg")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

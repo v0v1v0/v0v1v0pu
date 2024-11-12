@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_is_MxMatrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_is_MxMatrix</h2>
+
+<h3>Description</h3>
+
+<p>Utility function returning a binary answer to the question "Is this an OpenMx mxMatrix?"
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_is_MxMatrix(obj)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object to be tested to see if it is an OpenMx <code>mxMatrix()</code></p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Boolean
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_check()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = mxMatrix(name = "eg", type = "Full", nrow = 3, ncol = 3, values = .3)
+if(umx_is_MxMatrix(x)){
+	message("nice OpenMx matrix!")
+}
+</code></pre>
+
+
+</div>

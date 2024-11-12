@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as_stars</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Raster coercion to <code>`stars`</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>Coercion from raster <code>ursaRaster</code> object to raster <code>stars</code> object defined in package <span class="pkg">stars</span>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as_stars(obj)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Simple coercion to <code>stars</code> object of package <span class="pkg">stars</span>. Currently, color tables and attribution tables are not supported.
+
+
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>stars</code> for argument of class <code>ursaRaster</code>. Otherwise, <code>NULL</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(3)
+x &lt;- as_stars(a)
+class(x)
+if (requireNamespace("stars")) {
+   print(x)
+   b &lt;- as_ursa(x)
+   print(a)
+   print(b)
+}
+</code></pre>
+
+
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build models</h2>
+
+<h3>Description</h3>
+
+<p>Models specified terms in model data against an existing model
+and returns a clean, human readable table of summarizing the effects and
+statistics for the newly generated model. This function is meant to simplify
+fitting a large number of variables against a set of time-to-event data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_model(.object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.object</code></td>
+<td>
+<p>An object of a supported class. See S3 methods below.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments passed to the appropriate S3 method.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of class <code>tbl_df</code> (tibble) summarizing the provided
+object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>build_model.coxph</code>
+</p>
+
+
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_subset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a subset of a dataset</h2>
+
+<h3>Description</h3>
+
+<p>Create a subset of a dataset
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_subset(mdata, rows, cols = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows</code></td>
+<td>
+<p>A vector with the instances indexes (names or indexes).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>A vector with the attributes indexes (names or indexes).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A new mldr subset
+</p>
+
+
+<h3>Note</h3>
+
+<p>It is not necessary specify the labels attributes because they are
+included by default.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other sampling: 
+<code>create_holdout_partition()</code>,
+<code>create_kfold_partition()</code>,
+<code>create_random_subset()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Create a dataset with the 20 first examples and the 7 first attributes
+small.toy &lt;- create_subset(toyml, seq(20), seq(7))
+
+## Create a random dataset with 50 examples and 5 attributes
+random.toy &lt;- create_subset(toyml, sample(100, 50), sample(10, 5))
+</code></pre>
+
+
+</div>

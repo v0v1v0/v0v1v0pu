@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_forces</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>England and Wales Police Forces</h2>
+
+<h3>Description</h3>
+
+<p>Returns available police forces, details on a specific police force, or
+officers on that force.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_forces()
+
+ukc_force_details(force = NULL)
+
+ukc_officers(force)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>force</code></td>
+<td>
+<p>The id of the police force, available from the <code>id</code> column
+returned by <code>ukc_forces</code>. Not case sensitive.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>ukc_forces</code> returns a <code>tibble</code> with all police forces in England
+and Wales, <code>ukc_force_details</code> returns details on a given police force and
+<code>ukc_officers</code> returns details on senior officers for a given police force.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+forces &lt;- ukc_forces()
+
+cops &lt;- ukc_officers("cumbria")
+
+details &lt;- ukc_force_details("thames-valley")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

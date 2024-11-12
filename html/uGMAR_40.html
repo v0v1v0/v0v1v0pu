@@ -1,0 +1,362 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GSMAR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create object of class 'gsmar' defining a GMAR, StMAR, or G-StMAR model</h2>
+
+<h3>Description</h3>
+
+<p><code>GSMAR</code> creates an S3 object of class <code>'gsmar'</code> that defines a GMAR, StMAR, or G-StMAR model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GSMAR(
+  data,
+  p,
+  M,
+  params,
+  model = c("GMAR", "StMAR", "G-StMAR"),
+  restricted = FALSE,
+  constraints = NULL,
+  conditional = TRUE,
+  parametrization = c("intercept", "mean"),
+  calc_qresiduals,
+  calc_cond_moments,
+  calc_std_errors = FALSE,
+  custom_h = NULL
+)
+
+## S3 method for class 'gsmar'
+logLik(object, ...)
+
+## S3 method for class 'gsmar'
+residuals(object, ...)
+
+## S3 method for class 'gsmar'
+summary(object, ..., digits = 2)
+
+## S3 method for class 'gsmar'
+plot(x, ..., include_dens = TRUE)
+
+## S3 method for class 'gsmar'
+print(x, ..., digits = 2, summary_print = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a numeric vector or class <code>'ts'</code> object containing the data. <code>NA</code> values are not supported.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a positive integer specifying the autoregressive order of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+
+<dl>
+<dt>For <strong>GMAR</strong> and <strong>StMAR</strong> models:</dt>
+<dd>
+<p>a positive integer specifying the number of mixture components.</p>
+</dd>
+<dt>For <strong>G-StMAR</strong> models:</dt>
+<dd>
+<p>a size (2x1) integer vector specifying the number of <em>GMAR type</em> components <code>M1</code> in the
+first element and <em>StMAR type</em> components <code>M2</code> in the second element. The total number of mixture components is <code>M=M1+M2</code>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>params</code></td>
+<td>
+<p>a real valued parameter vector specifying the model.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>Size <code class="reqn">(M(p+3)+M-M1-1x1)</code> vector <strong><code class="reqn">\theta</code></strong><code class="reqn">=</code>(<strong><code class="reqn">\upsilon_{1}</code></strong><code class="reqn">,...,</code><strong><code class="reqn">\upsilon_{M}</code></strong>,
+<code class="reqn">\alpha_{1},...,\alpha_{M-1},</code><strong><code class="reqn">\nu</code></strong>) where
+</p>
+
+<ul>
+<li> <p><strong><code class="reqn">\upsilon_{m}</code></strong><code class="reqn">=(\phi_{m,0},</code><strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">,</code><code class="reqn">\sigma_{m}^2)</code>
+</p>
+</li>
+<li> <p><strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p}), m=1,...,M</code>
+</p>
+</li>
+<li> <p><strong><code class="reqn">\nu</code></strong><code class="reqn">=(\nu_{M1+1},...,\nu_{M})</code>
+</p>
+</li>
+<li> <p><code class="reqn">M1</code> is the number of GMAR type regimes.
+</p>
+</li>
+</ul>
+<p>In the <strong>GMAR</strong> model, <code class="reqn">M1=M</code> and the parameter <strong><code class="reqn">\nu</code></strong> dropped. In the <strong>StMAR</strong> model, <code class="reqn">M1=0</code>.
+</p>
+<p>If the model imposes <strong>linear constraints</strong> on the autoregressive parameters:
+Replace the vectors <strong><code class="reqn">\phi_{m}</code></strong> with the vectors <strong><code class="reqn">\psi_{m}</code></strong> that satisfy
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> (see the argument <code>constraints</code>).
+</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>Size <code class="reqn">(3M+M-M1+p-1x1)</code> vector <strong><code class="reqn">\theta</code></strong><code class="reqn">=(\phi_{1,0},...,\phi_{M,0},</code><strong><code class="reqn">\phi</code></strong><code class="reqn">,</code>
+<code class="reqn">\sigma_{1}^2,...,\sigma_{M}^2,</code><code class="reqn">\alpha_{1},...,\alpha_{M-1},</code><strong><code class="reqn">\nu</code></strong>), where <strong><code class="reqn">\phi</code></strong>=<code class="reqn">(\phi_{1},...,\phi_{p})</code>
+contains the AR coefficients, which are common for all regimes.
+</p>
+<p>If the model imposes <strong>linear constraints</strong> on the autoregressive parameters:
+Replace the vector <strong><code class="reqn">\phi</code></strong> with the vector <strong><code class="reqn">\psi</code></strong> that satisfies
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong> (see the argument <code>constraints</code>).
+</p>
+</dd>
+</dl>
+<p>Symbol <code class="reqn">\phi</code> denotes an AR coefficient, <code class="reqn">\sigma^2</code> a variance, <code class="reqn">\alpha</code> a mixing weight, and <code class="reqn">\nu</code> a degrees of
+freedom parameter. If <code>parametrization=="mean"</code>, just replace each intercept term <code class="reqn">\phi_{m,0}</code> with the regimewise mean
+<code class="reqn">\mu_m = \phi_{m,0}/(1-\sum\phi_{i,m})</code>. In the <strong>G-StMAR</strong> model, the first <code>M1</code> components are <em>GMAR type</em>
+and the rest <code>M2</code> components are <em>StMAR type</em>.
+Note that in the case <strong>M=1</strong>, the mixing weight parameters <code class="reqn">\alpha</code> are dropped, and in the case of <strong>StMAR</strong> or <strong>G-StMAR</strong> model,
+the degrees of freedom parameters <code class="reqn">\nu</code> have to be larger than <code class="reqn">2</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>is "GMAR", "StMAR", or "G-StMAR" model considered? In the G-StMAR model, the first <code>M1</code> components
+are <em>GMAR type</em> and the rest <code>M2</code> components are <em>StMAR type</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>restricted</code></td>
+<td>
+<p>a logical argument stating whether the AR coefficients <code class="reqn">\phi_{m,1},...,\phi_{m,p}</code> are restricted
+to be the same for all regimes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>constraints</code></td>
+<td>
+<p>specifies linear constraints imposed to each regime's autoregressive parameters separately.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>a list of size <code class="reqn">(pxq_{m})</code> constraint matrices <strong><code class="reqn">C_{m}</code></strong> of full column rank
+satisfying <strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> for all <code class="reqn">m=1,...,M</code>, where
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p})</code> and <strong><code class="reqn">\psi_{m}</code></strong><code class="reqn">=(\psi_{m,1},...,\psi_{m,q_{m}})</code>.</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>a size <code class="reqn">(pxq)</code> constraint matrix <strong><code class="reqn">C</code></strong> of full column rank satisfying
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong>, where <strong><code class="reqn">\phi</code></strong><code class="reqn">=(\phi_{1},...,\phi_{p})</code> and
+<strong><code class="reqn">\psi</code></strong><code class="reqn">=\psi_{1},...,\psi_{q}</code>.</p>
+</dd>
+</dl>
+<p>The symbol <code class="reqn">\phi</code> denotes an AR coefficient. Note that regardless of any constraints, the autoregressive order
+is always <code>p</code> for all regimes.
+Ignore or set to <code>NULL</code> if applying linear constraints is not desired.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conditional</code></td>
+<td>
+<p>a logical argument specifying whether the conditional or exact log-likelihood function should be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parametrization</code></td>
+<td>
+<p>is the model parametrized with the "intercepts" <code class="reqn">\phi_{m,0}</code> or
+"means" <code class="reqn">\mu_{m} = \phi_{m,0}/(1-\sum\phi_{i,m})</code>?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>calc_qresiduals</code></td>
+<td>
+<p>should quantile residuals be calculated? Default is <code>TRUE</code> iff the model contains data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>calc_cond_moments</code></td>
+<td>
+<p>should conditional means and variances be calculated? Default is <code>TRUE</code> iff the model contains data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>calc_std_errors</code></td>
+<td>
+<p>should approximate standard errors be calculated?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>custom_h</code></td>
+<td>
+<p>A numeric vector with same the length as the parameter vector: i:th element of custom_h is the difference
+used in central difference approximation for partial differentials of the log-likelihood function for the i:th parameter.
+If <code>NULL</code> (default), then the difference used for differentiating overly large degrees of freedom parameters
+is adjusted to avoid numerical problems, and the difference is <code>6e-6</code> for the other parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>object of class <code>'gsmar'</code> created with <code>fitGSMAR</code> or <code>GSMAR</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>in the plot method: arguments passed to the function <code>density</code> which
+calculates the kernel density estimate of the data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>number of digits to be printed (max 20)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>object of class <code>'gsmar'</code> created with <code>fitGSMAR</code> or <code>GSMAR</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include_dens</code></td>
+<td>
+<p>Plot also kernel density estimate of the data and model implied stationary
+density with regimewise densities? See the details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>summary_print</code></td>
+<td>
+<p>if set to <code>TRUE</code> then the print will include approximate
+standard errors for the estimates, log-likelihood, information criteria values,
+modulus of the roots of the characteristic AR polynomials for each regime, and
+several unconditional moments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Models can be built without data, e.q., in order to simulate from the process, but some things such as quantile
+residuals and conditional moments can't be calculated without data.
+</p>
+<p>If <code>include_dens == TRUE</code>, the kernel density estimate of the data is calculated
+with the function <code>density</code> from the package <code>stats</code>. By default, the default
+settings of that function are used, including the usage of Gaussian kernel. Use the dot
+parameters to adjust the settings if desired.
+</p>
+<p>By the model implied stationary density we mean the stationary one-dimensional mixture
+density of M regimes (see KMS 2015, Theorem 1 and the discussion following it for the Gaussian
+case and Theorem 2 in PMS 2018 for the Student's t case). The regimewise densities (i.e. each
+density 1,...,M in the stationary mixture density) are multiplied with the mixing weight
+parameters accordingly.
+</p>
+<p>In the density plot black represents the kernel density estimate of the data, grey dashed line the
+model implied density, and the colored dotted lines the regime wise densities.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class <code>'gsmar'</code> defining the specified GMAR, StMAR, or G-StMAR model. If data is supplied,
+the returned object contains (by default) empirical mixing weights, some conditional and unconditional moments, and quantile
+residuals. Note that the first p observations are taken as the initial values so the mixing weights, conditional moments, and
+quantile residuals start from the p+1:th observation (interpreted as t=1).
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>logLik(gsmar)</code>: Log-likelihood method
+</p>
+</li>
+<li> <p><code>residuals(gsmar)</code>: residuals method to extract quantile residuals
+</p>
+</li>
+<li> <p><code>summary(gsmar)</code>: summary method, standard errors in brackets
+</p>
+</li>
+<li> <p><code>plot(gsmar)</code>: Plot method for class 'gsmar'
+</p>
+</li>
+<li> <p><code>print(gsmar)</code>: print method
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Kalliovirta L., Meitz M. and Saikkonen P. 2015. Gaussian Mixture Autoregressive model for univariate time series.
+<em>Journal of Time Series Analysis</em>, <strong>36</strong>(2), 247-266.
+</p>
+</li>
+<li>
+<p> Meitz M., Preve D., Saikkonen P. 2023. A mixture autoregressive model based on Student's t-distribution.
+<em>Communications in Statistics - Theory and Methods</em>, <strong>52</strong>(2), 499-515.
+</p>
+</li>
+<li>
+<p> Virolainen S. 2022. A mixture autoregressive model based on Gaussian and Student's t-distributions.
+Studies in Nonlinear Dynamics &amp; Econometrics, <strong>26</strong>(4) 559-580.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>fitGSMAR</code>, <code>iterate_more</code>, <code>add_data</code>, <code>stmar_to_gstmar</code>,
+<code>swap_parametrization</code>, <code>get_gradient</code>, <code>simulate.gsmar</code>,
+<code>predict.gsmar</code>, <code>cond_moments</code>, <code>uncond_moments</code>, <code>LR_test</code>, <code>Wald_test</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># GMAR model without data
+params22 &lt;- c(0.9, 0.4, 0.2, 0.5, 0.7, 0.5, -0.2, 0.7, 0.7)
+gmar22 &lt;- GSMAR(p=2, M=2, params=params22, model="GMAR")
+gmar22
+
+# StMAR model, without data
+params12t &lt;- c(1.38, 0.88, 0.27, 3.8, 0.74, 3.15, 0.8, 300, 3.6)
+stmar12t &lt;- GSMAR(p=1, M=2, params=params12t, model="StMAR")
+stmar12t
+
+# G-StMAR model with data
+params42gs &lt;- c(0.04, 1.34, -0.59, 0.54, -0.36, 0.01, 0.06, 1.28, -0.36,
+                0.2, -0.15, 0.04, 0.19, 9.75)
+gstmar42 &lt;- GSMAR(data=M10Y1Y, p=4, M=c(1, 1), params=params42gs,
+                  model="G-StMAR")
+gstmar42
+
+# Restricted G-StMAR model with data
+params42gsr &lt;- c(0.13, 0.03, 1.29, -0.4, 0.25, -0.2, 0.03, 0.05, 0.51, 2.76)
+gstmar42r &lt;- GSMAR(data=M10Y1Y, p=4, M=c(1, 1), params=params42gsr,
+                   model="G-StMAR", restricted=TRUE)
+gstmar42r
+</code></pre>
+
+
+</div>

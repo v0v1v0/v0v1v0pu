@@ -1,0 +1,155 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tcga survival analysis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>TCGA Survival Analysis</h2>
+
+<h3>Description</h3>
+
+
+<ul>
+<li>
+<p> Firstly, get merged data of one molecular profile value and associated clinical data from TCGA Pan-Cancer dataset.
+</p>
+</li>
+<li>
+<p> Secondly, filter data as your wish.
+</p>
+</li>
+<li>
+<p> Finally, show K-M plot.
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">tcga_surv_get(
+  item,
+  TCGA_cohort = "LUAD",
+  profile = c("mRNA", "miRNA", "methylation", "transcript", "protein", "mutation", "cnv"),
+  TCGA_cli_data = dplyr::full_join(load_data("tcga_clinical"), load_data("tcga_surv"), by
+    = "sample"),
+  opt_pancan = .opt_pancan
+)
+
+tcga_surv_plot(
+  data,
+  time = "time",
+  status = "status",
+  cutoff_mode = c("Auto", "Custom"),
+  cutpoint = c(50, 50),
+  cnv_type = c("Duplicated", "Normal", "Deleted"),
+  profile = c("mRNA", "miRNA", "methylation", "transcript", "protein", "mutation", "cnv"),
+  palette = "aaas",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>item</code></td>
+<td>
+<p>a molecular identifier, can be gene symbol (common cases), protein symbol, etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TCGA_cohort</code></td>
+<td>
+<p>a TCGA cohort, e.g. "LUAD" (default), "LUSC", "ACC".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>profile</code></td>
+<td>
+<p>a molecular profile. Option can be one of "mRNA" (default), "miRNA", "methylation", "transcript", "protein", "mutation", "cnv".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TCGA_cli_data</code></td>
+<td>
+<p>a <code>data.frame</code> containing TCGA clinical data. Default use pre-compiled TCGA clinical data in
+this package.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt_pancan</code></td>
+<td>
+<p>specify one dataset for some molercular profiles</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a subset of result from <code>tcga_surv_get()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time</code></td>
+<td>
+<p>the column name for "time".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>status</code></td>
+<td>
+<p>the column name for "status".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff_mode</code></td>
+<td>
+<p>mode for grouping samples, can be "Auto" (default) or "Custom".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutpoint</code></td>
+<td>
+<p>cut point (in percent) for "Custom" mode, default is <code>c(50, 50)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cnv_type</code></td>
+<td>
+<p>only used when profile is "cnv", can select from <code>c("Duplicated", "Normal", "Deleted")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>palette</code></td>
+<td>
+<p>color palette, can be "hue", "grey", "RdBu", "Blues", "npg", "aaas", etc.
+More see <code>?survminer::ggsurvplot</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other parameters passing to <code>survminer::ggsurvplot</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> or a plot.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# 1. get data
+data &lt;- tcga_surv_get("TP53")
+# 2. filter data (optional)
+
+# 3. show K-M plot
+tcga_surv_plot(data, time = "DSS.time", status = "DSS")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

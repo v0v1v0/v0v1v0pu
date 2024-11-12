@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>prolific_anonymize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Clean up a prolific file for sharing by removing anonymity-compromising columns.</h2>
+
+<h3>Description</h3>
+
+<p>prolific.ac IDs and other columns like IP and lat/long might compromise
+subject anonymity when shared.
+<code>prolific_anonymize</code> replaces PIDs with a simple numeric sequence, preserving
+repeated measures in long data, and removing other columns.
+You can delete additional  columns by adding them to <code>extraColumns</code>. It is ideal for use
+when sharing data to <a href="https://researchbox.org">https://researchbox.org</a> which enforces anonymization.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">prolific_anonymize(
+  df = NULL,
+  PID = "PID",
+  extraColumns = NA,
+  baseOffset = 10000
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>Existing datafile to anonymize.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PID</code></td>
+<td>
+<p>The prolific ID col name to anonymize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extraColumns</code></td>
+<td>
+<p>Any  extra columns to delete (default NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>baseOffset</code></td>
+<td>
+<p>The numeric to start renumbering PIDs from (default = 1e4)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> [data.frame]
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>prolific_check_ID()</code>, <code>prolific_read_demog()</code>, <code>umx_merge_randomized_columns()</code>
+</p>
+</li></ul>
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+tmp = prolific_anonymize(df, PID = "PID")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

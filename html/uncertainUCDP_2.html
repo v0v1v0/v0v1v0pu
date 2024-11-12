@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>runcertainUCDP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parametric uncertainty distributions for UCDP events</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution, quantile and random number generation functions for the parametric reported-value inflated Gumbel mixture distribution for UCDP events. The functions estimate the parameters of the distribution based on the number of fatalities and the type of violence of the UCDP event.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">runcertainUCDP(n, fatalities, tov = c("sb", "ns", "os", "any"))
+
+puncertainUCDP(q, fatalities, tov = c("sb", "ns", "os", "any"))
+
+duncertainUCDP(x, fatalities, tov = c("sb", "ns", "os", "any"))
+
+quncertainUCDP(p, fatalities, tov = c("sb", "ns", "os", "any"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of observations to generate random values for</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fatalities</code></td>
+<td>
+<p>A vector of non-negative integers representing the number of fatalities of the UCDP events. Non-integer values are allowed but should be considered experimental.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tov</code></td>
+<td>
+<p>A character string representing the type of violence of the UCDP. Must be one of "sb", "ns", "os", or "any". The options are:
+</p>
+<p>* "sb" for state-based violence
+* "ns" for non-state violence
+* "os" for one-sided violence
+* "any" for parameters estimated across all type of violence. This is somewhat experimental and should be used with caution. This is possibly useful when the type of violence is unknown or when the user wants to combine all types of violence into a single category.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>Vector of quantiles</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Vector of probabilities</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The reported-value inflated Gumbel mixture distribution is a parametric distribution for modeling the uncertainty in the number of fatalities of UCDP events. The distribution is a mixture of a Gumbel distribution and a point mass at the reported number of fatalities. The distribution is estimated based on the number of fatalities and the type of violence of the UCDP event. The distribution is estimated using a set of regression models that estimate the location, scale, and weight parameters of the distribution based on the number of fatalities and the type of violence of the UCDP event.
+</p>
+
+
+<h3>Value</h3>
+
+<p>* <code>duncertainUCDP</code> gives the density function
+* <code>puncertainUCDP</code> gives the distribution function
+* <code>quncertainUCDP</code> gives the quantile function
+* <code>runcertainUCDP</code> generates random values as a vector of length <code>n</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(ucdpged)
+
+# Generate 10 random values for an arbitrary UCDP event
+runcertainUCDP(n = 10, fatalities = 100, tov = 'sb')
+
+# Generate 10 random values for the first event in the GED sample
+runcertainUCDP(n = 10, fatalities = ucdpged$best[1], tov = ucdpged$type_of_violence[1])
+
+# Obtaining the probability that an arbitrary UCDP event has at least 150 fatalities
+puncertainUCDP(q = 150, fatalities = 100, tov = 'ns')
+
+# Obtaining the probability that the for the first event in the GED sample has at least 5 fatalities
+puncertainUCDP(q = 5, fatalities = ucdpged$best[1], tov = ucdpged$type_of_violence[1])
+
+# Obtaining the 90th percentile for an arbitrary UCDP event and one-sided violence
+quncertainUCDP(p = 0.9, fatalities = 100, tov = 'os')
+
+# Obtaining the 90th percentile for the first event in the GED sample
+quncertainUCDP(p = 0.9, fatalities = ucdpged$best[1], tov = ucdpged$type_of_violence[1])
+
+# Obtaining the density for an arbitrary UCDP event and state-based violence
+duncertainUCDP(x = seq(from = 0, to = 500), fatalities = 100, tov = 'sb')
+
+# Obtaining the density for the first event in the GED sample
+duncertainUCDP(x = seq(0, 50), fatalities = ucdpged$best[1], tov = ucdpged$type_of_violence[1])
+
+</code></pre>
+
+
+</div>

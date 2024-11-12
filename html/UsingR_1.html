@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>age.universe</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Best estimate of the age of the universe</h2>
+
+<h3>Description</h3>
+
+<p>For years people have tried to estimate the age of the universe. This
+data set collects a few estimates starting with lower bounds using
+estimates for the earth's age.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(age.universe)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 16 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>lower</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>upper</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>year</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>source</dt>
+<dd>
+<p>Short description of source</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>In the last two decades estimates for the age of the universe have
+been greatly improved. As of 2013, the best guess is 13.7 billion
+years with a margin of error of 1 percent. This last estimate is found
+by WMAP using microwave background radiation. Previous estimates were
+also based on estimates of Hubble's constant, and dating of old stars.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data was collected from the following web sites:
+<a href="https://arxiv.org/abs/1212.5225">https://arxiv.org/abs/1212.5225</a>,
+https://case.edu/pubaff/univcomm/2003/1-03/kraussuniverse.html (now off-line),
+<a href="https://www.astro.ucla.edu/~wright/age.html">https://www.astro.ucla.edu/~wright/age.html</a>,
+http://www.lhup.edu/~dsimanek/cutting/ageuniv.htm (now off-line), and
+<a href="https://map.gsfc.nasa.gov/m_uni/uni_101age.html">https://map.gsfc.nasa.gov/m_uni/uni_101age.html</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(age.universe)
+n &lt;- nrow(age.universe)
+x &lt;- 1:n
+names(x) = age.universe$year
+plot(x,age.universe$upper,ylim=c(0,20))
+points(x,age.universe$lower)
+with(age.universe,sapply(x,function(i) lines(c(i,i),c(lower[i],upper[i]))))
+</code></pre>
+
+
+</div>

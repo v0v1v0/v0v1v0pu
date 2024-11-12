@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>[.mlresult</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Filter a Multi-Label Result</h2>
+
+<h3>Description</h3>
+
+<p>If column filter is performed, then the result will be a matrix. Otherwise,
+the result will be a mlresult.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'mlresult'
+mlresult[rowFilter = T, colFilter, ...]
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mlresult</code></td>
+<td>
+<p>A mlresult object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rowFilter</code></td>
+<td>
+<p>A list of rows to filter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colFilter</code></td>
+<td>
+<p>A list of columns to filter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Extra parameters to be used as the filter</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>mlresult or matrix. If column filter is performed, then the result
+will be a matrix. Otherwise, the result will be a mlresult.
+</p>
+
+
+</div>

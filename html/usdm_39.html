@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Variogram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Empirical variogram for raster data</h2>
+
+<h3>Description</h3>
+
+<p>Compute sample (empirical) variogram from raster data. The function returns a binned variogram and a variogram cloud.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Variogram(x, lag, cutoff, cells, size=100) 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> a raster object (<code>RasterLayer</code>) </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lag</code></td>
+<td>
+<p> the lag size (width of subsequent distance intervals) into which cell pairs are grouped for semivariance estimates. If missing, the cell size (raster resolution) is assigned. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff</code></td>
+<td>
+<p> spatial separation distance up to which cell pairs are included in semivariance estimates; as a default, the length of the diagonal of the box spanning the data is divided by three. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cells</code></td>
+<td>
+<p> numeric (optional). A vector of cell numbers in the Raster object. This forces the function to only consider these cells (and their neighbours) to compute the variogram.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p> positive integer specifying the number of cells to be drawn from raster object. If the number of cells in the raster object is large, a sample with the specified size is drawn to make the computation more efficient. </p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Variograms are widely used for exploring spatial structure in a single variable. Formally, it is defined as half the expected squared difference (half the variance of the difference) in the variable value at a specific geographical separation. A variogram summarizes the spatial relations in the data, and can be used to understand within what range (distance) the data is spatially autocorrelated. Naimi et al. (2011) linked this range to the impact of positional uncertainty on the performance of species distribution models (SDMs). Based on that study, examining variogram to find the effective autocorrelation range in predictors gives insight into whether predictions by SDMs are likely to be affected by the uncertainty in the sample locations (see Naimi et al. 2011, for more information).
+</p>
+<p>Note: A similar function has been implemented in the <code>elsa</code> package by the author of this package, and since the computation part of elsa is written in C programming language, the function in elsa is much faster.
+</p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>RasterVariogram</code></td>
+<td>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Babak Naimi <a href="mailto:naimi.b@gmail.com">naimi.b@gmail.com</a>
+</p>
+<p><a href="https://r-gis.net/">https://r-gis.net/</a>
+</p>
+<p><a href="https://www.biogeoinformatics.org/">https://www.biogeoinformatics.org/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Naimi, B., Skidmore, A.K, Groen, T.A., Hamm, N.A.S. 2011. Spatial autocorrelation in predictors reduces the impact of positional uncertainty in occurrence data on species
+distribution modelling, Journal of biogeography. 38: 1497-1509.
+</p>
+<p>Naimi, B., Hamm, N.A.S., Groen, T.A., Skidmore, A.K., and Toxopeus, A.G. 
+2014. Where is positional uncertainty a problem for species distribution modelling?, Ecography 37 (2): 191-203.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+file &lt;- system.file("external/spain.tif", package="usdm")
+
+r &lt;- rast(file) # reading a RasterBrick object including 10 raster layers in Spain
+
+r 
+
+plot(r[[1]]) # plot the first RasterLayer in r
+
+v1 &lt;- Variogram(r[[1]]) # compute the sample variogram for the first layer in r
+
+v2 &lt;- Variogram(r[[1]],lag=25000,cutoff=100000) # specify the lag and cutoff parameters
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

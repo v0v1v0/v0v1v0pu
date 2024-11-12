@@ -1,0 +1,228 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>locate_event</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Locate Event</h2>
+
+<h3>Description</h3>
+
+<p>Locate Event
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">locate_event(
+  text,
+  landmark_gazetteer,
+  landmark_gazetteer.name_var = "name",
+  landmark_gazetteer.type_var = "type",
+  roads,
+  roads.name_var = "name",
+  areas,
+  areas.name_var = "name",
+  event_words,
+  prepositions_list = list(c("at", "next to", "around", "just after", "opposite", "opp",
+    "apa", "hapa", "happened at", "just before", "at the", "outside", "right before"),
+    c("near", "after", "toward", "along", "towards", "approach"), c("past", "from",
+    "on")),
+  junction_words = c("intersection", "junction"),
+  false_positive_phrases = "",
+  type_list = NULL,
+  clost_dist_thresh = 500,
+  fuzzy_match = TRUE,
+  fuzzy_match.min_word_length = c(5, 11),
+  fuzzy_match.dist = c(1, 2),
+  fuzzy_match.ngram_max = 3,
+  fuzzy_match.first_letters_same = TRUE,
+  fuzzy_match.last_letters_same = TRUE,
+  quiet = TRUE,
+  mc_cores = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>text</code></td>
+<td>
+<p>Vector of texts to be geolocated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>landmark_gazetteer</code></td>
+<td>
+<p><code>sf</code> spatial data.frame representing landmarks.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>landmark_gazetteer.name_var</code></td>
+<td>
+<p>Name of variable indicating <code>name</code> of landmark.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>landmark_gazetteer.type_var</code></td>
+<td>
+<p>Name of variable indicating <code>type</code> of landmark.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>roads</code></td>
+<td>
+<p><code>sf</code> spatial data.frame representing roads.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>roads.name_var</code></td>
+<td>
+<p>Name of variable indicating <code>name</code> of road.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>areas</code></td>
+<td>
+<p><code>sf</code> spatial data.frame representing areas, such as administrative areas or neighborhoods.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>areas.name_var</code></td>
+<td>
+<p>Name of variable indicating <code>name</code> of area.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>event_words</code></td>
+<td>
+<p>Vector of event words, representing events to be geocoded.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prepositions_list</code></td>
+<td>
+<p>List of vectors of prepositions. Order of list determines order of preposition precedence. (Default: <code>list(c("at", "next to","around", "just after", "opposite","opp", "apa", "hapa","happened at", "just before","at the","outside", "right before"), c("near", "after", "toward", "along", "towards", "approach"), c("past","from","on"))</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>junction_words</code></td>
+<td>
+<p>Vector of junction words to check for when determining intersection of roads. (Default: <code>c("intersection", "junction")</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>false_positive_phrases</code></td>
+<td>
+<p>Common words found in text that include spurious location references (eg, <strong>githurai bus</strong> is the name of a bus, but <strong>githurai</strong> is also a place). These may be common phrases that should be checked and ignored in the text. (Default: <code>""</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type_list</code></td>
+<td>
+<p>List of vectors of types. Order of list determines order or type precedence. (Default: <code>NULL</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>clost_dist_thresh</code></td>
+<td>
+<p>Distance (meters) as to what is considered "close"; for example, when considering whether a landmark is close to a road. (Default: <code>500</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fuzzy_match</code></td>
+<td>
+<p>Whether to implement fuzzy matching of landmarks using levenstein distance. (Default: <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fuzzy_match.min_word_length</code></td>
+<td>
+<p>Minimum word length to use for fuzzy matching; vector length must be the same as <code>fuzzy_match.dist</code>. (Default: <code>c(5,11)</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fuzzy_match.dist</code></td>
+<td>
+<p>Allowable levenstein distances for fuzzy matching; vector length must be same as <code>fuzzy_match.min_word_length</code>. (Default: <code>c(1,2)</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fuzzy_match.ngram_max</code></td>
+<td>
+<p>The number of n-grams that should be extracted from text to calculate a levensteing distance against landmarks. For example, if the text is composed of 5 words: w1 w2 w3 w4 and <code>fuzzy_match.ngram_max = 3</code>, the function extracts <code style="white-space: pre;">⁠w1 w2 w3⁠</code> and compares the levenstein distance to all landmarks. Then in checks <code style="white-space: pre;">⁠w2 w3 w4⁠</code>, etc. (Default: <code>3</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fuzzy_match.first_letters_same</code></td>
+<td>
+<p>When implementing a fuzzy match, should the first letter of the original and found word be the same? (Default: <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fuzzy_match.last_letters_same</code></td>
+<td>
+<p>When implementing a fuzzy match, should the last letter of the original and found word be the same? (Default: <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>If <code>FALSE</code>, prints text that is being geocoded. (Default: <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mc_cores</code></td>
+<td>
+<p>If &gt; 1, uses geolocates events in parallel across multiple cores relying on the <code>parallel</code> package. (Default: <code>1</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>sf</code> spatial dataframe of geolocated events.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ulex)
+library(sf)
+
+## Landmarks
+landmarks_sf &lt;- data.frame(lat = runif(3),
+                           lon = runif(3),
+                           name = c("restaurant", "bank", "hotel"),
+                           type = c("poi", "poi", "poi")) |&gt;
+  st_as_sf(coords = c("lon", "lat"),
+           crs = 4326)
+
+## Road
+coords &lt;- matrix(runif(4), ncol = 2)
+road_sf &lt;- coords |&gt;
+  st_linestring() |&gt;
+  st_sfc(crs = 4326)
+road_sf &lt;- st_sf(geometry = road_sf)
+road_sf$name &lt;- "main st"
+
+## Area
+n &lt;- 5
+coords &lt;- matrix(runif(2 * n, min = 0, max = 10), ncol = 2)
+coords &lt;- rbind(coords, coords[1,])
+polygon &lt;- st_polygon(list(coords))
+area_sf &lt;- st_sfc(polygon, crs = 4326)
+area_sf &lt;- st_sf(geometry = area_sf)
+area_sf$name &lt;- "place"
+
+## Locate Event
+event_sf &lt;- locate_event(text = "accident near hotel",
+                         landmark_gazetteer = landmarks_sf,
+                         roads = road_sf,
+                         areas = area_sf,
+                         event_words = c("accident", "crash"))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fips</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve FIPS code for either a US state or county</h2>
+
+<h3>Description</h3>
+
+<p>Each US state and county has a unique FIPS
+(Federal Information Processing Standards) code. Use
+this function to obtain the FIPS code for a state or
+county.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fips(state, county = c())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>state</code></td>
+<td>
+<p>The state(s) for which to obtain a FIPS code(s).
+Can be entered as either a state abbreviation or full name (case-insensitive).
+</p>
+<p><code>state</code> can be entered as either a single state or a vector of states.
+If <code>state</code> is a vector, <code>county</code> must be omitted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>county</code></td>
+<td>
+<p>The county for which to obtain a FIPS code.
+Can be entered with or without "county" (case-insensitive).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>State and county FIPS (Federal Information Processing Standards) are
+two and five digit codes, respectively. They uniquely identify all states and
+counties within the United States. The first two digits of the five digit county
+codes correspond to the state that the county belongs to. FIPS codes also exist
+for US territories and minor outlying islands, though this package only provides
+information for the 50 US states (and their associated counties and
+census designated areas).
+</p>
+
+
+<h3>Value</h3>
+
+<p>The FIPS code(s) of given <code>state</code> or <code>county</code>.
+</p>
+<p>If only states are entered, a vector of length equal to the number of states
+is returned. If any states are not found or are invalid, <code>NA</code> is returned in their place.
+</p>
+<p>If a state and county are entered, a single value with the FIPS code
+for the given county is returned. If the county is invalid for the given state,
+an error is thrown.
+</p>
+<p>If both <code>state</code> and <code>county</code> are omitted, the entire list of available FIPS
+codes is returned, sorted by the state's abbreviation (e.g. Alaska (AK) comes
+before Alabama (AL)).
+</p>
+
+
+<h3>Note</h3>
+
+<p>A <code>state</code> must be included when searching for <code>county</code>,
+otherwise multiple results may be returned for duplicate county names.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>fips_info()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">fips()
+
+fips("NJ")
+fips("California")
+
+fips(c("AK", "CA", "UT"))
+
+fips("CA", county = "orange")
+fips(state = "AL", county = "autauga")
+fips(state = "Alabama", county = "Autauga County")
+</code></pre>
+
+
+</div>

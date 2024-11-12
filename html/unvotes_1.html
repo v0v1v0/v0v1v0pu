@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>un_roll_calls</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data on each roll call of the United Nations General Assembly</h2>
+
+<h3>Description</h3>
+
+<p>Information on each roll call vote of the United Nations General Assembly.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">un_roll_calls
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame (specifically a tbl_df) with one row
+for each roll call vote, and the following columns:
+</p>
+
+<dl>
+<dt>rcid</dt>
+<dd>
+<p>The roll call id; used to join with <code>un_votes</code>
+and <code>un_roll_call_issues</code></p>
+</dd>
+<dt>session</dt>
+<dd>
+<p>Session number. The UN holds one session per year; these
+started in 1946</p>
+</dd>
+<dt>importantvote</dt>
+<dd>
+<p>Whether the vote was classified as important by the
+U.S. State Department report "Voting Practices in the United Nations".
+These classifications began with session 39</p>
+</dd>
+<dt>date</dt>
+<dd>
+<p>Date of the vote, as a Date vector</p>
+</dd>
+<dt>unres</dt>
+<dd>
+<p>Resolution code</p>
+</dd>
+<dt>amend</dt>
+<dd>
+<p>Whether the vote was on an amendment; coded only until
+1985</p>
+</dd>
+<dt>para</dt>
+<dd>
+<p>Whether the vote was only on a paragraph and not a resolution;
+coded only until 1985</p>
+</dd>
+<dt>short</dt>
+<dd>
+<p>Short description</p>
+</dd>
+<dt>descr</dt>
+<dd>
+<p>Longer description</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The yes, no, and abstain columns that were present in the original
+Voeten data were removed (since they can be retrieved from the
+<code>un_votes</code> dataset)
+</p>
+
+
+<h3>Source</h3>
+
+<p>Erik Voeten "Data and Analyses of Voting in the UN General Assembly"
+Routledge Handbook of International Organization, edited by Bob Reinalda
+(published May 27, 2013)
+<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=hdl:1902.1/12379">https://dataverse.harvard.edu/dataset.xhtml?persistentId=hdl:1902.1/12379</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(dplyr)
+
+# combine with per-country-vote information
+un_votes %&gt;%
+  inner_join(un_roll_calls, by = "rcid")
+
+</code></pre>
+
+
+</div>

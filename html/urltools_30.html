@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>url_compose</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Recompose Parsed URLs</h2>
+
+<h3>Description</h3>
+
+<p>Sometimes you want to take a vector of URLs, parse them, perform
+some operations and then rebuild them. <code>url_compose</code> takes a data.frame produced
+by <code>url_parse</code> and rebuilds it into a vector of full URLs (or: URLs as full
+as the vector initially thrown into url_parse).
+</p>
+<p>This is currently a 'beta' feature; please do report bugs if you find them.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">url_compose(parsed_urls)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>parsed_urls</code></td>
+<td>
+<p>a data.frame sourced from <code>url_parse</code></p>
+</td>
+</tr></table>
+<h3>See Also</h3>
+
+<p><code>scheme</code> and other accessors, which you may want to
+run URLs through before composing them to modify individual values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Parse a URL and compose it
+url &lt;- "http://en.wikipedia.org"
+url_compose(url_parse(url))
+
+</code></pre>
+
+
+</div>

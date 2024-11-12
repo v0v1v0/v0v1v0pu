@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DonAdj</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Donor adjustment candidates &amp; results</h2>
+
+<h3>Description</h3>
+
+<p>Provides donor adjustment candidates, descriptors, and results in order of the proximity to the centroid of the subject catchment.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DonAdj(CDs = NULL, x, y, QMEDscd = NULL, alpha = TRUE, rows = 10, d2 = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>CDs</code></td>
+<td>
+<p>catchment descriptors derived from either GetCDs or CDsXML</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>catchment centroid easting (for when CDs isn't used)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>catchment centroid northing (for when CDs isn't used)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>QMEDscd</code></td>
+<td>
+<p>QMED estimate for the catchment of interest (for when CDs isn't used)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>logical argument with a default of TRUE. If FALSE the exponent of the donor adjustment equation is set to one</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows</code></td>
+<td>
+<p>number of sites provided; default is 10</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d2</code></td>
+<td>
+<p>a numeric vector of length two; the two site references for the donor catchments chosen for the two donor case</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>When d2 is FALSE the results for single donor adjustment are in the final column headed 'QMED.adj' for each site. If alpha is set to FALSE, the results in this column are from the same donor equation but with an exponent of 1. The donor adjustment method is as outlined in Science Report: SC050050 - Improving the FEH statistical procedures for flood frequency estimation. The method for two donors is outlined in 'Kjeldsen, T. (2019). Adjustment of QMED in ungauged catchments using two donor sites. Circulation - The Newsletter of the British Hydrological Society, 4'. When two donors are used, only the result is returned, rather than donor candidates. The QMEDfse column provides the gauged factorial standard error for the median of the annual maximum sample. It is worth considering this when choosing a donor site (a high value indicates a poor donor). When choosing between two donors, the site with a lower QMEDfse would be an appropriate choice (all else being equal). The QMEDfse is calculated with the QMEDfseSS() function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with rownames of site references and columns of catchment descriptors, distance from subect site, and associated results. When two donors are used, only the resulting adjusted QMED is returned
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get some CDs and output candidate donor sites
+CDs.54022 &lt;- GetCDs(54022)
+DonAdj(CDs.54022)
+#Get results with inputs of x,y, and QMEDscd
+DonAdj(x = 283261, y = 288067, QMEDscd = 17.931)
+#Get a result with two donors
+DonAdj(CDs.54022, d2 = c(54092, 54091))
+</code></pre>
+
+
+</div>

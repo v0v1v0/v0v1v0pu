@@ -1,0 +1,147 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot the scalability function from a USL model</h2>
+
+<h3>Description</h3>
+
+<p>Create a line plot for the scalability functionh of a Universal
+Scalability Law model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+plot(
+  x,
+  from = NULL,
+  to = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  bounds = FALSE,
+  alpha,
+  beta,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The USL object to plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+<p>The start of the range over which the scalability function
+will be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>The end of the range over which the scalability function
+will be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>A title for the x axis: see <code>title</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>A title for the y axis: see <code>title</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bounds</code></td>
+<td>
+<p>Add the bounds of scalability to the plot. This always
+includes the linear scalability bound for low loads. If the contention
+coefficient <code>alpha</code> is a positive number, then the Amdahl asymptote
+for high loads will also be plotted. If the coherency coefficient
+<code>beta</code> is also a positive number, then the point of peak scalability
+will also be indicated. All bounds are show using dotted lines. Some
+bounds might not be shown using the default plot area. In this case the
+parameter <code>ylim</code> can be used to increase the visible plot area and
+include all bounds in the output.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Optional parameter to be used for evaluation instead of the
+parameter computed for the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Optional parameter to be used for evaluation instead of the
+parameter computed for the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other graphical parameters passed to plot
+(see <code>par</code>, <code>plot.function</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>plot</code> creates a plot of the scalability function for the model
+represented by the argument <code>x</code>.
+</p>
+<p>If <code>from</code> is not specified then the range starts at the minimum value
+given to define the model. An unspecified value for <code>to</code> will lead
+to plot ending at the maximum value from the model. For <code>add = TRUE</code>
+the defaults are taken from the limits of the previous plot.
+</p>
+<p><code>xlab</code> and <code>ylab</code> can be used to set the axis titles. The defaults
+are the names of the regressor and response variables used in the model.
+</p>
+<p>If the parameter <code>bounds</code> is set to <code>TRUE</code> then the plot also
+shows dotted lines for the theoretical bounds of scalability. These are
+the linear scalability for small loads and the Amdahl asymptote for the
+limit of scalability as load approaches infinity.
+</p>
+<p>The parameters <code>alpha</code> or <code>beta</code> are useful to do a what-if
+analysis. Setting these parameters override the model parameters and show
+how the system would behave with a different contention or coherency delay
+parameter.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>, <code>plot.function</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(specsdm91)
+
+## Plot result from USL model for demo dataset
+plot(usl(throughput ~ load, specsdm91), bounds = TRUE, ylim = c(0, 3500))
+
+</code></pre>
+
+
+</div>

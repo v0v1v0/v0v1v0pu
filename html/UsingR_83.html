@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>KSI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data set on automobile deaths and injuries in Great Britain</h2>
+
+<h3>Description</h3>
+
+<p>Data on car drivers killed, car drivers killed or seriously injured
+(KSI), and light goods drivers killed during the years 1969 to 1984 in
+Great Britain. In February 1982 a compulsory seat belt law was introduced.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(KSI)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The data is stored as a multi-variate <code>zoo</code> object.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Data copied from Appendix 2 "Forecasting, structural time series, models and the
+Kalman Filter" by Andrew Harvey. The <code>lg.k</code> data is also found in
+the <code>vandrivers</code> dataset contained in the <code>sspir</code> package.
+</p>
+
+
+<h3>References</h3>
+
+<p>Source: HMSO: Road Accidents in Great Britain 1984.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(KSI)
+plot(KSI)
+seatbelt = time(KSI) &lt; 1983 + (2-1)/12
+
+</code></pre>
+
+
+</div>

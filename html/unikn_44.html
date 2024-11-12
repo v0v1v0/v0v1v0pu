@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>slide</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot a slide (or frame)</h2>
+
+<h3>Description</h3>
+
+<p><code>slide</code> plots an empty slide (or frame) 
+as a colored rectangle.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">slide(col = NA, dim = c(4/3, 1), border = grey(0.33, 1), lwd = 1.5)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>The color to fill the slide with (i.e., its background color).
+Default: <code>col = NA</code> (i.e., system default for transparency).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dim</code></td>
+<td>
+<p>The x- and y-dimensions of the slide. 
+Default: <code>dim = c(4/3, 1)</code> (i.e., unit height, 4/3 wider than high).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>border</code></td>
+<td>
+<p>The color of the slide's border. 
+Setting <code>border = NA</code> hides border.  
+Default: <code>border = grey(.33, 1)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd</code></td>
+<td>
+<p>The line width of the slide's border. 
+Setting <code>lwd = 0</code> or <code>lwd = NA</code> removes border. 
+Default: <code>lwd = 1.5</code>.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>heading</code>, <code>line</code>, or <code>mark</code> to add text to a slide;  
+<code>xbox</code> to plot a box.
+</p>
+<p>Other plot functions: 
+<code>theme_grau()</code>,
+<code>theme_unikn()</code>,
+<code>xbox()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">slide()  # default slide (or frame)
+slide(lwd = NA)  # borderless slide
+
+# Dimensions: 
+slide(dim = c(18, 9))   # larger and 2:1 dimensions
+slide(dim = c(1/3, 1))  # smaller and 1:3 dimensions
+
+# Formatting:
+slide(col = pal_seeblau[[1]], border = pal_seeblau[[5]], lwd = 2)
+
+</code></pre>
+
+
+</div>

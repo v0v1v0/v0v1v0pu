@@ -1,0 +1,163 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uptimerobot.monitor.edit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Edit a monitor</h2>
+
+<h3>Description</h3>
+
+<p><code>uptimerobot.monitor.edit</code> edits the properties for an existing monitor.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uptimerobot.monitor.edit(api.key, id, friendly.name = NULL, url = NULL,
+  activate = TRUE, subtype = NULL, port = NULL, interval = NULL,
+  keyword.type = NULL, keyword.value = NULL, HTTP.username = NULL,
+  HTTP.password = NULL, alert.contacts = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>api.key</code></td>
+<td>
+<p>string with a valid key for connecting to Uptimerobot API.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>numeric or integer with the ID of the monitor to edit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>friendly.name</code></td>
+<td>
+<p>string the friendly (screen) name of the monitor.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>string with the URL/IP of the monitor.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>activate</code></td>
+<td>
+<p>logical to set the status of the monitor. Set to <code>TRUE</code> to start the monitor or <code>FALSE</code> to put it in paused state.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subtype</code></td>
+<td>
+<p>string used only for "Port monitoring" to set which pre-defined port/service is monitored or if a custom port is monitored. You can use both the friendly name (string) or the index (integer) here.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>port</code></td>
+<td>
+<p>string used only for "Port monitoring" to set the port monitored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>integer with the interval for the monitoring check (in minutes).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keyword.type</code></td>
+<td>
+<p>required string in Keyword monitoring".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keyword.value</code></td>
+<td>
+<p>string with the value of the keyword (required for keyword monitoring).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>HTTP.username</code></td>
+<td>
+<p>string used for password-protected web pages (HTTP Basic Auth). Set to empty string to erase the current username. Available for HTTP and keyword monitoring.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>HTTP.password</code></td>
+<td>
+<p>string used for password-protected web pages (HTTP Basic Auth). Set to empty string to erase the current password.Available for HTTP and keyword monitoring.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alert.contacts</code></td>
+<td>
+<p>character vector or data frame with the IDs to alert each with their threshold and recurrence values.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If a property has not to be updated, just omit it from the parameters or set to <code>NA</code>.
+To erase the value of a property, set it to an empty string, ie <code>""</code>, instead (not <code>NA</code> or <code>NULL</code>!).
+</p>
+<p>The type of a monitor can not be edited (like changing a HTTP monitor into a Port monitor).
+</p>
+<p>The alert contacts are whom to be notified when the monitor goes up/down.
+</p>
+<p>Multiple alert contact IDs can be sent in a character vector or in a data frame. If you pass alert contact IDs in a vector, each element must be formatted in the form <code>&lt;id&gt;_&lt;threshold&gt;_&lt;recurrence&gt;</code> (note the underscores).
+If you prefer to format it as a data.frame, it must have these three columns: <code>id, threshold, recurrence</code>, numeric or integer. Order of the columns doesn't matter.
+</p>
+<p>Please note that thresholds and recurrences can be omitted (default to zero) and, as they are only available in the Pro Plan, they are always 0 in the Free Plan.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns <code>TRUE</code> in case success. An error is thrown otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gabriele Baldassarre
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ # Let's assume the api.key is available into the environment variable KEY
+ api.key &lt;- Sys.getenv("KEY", "")
+
+ # Create a monitor and get its monitor.id
+ monitor.id &lt;- uptimerobot.monitor.new(api.key,
+   friendly.name="Open Analytics",
+   url="https://gabrielebaldassarre.com", type="http"
+ )
+
+ # Change the friendly name of the monitor
+  if(uptimerobot.monitor.edit(api.key,
+     monitor.id,
+     friendly.name="Open Analytics - gabrielebaldassarre.com"
+  ){
+   message("Monitor has been successfully edited!")
+ }
+
+ # Delete the just-made monitor
+ if(uptimerobot.monitor.delete(api.key, monitor.id){
+   message("Monitor has been successfully deleted!")
+ }
+
+## End(Not run)
+</code></pre>
+
+
+</div>

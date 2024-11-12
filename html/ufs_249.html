@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>wrapVector</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Wrap all elements in a vector</h2>
+
+<h3>Description</h3>
+
+<p>Wrap all elements in a vector
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">wrapVector(x, width = 0.9 * getOption("width"), sep = "\n", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The character vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width</code></td>
+<td>
+<p>The number of</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The glue with which to combine the new lines</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments are passed to <code>strwrap()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">res &lt;- wrapVector(
+  c(
+    "This is a sentence ready for wrapping",
+    "So is this one, although it's a bit longer"
+  ),
+  width = 10
+);
+
+print(res);
+cat(res, sep="\n");
+</code></pre>
+
+
+</div>

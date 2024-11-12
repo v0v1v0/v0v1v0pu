@@ -1,0 +1,127 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.df-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class ur.df</h2>
+
+<h3>Description</h3>
+
+<p>This class contains the relevant information by applying the augmented
+Dickey-Fuller unit root test to a time series.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>y</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The time series to
+be tested.</p>
+</dd>
+<dt>
+<code>model</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The type of
+the deterministic part, either <code>"none"</code>, <code>"drift"</code> or
+<code>"trend"</code>. The latter includes a constant term, too.</p>
+</dd>
+<dt>
+<code>lags</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: Number of lags
+for error correction.</p>
+</dd>
+<dt>
+<code>cval</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: Critical values
+at the 1%, 5% and 10% level of significance.</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: Value of
+the test statistic.</p>
+</dd>
+<dt>
+<code>testreg</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The summary
+output of the test regression.</p>
+</dd>
+<dt>
+<code>res</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The residuals of
+the test regression.</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+name of the test, <em>i.e</em> ‘Augmented-Dickey-Fuller Test’.</p>
+</dd>
+</dl>
+<h3>Extends</h3>
+
+<p>Class <code>urca</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Type <code>showMethods(classes="ur.df")</code> at the R prompt for a
+complete list of methods which are available for this class.
+</p>
+<p>Useful methods include
+</p>
+
+<dl>
+<dt>
+<code>show</code>:</dt>
+<dd>
+<p>test statistic.</p>
+</dd>
+<dt>
+<code>summary</code>:</dt>
+<dd>
+<p>like show, but critical value and summary of
+test regression added.</p>
+</dd>
+<dt>
+<code>plot</code>:</dt>
+<dd>
+<p>Residual plot, acfs' and pacfs'.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Dickey, D. A. and Fuller, W. A. (1979), Distributions of the
+Estimators For Autoregressive Time Series with a Unit Root,
+<em>Journal of the American Statistical Association</em>,  <b>75</b>, 427–431.
+</p>
+<p>Dickey, D. A. and Fuller, W. A. (1981), Likelihood Ratio Statistics
+for Autoregressive Time Series with a Unit Root, <em>Econometrica</em>,
+<b>49</b>, 1057–1072.
+</p>
+<p>Hamilton (1994), <em>Time Series Analysis</em>, Princeton University Press.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.df</code> and <code>urca-class</code>
+</p>
+
+
+</div>

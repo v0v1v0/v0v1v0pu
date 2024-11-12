@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>combine_excels</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Combine Excel files in a directory</h2>
+
+<h3>Description</h3>
+
+<p>Given a directory (and, optionally, a pattern to search against),
+concatenate all Excel files into a single tibble.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">combine_excels(dir, pattern = "*.xls[x]?", all_sheets = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dir</code></td>
+<td>
+<p>Path to the directory to look at for files.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>Pattern to use for detecting files. (Default: '*.xls[x]?')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all_sheets</code></td>
+<td>
+<p>Should this function also concatenate all sheets within each
+Excel file into one long tibble? (Default: FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Parameters to pass to <code>readxl::read_excel</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A tibble of concatenated data from multiple Excel files.
+</p>
+
+
+</div>

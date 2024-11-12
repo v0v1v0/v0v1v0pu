@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rep_optimBn</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Optimization function with multiple staring points (for local optima)</h2>
+
+<h3>Description</h3>
+
+<p>Finds the configuration with max Bn among all configurations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">rep_optimBn(mdm, rep = 15, bootB = -1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdm</code></td>
+<td>
+<p>Matrix of squared Euclidean distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rep</code></td>
+<td>
+<p>Number of replications</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootB</code></td>
+<td>
+<p>Result of previous bootstrap (if available). If, -1, a new bootstrap is performed for the variance of Bn.</p>
+</td>
+</tr>
+</table>
+</div>

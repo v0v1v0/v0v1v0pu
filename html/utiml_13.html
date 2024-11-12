@@ -1,0 +1,158 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Classifier Chains for multi-label Classification</h2>
+
+<h3>Description</h3>
+
+<p>Create a Classifier Chains model for multilabel classification.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cc(
+  mdata,
+  base.algorithm = getOption("utiml.base.algorithm", "SVM"),
+  chain = NA,
+  ...,
+  cores = getOption("utiml.cores", 1),
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset used to train the binary models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base.algorithm</code></td>
+<td>
+<p>A string with the name of the base algorithm. (Default:
+<code>options("utiml.base.algorithm", "SVM")</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chain</code></td>
+<td>
+<p>A vector with the label names to define the chain order. If
+empty the chain is the default label sequence of the dataset. (Default:
+<code>NA</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm for all subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the training. Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed. This is useful when
+the method is run in parallel. (Default: <code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Classifier Chains is a Binary Relevance transformation method based to
+predict multi-label data. This is based on the one-versus-all approach to
+build a specific model for each label. It is different from BR method due the
+strategy of extended the attribute space with the 0/1 label relevances of all
+previous classifiers, forming a classifier chain.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>CCmodel</code> containing the set of fitted
+models, including: </p>
+
+<dl>
+<dt>chain</dt>
+<dd>
+<p>A vector with the chain order.</p>
+</dd>
+<dt>labels</dt>
+<dd>
+<p>A vector with the label names in expected order.</p>
+</dd>
+<dt>models</dt>
+<dd>
+<p>A list of models named by the label names.</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+<p>Read, J., Pfahringer, B., Holmes, G., &amp; Frank, E. (2011). Classifier chains
+for multi-label classification. Machine Learning, 85(3), 333-359.
+</p>
+<p>Read, J., Pfahringer, B., Holmes, G., &amp; Frank, E. (2009). Classifier Chains
+for Multi-label Classification. Machine Learning and Knowledge Discovery
+in Databases, Lecture Notes in Computer Science, 5782, 254-269.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Transformation methods: 
+<code>brplus()</code>,
+<code>br()</code>,
+<code>clr()</code>,
+<code>dbr()</code>,
+<code>ebr()</code>,
+<code>ecc()</code>,
+<code>eps()</code>,
+<code>esl()</code>,
+<code>homer()</code>,
+<code>lift()</code>,
+<code>lp()</code>,
+<code>mbr()</code>,
+<code>ns()</code>,
+<code>ppt()</code>,
+<code>prudent()</code>,
+<code>ps()</code>,
+<code>rakel()</code>,
+<code>rdbr()</code>,
+<code>rpc()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- cc(toyml, "RANDOM")
+pred &lt;- predict(model, toyml)
+
+
+# Use a specific chain with C5.0 classifier
+mychain &lt;- sample(rownames(toyml$labels))
+model &lt;- cc(toyml, 'C5.0', mychain)
+
+# Set a specific parameter
+model &lt;- cc(toyml, 'KNN', k=5)
+
+#Run with multiple-cores
+model &lt;- cc(toyml, 'RF', cores = 2, seed = 123)
+
+</code></pre>
+
+
+</div>

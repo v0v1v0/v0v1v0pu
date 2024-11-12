@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>var2string</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converts Numeric Variables into Padded Strings</h2>
+
+<h3>Description</h3>
+
+<p>Mechanism for converting numeric variables into strings for reporting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">var2string(vars, maxlength = 0, nsig_e = 3, nsig_f = 4)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vars</code></td>
+<td>
+<p>numeric variable or a vector of numeric variables</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxlength</code></td>
+<td>
+<p>if this value is greater than zero spaces will be added to the beginning of the string until the total length is equal to maxlength</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nsig_e</code></td>
+<td>
+<p>number of significant figures for scientific notation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nsig_f</code></td>
+<td>
+<p>number of significant figures for numbers (2.123)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Number as a string padded
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">var2string(pi, nsig_f=20)
+var2string(.0001121, nsig_e=2, maxlength=10)
+</code></pre>
+
+
+</div>

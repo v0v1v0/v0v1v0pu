@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>midsize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Price of new and used of three mid-sized cars</h2>
+
+<h3>Description</h3>
+
+<p>New and used prices of three popular mid-sized cars.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(midsize)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 15 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>Year</dt>
+<dd>
+<p>2004 is new car price, others are for used car</p>
+</dd>
+<dt>Accord</dt>
+<dd>
+<p>Honda Accord</p>
+</dd>
+<dt>Camry</dt>
+<dd>
+<p>Toyota Camry</p>
+</dd>
+<dt>Taurus</dt>
+<dd>
+<p>Ford Taurus</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The value of a car depreciates over time. This data gives the price of a
+new car and values of similar models for previous years as reported by
+https://www.edmunds.com.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(midsize)
+plot(Accord ~ I(2004-Year), data = midsize)
+</code></pre>
+
+
+</div>

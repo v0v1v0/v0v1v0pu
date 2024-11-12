@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sigmaOLScor1</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Correction of OLS sigma</h2>
+
+<h3>Description</h3>
+
+<p>This function is a bias correction of the residual standard deviation under MNAR, used by <code>ui.causal</code> and <code>ui.ols</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sigmaOLScor1(X, sigmaOLS, n, p, u, gridrho)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Covariate matrix outcome.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigmaOLS</code></td>
+<td>
+<p>Residual sd from outcome regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of complete cases.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Number of covariates outcome regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+<p>Fitted values from propensity score regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gridrho</code></td>
+<td>
+<p>Values of rho.</p>
+</td>
+</tr>
+</table>
+</div>

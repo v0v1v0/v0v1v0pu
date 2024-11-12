@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>listmerge</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Merges two lists.</h2>
+
+<h3>Description</h3>
+
+<p>Merges two lists.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">listmerge(x, y, type = c("merge", "template"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A list of default arguments.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>A list of supplied arguments</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>If <code>merge</code>, the list will be merge with y
+having priority; if <code>template</code>, named the elements of
+y not in x will be discarded after merging.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A merged list where conflicts are solved in favor
+of y. Does not preserve ordering.
+</p>
+
+
+</div>

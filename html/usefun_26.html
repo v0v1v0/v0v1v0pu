@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pretty_print_bold_string</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pretty print a bold string</h2>
+
+<h3>Description</h3>
+
+<p>Prints a bold string only when <code>html.output</code> is enabled. Otherwise, it prints
+a normal string. The the "&gt;" sign can be appended if nice output in an R
+notebook is desired.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pretty_print_bold_string(string, with.gt = TRUE, html.output = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>string</code></td>
+<td>
+<p>a string</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>with.gt</code></td>
+<td>
+<p>logical. Determines if the "&gt;" sign will be appended for nice
+printing in an R notebook. (use with the chuck option <em>results = 'asis'</em>). Default value: TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>html.output</code></td>
+<td>
+<p>logical. If TRUE, it encapsulates the string with the bold
+tags for an HTML document. Default value: TRUE.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>pretty_print_string</code>
+</p>
+
+
+</div>

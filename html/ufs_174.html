@@ -1,0 +1,125 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>confIntOmegaSq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Confidence intervals for Omega Squared</h2>
+
+<h3>Description</h3>
+
+<p>This function uses the MBESS functions <code>conf.limits.ncf()</code> (which has been
+copied into this package to avoid the dependency on <code>MBESS</code>)
+and <code>convert.ncf.to.omegasq()</code> to compute the point estimate and
+confidence interval for Omega Squared (which have been lifted out of MBESS to
+avoid importing the whole package)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">confIntOmegaSq(var1, var2, conf.level = 0.95)
+
+## S3 method for class 'confIntOmegaSq'
+print(x, ..., digits = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>var1, var2</code></td>
+<td>
+<p>The two variables: one should be a factor (or will be made
+a factor), the other should have at least interval level of measurement. If
+none of the variables is a factor, the function will look for the variable
+with the least unique values and change it into a factor.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>Level of confidence for the confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x, digits, ...</code></td>
+<td>
+<p>Respectively the object to print, the number of digits to
+round to, and any additonal arguments to pass on to the <code>print</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>confIntOmegaSq</code> object is returned, with as elements:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>The input arguments</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intermediate</code></td>
+<td>
+<p>Objects generated
+while computing the output</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>The output of the function,
+consisting of:</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$es</code></td>
+<td>
+<p>The point estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$ci</code></td>
+<td>
+<p>The
+confidence interval</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>Formula 16 in Steiger (2004) is used for the conversion in
+<code>convert.ncf.to.omegasq()</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Steiger, J. H. (2004). Beyond the F test: Effect size confidence
+intervals and tests of close fit in the analysis of variance and contrast
+analysis. Psychological Methods, 9(2), 164-82.
+https://doi.org/10.1037/1082-989X.9.2.164
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+confIntOmegaSq(mtcars$mpg, mtcars$cyl);
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>father.son</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pearson's data set on heights of  fathers and their sons</h2>
+
+<h3>Description</h3>
+
+<p>1078 measurements of a father's height and his son's height.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(father.son)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 1078 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>fheight</dt>
+<dd>
+<p>Father's height in inches</p>
+</dd>
+<dt>sheight</dt>
+<dd>
+<p>Son's height in inches</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Data set used by Pearson to investigate regression. See data set
+<code>galton</code> for data set used by Galton.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Read into R by the command
+</p>
+<p><code>read.table("http://stat-www.berkeley.edu/users/juliab/141C/pearson.dat",sep=" ")[,-1]</code>,
+</p>
+<p>as mentioned by Chuck Cleland on the r-help mailing list.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(father.son)
+## like cover of Freedman, Pisani, and Purves
+plot(sheight ~ fheight, data=father.son,bty="l",pch=20)
+abline(a=0,b=1,lty=2,lwd=2)
+abline(lm(sheight ~ fheight, data=father.son),lty=1,lwd=2)
+</code></pre>
+
+
+</div>

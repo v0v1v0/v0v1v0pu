@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_gene_drug_response_diff</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize Gene and Drug Response Difference with CCLE Data</h2>
+
+<h3>Description</h3>
+
+<p>See analyze_gene_drug_response_diff for examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_gene_drug_response_diff(
+  Gene = "TP53",
+  tissue = "lung",
+  Show.P.label = TRUE,
+  Method = "wilcox.test",
+  values = c("#DF2020", "#DDDF21"),
+  alpha = 0.5
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Gene</code></td>
+<td>
+<p>a molecular identifier (e.g., "TP53") or a formula specifying
+genomic signature (<code>"TP53 + 2 * KRAS - 1.3 * PTEN"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tissue</code></td>
+<td>
+<p>select cell line origin tissue.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Show.P.label</code></td>
+<td>
+<p><code>TRUE</code> or <code>FALSE</code> present p value with number or label <code>*</code>, <code style="white-space: pre;">⁠**⁠</code>, <code style="white-space: pre;">⁠***⁠</code> and <code style="white-space: pre;">⁠****⁠</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Method</code></td>
+<td>
+<p>default method is wilcox.test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>the color to fill tumor or normal</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>set alpha for dots.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>ggplot</code> object.
+</p>
+
+
+</div>

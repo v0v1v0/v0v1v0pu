@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_array_shift</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Like the php array_shift function: shifts an item off the beginning of a list</h2>
+
+<h3>Description</h3>
+
+<p>Returns x[1]. Has the SIDE EFFECT of assigning x to x[2:end] in the container environment.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_array_shift(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the vector to shift</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> first item of x
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = c("Alice", "Bob", "Carol")
+umx_array_shift(x) # returns "Alice"
+x # now only 2 items (altered in containing environment)
+</code></pre>
+
+
+</div>

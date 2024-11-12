@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compute_extended_ratios</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute extended set of biomarker ratios</h2>
+
+<h3>Description</h3>
+
+<p>Computes 76 additional ratios not provided by the Nightingale platform. These
+include lipid fractions in HDL, LDL, VLDL, and total serum, as well as
+cholesterol fractions, and omega to polyunsaturated fatty acid ratios. See
+<code>nmr_info</code> for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compute_extended_ratios(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>data.frame</code> containing NMR metabolomics data from UK Biobank.
+May either be raw field data output by
+<a href="https://biobank.ctsu.ox.ac.uk/crystal/exinfo.cgi?src=accessing_data_guide">ukbconv</a>
+or data with column names corresponding to biomarkers listed in <code>nmr_info</code>.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>If your UK Biobank project only has access to a subset of biomarkers, then
+this function will only return the subset of ratios that can be computed from
+the biomarker data provided.
+</p>
+<p>All biomarkers in the input data are also returned alongside the ratios computed
+by this function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> with the additional computed biomarker ratios.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>nmr_info</code> for list of computed biomarker ratios,
+<code>compute_extended_ratio_qc_flags()</code> for obtaining an
+aggregate of the biomarker QC flags from the biomarkers underlying each
+computed ratio, and <code>extract_biomarkers()</code> for details on how
+raw data from
+<a href="https://biobank.ctsu.ox.ac.uk/crystal/exinfo.cgi?src=accessing_data_guide">ukbconv</a>
+is processed.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ukb_data &lt;- ukbnmr::test_data # Toy example dataset for testing package
+nmr &lt;- compute_extended_ratios(ukb_data)
+
+</code></pre>
+
+
+</div>

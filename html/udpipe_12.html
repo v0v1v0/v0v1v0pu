@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>brussels_reviews_anno</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reviews of the AirBnB customers which are tokenised, POS tagged and lemmatised</h2>
+
+<h3>Description</h3>
+
+<p>Reviews of the AirBnB customerswhich are tokenised, POS tagged and lemmatised.
+The data contains 1 row per document/token and contains the fields
+doc_id, language, sentence_id, token_id, token, lemma, xpos. <br>
+Data has been converted from UTF-8 to ASCII as in <code>iconv(x, from = "UTF-8", to = "ASCII//TRANSLIT")</code> in order
+to be able to comply to CRAN policies.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="http://insideairbnb.com/brussels">http://insideairbnb.com/brussels</a>: information of 2015-10-03
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>brussels_reviews</code>, <code>brussels_listings</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## brussels_reviews_anno
+data(brussels_reviews_anno)
+head(brussels_reviews_anno)
+sort(table(brussels_reviews_anno$xpos))
+
+## Not run: 
+
+##
+## If you want to construct a similar dataset as the 
+## brussels_reviews_anno dataset based on the udpipe library, do as follows
+##
+
+library(udpipe)
+library(data.table)
+data(brussels_reviews)
+
+## The brussels_reviews contains comments on Airbnb sites in 3 languages: es, fr and nl
+table(brussels_reviews$language)
+bxl_anno &lt;- split(brussels_reviews, brussels_reviews$language)
+
+## Annotate the Spanish comments
+m &lt;- udpipe_download_model(language = "spanish-ancora")
+m &lt;- udpipe_load_model(file = m$file_model)
+bxl_anno$es &lt;- udpipe_annotate(object = m, x = bxl_anno$es$feedback, doc_id = bxl_anno$es$id)
+
+## Annotate the French comments
+m &lt;- udpipe_download_model(language = "french-partut")
+m &lt;- udpipe_load_model(file = m$file_model)
+bxl_anno$fr &lt;- udpipe_annotate(object = m, x = bxl_anno$fr$feedback, doc_id = bxl_anno$fr$id)
+
+## Annotate the Dutch comments
+m &lt;- udpipe_download_model(language = "dutch-lassysmall")
+m &lt;- udpipe_load_model(file = m$file_model)
+bxl_anno$nl &lt;- udpipe_annotate(object = m, x = bxl_anno$nl$feedback, doc_id = bxl_anno$nl$id)
+
+brussels_reviews_anno &lt;- lapply(bxl_anno, as.data.frame)
+brussels_reviews_anno &lt;- rbindlist(brussels_reviews_anno)
+str(brussels_reviews_anno)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

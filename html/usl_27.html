@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>usl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a model for the Universal Scalability Law</h2>
+
+<h3>Description</h3>
+
+<p><code>usl</code> is used to create a model for the Universal Scalability Law.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">usl(formula, data, method = "default")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>An object of class "<code>formula</code>" (or one that
+can be coerced to that class): a symbolic description of the model to be
+analyzed. The details of model specification are given under 'Details'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A data frame, list or environment (or object coercible by
+as.data.frame to a data frame) containing the variables in the model.
+If not found in data, the variables are taken from
+<code>environment(formula)</code>, typically the environment from which
+<code>usl</code> is called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Character value specifying the method to use. The possible
+values are described under 'Details'.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The Universal Scalability Law is used to forcast the scalability of
+either a hardware or a software system.
+</p>
+<p>The USL model works with one independent variable (e.g. virtual users,
+processes, threads, ...) and one dependent variable (e.g. throughput, ...).
+Therefore the model formula must be in the simple
+"<code>response ~ predictor</code>" format.
+</p>
+<p>The model produces two main coefficients as result: <code>alpha</code> models the
+contention and <code>beta</code> the coherency delay of the system. The third
+coefficient <code>gamma</code> estimates the value of the dependent variable
+(e.g. throughput) for the single user/process/thread case. It therefore
+corresponds to the scale factor calculated in previous versions of the
+<code>usl</code> package.
+</p>
+<p>The function <code>coef</code> extracts the coefficients from the model
+object.
+</p>
+<p>The argument <code>method</code> selects which solver is used to solve the
+model:
+</p>
+
+<ul>
+<li>
+<p> "<code>nls</code>" for a nonlinear regression model. This method
+estimates all coefficients <code>alpha</code>, <code>beta</code> and <code>gamma</code>.
+The R base function <code>nls</code> with the "<code>port</code>" algorithm
+is used internally to solve the model. So all restrictions of the
+"<code>port</code>" algorithm apply.
+</p>
+</li>
+<li>
+<p> "<code>nlxb</code>" for a nonliner regression model using the function
+<code>nlxb</code> from the <code>nlsr</code> package. This method
+also estimates all three coefficients. It is expected to be more robust
+than the <code>nls</code> method.
+</p>
+</li>
+<li>
+<p> "<code>default</code>" for the default method using a transformation
+into a 2nd degree polynom has been removed with the implementation
+of the model using three coefficients in the <span class="pkg">usl</span> package 2.0.0.
+Calling the "<code>default</code>" method will internally dispatch to the
+"<code>nlxb</code>" solver instead.
+</p>
+</li>
+</ul>
+<p>The Universal Scalability Law can be expressed with following formula.
+<code>C(N)</code> predicts the relative capacity of the system for a given
+load <code>N</code>:
+</p>
+<p style="text-align: center;"><code class="reqn">C(N) = \frac{\gamma N}{1 + \alpha (N - 1) + \beta N (N - 1)}</code>
+</p>
+
+
+
+<h3>Value</h3>
+
+<p>An object of class USL.
+</p>
+
+
+<h3>References</h3>
+
+<p>Neil J. Gunther. Guerrilla Capacity Planning: A Tactical
+Approach to Planning for Highly Scalable Applications and Services.
+Springer, Heidelberg, Germany, 1st edition, 2007.
+</p>
+<p>John C. Nash. nlsr: Functions for nonlinear least squares
+solutions, 2017. R package version 2017.6.18.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>efficiency,USL-method</code>,
+<code>scalability,USL-method</code>,
+<code>peak.scalability,USL-method</code>,
+<code>optimal.scalability,USL-method</code>,
+<code>limit.scalability,USL-method</code>,
+<code>summary,USL-method</code>,
+<code>sigma,USL-method</code>
+<code>predict,USL-method</code>,
+<code>overhead,USL-method</code>,
+<code>confint,USL-method</code>,
+<code>coef</code>,
+<code>fitted</code>,
+<code>residuals</code>,
+<code>df.residual</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(raytracer)
+
+## Create USL model for "throughput" by "processors"
+usl.model &lt;- usl(throughput ~ processors, raytracer)
+
+## Show summary of model parameters
+summary(usl.model)
+
+## Show complete list of efficiency parameters
+efficiency(usl.model)
+
+## Extract coefficients for model
+coef(usl.model)
+
+## Calculate point of peak scalability
+peak.scalability(usl.model)
+
+## Plot original data and scalability function
+plot(raytracer)
+plot(usl.model, add=TRUE)
+
+</code></pre>
+
+
+</div>

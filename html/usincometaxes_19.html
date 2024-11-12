@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>taxsim_calculate_taxes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate state and federal taxes using TASXSIM 35.</h2>
+
+<h3>Description</h3>
+
+<p>This function calculates state and federal income taxes using the TAXSIM 35 tax simulator.
+See <a href="http://taxsim.nber.org/taxsim35/">http://taxsim.nber.org/taxsim35/</a> for more information on TAXSIM 35. The function uses
+a compiled WebAssembly (wasm) version of the TAXSIM app that is part of the package to calculate taxes.
+Details about generating the wasm file can be found here: <a href="https://github.com/tmm1/taxsim.js">https://github.com/tmm1/taxsim.js</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">taxsim_calculate_taxes(
+  .data,
+  marginal_tax_rates = "Wages",
+  return_all_information = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.data</code></td>
+<td>
+<p>Data frame containing the information that will be used to calculate taxes.
+This data set will be sent to TAXSIM. Data frame must have specified column names and data types.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>marginal_tax_rates</code></td>
+<td>
+<p>Variable to use when calculating marginal tax rates. One of 'Wages', 'Long Term Capital Gains',
+'Primary Wage Earner', or 'Secondary Wage Earner'. Default is 'Wages'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return_all_information</code></td>
+<td>
+<p>Boolean (TRUE or FALSE). Whether to return all information from TAXSIM (TRUE),
+or only key information (FALSE). Returning all information returns 42 columns of output, while only
+returning key information returns 9 columns. It is faster to download results with only key information.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The output data set contains all the information returned by <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>,
+using the same column names. Descriptions of these columns can be found at the bottom of the page
+containing <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35's documentation</a>.
+</p>
+
+
+<h3>Formatting your data</h3>
+
+<p>In the input data set, <code>.data</code>, each column is a tax characteristic (year, filing status, income, etc.)
+and each row is a tax filing unit.
+</p>
+<p>Columns should take the same names, and fulfill the same requirements, as those needed for <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>.
+Potential columns, with there names and descriptions, can be found at: <a href="http://taxsim.nber.org/taxsim35/">http://taxsim.nber.org/taxsim35/</a>.
+</p>
+<p>The following columns are required: <code>taxsimid</code>, <code>year</code>, <code>mstat</code>, and <code>state</code>.
+</p>
+<p>There are two points where <code>taxsim_calculate_taxes</code> departs from <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>.
+</p>
+
+<ol><li>
+<p> For filing status, <code>mstat</code>, users can either enter the number allowed by <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>
+or one of the following descriptions:
+</p>
+</li></ol>
+<ul>
+<li>
+<p> "single"
+</p>
+</li>
+<li>
+<p> "married, jointly"
+</p>
+</li>
+<li>
+<p> "married, separately"
+</p>
+</li>
+<li>
+<p> "dependent child"
+</p>
+</li>
+<li>
+<p> "head of household"
+</p>
+</li>
+</ul>
+<ol><li>
+<p> For <code>state</code>, users can either enter the SOI code, as required by <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>,
+the two-letter state abbreviation, or the full name of the state.
+</p>
+</li></ol>
+<p>It is OK if the input data set, <code>.data</code>, contains columns in addition to the ones that are used by <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>.
+</p>
+
+
+<h3>Giving credit where it is due</h3>
+
+<p>The NBER's <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a> tax simulator does all tax
+calculations. This package simply lets users interact with the tax simulator through R. Therefore,
+users should cite the TASXSIM 35 tax simulator when they use this package in their work:
+</p>
+<p>Feenberg, Daniel Richard, and Elizabeth Coutts, An Introduction to the TAXSIM Model,
+Journal of Policy Analysis and Management vol 12 no 1, Winter 1993, pages 189-194.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+family_income &lt;- data.frame(
+    taxsimid = c(1, 2),
+    state = c('North Carolina', 'NY'),
+    year = c(2015, 2015),
+    mstat = c('single', 'married, jointly'),
+    pwages = c(10000, 100000),
+    page = c(26, 36)
+)
+
+
+family_taxes &lt;- taxsim_calculate_taxes(family_income)
+
+merge(family_income, family_taxes, by = 'taxsimid')
+
+</code></pre>
+
+
+</div>

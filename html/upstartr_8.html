@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>convert_str_to_logical</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converts a character vector to logicals</h2>
+
+<h3>Description</h3>
+
+<p>Takes a character vector and converts it to logicals, optionally using
+a vector of patterns to match against for truthy and falsy values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">convert_str_to_logical(
+  x,
+  truthy = c("T", "TRUE", "Y", "YES"),
+  falsy = c("F", "FALSE", "N", "NO")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A character vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>truthy</code></td>
+<td>
+<p>A vector of case-insensitive truthy values to turn into TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>falsy</code></td>
+<td>
+<p>A vector of case-insensitive falsy values to turn into FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A logical vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">convert_str_to_logical(c('YES', 'Y', 'No', 'N', 'YES', 'yes', 'no', 'Yes', 'NO', 'Y', 'y'))
+
+</code></pre>
+
+
+</div>

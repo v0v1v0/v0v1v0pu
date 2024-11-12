@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.RMSEA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print a RMSEA object</h2>
+
+<h3>Description</h3>
+
+<p>Print method for "RMSEA" objects: e.g. <code>RMSEA()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'RMSEA'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>RMSEA object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> invisible
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>RMSEA()</code>, <code>print()</code>
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+
+m1 = umxRAM("One Factor", data = demoOneFactor, type= "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1.0)
+)
+tmp = summary(m1)
+RMSEA(tmp)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

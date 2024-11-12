@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ablrtest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Likelihood ratio test for restrictions on alpha and beta</h2>
+
+<h3>Description</h3>
+
+<p>This function estimates a restricted VAR, where the restrictions are
+based upon <code class="reqn">\bold{\alpha}</code>, <em>i.e.</em> the loading vectors and
+<code class="reqn">\bold{\beta}</code>, <em>i.e</em> the matrix of cointegration vectors. The test
+statistic is distributed as <code class="reqn">\chi^2</code> with <code class="reqn">(p-m)r + (p-s)r</code> degrees of
+freedom, with <code class="reqn">m</code> equal to the columns of the restricting matrix
+<code class="reqn">\bold{A}</code>, <code class="reqn">s</code> equal to the columns of the restricting matrix
+<code class="reqn">\bold{H}</code> and <code class="reqn">p</code> the order of the VAR.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ablrtest(z, H, A, r)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class <code>ca.jo</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>H</code></td>
+<td>
+<p>The <code class="reqn">(p \times s)</code> matrix containing the restrictions on
+<code class="reqn">\bold{\beta}</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>A</code></td>
+<td>
+<p>The <code class="reqn">(p \times m)</code> matrix containing the restrictions on
+<code class="reqn">\bold{\alpha}</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The count of cointegrating relationships; <br>
+inferred from <code>summary(ca.jo-object)</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The restricted <code class="reqn">\bold{\alpha}</code> matrix, as well as <code class="reqn">\bold{\beta}</code> is
+normalised with respect to the first variable.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>cajo.test</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code>, <code>alrtest</code>, <code>blrtest</code>,
+<code>cajo.test-class</code>, <code>ca.jo-class</code> and
+<code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.vecm &lt;- ca.jo(sjd, ecdet = "const", type="eigen", K=2, spec="longrun",
+season=4)
+HD1 &lt;- matrix(c(1, -1, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 1), c(5,3))
+DA &lt;- matrix(c(1,0,0,0, 0, 1, 0, 0, 0, 0, 0, 1), c(4,3))
+summary(ablrtest(sjd.vecm, H=HD1, A=DA, r=1))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,396 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dataShape</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>normalityAssessment and samplingDistribution</h2>
+
+<h3>Description</h3>
+
+<p>normalityAssessment can be used to assess whether a variable and the
+sampling distribution of its mean have an approximately normal distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dataShape(
+  sampleVector,
+  na.rm = TRUE,
+  type = 2,
+  digits = 2,
+  conf.level = 0.95,
+  plots = TRUE,
+  xLabs = NA,
+  yLabs = NA,
+  qqCI = TRUE,
+  labelOutliers = TRUE,
+  sampleSizeOverride = NULL
+)
+
+## S3 method for class 'dataShape'
+print(x, digits = x$input$digits, extraNotification = TRUE, ...)
+
+## S3 method for class 'dataShape'
+pander(x, digits = x$input$digits, extraNotification = TRUE, ...)
+
+normalityAssessment(
+  sampleVector,
+  samples = 10000,
+  digits = 2,
+  samplingDistColor = "#2222CC",
+  normalColor = "#00CC00",
+  samplingDistLineSize = 2,
+  normalLineSize = 1,
+  xLabel.sampleDist = NULL,
+  yLabel.sampleDist = NULL,
+  xLabel.samplingDist = NULL,
+  yLabel.samplingDist = NULL,
+  sampleSizeOverride = TRUE
+)
+
+## S3 method for class 'normalityAssessment'
+print(x, ...)
+
+## S3 method for class 'normalityAssessment'
+pander(x, headerPrefix = "#####", suppressPlot = FALSE, ...)
+
+samplingDistribution(
+  popValues = c(0, 1),
+  popFrequencies = c(50, 50),
+  sampleSize = NULL,
+  sampleFromPop = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>sampleVector</code></td>
+<td>
+<p>Numeric vector containing the sample data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>Whether to remove missing data first.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of skewness and kurtosis to compute; either 1 (g1 and g2),
+2 (G1 and G2), or 3 (b1 and b2). See Joanes &amp; Gill (1998) for more
+information.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Number of digits to use when printing results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>Confidence of confidence intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plots</code></td>
+<td>
+<p>Whether to display plots.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xLabs, yLabs</code></td>
+<td>
+<p>The axis labels for the three plots (should be vectors of
+three elements; the first specifies the X or Y axis label for the rightmost
+plot (the histogram), the second for the middle plot (the QQ plot), and the
+third for the rightmost plot (the box plot).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>qqCI</code></td>
+<td>
+<p>Whether to show the confidence interval for the QQ plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labelOutliers</code></td>
+<td>
+<p>Whether to label outliers with their row number in the
+box plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampleSizeOverride</code></td>
+<td>
+<p>Whether to use the sample size of the sample as
+sample size for the sampling distribution, instead of the sampling
+distribution size. This makes sense, because otherwise, the sample size and
+thus sensitivity of the null hypothesis significance tests is a function of
+the number of samples used to generate the sampling distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to print/pander.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extraNotification</code></td>
+<td>
+<p>Whether to be particularly informative.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments are passed on, usually to the default methods.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>Number of samples to use when constructing sampling
+distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samplingDistColor</code></td>
+<td>
+<p>Color to use when drawing the sampling
+distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalColor</code></td>
+<td>
+<p>Color to use when drawing the standard normal curve.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samplingDistLineSize</code></td>
+<td>
+<p>Size of the line used to draw the sampling
+distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalLineSize</code></td>
+<td>
+<p>Size of the line used to draw the standard normal
+distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xLabel.sampleDist</code></td>
+<td>
+<p>Label of x axis of the distribution of the sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yLabel.sampleDist</code></td>
+<td>
+<p>Label of y axis of the distribution of the sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xLabel.samplingDist</code></td>
+<td>
+<p>Label of x axis of the sampling distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yLabel.samplingDist</code></td>
+<td>
+<p>Label of y axis of the sampling distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headerPrefix</code></td>
+<td>
+<p>A prefix to insert before the heading (e.g. to use Markdown
+headings).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppressPlot</code></td>
+<td>
+<p>Whether to suppress (<code>TRUE</code>) or print (<code>FALSE</code>) the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>popValues</code></td>
+<td>
+<p>The possible values (levels) of the relevant variable. For
+example, for a dichotomous variable, this can be "c(1:2)" (or "c(1, 2)").
+Note that samplingDistribution is for manually specifying the frequency
+distribution (or proportions); if you have a vector with 'raw' data, just
+call normalityAssessment directly.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>popFrequencies</code></td>
+<td>
+<p>The frequencies corresponding to each value in
+popValues; must be in the same order! See the examples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampleSize</code></td>
+<td>
+<p>Size of the sample; the sum of the frequencies if not
+specified.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampleFromPop</code></td>
+<td>
+<p>If true, the sample vector is created by sampling from
+the population information specified; if false, rep() is used to generate
+the sample vector. Note that is proportions are supplied in popFrequencies,
+sampling from the population is necessary!</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>samplingDistribution is a convenient wrapper for normalityAssessment that
+makes it easy to quickly generate a sample and sampling distribution from
+frequencies (or proportions).
+</p>
+<p>dataShape computes the skewness and kurtosis.
+</p>
+<p>normalityAssessment provides a number of normality tests and draws
+histograms of the sample data and the sampling distribution of the mean
+(most statistical tests assume the latter is normal, rather than the first;
+normality of the sample data guarantees normality of the sampling
+distribution of the mean, but if the sample size is sufficiently large, the
+sampling distribution of the mean is approximately normal even when the
+sample data are not normally distributed). Note that for the sampling
+distribution, the degrees of freedom are usually so huge that the normality
+tests, negligible deviations from normality will already result in very
+small p-values.
+</p>
+<p>samplingDistribution makes it easy to quickly assess the distribution of a
+variables based on frequencies or proportions, and dataShape computes
+skewness and kurtosis.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object with several results, the most notably of which are:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>plot.sampleDist</code></td>
+<td>
+<p>Histogram of sample distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sw.sampleDist</code></td>
+<td>
+<p>Shapiro-Wilk normality test of sample distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ad.sampleDist</code></td>
+<td>
+<p>Anderson-Darling normality test of sample distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ks.sampleDist</code></td>
+<td>
+<p>Kolmogorov-Smirnof normality test of sample
+distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kurtosis.sampleDist</code></td>
+<td>
+<p>Kurtosis for sample distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>skewness.sampleDist</code></td>
+<td>
+<p>Skewness for sample distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.samplingDist</code></td>
+<td>
+<p>Histogram of sampling distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sw.samplingDist</code></td>
+<td>
+<p>Shapiro-Wilk normality test of sampling distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ad.samplingDist</code></td>
+<td>
+<p>Anderson-Darling normality test of sampling
+distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ks.samplingDist</code></td>
+<td>
+<p>Kolmogorov-Smirnof normality test of
+sampling distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataShape.samplingDist</code></td>
+<td>
+<p>Skewness and kurtosis
+for sampling distribution</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### Note: the 'not run' is simply because running takes a lot of time,
+###       but these examples are all safe to run!
+## Not run: 
+
+normalityAssessment(rnorm(35));
+
+### Create a distribution of three possible values and
+### show the sampling distribution for the mean
+popValues &lt;- c(1, 2, 3);
+popFrequencies &lt;- c(20, 50, 30);
+sampleSize &lt;- 100;
+samplingDistribution(popValues = popValues,
+                     popFrequencies = popFrequencies,
+                     sampleSize = sampleSize);
+
+### Create a very skewed distribution of ten possible values
+popValues &lt;- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+popFrequencies &lt;- c(2, 4, 8, 6, 10, 15, 12, 200, 350, 400);
+samplingDistribution(popValues = popValues,
+                     popFrequencies = popFrequencies,
+                     sampleSize = sampleSize, digits=5);
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

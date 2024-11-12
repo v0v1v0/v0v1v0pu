@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>crime</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> violent crime rates in 50 states of US </h2>
+
+<h3>Description</h3>
+
+<p>crime rates for 50 states in 1983 and 1993
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(crime)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>y1983</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>y1993</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>from Kitchens' Exploring Statistics
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(crime)
+boxplot(crime)
+t.test(crime[,1],crime[,2],paired=TRUE)
+</code></pre>
+
+
+</div>

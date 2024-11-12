@@ -1,0 +1,153 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>etienne</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Etienne's sampling formula</h2>
+
+<h3>Description</h3>
+
+<p>Function <code>etienne()</code> returns the probability of a given dataset
+given <code>theta</code> and <code>m</code> according to the Etienne's sampling
+formula.  Function <code>optimal.params()</code> returns the maximum likelihood
+estimates for <code>theta</code> and <code>m</code> using numerical optimization
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">etienne(theta, m, D, log.kda = NULL, give.log = TRUE, give.like = TRUE)
+optimal.params(D, log.kda = NULL, start = NULL, give = FALSE, ...) 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>Fundamental biodiversity parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>Immigration probability</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>D</code></td>
+<td>
+<p>Dataset; a count object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log.kda</code></td>
+<td>
+<p>The KDA as defined in equation A11 of Etienne 2005.
+See details section</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>give.log</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to return
+the logarithm of the value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>give.like</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to return
+the likelihood and <code>FALSE</code> meaning to return the probability</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>In function <code>optimal.params()</code>, the start point for
+the optimization routine <code class="reqn">(\theta,m)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>give</code></td>
+<td>
+<p>In function <code>optimal.params()</code>, Boolean, with
+<code>TRUE</code> meaning to return all output of the optimization
+routine, and default <code>FALSE</code> meaning to return just the point
+estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>In function <code>optimal.params()</code>, further arguments
+passed to <code>optim()</code></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function <code>etienne()</code> is just Etienne's formula 6:
+</p>
+<p style="text-align: center;"><code class="reqn">P[D|\theta,m,J]=
+    \frac{J!}{\prod_{i=1}^Sn_i\prod_{j=1}^J{\Phi_j}!}
+    \frac{\theta^S}{(\theta)_J}\times
+    \sum_{A=S}^J\left(K(D,A)
+       \frac{(\theta)_J}{(\theta)_A}
+       \frac{I^A}{(I)_J}
+       \right)</code>
+</p>
+
+<p>where <code class="reqn">\log K(D,A)</code> is given by function <code>logkda()</code> (qv).  It
+might be useful to know the (trivial) identity for the Pochhammer symbol
+[written <code class="reqn">(z)_n</code>] documented in <code>theta.prob.Rd</code>.  For
+convenience, Etienne's Function <code>optimal.params()</code> uses
+<code>optim()</code> to return the maximum likelihood estimate for
+<code class="reqn">\theta</code> and <code class="reqn">m</code>.
+</p>
+<p>Compare function <code>optimal.theta()</code>, which is restricted to no
+dispersal limitation, ie <code class="reqn">m=1</code>.
+</p>
+<p>Argument <code>log.kda</code> is optional: this is the <code class="reqn">K(D,A)</code> as defined
+in equation A11 of Etienne 2005; it is computationally expensive to
+calculate.  If it is supplied, the functions documented here will not
+have to calculate it from scratch: this can save a considerable amount
+of time
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>R. S. Etienne 2005. “A new sampling formula for
+biodiversity”.  <em>Ecology letters</em> 8:253-260</p>
+
+
+<h3>See Also</h3>
+
+<p><code>logkda</code>,<code>optimal.theta</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(butterflies)
+## Not run: optimal.params(butterflies)  #takes too long without PARI/GP
+
+
+#Now the one from Etienne 2005, supplementary online info:
+
+zoo &lt;- count(c(pigs=1, dogs=1, cats=2, frogs=3, bats=5, slugs=8))
+l &lt;- logkda.R(zoo, use.brob=TRUE)  # Use logkda() if pari/gp is available
+optimal.params(zoo, log.kda=l)  #compare his answer of 7.047958 and 0.22635923.
+
+</code></pre>
+
+
+</div>

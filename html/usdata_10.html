@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>houserace10</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Election results for the 2010 U.S. House of Represenatives races</h2>
+
+<h3>Description</h3>
+
+<p>Election results for the 2010 U.S. House of Represenatives races
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">houserace10
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 435 observations on the following 24 variables.
+</p>
+
+<dl>
+<dt>id</dt>
+<dd>
+<p>Unique identifier for the race, which does not
+overlap with other 2010 races (see <code>govrace10</code> and
+<code>senaterace10</code>)</p>
+</dd>
+<dt>state</dt>
+<dd>
+<p>State name</p>
+</dd>
+<dt>abbr</dt>
+<dd>
+<p>State name abbreviation</p>
+</dd>
+<dt>num</dt>
+<dd>
+<p>District number for the state</p>
+</dd>
+<dt>name1</dt>
+<dd>
+<p>Name of the winning candidate</p>
+</dd>
+<dt>perc1</dt>
+<dd>
+<p>Percentage of vote for winning candidate (if more than
+one candidate)</p>
+</dd>
+<dt>party1</dt>
+<dd>
+<p>Party of winning candidate</p>
+</dd>
+<dt>votes1</dt>
+<dd>
+<p>Number of votes for winning candidate</p>
+</dd>
+<dt>name2</dt>
+<dd>
+<p>Name of candidate with second most votes</p>
+</dd>
+<dt>perc2</dt>
+<dd>
+<p>Percentage of vote for candidate who came in second</p>
+</dd>
+<dt>party2</dt>
+<dd>
+<p>Party of candidate with second most votes</p>
+</dd>
+<dt>votes2</dt>
+<dd>
+<p>Number of votes for candidate who came in second</p>
+</dd>
+<dt>name3</dt>
+<dd>
+<p>Name of candidate with third most votes</p>
+</dd>
+<dt>perc3</dt>
+<dd>
+<p>Percentage of vote for candidate who came in third</p>
+</dd>
+<dt>party3</dt>
+<dd>
+<p>Party of candidate with third most votes</p>
+</dd>
+<dt>votes3</dt>
+<dd>
+<p>Number of votes for candidate who came in third</p>
+</dd>
+<dt>name4</dt>
+<dd>
+<p>Name of candidate with fourth most votes</p>
+</dd>
+<dt>perc4</dt>
+<dd>
+<p>Percentage of vote for candidate who came in fourth</p>
+</dd>
+<dt>party4</dt>
+<dd>
+<p>Party of candidate with fourth most votes</p>
+</dd>
+<dt>votes4</dt>
+<dd>
+<p>Number of votes for candidate who came in fourth</p>
+</dd>
+<dt>name5</dt>
+<dd>
+<p>Name of candidate with fifth most votes</p>
+</dd>
+<dt>perc5</dt>
+<dd>
+<p>Percentage of vote for candidate who came in fifth</p>
+</dd>
+<dt>party5</dt>
+<dd>
+<p>Party of candidate with fifth most votes</p>
+</dd>
+<dt>votes5</dt>
+<dd>
+<p>Number of votes for candidate who came in fifth</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>This analysis in the Examples section was inspired by and is similar to that
+of Nate Silver's district-level analysis on the FiveThirtyEight blog in the
+New York Times: <a href="https://fivethirtyeight.com/features/2010-an-aligning-election/">https://fivethirtyeight.com/features/2010-an-aligning-election/</a>
+</p>
+
+
+<h3>Source</h3>
+
+<p>MSNBC.com, retrieved 2010-11-09.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+hr &lt;- table(houserace10[, c("abbr", "party1")])
+nr &lt;- apply(hr, 1, sum)
+
+pr &lt;- prrace08[prrace08$state != "DC", c("state", "p_obama")]
+hr &lt;- hr[as.character(pr$state), ]
+(fit &lt;- glm(hr ~ pr$p_obama, family = binomial))
+
+x1 &lt;- pr$p_obama[match(houserace10$abbr, pr$state)]
+y1 &lt;- (houserace10$party1 == "Democrat") + 0
+g &lt;- glm(y1 ~ x1, family = binomial)
+
+
+x &lt;- pr$p_obama[pr$state != "DC"]
+nr &lt;- apply(hr, 1, sum)
+plot(x, hr[, "Democrat"] / nr,
+  pch = 19, cex = sqrt(nr), col = "#22558844",
+  xlim = c(20, 80), ylim = c(0, 1),
+  xlab = "Percent vote for Obama in 2008",
+  ylab = "Probability of Democrat winning House seat"
+)
+X &lt;- seq(0, 100, 0.1)
+lo &lt;- -5.6079 + 0.1009 * X
+p &lt;- exp(lo) / (1 + exp(lo))
+lines(X, p)
+abline(h = 0:1, lty = 2, col = "#888888")
+</code></pre>
+
+
+</div>

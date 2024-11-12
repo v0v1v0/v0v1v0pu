@@ -1,0 +1,189 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>testRetestCES</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Test-Retest Coefficient of Equivalence &amp; Stability</h2>
+
+<h3>Description</h3>
+
+<p>The testRetestCES function computes the test-retest Coefficient of
+Equivalence and Stability (Schmidt, Le &amp; Ilies, 2003).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">testRetestCES(
+  dat = NULL,
+  moments = NULL,
+  testDat = NULL,
+  retestDat = NULL,
+  parallelTests = "means",
+  sortItems = FALSE,
+  convertToNumeric = TRUE,
+  digits = 4
+)
+
+## S3 method for class 'testRetestCES'
+print(x, digits = x$input$digits, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>A dataframe. For testRetestCES, this dataframe must contain the
+items in the scale at both measurement moments. If no dataframe is
+specified, a dialogue will be launched to allow the user to select an SPSS
+datafile. If only one dataframe is specified, either the items have to be
+ordered chronologically (i.e. first all items for the first measurement,
+then all items for the second measurement), or the vector 'moments' has to
+be used to indicate, for each item, to which measurement moment it belongs.
+The number of columns in this dataframe MUST be even! Note that instead of
+providing this dataframe, the items of each measurement moment can be
+provided separately in testDat and retestDat as well.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>moments</code></td>
+<td>
+<p>Used to indicate to which measurement moment each item in
+'dat' belongs; should be a vector with the same length as dat has columns,
+and with two possible values (e.g. 1 and 2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>testDat, retestDat</code></td>
+<td>
+<p>Dataframes with the items for each measurement
+moment: note that the items have to be in the same order (unless sortItems
+is TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallelTests</code></td>
+<td>
+<p>A vector indicating which items belong to which
+parallel test; like the moments vector, this should have two possible values
+(e.g. 1 and 2).  Alternatively, it can be character value with 'means' or
+'variances'; in this case, parallelSubscales will be used to create roughly
+parallel halves.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortItems</code></td>
+<td>
+<p>If true, the columns (items) in each dataframe are ordered
+alphabetically before starting. This can be convenient to ensure that the
+order of the items at each measurement moment is the same.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>convertToNumeric</code></td>
+<td>
+<p>When TRUE, the function will attempt to convert all
+vectors in the dataframes to numeric.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Number of digits to print.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to print</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Ignored.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function computes the test-retest Coefficient of Equivalence and
+Stability (CES) as described in Schmidt, Le &amp; Ilies (2003). Note that this
+function only computes the test-retest CES for a scale that is administered
+twice and split into two parallel halves post-hoc (this procedure is
+explained on page 210, and the equations that are used, 16 and 17a are
+explained on page 212).
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object with the input and several output variables. Most notably:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Input specified when calling the function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intermediate</code></td>
+<td>
+<p>Intermediate values and objects computed to get to the
+final results</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$testRetestCES</code></td>
+<td>
+<p>The value of the test-retest
+Coefficient of Equivalence and Stability.</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>This function uses equations 16 and 17 on page 212 of Schmidt, Le &amp;
+Ilies (2003): in other words, this function assumes that one scale is
+administered twice. If you'd like the computation for two different but
+parellel scales/measures to be implemented, please contact me.
+</p>
+
+
+<h3>References</h3>
+
+<p>Schmidt, F. L., Le, H., &amp; Ilies, R. (2003) Beyond Alpha: An
+Empirical Examination of the Effects of Different Sources of Measurement
+Error on Reliability Estimates for Measures of Individual-differences
+Constructs. Psychological Methods, 8(2), 206-224. <a href="doi:10/dzmk7n">doi:10/dzmk7n</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+### This will prompt the user to select an SPSS file
+testRetestCES();
+
+## End(Not run)
+
+### Load data from simulated dataset testRetestSimData (which
+### satisfies essential tau-equivalence).
+data(testRetestSimData);
+
+### The first column is the true score, so it's excluded in this example.
+exampleData &lt;- testRetestSimData[, 2:ncol(testRetestSimData)];
+
+### Compute test-retest alpha coefficient
+testRetestCES(exampleData);
+
+</code></pre>
+
+
+</div>

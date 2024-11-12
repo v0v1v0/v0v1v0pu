@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>scrabble</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Distribution of Scrabble pieces</h2>
+
+<h3>Description</h3>
+
+<p>Distribution and point values of letters in Scrabble.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(scrabble)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 27 observations on the following 3 variables.
+</p>
+
+<dl>
+<dt>piece</dt>
+<dd>
+<p>Which piece</p>
+</dd>
+<dt>points</dt>
+<dd>
+<p>point value</p>
+</dd>
+<dt>frequency</dt>
+<dd>
+<p>Number of pieces</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Scrabble is a popular board game based on forming words from the
+players' pieces. These consist of letters drawn from a pile at
+random. The game has a certain frequency of letters given by this
+data. These match fairly well with the letter distribution of the
+English language.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(scrabble)
+## perform chi-squared analysis on long string. Is it in English?
+quote = " R is a language and environment for statistical computing  \
+and graphics. It is a GNU project which is similar to the S language \
+and environment which was developed at Bell Laboratories (formerly   \
+AT&amp;T, now Lucent Technologies) by John Chambers and colleagues. R    \
+can be considered as a different implementation of S. There are      \
+some important differences, but much code written for S runs         \
+unaltered under R."
+quote.lc = tolower(quote)
+quote = unlist(strsplit(quote.lc,""))
+ltr.dist = sapply(c(letters," "),function(x) sum(quote == x))
+chisq.test(ltr.dist,,scrabble$freq)
+
+</code></pre>
+
+
+</div>

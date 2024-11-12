@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UpDownApp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Shiny app to vizualise the longitudinal intra-group observations and the detected disturbances</h2>
+
+<h3>Description</h3>
+
+<p>The function starts a shiny app which visualizes the data organized by the hierarchical levels, and the estimated start and end point of the detected disturbances
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">  UpDownApp(updown.out,obs=NULL,width=1000,height=1000)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>updown.out</code></td>
+<td>
+<p>Global output of the <code>UpDown</code> function </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>obs</code></td>
+<td>
+<p>(optional) vector of character string specifing the names of the considered longitudinal observations appearing in the dataframe <code>data</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width,height</code></td>
+<td>
+<p>(optional) interger specifing the width and the height of the plot in the Rshiny.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, run the application</p>
+
+
+<h3>See Also</h3>
+
+<p><code>shiny()</code>, <code>ggplot2()</code>, <code>UpDown()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# load data
+data=get(data(PigFarming))
+
+levels=c("batch","pen","id")
+updown.out&lt;- UpDown(data,levels=levels, vtime="time", obs="weight",
+kappa=0.75, thr_va=0.5, correction="age")
+
+
+if(interactive()){UpDownApp(updown.out)}
+
+</code></pre>
+
+
+</div>

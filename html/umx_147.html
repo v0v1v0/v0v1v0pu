@@ -1,0 +1,186 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummarizeTwinData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summarize twin data</h2>
+
+<h3>Description</h3>
+
+<p>Produce a summary of wide-format twin data, showing the number of individuals, the mean and SD for each trait, and the correlation for each twin-type.
+</p>
+<p>Set MZ and DZ to summarize the two-group case.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummarizeTwinData(
+  data = NULL,
+  selVars = NULL,
+  sep = "_T",
+  zyg = "zygosity",
+  age = "age",
+  MZ = NULL,
+  DZ = NULL,
+  MZFF = "MZFF",
+  DZFF = "DZFF",
+  MZMM = "MZMM",
+  DZMM = "DZMM",
+  DZOS = "DZOS",
+  digits = 2,
+  report = c("markdown", "html")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The twin data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>selVars</code></td>
+<td>
+<p>Collection of variables to report on, e.g. c("wt", "ht").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The separator string that will turn a variable name into a twin variable name, default= "_T" for wt_T1 and wt_T2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zyg</code></td>
+<td>
+<p>The zygosity column in the dataset (default "zygosity").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>age</code></td>
+<td>
+<p>The age column in the dataset (default "age")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MZ</code></td>
+<td>
+<p>Set level in zyg corresponding to MZ for two group case (defaults to using 5-group case).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DZ</code></td>
+<td>
+<p>Set level in zyg corresponding to DZ for two group case (defaults to using 5-group case).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MZFF</code></td>
+<td>
+<p>The level of zyg corresponding to MZ FF pairs: default= "MZFF".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DZFF</code></td>
+<td>
+<p>The level of zyg corresponding to DZ FF pairs: default= "DZFF".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MZMM</code></td>
+<td>
+<p>The level of zyg corresponding to MZ MM pairs: default= "MZMM".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DZMM</code></td>
+<td>
+<p>The level of zyg corresponding to DZ MM pairs: default= "DZMM".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DZOS</code></td>
+<td>
+<p>The level of zyg corresponding to DZ OS pairs: default= "DZOS".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Rounding precision of the report (default 2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>What to return (default = 'markdown'). Use 'html' to open a web table.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> formatted table, e.g. in markdown.
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxAPA()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(twinData)
+umxSummarizeTwinData(twinData, sep = "", selVars = c("wt", "ht"))
+MZs = c("MZMM", "MZFF"); DZs = c("DZFF","DZMM", "DZOS")
+umxSummarizeTwinData(twinData, sep = "", selVars = c("wt", "ht"), MZ = MZs, DZ = DZs)
+</code></pre>
+
+
+</div>

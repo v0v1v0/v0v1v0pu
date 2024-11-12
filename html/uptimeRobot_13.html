@@ -1,0 +1,149 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uptimerobot.monitors</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get general informations about monitors</h2>
+
+<h3>Description</h3>
+
+<p><code>uptimerobots.monitors.responses</code> return a dataset with general informations
+for a set of monitors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uptimerobot.monitors(api.key, monitors = NULL, types = NULL,
+  statuses = NULL, search = NULL, summary = list(), limit = 50,
+  offset = 0, fields = uptimerobot.fields("monitor")$typical)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>api.key</code></td>
+<td>
+<p>A valid key for connecting to UptimeRobors public API.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>monitors</code></td>
+<td>
+<p>vector or comma-delimited string with the IDs of the monitors to get. If not used or set to <code>NULL</code>, will return all monitors in an account.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>types</code></td>
+<td>
+<p>vector or comma-delimited string of monitor types. If not used or set to <code>NULL</code>, the function will return all monitors types (HTTP, keyword, ping..) in an account. Else, it is possible to define any number of monitor types. You can use both the friendly name (string) or the index (integer) here.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>statuses</code></td>
+<td>
+<p>vector or comma-delimited string of monitor statuses. If not used or set to <code>NULL</code>, the function will return  all monitors statuses (up, down, paused) in an account. Else, it is possible to define any number of monitor statuses. You can use both the friendly name (string) or the index (integer) here.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>search</code></td>
+<td>
+<p>An optional keyword of to search within monitor URL or friendly name to get filtered results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>summary</code></td>
+<td>
+<p>list of logical values to flag summary indicators to add to the output dataset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>An integer value used for pagination. Defines the max number of records to return in each page. Default and max. is 50.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>An integer value to set the index of the first monitor to get (used for pagination).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fields</code></td>
+<td>
+<p>vector or comma-delimited string with the general informations to include in the output dataset.
+You may want to use the helper function <code>uptimerobot.fields</code> if you don't want to manually compile the list of fields.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If a vector of monitor is not given, the function will return data for all the available monitors.
+</p>
+<p><code>summary</code> parameter expect a lists of three named logic values that set which columns of additional statistics for each monitor must  be added to output dataset for
+each available monitor. These are summary values only, as the instances are obtained using a set of dedicated functions.
+</p>
+
+<ol>
+<li> <p><code>response.times</code> set to <code>TRUE</code> to add a column with the number of pings with response times available for the monitor to the output. These values can be queried using <code>uptimerobot.monitor.responses</code> function.
+</p>
+</li>
+<li> <p><code>log.records</code> set to <code>TRUE</code> to add a column with the number of log entries recorded for the monitor to the output. These records can be queried using <code>uptimerobot.monitor.logs</code> function.
+</p>
+</li>
+<li> <p><code>alert.contacts</code> set to <code>TRUE</code> to add a column with the number of alert contacts binded to the monitor to the output. Detailed informations about these contacts can be queried using <code>uptimerobot.monitor.contacts</code> function.
+</p>
+</li>
+</ol>
+<p>You may just add the elements you want to include into the list, as they default to <code>FALSE</code> if missing. Set an empty list to exclude all the summary statistics from the output.
+</p>
+<p>The API uses pagination and returns no more than 50 monitors on each page. Use <code>limit</code> and <code>offset</code> to set a different number of
+monitors to get on each page and to move between pages. Leave default values to get all the data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataset with general informations about the given monitors
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gabriele Baldassarre
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uptimerobot.monitor.responses</code>, <code>uptimerobot.monitor.logs</code>, <code>uptimerobot.monitor.contacts</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Let's assume the api.key is available into the environment variable KEY
+api.key &lt;- Sys.getenv("KEY", "")
+
+# Returns all the  monitors with a default set of attributes
+monitors.df &lt;- uptimerobot.monitors(api.key)
+
+#' # Returns all the monitors of 'keyword' type
+monitors.kwd..df &lt;- uptimerobot.monitors(api.key, type="keyword")
+
+# Returns all the monitors and all the attributes
+monitors.full.df &lt;- uptimerobot.monitors(api.key, fields=uptimerobot.fields("monitor")$full))
+
+# Returns only the two monitors with ID: 1234, 5678
+monitors.df &lt;- uptimerobot.monitors(api.key, c("1234", "5678"))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

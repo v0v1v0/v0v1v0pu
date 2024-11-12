@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ligand2.hard</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A dataset of binding energies obtained with a conventional interaction potential</h2>
+
+<h3>Description</h3>
+
+<p>A dataset for protein-ligand binding with an unmodified energy function.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(ligand2.hard)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame containing 1 column and 18000 rows.</p>
+
+
+<h3>Details</h3>
+
+ 
+<p>The dataset contains binding energies (in kcal/mol) for the ligand
+2/FKBP complex with an unmodified
+energy function, simulated using replica exchange with 18 lambda values
+(Tan et al. 2012).
+</p>
+<p>Suppose that the dataset is converted to a <code>1000 x 18</code> matrix as
+follows.
+</p>
+<pre>
+  data(ligand2.hard)
+  lig.data &lt;- matrix(ligand2.hard$V1, nrow=1000)
+</pre>
+<p>The 18 columns of <code>lig.data</code>
+correspond to the raw output of the 18 replicas. A replica is defined as a continuous
+replica exchange molecular dynamics thread with variable lambda (exchanges are
+performed by swapping lambda values rather than coordinates). The 1000
+rows represent as many sequential time points during the replica
+exchange trajectory. Each row contains binding energies from each
+replica taken at the same simulation time (synchronous sampling).
+</p>
+
+
+<h3>References</h3>
+
+<p>Tan, Z., Gallicchio, E., Lapelosa, M., and Levy, R.M. (2012) "Theory of binless multi-state free energy
+estimation with applications to protein-ligand binding," <em>Journal of Chemical Physics</em>, 136, 144102.
+</p>
+
+
+</div>

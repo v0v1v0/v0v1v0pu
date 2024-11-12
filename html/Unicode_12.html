@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u_char_inspect</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Character Inspection</h2>
+
+<h3>Description</h3>
+
+<p>Inspect Unicode characters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">u_char_inspect(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object which can be coerced to a <code>u_char</code>
+vector of Unicode characters via <code>as.u_char</code>.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A data frame with variables <code>Code</code>, <code>Name</code> and <code>Char</code>,
+giving the code and name of the given characters and the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> character
+vectors corresponding to the code points.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Who has ever seen a capital sharp s?
+x &lt;- u_char_from_name(c("LATIN SMALL LETTER SHARP S",
+                        "LATIN CAPITAL LETTER SHARP S"))
+u_char_inspect(x)
+## (Does this display anything useful?)
+</code></pre>
+
+
+</div>

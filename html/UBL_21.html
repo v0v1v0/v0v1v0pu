@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>RandOverClassif</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Random over-sampling for imbalanced classification problems
+</h2>
+
+<h3>Description</h3>
+
+<p>This function performs a random over-sampling strategy for imbalanced multiclass problems. Essentially, a percentage of cases of the class(es) 
+selected by the user are randomly over-sampled by the introduction of replicas of examples. Alternatively, the strategy can be applied to either balance all the existing classes or to "smoothly invert" the frequency of the examples in each class.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">RandOverClassif(form, dat, C.perc = "balance", repl = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+
+<p>A data frame containing the original imbalanced data set.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C.perc</code></td>
+<td>
+
+<p>A named list containing each class name and the corresponding over-sampling percentage, greater than or equal to 1, where 1 means that no over-sampling is to be applied in the corresponding class. The user may indicate only the classes where he wants to apply random over-sampling. For instance, a percenatge of 2 means that, in the changed data set, the number of examples of that class are doubled. Alternatively, this parameter can be set to "balance" (the default) or "extreme", cases where the over-sampling percentages are automatically estimated. The "balance" option tries to balance all the existing classes while the "extreme" option inverts the classes original frequencies.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repl</code></td>
+<td>
+
+<p>A boolean value controlling the possibility of having repetition of examples when choosing the examples to repeat in the over-sampled data set. Defaults to TRUE because this is a necessary condition if the selected percentage is greater than 2. This parameter is only important when the over-sampling percentage is between 1 and 2. In this case, it controls if all the new examples selected from a given class can be repeated or not.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function performs a random over-sampling strategy for dealing with imbalanced multiclass problems. The new examples included in the new data set are replicas of the examples already present in the original data set. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns a data frame with
+the new data set resulting from the application of the random over-sampling strategy.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>See Also</h3>
+
+<p><code>RandUnderClassif</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  if (requireNamespace("DMwR2", quietly = TRUE)) {
+  data(algae, package ="DMwR2")
+  clean.algae &lt;- data.frame(algae[complete.cases(algae), ])
+  # classes spring and winter remain unchanged
+  C.perc = list(autumn = 2, summer = 1.5, spring = 1) 
+  myover.algae &lt;- RandOverClassif(season~., clean.algae, C.perc)
+  oveBalan.algae &lt;- RandOverClassif(season~., clean.algae, "balance")
+  oveInvert.algae &lt;- RandOverClassif(season~., clean.algae, "extreme")
+  } else {
+  library(MASS)
+  data(cats)
+  myover.cats &lt;- RandOverClassif(Sex~., cats, list(M = 1.5))
+  oveBalan.cats &lt;- RandOverClassif(Sex~., cats, "balance")
+  oveInvert.cats &lt;- RandOverClassif(Sex~., cats, "extreme")
+  
+  # learn a model and check results with original and over-sampled data
+  library(rpart)
+  idx &lt;- sample(1:nrow(cats), as.integer(0.7 * nrow(cats)))
+  tr &lt;- cats[idx, ]
+  ts &lt;- cats[-idx, ]
+  
+  ctO &lt;- rpart(Sex ~ ., tr)
+  predsO &lt;- predict(ctO, ts, type = "class")
+  new.cats &lt;- RandOverClassif(Sex~., tr, "balance")
+  ct1 &lt;- rpart(Sex ~ ., new.cats)
+  preds1 &lt;- predict(ct1, ts, type = "class")
+  table(predsO, ts$Sex)   
+  table(preds1, ts$Sex)
+  }
+</code></pre>
+
+
+</div>

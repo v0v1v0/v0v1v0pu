@@ -1,0 +1,148 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>suggest_k</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Suggest k</h2>
+
+<h3>Description</h3>
+
+<p>Tool to help decide how many clusters to use for partition around medoids algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">suggest_k(
+  data,
+  range = 3:10,
+  samples_col = "Sample",
+  abundance_col = "Abundance",
+  index = "Average Silhouette Score",
+  detailed = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range</code></td>
+<td>
+<p>The range of values of k to test, default is from 3 to 10.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples_col</code></td>
+<td>
+<p>String with name of column with sample names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>abundance_col</code></td>
+<td>
+<p>string with name of column with abundance values. Default is "Abundance".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>index</code></td>
+<td>
+<p>Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinski-Harabasz".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>detailed</code></td>
+<td>
+<p>If False (default) returns an integer with best overall k. If TRUE, returns a list with full details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Extra arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The best k is selected for each sample, based on the selected index.
+If different k's are obtained for different samples (probable) then we
+calculate the mean value of k and return it as an integer. Alternatively, we can
+return a more detailed result in the form of a list.
+</p>
+<p><strong>Note</strong>: this function is used within <code>define_rb()</code>, with default parameters, for the
+optional automatic selection of k.
+</p>
+<p><strong>Detailed option</strong>
+</p>
+<p>If <code>detailed = TRUE</code>, then the output is a list with information to help decide for k.
+More specifically, the list will include:
+</p>
+
+<ul>
+<li>
+<p> A data.frame summarizing what information each index provides and how to interpret the value.
+</p>
+</li>
+<li>
+<p> A brief summary indicating the number of samples in the dataset and the range of k values used.
+</p>
+</li>
+<li>
+<p> A data.frame with the best k for each sample, based on each index.
+</p>
+</li>
+</ul>
+<p><strong>Automatic k selection</strong>
+</p>
+<p>If <code>detailed = FALSE</code>, this function will provide a single integer with the best k.
+The <strong>default</strong> decision is based on the maximum average Silhouette score obtained
+for the values of k between 3 and 10. To better understand why the average Silhouette score and
+this range of k's were selected, we refer to Pascoal et al., 2024 (in peer-review) and to
+vignette("explore-classifications").
+</p>
+<p>Alternatively, this function can also provide the best k, as an integer, based on another index
+(Davies-Bouldin and Calinski-Harabasz) and can compare the entire of possible k's.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Integer indicating best k from selected index. Optionally, can return a list with details.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>evaluate_k()</code>, <code>evaluate_sample_k()</code>, <code>check_DB()</code>, <code>check_CH()</code>, <code>check_avgSil()</code>, <code>cluster::pam()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+# Get the best k with default parameters
+suggest_k(nice_tidy)
+
+
+# Get detailed results to decide for yourself
+suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
+
+# Get best k, based on Davies-Bouldin index
+suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin")
+
+
+</code></pre>
+
+
+</div>

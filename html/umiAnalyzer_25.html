@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>saveConsData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Save consensus data</h2>
+
+<h3>Description</h3>
+
+<p>If save is set to TRUE data will be written to a csv file otherwise consensus data will
+be returned as a tibble.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">saveConsData(
+  object,
+  save = FALSE,
+  fileName = "consensus_data.csv",
+  outDir = getwd(),
+  delim = ";"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>UMIexperiment object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>save</code></td>
+<td>
+<p>Logical. Should data be saved to file? Default is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fileName</code></td>
+<td>
+<p>String. Name of the file to be saved. Default is 'consensus_data.csv'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outDir</code></td>
+<td>
+<p>output directory, defaults to working directory</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delim</code></td>
+<td>
+<p>Single character string, either ';' or ',' or tab</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data table
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main = system.file('extdata', package = 'umiAnalyzer')
+
+samples &lt;- list.dirs(path = main, full.names = FALSE, recursive = FALSE)
+
+example &lt;- createUmiExperiment(experimentName = 'example',mainDir = main,sampleNames = samples)
+
+consensus_data &lt;- saveConsData(object = example)
+consensus_data
+
+
+</code></pre>
+
+
+</div>

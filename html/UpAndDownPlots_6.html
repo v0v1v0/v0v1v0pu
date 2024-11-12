@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>NIpop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Northern Ireland population estimates 2011-2017
+</h2>
+
+<h3>Description</h3>
+
+<p>The Northern Ireland Statistics &amp; Research Agency (NISRA) publishes population estimates on their webpage for 80 District Electoral Areas (DEA).  Each of these DEAs is in one of the 11 Local Government Districts (LGD).  The data are further broken down by gender and age groups.  This dataset includes estimates for the years 2011 to 2017.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(NIpop)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 640 observations on the following 11 variables.
+</p>
+
+<dl>
+<dt><code>area_name</code></dt>
+<dd>
+<p>District Electoral Area</p>
+</dd>
+<dt><code>LGD2014_name</code></dt>
+<dd>
+<p>Local Government District</p>
+</dd>
+<dt><code>gender</code></dt>
+<dd>
+<p>Males or Females</p>
+</dd>
+<dt><code>age</code></dt>
+<dd>
+<p>four age groups: 00-15, 16-39, 40-64, 65+</p>
+</dd>
+<dt><code>y2011</code></dt>
+<dd>
+<p>population estimates for the year 2011</p>
+</dd>
+<dt><code>y2012</code></dt>
+<dd>
+<p>population estimates for the year 2012</p>
+</dd>
+<dt><code>y2013</code></dt>
+<dd>
+<p>population estimates for the year 2013</p>
+</dd>
+<dt><code>y2014</code></dt>
+<dd>
+<p>population estimates for the year 2014</p>
+</dd>
+<dt><code>y2015</code></dt>
+<dd>
+<p>population estimates for the year 2015</p>
+</dd>
+<dt><code>y2016</code></dt>
+<dd>
+<p>population estimates for the year 2016</p>
+</dd>
+<dt><code>y2017</code></dt>
+<dd>
+<p>population estimates for the year 2017</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Northern Ireland Statistics &amp; Research Agency <br><a href="https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/MYE17_DEA_1117.xlsx">https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/MYE17_DEA_1117.xlsx</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">km &lt;- ud_prep(NIpop, v1="y2011", v2="y2017", levs=c("age", "gender"), sortLev=c("orig", "perc"))
+k2 &lt;- ud_plot(km, labelvar="age")
+k2$uadl
+</code></pre>
+
+
+</div>

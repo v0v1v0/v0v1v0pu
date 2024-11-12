@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_optim_fit_triphasic</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit triphasic model to data using optim</h2>
+
+<h3>Description</h3>
+
+<p>This function uses optim to fit the triphasic model to data from a given subject
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_optim_fit_triphasic(initial_params, param_names, free_param_index,
+  data, forward_param_transform_fn = forward_param_transform_fn,
+  inv_param_transform_fn = inv_param_transform_fn, searchmethod)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>initial_params</code></td>
+<td>
+<p>named vector of the initial parameter guess.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param_names</code></td>
+<td>
+<p>names of parameter vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free_param_index</code></td>
+<td>
+<p>logical vector indicating whether the parameters A, delta, A_b, delta_b, B, gamma are to be recovered. This should be c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE) for the triphasic model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe with columns for the subject's viral load measurements ('vl'), and timing of sampling ('time')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forward_param_transform_fn</code></td>
+<td>
+<p>list of transformation functions to be used when fitting the model in optim. Defaults to log transformations for all parameters (to allow unconstrained optimization).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inv_param_transform_fn</code></td>
+<td>
+<p>list of transformation functions to be used when back-transforming the transformed parameters. Should be the inverse of the forward transformation functions. Defaults to exponential.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>searchmethod</code></td>
+<td>
+<p>optimization algorithm to be used in optim. Defaults to Nelder-Mead.</p>
+</td>
+</tr>
+</table>
+</div>

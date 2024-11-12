@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_centre</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Inserts UKB centre names into data</h2>
+
+<h3>Description</h3>
+
+<p>Inserts a column with centre name, <code>ukb_centre</code>, into the supplied data.frame. Useful if your UKB centre variable <code>uk_biobank_assessment_centre_0_0</code> has not been populated with named levels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_centre(data, centre.var = "^uk_biobank_assessment_centre.*0_0")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A UKB dataset created with <code>ukb_df</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>centre.var</code></td>
+<td>
+<p>The UKB column containing numerically coded assessment centre. The default is a regular expression <code>"^uk_biobank_assessment_centre.*0_0"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A dataframe with an additional column <code>ukb_centre</code> - UKB assessment centre names
+</p>
+
+
+</div>

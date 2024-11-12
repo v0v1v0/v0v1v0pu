@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dist_to_centroids</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute distances from each item to group centroids</h2>
+
+<h3>Description</h3>
+
+<p>Compute distances from each item to group centroids
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dist_to_centroids(d, g, squared = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+<p>A distance matrix object of class <code>dist</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>g</code></td>
+<td>
+<p>A factor representing the groups of items in <code>d</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>squared</code></td>
+<td>
+<p>If <code>TRUE</code>, return the squared distance to group
+centroids.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function computes the distance from each item to the centroid positions
+of groups defined in the argument <code>g</code>.  This is accomplished without
+determining the centroid positions directly; see the documentation for
+<code>dist_between_centroids</code> for details on this procedure.
+</p>
+<p>If the distance can't be represented in a Euclidean space, the
+<code>CentroidDistance</code> is set to <code>NaN</code>.  See the documentation for
+<code>dist_between_centroids</code> for further details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame with distances to the group centroids:
+</p>
+
+<dl>
+<dt>Item</dt>
+<dd>
+<p>A character vector of item labels from the dist object, or an integer
+vector of item locations if labels are not present.</p>
+</dd>
+<dt>CentroidGroup</dt>
+<dd>
+<p>The group for which the centroid distance is given. The column type
+should match that of the argument g (the <code>unique</code> function is used
+to generate this column).</p>
+</dd>
+<dt>CentroidDistance</dt>
+<dd>
+<p>Inferred distance from the item to the centroid position of the
+indicated group.</p>
+</dd>
+</dl>
+</div>

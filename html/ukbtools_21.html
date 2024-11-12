@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_gen_read_sample</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reads an Oxford format sample file</h2>
+
+<h3>Description</h3>
+
+<p>This is a wrapper for <code>read_table</code> that reads an Oxford format .sample file. If you use the unedited sample file as supplied with your genetic data, you should only need to specify the first argument, file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_gen_read_sample(file, col.names = c("id_1", "id_2", "missing"),
+  row.skip = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>A path to a sample file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.names</code></td>
+<td>
+<p>A character vector of column names. Default: c("id_1", "id_2", "missing")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>row.skip</code></td>
+<td>
+<p>Number of lines to skip before reading data.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>ukb_gen_read_fam</code> to read a fam file
+</p>
+
+
+</div>

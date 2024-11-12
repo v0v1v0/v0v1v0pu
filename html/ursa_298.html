@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursa_crop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Crop 'no data' margins.
+</h2>
+
+<h3>Description</h3>
+
+<p>Function <code>ursa_crop</code>
+
+makes such spatial subset of source raster image, where margins of 'no data' values are absent or have specified width.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+
+ursa_crop(obj, condition, border = 0, expand = 1, resetGrid = TRUE, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>condition</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code> or <code>missing</code>. The condition for cutting. If ‘missing’ then condition is defined from <code>obj</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>border</code></td>
+<td>
+
+<p>Integer of length 1, 2 or 4. Desired margins for geographical subset. Units are cells (pixels).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expand</code></td>
+<td>
+
+<p>Numeric of length 1, 2 or 4. Desired boundary expansion for geographical subset. Units is ratio (relative to 1). Default is 1.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resetGrid</code></td>
+<td>
+
+<p>Logical. If <code>resetGrid=TRUE</code> then sessional grid parameters is established from grid parameters of created raster. If <code>resetGrid=FALSE</code> then sessional grid parameters keep without change. Defailu is <code>TRUE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+
+<p>Logical. <code>TRUE</code> provides some additional information on console.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+
+<p>This function calls <code>regrid</code> with passing values of arguments <code>resetGrid</code> and <code>verbose</code> without changes.
+</p>
+<p>Bordering (argument <code>border</code>) is applied before expansion (argument <code>expand</code>).
+</p>
+<p>This function is an instrument for data compression for spatial matrices with wide margins of 'no data' value. It keeps spatial structure (pixel's neighborhood) in the internal data storage. Otherwise, <code>compress</code> reduces object size using spatial indexing with dropping of spatial structure.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+'printCR' &lt;- function(obj) print(with(ursa_grid(obj),c(c=columns,r=rows)))
+g0 &lt;- session_grid()
+a &lt;- pixelsize()
+th &lt;- with(ursa_grid(a),resx*resy*1e-6)
+a0 &lt;- a[a&gt;th*0.9]
+print(session_grid())
+printCR(a0)
+print(a0)
+a1 &lt;- ursa_crop(a0,resetGrid=TRUE)
+print(session_grid())
+printCR(a1)
+print(a1)
+a2 &lt;- ursa_crop(a0,resetGrid=FALSE)
+print(session_grid())
+printCR(a2)
+print(a2)
+a3 &lt;- a[a&gt;=th*0.85 &amp; a&lt;=th*1.01]
+b1 &lt;- ursa_dummy(nband=3,min=0,max=255)
+print(b1)
+b2 &lt;- ursa_crop(b1[a3&gt;0],border=10)
+print(b2)
+printCR(b2)
+b2[is.na(b2)] &lt;- 255
+display_rgb(b2)
+b3 &lt;- ursa_crop(b1,a3,border=0)
+print(b3)
+printCR(b3)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simple.chutes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>simulate a chutes and ladder game</h2>
+
+<h3>Description</h3>
+
+<p>This function will simulate a chutes and ladder game. It 
+returns a trajectory for a single player. Optionally it can return the 
+transition matrix which can be used to speed up the simulation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simple.chutes(sim=FALSE, return.cl=FALSE, cl=make.cl())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>sim</code></td>
+<td>
+<p>Set to TRUE to return a trajectory.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return.cl</code></td>
+<td>
+<p>Set to TRUE to return a transistion matrix </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cl</code></td>
+<td>
+<p>set to the chutes and ladders transition matrix </p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>To make a chutes and ladders trajectory
+</p>
+<p>simple.chutes(sim=TRUE)
+</p>
+<p>To return the game board
+</p>
+<p>simple.chutes(return.cl=TRUE)
+</p>
+<p>when doing a lot of simulations, it may be best to pass in the game
+board
+</p>
+<p>cl &lt;- simple.chutes(return.cl=TRUE)
+simple.chutes(sim=TRUE,cl)
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a trajectory as a vector, or a matrix if asked to return the
+transition matrix
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>John Verzani</p>
+
+
+<h3>References</h3>
+
+<p> board was from http://www.ahs.uwaterloo.ca/~musuem/vexhibit/Whitehill/snakes/snakes.gif  </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(simple.chutes(sim=TRUE))
+</code></pre>
+
+
+</div>

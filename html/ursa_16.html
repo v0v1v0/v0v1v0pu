@@ -1,0 +1,230 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>panel_scalebar</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Add scale bar to the image panel
+</h2>
+
+<h3>Description</h3>
+
+<p><code>panel_scalebar</code> puts a scale bar ('box' style) on the panel with raster image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">panel_scalebar(...)
+
+# non-public
+.panel_scalebar(position = "bottomleft", w = NA, cex = 0.85,
+                col = "#0000002F", bg = "transparent", fill = "#FFFFFF2F",
+                language=NA, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are recognized via their names (using regular expressions) and classes. Passed to non-public <code>.panel_scalebar</code>, excepting argument <code>scalebar</code>:
+
+
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+            <strong>Pattern</strong> (<code>panel_scalebar</code>) </td>
+<td style="text-align: left;"> <strong>Argument</strong> (<code>.panel_scalebar</code>) </td>
+<td style="text-align: left;"> <strong>Description</strong>
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar|ruler|decor)</code> </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Logical or integer. Responsible for should scale bar be displayed or not. If logical and <code>TRUE</code> then scale bars are plotted on all panel of layout. If logical and <code>FALSE</code> then scale bars are not displayed. If argument is a vector of positive integers, then scale bars are plotted only in the specified panels, which sequence is defined in <code>compose_design</code> function and returned from <code>getOption("ursaPngLayout")$layout</code>. Default is <code>TRUE</code>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*pos(ition)*</code> </td>
+<td style="text-align: left;"> <code>position</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*w</code> </td>
+<td style="text-align: left;"> <code>w</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*cex</code> </td>
+<td style="text-align: left;"> <code>cex</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*col</code> </td>
+<td style="text-align: left;"> <code>col</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*fill</code> </td>
+<td style="text-align: left;"> <code>fill</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*bg</code> </td>
+<td style="text-align: left;"> <code>bg</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*language</code> </td>
+<td style="text-align: left;"> <code>language</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+            </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(scalebar\\.)*verb(ose)*</code> </td>
+<td style="text-align: left;"> <code>verbose</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+         </td>
+</tr>
+</table>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>position</code></td>
+<td>
+<p>Character keyword or numeric of length 2 in the interval [0,1]. Defines the location of scale bar. If character, then one of the "bottomleft", "bottomright", "topleft", "topright", "left", "right", "bottom", "top", or "center". If numeric then relative position on panel is defined using shift on horizontal and vertical axes from origin in the bottom-left corner. Default is <code>"bottomleft"</code>.</p>
+</td>
+</tr>
+</table>
+<table>
+<tr style="vertical-align: top;">
+<td><code>w</code></td>
+<td>
+<p>Positive numeric. The length <em>in km</em> of scalebar's right segment. If <code>w=NA</code> then length of segment is defined automatically. Default is <code>NA</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex</code></td>
+<td>
+<p>Positive numeric. The relative font size for scalebar's labels. Default is <code>0.85</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>Character. Primary fill color for scalebar box and scalebar labels. Default is <code>"#0000002F"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fill</code></td>
+<td>
+<p>Character. Secondary fill color for scalebar box. Default is <code style="white-space: pre;">⁠"#FFFFFF2F"⁠</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bg</code></td>
+<td>
+<p>Character. Background color for the area of scalebar box and labels. Default is <code>"transparent"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>language</code></td>
+<td>
+<p>Character. Language for longitude and latitude captions. If <code>"ru"</code> then captions are in Russian else in English. Default is <code>NA</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Logical. Value <code>TRUE</code> may provide some additional information on console. Default is <code>FALSE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The scalebar has 2 left segments and 2 right segments. Left and right segments are separated by 0. The length of left segments is a half of length of right segments.
+</p>
+<p>Argument <code>scalebar</code> (or, synonym, <code>ruler</code>) is introduced for unconditional calling of <code>panel_scalebar</code> inside of high-level functions.
+</p>
+<p>Default <code>x=0</code> and <code>y=0</code> define the <code style="white-space: pre;">⁠"bottomleft"⁠</code> position of scale bar.
+</p>
+<p>If argument <code>scale</code> in the function <code>compose_open</code> is character, then the length of one segment is exactly 1 cm, and the total length of scalebar is 3 cm.
+</p>
+<p>If not <code>language="ru"</code> but environmental variable <code>LANGUAGE=ru</code> then labels are in Russian (cyrillics).
+</p>
+<p>The length distortions is taken into account for transverse Mercator (<code>"+proj=tmerc"</code>) projection regarding to location of scalebar.
+</p>
+<p>Scalebar (single occurence) can be controlled in high-level plot functions (<em>e.g.</em>, <code>display</code>, <code>compose_plot</code>, <code>display_stack</code>, <code>display_brick</code>, <code>display_rgb</code>, <em>etc</em>.). 
+</p>
+<p>To plot scalebar, use argument <code>scalebar=TRUE</code> and prefix <code>(ruler|scalebar)</code> (<code>scalebar.*</code> or <code>ruler.*</code>) for scalebar's parameters, <em>e.g.</em>, <code>scalebar.pos="bottomright"</code>, <code>scalebar.cex=0.9</code>.
+</p>
+<p>Scalebar is not displayed for longlat projection (<code>"+proj=longlat"</code>), where units are degrees.
+</p>
+
+
+<h3>Value</h3>
+
+<p>This function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+# example no.1 -- direct usage
+   a &lt;- colorize(pixelsize())
+   compose_open(a)
+   panel_new()
+   panel_raster(a)
+   panel_graticule()
+   panel_coastline()
+   panel_scalebar()
+   compose_close()
+
+# example no.2 -- indirect usage
+   display_rgb(ursa_dummy(nband=3,min=0,max=255),coastline=FALSE
+              ,scalebar=TRUE,scalebar.col="white",scalebar.fill="black")
+
+# example no.3 -- for paper copy
+   a &lt;- colorize(pixelsize(),breakvalue=seq(400,650,by=50),pal=c("gray90","gray30"))
+   compose_open(scale="1:95000000",dpi=150,device="cairo",family="serif")
+   compose_plot(a,units=expression(km^2)
+               ,graticule=TRUE,coastline=FALSE,scalebar=TRUE,scalebar.pos=c(1,1))
+   compose_close(bpp=8)
+
+# example no.4 -- length distortion in the Transverse Mercator projection
+
+   a1 &lt;- regrid(setbound=c(10,65,71,83),dim=c(100,100),crs=4326)
+   a2 &lt;- polygonize(ursa_bbox(a1))
+   a3 &lt;- spatial_transform(a2,3857)
+   a4 &lt;- regrid(setbound=spatial_bbox(a3),res=20000,crs=spatial_crs(a3))
+   compose_open(legend=NULL)
+   panel_new("white")
+   panel_coastline(fill="#00000010",detail="l")
+  # panel_graticule()
+   for (p in c("bottom","center","top"))
+      panel_scalebar(pos=p,w=500)
+   compose_close()
+
+</code></pre>
+
+
+</div>

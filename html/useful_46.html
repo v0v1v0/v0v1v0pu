@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>PlotHartigan</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot a series of Hartigan's Numbers</h2>
+
+<h3>Description</h3>
+
+<p>After fitting a series of Hartigan's Numbers (see <code>FitKMeans</code>) this will plot the results so it is easy to visualize
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">PlotHartigan(hartigan, title = "Hartigan's Rule", smooth = FALSE,
+  linecolor = "grey", linetype = 2L, linesize = 1L, minor = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>hartigan</code></td>
+<td>
+<p>The results from
+<code>FitKMeans</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Title to be used in the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smooth</code></td>
+<td>
+<p>logical; if true a smoothed line will be fit to the points, otherwise it will be a piecewise line</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linecolor</code></td>
+<td>
+<p>Color of the horizontal line denoting 10</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linetype</code></td>
+<td>
+<p>Type of the horizontal line denoting 10</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linesize</code></td>
+<td>
+<p>Size of the horizontal line denoting 10</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minor</code></td>
+<td>
+<p>logical; if true minor grid
+lines will be plotted</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Displays a graphical representation of the results of <code>FitKMeans</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>a ggplot object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+www.jaredlander.com
+</p>
+
+
+<h3>References</h3>
+
+<p>#' http://www.stat.columbia.edu/~madigan/DM08/descriptive.ppt.pdf
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>kmeans</code> <code>FitKMeans</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(iris)
+hartiganResults &lt;- FitKMeans(iris[, -ncol(iris)])
+PlotHartigan(hartiganResults)
+
+</code></pre>
+
+
+</div>

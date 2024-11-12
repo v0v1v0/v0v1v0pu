@@ -1,0 +1,141 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>convert.cer.to.d</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper functions for Numbers Needed for Change</h2>
+
+<h3>Description</h3>
+
+<p>These functions are used by <code>nnc()</code> in the behaviorchange package to
+compute the Numbers Needed for Change, but are also available for manual use.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">convert.cer.to.d(
+  cer,
+  eer,
+  eventDesirable = TRUE,
+  eventIfHigher = TRUE,
+  dist = "norm",
+  distArgs = NULL,
+  distNS = "stats"
+)
+
+convert.d.to.eer(
+  d,
+  cer,
+  eventDesirable = TRUE,
+  eventIfHigher = TRUE,
+  dist = "norm",
+  distArgs = list(),
+  distNS = "stats"
+)
+
+convert.d.to.nnc(d, cer, r = 1, eventDesirable = TRUE, eventIfHigher = TRUE)
+
+convert.eer.to.d(
+  eer,
+  cer,
+  eventDesirable = TRUE,
+  eventIfHigher = TRUE,
+  dist = "norm",
+  distArgs = NULL,
+  distNS = "stats"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cer</code></td>
+<td>
+<p>The Control Event Rate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eer</code></td>
+<td>
+<p>The Experimental Event Rate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eventDesirable</code></td>
+<td>
+<p>Whether an event is desirable or undesirable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eventIfHigher</code></td>
+<td>
+<p>Whether scores above or below the threshold are
+considered 'an event'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist, distArgs, distNS</code></td>
+<td>
+<p>Used to specify the distribution to use to convert
+between Cohen's d and the CER and EER. distArgs can be used to specify
+additional arguments to the corresponding <code>q</code> and <code>p</code> functions, and
+distNS to specify the namespace (i.e. package) from where to get the
+distribution functions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+<p>The value of Cohen's <em>d</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The correlation between the determinant and behavior (for mediated
+Numbers Needed for Change).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The converted value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters &amp; Stefan Gruijters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Gruijters, S. L., &amp; Peters, G. Y. (2019). Gauging the
+impact of behavior change interventions: A tutorial on the Numbers
+Needed to Treat. <em>PsyArXiv.</em> <a href="https://doi.org/10.31234/osf.io/2bau7">doi:10.31234/osf.io/2bau7</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>nnc()</code> in the behaviorchange package.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+convert.d.to.eer(d=.5, cer=.25);
+convert.d.to.nnc(d=.5, cer=.25);
+
+</code></pre>
+
+
+</div>

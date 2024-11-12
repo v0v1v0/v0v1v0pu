@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uptimerobot.monitor.delete</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Delete a monitor</h2>
+
+<h3>Description</h3>
+
+<p><code>uptimerobot.monitor.delete</code> remove a monitor and all existing statistics of it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uptimerobot.monitor.delete(api.key, id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>api.key</code></td>
+<td>
+<p>string with a valid key for connecting to Uptimerobot API.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>numeric or integer with the ID of the monitor to delete.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns <code>TRUE</code> in case success. An error is thrown otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gabriele Baldassarre
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ # Let's assume the api.key is available into the environment variable KEY
+ api.key &lt;- Sys.getenv("KEY", "")
+
+ # Create a monitor and get its monitor.id
+ monitor.id &lt;- uptimerobot.monitor.new(api.key,
+   friendly.name="Open Analytics",
+   url="https://gabrielebaldassarre.com", type="http"
+ )
+
+ # Change the friendly name of the monitor
+  if(uptimerobot.monitor.edit(api.key,
+     monitor.id,
+     friendly.name="Open Analytics - gabrielebaldassarre.com"
+  ){
+   message("Monitor has been successfully edited!")
+ }
+
+ # Delete the just-made monitor
+ if(uptimerobot.monitor.delete(api.key, monitor.id){
+   message("Monitor has been successfully deleted!")
+ }
+
+## End(Not run)
+</code></pre>
+
+
+</div>

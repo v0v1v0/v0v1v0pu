@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>us_crime_rates</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>US Crime Rates</h2>
+
+<h3>Description</h3>
+
+<p>National data on the number of crimes committed in the US between
+1960 and 2019.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">us_crime_rates
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 60 rows and 12 variables.
+</p>
+
+<dl>
+<dt>year</dt>
+<dd>
+<p>Year data was collected.</p>
+</dd>
+<dt>population</dt>
+<dd>
+<p>Population of the United States the year data was collected.</p>
+</dd>
+<dt>total</dt>
+<dd>
+<p>Total number of violent and property crimes committed.</p>
+</dd>
+<dt>violent</dt>
+<dd>
+<p>Total number of violent crimes committed.</p>
+</dd>
+<dt>property</dt>
+<dd>
+<p>Total number of property crimes committed.</p>
+</dd>
+<dt>murder</dt>
+<dd>
+<p>Number of murders committed. Counted in violent total.</p>
+</dd>
+<dt>forcible_rape</dt>
+<dd>
+<p>Number of forcible rapes committed. Counted in violent total.</p>
+</dd>
+<dt>robbery</dt>
+<dd>
+<p>Number of robberies committed. Counted in violent total.</p>
+</dd>
+<dt>aggravated_assault</dt>
+<dd>
+<p>Number of aggravated assaults committed. Counted in violent total.</p>
+</dd>
+<dt>burglary</dt>
+<dd>
+<p>Number of burglaries committed. Counted in property total.</p>
+</dd>
+<dt>larceny_theft</dt>
+<dd>
+<p>Number of larcency thefts committed. Counted in property total.</p>
+</dd>
+<dt>vehicle_theft</dt>
+<dd>
+<p>Number of vehicle thefts committed. Counted in property total.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://www.disastercenter.com/crime/uscrime.htm">Disaster Center</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(ggplot2)
+
+ggplot(us_crime_rates, aes(x = population, y = total)) +
+  geom_point() +
+  labs(
+    title = "Crimes V Population",
+    x = "Population",
+    y = "Total Number of Crimes"
+  )
+
+ggplot(us_crime_rates, aes(x = murder)) +
+  geom_boxplot() +
+  labs(
+    title = "US Murders",
+    subtitle = "1960 - 2019",
+    x = "Number of Murders"
+  ) +
+  theme(axis.text.y = element_blank())
+</code></pre>
+
+
+</div>

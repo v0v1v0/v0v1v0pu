@@ -1,0 +1,137 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>display_stack</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plot multi-band heterogenous raster images in the PNG format.
+</h2>
+
+<h3>Description</h3>
+
+<p>Raster images are forced to be interpreted as heterogenuous (having the different units). It implies creating multi-panel layout with multiple colorbars.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">display_stack(obj, ...)
+display_hetero(obj, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code> or <code>list</code> of <code>ursaRaster</code> objects.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Passed to hierarchy of plotting functions:
+</p>
+
+<ul>
+<li> <p><code>compose_open</code>
+</p>
+
+<ul><li> <p><code>compose_design</code>
+</p>
+</li></ul>
+</li>
+<li> <p><code>compose_plot</code>
+</p>
+
+<ul>
+<li> <p><code>compose_panel</code>
+</p>
+
+<ul>
+<li> <p><code>panel_new</code>
+</p>
+</li>
+<li> <p><code>panel_raster</code>
+</p>
+</li>
+<li> <p><code>panel_decor</code>
+</p>
+
+<ul>
+<li> <p><code>panel_graticule</code>
+</p>
+</li>
+<li> <p><code>panel_coastline</code>
+</p>
+</li>
+<li> <p><code>panel_scalebar</code>
+</p>
+</li>
+</ul>
+</li>
+<li> <p><code>panel_annotation</code>
+</p>
+</li>
+</ul>
+</li>
+<li> <p><code>compose_legend</code>
+</p>
+
+<ul><li> <p><code>legend_colorbar</code>
+</p>
+</li></ul>
+</li>
+</ul>
+</li>
+<li> <p><code>compose_close</code>
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If argument <code>obj</code> is object of class <code>ursaRaster</code> then <code>obj</code> is coerced to <code>list</code> of <code>ursaRaster</code> objects ('brick' is coerced to 'stack').
+</p>
+<p>The plot layout is either two-columns or two-rows. Extent of coordinate grid has a form of rectangle. The layout selection depends on ratio of rectangle's sides. For single-column design use parameter <code>layout=c(NA,1L)</code>. e.g., <code>display_brick(a,layout=c(NA,1))</code>, for single-row design use parameter <code>layout=c(1,NA)</code>. The same is for forcing of two-columns (<code>layout=c(NA,2L)</code>) and two-rows layouts (<code>layout=c(2L,NA)</code>). Other layouts are not applicable for multiple colorbars.
+</p>
+<p><code>display_hetero</code> is a synonym to <code>display_stack</code>. It is introduced to emphasize the plotting of complex object with heterogeneous elements, for example, having different units.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>display</code>, <code>display_brick</code>, <code>display_rgb</code>
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(nband=3)
+display_stack(a)
+</code></pre>
+
+
+</div>

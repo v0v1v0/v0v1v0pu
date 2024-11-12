@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>importDesign</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Import experimental design meta data such as replicates, treatments, categorical variables.</h2>
+
+<h3>Description</h3>
+
+<p>Import experimental design meta data such as replicates, treatments, categorical variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">importDesign(object, file, delim = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>UMI.experiment to which to add metadata</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>File containing meta data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delim</code></td>
+<td>
+<p>Column separator. Default is NULL (automatically determine delimiter)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A UMIexperiment object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main &lt;- system.file("extdata", package = "umiAnalyzer")
+
+simsen &lt;- createUmiExperiment(main)
+
+metaData &lt;- system.file("extdata", "metadata.txt", package = "umiAnalyzer")
+
+simsen &lt;- importDesign(object = simsen,file = metaData)
+
+# Retrieve meta data
+design &lt;- getMetaData(object = simsen, attributeName = "design")
+design
+
+
+</code></pre>
+
+
+</div>

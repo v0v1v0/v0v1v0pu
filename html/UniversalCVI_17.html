@@ -1,0 +1,299 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>FzzyCVIs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Fuzzy cluster validity indexes used in Wiroonsri and Preedasawakul (2023)
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the cluster validity indexes for a result of either FCM or EM clustering from user specified <code>cmin</code> to <code>cmax</code> used in Wiroonsri and Preedasawakul (2023). It includes the XB (X. L. Xie and G. Beni, 1991) index, KWON (S. H. Kwon, 1998) index, KWON2 (S. H. Kwon et al., 2021) index, TANG (Y. Tang et al., 2005) index , HF (F. Haouas et al., 2017) index, WL (C. H. Wu et al., 2015) index, PBM (M. K. Pakhira et al., 2004) index, KPBM (C. Alok, 2010) index, CCVP and CCVS (M. Popescu et al., 2013) index, GC1, GC2, GC3, and GC4 (J. C. Bezdek et al., 2016) indexes , WPC, WP, WPCI1, and, WPCI2 (N. Wiroonsri and O. Preedasawakul, 2023) indexes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">FzzyCVIs(x, cmax, cmin = 2, indexlist = 'all', corr = 'pearson',
+  method = 'FCM', fzm = 2, gamma = (fzm^2*7)/4, sampling = 1,
+  iter = 100, nstart = 20, NCstart = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmax</code></td>
+<td>
+<p>a maximum number of clusters to be considered.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmin</code></td>
+<td>
+<p>a minimum number of clusters to be considered. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indexlist</code></td>
+<td>
+<p>a character string indicating which cluster validity indexes to be computed (<code>"all"</code>, <code>"WPC"</code>, <code>"WP"</code>, <code>"WPCI1"</code>, <code>"WPCI2"</code>, <code>"XB"</code>, "<code>"KWON"</code>", "<code>"KWON2"</code>", "<code>"TANG"</code>", "<code>"HF"</code>", <code>"WL"</code>, <code>"PBM"</code>, <code>"KPBM"</code>, <code>"CCVP"</code>, <code>"CCVS"</code>, <code>"GC1"</code>, <code>"GC2"</code>, <code>"GC3"</code>, <code>"GC4"</code>). More than one indexes can be selected.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>corr</code></td>
+<td>
+<p>a character string indicating which correlation coefficient is to be computed (<code>"pearson"</code>, <code>"kendall"</code> or <code>"spearman"</code>) for <code>indexlist</code> = (<code>"WP"</code>, <code>"WPC"</code>, <code>"WPCI1"</code>,<code>"WPCI2"</code>, <code>"CCVP"</code>, <code>"CCVS"</code>, <code>"GC1"</code>, <code>"GC2"</code>, <code>"GC3"</code> or <code>"GC4"</code>). The default is <code>"pearson"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which clustering method to be used (<code>"FCM"</code> or <code>"EM"</code>). The default is <code>"FCM"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fzm</code></td>
+<td>
+<p>a number greater than 1 giving the degree of fuzzification for <code>method = "FCM"</code>. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gamma</code></td>
+<td>
+<p>adjusted fuzziness parameter for <code>indexlist</code> = (<code>"WP"</code>, <code>"WPC"</code>, <code>"WPCI1"</code>, <code>"WPCI2"</code>). The default is <code class="reqn">7fzm^2/4</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampling</code></td>
+<td>
+<p>a number greater than 0 and less than or equal to 1 indicating the undersampling proportion of data to be used. This argument is intended for handling a large dataset. The default is <code>1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>a maximum number of iterations for <code>method = "FCM"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for FCM for <code>method = "FCM"</code>. The default is <code>20</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NCstart</code></td>
+<td>
+<p>logical for <code>indexlist</code> includes either of the <code>"WP"</code>, <code>"WPC"</code>, <code>"WPCI1"</code>, and <code>"WPCI2"</code>), if <code>TRUE</code>, the WP correlation at <code>c=1</code> is defined as the ratio introduced in the reference. Otherwise, it is assigned as <code>0</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The well-known cluster validity indexes for either FCM or EM clustering. It includes the XB (X. L. Xie and G. Beni., 1991) index, KWON (S. H. Kwon, 1998) index, KWON2 (S. H. Kwon et al., 2021) index, TANG (Y. Tang et al., 2005) index , HF (F. Haouas et al., 2017) index, WL (C. H. Wu et al., 2015) index, PBM (M. K. Pakhira et al., 2004) index, KPBM (C. Alok, 2010) index, CCVP and CCVS (M. Popescu et al., 2013) index, GC1, GC2, GC3, and GC4 (J. C. Bezdek et al., 2016) indexes , WPC, WP, WPCI1, and, WPCI2 (N. Wiroonsri and O. Preedasawakul, 2023) indexes.
+</p>
+<p>The WPC computes the correlation between the actual distance between a pair of data points and the distance between adjusted centroids with respect to the pair. WPCI1 and WPCI2 are the proportion and the subtraction, respectively, of the same two ratios. The first ratio is the WPC improvement from <code>c-1</code> clusters to <code>c</code> clusters over the entire room for improvement. The second ratio is the WPC improvement from <code>c</code> clusters to <code>c+1</code> clusters over the entire room for improvement. <code>WP</code> is defined as a combination of <code>WPCI1</code> and <code>WPCI2</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>WPC</code></td>
+<td>
+<p>the WP correlation from <code>c</code> from <code>cmin-1</code> to <code>cmax+1</code> shown in a data frame.</p>
+</td>
+</tr></table>
+<p>Each of the followings shows the values of each index for <code>c</code> from <code>cmin</code> to <code>cmax</code> in a data frame.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>WP</code></td>
+<td>
+<p>the WP index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>WPCI1</code></td>
+<td>
+<p>the WPCI1 index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>WPCI2</code></td>
+<td>
+<p>the WPCI2 index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>XB</code></td>
+<td>
+<p>the XB index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>KWON</code></td>
+<td>
+<p>the KWON index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>KWON2</code></td>
+<td>
+<p>the KWON2 index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TANG</code></td>
+<td>
+<p>the TANG index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>HF</code></td>
+<td>
+<p>the HF index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>WL</code></td>
+<td>
+<p>the WL index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PBM</code></td>
+<td>
+<p>the PBM index</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>KPBM</code></td>
+<td>
+<p>the KPBM index</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CCVP</code></td>
+<td>
+<p>the Pearson Correlation Cluster Validity index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CCVS</code></td>
+<td>
+<p>the Spearman’s (rho) Correlation Cluster Validity index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>GC1</code></td>
+<td>
+<p>the generalized C index (<code class="reqn">\sum\cdot \sim</code> Sum-Product).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>GC2</code></td>
+<td>
+<p>the generalized C index (<code class="reqn">\sum\wedge \sim</code> Sum-Min).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>GC3</code></td>
+<td>
+<p>the generalized C index (<code class="reqn">\vee\cdot \sim</code> Max-Product).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>GC4</code></td>
+<td>
+<p>the generalized C index (<code class="reqn">\vee\wedge \sim</code> Max-Min).</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>C. Alok. (2010). "An investigation of clustering algorithms and soft computing approaches for pattern recognition," Department of Computer Science, Assam University.<br><br></p>
+<p>J. C. Bezdek, M. Moshtaghi, T. Runkler, C. Leckie, “The generalized
+c index for internal fuzzy cluster validity,” IEEE Transactions on Fuzzy
+Systems, vol. 24, no. 6, pp. 1500–1512, 2016. <br><br></p>
+<p>F. Haouas, Z. Ben Dhiaf, A. Hammouda, B. Solaiman, "A new efficient fuzzy cluster validity index: Application to images clustering," 2017 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE), Naples, Italy, 2017, pp. 1-6.<br><br></p>
+<p>S. H. Kwon, “Cluster validity index for fuzzy clustering,” Electronics
+letters, vol. 34, no. 22, pp. 2176–2177, 1998. <br><br></p>
+<p>S. H. Kwon, J. Kim, S. H. Son, “Improved cluster validity index
+for fuzzy clustering,” Electronics Letters, vol. 57, no. 21, pp. 792–794,
+2021. <br><br></p>
+<p>M. K. Pakhira, S. Bandyopadhyay, U. Maulik, “Validity index for crisp and fuzzy clusters,” Pattern recognition, vol. 37, no. 3, pp. 487–501, 2004.<br><br></p>
+<p>M. Popescu, J. C. Bezdek, T. C. Havens, J. M. Keller, "A Cluster Validity Framework Based on Induced Partition Dissimilarity," in IEEE Transactions on Cybernetics, vol. 43, no. 1, pp. 308-320, Feb. 2013.<br><br></p>
+<p>Y. Tang, F. Sun, Z. Sun, “Improved validation index for fuzzy clustering,” in Proceedings of the 2005, American Control Conference, 2005., pp. 1120–1125 vol. 2, 2005.<br><br></p>
+<p>N. Wiroonsri, O. Preedasawakul, "A correlation-based fuzzy cluster validity index with secondary options detector," arXiv:2308.14785, 2023 <br><br></p>
+<p>C. H. Wu, C. S. Ouyang, L. W. Chen, L. W. Lu, “A new
+fuzzy clustering validity index with a median factor for centroid-based clustering,” IEEE Transactions on Fuzzy Systems, vol. 23, no. 3, pp. 701–718, 2015.<br><br></p>
+<p>X. Xie, G. Beni, “A validity measure for fuzzy clustering,” IEEE
+Transactions on Pattern Analysis and Machine Intelligence, vol. 13, no. 8,
+pp. 841–847, 1991.<br><br></p>
+
+
+<h3>See Also</h3>
+
+<p><code>WP.IDX, GC.IDX, CCV.IDX,  R1_data</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# Iris data
+x = iris[,1:4]
+
+# ---- FCM algorithm ----
+
+
+# Compute selected a set of indices ("WPC","WP","XB") using default gamma
+F.s = FzzyCVIs(scale(x), cmax = 10, cmin = 2, indexlist = c("WPC","WP","XB"),
+  corr = 'pearson', method = 'FCM', fzm = 2, iter = 100, nstart = 20, NCstart = TRUE)
+
+# Plot the computed indexes
+plot_idx(F.s)
+
+# ---- EM algorithm ----
+
+# Compute all the indices by FzzyCVIs using default gamma
+E.all = FzzyCVIs(scale(x), cmax = 10, cmin = 2, indexlist = 'all', corr = 'pearson',
+  method = 'EM', iter = 100, nstart = 20, NCstart = TRUE)
+
+# Plot the computed indexes
+plot_idx(E.all)
+
+</code></pre>
+
+
+</div>

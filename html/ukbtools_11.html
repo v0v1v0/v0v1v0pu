@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_df</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reads a UK Biobank phenotype fileset and returns a single dataset.</h2>
+
+<h3>Description</h3>
+
+<p>A UK Biobank <em>fileset</em> includes a <em>.tab</em> file containing the raw data with field codes instead of variable names, an <em>.r</em> (<em>sic</em>) file containing code to read raw data (inserts categorical variable levels and labels), and an <em>.html</em> file containing tables mapping field code to variable name, and labels and levels for categorical variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_df(fileset, path = ".", n_threads = "dt", data.pos = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fileset</code></td>
+<td>
+<p>The prefix for a UKB fileset, e.g., ukbxxxx (for ukbxxxx.tab, ukbxxxx.r, ukbxxxx.html)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>The path to the directory containing your UKB fileset. The default value is the current directory.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_threads</code></td>
+<td>
+<p>Either "max" (uses the number of cores, 'parallel::detectCores()'), "dt" (default - uses the data.table default, 'data.table::getDTthreads()'), or a numerical value (in which case n_threads is set to the supplied value, or 'parallel::detectCores()' if it is smaller).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.pos</code></td>
+<td>
+<p>Locates the data in your .html file. The .html file is read into a list; the default value data.pos = 2 indicates the second item in the list. (The first item in the list is the title of the table). You will probably not need to change this value, but if the need arises you can open the .html file in a browser and identify where in the file the data is.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <strong>index</strong> and <strong>array</strong> from the UKB field code are preserved in the variable name, as two numbers separated by underscores at the end of the name e.g. <em>variable_index_array</em>. <strong>index</strong> refers the assessment instance (or visit). <strong>array</strong> captures multiple answers to the same "question". See UKB documentation for detailed descriptions of <a href="http://biobank.ctsu.ox.ac.uk/crystal/instance.cgi?id=2">index</a> and <a href="http://biobank.ctsu.ox.ac.uk/crystal/help.cgi?cd=array">array</a>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe with variable names in snake_case (lowercase and separated by an underscore).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukb_df_field</code> <code>ukb_df_full_join</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Simply provide the stem of the UKB fileset.
+# To read ukb1234.tab, ukb1234.r, ukb1234.html
+
+my_ukb_data &lt;- ukb_df("ukb1234")
+
+
+If you have multiple UKB filesets, read each then join with your preferred
+method (ukb_df_full_join is
+a thin wrapper around dplyr::full_join applied recursively with
+purrr::reduce).
+
+ukb1234_data &lt;- ukb_df("ukb1234")
+ukb2345_data &lt;- ukb_df("ukb2345")
+ukb3456_data &lt;- ukb_df("ukb3456")
+
+ukb_df_full_join(ukb1234_data, ukb2345_data, ukb3456_data)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

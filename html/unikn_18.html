@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pal_grau</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>uni.kn color palette grau</h2>
+
+<h3>Description</h3>
+
+<p><code>pal_grau</code> provides an additional uni.kn color palette  
+as a data frame containing 5 colors (shades of 
+<code>Grau</code> or grey).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pal_grau
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>data.frame</code> with 1 rows and 5 columns.
+</p>
+
+
+<h3>Details</h3>
+
+<p>See <a href="https://www.uni-konstanz.de/en/university/news-and-media/create-online-and-print-media/corporate-design/">https://www.uni-konstanz.de/en/university/news-and-media/create-online-and-print-media/corporate-design/</a> for details.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pal_unikn</code> for the unikn default color palette with all 5 colors of <code>pal_seeblau</code>; 
+<code>pal_unikn_pref</code> for a uni.kn color palette with all preferred colors; 
+<code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes.
+</p>
+<p>Other color palettes: 
+<code>pal_bordeaux</code>,
+<code>pal_karpfenblau</code>,
+<code>pal_peach</code>,
+<code>pal_petrol</code>,
+<code>pal_pinky</code>,
+<code>pal_seeblau</code>,
+<code>pal_seegruen</code>,
+<code>pal_signal</code>,
+<code>pal_unikn</code>,
+<code>pal_unikn_dark</code>,
+<code>pal_unikn_light</code>,
+<code>pal_unikn_pair</code>,
+<code>pal_unikn_ppt</code>,
+<code>pal_unikn_pref</code>,
+<code>pal_unikn_web</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">pal_grau
+dim(pal_grau)  # 1 5
+pal_grau[3]    # preferred (named) color "grau3"
+pal_grau[[3]]  # preferred color "grau3" OR "#9AA0A7"
+
+# Plotting palette:
+seecol(pal_grau)
+
+</code></pre>
+
+
+</div>

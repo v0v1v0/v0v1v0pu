@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unjoin</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>unjoin</h2>
+
+<h3>Description</h3>
+
+<p>Split a table in two and remove repeated values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unjoin(data, ..., key_col = "idx0")
+
+## S3 method for class 'data.frame'
+unjoin(data, ..., key_col = ".idx0")
+
+## S3 method for class 'unjoin'
+unjoin(data, ..., key_col = ".idx0")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A data frame.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Specification of columns to unjoin by.  For full details, see the 'dplyr::select“ documentation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>key_col</code></td>
+<td>
+<p>The name of the new column to key the two output data frames.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The data frame on input is treated as "data", the new data frame is treated
+as the normalized key. This means that the split-off and de-duplicated table has the name given via
+the 'key_col' argument (defaults to ".idx0") and shares this name with the common key.
+</p>
+<p>It's not yet clear if this flexibility around naming is a good idea, but it enables a simple scheme for chaining
+unjoins, though you'd better not use the same 'key_col' again.
+</p>
+<p>This is a subset of the tasks done by <code>nest</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>'dplyr::inner_join' for the inverse operation.
+</p>
+<p>'tidyr::nest' for the complementary operation resulting in one nested data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+data("Seatbelts", package= "datasets")
+x &lt;- unjoin(as.data.frame(Seatbelts), front, law)
+y &lt;- inner_join(x$.idx0, x$data) %&gt;% select(-.idx0)
+all.equal(y[colnames(Seatbelts)], as.data.frame(Seatbelts))
+
+iris %&gt;% unjoin(-Species)
+chickwts %&gt;% unjoin(weight)
+
+if (require("gapminder")) {
+  gapminder %&gt;%
+    group_by(country, continent) %&gt;%
+    unjoin()
+
+  gapminder %&gt;%
+    unjoin(-country, -continent)
+  unjoin(gapminder)
+}
+unjoin(iris, Petal.Width) %&gt;% unjoin(Species, key_col = ".idx1")
+</code></pre>
+
+
+</div>

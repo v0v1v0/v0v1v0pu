@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build.formula</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Formula Builder</h2>
+
+<h3>Description</h3>
+
+<p>Formula Builder
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build.formula(lhs, rhs)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lhs</code></td>
+<td>
+<p>Character vector for left side of formula</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rhs</code></td>
+<td>
+<p>Character vector for right side of formula</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Builds a formula easily given the left and right hand sides.  Right now it only handles additive formulas and not interactions unless that is specified in the character.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A formula object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander www.jaredlander.com
+</p>
+
+
+<h3>See Also</h3>
+
+<p>formula as.formula
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+build.formula("Y", "X")
+build.formula(c("Y", "Z"), "X")
+build.formula("Z", c("X", "Q"))
+build.formula(c("Y", "Z"), c("X", "Q"))
+
+</code></pre>
+
+
+</div>

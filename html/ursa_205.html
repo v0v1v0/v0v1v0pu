@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rep</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Replicate bands of raster image.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>rep</code> for object of class <code>ursaRaster</code> creates new <code>ursaRaster</code> objects with repitition of original band sequence.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+rep(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Further arguments to be passed to or from other methods. Keywords:
+</p>
+
+<dl>
+<dt><code>times</code></dt>
+<dd>
+<p>Positive integer. Number of times to repeat each band.</p>
+</dd>
+</dl>
+<p>If argument has no name, then <code>times</code> is assumpted.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>c</code> for <code>ursaRaster</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+session_grid(regrid(mul=1/4))
+a &lt;- ursa_dummy(nband=3)
+print(a)
+b1 &lt;- rep(a,by=2)
+print(b1)
+b2 &lt;- rep(a,length=5)
+print(b2)
+b3 &lt;- rep(a[3],3)
+print(b3)
+</code></pre>
+
+
+</div>

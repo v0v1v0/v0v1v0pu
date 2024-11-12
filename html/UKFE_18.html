@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EncProb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Encounter probabilities</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the probability of experiencing at least n events with a given return period (RP), over a given number of years
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">EncProb(n, yrs, RP, dist = "Poisson")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of events</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yrs</code></td>
+<td>
+<p>number of years</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period of the events</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>choice of probability distribution. Either "Poisson" or "Binomial"</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The choice of binomial or Poisson distributions for calculating encounter probablities is akin to annual maximum (AM) versus peaks over threshold (POT) approaches to extreme value analysis. AM and binomial assume only one "event" can occur in the blocked time period. Whereas Poisson and POT don't make this assumption. In the case of most catchments in the UK, it is rare to have less than two independent "events" per year; in which case the Poisson and POT choices are more suitable. In large catchments, with seasonally distinctive baseflow, there may only be one independent peak in the year. However, the results from both methods converge with increasing magnitude, yielding insignificant difference beyond a 20-year return period.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A probability
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Calculate the probability of exceeding at least one 50-yr RP event
+#over a 10 year period, using the Poisson distribution.
+EncProb(n = 1, yrs = 10, RP = 50)
+#Calculate the probability of exceeding at least two 100-yr RP events
+#over a 100 year period, using the binomial distribution.
+EncProb(n = 2, yrs = 100, RP = 100, dist = "Binomial")
+</code></pre>
+
+
+</div>

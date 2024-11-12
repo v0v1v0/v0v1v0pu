@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Simple display of raster images
+</h2>
+
+<h3>Description</h3>
+
+<p>Function <code>image</code> for <code>ursaRaster</code> object calls generic function <code>image</code>.
+<br>
+Function <code>plot</code> for <code>ursaRaster</code> object calls function <code>filled.contour</code>.
+<br>
+Color tables are supported.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+plot(x, ...)
+
+## S3 method for class 'ursaRaster'
+image(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Other parameters. Are passed to or <code>filled.contour</code> or to generic function <code>image</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Usage of both these functions is justified for low-level control of plotting. It is recommended to use high-level function <code>display</code>. It is flexible and power instrument for raster images visualization.
+</p>
+<p>Function <code>as.list</code> for <code>ursaRaster</code> object transforms single band of raster image to a suitable object for plotting via function <code>image</code> from package <span class="pkg">graphics</span>
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returned value from <code>image</code> or <code>filled.contour</code> (both functions are in the package <span class="pkg">graphics</span>)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>display</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- pixelsize()
+plot(a,asp=1)
+image(a,asp=1)
+b &lt;- colorize(a,ncolor=15)
+plot(b,asp=1)
+image(b,asp=1)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,211 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummary.MxModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Shows a compact, publication-style, summary of a RAM model</h2>
+
+<h3>Description</h3>
+
+<p>Report the fit of a model in a compact form suitable for a journal.
+It reports parameters in a markdown or html table (optionally standardized), and fit indices
+RMSEA (an absolute fit index, comparing the model to a perfect model) and CFI and TLI (incremental fit indices comparing model a model with the worst fit).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxModel'
+umxSummary(
+  model,
+  refModels = NULL,
+  std = FALSE,
+  digits = 2,
+  report = c("markdown", "html"),
+  means = TRUE,
+  residuals = TRUE,
+  SE = TRUE,
+  filter = c("ALL", "NS", "SIG"),
+  RMSEA_CI = FALSE,
+  ...,
+  matrixAddresses = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The <code>mxModel()</code> whose fit will be reported</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>refModels</code></td>
+<td>
+<p>Saturated models if needed for fit indices (see example below:
+If NULL will be computed on demand. If FALSE will not be computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>If TRUE, model is standardized (Default FALSE, NULL means "don't show").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>How many decimal places to report (Default 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>If "html", then show results in browser (default = "markdown")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether to include means in the summary (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>residuals</code></td>
+<td>
+<p>Whether to include residuals in the summary (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SE</code></td>
+<td>
+<p>Whether to compute SEs... defaults to TRUE. In rare cases, you might need to turn off to avoid errors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter</code></td>
+<td>
+<p>whether to show significant paths (SIG) or NS paths (NS) or all paths (ALL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RMSEA_CI</code></td>
+<td>
+<p>Whether to compute the CI on RMSEA (Defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters to control model summary</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>matrixAddresses</code></td>
+<td>
+<p>Whether to show "matrix address" columns (Default = FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>umxSummary</code> alerts you when model fit is worse than accepted criterion (TLI &gt;= .95 and RMSEA &lt;= .06; (Hu &amp; Bentler, 1999; Yu, 2002).
+</p>
+<p>Note: For some (multi-group) models, you will need to fall back on <code>summary()</code>
+</p>
+<p><strong>CIs and Identification</strong>
+This function uses the standard errors reported by OpenMx to produce the CIs you see in umxSummary
+These are used to derive confidence intervals based on the formula 95%CI = estimate +/- 1.96*SE)
+</p>
+<p>Sometimes SEs appear NA. This may reflect a model which is not identified (see <a href="http://davidakenny.net/cm/identify.htm">http://davidakenny.net/cm/identify.htm</a>).
+This can include empirical under-identification - for instance two factors
+that are essentially identical in structure. use <code>mxCheckIdentification()</code> to check identification.
+</p>
+<p>Solutions: If there are paths estimated at or close to zero suggests that fixing one or two of
+these to zero may fix the standard error calculation.
+</p>
+<p>If factor loadings can flip sign and provide identical fit, this creates another form of
+under-identification and can break confidence interval estimation.
+<em>Solution</em>: Fixing a factor loading to 1 and estimating factor variances can help here.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> parameterTable returned invisibly, if estimates requested
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Hu, L., &amp; Bentler, P. M. (1999). Cutoff criteria for fit indexes in covariance
+structure analysis: Conventional criteria versus new alternatives. <em>Structural Equation Modeling</em>, <strong>6</strong>, 1-55.
+</p>
+</li>
+<li>
+<p> Yu, C.Y. (2002). Evaluating cutoff criteria of model fit indices for latent variable models
+with binary and continuous outcomes. University of California, Los Angeles, Los Angeles.
+Retrieved from <a href="https://www.statmodel.com/download/Yudissertation.pdf">https://www.statmodel.com/download/Yudissertation.pdf</a>
+</p>
+</li>
+</ul>
+<p><a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxRAM()</code>
+</p>
+</li></ul>
+<p>Other Summary functions: 
+<code>umxSummaryACEcov()</code>,
+<code>umxSummaryCP()</code>,
+<code>umxSummaryGxE()</code>,
+<code>umxSummaryIP()</code>,
+<code>umxSummaryMRDoC()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+umxSummary(m1, std = TRUE)
+# output as latex
+umx_set_table_format("latex")
+umxSummary(m1, std = TRUE)
+umx_set_table_format("markdown")
+# output as raw
+umxSummary(m1, std = FALSE)
+
+# switch to a raw data model
+m1 = umxRAM("One Factor", data = demoOneFactor[1:100, ],
+	umxPath("G", to = manifests),
+	umxPath(v.m. = manifests),
+	umxPath(v1m0 = "G")
+)
+umxSummary(m1, std = TRUE, filter = "NS")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

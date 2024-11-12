@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MaximumLikelihoodDistribution</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Maximum likelihood estimated distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution function, quantile function and random generation for
+a univariate distribution estimated by maximum likelihood.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dml(x, obj, log = FALSE)
+
+pml(q = q, obj, lower.tail = TRUE, log.p = FALSE)
+
+qml(p = p, obj, lower.tail = TRUE, log.p = FALSE)
+
+rml(n = n, obj)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an <code>univariateML</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, the probabilities p are gives as
+<code>log(p)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), the probabilities are
+<code class="reqn">P[X \le x]</code> otherwise, <code class="reqn">P[X &gt; x]</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>dml</code> is the density, <code>pml</code> is the distribution function,
+<code>qml</code> is the quantile function, and <code>rml</code> is the random variable
+generator.
+</p>
+<p>These functions work like their counterparts in <code>stats</code>, e.g.
+Normal. The <code>univariateML</code> object contains both maximum
+likelihood estimates and the identity of the model these estimates were
+calculated under. These functions are wrappers around underlying density,
+distribution, quantile and random generation functions where unknown
+parameters are filled with the maximum likelihood estimates.
+See the example.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dml</code> gives the density, <code>pml</code> gives the distribution
+function, <code>qml</code> gives the quantile function, and <code>rml</code>
+generates random deviates.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Simple example
+obj &lt;- mlnorm(airquality$Wind)
+dml(0.5, obj) == dnorm(0.5, mean = obj[1], sd = obj[2])
+
+obj &lt;- mlbetapr(airquality$Wind)
+
+# Plot the logarithm of the beta prime distribution.
+plot(function(x) dml(x, obj, log = TRUE),
+  from = 0, to = 20,
+  main = "Logarithm of Density", ylab = NA, lwd = 2
+)
+</code></pre>
+
+
+</div>

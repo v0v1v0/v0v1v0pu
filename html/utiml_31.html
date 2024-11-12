@@ -1,0 +1,163 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>homer</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Hierarchy Of Multilabel classifiER (HOMER)</h2>
+
+<h3>Description</h3>
+
+<p>Create a Hierarchy Of Multilabel classifiER (HOMER).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">homer(
+  mdata,
+  base.algorithm = getOption("utiml.base.algorithm", "SVM"),
+  clusters = 3,
+  method = c("balanced", "clustering", "random"),
+  iteration = 100,
+  ...,
+  cores = getOption("utiml.cores", 1),
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset used to train the binary models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base.algorithm</code></td>
+<td>
+<p>A string with the name of the base algorithm. (Default:
+<code>options("utiml.base.algorithm", "SVM")</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>clusters</code></td>
+<td>
+<p>Number maximum of nodes in each level. (Default: 3)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>The strategy used to organize the labels (create the
+meta-labels). The options are: "balanced", "clustering" and "random".
+(Default: "balanced").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iteration</code></td>
+<td>
+<p>The number max of iterations, used by balanced or clustering
+methods.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm for all subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the training. Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed. (Default:
+<code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>HOMER is an algorithm for effective and computationally efficient multilabel
+classification in domains with many labels. It constructs a hierarchy of
+multilabel classifiers, each one dealing with a much smaller set of labels.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>HOMERmodel</code> containing the set of fitted
+models, including:
+</p>
+
+<dl>
+<dt>labels</dt>
+<dd>
+<p>A vector with the label names.</p>
+</dd>
+<dt>clusters</dt>
+<dd>
+<p>The number of nodes in each level</p>
+</dd>
+<dt>models</dt>
+<dd>
+<p>The Hierarchy of BR models.</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+<p>Tsoumakas, G., Katakis, I., &amp; Vlahavas, I. (2008). Effective and efficient
+multilabel classification in domains with large number of labels. In Proc.
+ECML/PKDD 2008 Workshop on Mining Multidimensional Data (MMD'08)
+(pp. 30-44). Antwerp, Belgium.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Transformation methods: 
+<code>brplus()</code>,
+<code>br()</code>,
+<code>cc()</code>,
+<code>clr()</code>,
+<code>dbr()</code>,
+<code>ebr()</code>,
+<code>ecc()</code>,
+<code>eps()</code>,
+<code>esl()</code>,
+<code>lift()</code>,
+<code>lp()</code>,
+<code>mbr()</code>,
+<code>ns()</code>,
+<code>ppt()</code>,
+<code>prudent()</code>,
+<code>ps()</code>,
+<code>rakel()</code>,
+<code>rdbr()</code>,
+<code>rpc()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- homer(toyml, "RANDOM")
+pred &lt;- predict(model, toyml)
+
+
+##Change default configurations
+model &lt;- homer(toyml, "RF", clusters=5, method="clustering", iteration=10)
+
+</code></pre>
+
+
+</div>

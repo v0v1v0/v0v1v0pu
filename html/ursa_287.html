@@ -1,0 +1,188 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursaStack</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+List of raster images.
+</h2>
+
+<h3>Description</h3>
+
+<p>Functions to create list (layers) of multiband raster images (<em>stack</em> in the notation of <span class="pkg">raster</span> package) and to coerce list of images to single multiband image (<em>brick</em> in the notation of <span class="pkg">raster</span> package).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+ursa_stack(...)
+
+ursa_brick(obj)
+
+ursa_apply(obj, FUN, ...)
+
+## S3 method for class 'ursaRaster'
+as.list(x, ...)
+
+## S3 method for class 'ursaStack'
+unlist(x, recursive, use.names)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj, x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code> or list of <code>ursaRaster</code> objects. In function <code>ursa_apply</code> argument "<code>X</code>", which is passed to function <code>lapply</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FUN</code></td>
+<td>
+
+<p>Argument "<code>FUN</code>", which is passed to function <code>lapply</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>recursive</code></td>
+<td>
+
+<p>Not used. For consistency with generic function <code>unlist</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.names</code></td>
+<td>
+
+<p>Not used. For consistency with generic function <code>unlist</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Denending of functions:<br></p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+   <code>ursa_stack</code>, <code>as.list</code> </td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"> List of <code>ursaRaster</code> objects</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>ursa_apply</code> </td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"> Arguments "<code>...</code>", which are passed to function <code>lapply</code>.
+   </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>as.list</code> (of <code>ursaRaster</code> object(s)), <code>ursa_stack</code> create list of <code>ursaRaster</code> objects, where items of list are sinle-band images. If <code>x</code> is <code>ursaRaster</code> object, then <code>list(x)</code> create a list of length one, which item is multiband image.
+</p>
+<p><code>unlist</code> (for list of <code>ursaRaster</code> objects), <code>ursa_brick</code> create single multiband <code>ursaRaster</code> object. There is an alternative way for unlisting the list of <code>ursaRaster</code>: <code>as.ursa</code>.
+</p>
+<p>Raster <em>stack</em> is a way to group bands, for example, by units (degree Celsium, meters).<br>
+Raster <em>brick</em> is a way to combine versalite images to the single multiband image, for example, for saving in file.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>ursa_stack</code>, <code>as.list</code> return object of class <code>ursaStack</code>. It is a list, with class "ursaStack" attribute.
+</p>
+<p><code>unlist</code> (for list of <code>ursaRaster</code> objects), <code>ursa_brick</code> return object of class <code>ursaRaster</code>.
+</p>
+<p><code>ursa_apply</code> returns object of class <code>ursaStack</code>, if result is list of <code>ursaRaster</code> objects, otherwise returns general <code>list</code>.
+</p>
+
+
+<h3>Warning </h3>
+
+<p>There is no any verifications, that grids of <code>ursaRaster</code> objects are the same.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Generic <code>unlist(x)</code> deals only with class of <code>x</code>, but doesn't take into account class of objects in list (e. g., <code>x[[1]]</code>). So, there is no effective way to use only <code>list</code>/<code>unlist</code> for <code>ursaRaster</code> objects to do a conversion between raster <em>brick</em> and <em>stack</em>.
+Generic <code>unlist(x)</code> deals only with class of <code>x</code>, but doesn't take into account class of objects in list (e. g., <code>x[[1]]</code>). So, there is no effective way to use only <code>list</code>/<code>unlist</code> for <code>ursaRaster</code> objects to do a conversion between raster <em>brick</em> and <em>stack</em>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://CRAN.R-project.org/package=raster">https://CRAN.R-project.org/package=raster</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>lapply</code> <code>list</code> <code>unlist</code>
+</p>
+<p><code>c</code> for <code>ursaRaster</code> objects.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(3)
+print(a)
+b1 &lt;- ursa_stack(a[1:2],colorize(a[3],ramp=FALSE))
+print(b1)
+b2 &lt;- as.list(a)
+print(b2)
+b3 &lt;- list(a[1],a[2:3])
+print(b3)
+b31 &lt;- lapply(b3,colorize,ramp=FALSE)
+print(b31)
+b32 &lt;- ursa_apply(b3,colorize,ramp=FALSE,rev=TRUE)
+print(b32)
+s311 &lt;- ursa_apply(b31,ursa_colortable)
+print(s311)
+s21 &lt;- lapply(b2,global_mean)
+print(s21)
+s22 &lt;- sapply(b2,global_mean)
+print(s22)
+s31 &lt;- lapply(b3,global_mean)
+print(s31)
+s32 &lt;- sapply(b3,global_mean)
+print(s32)
+c1 &lt;- unlist(b1)
+print(c1)
+c2 &lt;- unlist(b2)
+print(c2)
+c3 &lt;- unlist(b3)
+print(if (is.ursa(c3)) c3 else "broken object")
+d3 &lt;- as.ursa(b3)
+print(if (is.ursa(d3)) d3 else "broken object")
+</code></pre>
+
+
+</div>

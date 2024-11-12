@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_table</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build summary tables</h2>
+
+<h3>Description</h3>
+
+<p>Takes a data or model object and summarizes it into a ready to
+export, human-readable summary table.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_table(.object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.object</code></td>
+<td>
+<p>An object of a supported class. See S3 methods below.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments passed to the appropriate S3 method.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of class tbl_df (tibble) summarizing the provided object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>build_table.data.frame</code>,
+<code>build_table.coxph</code>,
+<code>build_table.lm</code>
+</p>
+
+
+</div>

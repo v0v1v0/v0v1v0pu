@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>baima</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>EcM Fungal Data with Environmental Variables</h2>
+
+<h3>Description</h3>
+
+<p>Ectomycorrhizal (EcM) fungal community and environmental data were excerpted from Gong et al. (2022). Sampling was conducted along the elevation gradient (2,900 m to 4,500 m) in the eastern slope of Baima Snow Mountain during both dry (November 2017) and wet (August 2018) seasons after studying community compositions of the host plants of EcM fungi.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(baima.fun)
+
+data(baima.env)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>263 samples from the root tips were excerpted. There are two linked data sets: <code>baima.fun</code>, a data frame containing 3,099 amplicon sequence variants (ASVs) of root associated EcM fungi; <code>baima.env</code>, a data frame containing 14 environmental variables.
+</p>
+<p>The fields in the environmental data are:
+</p>
+
+<dl>
+<dt>environmental_medium</dt>
+<dd>
+<p>Sample type</p>
+</dd>
+<dt>latitude</dt>
+<dd>
+<p>Latitude</p>
+</dd>
+<dt>lontitude</dt>
+<dd>
+<p>Lontitude</p>
+</dd>
+<dt>altitude</dt>
+<dd>
+<p>Elevation (m)</p>
+</dd>
+<dt>season</dt>
+<dd>
+<p>Season, a factor with levels <code>dry</code> and <code>wet</code></p>
+</dd>
+<dt>em.GR</dt>
+<dd>
+<p>Richness of EcM plant at genus level</p>
+</dd>
+<dt>em.abun</dt>
+<dd>
+<p>The number of individuals of each EcM genus</p>
+</dd>
+<dt>sea.MT</dt>
+<dd>
+<p>Dry-season and wet-season mean temperature</p>
+</dd>
+<dt>pH</dt>
+<dd>
+<p>Soil pH</p>
+</dd>
+<dt>TP</dt>
+<dd>
+<p>Total phosphorus (g/kg)</p>
+</dd>
+<dt>TK</dt>
+<dd>
+<p>Total potassium (g/kg)</p>
+</dd>
+<dt>AN</dt>
+<dd>
+<p>Alkaline-hydrolysable nitrogen (mg/kg)</p>
+</dd>
+<dt>AP</dt>
+<dd>
+<p>Available phosphorus (mg/kg)</p>
+</dd>
+<dt>AK</dt>
+<dd>
+<p>Available potassium (mg/kg)</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+<p>Gong S, Feng B, Jian S P, et al. Elevation Matters More than Season in Shaping the Heterogeneity of Soil and Root Associated Ectomycorrhizal Fungal Community. Microbiology spectrum, 2022, 10(1): e01950-21.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(baima.fun)
+data(baima.env)
+</code></pre>
+
+
+</div>

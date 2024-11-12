@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>used_there</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Scrape the summaries for site-wide analysis</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+</p>
+<p>Harvests and consolidates function usage tables from pages of a Quarto
+website by searching for tables with the CSS class "usedthese"
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">used_there(url, num_links = 30)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>The url to the website listing page of posts containing usage
+tables created with <code>used_here()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>num_links</code></td>
+<td>
+<p>The number of links returned from the listing page may be
+restricted using this argument.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A tibble summarising package &amp; function usage
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Uses a Quarto listing url to scrape &amp; consolidate usage
+used_there("https://www.quantumjitter.com/project/", 1)
+
+</code></pre>
+
+
+</div>

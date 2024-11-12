@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_set_data_variance_check</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_set_data_variance_check</h2>
+
+<h3>Description</h3>
+
+<p>Set default for data checking in models like umxACE umxGxE etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_set_data_variance_check(minVar = NULL, maxVarRatio = NULL, silent = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>minVar</code></td>
+<td>
+<p>Set the threshold at which to warn user about variables with too-small variance. Else returns the current value of umx_minVar</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxVarRatio</code></td>
+<td>
+<p>Set the option for threshold at which to warn user variances differ too much. Else returns the current value of umx_maxVarRatio</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>If TRUE, no message will be printed.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- list of umx_minVar and umx_maxVarRatio settings
+</p>
+
+
+<h3>See Also</h3>
+
+<p>xmu_check_variance which uses these to check sanity in the variances of a data frame.
+</p>
+<p>Other Get and set: 
+<code>umx_get_checkpoint()</code>,
+<code>umx_get_options()</code>,
+<code>umx_set_auto_plot()</code>,
+<code>umx_set_auto_run()</code>,
+<code>umx_set_checkpoint()</code>,
+<code>umx_set_condensed_slots()</code>,
+<code>umx_set_cores()</code>,
+<code>umx_set_dollar_symbol()</code>,
+<code>umx_set_optimization_options()</code>,
+<code>umx_set_optimizer()</code>,
+<code>umx_set_plot_file_suffix()</code>,
+<code>umx_set_plot_format()</code>,
+<code>umx_set_plot_use_hrbrthemes()</code>,
+<code>umx_set_separator()</code>,
+<code>umx_set_silent()</code>,
+<code>umx_set_table_format()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umx)
+umx_set_data_variance_check() # print current state
+old = umx_set_data_variance_check(silent = TRUE) # store existing value
+umx_set_data_variance_check(minVar = .01)
+umx_set_data_variance_check(maxVarRatio = 500)
+umx_set_data_variance_check(minVar = old$minVar, maxVarRatio = old$maxVarRatio) # reinstate
+</code></pre>
+
+
+</div>

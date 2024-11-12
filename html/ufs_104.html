@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>exceptionalScores</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Find exceptional scores</h2>
+
+<h3>Description</h3>
+
+<p>A function to detect participants that consistently respond exceptionally.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">exceptionalScores(
+  dat,
+  items = NULL,
+  exception = 0.025,
+  totalOnly = TRUE,
+  append = TRUE,
+  both = TRUE,
+  silent = FALSE,
+  suffix = "_isExceptional",
+  totalVarName = "exceptionalScores"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>The dataframe containing the variables to inspect, or the vector
+to inspect (but for vectors, <code>exceptionalScore()</code> might be more
+useful).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>The names of the variables to inspect.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exception</code></td>
+<td>
+<p>When an item will be considered exceptional, passed on as
+<code>prob</code> to <code>exceptionalScore()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>totalOnly</code></td>
+<td>
+<p>Whether to return only the number of exceptional scores for
+each row in the dataframe, or for each inspected item, which values are
+exceptional.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>append</code></td>
+<td>
+<p>Whether to return the supplied dataframe with the new
+variable(s) appended (if TRUE), or whether to only return the new
+variable(s) (if FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>both</code></td>
+<td>
+<p>Whether to look for both low and high exceptional scores (<code>TRUE</code>)
+or not (<code>FALSE</code>; see <code>exceptionalScore()</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Can be used to suppress messages.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffix</code></td>
+<td>
+<p>If not returning the total number of exceptional values, for
+each inspected variable, a new variable is returned indicating which values
+are exceptional.  The text string is appended to each original variable name
+to create the new variable names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>totalVarName</code></td>
+<td>
+<p>If returning only the total number of exceptional
+values, and appending these to the provided dataset, this text string is
+used as variable name.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Either a vector containing the number of exceptional values, a
+dataset containing, for each inspected variable, which values are
+exceptional, or the provided dataset where either the total or the
+exceptional values for each variable are appended.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">exceptionalScores(mtcars);
+
+</code></pre>
+
+
+</div>

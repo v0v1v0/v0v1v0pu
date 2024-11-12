@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>install.OpenMx</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Install OpenMx, with choice of builds</h2>
+
+<h3>Description</h3>
+
+<p>You can install OpenMx, including the latest NPSOL-enabled build of OpenMx. Options are:
+</p>
+
+<ol>
+<li>
+<p> "NPSOL": Install from our repository (default): This is where we maintain binaries supporting parallel processing and NPSOL.
+</p>
+</li>
+<li>
+<p> "travis": Install the latest travis built (MacOS only).
+</p>
+</li>
+<li>
+<p> "CRAN": Install from CRAN.
+</p>
+</li>
+<li>
+<p> "open travis build page": Open the list of travis builds in a browser window.
+</p>
+</li>
+</ol>
+<h3>Usage</h3>
+
+<pre><code class="language-R">install.OpenMx(
+  loc = c("NPSOL", "travis", "CRAN", "open travis build page", "UVa"),
+  url = NULL,
+  lib,
+  repos = getOption("repos")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>loc</code></td>
+<td>
+<p>Version to get default is "NPSOL". "travis" (latest build),CRAN, list of builds.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>Custom URL. On Mac, set this to "Finder" and the package selected in the Finder will be installed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lib</code></td>
+<td>
+<p>Where to install the package.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repos</code></td>
+<td>
+<p>Which repository to use (ignored currently).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>umxVersion()</code>
+</p>
+<p>Other Miscellaneous Utility Functions: 
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+install.OpenMx() # gets the NPSOL version
+install.OpenMx("NPSOL") # gets the NPSOL version explicitly
+install.OpenMx("CRAN") # Get the latest CRAN version
+install.OpenMx("open travis build page") # Open web page of travis builds
+
+## End(Not run)
+</code></pre>
+
+
+</div>

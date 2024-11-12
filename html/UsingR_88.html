@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mandms</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Proportions of colors in various M and M's varieties</h2>
+
+<h3>Description</h3>
+
+<p>A bag of the candy M and M's has many different colors. Each large
+production batch is blended to the ratios given in this data set. The
+batches are thoroughly mixed and then the individual packages are
+filled by weight using high-speed equipment, not by count.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(mandms)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 5 observations on the following 6 variables.
+</p>
+
+<dl>
+<dt>blue</dt>
+<dd>
+<p>percentage of blue</p>
+</dd>
+<dt>brown</dt>
+<dd>
+<p>percentage of brown</p>
+</dd>
+<dt>green</dt>
+<dd>
+<p>percentage of green</p>
+</dd>
+<dt>orange</dt>
+<dd>
+<p>percentage of orange</p>
+</dd>
+<dt>red</dt>
+<dd>
+<p>percentage of red</p>
+</dd>
+<dt>yellow</dt>
+<dd>
+<p>percentage of yellow</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>This data is attributed to an email sent by Masterfoods USA, A Mars,
+Incoporated Company. This email was archived at the Math Forum,
+http://www.mathforum.org (now off-line).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(mandms)
+bagfull = c(15,34,7,19,29,24)
+names(bagfull) = c("blue","brown","green","orange","red","yellow")
+prop = function(x) x/sum(x)
+chisq.test(bagfull,p = prop(mandms["milk chocolate",]))
+chisq.test(bagfull,p = prop(mandms["Peanut",]))
+</code></pre>
+
+
+</div>

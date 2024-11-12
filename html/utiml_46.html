@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mlpredict</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prediction transformation problems</h2>
+
+<h3>Description</h3>
+
+<p>Base classifiers are used to build models to solve the the transformation
+problems. To create a new base classifier, two steps are necessary:
+</p>
+
+<ol>
+<li>
+<p> Create a train method
+</p>
+</li>
+<li>
+<p> Create a prediction method
+</p>
+</li>
+</ol>
+<p>This section is about how to create the second step: a prediction method.
+To create a new train method see <code>mltrain</code> documentation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mlpredict(model, newdata, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>An object model returned by some mltrain method, its class
+determine the name of this method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>A data.frame with the new data to be predicted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the predict method.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A matrix with the probabilities of each class value/example,
+where the rows are the examples and the columns the class values.
+</p>
+
+
+<h3>How to create a new prediction base method</h3>
+
+<p>Fist is necessary to know the class of model generate by the respective train
+method, because this name determines the method name. It must start with
+<code>'mlpredict.'</code>, followed by the model class name, e.g. a model with
+class 'fooModel' must be called as <code>mlpredict.fooModel</code>.
+</p>
+<p>After defined the name, you need to implement your prediction base method.
+The model built on mltrain is available on <code>model</code> parameter and the
+<code>newdata</code> is the data to be predict.
+</p>
+<p>The return of this method must be a data.frame with two columns called
+<code>"prediction"</code> and <code>"probability"</code>. The first column contains the
+predicted class and the second the probability/score/confidence of this
+prediction. The rows represents the examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Create a method that predict always the first class
+# The model must be of the class 'fooModel'
+mlpredict.fooModel &lt;- function (model, newdata, ...) {
+   # Predict the first class with a random confidence
+   data.frame(
+     prediction = rep(model$classes[1], nrow(newdata)),
+     probability = sapply(runif(nrow(newdata)), function (score) {
+       max(score, 1 - score)
+     }),
+     row.names = rownames(newdata)
+   )
+}
+
+
+# Create a SVM predict method using the e1071 package (the class of SVM model
+# from e1071 package is 'svm')
+library(e1071)
+mlpredict.svm &lt;- function (dataset, newdata, ...) {
+   result &lt;- predict(model, newdata, probability = TRUE, ...)
+   attr(result, 'probabilities')
+}
+
+</code></pre>
+
+
+</div>

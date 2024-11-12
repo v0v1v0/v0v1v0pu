@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>obj.fcn</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+The objective function for UWHAM
+</h2>
+
+<h3>Description</h3>
+
+<p>This function computes the objective function, its gradient and its hessian matrix for UWHAM.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">obj.fcn(ze, logQ, size, base)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ze</code></td>
+<td>
+<p>A vector of log-normalizing constants (or free energies) for the sampled thermodynamic states.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logQ</code></td>
+<td>
+<p>The matrix of log of unnormalized density ratios for the sampled thermodynamic states over the baseline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>A vector giving the individual sample sizes for the sampled thermodynamic states.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>The baseline index.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The objective function is convex as discussed in Tan et al. (2012). See also Gill et al. (1998) for related results on biased sampling models. 
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>The value of the objective function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gradient</code></td>
+<td>
+<p>The gradient of the objective function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hessian</code></td>
+<td>
+<p>The hessian matrix of objective function.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Gill, R., Vardi, Y., and Wellner, J. (1998) "Large sample theory of empirical distributions in biased sampling models," <em>Annals of Statistics</em>, 16, 1069–1112.
+</p>
+<p>Tan, Z., Gallicchio, E., Lapelosa, M., and Levy, R.M. (2012) "Theory of binless multi-state free energy estimation with applications to protein-ligand binding," <em>Journal of Chemical Physics</em>, 136, 144102.
+</p>
+
+
+</div>

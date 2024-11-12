@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>maxpos_on_line</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>applies a line to a raster and returns the position of the maximum value</h2>
+
+<h3>Description</h3>
+
+<p>applies a line to a raster and returns the position of the maximum value
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">maxpos_on_line(dem, line)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dem</code></td>
+<td>
+<p>raster object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>line</code></td>
+<td>
+<p>sp object</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## load DEM/DSM 
+dem &lt;- terra::rast(system.file("extdata", "mrbiko.tif", package = "uavRmp"))
+
+## generate extraction line object
+line &lt;- sp_line(c(8.66821,8.68212),c(50.83939,50.83267),ID="Highest Position",runDir=runDir)
+## extract highest position
+maxpos_on_line(dem,line)  
+
+## End(Not run)
+</code></pre>
+
+
+</div>

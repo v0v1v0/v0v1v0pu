@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pack</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pack cell values from separate columns per data type into one list-column</h2>
+
+<h3>Description</h3>
+
+<p>Pack cell values from separate columns per data type into one list-column
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pack(
+  cells,
+  types = data_type,
+  name = "value",
+  drop_types = TRUE,
+  drop_type_cols = TRUE
+)
+
+unpack(cells, values = value, name = "data_type", drop_packed = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cells</code></td>
+<td>
+<p>A data frame of cells, one row per cell.  For <code>pack()</code> it must
+have a column that names, for each cell/row, which of the other columns the
+value is in.  For <code>unpack()</code> it must have a list-column of cell values, where
+each element is named according to the data type of the value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>types</code></td>
+<td>
+<p>For <code>pack()</code>, the name of the column that that names, for each
+cell/row, which of the other columns the value is in.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>A string. For <code>pack()</code>, the name to give the new list-column of
+values.  For <code>unpack()</code>, the name to give the new column that will name, for
+each cell, which of the other columns the value is in.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop_types</code></td>
+<td>
+<p>For <code>pack()</code>, whether to drop the column named by <code>types</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop_type_cols</code></td>
+<td>
+<p>For <code>pack()</code>, whether to drop the original columns of
+cell values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>For <code>unpack()</code>, the name of the list-column of cell values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop_packed</code></td>
+<td>
+<p>For <code>unpack()</code>, whether to drop the column named by
+<code>values</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>When cells are represented by rows of a data frame, the values of the cells
+will be in different columns according to their data type.  For example, the
+value of a cell containing text will be in a column called <code>chr</code> (or
+<code>character</code> if it came via tidyxl).  A column called <code>data_type</code> names, for
+each cell, which column its value is in.
+</p>
+<p><code>pack()</code> rearranges the cell values in a different way, so that they are all
+in one column, by
+</p>
+
+<ol>
+<li>
+<p> taking each cell value, from whichever column.
+</p>
+</li>
+<li>
+<p> making it an element of a list.
+</p>
+</li>
+<li>
+<p> naming each element according to the column it came from.
+</p>
+</li>
+<li>
+<p> making the list into a new list-column of the original data frame.
+</p>
+</li>
+</ol>
+<p>By default, the original columns are dropped, and so is the <code>data_type</code>
+column.
+</p>
+<p><code>unpack()</code> is the complement.
+</p>
+<p>This can be useful for dropping all columns of <code>cells</code> except the ones that
+contain data.  For example, <code>tidyxl::xlsx_cells()</code> returns a very wide data
+frame, and to make it narrow you might do:
+</p>
+<div class="sourceCode"><pre>select(cells, row, col, character, numeric, date)
+</pre></div>
+<p>But what if you don't know in advance that the data types you need are
+<code>character</code>, <code>numeric</code> and <code>date</code>?  You might also need <code>logical</code> and
+<code>error</code>.
+</p>
+<p>Instead, <code>pack()</code> all the data types into a single column, select it, and
+then unpack.
+</p>
+<div class="sourceCode"><pre>pack(cells) %&gt;%
+  select(row, col, value) %&gt;%
+  unpack()
+</pre></div>
+
+
+<h3>Functions</h3>
+
+
+<ul><li> <p><code>unpack()</code>: Unpack cell values from one list-column into separate columns per data type
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># A normal data frame
+w &lt;- data.frame(foo = 1:2,
+                bar = c("a", "b"),
+                stringsAsFactors = FALSE)
+w
+
+# The same data, represented by one row per cell, with integer values in the
+# `int` column and character values in the `chr` column.
+x &lt;- as_cells(w)
+x
+
+# pack() and unpack() are complements
+pack(x)
+unpack(pack(x))
+
+# Drop non-data columns from a wide data frame of cells from tidyxl
+if (require(tidyxl)) {
+  cells &lt;- tidyxl::xlsx_cells(system.file("extdata", "purpose.xlsx", package = "unpivotr"))
+  cells
+
+  pack(cells) %&gt;%
+    dplyr::select(row, col, value) %&gt;%
+    unpack()
+}
+</code></pre>
+
+
+</div>

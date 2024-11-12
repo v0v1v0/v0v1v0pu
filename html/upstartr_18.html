@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>end_processing</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Runs the post-processing step on a startr project.</h2>
+
+<h3>Description</h3>
+
+<p>The post-processing step, run as part of <code>upstartr::run_process</code>
+during the <code>process.R</code> stage of a startr project, removes all variables
+saved by <code>upstartr::begin_processing</code>
+and then beeps to announce it's finished.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">end_processing(
+  should_clean_processing_variables = TRUE,
+  should_beep = TRUE,
+  logged_vars = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>should_clean_processing_variables</code></td>
+<td>
+<p>Either TRUE, FALSE, or pulled from the environment if set.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>should_beep</code></td>
+<td>
+<p>Either TRUE, FALSE, or pulled from the environment if set.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logged_vars</code></td>
+<td>
+<p>A list of variables that existed before the processing step began.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, called for side effects
+</p>
+
+
+</div>

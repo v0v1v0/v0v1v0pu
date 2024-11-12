@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sharedSubString</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>sharedSubString</h2>
+
+<h3>Description</h3>
+
+<p>A function to find the longest shared substring in a character vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sharedSubString(x, y = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The character vector to process.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Optionally, two single values can be specified. This is probably
+not useful to end users, but it's used by the function when it calls itself.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector of length one with either the longest substring that occurs
+in all values of the character vector, or NA if no overlap an be found.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+  sharedSubString(c("t0_responseTime", "t1_responseTime", "t2_responseTime"));
+  ### Returns "_responseTime"
+
+</code></pre>
+
+
+</div>

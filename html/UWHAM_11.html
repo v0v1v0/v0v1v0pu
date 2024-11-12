@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uwham.phi</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Unbinned weighted histogram analysis method (UWHAM) for estimating expectations
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements UWHAM for estimating expectations for multiple distributions (such as
+multiple generalized ensembles) as described in Tan et al. (2012).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uwham.phi(phi, state, out.uwham, fisher = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>phi</code></td>
+<td>
+<p>A vector of function (or observable) values on the pooled sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>state</code></td>
+<td>
+<p>A vector of indices between <code>1</code> to <code>M</code> for the thermodynamic states under which expectations are to be computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out.uwham</code></td>
+<td>
+<p>The output of <code>uwham</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fisher</code></td>
+<td>
+<p>Logical; if <code>NULL</code>, no variance estimation; if <code>TRUE</code>, variance estimation is based
+on Fisher information; if <code>FALSE</code> variance estimation is based on the Sandwich variance formula (see the details).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The implementation is directly based on Tan et al. (2012). See the details for <code>uwham</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>phi</code></td>
+<td>
+<p>The vector of estimated expectations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phi.v</code></td>
+<td>
+<p>The vector of estimated variances for <code>phi</code>, if <code>fisher!=NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phi.V</code></td>
+<td>
+<p>The variance-covariance matrix for <code>phi</code>, if <code>fisher!=NULL</code>.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Tan, Z., Gallicchio, E., Lapelosa, M., and Levy, R.M. (2012) "Theory of binless multi-state free energy estimation with applications to protein-ligand binding," <em>Journal of Chemical Physics</em>, 136, 144102.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+#See the examples for uwham().
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>iEsomTrain</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>iEsomTrain</h2>
+
+<h3>Description</h3>
+
+<p>Trains the ESOM and shows the Umatrix.</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Data</code></td>
+<td>
+<p>Matrix of Data that will be used to learn. One DataPoint per row</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BestMatches</code></td>
+<td>
+<p>Array with positions of Bestmatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Cls</code></td>
+<td>
+<p>Classification of the Bestmatches as a  vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Key</code></td>
+<td>
+<p>Numeric vector of keys matching the Bestmatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>Are BestMatches placed on a toroid grid? TRUE by default</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List with
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>Umatrix</code></td>
+<td>
+<p>matrix with height values of the umatrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BestMatches</code></td>
+<td>
+<p>matrix containing the bestmatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lines</code></td>
+<td>
+<p>number of lines of the chosen ESOM</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Columns</code></td>
+<td>
+<p>number of columns of the chosen ESOM</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Epochs</code></td>
+<td>
+<p>number of epochs of the chosen ESOM</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Weights</code></td>
+<td>
+<p>List of weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>True if a toroid grid was used</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>EsomDetails</code></td>
+<td>
+<p>Further details describing the chosen ESOM parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>JumpingDataPointsHist</code></td>
+<td>
+<p>Number of Datapoints that jumped to another neuron in each epoch</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Thrun, M. C., Lerch, F., Loetsch, J., Ultsch, A.: Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision,Plzen, 2016.
+</p>
+
+
+</div>

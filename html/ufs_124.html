@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ggPie</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A ggplot pie chart</h2>
+
+<h3>Description</h3>
+
+<p>This function creates a pie chart. Note that these are generally quite
+strongly advised against, as people are not good at interpreting relative
+frequencies on the basis of pie charts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ggPie(vector, scale_fill = ggplot2::scale_fill_viridis_d())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vector</code></td>
+<td>
+<p>The vector (best to pass a factor).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale_fill</code></td>
+<td>
+<p>The ggplot scale fill function to use for the colors.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot pie chart.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This function is very strongly based on the Mathematical Coffee post
+at
+http://mathematicalcoffee.blogspot.com/2014/06/ggpie-pie-graphs-in-ggplot2.html.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ggPie(mtcars$cyl);
+
+</code></pre>
+
+
+</div>

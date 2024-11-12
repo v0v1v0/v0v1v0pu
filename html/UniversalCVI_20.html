@@ -1,0 +1,278 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Hvalid</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Wiroonsri(2024) correlation-based cluster validity indices and other well-known cluster validity indices
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the cluster validity indexes for a result of either kmeans or hierarchical clustering from user specified <code>kmin</code> to <code>kmax</code> used in Wiroonsri(2024). It includes the DI (J. C. Dunn, 1973) index, CH (T. Calinski and J. Harabasz, 1974) index, DB (D. L. Davies and D. W. Bouldin, 1979) index, PB (G. W. Miligan, 1985) index, CSL (C. H. Chou et al., 2004) index, PBM (M. K. Pakhira et al., 2004) index, DBs (M. Kim and R. S. Ramakrishna, 2005), Score function (S. Saitta et al., 2007), STR (A. Starczewski, 2017) index, NC, NCI, NCI1, and, NCI2 (N. Wiroonsri, 2024) indexes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Hvalid(x, kmax, kmin = 2, indexlist = "all", method = "kmeans",
+  p = 2, q = 2, corr = "pearson", nstart = 100, sampling = 1, NCstart = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kmax</code></td>
+<td>
+<p>a maximum number of clusters to be considered.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kmin</code></td>
+<td>
+<p>a minimum number of clusters to be considered. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indexlist</code></td>
+<td>
+<p>a character string indicating which cluster validity indexes to be computed (<code>"all"</code>, <code>"NC"</code>, <code>"NCI"</code>, <code>"NCI1"</code>, <code>"NCI2"</code>, <code>"PB"</code>, <code>"CSL"</code>, <code>"CH"</code>, <code>"DB"</code>, <code>"DBs"</code>, <code>"SF"</code>, <code>"DI"</code>, <code>"STR"</code>, <code>"PBM"</code>). More than one indexes can be selected.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which clustering method to be used (<code>"kmeans"</code>, <code>"hclust_complete"</code>, <code>"hclust_average"</code>, <code>"hclust_single"</code>). The default is <code>"kmeans"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>the power of the Minkowski distance between centroids of clusters for <code>indexlist = c("DB","DBs")</code>. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>the power of dispersion measure of a cluster for <code>indexlist = c("DB","DBs")</code>. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>corr</code></td>
+<td>
+<p>a character string indicating which correlation coefficient is to be computed (<code>"pearson"</code>, <code>"kendall"</code> or <code>"spearman"</code>). The default is <code>"pearson"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for kmeans for <code>method = "kmeans"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampling</code></td>
+<td>
+<p>a number greater than 0 and less than or equal to 1 indicating the undersampling proportion of data to be used. This argument is intended for handling a large dataset. The default is <code>1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NCstart</code></td>
+<td>
+<p>logical for <code>indexlist</code> includes the <code>"NC"</code>, <code>"NCI"</code>, <code>"NCI1"</code>, and <code>"NCI2"</code>), if <code>TRUE</code>, the NC correlation at <code>k=1</code> is defined as the ratio introduced in the reference. Otherwise, it is assigned as <code>0</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The well-known cluster validity indices used in Wiroonsri(2024). It includes the DI (J. C. Dunn, 1973) index, CH (T. Calinski and J. Harabasz, 1974) index, DB (D. L. Davies and D. W. Bouldin, 1979) index, PB (G. W. Miligan, 1980) index, CSL (C. H. Chou et al., 2004) index, PBM (M. K. Pakhira et al., 2004) index, DBs (M. Kim and R. S. Ramakrishna, 2005), Score function (S. Saitta et al., 2007), STR (A. Starczewski, 2017), NC, NCI, NCI1, and, NCI2 (N. Wiroonsri, 2024) indexes.
+</p>
+<p>The NC correlation computes the correlation between an actual distance between a pair of data points and a centroid distance of clusters that the two points locate in. NCI1 and NCI2 are the proportion and the subtraction, respectively, of the same two ratios. The first ratio is the NC improvement from <code>k-1</code> clusters to <code>k</code> clusters over the entire room for improvement. The second ratio is the NC improvement from <code>k</code> clusters to <code>k+1</code> clusters over the entire room for improvement. NCI is a combination of NCI1 and NCI2.
+</p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>NC</code></td>
+<td>
+<p>the NC correlations for <code>k</code> from <code>kmin-1</code> to <code>kmax+1</code> shown in a data frame where the first and the second columns are <code>k</code> and the NC, respectively.</p>
+</td>
+</tr></table>
+<p>Each of the followings shows the values of each index for <code>k</code> from <code>kmin</code> to <code>kmax</code> in a data frame.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>NCI</code></td>
+<td>
+<p>the NCI index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NCI1</code></td>
+<td>
+<p>the NCI1 index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NCI2</code></td>
+<td>
+<p>the NCI2 index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PB</code></td>
+<td>
+<p>the PB index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DI</code></td>
+<td>
+<p>the DI index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DB</code></td>
+<td>
+<p>the DB index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DBs</code></td>
+<td>
+<p>the DBs index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CSL</code></td>
+<td>
+<p>the CSL index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CH</code></td>
+<td>
+<p>the CH index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SF</code></td>
+<td>
+<p>the Score function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>STR</code></td>
+<td>
+<p>the STR index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PBM</code></td>
+<td>
+<p>the PBM index.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>J. C. Bezdek, N. R. Pal, "Some new indexes of cluster validity," <em>IEEE Transactions on Systems, Man, and Cybernetics</em>, Part B, 28, 301-315 (1998).
+</p>
+<p>T. Calinski, J. Harabasz, "A dendrite method for cluster analysis," <em>Communications in Statistics</em>, 3, 1-27 (1974).
+</p>
+<p>C. H. Chou, M. C. Su, E. Lai, "A new cluster validity measure and its application to image compression," <em>Pattern Anal Applic</em>, 7, 205-220 (2004).
+</p>
+<p>D. L. Davies, D. W. Bouldin, "A cluster separation measure," <em>IEEE Trans Pattern Anal Machine Intell</em>, 1, 224-227 (1979).
+</p>
+<p>J. C. Dunn, "A fuzzy relative of the ISODATA process and its use in detecting compact well-separated clusters," <em>J Cybern</em>, 3(3), 32-57 (1973).
+</p>
+<p>M. Kim, R. S. Ramakrishna, "New indices for cluster validity assessment," <em>Pattern Recognition Letters</em>, 26, 2353-2363 (2005).
+</p>
+<p>G. W. Miligan, "An examination of the effect of six types of error perturbation on fifteen clustering algorithms," <em>Psychometrika</em>, 45, 325-342 (1980).
+</p>
+<p>M. K. Pakhira, S. Bandyopadhyay and U. Maulik, "Validity index for crisp and fuzzy clusters," <em>Pattern Recogn</em> 37(3):487–501 (2004).
+</p>
+<p>S. Saitta, B. Raphael, I. Smith, "A bounded index for cluster validity," <em>In Perner, P.: Machine Learning and Data Mining in Pattern Recognition, Lecture Notes in Computer Science</em>, 4571, Springer (2007).
+</p>
+<p>A. Starczewski, "A new validity index for crisp clusters," <em>Pattern Anal Applic</em> 20, 687–700 (2017).
+</p>
+<p>N. Wiroonsri, "Clustering performance analysis using a new correlation based cluster validity index," Pattern Recognition, 145, 109910, 2024.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Wvalid, FzzyCVIs, DI.IDX,  R1_data</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# The data is from Wiroonsri (2024).
+x = R1_data[,1:2]
+
+
+# ---- Kmeans ----
+
+# Compute all the indices by Hvalid
+Hvalid(scale(x), kmax = 15, kmin = 2, indexlist = "all",
+  method = "kmeans", p = 2, q = 2, corr = "pearson", nstart = 100, NCstart = TRUE)
+
+# Compute selected a set of indices ("NC","NCI","DI","DB")
+Hvalid(scale(x), kmax = 15, kmin = 2, indexlist = c("NC","NCI","DI","DB"),
+  method = "kmeans", p = 2, q = 2, corr = "pearson", nstart = 100, NCstart = TRUE)
+
+# ---- Hierarchical ----
+
+# Average linkage
+
+# Compute all the indices by Hvalid
+Hvalid(scale(x), kmax = 15, kmin = 2, indexlist = "all",
+  method = "hclust_average", p = 2, q = 2, corr = "pearson", nstart = 100, NCstart = TRUE)
+
+# Compute selected a set of indices ("NC","NCI","DI","DB")
+Hvalid(scale(x), kmax = 15, kmin = 2, indexlist = c("NC","NCI","DI","DB"),
+  method = "hclust_average", p = 2, q = 2, corr = "pearson", nstart = 100, NCstart = TRUE)
+
+#---Plot and compare the indexes---
+
+# Compute six cluster validity indexes of a kmeans clustering result for k from 2 to 15
+IDX.list = c("NCI", "DI", "DB", "DBs", "CSL", "CH")
+
+Hvalid.result = Hvalid(scale(x), kmax = 15, kmin = 2, indexlist = IDX.list,
+  method = "hclust_average", p = 2, q = 2, corr = "pearson", nstart = 100, NCstart = TRUE)
+
+# Plot the computed indexes
+plot_idx(Hvalid.result)
+</code></pre>
+
+
+</div>

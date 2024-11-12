@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxParameters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Display path estimates from a model, filtering by name and value.</h2>
+
+<h3>Description</h3>
+
+<p>Often you want to see the estimates from a model, and often you don't want all of them.
+<code>umxParameters()</code> helps in this case, allowing you to select parameters matching a name filter,
+and also to only show parameters above or below a certain value.
+</p>
+<p>If pattern is a vector, each regular expression is matched, and all unique matches to the whole vector are returned.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxParameters(
+  x,
+  thresh = c("all", "above", "below", "&gt;", "&lt;", "NS", "sig"),
+  b = NULL,
+  pattern = ".*",
+  std = FALSE,
+  digits = 2
+)
+
+parameters(
+  x,
+  thresh = c("all", "above", "below", "&gt;", "&lt;", "NS", "sig"),
+  b = NULL,
+  pattern = ".*",
+  std = FALSE,
+  digits = 2
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an <code>mxModel()</code> or model summary from which to report parameter estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thresh</code></td>
+<td>
+<p>optional: Filter out estimates 'below' or 'above' a certain value (default = "all").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>Combine with thresh to set a minimum or maximum for which estimates to show.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>Optional string to match in the parameter names. Default '.*' matches all. <code>regex()</code> allowed!</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Standardize output: NOT IMPLEMENTED YET</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Round to how many digits (2 = default).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>It is on my TODO list to implement filtering by significance, and to add standardizing.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> list of matching parameters, filtered by name and value
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxGetParameters()</code>, <code>umxSummary()</code>, <code>namez()</code>
+</p>
+</li></ul>
+<p>Other Reporting Functions: 
+<code>umxAPA()</code>,
+<code>umxFactorScores()</code>,
+<code>umxGetLatents()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxGetParameters()</code>,
+<code>umx_aggregate()</code>,
+<code>umx_time()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("OneFactor", data = demoOneFactor,
+	umxPath(from = "G", to = manifests), # factor loadings
+	umxPath(v.m. = manifests),           # residual variance
+	umxPath(v1m0 = "G")                  # standardized latent
+)
+# Parameters with values below .1
+umxParameters(m1, "below", .1)
+# Parameters with values above .5
+umxParameters(m1, "above", .5)
+# Parameters with values below .1 and containing "_to_" in their label
+umxParameters(m1, "below", .1, "_to_")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

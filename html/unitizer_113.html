@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>testFuns</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Store Functions for New vs. Reference Test Comparisons</h2>
+
+<h3>Description</h3>
+
+<p><code>testFuns</code> contains the functions used to compare the results and side
+effects of running test expressions.  “testFuns” objects can be used
+as the <code>compare</code> argument for <code>unitizer_sect</code>, thereby
+allowing you to specify different comparison functions for different aspects
+of test evaluation.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The default comparison functions are as follows:
+</p>
+
+<ul>
+<li>
+<p> value: <code>all_eq</code>
+</p>
+</li>
+<li>
+<p> conditions: <code>all_eq</code>
+</p>
+</li>
+<li>
+<p> output: <code>function(x, y) TRUE</code>, i.e. not compared
+</p>
+</li>
+<li>
+<p> message: <code>function(x, y) TRUE</code>, i.e. not compared as conditions
+should be capturing warnings/errors
+</p>
+</li>
+<li>
+<p> aborted: <code>function(x, y) TRUE</code>, i.e. not compared as conditions
+should also be capturing this implicitly
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>unitizer_sect</code> for more relevant usage examples,
+<code>all_eq</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># use `identical` instead of `all.equal` to compare values
+testFuns(value=identical)
+</code></pre>
+
+
+</div>

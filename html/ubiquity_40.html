@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_estimate_parameters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Control Estimation Process</h2>
+
+<h3>Description</h3>
+
+<p>Manages the flow of parameter estimation using data specified with <code>system_define_cohort</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_estimate_parameters(
+  cfg,
+  flowctl = "plot guess",
+  analysis_name = "my_analysis",
+  archive_results = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flowctl</code></td>
+<td>
+<p>string to control what the flow of the function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>archive_results</code></td>
+<td>
+<p>boolean variable to control whether results will be archived</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>flowctl</code> argument can have the following values
+</p>
+
+<ul>
+<li> <p><code>"plot guess"</code> return the initial guess
+</p>
+</li>
+<li> <p><code>"estimate"</code> perform estimation
+</p>
+</li>
+<li> <p><code>"previous estimate as guess"</code> load previous estimate for <code>analysis_name</code> and use that as the initial guess
+</p>
+</li>
+<li> <p><code>"plot previous estimate"</code> return the previous estimate for <code>analysis_name</code>
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>parameter estimates
+</p>
+
+
+</div>

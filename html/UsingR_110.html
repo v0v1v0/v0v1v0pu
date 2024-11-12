@@ -1,0 +1,138 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>QQplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Creates a qqplot with shaded density estimate </h2>
+
+<h3>Description</h3>
+
+<p>Creates a qqplot of two variables along with graphs of their
+densities, shaded so that the corresponding percentiles are clearly
+matched up.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">QQplot(x, y, n = 20, xsf = 4, ysf = 4, main = "qqplot", xlab = deparse(substitute(x)),
+        ylab = deparse(substitute(y)), pch = 16, pcol = "black", shade = "gray", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> The x variable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p> The y variable </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p> number of points to plot in qqplot. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xsf</code></td>
+<td>
+<p> scale factor to adjust size of x density graph </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ysf</code></td>
+<td>
+<p> scale factor to adjust size of y density graph </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p> title </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p> label for x axis </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p> label for y axis </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pch</code></td>
+<td>
+<p> plot character for points in qqplot </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pcol</code></td>
+<td>
+<p> color of plot character </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shade</code></td>
+<td>
+<p> shading color </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> extra arguments passed to <code>plot.window</code> </p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Shows density estimates for the two samples in a qqplot. Meant to make
+this useful plot more transparent to first-time users of
+quantile-quantile plots.
+</p>
+<p>This function has some limitations: the scale factor may need to be
+adjusted; the code to shade only shaded trapezoids, and does not
+completely follow the density.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Produces a graphic
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> John Verzani </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>qqplot</code>, <code>qqnorm</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+x = rnorm(100)
+y = rt(100, df=3)
+QQplot(x,y)
+
+</code></pre>
+
+
+</div>

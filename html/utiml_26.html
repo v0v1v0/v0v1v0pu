@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fill_sparse_mldata</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fill sparse dataset with 0 or ” values</h2>
+
+<h3>Description</h3>
+
+<p>Transform a sparse dataset filling NA values to 0 or ” based on the column
+type. Text columns with numeric values will be modified to numerical.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fill_sparse_mldata(mdata)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>The mldr dataset to be filled.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a new mldr object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other pre process: 
+<code>normalize_mldata()</code>,
+<code>remove_attributes()</code>,
+<code>remove_labels()</code>,
+<code>remove_skewness_labels()</code>,
+<code>remove_unique_attributes()</code>,
+<code>remove_unlabeled_instances()</code>,
+<code>replace_nominal_attributes()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">sparse.toy &lt;- toyml
+sparse.toy$dataset$ratt10[sample(100, 30)] &lt;- NA
+complete.toy &lt;- fill_sparse_mldata(sparse.toy)
+</code></pre>
+
+
+</div>

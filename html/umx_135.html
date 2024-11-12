@@ -1,0 +1,488 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxRAM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build and run path-based SEM models</h2>
+
+<h3>Description</h3>
+
+<p><code>umxRAM</code> expedites creation of structural equation models, still without doing invisible things to the model. It
+supports <code>umxPath()</code>. To support cross-language sharing and science learning, <code>umxRAM</code> also supports lavaan model strings.
+</p>
+<p>Here's a path example that models miles per gallon (mpg) as a function of weight (wt) and engine displacement (disp)
+using the widely used <code>mtcars</code> data set.
+</p>
+<div class="sourceCode"><pre>m1 = umxRAM("tim", data = mtcars,
+	umxPath(c("wt", "disp"), to = "mpg"),
+	umxPath("wt", with = "disp"),
+	umxPath(v.m. = c("wt", "disp", "mpg"))
+)
+</pre></div>
+<p>As you can see, most of the work is done by <code>umxPath()</code>. <code>umxRAM</code> wraps these paths up, takes the <code style="white-space: pre;">⁠data =⁠</code> input, and
+then internally sets up all the labels and start values for the model, runs it, and calls <code>umxSummary()</code>, and <code>plot.MxModel()</code>.
+</p>
+<p>Try it, or one of the several models in the examples at the bottom of this page.
+</p>
+<p>A common error is to include data in the main list, a bit like
+saying <code>lm(y ~ x + df)</code> instead of <code>lm(y ~ x, data = df)</code>.
+</p>
+<p><strong>nb</strong>: Because it uses the presence of a variable in the data to detect if a variable is latent or not, <code>umxRAM</code> needs data at build time.
+</p>
+<p><strong>String Syntax</strong>
+</p>
+<p>Here is an example using lavaan syntax (for more, see <code>umxLav2RAM()</code>)
+</p>
+<div class="sourceCode R"><pre>m1 = umxRAM("mpg ~ wt + disp", data = mtcars)
+</pre></div>
+<p><strong>Sketch mode</strong>
+</p>
+<p>If you are at the "sketching" stage of theory consideration, <code>umxRAM</code> supports
+setting data to a simple vector of manifest names.
+As usual in <code>umxRAM</code>, any variables you refer to that are not in data are treated as latents.
+</p>
+<div class="sourceCode R"><pre>m1 = umxRAM("sketch", data = c("A", "B"),
+	umxPath("C", to = c("A", "B"), values=.3),
+	umxPath("A", with = "B", values=.45),
+	umxPath(v.m. = c("A", "B")),
+	umxPath(v1m0 = "C")
+)
+plot(m1, means = FALSE)
+</pre></div>
+<p>Will create this figure:
+</p>
+<p><img src="../help/figures/sketch.png" alt="Figure: sketch.png"></p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxRAM(
+  model = NA,
+  ...,
+  data = NULL,
+  name = NA,
+  group = NULL,
+  group.equal = NULL,
+  suffix = "",
+  comparison = TRUE,
+  type = c("Auto", "FIML", "cov", "cor", "WLS", "DWLS", "ULS"),
+  weight = NULL,
+  allContinuousMethod = c("cumulants", "marginals"),
+  autoRun = getOption("umx_auto_run"),
+  tryHard = c("no", "yes", "ordinal", "search"),
+  std = FALSE,
+  refModels = NULL,
+  remove_unused_manifests = TRUE,
+  independent = NA,
+  setValues = TRUE,
+  optimizer = NULL,
+  verbose = FALSE,
+  std.lv = FALSE,
+  lavaanMode = c("sem", "lavaan"),
+  printTab = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A model to update (or set to string to use as name for new model)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>umxPaths, mxThreshold objects, etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data for the model. Can be an <code>mxData()</code> or a data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>A friendly name for the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group</code></td>
+<td>
+<p>(optional) Column name to use for a multi-group model (default = NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group.equal</code></td>
+<td>
+<p>In multi-group models, what to equate across groups (default = NULL: all free)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffix</code></td>
+<td>
+<p>String to append to each label (useful if model will be used in a multi-group model)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>Compare the new model to the old (if updating an existing model: default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>One of "Auto", "FIML", "cov", "cor", "WLS", "DWLS", "ULS"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weight</code></td>
+<td>
+<p>Passes weight values to mxData</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>allContinuousMethod</code></td>
+<td>
+<p>"cumulants" or "marginals". Used in all-continuous WLS data to determine if a means model needed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoRun</code></td>
+<td>
+<p>Whether to run the model (default), or just to create it and return without running.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Default ('no') uses normal mxRun. "yes" uses mxTryHard. Other options: "ordinal", "search"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to show standardized estimates, raw (NULL print fit only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>refModels</code></td>
+<td>
+<p>pass in reference models if available. Use FALSE to suppress computing these if not provided.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_unused_manifests</code></td>
+<td>
+<p>Whether to remove variables in the data to which no path makes reference (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>independent</code></td>
+<td>
+<p>Whether the model is independent (default = NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>setValues</code></td>
+<td>
+<p>Whether to generate likely good start values (Defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>optimizer</code></td>
+<td>
+<p>optionally set the optimizer (default NULL does nothing)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Whether to tell the user what latents and manifests were created etc. (Default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std.lv</code></td>
+<td>
+<p>Whether to auto standardize latent variables when using string syntax (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lavaanMode</code></td>
+<td>
+<p>Defaults when building out string syntax default = "sem" (alternative is "lavaan", with very few defaults)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>printTab</code></td>
+<td>
+<p>(for string input, whether to output a table of paths (FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><strong>Comparison for OpenMx users</strong>
+</p>
+<p><code>umxRAM</code> differs from <code>OpenMx::mxModel()</code> in the following ways:
+</p>
+
+<ol>
+<li>
+<p> You don't need to set type = "RAM".
+</p>
+</li>
+<li>
+<p> You don't need to list manifestVars (they are detected from path usage).
+</p>
+</li>
+<li>
+<p> You don't need to list latentVars (detected as anything in paths but not in <code>mxData</code>).
+</p>
+</li>
+<li>
+<p> You don't need to create mxData when you already have a data.frame.
+</p>
+</li>
+<li>
+<p> You add data with <code style="white-space: pre;">⁠data = ⁠</code> (as elsewhere in R, e.g. <code>lm()</code>).
+</p>
+</li>
+<li>
+<p> You don't need to add labels: paths are automatically labelled "a_to_b" etc.
+</p>
+</li>
+<li>
+<p> You don't need to set start values, they will be done for you.
+</p>
+</li>
+<li>
+<p> You don't need to <code>mxRun</code> the model: it will run automatically, and print a summary.
+</p>
+</li>
+<li>
+<p> You don't need to run <code>summary</code>: with <code>autoRun=TRUE</code>, it will print a summary.
+</p>
+</li>
+<li>
+<p> You get a plot of the model with estimates on the paths, including multiple groups.
+</p>
+</li>
+<li>
+<p> Less typing: <code>umxPath()</code> offers powerful verbs to describe paths.
+</p>
+</li>
+<li>
+<p> Supports a subset of lavaan string input.
+</p>
+</li>
+</ol>
+<p><strong>Start values</strong>. Currently, manifest variable means are set to the observed means,
+residual variances are set to 80%  of the observed variance of each variable,
+and single-headed paths are set to a positive starting value (currently .9).
+<em>note</em>: The start-value strategy is subject to improvement, and will be documented in the help for <code>umxRAM()</code>.
+</p>
+<p><strong>Comparison with other software</strong>
+</p>
+<p>Some SEM software does a lot of behind-the-scenes defaulting and path addition.
+If you want this, I'd say use <code>umxRAM</code> with lavaan string input.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>, <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>umxPath()</code>, <code>umxSummary()</code>, <code>plot()</code>, <code>parameters()</code>, <code>umxSuperModel()</code>, <code>umxLav2RAM()</code>
+</p>
+<p>Other Core Model Building Functions: 
+<code>umxMatrix()</code>,
+<code>umxModify()</code>,
+<code>umxPath()</code>,
+<code>umxSuperModel()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+# ============================================
+# = 1. Here's a simple example with raw data =
+# ============================================
+mtcars$litres = mtcars$disp/61.02
+m1 = umxRAM("tim", data = mtcars,
+	umxPath(c("wt", "litres"), to = "mpg"),
+	umxPath("wt", with = "litres"),
+	umxPath(v.m. = c("wt", "litres", "mpg"))
+)
+
+# 2. Use parameters to see the parameter estimates and labels
+parameters(m1)
+
+# And umxSummary to get standardized parameters, CIs etc from the run model.
+umxSummary(m1, std=TRUE)
+# |name           | Std.Estimate| Std.SE|CI                   |
+# |:--------------|------------:|------:|:--------------------|
+# |wt_to_mpg      |        -0.54|   0.17|-0.54 [-0.89, -0.2]  |
+# |disp_to_mpg    |        -0.36|   0.18|-0.36 [-0.71, -0.02] |
+# |mpg_with_mpg   |         0.22|   0.07|0.22 [0.08, 0.35]    |
+# |wt_with_wt     |         1.00|   0.00|1 [1, 1]             |
+# |b1             |         0.89|   0.04|0.89 [0.81, 0.96]    |
+# |disp_with_disp |         1.00|   0.00|1 [1, 1]             |
+
+# 3. Of course you can plot the model
+plot(m1)
+plot(m1, std=TRUE, means=FALSE)
+plot(m1, std = TRUE, means=FALSE, strip= TRUE, resid = "line")
+
+# ===============================================
+# = lavaan string example (more at ?umxLav2RAM) =
+# ===============================================
+m1 = umxRAM(data = mtcars, "#modelName
+ mpg ~ wt + disp")
+
+
+# =======================
+# = A multi-group model =
+# =======================
+
+mtcars$litres = mtcars$disp/61.02
+m1 = umxRAM("tim", data = mtcars, group = "am",
+	umxPath(c("wt", "litres"), to = "mpg"),
+	umxPath("wt", with = "litres"),
+	umxPath(v.m. = c("wt", "litres", "mpg"))
+)
+# In this model, all parameters are free across the two groups.
+
+# ====================================
+# = A cov model, with steps laid out =
+# ====================================
+
+# *note*: The variance of displacement is in cubic inches and is very large.
+# to help the optimizer, one might, say, multiply disp *.016 to work in litres
+tmp = mtcars; tmp$disp= tmp$disp *.016
+
+# We can just give the raw data and ask for it to be made into type cov:
+m1 = umxRAM("tim", data = tmp, type="cov",
+	umxPath(c("wt", "disp"), to = "mpg"),
+	umxPath("wt", with = "disp"),
+	umxPath(var = c("mpg", "wt", "disp"))
+)
+
+# (see ?umxPath for more nifty options making paths...)
+
+# =========================================
+# = umxRAM can also accept mxData as data =
+# =========================================
+# For convenience, list up the manifests you will be using
+
+selVars = c("mpg", "wt", "disp")
+tmp = mtcars; tmp$disp= tmp$disp *.016
+myCov = mxData(cov(tmp[, selVars]), type = "cov", numObs = nrow(mtcars) )
+
+m1 = umxRAM("tim", data = myCov,
+	umxPath(c("wt", "disp"), to = "mpg"),
+	umxPath("wt", with = "disp"),
+	umxPath(var = selVars)
+)
+
+
+# =======================
+# = umxRAM supports WLS =
+# =======================
+
+# 1. Run an all-continuous WLS model
+ mw = umxRAM("raw", data = mtcars[, c("mpg", "wt", "disp")], 
+	type = "WLS", allContinuousMethod = "cumulants",
+ 	umxPath(var = c("wt", "disp", "mpg")),
+ 	umxPath(c("wt", "disp"), to = "mpg"),
+ 	umxPath("wt", with = "disp"),
+     umxPath(var = c("wt", "disp", "mpg"))
+ )
+# 2. Switch to marginals to support means
+ mw = umxRAM("raw", data = mtcars[, c("mpg", "wt", "disp")], 
+	type = "WLS", allContinuousMethod= "marginals",
+ 	umxPath(var = c("wt", "disp", "mpg")),
+ 	umxPath(c("wt", "disp"), to = "mpg"),
+ 	umxPath("wt", with = "disp"),
+     umxPath(var = c("wt", "disp", "mpg"))
+ )
+
+
+# ===============================
+# = Using umxRAM in Sketch mode =
+# ===============================
+# No data needed: just list variable names!
+# Resulting model will be plotted automatically
+m1 = umxRAM("what does unique pairs do, I wonder", data = c("A", "B", "C"),
+   umxPath(unique.pairs = c("A", "B", "C"))
+)
+
+m1 = umxRAM("ring around the rosey", data = c("B", "C"),
+  umxPath(fromEach = c("A", "B", "C"))
+)
+
+m1 = umxRAM("fromEach with to", data = c("B", "C"),
+   umxPath(fromEach = c("B", "C"), to= "D")
+)
+
+m1 = umxRAM("CFA_sketch", data = paste0("x", 1:4),
+	umxPath("g", to = paste0("x", 1:4)),
+	umxPath(var = paste0("x", 1:4)),
+	umxPath(v1m0 = "g")
+)
+
+# =================================================
+# = This is an example of using your own labels:  =
+#   umxRAM will not over-ride them                =
+# =================================================
+m1 = umxRAM("tim", data = mtcars, type="cov",
+	umxPath(c("wt", "disp"), to = "mpg"),
+	umxPath(cov = c("wt", "disp"), labels = "b1"),
+	umxPath(var = c("wt", "disp", "mpg"))
+)
+omxCheckEquals(m1$S$labels["disp", "wt"], "b1") # label preserved
+m1$S$labels
+#      mpg             wt            disp
+# mpg  "mpg_with_mpg"  "mpg_with_wt" "disp_with_mpg"
+# wt   "mpg_with_wt"   "wt_with_wt"  "b1"
+# disp "disp_with_mpg" "b1"          "disp_with_disp"
+parameters(m1)
+
+# ===========
+# = Weights =
+# ===========
+# !!! Not tested !!!
+mtcars$litres = mtcars$disp/61.02
+m1 = umxRAM("tim", data = mtcars, weight= "cyl",
+	umxPath(c("wt", "litres"), to = "mpg"),
+	umxPath("wt", with = "litres"),
+	umxPath(v.m. = c("wt", "litres", "mpg"))
+)
+
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

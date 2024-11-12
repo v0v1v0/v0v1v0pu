@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>logLik.UPG.Probit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute log-likelihoods from UPG.Probit objects</h2>
+
+<h3>Description</h3>
+
+<p><code>logLik</code> can be used to compute log-likelihoods from <code>UPG.Probit</code> objects. The log-likelihood is based on the posterior mean of the coefficients.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UPG.Probit'
+logLik(object = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class <code>UPG.Probit</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other logLik parameters.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a numeric of class <code>logLik</code> with attributes containing the number of estimated parameters and the number of observations.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gregor Zens
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary.UPG.Probit</code> to summarize a <code>UPG.Probit</code> object and create tables.
+<code>plot.UPG.Probit</code> to plot a <code>UPG.Probit</code> object.
+<code>coef.UPG.Probit</code> to extract coefficients from a <code>UPG.Probit</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# estimate a probit model using example data
+library(UPG)
+data(lfp)
+y = lfp[,1]
+X = lfp[,-1]
+results.probit = UPG(y = y, X = X, model = "probit")
+
+# extract log-likelihood
+ll.probit = logLik(results.probit)
+
+
+</code></pre>
+
+
+</div>

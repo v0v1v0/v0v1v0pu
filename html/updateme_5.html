@@ -1,0 +1,163 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>updateme_sources_set</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Configure updateme lookup of new package versions</h2>
+
+<h3>Description</h3>
+
+<p>This function is a helper for setting the <code>"updateme.sources"</code>
+global option. It provides a user-friendly interface and validation of the
+options you set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">updateme_sources_set(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Named or unnamed arguments. Values should be either:
+</p>
+
+<ul>
+<li>
+<p> One of <code>names(getOption("repo"))</code>: latest versions will be taken from
+this source, if available
+</p>
+</li>
+<li> <p><code>"bioc"</code>: new versions will be looked for on Bioconductor
+</p>
+</li>
+<li> <p><code>"github"</code>/<code>"gitlab"</code>: new versions will looked for on on
+GitHub/GitLab, if a repo can be identified using the package
+<code>DESCRIPTION</code>
+</p>
+</li>
+<li>
+<p> A URL pointing to a GitHub/GitLab repo, e.g.
+<code>"https://github.com/wurli/updateme"</code>: the latest version <em>for this
+particular package</em> will be taken from this project
+</p>
+</li>
+<li> <p><code>NA</code>: updateme will not attempt to query new versions.
+Note that <code>NA</code> inputs must always be named (i.e. you must specify this
+'per package')
+</p>
+</li>
+<li> <p><code>NULL</code>: return to the default behaviour
+</p>
+</li>
+</ul>
+<p>If arguments are named, names should indicate package which the option
+should apply to. If unnamed, the option will apply to all packages. See
+examples for more information.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The result of setting
+<code style="white-space: pre;">⁠options(updateme.sources = &lt;new_options&gt;)⁠</code>
+</p>
+
+
+<h3>Private Repositories</h3>
+
+<p>updateme supports packages installed from private repositories on GitHub
+and GitLab. To get upstream package version from either, you should only have
+to configure a personal access token (PAT):
+</p>
+
+<ul>
+<li>
+<p> For GitHub packages, updateme checks, in order:
+</p>
+
+<ul>
+<li>
+<p> The <code>GITHUB_PAT</code> environmental variable
+</p>
+</li>
+<li>
+<p> The <code>GITHUB_TOKEN</code> environmental variable
+</p>
+</li>
+<li>
+<p> Any personal access tokens configured using <code>gitcreds::gitcreds_set()</code>
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p> For GitLab packages, updateme checks, in order:
+</p>
+
+<ul>
+<li>
+<p> The <code>GITLAB_PAT</code> environmental variable
+</p>
+</li>
+<li>
+<p> The <code>GITLAB_TOKEN</code> environmental variable
+</p>
+</li>
+<li>
+<p> Any personal access tokens configured using <code>gitcreds::gitcreds_set()</code>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>updateme_on()</code> and <code>updateme_off()</code> to disable updateme for all
+packages
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># If you want to check non-standard repos for new versions of packages,
+# you'll first have to set the repos global option. Note that each
+# option must be named for compatibility with updateme
+old_repos &lt;- options(repos = c(
+
+  # Your default CRAN mirror will likely be something like this
+  CRAN = "https://cloud.r-project.org",
+
+  # The r-lib r-universe, including dev versions of infrastructure packages
+  # like cli, rlang, etc
+  `r-lib` = "https://r-lib.r-universe.dev"
+))
+
+# 1. New versions will first be looked up from the r-lib R universe by default
+# 2. If not found, they will be looked up from the usual CRAN mirror
+# 3. dplyr will always be first looked up from GitHub
+# 4. ggplot2 won't be looked up or notified about
+old_updateme_sources &lt;- updateme_sources_set(
+  "r-lib",
+  "CRAN",
+  dplyr = "https://github.com/tidyverse/dplyr", # Name is optional here
+  ggplot2 = NA
+)
+
+# memoise should now be looked up from the r-lib r-universe
+if (interactive()) {
+  library(memoise)
+}
+
+# Restore old options
+options(old_repos)
+options(old_updateme_sources)
+</code></pre>
+
+
+</div>

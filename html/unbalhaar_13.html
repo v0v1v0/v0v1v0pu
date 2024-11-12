@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uh.bu</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Denoising via bottom-up Unbalanced Haar </h2>
+
+<h3>Description</h3>
+
+<p>Given an input vector of the form “signal + iid Gaussian noise”, the function
+estimates the noise level via Median Absolute Deviation, finds the best bottom-up
+Unbalanced Haar decomposition, thresholds it with the universal threshold, and 
+performs the inverse Unbalanced Haar transform to yield an estimate of the signal.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uh.bu(x, stretch = length(x))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>            a vector of the form “signal + iid Gaussian noise” </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stretch</code></td>
+<td>
+<p>    at each iteration, only the first <code>1:stretch</code> elements of the current input vector (whose length
+decreases by one with each iteration) get scanned in the search for the worst-fitting fine-scale Unbalanced Haar wavelet</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an estimate of the signal
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Piotr Fryzlewicz</p>
+
+
+<h3>References</h3>
+
+<p>P. Fryzlewicz (2007) “Unbalanced Haar technique for nonparametric 
+function estimation”. <em>Journal of the American Statistical Association</em>, 102, 1318-1327. </p>
+
+
+<h3>See Also</h3>
+
+<p><code>uh</code>, <code>best.unbal.haar.bu</code>, <code>hard.thresh.bu</code>, <code>reconstr.bu</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c(rep(0, 100), rep(1, 200)) + rnorm(300)
+est &lt;- uh.bu(x)
+</code></pre>
+
+
+</div>

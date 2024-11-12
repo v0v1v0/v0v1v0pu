@@ -1,0 +1,140 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>display</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plot raster image(s) in the PNG format.
+</h2>
+
+<h3>Description</h3>
+
+<p>High-level function to create multi-panel layout of images and to display with decoration (gridlines, coastlines, scalebar, colorbars) in the PNG format. It is an aggregator of low-level functions for typical plotting.
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">display(obj, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code> or <code>list</code> of <code>ursaRaster</code> objects.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Passed to either <code>display_brick</code> or <code>display_stack</code> or <code>display_rgb</code> functions and further to hierarchy of plotting functions:
+</p>
+
+<ul>
+<li> <p><code>compose_open</code>
+</p>
+
+<ul><li> <p><code>compose_design</code>
+</p>
+</li></ul>
+</li>
+<li> <p><code>compose_plot</code>
+</p>
+
+<ul>
+<li> <p><code>panel_new</code>
+</p>
+</li>
+<li> <p><code>panel_raster</code>
+</p>
+</li>
+<li> <p><code>panel_decor</code>
+</p>
+
+<ul>
+<li> <p><code>panel_graticule</code>
+</p>
+</li>
+<li> <p><code>panel_coastline</code>
+</p>
+</li>
+<li> <p><code>panel_scalebar</code>
+</p>
+</li>
+<li> <p><code>panel_annotation</code>
+</p>
+</li>
+</ul>
+</li>
+<li> <p><code>compose_legend</code>
+</p>
+</li>
+</ul>
+</li>
+<li> <p><code>compose_close</code>
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If argument <code>obj</code> is missing (e.g, calling <code>display()</code> without parameters) then plotting the sessional CRS with blank image.
+</p>
+<p>If argument <code>obj</code> is <code>list</code> of <code>ursaRaster</code> objects (or object of class <code>ursaStack</code>) then <code>display_stack</code> is called.
+</p>
+<p>If argument <code>obj</code> is object of class <code>ursaRaster</code> and has 3 or 4 bands and values in each band are <code>integer</code> and in interval between 0 and 255, then <code>display_rgb</code> is called.
+</p>
+<p>If argument <code>obj</code> is object of class <code>ursaRaster</code> then firstly internal test is applied to detect either image's bands contains homogeneous information (raster brick) or heterogeneous information (raster stack). Then either <code>display_brick</code> or <code>display_stack</code> is called. This test is rough due to unknown data origin. It is supposed to adjust kind of plotting by means of direct specification of <code>display_brick</code> or <code>display_stack</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p>Returned value from either <code>display_brick</code> or <code>display_stack</code> or <code>display_rgb</code> functions.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>display_brick</code>, <code>display_stack</code>, <code>display_rgb</code>
+</p>
+<p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>-styled plotting:  <code>plot</code>, <code>image</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+set.seed(500)
+a.brick &lt;- a.stack &lt;- ursa_dummy(nband=3,min=0,max=255,mul=1/16)
+a.stack[2] &lt;- a.stack[2]/10
+a.stack[3] &lt;- sqrt(a.stack[3])
+a.rgb &lt;- as.integer(round(a.brick))
+print(a.brick)
+print(a.stack)
+print(a.rgb)
+display(a.brick,decor=FALSE)
+display(a.stack,decor=FALSE)
+display(a.rgb)
+</code></pre>
+
+
+</div>

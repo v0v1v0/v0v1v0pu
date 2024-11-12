@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_rpt_save_report</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Save Report to a File</h2>
+
+<h3>Description</h3>
+
+<p>Saves a ubiquity report to the specified file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_rpt_save_report(cfg, output_file = NULL, rptname = "default")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_file</code></td>
+<td>
+<p>File to save the report to (must be either .pptx or .docx
+depending on the type of report)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rptname</code></td>
+<td>
+<p>ubiquity report name</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list with the follwoing elements 
+</p>
+
+<ul>
+<li>
+<p>isgood Boolean variable indicating success or failure
+</p>
+</li>
+<li>
+<p>msgs   Verbose description of the save results
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Reporting vignette (<code>vignette("Reporting", package = "ubiquity")</code>)
+</p>
+
+
+</div>

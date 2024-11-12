@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>gerrymander</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Gerrymander</h2>
+
+<h3>Description</h3>
+
+<p>A dataset on gerrymandering and its influence on House elections. The data set was originally built by Jeff Whitmer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">gerrymander
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 435 rows and 12 variables:
+</p>
+
+<dl>
+<dt>district</dt>
+<dd>
+<p>Congressional district.</p>
+</dd>
+<dt>last_name</dt>
+<dd>
+<p>Last name of 2016 election winner.</p>
+</dd>
+<dt>first_name</dt>
+<dd>
+<p>First name of 2016 election winnner.</p>
+</dd>
+<dt>party16</dt>
+<dd>
+<p>Political party of 2016 election winner.</p>
+</dd>
+<dt>clinton16</dt>
+<dd>
+<p>Percent of vote received by Clinton in 2016 Presidential Election.</p>
+</dd>
+<dt>trump16</dt>
+<dd>
+<p>Percent of vote received by Trump in 2016 Presidential Election.</p>
+</dd>
+<dt>dem16</dt>
+<dd>
+<p>Did a Democrat win the 2016 House election. Levels of 1 (yes) and 0 (no).</p>
+</dd>
+<dt>state</dt>
+<dd>
+<p>State the Representative is from.</p>
+</dd>
+<dt>party18</dt>
+<dd>
+<p>Political Party of the 2018 election winner.</p>
+</dd>
+<dt>dem18</dt>
+<dd>
+<p>Did a Democrat win the 2018 House election. Levels of 1 (yes) and 0 (no).</p>
+</dd>
+<dt>flip18</dt>
+<dd>
+<p>Did a Democrat flip the seat in the 2018 election? Levels of 1 (yes) and 0 (no).</p>
+</dd>
+<dt>gerry</dt>
+<dd>
+<p>Categorical variable for prevalence of gerrymandering with levels of low, mid and high.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://www.washingtonpost.com/news/wonk/wp/2014/05/15/americas-most-gerrymandered-congressional-districts/">Washington Post</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ggplot2)
+library(dplyr)
+ggplot(gerrymander |&gt; filter(gerry != "mid"), aes(clinton16, dem16, color = gerry)) +
+  geom_jitter(height = 0.05, size = 3, shape = 1) +
+  geom_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
+  scale_color_manual(values = c("purple", "orange")) +
+  labs(
+    title = "Logistic Regression of 2016 House Elections",
+    subtitle = "by Congressional District",
+    x = "Percent of Presidential Vote Won by Clinton",
+    y = "Seat Won by Democrat Candidate",
+    color = "Gerrymandering"
+  )
+</code></pre>
+
+
+</div>

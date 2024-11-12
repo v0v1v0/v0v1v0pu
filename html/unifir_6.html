@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>add_prop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add a prop to a unifir script</h2>
+
+<h3>Description</h3>
+
+<p>This function is exported so that developers can add their own props
+in new packages, without needing to re-implement the prop and script
+classes themselves. It is not expected that end users will need this
+function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">add_prop(script, prop, exec = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>script</code></td>
+<td>
+<p>A script object (from make_script) to append the prop to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prop</code></td>
+<td>
+<p>A <code>unifir_prop</code> object (from unifir_prop) to add to the script.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exec</code></td>
+<td>
+<p>Logical: Should the method created by the prop be called in the
+MainFunc method?</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p>Other props: 
+<code>add_default_player()</code>,
+<code>add_light()</code>,
+<code>add_texture()</code>,
+<code>create_terrain()</code>,
+<code>import_asset()</code>,
+<code>instantiate_prefab()</code>,
+<code>load_png()</code>,
+<code>load_scene()</code>,
+<code>new_scene()</code>,
+<code>read_raw()</code>,
+<code>save_scene()</code>,
+<code>set_active_scene()</code>,
+<code>validate_path()</code>
+</p>
+<p>Other utilities: 
+<code>add_default_player()</code>,
+<code>create_unity_project()</code>,
+<code>find_unity()</code>,
+<code>get_asset()</code>,
+<code>load_png()</code>,
+<code>load_scene()</code>,
+<code>new_scene()</code>,
+<code>read_raw()</code>,
+<code>save_scene()</code>,
+<code>set_active_scene()</code>,
+<code>validate_path()</code>,
+<code>waiver()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">script &lt;- make_script("example_script", unity = waiver())
+prop &lt;- unifir_prop(
+  prop_file = waiver(), # Must be a file that exists or waiver()
+  method_name = NULL, # Auto-generated if NULL or NA
+  method_type = "ExampleProp", # Length-1 character vector
+  parameters = list(), # Not validated, usually a list
+  build = function(script, prop, debug) {},
+  using = character(0)
+)
+script &lt;- add_prop(script, prop)
+</code></pre>
+
+
+</div>

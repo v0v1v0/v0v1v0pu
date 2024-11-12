@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_user_metrics_referring_domains</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Metrics for a Bitlink by referring domains</h2>
+
+<h3>Description</h3>
+
+<p>This endpoint will rollup the click counts to a referrer about a single Bitlink.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_user_metrics_referring_domains(
+  bitlink = NULL,
+  unit = "day",
+  units = -1,
+  size = 50,
+  unit_reference = NULL,
+  showRequestURL = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>bitlink</code></td>
+<td>
+<p>- required, a Bitlink made of the domain and hash</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unit</code></td>
+<td>
+<p>- string | Default: "day", Enum: "minute" "hour" "day" "week" "month" | A unit of time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>- integer | Default: -1 | An integer representing the time units to
+query data for. pass -1 to return all units of time.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>- string |  Default: 50 | The quantity of items to be be returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unit_reference</code></td>
+<td>
+<p>- string | An ISO-8601 timestamp, indicating the most recent time for
+which to pull metrics. Will default to current time.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>facet - string | One of "countries" "referrers" "referrers_by_domain"
+"referring_domains" "referring_networks" "shorten_counts"
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <a href="https://dev.bitly.com/api-reference/#getMetricsForBitlinkByReferringDomains">https://dev.bitly.com/api-reference/#getMetricsForBitlinkByReferringDomains</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+bitly_user_metrics_referring_domains(bitlink = "cnn.it/2HomWGB", unit = "month", units = -1,
+size = 100)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

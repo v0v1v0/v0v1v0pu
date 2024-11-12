@@ -1,0 +1,387 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multidog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit <code>flexdog</code> to multiple SNPs.</h2>
+
+<h3>Description</h3>
+
+<p>This is a convenience function that will run <code>flexdog</code> over many SNPs.
+Support is provided for parallel computing through the doParallel package.
+This function has not been extensively tested. Please report any bugs to
+<a href="https://github.com/dcgerard/updog/issues">https://github.com/dcgerard/updog/issues</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multidog(
+  refmat,
+  sizemat,
+  ploidy,
+  model = c("norm", "hw", "bb", "s1", "s1pp", "f1", "f1pp", "flex", "uniform", "custom"),
+  nc = 1,
+  p1_id = NULL,
+  p2_id = NULL,
+  bias_init = exp(c(-1, -0.5, 0, 0.5, 1)),
+  prior_vec = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>refmat</code></td>
+<td>
+<p>A matrix of reference read counts. The columns index
+the individuals and the rows index the markers (SNPs). This matrix must have
+rownames (for the names of the markers) and column names (for the names
+of the individuals). These names must match the names in <code>sizemat</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sizemat</code></td>
+<td>
+<p>A matrix of total read counts. The columns index
+the individuals and the rows index the markers (SNPs). This matrix must have
+rownames (for the names of the markers) and column names (for the names
+of the individuals). These names must match the names in <code>refmat</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ploidy</code></td>
+<td>
+<p>The ploidy of the species. Assumed to be the same for each
+individual.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>What form should the prior (genotype distribution) take?
+See Details for possible values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nc</code></td>
+<td>
+<p>The number of computing cores to use when doing parallelization
+on your local machine. See the section "Parallel Computation" for how
+to implement more complicated evaluation strategies using the
+<code>future</code> package.
+</p>
+<p>When you are specifying other evaluation strategies using the
+<code>future</code> package, you should also set <code>nc = NA</code>.
+</p>
+<p>The value of <code>nc</code> should never be
+more than the number of cores available in your computing environment.
+You can determine the maximum number of available cores by running
+<code>future::availableCores()</code> in R.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p1_id</code></td>
+<td>
+<p>The ID of the first parent. This should be a character of
+length 1. This should correspond to a single column name in <code>refmat</code>
+and <code>sizemat</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p2_id</code></td>
+<td>
+<p>The ID of the second parent. This should be a character of
+length 1. This should correspond to a single column name in <code>refmat</code>
+and <code>sizemat</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bias_init</code></td>
+<td>
+<p>A vector of initial values for the bias parameter
+over the multiple runs of <code>flexdog_full()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prior_vec</code></td>
+<td>
+<p>The pre-specified genotype distribution. Only used if
+<code>model = "custom"</code> and must otherwise be <code>NULL</code>. If specified,
+then it should be a vector of length <code>ploidy + 1</code> with
+non-negative elements that sum to 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional parameters to pass to <code>flexdog_full()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>You should format your reference counts and total read counts in two
+separate matrices. The rows should index the markers (SNPs) and the
+columns should index the individuals. Row names are how we ID the SNPs
+and column names are how we ID the individuals, and so they are required
+attributes.
+</p>
+<p>If your data are in VCF files, I would recommend importing them using the
+VariantAnnotation package from Bioconductor
+<a href="https://bioconductor.org/packages/VariantAnnotation/">https://bioconductor.org/packages/VariantAnnotation/</a>. It's a great
+VCF parser.
+</p>
+<p>See the details of <code>flexdog</code> for the possible values of
+<code>model</code>.
+</p>
+<p>If <code>model = "f1"</code>, <code>model = "s1"</code>, <code>model = "f1pp"</code>
+or <code>model = "s1pp"</code> then the user may
+provide the individual ID for parent(s) via the <code>p1_id</code>
+and <code>p2_id</code> arguments.
+</p>
+<p>The output is a list containing two data frames. The first data frame,
+called <code>snpdf</code>, contains information on each SNP, such as the allele bias
+and the sequencing error rate. The second data frame, called <code>inddf</code>,
+contains information on each individual at each SNP, such as the estimated
+genotype and the posterior probability of being classified correctly.
+</p>
+<p>SNPs that contain 0 reads (or all missing data) are entirely removed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list-like object of two data frames.
+</p>
+
+<dl>
+<dt><code>snpdf</code></dt>
+<dd>
+<p>A data frame containing properties of the SNPs (markers).
+The rows index the SNPs. The variables include:
+</p>
+
+<dl>
+<dt><code>snp</code></dt>
+<dd>
+<p>The name of the SNP (marker).</p>
+</dd>
+<dt><code>bias</code></dt>
+<dd>
+<p>The estimated allele bias of the SNP.</p>
+</dd>
+<dt><code>seq</code></dt>
+<dd>
+<p>The estimated sequencing error rate of the SNP.</p>
+</dd>
+<dt><code>od</code></dt>
+<dd>
+<p>The estimated overdispersion parameter of the SNP.</p>
+</dd>
+<dt><code>prop_mis</code></dt>
+<dd>
+<p>The estimated proportion of individuals
+misclassified in the SNP.</p>
+</dd>
+<dt><code>num_iter</code></dt>
+<dd>
+<p>The number of iterations performed during
+the EM algorithm for that SNP.</p>
+</dd>
+<dt><code>llike</code></dt>
+<dd>
+<p>The maximum marginal likelihood of the SNP.</p>
+</dd>
+<dt><code>ploidy</code></dt>
+<dd>
+<p>The provided ploidy of the species.</p>
+</dd>
+<dt><code>model</code></dt>
+<dd>
+<p>The provided model for the prior genotype
+distribution.</p>
+</dd>
+<dt><code>p1ref</code></dt>
+<dd>
+<p>The user-provided reference read counts of parent 1.</p>
+</dd>
+<dt><code>p1size</code></dt>
+<dd>
+<p>The user-provided total read counts of parent 1.</p>
+</dd>
+<dt><code>p2ref</code></dt>
+<dd>
+<p>The user-provided reference read counts of parent 2.</p>
+</dd>
+<dt><code>p2size</code></dt>
+<dd>
+<p>The user-provided total read counts of parent 2.</p>
+</dd>
+<dt><code>Pr_k</code></dt>
+<dd>
+<p>The estimated frequency of individuals with genotype
+k, where k can be any integer between 0 and the ploidy level.</p>
+</dd>
+<dt>Model specific parameter estimates</dt>
+<dd>
+<p>See the return value of
+<code>par</code> in the help page of <code>flexdog</code>.</p>
+</dd>
+</dl>
+</dd>
+<dt><code>inddf</code></dt>
+<dd>
+<p>A data frame containing the properties of the
+individuals at each SNP. The variables include:
+</p>
+
+<dl>
+<dt><code>snp</code></dt>
+<dd>
+<p>The name of the SNP (marker).</p>
+</dd>
+<dt><code>ind</code></dt>
+<dd>
+<p>The name of the individual.</p>
+</dd>
+<dt><code>ref</code></dt>
+<dd>
+<p>The provided reference counts for that individual at
+that SNP.</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>The provided total counts for that individual at
+that SNP.</p>
+</dd>
+<dt><code>geno</code></dt>
+<dd>
+<p>The posterior mode genotype for that individual at
+that SNP. This is the estimated reference allele dosage for a
+given individual at a given SNP.</p>
+</dd>
+<dt><code>postmean</code></dt>
+<dd>
+<p>The posterior mean genotype for that individual
+at that SNP. This is a continuous genotype estimate of the
+reference allele dosage for a given individual at a given SNP.</p>
+</dd>
+<dt><code>maxpostprob</code></dt>
+<dd>
+<p>The maximum posterior probability. This
+is the posterior probability that the individual was genotyped
+correctly.</p>
+</dd>
+<dt><code>Pr_k</code></dt>
+<dd>
+<p>The posterior probability that a given individual
+at a given SNP has genotype k, where k can vary from 0 to the
+ploidy level of the species.</p>
+</dd>
+<dt><code>logL_k</code></dt>
+<dd>
+<p>The genotype <em>log</em>-likelihoods for dosage
+k for a given individual at a given SNP, where k can vary f
+rom 0 to the ploidy level of the species.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<h3>Parallel Computation</h3>
+
+<p>The <code>multidog()</code> function supports parallel computing. It does
+so through the <a href="https://cran.r-project.org/package=future">future</a>
+package.
+</p>
+<p>If you are just running <code>multidog()</code> on a local machine, then you
+can use the <code>nc</code> argument to specify the parallelization. Any value
+of <code>nc</code> greater than 1 will result in multiple background R sessions to
+genotype all of the SNPs. The maximum value of <code>nc</code> you should
+try can be found by running <code>future::availableCores()</code>. Running
+<code>multidog()</code> using <code>nc</code> is equivalent to setting the future
+plan with <code>future::plan(future::multisession, workers = nc)</code>.
+</p>
+<p>Using the future package means that different evaluation strategies
+are possible. In particular, if you are using a high performance machine,
+you can explore using the
+<a href="https://cran.r-project.org/package=future.batchtools">future.batchtools</a>
+package to evaluate <code>multidog()</code> using schedulers like Slurm
+or TORQUE/PBS.
+</p>
+<p>To use a different strategy, set <code>nc = NA</code> and then
+run <code>future::plan()</code> prior to
+running <code>multidog()</code>. For example, to set up forked R processes
+on your current machine (instead of using background R sessions), you would
+run (will not work on Windows):
+<code>future::plan(future::multicore)</code>, followed by
+running <code>multidog()</code> with <code>nc = NA</code>. See the examples below.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>See Also</h3>
+
+
+<dl>
+<dt>
+<code>flexdog()</code>:</dt>
+<dd>
+<p>For the underlying genotyping function.</p>
+</dd>
+<dt>
+<code>format_multidog()</code>:</dt>
+<dd>
+<p>For converting the output
+of <code>multidog()</code> to a matrix.</p>
+</dd>
+<dt>
+<code>filter_snp()</code>:</dt>
+<dd>
+<p>For filtering SNPs using the
+output of <code>multidog()</code>.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data("uitdewilligen")
+
+## Run multiple R sessions using the `nc` variable.
+mout &lt;- multidog(refmat = t(uitdewilligen$refmat),
+                 sizemat = t(uitdewilligen$sizemat),
+                 ploidy = uitdewilligen$ploidy,
+                 nc = 2)
+mout$inddf
+mout$snpdf
+
+## Run multiple external R sessions on the local machine.
+## Note that we set `nc = NA`.
+cl &lt;- parallel::makeCluster(2, timeout = 60)
+future::plan(future::cluster, workers = cl)
+mout &lt;- multidog(refmat = t(uitdewilligen$refmat),
+                 sizemat = t(uitdewilligen$sizemat),
+                 ploidy = uitdewilligen$ploidy,
+                 nc = NA)
+mout$inddf
+mout$snpdf
+
+## Close cluster and reset future to current R process
+parallel::stopCluster(cl)
+future::plan(future::sequential)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>reaction.time</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reaction time with cell phone usage</h2>
+
+<h3>Description</h3>
+
+<p>A simulated dataset on reaction time to an external event for subject
+using cell phones.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(reaction.time)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 60 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>age</dt>
+<dd>
+<p>Age of participant coded as 16-24 or 25+</p>
+</dd>
+<dt>gender</dt>
+<dd>
+<p>Male of Female</p>
+</dd>
+<dt>control</dt>
+<dd>
+<p>Code to indicate if subject is using a cell phone "T"
+or is in the control group "C"</p>
+</dd>
+<dt>time</dt>
+<dd>
+<p>Time in seconds to react to external event</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Several studies indicate that cell phone usage while driving can
+effect reaction times to external events. This dataset uses simulated data
+based on values from the  NHTSA study "The Influence of the Use of
+Mobile Phones on Driver Situation Awareness".
+</p>
+
+
+<h3>Source</h3>
+
+<p>The NHTSA study was  found at http://www-nrd.nhtsa.dot.gov/departments/nrd-13/driver-distraction/PDF/2.PDF
+</p>
+
+
+<h3>References</h3>
+
+<p>This study and others were linked from the web page http://www.accidentreconstruction.com/research/cellphones/ (now off-line).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(reaction.time)
+boxplot(time ~ control, data = reaction.time)
+</code></pre>
+
+
+</div>

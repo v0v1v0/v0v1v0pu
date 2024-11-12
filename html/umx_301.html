@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>xmu_check_needs_means</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check data to see if model needs means.</h2>
+
+<h3>Description</h3>
+
+<p>Check data to see if model needs means.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">xmu_check_needs_means(
+  data,
+  type = c("Auto", "FIML", "cov", "cor", "WLS", "DWLS", "ULS"),
+  allContinuousMethod = c("cumulants", "marginals")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p><code>mxData()</code> to check.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>of the data requested by the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>allContinuousMethod</code></td>
+<td>
+<p>How data will be processed if used for WLS.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> T/F
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>xmu_make_mxData()</code>
+</p>
+</li></ul>
+<p>Other xmu internal not for end user: 
+<code>umxModel()</code>,
+<code>umxRenameMatrix()</code>,
+<code>umx_APA_pval()</code>,
+<code>umx_fun_mean_sd()</code>,
+<code>umx_get_bracket_addresses()</code>,
+<code>umx_make()</code>,
+<code>umx_standardize()</code>,
+<code>umx_string_to_algebra()</code>,
+<code>xmuHasSquareBrackets()</code>,
+<code>xmuLabel_MATRIX_Model()</code>,
+<code>xmuLabel_Matrix()</code>,
+<code>xmuLabel_RAM_Model()</code>,
+<code>xmuMI()</code>,
+<code>xmuMakeDeviationThresholdsMatrices()</code>,
+<code>xmuMakeOneHeadedPathsFromPathList()</code>,
+<code>xmuMakeTwoHeadedPathsFromPathList()</code>,
+<code>xmuMaxLevels()</code>,
+<code>xmuMinLevels()</code>,
+<code>xmuPropagateLabels()</code>,
+<code>xmuRAM2Ordinal()</code>,
+<code>xmuTwinSuper_Continuous()</code>,
+<code>xmuTwinSuper_NoBinary()</code>,
+<code>xmuTwinUpgradeMeansToCovariateModel()</code>,
+<code>xmu_CI_merge()</code>,
+<code>xmu_CI_stash()</code>,
+<code>xmu_DF_to_mxData_TypeCov()</code>,
+<code>xmu_PadAndPruneForDefVars()</code>,
+<code>xmu_bracket_address2rclabel()</code>,
+<code>xmu_cell_is_on()</code>,
+<code>xmu_check_levels_identical()</code>,
+<code>xmu_check_variance()</code>,
+<code>xmu_clean_label()</code>,
+<code>xmu_data_missing()</code>,
+<code>xmu_data_swap_a_block()</code>,
+<code>xmu_describe_data_WLS()</code>,
+<code>xmu_dot_make_paths()</code>,
+<code>xmu_dot_make_residuals()</code>,
+<code>xmu_dot_maker()</code>,
+<code>xmu_dot_move_ranks()</code>,
+<code>xmu_dot_rank_str()</code>,
+<code>xmu_extract_column()</code>,
+<code>xmu_get_CI()</code>,
+<code>xmu_lavaan_process_group()</code>,
+<code>xmu_make_TwinSuperModel()</code>,
+<code>xmu_make_bin_cont_pair_data()</code>,
+<code>xmu_make_mxData()</code>,
+<code>xmu_match.arg()</code>,
+<code>xmu_name_from_lavaan_str()</code>,
+<code>xmu_path2twin()</code>,
+<code>xmu_path_regex()</code>,
+<code>xmu_print_algebras()</code>,
+<code>xmu_rclabel_2_bracket_address()</code>,
+<code>xmu_safe_run_summary()</code>,
+<code>xmu_set_sep_from_suffix()</code>,
+<code>xmu_show_fit_or_comparison()</code>,
+<code>xmu_simplex_corner()</code>,
+<code>xmu_standardize_ACEcov()</code>,
+<code>xmu_standardize_ACEv()</code>,
+<code>xmu_standardize_ACE()</code>,
+<code>xmu_standardize_CP()</code>,
+<code>xmu_standardize_IP()</code>,
+<code>xmu_standardize_RAM()</code>,
+<code>xmu_standardize_SexLim()</code>,
+<code>xmu_standardize_Simplex()</code>,
+<code>xmu_start_value_list()</code>,
+<code>xmu_starts()</code>,
+<code>xmu_summary_RAM_group_parameters()</code>,
+<code>xmu_twin_add_WeightMatrices()</code>,
+<code>xmu_twin_check()</code>,
+<code>xmu_twin_get_var_names()</code>,
+<code>xmu_twin_make_def_means_mats_and_alg()</code>,
+<code>xmu_twin_upgrade_selDvs2SelVars()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">xmu_check_needs_means(mtcars, type = "Auto")
+xmu_check_needs_means(mtcars, type = "FIML")
+# xmu_check_needs_means(mtcars, type = "cov")
+# xmu_check_needs_means(mtcars, type = "cor")
+
+# TRUE - marginals means means
+xmu_check_needs_means(mtcars, type = "WLS", allContinuousMethod= "marginals")
+xmu_check_needs_means(mtcars, type = "ULS", allContinuousMethod= "marginals")
+xmu_check_needs_means(mtcars, type = "DWLS", allContinuousMethod= "marginals")
+
+# ================================
+# = Provided as an mxData object =
+# ================================
+tmp = mxData(mtcars, type="raw")
+xmu_check_needs_means(tmp, type = "FIML") # TRUE
+xmu_check_needs_means(tmp, type = "ULS", allContinuousMethod= "cumulants") #FALSE
+# TRUE - means with marginals
+xmu_check_needs_means(tmp, type = "WLS", allContinuousMethod= "marginals")
+tmp = mxData(cov(mtcars), type="cov", numObs= 100)
+# Should catch this can't be type FIML
+xmu_check_needs_means(tmp) # FALSE
+tmp = mxData(cov(mtcars), means = umx_means(mtcars), type="cov", numObs= 100)
+xmu_check_needs_means(tmp) # TRUE
+
+# =======================
+# = One var is a factor =
+# =======================
+tmp = mtcars
+tmp$cyl = factor(tmp$cyl)
+xmu_check_needs_means(tmp, allContinuousMethod= "cumulants") # TRUE
+xmu_check_needs_means(tmp, allContinuousMethod= "marginals") # TRUE - always has means
+</code></pre>
+
+
+</div>

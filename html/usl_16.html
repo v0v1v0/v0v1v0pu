@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>peak.scalability,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Point of peak scalability of a USL model</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the point of peak scalability for a specific model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+peak.scalability(object, alpha, beta, gamma)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A USL object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Optional parameter to be used for evaluation instead of the
+parameter computed for the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Optional parameter to be used for evaluation instead of the
+parameter computed for the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gamma</code></td>
+<td>
+<p>Optional parameter to be used for evaluation instead of the
+parameter computed for the model.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The peak scalability is the point where the throughput of the system starts
+to go retrograde, i.e., starts to decrease with increasing load.
+</p>
+<p>The parameters <code>alpha</code>, <code>beta</code> and <code>gamma</code> are useful to do a
+what-if analysis. Setting these parameters override the model parameters and
+show how the system would behave with a different contention or coherency
+delay parameter.
+</p>
+<p>See formula (4.33) in <em>Guerilla Capacity Planning</em>.
+</p>
+<p>This function accepts an argument for <code>gamma</code> although the value is
+not required to perform the calculation. This is on purpose to provide a
+coherent interface.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric value for the point where peak scalability will be
+reached.
+</p>
+
+
+<h3>References</h3>
+
+<p>Neil J. Gunther. Guerrilla Capacity Planning: A Tactical
+Approach to Planning for Highly Scalable Applications and Services.
+Springer, Heidelberg, Germany, 1st edition, 2007.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>,
+<code>optimal.scalability,USL-method</code>
+<code>limit.scalability,USL-method</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(specsdm91)
+
+peak.scalability(usl(throughput ~ load, specsdm91))
+## Peak scalability will be reached at about 96 virtual users
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>install_pkgs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Re-install Packages from Previous Installation</h2>
+
+<h3>Description</h3>
+
+<p>Provided the location of the previous R installation's package
+library, the function will attempt to re-install each of the
+packages found. Packages are installed with <code>renv::install()</code>
+and will be added to the 'renv' package cache.
+</p>
+<p>Packages can be installed from GitHub, GitLab, BioConductor, and
+any repository listed in <code>getOption("repos")</code>. This would typically
+be from CRAN and any other secondary repositories that may be set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">install_pkgs(lib.loc = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>lib.loc</code></td>
+<td>
+<p>character vector describing the location of R library
+trees to search through</p>
+</td>
+</tr></table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">if (interactive()) {
+  install_pkgs()
+}
+</code></pre>
+
+
+</div>

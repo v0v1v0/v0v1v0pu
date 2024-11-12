@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>udderquarterinfection</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Udder Quarter Infection Data</h2>
+
+<h3>Description</h3>
+
+<p>The udder quarter infection data contains the times to infection of the individual udder quarters of 100 cows during one lactation period.
+The 'cowid' variable contains the cow number. Each cow has 4 different quarters, with the variable 'quarter' referring to the specific quarter,
+i.e., RF: right front,  RR: right rear, LF: left front,  LR: left rear.
+The lactation number, i.e., the number of calvings that the cow has experienced, is given by the variable 'lactation'.
+If at least one infection occurs in a quarter during the lactation period, the 'status' variable is set to 1,
+and the interval [t1,t2] in which an infection takes place is given by the variables 'left' and 'right',
+where 'right' denotes the time with the first positive result, and 'left' the last time (with a negative result) before the first positive result.
+Only the first infection is contained in the data set.
+If no infection occurs, the 'status' variable is set to 1, and the last interval [t1,t2] in which the quarter was observed is put in the variables 'left' and 'right'.,
+</p>
+<p>The following example analyses of this data set are currently available in the package:
+</p>
+
+<ul><li> <p><code>Gamma_Frailty_Interval_Censoring</code>
+</p>
+</li></ul>
+<h3>Format</h3>
+
+<p>A dataframe with 4784 rows and 6 variables.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## SHORT DATASET ANALYSIS ##
+
+library(UdderQuarterInfectionData)
+data("udderquarterinfection")
+
+Gamma_Frailty_Interval_Censoring()
+# $nlm
+# $nlm$minimum
+# [1] 5670.491
+#
+# $nlm$estimate
+# [1] 3.7967246 0.1201593 1.9672298 0.8590531
+#
+# $nlm$gradient
+# [1]  0.0002924871  0.0017653292 -0.0005460029  0.0003265086
+#
+# $nlm$hessian
+# [,1]       [,2]      [,3]       [,4]
+# [1,]   23.22965  -117.7682 -39.93813  -10.10561
+# [2,] -117.76825 15471.4753 567.24283 1228.87332
+# [3,]  -39.93813   567.2428 664.76359   24.63047
+# [4,]  -10.10561  1228.8733  24.63047  147.76479
+#
+# $nlm$code
+# [1] 1
+#
+# $nlm$iterations
+# [1] 22
+#
+#
+# $covmat
+# [,1]          [,2]          [,3]         [,4]
+# [1,] 0.049281911  0.0001242730  0.0027853686  0.001872592
+# [2,] 0.000124273  0.0001982213 -0.0001015391 -0.001623066
+# [3,] 0.002785369 -0.0001015391  0.0017306214  0.000746460
+# [4,] 0.001872592 -0.0016230660  0.0007464600  0.020269244
+
+## End(Not run)
+</code></pre>
+
+
+</div>

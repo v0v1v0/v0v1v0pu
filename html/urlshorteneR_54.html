@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>isgd_LinksExpand</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Expand a short URL to a longer one</h2>
+
+<h3>Description</h3>
+
+<p>See <a href="https://is.gd/apilookupreference.php">https://is.gd/apilookupreference.php</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">isgd_LinksExpand(shorturl = "", showRequestURL = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>shorturl</code></td>
+<td>
+<p>- (optional) You can specify the shorturl parameter if you'd like to pick a
+shortened URL instead of having is.gd randomly generate one. These must be between
+5 and 30 characters long and can only contain alphanumeric characters and underscores.
+Shortened URLs are case sensitive. Bear in mind that a desired short URL might already
+be taken (this is very often the case with common words) so if you're using this option
+be prepared to respond to an error and get an alternative choice from your app's user.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- show URL which has been build and requested from server.
+For debug purposes.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+isgd_LinksExpand(shorturl = "https://is.gd/4oIAXJ", showRequestURL = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

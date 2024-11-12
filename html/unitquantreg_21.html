@@ -1,0 +1,205 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>hnp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>(Half-)Normal probability plots with simulated envelopes for
+<code>unitquantreg</code> objects</h2>
+
+<h3>Description</h3>
+
+<p>Produces a (half-)normal probability plot from a fitted model
+object of class <code>unitquantreg</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">hnp(object, ...)
+
+## S3 method for class 'unitquantreg'
+hnp(
+  object,
+  nsim = 99,
+  halfnormal = TRUE,
+  plot = TRUE,
+  output = TRUE,
+  level = 0.95,
+  resid.type = c("quantile", "cox-snell"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>fitted model object of class <code>unitquantreg</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>currently not used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nsim</code></td>
+<td>
+<p>number of simulations used to compute envelope. Default is 99.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>halfnormal</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, a half-normal plot is produced.
+If <code>FALSE</code>, a normal plot is produced.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Should the (half-)normal plot be plotted? Default is <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>Should the output be returned? Default is <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>confidence level of the simulated envelope. Default is 0.95.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resid.type</code></td>
+<td>
+<p>type of residuals to be used. The default is <code>quantile</code>.
+See <code>residuals.unitquantreg</code> for further details.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Residuals plots with simulated envelope were proposed by Atkinson (1981)
+and can be construct as follows:
+</p>
+
+<ol>
+<li>
+<p>generate sample set of <code class="reqn">n</code> independent observations from the estimated
+parameters of the fitted model;
+</p>
+</li>
+<li>
+<p>fit the model using the generated sample, if <code>halfnormal</code> is
+<code>TRUE</code> compute the absolute values of the residuals and arrange them in order;
+</p>
+</li>
+<li>
+<p>repeat steps (1) and (2) <code>nsim</code> number of times;
+</p>
+</li>
+<li>
+<p>consider the <code class="reqn">n</code> sets of the <code>nsim</code> ordered statistics
+of the residuals, then for each set compute the quantile <code>level</code>/2,
+the median and the quantile 1 - <code>level</code>/2;
+</p>
+</li>
+<li>
+<p>plot these values and the ordered residuals of the original sample set
+versus the expected order statistics of a (half)-normal distribution,
+which is approximated as
+</p>
+<p style="text-align: center;"><code class="reqn">G^{-1} \left(\frac{i + n - 0.125}{2n + 0.5} \right)</code>
+</p>
+
+<p>for half-normal plots, i.e., <code>halfnormal=TRUE</code> or
+</p>
+<p style="text-align: center;"><code class="reqn">G^{-1} \left(\frac{i - 0.375}{n + 0.25}\right)</code>
+</p>
+
+<p>for normal plots, i.e., <code>halfnormal=FALSE</code>, where <code class="reqn">G(\cdot)</code> is the the
+cumulative distribution function of standard Normal distribution for
+<code>quantile</code> residuals or the standard exponential distribution for the
+<code>cox-snell</code> residuals.
+</p>
+</li>
+</ol>
+<p>According to Atkinson (1981), if the model was correctly specified then no
+more than <code>level</code>100% of the observations are expected to appear
+outside the envelope bands. Additionally, if a large proportion of the
+observations lies outside the envelope, thus one has evidence against
+the adequacy of the fitted model.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with the following components in ordered
+(and absolute if <code>halfnormal</code> is <code>TRUE</code>) values:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>obs</code></td>
+<td>
+<p>the observed residuals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>teo</code></td>
+<td>
+<p>the theoretical residuals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower</code></td>
+<td>
+<p>lower envelope band.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>median</code></td>
+<td>
+<p>median envelope band.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>upper</code></td>
+<td>
+<p>upper envelope band.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_elapsed</code></td>
+<td>
+<p>time elapsed to fit the <code>nsim</code> models.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>André F. B. Menezes
+</p>
+
+
+<h3>References</h3>
+
+<p>Atkinson, A. C., (1981). Two graphical displays for outlying and influential observations in regression. <em>Biometrika</em> <b>68</b>(1), 13–20.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>residuals.unitquantreg</code>
+</p>
+
+
+</div>

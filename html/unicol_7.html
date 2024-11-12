@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>anu_2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Font colours of Australian National University, Australia</h2>
+
+<h3>Description</h3>
+
+<p><code>anu_2</code> provides the four font colors 
+of the <a href="https://www.anu.edu.au">Australian National University</a>, Canberra, Australia.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">anu_2
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 4.
+</p>
+
+
+<h3>Details</h3>
+
+<p>ANU's primary colour is <code>ANU gold</code>, defined as HEX <code>"#BE830E"</code>, 
+but the default font colour is <code>"black"</code>, or HEX <code>"#000000"</code>.
+</p>
+<p>ANU has several alternative font colours that are approved to use on ANU websites. 
+See ANU's <a href="https://webpublishing.anu.edu.au/web-style-guide/text">Web Style Guide: Text</a>
+for corresponding class names. 
+</p>
+<p>Please ensure that any combination of font and background colours passes the WCAG 2.1 accessibility check. 
+(see the <a href="https://webpublishing.anu.edu.au/web-style-guide/accessibility">Accessibility section</a> 
+for approved colour combinations).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of colors (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>unicol</strong>, 2023-09-04.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://www.anu.edu.au">ANU</a>'s 
+<a href="https://webpublishing.anu.edu.au/web-style-guide/colours">Web Style Guide: Colours</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>anu_1</code> for background colours of Australian National University;
+<code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes;
+<code>simcol</code> for finding similar colors;
+<code>newpal</code> for defining new color palettes;
+<code>grepal</code> for finding named colors.
+</p>
+<p>Other Australian university color palettes: 
+<code>anu_1</code>,
+<code>mq_1</code>,
+<code>mq_2</code>,
+<code>wollongong_1</code>,
+<code>wollongong_2</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">anu_2
+unikn::seecol(anu_2, col_bg = "grey95", 
+              main = "Font colours of the Australian National University (ANU)")
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,68 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>toLatex</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converting R Objects to BibTeX or LaTeX</h2>
+
+<h3>Description</h3>
+
+<p>These methods convert <span class="rlang"><b>R</b></span> objects to character vectors with
+BibTeX or LaTeX markup.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">toBibtex(object, ...)
+toLatex(object, ...)
+## S3 method for class 'Bibtex'
+print(x, prefix = "", ...)
+## S3 method for class 'Latex'
+print(x, prefix = "", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr>
+<td><code id="object">object</code></td>
+<td>
+<p>object of a class for which a <code>toBibtex</code> or
+<code>toLatex</code> method exists.</p>
+</td>
+</tr>
+<tr>
+<td><code id="x">x</code></td>
+<td>
+<p>object of class <code>"Bibtex"</code> or
+<code>"Latex"</code>.</p>
+</td>
+</tr>
+<tr>
+<td><code id="prefix">prefix</code></td>
+<td>
+<p>a character string which is printed at the beginning of
+each line, mostly used to insert whitespace for indentation.</p>
+</td>
+</tr>
+<tr>
+<td><code id="...">...</code></td>
+<td>
+<p>in the print methods, passed to <code>writeLines</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Objects of class <code>"Bibtex"</code> or <code>"Latex"</code> are simply
+character vectors where each element holds one line of the
+corresponding BibTeX or LaTeX file.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>citEntry</code> and <code>sessionInfo</code> for examples</p>
+
+</main></div>

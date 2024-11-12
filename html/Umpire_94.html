@@ -1,0 +1,192 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>SurvivalModel-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "SurvivalModel" Class</h2>
+
+<h3>Description</h3>
+
+<p>A <code>SurvivalModel</code> class represents the information for simulating
+survival times for each patient.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">SurvivalModel(baseHazard = 1/5,
+              accrual = 5,
+              followUp = 1,
+              units = 12,
+              unitName = "months")
+## S4 method for signature 'SurvivalModel'
+rand(object, n, beta = NULL, ...) 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>baseHazard</code></td>
+<td>
+<p>numeric scalar describing the underlying hazard rate at
+baseline levels of covariates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>accrual</code></td>
+<td>
+<p>numeric scalar representing number of patient accrual years</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>followUp</code></td>
+<td>
+<p>numeric scalar representing length of follow up, in years</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>numeric scalar representing number of units per year where
+units are specified by <code>unitName</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unitName</code></td>
+<td>
+<p>character string representing the <code>unit</code> argument type</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>object of class <code>SurvivalModel</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric scalar specifying quantity of random numbers</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>numeric vector specifying beta parameters for patients</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments for generic routines</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The <code>SurvivalModel</code> generator returns an object of class
+<code>SurvivalModel</code>.
+</p>
+<p>The <code>rand</code> method returns a data.frame with components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>LFU</code></td>
+<td>
+<p>time to event</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Event</code></td>
+<td>
+<p>whether the data is censored</p>
+</td>
+</tr>
+</table>
+<h3>Objects from the Class</h3>
+
+<p>Although objects of the class can be created by a direct call to
+new, the preferred method is to use the
+<code>SurvivalModel</code> generator function.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>baseHazard</code>:</dt>
+<dd>
+<p>see corresponding argument above</p>
+</dd>
+<dt>
+<code>accrual</code>:</dt>
+<dd>
+<p>see corresponding argument above</p>
+</dd>
+<dt>
+<code>followUp</code>:</dt>
+<dd>
+<p>see corresponding argument above</p>
+</dd>
+<dt>
+<code>units</code>:</dt>
+<dd>
+<p>see corresponding argument above</p>
+</dd>
+<dt>
+<code>unitName</code>:</dt>
+<dd>
+<p>see corresponding argument above</p>
+</dd>
+</dl>
+<h3>Methods</h3>
+
+
+<dl>
+<dt>rand(object, n, beta, ...)</dt>
+<dd>
+<p>Simulate survival data for <code>n</code>
+patients given <code>beta</code>.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Jiexin Zhang <a href="mailto:jiexinzhang@mdanderson.org">jiexinzhang@mdanderson.org</a>,
+</p>
+
+
+<h3>References</h3>
+
+<p>Zhang J, Coombes KR.<br><em>Sources of variation in false discovery rate estimation include
+sample size, correlation, and inherent differences between groups.</em><br>
+BMC Bioinformatics. 2012; 13 Suppl 13:S1. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>CancerModel</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("SurvivalModel")
+sm &lt;- SurvivalModel()
+## Generate data from base model
+outcome &lt;- rand(sm, 100)
+summary(outcome)
+## Generate data from five classes with different beta parameters
+beta &lt;- rep(rnorm(5, 0, 2), each = 20)
+outcome &lt;- rand(sm, 100, beta = beta)
+summary(outcome)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,193 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummarySimplex</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Shows a compact, publication-style, summary of a Simplex model.</h2>
+
+<h3>Description</h3>
+
+<p>Summarize a fitted Simplex model returned by <code>umxSimplex()</code>. Can control digits, report comparison model fits,
+optionally show the Rg (genetic and environmental correlations), and show confidence intervals. the report parameter allows
+drawing the tables to a web browser where they may readily be copied into non-markdown programs like Word.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummarySimplex(
+  model,
+  digits = 2,
+  file = getOption("umx_auto_plot"),
+  comparison = NULL,
+  std = TRUE,
+  showRg = FALSE,
+  CIs = TRUE,
+  report = c("markdown", "html"),
+  returnStd = FALSE,
+  extended = FALSE,
+  zero.print = ".",
+  show = c("std", "raw"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an <code>mxModel()</code> to summarize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: "name" = use the name of the model.
+Defaults to NA = no plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>you can run mxCompare on a comparison model (default = NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the output (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRg</code></td>
+<td>
+<p>(T/F) Whether to show the genetic correlations (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Whether to show Confidence intervals if they exist (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>If "html", then open an html table of the results (default = 'markdown')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStd</code></td>
+<td>
+<p>Whether to return the standardized form of the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extended</code></td>
+<td>
+<p>how much to report (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero.print</code></td>
+<td>
+<p>How to show zeros (default = ".")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show</code></td>
+<td>
+<p>Here to support being called from generic xmu_safe_run_summary. User should ignore: can be c("std", "raw")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters to control model summary</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See documentation for other umx models here: <code>umxSummary()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxSimplex()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# 4 time model
+# Select Data
+data(iqdat)
+mzData &lt;- subset(iqdat, zygosity == "MZ")
+dzData &lt;- subset(iqdat, zygosity == "DZ")
+vars = c("IQ_age1", "IQ_age2", "IQ_age3", "IQ_age4")
+m1= umxSimplex(selDVs= vars, sep= "_T", dzData= dzData, mzData= mzData, tryHard= "yes")
+umxSummary(m1, file = NA);
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,153 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rdbr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Recursive Dependent Binary Relevance (RDBR) for multi-label Classification</h2>
+
+<h3>Description</h3>
+
+<p>Create a RDBR classifier to predict multi-label data. This is a recursive
+approach that enables the binary classifiers to discover existing label
+dependency by themselves. The idea of RDBR is running DBR recursively until
+the results stabilization of the result.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">rdbr(
+  mdata,
+  base.algorithm = getOption("utiml.base.algorithm", "SVM"),
+  estimate.models = TRUE,
+  ...,
+  cores = getOption("utiml.cores", 1),
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset used to train the binary models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base.algorithm</code></td>
+<td>
+<p>A string with the name of the base algorithm. (Default:
+<code>options("utiml.base.algorithm", "SVM")</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>estimate.models</code></td>
+<td>
+<p>Logical value indicating whether is necessary build
+Binary Relevance classifier for estimate process. The default implementation
+use BR as estimators, however when other classifier is desirable then use
+the value <code>FALSE</code> to skip this process. (Default: <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm for all subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the training. Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed. This is useful when
+the method is run in parallel. (Default: <code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The train method is exactly the same of DBR the recursion is in the predict
+method.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>RDBRmodel</code> containing the set of fitted
+models, including:
+</p>
+
+<dl>
+<dt>labels</dt>
+<dd>
+<p>A vector with the label names.</p>
+</dd>
+<dt>estimation</dt>
+<dd>
+<p>The BR model to estimate the values for the labels.
+Only when the <code>estimate.models = TRUE</code>.</p>
+</dd>
+<dt>models</dt>
+<dd>
+<p>A list of final models named by the label names.</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+<p>Rauber, T. W., Mello, L. H., Rocha, V. F., Luchi, D., &amp; Varejao, F. M.
+(2014). Recursive Dependent Binary Relevance Model for Multi-label
+Classification. In Advances in Artificial Intelligence - IBERAMIA, 206-217.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Dependent Binary Relevance (DBR)</code>
+</p>
+<p>Other Transformation methods: 
+<code>brplus()</code>,
+<code>br()</code>,
+<code>cc()</code>,
+<code>clr()</code>,
+<code>dbr()</code>,
+<code>ebr()</code>,
+<code>ecc()</code>,
+<code>eps()</code>,
+<code>esl()</code>,
+<code>homer()</code>,
+<code>lift()</code>,
+<code>lp()</code>,
+<code>mbr()</code>,
+<code>ns()</code>,
+<code>ppt()</code>,
+<code>prudent()</code>,
+<code>ps()</code>,
+<code>rakel()</code>,
+<code>rpc()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- rdbr(toyml, "RANDOM")
+pred &lt;- predict(model, toyml)
+
+
+# Use Random Forest as base algorithm and 2 cores
+model &lt;- rdbr(toyml, 'RF', cores = 2, seed = 123)
+
+</code></pre>
+
+
+</div>

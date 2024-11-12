@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ConsumerPriceIndexUK</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Consumer Price Index data for the UK for August 2017 and August 2018.
+</h2>
+
+<h3>Description</h3>
+
+<p>The UK Office for National Statistics publishes updated Consumer Price Index data every month.  There are 12 sectors with from 1 to 7 subsectors and the subsectors comprise up to 9 items.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(CPIuk)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 85 observations on the following 10 variables.
+</p>
+
+<dl>
+<dt><code>ID</code></dt>
+<dd>
+<p>ID number made up of Sector, Subsector, Item numbers</p>
+</dd>
+<dt><code>SectorID</code></dt>
+<dd>
+<p>Sector number</p>
+</dd>
+<dt><code>SubsectorID</code></dt>
+<dd>
+<p>Subsector number within sector</p>
+</dd>
+<dt><code>Item</code></dt>
+<dd>
+<p>Item number within Sector</p>
+</dd>
+<dt><code>Sector</code></dt>
+<dd>
+<p>Sector label</p>
+</dd>
+<dt><code>Subsector</code></dt>
+<dd>
+<p>Subsector label</p>
+</dd>
+<dt><code>Component</code></dt>
+<dd>
+<p>Item label</p>
+</dd>
+<dt><code>Weight</code></dt>
+<dd>
+<p>Item weight in 2017</p>
+</dd>
+<dt><code>Aug2017</code></dt>
+<dd>
+<p>Item index value in August 2017</p>
+</dd>
+<dt><code>Aug2018</code></dt>
+<dd>
+<p>Item index value in August 2018</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Office for National Statistics (ONS) UK <br><a href="https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/consumerpriceinflation/">https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/consumerpriceinflation/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">yw &lt;- ud_prep(CPIuk, weight="Weight", v1="Aug2017", v2="Aug2018",
+              levs=c("Sector"), sortLev=c("perc"))
+y2 &lt;- ud_plot(yw, labelvar="Sector")
+y2$uadl
+</code></pre>
+
+
+</div>

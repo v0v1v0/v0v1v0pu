@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>initialize,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate an object from the "<code>USL</code>" class</h2>
+
+<h3>Description</h3>
+
+<p>Initialize the object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+initialize(.Object, call, frame, regr, resp, alpha, beta, gamma)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.Object</code></td>
+<td>
+<p>The object to initialize.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The formula used to create the USL model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>frame</code></td>
+<td>
+<p>The model frame containing the variables in the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regr</code></td>
+<td>
+<p>The name of the regressor variable in the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resp</code></td>
+<td>
+<p>The name of the response variable in the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>The contention parameter of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>The coherency delay parameter of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gamma</code></td>
+<td>
+<p>The slope of the ideal parallel scaling of the three parameter
+model. This parameter corrsponds to the scale.factor parameter of the
+two parameter model.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of the specific type.
+</p>
+
+
+</div>

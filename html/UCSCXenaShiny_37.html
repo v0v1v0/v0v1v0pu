@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>query_general_value</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>download data for shiny general analysis</h2>
+
+<h3>Description</h3>
+
+<p>download data for shiny general analysis
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">query_general_value(
+  L1,
+  L2,
+  L3,
+  database = c("toil", "pcawg", "ccle"),
+  tpc_value_nonomics = NULL,
+  opt_pancan = NULL,
+  custom_metadata = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>L1</code></td>
+<td>
+<p>level 1  main datatype</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>L2</code></td>
+<td>
+<p>level 2  sub datatype</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>L3</code></td>
+<td>
+<p>level 3  identifier</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>database</code></td>
+<td>
+<p>one of c("toil","pcawg","ccle")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tpc_value_nonomics</code></td>
+<td>
+<p>non-omics matrix data of one database</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt_pancan</code></td>
+<td>
+<p>molecular datasets parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>custom_metadata</code></td>
+<td>
+<p>user customized metadata</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+general_value_id = UCSCXenaShiny:::query_general_id()
+tcga_value_option = general_value_id[["value"]][[1]]
+tcga_index_value = tcga_value_option[["Tumor index"]]
+tcga_immune_value = tcga_value_option[["Immune Infiltration"]]
+tcga_pathway_value = tcga_value_option[["Pathway activity"]]
+tcga_phenotype_value = tcga_value_option[["Phenotype data"]]
+clinical_phe = tcga_phenotype_value[["Clinical Phenotype"]]
+x_data = UCSCXenaShiny:::query_general_value(
+           "Molecular profile", "mRNA Expression", "TP53", "toil",
+           tcga_index_value, tcga_immune_value, tcga_pathway_value, 
+           clinical_phe)
+                                             
+y_data = UCSCXenaShiny:::query_general_value(
+           "Immune Infiltration", "CIBERSORT", "Monocyte", "toil",
+           tcga_index_value, tcga_immune_value, tcga_pathway_value, 
+           clinical_phe)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

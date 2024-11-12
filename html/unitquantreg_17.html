@@ -1,0 +1,141 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ulogistic</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The unit-Logistic distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function and random number generation for the unit-Logistic distribution reparametrized in terms of the <code class="reqn">\tau</code>-th quantile, <code class="reqn">\tau \in (0, 1)</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dulogistic(x, mu, theta, tau = 0.5, log = FALSE)
+
+pulogistic(q, mu, theta, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+qulogistic(p, mu, theta, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+rulogistic(n, mu, theta, tau = 0.5)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>vector of positive quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>location parameter indicating the <code class="reqn">\tau</code>-th quantile, <code class="reqn">\tau \in (0, 1)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>nonnegative shape parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>the parameter to specify which quantile is to used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>logical; If TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; If TRUE, (default), <code class="reqn">P(X \leq{x})</code> are returned, otherwise <code class="reqn">P(X &gt; x)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is taken to be the number required.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Probability density function
+</p>
+<p style="text-align: center;"><code class="reqn">f(y\mid \alpha ,\theta )=\frac{\theta \exp \left( \alpha \right) \left(\frac{y}{1-y}\right) ^{\theta -1}}{\left[ 1+\exp \left( \alpha \right)\left( \frac{y}{1-y}\right) ^{\theta }\right] ^{2}}</code>
+</p>
+
+<p>Cumulative distribution function
+</p>
+<p style="text-align: center;"><code class="reqn">F(y\mid \alpha ,\theta )=\frac{\exp \left( \alpha \right) \left( \frac{y}{1-y}\right) ^{\theta }}{1+\exp \left( \alpha \right) \left( \frac{y}{1-y}\right) ^{\theta }}</code>
+</p>
+
+<p>Quantile function
+</p>
+<p style="text-align: center;"><code class="reqn">Q(\tau \mid \alpha ,\theta )=\frac{\exp \left( -\frac{\alpha }{\theta }\right) \left( \frac{\tau }{1-\tau }\right) ^{\frac{1}{\theta }}}{1+\exp\left( -\frac{\alpha }{\theta }\right) \left( \frac{\tau }{1-\tau }\right) ^{ \frac{1}{\theta }}} </code>
+</p>
+
+<p>Reparameterization
+</p>
+<p style="text-align: center;"><code class="reqn">\alpha=g^{-1}(\mu )=\log \left( \frac{\tau }{1-\tau }\right) -\theta \log \left(   \frac{\mu }{1-\mu }\right) </code>
+</p>
+
+
+
+<h3>Value</h3>
+
+<p><code>dulogistic</code> gives the density, <code>pulogistic</code> gives the distribution function,
+<code>qulogistic</code> gives the quantile function and <code>rulogistic</code> generates random deviates.
+</p>
+<p>Invalid arguments will return an error message.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Josmar Mazucheli <a href="mailto:jmazucheli@gmail.com">jmazucheli@gmail.com</a>
+</p>
+<p>André F. B. Menezes <a href="mailto:andrefelipemaringa@gmail.com">andrefelipemaringa@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Paz, R. F., Balakrishnan, N. and Bazán, J. L., 2019. L-Logistic regression models: Prior sensitivity analysis, robustness to outliers and applications. <em>Brazilian Journal of Probability and Statistics</em>, <b>33</b>(3), 455–479.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(123)
+x &lt;- rulogistic(n = 1000, mu = 0.5, theta = 1.5, tau = 0.5)
+R &lt;- range(x)
+S &lt;- seq(from = R[1], to = R[2], by =  0.01)
+hist(x, prob = TRUE, main = 'unit-Logistic')
+lines(S, dulogistic(x = S, mu = 0.5, theta = 1.5, tau = 0.5), col = 2)
+plot(ecdf(x))
+lines(S, pulogistic(q = S, mu = 0.5, theta = 1.5, tau = 0.5), col = 2)
+plot(quantile(x, probs = S), type = "l")
+lines(qulogistic(p = S, mu = 0.5, theta = 1.5, tau = 0.5), col = 2)
+</code></pre>
+
+
+</div>

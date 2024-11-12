@@ -1,0 +1,231 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>distr.table.x</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Analysis of a univariate distribution using frequency tables</h2>
+
+<h3>Description</h3>
+
+<p><code>distr.table.x()</code> computes the frequency table of a vector or a factor.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">distr.table.x(
+  x,
+  freq = c("counts", "proportions"),
+  total = TRUE,
+  breaks,
+  adj.breaks = TRUE,
+  interval = FALSE,
+  f.digits = 2,
+  p.digits = 0,
+  d.digits = 5,
+  force.digits = FALSE,
+  use.scientific = FALSE,
+  data,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An unquoted string identifying the variable whose
+distribution has to be analysed. <code>x</code> can be the name of a vector
+or a factor in the workspace or the name of one of the columns in the
+data frame specified in the <code>data</code> argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freq</code></td>
+<td>
+<p>A character vector specifying the set of frequencies to be
+displayed (more options are allowed). Allowed options (possibly abbreviated)
+are <code>"counts"</code>, <code>"percentages"</code>, <code>"proportions"</code>,
+<code>"densities"</code> (only for variables classified into intervals
+or measured in classes), and <code>"cumulative"</code>.
+If no frequency is specified, <code>"counts"</code>
+and <code>"proportions"</code> are displayed by default.
+If only <code>"cumulative"</code> is specified, counts and proportions
+are displayed too, with their respective cumulative frequencies.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>total</code></td>
+<td>
+<p>Logical value indicating whether the sum of the requested
+frequencies should be added to the table; default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>breaks</code></td>
+<td>
+<p>Allows to classify a <em>numerical</em> variable <code>x</code> into
+intervals. It can be an integer indicating the number of intervals of
+equal width used to classify <code>x</code>, or a vector of increasing numeric
+values defining the endpoints of intervals (closed on the left and open
+on the right; the last interval is closed on the right too). To cover
+the entire range of values the maximum and the minimum values should be
+included between the first and the last break. It is possible to specify
+a set of breaks covering only a portion of the <code>x</code> range.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adj.breaks</code></td>
+<td>
+<p>Logical value indicating whether the endpoints of
+intervals of a numerical variable <code>x</code> when classified
+into intervals should be displayed avoiding scientific notation;
+default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>Logical value indicating whether <code>x</code> is a variable
+measured in intervals (<code>TRUE</code>). If the detected intervals are not
+consistent (e.g. overlapping intervals, or intervals with upper endpoint
+higher than the lower one), the variable is tabulated as it is, even if
+results are not necessarily consistent; default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>f.digits, p.digits, d.digits</code></td>
+<td>
+<p>Integer values specifying the number of
+decimals used to round respectively proportions (default: <code>f.digits=2</code>),
+percentages (default: <code>p.digits=0</code>), and densities
+(default: <code>d.digits=5</code>). If the chosen rounding formats some
+non-zero values as zero, the number of decimals is increased
+so that all values have at least one significant digit, unless the argument
+<code>force.digits</code> is set to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.digits</code></td>
+<td>
+<p>Logical value indicating whether frequencies and
+densities should be forcedly rounded to the number of decimals specified in
+<code>f.digits</code>, <code>p.digits</code>, and <code>d.digits</code> even if non-zero
+values are rounded to zero (default to <code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.scientific</code></td>
+<td>
+<p>Logical value indicating whether numbers
+in tables (typically densities) should be displayed using
+scientific notation (<code>TRUE</code>); default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>An optional data frame containing <code>x</code>.
+If not found in <code>data</code>, <code>x</code> is taken from the environment
+from which <code>distr.table.x()</code> is called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to low level functions.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A table (converted to dataframe) listing the
+values taken by the variable, arranged in standard
+order (logical, alphabetical or numerical order for vectors,
+order of levels for factors, ordered intervals for classified
+variables or for variables measured in classes), and the requested set
+of frequencies.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raffaella Piccarreta <a href="mailto:raffaella.piccarreta@unibocconi.it">raffaella.piccarreta@unibocconi.it</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>distr.plot.x()</code> for plotting a univariate
+distribution.
+</p>
+<p><code>distr.table.xy()</code> for tabulating a bivariate
+distribution.
+</p>
+<p><code>distr.plot.xy()</code> for plotting a bivariate
+distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(MktDATA, package = "UBStats")
+
+# Character vectors, factors, and discrete numeric vectors
+distr.table.x(Education, data = MktDATA)
+
+distr.table.x(Children, freq = c("count","prop","cum"),
+              data = MktDATA)
+
+# Numerical variable classified into intervals
+# - Classes of equal width
+distr.table.x(AOV, breaks = 6, freq = c("Count","Prop","Perc","Cum"),
+              p.digits = 2, data = MktDATA)
+# - Classes with specified endpoints
+distr.table.x(AOV, breaks = c(0,20,30,50,100,180),
+              freq = c("Count","Perc","Cum","Densities"), 
+              p.digits = 2, data = MktDATA)
+# Numerical variable measured in classes
+# - Variable measured in classes
+distr.table.x(Income, freq = c("count","prop","cum","dens"),
+              interval = TRUE, data = MktDATA)
+# - An example of non-consistent intervals. 
+#   Densities are not calculated
+x.inconsistent &lt;- c(rep("0;10",30),rep("10;20",25),rep("25;8",25),
+                    rep("15;31",15),rep("20;45",16),rep("30;40",18))
+distr.table.x(x.inconsistent, freq = c("count","prop","cum","dens"),
+              interval = TRUE)
+
+# Arguments adj.breaks, use.scientific, and force.digits
+#  A variable with a very wide range (very small densities)
+LargeX &lt;- MktDATA$AOV*5000000 
+# - Default: manages possible excess of rounding
+distr.table.x(LargeX, breaks = 5, 
+              freq = c("count","percent","densities"))
+# - Forcing digits to the default values 
+distr.table.x(LargeX, breaks = 5,
+              freq=c("count","percent","dens"),
+              force.digits = TRUE)
+#  - Scientific notation for frequencies/densities 
+distr.table.x(LargeX, breaks = 5,
+              freq = c("count","percent","dens"),
+              use.scientific = TRUE)
+#  - Scientific notation both for intervals’ endpoints 
+#    and for frequencies/densities
+distr.table.x(LargeX, breaks = 5, adj.breaks = FALSE,
+              freq = c("count","percent","dens"),
+              use.scientific = TRUE)
+
+# Output a dataframe with the table
+table.AOV&lt;-distr.table.x(AOV, breaks = c(0,20,30,50,100,180),
+                         freq = c("Count","Perc","Cum","Dens"), 
+                         data = MktDATA)
+                         
+</code></pre>
+
+
+</div>

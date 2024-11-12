@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>PoolSmall</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create pooling group for small catchments</h2>
+
+<h3>Description</h3>
+
+<p>Function to develop a small catchments pooling group based on catchment descriptors
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">PoolSmall(
+  CDs = NULL,
+  AREA,
+  SAAR,
+  N = 500,
+  exclude = NULL,
+  iug = FALSE,
+  UrbMax = 0.03,
+  DeUrb = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>CDs</code></td>
+<td>
+<p>catchment descriptors derived from either GetCDs or CDsXML</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>AREA</code></td>
+<td>
+<p>catchment area in km2</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SAAR</code></td>
+<td>
+<p>catchment standard average annual rainfall (1961-1990) in mm</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>minimum Number of total gauged record years for the pooling group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+<p>sites to exclude from the pooling group. Either a single site reference or a vector of site references (numeric)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iug</code></td>
+<td>
+<p>iug stands for 'include urban gauge' - which refers to a gauged subject site if it's &gt; UrbMax. It's a logical argument with default of FALSE. TRUE will over-ride the default and add the closest site in catchment descriptor space (should be the gauge of interest) to the pooling group if it has URBEXT2000 &gt;= UrbMax</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>UrbMax</code></td>
+<td>
+<p>Maximum URBEXT2000 level with a default of 0.03. Any catchment with URBEXT2000 above this level will be excluded from the pooling group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DeUrb</code></td>
+<td>
+<p>logical argument with a default of FALSE. If true, the Lcv and LSkew of any site in the pooling group with URBEXT2000 &gt; 0.03 will be de-urbanised</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A pooling group is created from a CDs object, derived from GetCDs or CDsXML, or specifically with the necessary catchment descriptors (see arguments). To change the default pooling group one or more sites can be excluded using the 'exclude' option, which requires either a site reference or multiple site references in a vector. If this is done, the site with the next lowest similarity distance measure is added to the group (until the total number of years is at least N). Sites with URBEXT2000 (urban extent) &gt; 0.03 are excluded by default and this can be adjusted with the UrbMax argument. If a gauged assessment is required and the site of interest is &gt; UrbMax it can be included by setting iug = TRUE. De-urbanise the Lcv and Lskew (L-moment ratios) of sites with URBEXT2000 &gt; 0.03 by setting DeUrb = TRUE. If the user has more data available for a particular site within the pooling group, the Lcv and Lskew for the site can be updated after the group has been finalised.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame of the pooling group with site reference row names and 24 columns, each providing catchment &amp; gauge details for the sites in the pooling group.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get some catchment descriptors
+CDs.21001 &lt;- GetCDs(21001)
+#Set up a pooling group object called Pool.21001 excluding site 206006
+#Then print the group to the console
+Pool.21001 &lt;- PoolSmall(CDs.21001, exclude = 206006)
+Pool.21001
+#Form a pooling group, called PoolGroup, with the catchment descriptors specifically
+PoolGroup &lt;- PoolSmall(AREA = 22, SAAR = 1702)
+</code></pre>
+
+
+</div>

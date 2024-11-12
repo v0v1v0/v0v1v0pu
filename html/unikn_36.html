@@ -1,0 +1,178 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>post</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Post text (in an xbox)</h2>
+
+<h3>Description</h3>
+
+<p><code>post</code> plots 1 or more text strings (provided as a character vector <code>labels</code>) 
+to an (existing or new) <code>xbox</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">post(
+  labels,
+  x = 0.03,
+  y = 0.55,
+  x_layout = NA,
+  y_layout = "even",
+  col = "white",
+  col_bg = Seeblau,
+  cex = 1,
+  font = 1,
+  new_plot = "none"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>A character vector specifying the text labels 
+to be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A numeric vector of x-coordinates at which the 
+text labels in <code>labels</code> should be written. 
+If the lengths of <code>x</code> and <code>y</code> differ, 
+the shorter one is recycled. 
+Default: <code>x = .03</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>A numeric vector of y-coordinates at which the 
+text labels in <code>labels</code> should be written. 
+If the lengths of <code>x</code> and <code>y</code> differ, 
+the shorter one is recycled. 
+Default: <code>y = .55</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x_layout</code></td>
+<td>
+<p>An optional numeric vector or character string
+to control the horizontal positions of <code>labels</code>. 
+Numeric values are interpreted as increments to values of <code>x</code> 
+and recycled (to enable stepwise or alternating patterns). 
+3 character string options are: 
+<code>"center"</code> (i.e., center wrt. first label or plot center),
+<code>"left"</code> (i.e., left wrt. first label or plot center), 
+<code>"right"</code> (i.e., right wrt. first label or plot center). 
+Default: <code>x_layout = NA</code> (i.e., using values of <code>x</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y_layout</code></td>
+<td>
+<p>A numeric value or character string 
+to control the vertical positions of <code>labels</code>. 
+Numeric values are interpreted as increments to values of <code>y[1]</code> 
+and recycled (to enable stepwise or alternating patterns). 
+2 character string options are: 
+<code>"even"</code> (i.e., even distribution of labels across available y-space) and 
+<code>"flush"</code> (i.e., no space between adjacent labels, i.e., <code>y_layout = 0</code>). 
+Default: <code>y_layout = "even"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>The color(s) of the text label(s). 
+Default: <code>col_lbl = "white"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col_bg</code></td>
+<td>
+<p>The background color(s) of the <code>xbox</code>. 
+Default: <code>col_bg = Seeblau</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex</code></td>
+<td>
+<p>Numeric character expansion factor(s), 
+multiplied by <code>par("cex")</code> to yield the character size(s). 
+Default: <code>cex = 1.0</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>font</code></td>
+<td>
+<p>The font type(s) to be used. 
+Default: <code>font = 1</code> (i.e., plain text).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>new_plot</code></td>
+<td>
+<p>Should a new plot be generated?
+Set to <code>"xbox"</code> to plot to a basic <code>xbox</code> 
+(with square dimensions, i.e., <code>dim = c(1, 1)</code>).  
+Default: <code>new_plot = "none"</code> (i.e., assumes a pre-existing <code>xbox</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The positions of the text elements in <code>labels</code> can be specified by 
+providing their coordinates (as <code>x</code> and <code>y</code> arguments) or 
+by providing an initial position and an <code>y_layout</code> (see below). 
+</p>
+<p>Text formatting parameters (like <code>col</code>, <code>col_bg</code>, <code>cex</code>, <code>font</code>)         
+are recycled to match <code>length(labels)</code>. 
+</p>
+<p><code>post</code> uses the base graphics system <code>graphics::</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>xbox</code> to create a new xbox (without text).
+</p>
+<p>Other text functions: 
+<code>mark()</code>,
+<code>uline()</code>,
+<code>url_unikn()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create a new xbox: 
+post(labels = "This is a test.", new_plot = "xbox", 
+     cex = 1.2, font = 2, col_bg = pal_seeblau[[5]])
+
+# Add text to an existing xbox: 
+post(labels = c("More text follows here,",
+              "yet another line here,",
+              "and even more here."), 
+              y = .4, y_layout = .04, 
+              new_plot = "none")
+              
+# Using x_layout and y_layout:
+post(labels = c("Ene,", "mene, miste,", "es rappelt", "in der Kiste."), 
+     cex = 1.4, font = 2, col = "white", col_bg = Pinky, 
+     x = .1, y = .5, x_layout = "left", y_layout = .05, new_plot = "xbox")
+     
+post(labels = c("Hello world!", "Does this work?", "That's good!", "Please carry on..."), 
+     cex = 1.4, font = 2, col = "white", col_bg = Karpfenblau, 
+     x = .01, y = .6, x_layout = .10, y_layout = .05, new_plot = "xbox")
+                                               
+</code></pre>
+
+
+</div>

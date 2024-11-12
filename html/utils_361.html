@@ -1,0 +1,82 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>winDialog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dialog Boxes under Windows</h2>
+
+<h3>Description</h3>
+
+<p>On MS Windows only, put up a dialog box to communicate with the user.
+There are various types, either for the user to select from a set of
+buttons or to edit a string.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">winDialog(type = c("ok", "okcancel", "yesno", "yesnocancel"),
+          message)
+
+winDialogString(message, default)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr>
+<td><code id="type">type</code></td>
+<td>
+<p>character. The type of dialog box. It will have the
+buttons implied by its name.</p>
+</td>
+</tr>
+<tr>
+<td><code id="message">message</code></td>
+<td>
+<p>character. The information field of the dialog
+box. Limited to 255 chars (by Windows, checked by R).</p>
+</td>
+</tr>
+<tr>
+<td><code id="default">default</code></td>
+<td>
+<p>character. The default string.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>For <code>winDialog</code> a character string giving the name of the button
+pressed (in capitals) or <code>NULL</code> (invisibly) if the user had no
+choice.
+</p>
+<p>For <code>winDialogString</code> a string giving the contents of the text
+box when <code>Ok</code> was pressed, or <code>NULL</code> if <code>Cancel</code> was pressed.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The standard keyboard accelerators work with these dialog boxes:
+where appropriate <code>Return</code> accepts the default action,
+<code>Esc</code> cancels and the underlined initial letter (<code>Y</code> or
+<code>N</code>) can be used.
+</p>
+<p>These functions are only available on Windows.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>winMenuAdd</code><br><code>file.choose</code> to select a file<br>
+package <code>windlgs</code> in the package source distribution for ways to
+program dialogs in C in the <code>GraphApp</code> toolkit.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: winDialog("yesno", "Is it OK to delete file blah")
+</code></pre>
+
+</main></div>

@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxWeightedAIC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>AIC weight-based conditional probabilities.</h2>
+
+<h3>Description</h3>
+
+<p>Returns the best model by AIC, and computes the probabilities
+according to AIC weight-based conditional probabilities (Wagenmakers &amp; Farrell, 2004).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxWeightedAIC(models, digits = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>models</code></td>
+<td>
+<p>a list of models to compare.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>(default 2)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Best model
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Wagenmakers E.J., Farrell S. (2004), 192-196. AIC model selection using Akaike weights. <em>Psychonomic Bulletin and Review</em>. <strong>11</strong>, 192-196. <a href="https://pubmed.ncbi.nlm.nih.gov/15117008/">https://pubmed.ncbi.nlm.nih.gov/15117008/</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>AIC()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">l1 = lm(mpg~ wt + disp, data=mtcars)
+l2 = lm(mpg~ wt, data=mtcars)
+umxWeightedAIC(models = list(l1, l2))
+</code></pre>
+
+
+</div>

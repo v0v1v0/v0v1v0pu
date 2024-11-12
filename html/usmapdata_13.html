@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>us_map</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve US map data</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve US map data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">us_map(
+  regions = c("states", "state", "counties", "county"),
+  include = c(),
+  exclude = c(),
+  as_sf = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>regions</code></td>
+<td>
+<p>The region breakdown for the map, can be one of
+(<code>"states"</code>, <code>"state"</code>, <code>"counties"</code>, <code>"county"</code>).
+The default is <code>"states"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include</code></td>
+<td>
+<p>The regions to include in the resulting map. If <code>regions</code> is
+<code>"states"</code>/<code>"state"</code>, the value can be either a state name, abbreviation or FIPS code.
+For counties, the FIPS must be provided as there can be multiple counties with the
+same name. If states are provided in the county map, only counties in the included states
+will be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+<p>The regions to exclude in the resulting map. If <code>regions</code> is
+<code>"states"</code>/<code>"state"</code>, the value can be either a state name, abbreviation or FIPS code.
+For counties, the FIPS must be provided as there can be multiple counties with the
+same name. The regions listed in the <code>include</code> parameter are applied first and the
+<code>exclude</code> regions are then removed from the resulting map. Any excluded regions
+not present in the included regions will be ignored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as_sf</code></td>
+<td>
+<p>Defunct, this parameter no longer has any effect and will be removed in
+the future.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An <code>sf</code> data frame of US map coordinates divided by the desired <code>regions</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">str(us_map())
+
+df &lt;- us_map(regions = "counties")
+west_coast &lt;- us_map(include = c("CA", "OR", "WA"))
+
+excl_west_coast &lt;- us_map(exclude = c("CA", "OR", "WA"))
+
+</code></pre>
+
+
+</div>

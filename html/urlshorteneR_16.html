@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_retrieve_channels</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve channels (Premium)</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve the channels available to a user
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_retrieve_channels(
+  group_guid = NULL,
+  campaign_guid = NULL,
+  showRequestURL = T
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group_guid</code></td>
+<td>
+<p>- a GUID for a Bitly group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>campaign_guid</code></td>
+<td>
+<p>- string | A GUID for a Bitly campaign</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Campaigns</h3>
+
+<p>Bitly Campaigns allows you to build and manage omnichannel campaigns.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference/#getChannels">https://dev.bitly.com/api-reference/#getChannels</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  gc &lt;- bitly_retrieve_channels(group_guid = "testing", campaign_guid = "test")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

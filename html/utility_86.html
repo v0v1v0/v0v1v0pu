@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.fun.exp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Exponential function for value or utility functions</h2>
+
+<h3>Description</h3>
+
+<p>Exponential function for value or utility functions.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.fun.exp(attrib, par)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>attrib</code></td>
+<td>
+
+<p>vector of attribute levels to calculate corresponding value or utility.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>Vector of parameters: <br><code>par[1]</code>: absolute risk aversion <br><code>par[2]</code>: minimum of attribute range (default = 0) <br><code>par[3]</code>: maximum of attribute range (default = 1) 
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function evaluates the expression <br><code>(1-exp(-par[1]*(a-par[2])/(par[3]-par[2])))/(1-exp(-par[1]))</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Vector of values or utilities corresponding to the attributes passed by argument <code>a</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the node constructors <br><code>utility.endnode.intpol1d.create</code> and <code>utility.conversion.intpol.create</code> <br>
+in which this function can be used.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utility.fun.exp(0:10/10,par=c(2,0,1))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>proportion2percentile</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Rounds proportions to significant digits both near 0 and 1,
+then converts to percentiles</h2>
+
+<h3>Description</h3>
+
+<p>Rounds proportions to significant digits both near 0 and 1,
+then converts to percentiles
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">proportion2percentile(
+  p,
+  digits = 2,
+  remove_leading_zero = TRUE,
+  add_percent_character = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>probability</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>rounding digits. Defaults to 2</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_leading_zero</code></td>
+<td>
+<p>Remove leading zero for small percentiles,
+Defaults to TRUE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add_percent_character</code></td>
+<td>
+<p>Append percent character. Defaults to FALSE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>character vector
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">proportion2percentile(0.01111)
+</code></pre>
+
+
+</div>

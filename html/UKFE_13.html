@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DDFImport</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>DDF13 or DDF22 results from .xml files</h2>
+
+<h3>Description</h3>
+
+<p>Imports the depth duration frequency 2013 or 2022 results from xml files either from an FEH webservice download or from the Peakflows dataset downloaded from the national river flow archive (NRFA) website
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DDFImport(x, ARF = FALSE, Plot = TRUE, DDFVersion = 22)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the xml file path</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ARF</code></td>
+<td>
+<p>logical argument with a default of FALSE. If TRUE, the areal reduction factor is applied to the results. If FALSE, no area reduction factor is applied</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Plot</code></td>
+<td>
+<p>logical argument with a default of TRUE. If TRUE the DDF curve is plotted for a few return periods</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DDFVersion</code></td>
+<td>
+<p>Version of the DDF model (numeric). either 22 or 13. The default is 22.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function returns a data-frame of results. For further durations and return periods the separate DDF function can be applied with the data-frame as the argument/input. File paths for importing data require forward slashes. On some operating systems, such as windows, the copy and pasted file paths will have backward slashes and would need to be changed accordingly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame of DDF results (mm) with columns for duration and rows for return period. If Plot equals TRUE a DDF plot is also returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Import DDF22 results from a NRFA peakflows xml file and display in console
+## Not run: DDF22.4003 &lt;- DDFImport("C:/Data/NRFAPeakFlow_v11/Suitable for QMED/04003.xml")
+## Not run: DDF22.4003
+#Import DDF22 results from a FEH webserver xml file and display in the console
+## Not run: DDF22.MySite &lt;- DDFImport("C:/Data/FEH_Catchment_384200_458200.xml")
+</code></pre>
+
+
+</div>

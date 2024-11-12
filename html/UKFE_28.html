@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GenParetoGF</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generalised Pareto distribution growth factors</h2>
+
+<h3>Description</h3>
+
+<p>Estimated growth factors as a function of return period, with inputs of Lcv &amp; LSkew (linear coefficient of variation &amp; linear skewness)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GenParetoGF(lcv, lskew, RP, ppy = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lcv</code></td>
+<td>
+<p>linear coefficient of variation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lskew</code></td>
+<td>
+<p>linear skewness</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ppy</code></td>
+<td>
+<p>peaks per year</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Growth factors (GF) are calculated by the method outlined in the Flood Estimation Handbook, volume 3, 1999. The average number of peaks per year argument (ppy) is for the function to convert from the peaks over threshold (POT) scale to the annual scale. For example, if there are 3 peaks per year, the probability associated with the 100-yr return period estimate would be 0.01/3 (i.e. an RP of 300 on the POT scale) rather than 0.01.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Generalised Pareto estimated growth factor
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get POT flow data from the Thames at Kingston (noting the no. peaks per year).
+#Then estimate the 100-year growth factor with lcv and lskew estimates
+TPOT &lt;- POTextract(ThamesPQ[,c(1,3)], thresh = 0.90)
+GenParetoGF(Lcv(TPOT$peak), LSkew(TPOT$peak), RP = 100, ppy = 1.867)
+#multiply by the median of the POT data for an estimate of the 100-yr flood
+GenParetoGF(Lcv(TPOT$peak), LSkew(TPOT$peak), RP = 100, ppy = 1.867)*median(TPOT$peak)
+</code></pre>
+
+
+</div>

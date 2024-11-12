@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>acft</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>acft</h2>
+
+<h3>Description</h3>
+
+<p>Theoretical autocorrelation functions of ARMA models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">acft(MApoly = 1, ARpoly = 1, ncoef = 38, s = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>MApoly</code></td>
+<td>
+<p>coefficients of numerator polynomial in descending order</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ARpoly</code></td>
+<td>
+<p>coefficients of denominator polynomial in descending order</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncoef</code></td>
+<td>
+<p>number of coefficients</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+<p>seasonal period, number of observations per year</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Theoretical autocorrelation functions
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>colMedians</code>, <code>rowMedians</code>, <code>tests</code>,
+<code>sumStats</code>, <code>gaussTest</code>, <code>ident</code>,
+<code>cusum</code>, <code>varTest</code>, <code>conv</code>,
+<code>armaFilter</code>, <code>dif</code>, <code>roots</code>,
+<code>zplane</code>, <code>slide</code>,
+<code>plotSlide</code>, <code>Accuracy</code>, <code>tsDisplay</code>,
+<code>size</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">acft(c(1, -0.8), c(1, 0.8))
+</code></pre>
+
+
+</div>

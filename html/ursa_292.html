@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursa_cache</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Cache management of ursa package
+</h2>
+
+<h3>Description</h3>
+
+<p>This help topic is about how cache is managed in the package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ursa_cache()
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p>Users, who want to keep cache files between R sessions, should define option with name <code>ursaCacheDir</code> and value of the path for storage of cache files. This setting can be specified if <code>~/.Rprofile</code> file, or be in your code. If you specify permanent cache directory as sub-directory of <code>tempdir()</code> (see example), it will be removed after finishing of R session.
+</p>
+
+
+<h3>Value</h3>
+
+<p>NULL
+</p>
+
+
+<h3>Note</h3>
+
+<p>There is no neccessary to call this function. It just defines this help topic.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"> ## internet connection is required
+options(ursaCacheDir=file.path(tempdir(),".ursaCacheDir"))
+print(c(tempdir=tempdir(),ursaCacheDir=getOption("ursaCacheDir")))
+glance("Mount Eden",place="park")
+dir(getOption("ursaCacheDir"))
+</code></pre>
+
+
+</div>

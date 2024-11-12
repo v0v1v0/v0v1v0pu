@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>soloLog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Download, reorganize and export the binary log files from 3DR Solo Pixhawk controller or the telemetry log files from the Solo radio control unit</h2>
+
+<h3>Description</h3>
+
+<p>Wraps the mavtogpx.py converter as provided by the <a href="https://github.com/dronekit/dronekit-python">dronkit library</a>). It downloads and optionally converts the most important 3DR Solo logfiles. Optionally you may import the geometries and data as <code>sp</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">soloLog(
+  logFileSample = "recent",
+  logSource = "rc",
+  logDest = tempdir(),
+  downloadOnly = FALSE,
+  netWarn = FALSE,
+  renameFiles = TRUE,
+  makeSP = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>logFileSample</code></td>
+<td>
+<p><code>character</code> , options are:  <code>recent</code> download the most recent logfile,  <code>all</code> downloads all logfiles, or a plain number e.g. <code>2</code> for a specific logfile. Note the telemetry logfiles are numbering from 1 to 9 only, the most recent one is not numbered. The binary logfiles from the pixhawk are numbering continously but only the last 50 files or so will exist.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logSource</code></td>
+<td>
+<p><code>character</code>, options are: <code>rc</code> = logfiles from the radio control, <code>pixhawk</code> = logfiles from the flightcontroller, default is set to  <code>rc</code>. The radio control is providing the last ten telemetry data files, while the flight controller provides the latest 50 binary logfiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logDest</code></td>
+<td>
+<p><code>character</code> (existing) destination path to which the logs should be downloaded to</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>downloadOnly</code></td>
+<td>
+<p><code>logical</code> wether to only download the files or also convert and rename them, default is set FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>netWarn</code></td>
+<td>
+<p><code>logical</code> wether to warn and waits before starting a connection to the controller. helps while testing due to occassional wifi shutdowns of the Solo, default is set to FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>renameFiles</code></td>
+<td>
+<p><code>logical</code> renames the log and gpx files according to the time period, default is set TRUE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>makeSP</code></td>
+<td>
+<p><code>logical</code> wether returning an <code>sp</code> object from the gpx files or not, default is FALSE</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>for using the Solo stuff is tested only for Linux and the bash shell under Windows 10. You need to install the following python libs: <br><code style="white-space: pre;">⁠sudo pip install pymavlink⁠</code>  <br><code style="white-space: pre;">⁠sudo pip install dronekit-sitl⁠</code> <br><code style="white-space: pre;">⁠sudo pip install dronekit⁠</code> <br><br>
+Additionally you need <code>sshpass</code>:<br><code style="white-space: pre;">⁠sudo apt-get install sshpass⁠</code> <br><br> And please rememeber - you need to be connected at least to a running 3DR Solo radio control and if you want to donload data from the Pixhawk to a Solo UAV
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## download recent telemetry log file from controller and convert it to gpx
+soloLog(logFiles = "solo.tlog")
+
+## download the last available logfile from the radio control
+soloLog()
+
+## download ALL logfiles from the radio control
+soloLog(logFiles = "all")
+
+## download ALL telemetry logfiles from the flight controller
+soloLog(logSource = "pixhawk",logFiles = "all")
+
+## download telementry logfile number 5  from the remote control
+soloLog(logSource = "rc",logFiles = "5")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

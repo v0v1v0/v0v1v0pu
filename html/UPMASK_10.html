@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>meanThreeSigRej</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perform cuts in the data</h2>
+
+<h3>Description</h3>
+
+<p><code>meanThreeSigRej</code> will perform an interative rejection using the mean
+and three sigma of the data. The function will compute the mean and standard 
+deviation of the input vector, reject all entries lying farther than three-sigma, and 
+iterate until the mean varies (fractionaly) by less than the tolerance value. The 
+function will return a data frame with the mean, standard deviation value and the 
+number of iterations until the convergence was reached.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">meanThreeSigRej(vec, maxI, tolerance)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vec</code></td>
+<td>
+<p>a vector with the data to consider</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxI</code></td>
+<td>
+<p>an integer with the maximum amount of iterations allowed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tolerance</code></td>
+<td>
+<p>a double with the tolerance value (as <code>(old-new)/old</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with the fields <code>mean</code>, <code>sd</code> (the standard deviation) and <code>convergenceAtIter</code> (the iteration where the convergence was reached).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create a simple data set with the values and errors
+toyData &lt;- c(rnorm(30, mean=0, sd=5), 10000, 1000)
+
+# Call the function to perform cuts
+toyDataItStat &lt;- meanThreeSigRej(toyData)
+
+cat(paste("True mean             = 0\n"))
+cat(paste("Before rejection mean =",round(mean(toyData),2),"\n"))
+cat(paste("After rejetion mean   =",round(toyDataItStat$mean,2),"\n"))
+
+# Clean the environment
+rm(list=c("toyData", "toyDataItStat"))
+ 
+</code></pre>
+
+
+</div>

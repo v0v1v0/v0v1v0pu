@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ch.rs.pvalue</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>P-values for the CH test statistic</h2>
+
+<h3>Description</h3>
+
+<p>Compute p-values for the Canova and Hansen (CH) test statistic 
+based on the response surface regressions approach.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ch.rs.pvalue(x, type, lag1, S, n, nobsreg, VMdf)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric. The value of the CH statistic.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>a string specifying the formulation of the test, 
+<code>"dummy"</code> for seasonal dummies or <code>"trigonometric"</code> for seasonal cycles.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>lag1</code></td>
+<td>
+<p>logical indicating whether a first order lag of was included in the regression model.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>S</code></td>
+<td>
+<p>numeric, the periodicity of the data.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric, the number of observations.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>nobsreg</code></td>
+<td>
+<p>an integer indicating the number of points employed in the response surface 
+regression.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>VMdf</code></td>
+<td>
+<p>numeric, the degrees of freedom of the Von Mises distribution.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Ported from Gretl code provided by Díaz-Emparanza and Moral (2013).
+</p>
+<p>For <code>type="dummy"</code>, 
+the p-value for the joint test statistic is not available.
+</p>
+<p>This function is mainly intended to be used internally by <code>ch.test</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric giving the calculated p-value.
+</p>
+
+
+<h3>References</h3>
+
+<p>Díaz-Emparanza, I. and Moral, M. P. (2013) 
+<em>Seasonal Stability Tests in gretl. An Application to International Tourism Data</em>.
+Working paper: Biltoki D.T. 2013.03. 
+URL: <a href="https://addi.ehu.es/handle/10810/10577">https://addi.ehu.es/handle/10810/10577</a>.
+Gretl code: https://www.ehu.eus/ignacio.diaz-emparanza/packages/Canova_Hansen.gfn
+(seems unavailable, so not linked)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ch.test</code>.
+</p>
+
+
+</div>

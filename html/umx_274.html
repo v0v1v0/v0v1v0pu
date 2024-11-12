@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_trim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Trim whitespace surrounding a string.</h2>
+
+<h3>Description</h3>
+
+<p>Returns string without leading or trailing whitespace, like the php function.
+See also built-in <code>base::trimws()</code> does the same.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_trim(string, removeThis = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>string</code></td>
+<td>
+<p>to trim</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>removeThis</code></td>
+<td>
+<p>if not NULL then this regular expression is removed wherever found in 'string'</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> string
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>base::trimws()</code>
+</p>
+<p>Other String Functions: 
+<code>umx_explode_twin_names()</code>,
+<code>umx_explode()</code>,
+<code>umx_grep()</code>,
+<code>umx_names()</code>,
+<code>umx_paste_names()</code>,
+<code>umx_rot()</code>,
+<code>umx_str_chars()</code>,
+<code>umx_str_from_object()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">umx_trim(" dog") # "dog"
+trimws(" dog ", "l") # added by R in v 3.3.0
+umx_trim("dog ") # "dog"
+umx_trim("\t dog \n") # "dog"
+umx_trim("xlsx dog.xlsx", "\\.?xlsx ?") # "dog"
+</code></pre>
+
+
+</div>

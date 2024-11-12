@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.pp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Phillips and Perron Unit Root Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs the Phillips and Perron unit root test. Beside the Z
+statistics Z-alpha and Z-tau, the Z statistics for the deterministic
+part of the test regression are computed, too.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ur.pp(x, type = c("Z-alpha", "Z-tau"), model = c("constant", "trend"),
+      lags = c("short", "long"), use.lag = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector to be tested for a unit root.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Test type, either <code>"Z-alpha"</code> or <code>"Z-tau"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>Determines the deterministic part in the test regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lags</code></td>
+<td>
+<p>Lags used for correction of error term.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.lag</code></td>
+<td>
+<p>Use of a different lag number, specified by the user.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function <code>ur.pp()</code> computes the Phillips and Perron test. For
+correction of the error term a Bartlett window is used. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ur.pp</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Phillips, P.C.B. and Perron, P. (1988), Testing for a unit root in
+time series regression, <em>Biometrika</em>,  <b>75(2)</b>, 335–346.
+</p>
+<p>MacKinnon, J.G. (1991), Critical Values for Cointegration Tests,
+<em>Long-Run Economic Relationships</em>, eds. R.F. Engle and
+C.W.J. Granger, London, Oxford, 267–276.
+</p>
+<p>Download possible at: <a href="https://cowles.yale.edu/">https://cowles.yale.edu/</a>, see rubric
+'Discussion Papers (CFDPs)'.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.pp-class</code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nporg)
+gnp &lt;- na.omit(nporg[, "gnp.r"])
+pp.gnp &lt;- ur.pp(gnp, type="Z-tau", model="trend", lags="short")
+summary(pp.gnp)
+</code></pre>
+
+
+</div>

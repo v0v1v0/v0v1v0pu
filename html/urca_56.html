@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>summary-methods</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Methods for Function summary in Package ‘urca’</h2>
+
+<h3>Description</h3>
+
+<p>Summarises the outcome of unit root/cointegration tests by creating a new object of class <code>sumurca</code>.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>object = "ur.df"</dt>
+<dd>
+<p>The test type, its statistic, the test
+regression and the critical values for the Augmented Dickey and
+Fuller test are returned.</p>
+</dd>  
+<dt>object = "ur.ers"</dt>
+<dd>
+<p>The test type, its statistic and the
+critical values for the Elliott, Rothenberg and Stock test are
+returned. In case of test <code>"DF-GLS"</code> the summary output
+of the test regression is provided, too.</p>
+</dd>
+<dt>object = "ur.kpss"</dt>
+<dd>
+<p>The test statistic, the critical value as
+well as the test type and the number of lags used for error
+correction for the Kwiatkowski <em>et al.</em> unit root test is
+returned.</p>
+</dd>
+<dt>object = "ca.jo"</dt>
+<dd>
+<p>The <code>"trace"</code> or <code>"eigen"</code> statistic,
+the critical values as well as the eigenvalues, eigenvectors and
+the loading matrix of the Johansen procedure are reported.</p>
+</dd>
+<dt>object = "cajo.test"</dt>
+<dd>
+<p>The test statistic of a restricted VAR
+with respect to <code class="reqn">\bold{\alpha}</code> and/or <code class="reqn">\bold{\beta}</code> with
+p-value and degrees of freedom is reported. Furthermore, the
+restriction matrix(ces), the eigenvalues and eigenvectors as well
+as the loading matrix are returned.</p>
+</dd>  
+<dt>object = "ca.po"</dt>
+<dd>
+<p>The <code>"Pz"</code> or <code>"Pu"</code> statistic,
+the critical values as well as the summary output of the test
+regression for the Phillips and Ouliaris cointegration test.</p>
+</dd>
+<dt>object = "ur.pp"</dt>
+<dd>
+<p>The Z statistic, the critical values as
+well as the summary output of the test regression for the Phillips
+and Perron test, as well as the test statistics for the
+coefficients of the deterministic part is returned.</p>
+</dd>
+<dt>object = "ur.df"</dt>
+<dd>
+<p>The relevant tau statistic, the critical
+values as well as the summary output of the test regression for
+the augmented Dickey-Fuller test is returned.</p>
+</dd>
+<dt>object = "ur.sp"</dt>
+<dd>
+<p>The test statistic, the critical value as
+well as the summary output of the test regression for the Schmidt
+and Phillips test is returned.</p>
+</dd>
+<dt>object = "ur.za"</dt>
+<dd>
+<p>The test statistic, the critical values as
+well as the summary output of the test regression for the Zivot and
+Andrews test is returned.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.ers-class</code>, <code>ur.kpss-class</code>,
+<code>ca.jo-class</code>, <code>cajo.test-class</code>,
+<code>ca.po-class</code>, <code>ur.pp-class</code>,
+<code>ur.df-class</code>, <code>ur.sp-class</code>,
+<code>ur.za-class</code> and <code>sumurca-class</code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nporg)
+gnp &lt;- na.omit(nporg[, "gnp.r"])
+gnp.l &lt;- log(gnp)
+#
+ers.gnp &lt;- ur.ers(gnp, type="DF-GLS", model="trend", lag.max=4)
+summary(ers.gnp)
+#
+kpss.gnp &lt;- ur.kpss(gnp.l, type="tau", lags="short")
+summary(kpss.gnp)
+#
+pp.gnp &lt;- ur.pp(gnp, type="Z-tau", model="trend", lags="short")
+summary(pp.gnp)
+#
+df.gnp &lt;- ur.df(gnp, type="trend", lags=4)
+summary(df.gnp)
+#
+sp.gnp &lt;- ur.sp(gnp, type="tau", pol.deg=1, signif=0.01)
+summary(sp.gnp)
+#
+za.gnp &lt;- ur.za(gnp, model="both", lag=2)
+summary(za.gnp)
+#
+data(finland)
+sjf &lt;- finland
+sjf.vecm &lt;- ca.jo(sjf, ecdet="none", type="eigen", K=2, season=4)
+summary(sjf.vecm)
+#
+HF0 &lt;- matrix(c(-1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1), c(4,3))
+summary(blrtest(sjf.vecm, H=HF0, r=3))
+</code></pre>
+
+
+</div>

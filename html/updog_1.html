@@ -1,0 +1,149 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>updog-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+<code>updog</code> Flexible Genotyping for Polyploids</h2>
+
+<h3>Description</h3>
+
+<p>Implements empirical Bayes approaches to genotype
+polyploids from next generation sequencing data while
+accounting for allele bias, overdispersion, and sequencing
+error. The main functions are <code>flexdog()</code>
+and <code>multidog()</code>, which allow the specification
+of many different genotype distributions. Also provided
+are functions to simulate genotypes, <code>rgeno()</code>,
+and read-counts, <code>rflexdog()</code>, as well as
+functions to calculate oracle genotyping error rates,
+<code>oracle_mis()</code>, and correlation with the true
+genotypes, <code>oracle_cor()</code>. These latter two
+functions are useful for read depth calculations. Run
+<code>browseVignettes(package = "updog")</code> in R for example usage. See
+Gerard et al. (2018)
+&lt;<a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a>&gt;
+and Gerard and Ferrao (2020)
+&lt;<a href="https://doi.org/10.1093/bioinformatics/btz852">doi:10.1093/bioinformatics/btz852</a>&gt;
+for details on the implemented methods.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The package is named <code>updog</code> for "Using
+Parental Data for Offspring Genotyping" because
+we originally developed the
+method for full-sib populations, but it works
+now for more general populations.
+</p>
+<p>Our best competitor is probably the <code>fitPoly</code> package,
+which you can check out at
+<a href="https://cran.r-project.org/package=fitPoly">https://cran.r-project.org/package=fitPoly</a>. Though, we think
+that <code>updog</code> returns better calibrated measures of uncertainty
+when you have next-generation sequencing data.
+</p>
+<p>If you find a bug or want an enhancement, please submit an
+issue at <a href="https://github.com/dcgerard/updog/issues">https://github.com/dcgerard/updog/issues</a>.
+</p>
+
+
+<h3>
+<code>updog</code> Functions</h3>
+
+
+<dl>
+<dt><code>flexdog()</code></dt>
+<dd>
+<p>The main function that
+fits an empirical Bayes approach to genotype polyploids
+from next generation sequencing data.</p>
+</dd>
+<dt><code>multidog()</code></dt>
+<dd>
+<p>A convenience function for running
+<code>flexdog()</code> over many SNPs. This function provides
+support for parallel computing.</p>
+</dd>
+<dt><code>format_multidog()</code></dt>
+<dd>
+<p>Return arrayicized elements from the output of <code>multidog()</code>.</p>
+</dd>
+<dt><code>filter_snp()</code></dt>
+<dd>
+<p>Filter SNPs based on the output of <code>multidog()</code></p>
+</dd>
+<dt><code>rgeno()</code></dt>
+<dd>
+<p>simulate the genotypes of a sample
+from one of the models allowed in <code>flexdog()</code>.</p>
+</dd>
+<dt><code>rflexdog()</code></dt>
+<dd>
+<p>Simulate read-counts from the
+<code>flexdog()</code> model.</p>
+</dd>
+<dt><code>plot.flexdog()</code></dt>
+<dd>
+<p>Plotting the output of
+<code>flexdog()</code>.</p>
+</dd>
+<dt><code>plot.multidog()</code></dt>
+<dd>
+<p>Plotting the output of
+<code>multidog()</code>.</p>
+</dd>
+<dt><code>oracle_joint()</code></dt>
+<dd>
+<p>The joint distribution of the true genotype
+and an oracle estimator.</p>
+</dd>
+<dt><code>oracle_plot()</code></dt>
+<dd>
+<p>Visualize the output of <code>oracle_joint()</code>.</p>
+</dd>
+<dt><code>oracle_mis()</code></dt>
+<dd>
+<p>The oracle misclassification error rate (Bayes rate).</p>
+</dd>
+<dt><code>oracle_cor()</code></dt>
+<dd>
+<p>Correlation between the true genotype and the oracle estimated genotype.</p>
+</dd>
+</dl>
+<h3>
+<code>updog</code> Datasets</h3>
+
+
+<dl>
+<dt><code>snpdat</code></dt>
+<dd>
+<p>A small example dataset for using
+<code>flexdog</code>.</p>
+</dd>
+<dt><code>uitdewilligen</code></dt>
+<dd>
+<p>A small example dataset</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p>Gerard, D., Ferrão, L. F. V., Garcia, A. A. F., &amp; Stephens, M. (2018). Genotyping Polyploids from Messy Sequencing Data. <em>Genetics</em>, 210(3), 789-807. <a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a>.
+</p>
+</li>
+<li>
+<p>Gerard, David, and Luís Felipe Ventorim Ferrão. "Priors for genotyping polyploids." Bioinformatics 36, no. 6 (2020): 1795-1800. <a href="https://doi.org/10.1093/bioinformatics/btz852">doi:10.1093/bioinformatics/btz852</a>.
+</p>
+</li>
+</ul>
+</div>

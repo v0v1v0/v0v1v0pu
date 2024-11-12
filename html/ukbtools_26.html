@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_gen_sqc_names</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sample QC column names</h2>
+
+<h3>Description</h3>
+
+<p>The UKB sample QC file has no header on it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_gen_sqc_names(data, col_names_only = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The UKB ukb_sqc_v2.txt data as dataframe. (Not necessary if column names only are required)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col_names_only</code></td>
+<td>
+<p>If <code>TRUE</code> returns a character vector of column names (<code>data</code> argument not required). Useful if you would like to supply as header when reading in your sample QC data. If <code>FALSE</code> (Default), returns the supplied dataframe with column names (Checks number of columns in supplied data. See Details.).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>From <a href="https://biobank.ctsu.ox.ac.uk/crystal/refer.cgi?id=531">UKB Resource 531</a>: There are currently 2 versions of this file (UKB ukb_sqc_v2.txt) in circulation. The newer version is described below and contains column headers on the first row. The older (deprecated) version lacks the column headers and has two additional Affymetrix internal values prefixing the columns listed below.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A sample QC dataframe with column names, or a character vector of column names if <code>col_names_only = TRUE</code>.
+</p>
+
+
+</div>

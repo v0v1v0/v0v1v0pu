@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uM2M4</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unbiased central moment estimates</h2>
+
+<h3>Description</h3>
+
+<p>Calculate unbiased estimates of central moments and their powers and
+products.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uM2M4(m2, m3, m4, m6, n)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>m2</code></td>
+<td>
+<p>naive biased variance estimate <code class="reqn">m_2 = 1/n \sum_{i = 1}^n ((X_i
+- \bar{X})^2</code> for a vector <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m3</code></td>
+<td>
+<p>naive biased third central moment estimate <code class="reqn">m_3 = 1/n \sum_{i =
+1}^n ((X_i - \bar{X})^3</code> for a vector <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m4</code></td>
+<td>
+<p>naive biased fourth central moment estimate <code class="reqn">m_4 = 1/n \sum_{i
+= 1}^n ((X_i - \bar{X})^4</code> for a vector
+<code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m6</code></td>
+<td>
+<p>naive biased sixth central moment estimate <code class="reqn">m_6 = 1/n \sum_{i =
+1}^n ((X_i - \bar{X})^6</code> for a vector <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>sample size.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Unbiased estimate of a product of second and fourth central moments
+<code class="reqn">\mu_2 \mu_4</code>, where <code class="reqn">\mu_2</code> and
+<code class="reqn">\mu_4</code> are second and fourth central moments respectively.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other unbiased estimates (one-sample): 
+<code>uM2()</code>,
+<code>uM2M3()</code>,
+<code>uM2pow2()</code>,
+<code>uM2pow3()</code>,
+<code>uM3()</code>,
+<code>uM3pow2()</code>,
+<code>uM4()</code>,
+<code>uM5()</code>,
+<code>uM6()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">n &lt;- 10
+smp &lt;- rgamma(n, shape = 3)
+m &lt;- mean(smp)
+for (j in 2:6) {
+  m &lt;- c(m, mean((smp - m[1])^j))
+}
+uM2M4(m[2], m[3], m[4], m[6], n)
+</code></pre>
+
+
+</div>

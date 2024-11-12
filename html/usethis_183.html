@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_spell_check</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Use spell check</h2>
+
+<h3>Description</h3>
+
+<p>Adds a unit test to automatically run a spell check on documentation and,
+optionally, vignettes during <code style="white-space: pre;">⁠R CMD check⁠</code>, using the
+spelling package. Also adds a <code>WORDLIST</code>
+file to the package, which is a dictionary of whitelisted words. See
+spelling::wordlist for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_spell_check(vignettes = TRUE, lang = "en-US", error = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vignettes</code></td>
+<td>
+<p>Logical, <code>TRUE</code> to spell check all <code>rmd</code> and <code>rnw</code> files in
+the <code style="white-space: pre;">⁠vignettes/⁠</code> folder.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lang</code></td>
+<td>
+<p>Preferred spelling language. Usually either <code>"en-US"</code> or
+<code>"en-GB"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>error</code></td>
+<td>
+<p>Logical, indicating whether the unit test should fail if
+spelling errors are found. Defaults to <code>FALSE</code>, which does not error, but
+prints potential spelling errors</p>
+</td>
+</tr>
+</table>
+</div>

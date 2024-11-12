@@ -1,0 +1,249 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>TEST.diffprop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Tests on the difference between proportions</h2>
+
+<h3>Description</h3>
+
+<p><code>TEST.diffprop()</code> tests hypotheses on the difference between the
+proportion of successes in two independent populations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">TEST.diffprop(
+  x,
+  y,
+  success.x = NULL,
+  success.y = NULL,
+  pdiff0 = 0,
+  alternative = "two.sided",
+  by,
+  digits = 2,
+  force.digits = FALSE,
+  use.scientific = FALSE,
+  data,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, y</code></td>
+<td>
+<p>Unquoted strings identifying the variables of
+interest. <code>x</code> and <code>y</code> can be the
+names of vectors or factors in the workspace or the
+names of columns in the data frame
+specified in the <code>data</code> argument.
+It is possible to use a mixed specification
+(e.g, one vector and one column in data).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>success.x, success.y</code></td>
+<td>
+<p>If <code>x,y</code> are factors, character
+vectors, or numeric non-binary vectors, success must be used to indicate
+the category/value corresponding to success in the populations. These
+arguments can be omitted (<code>NULL</code>, default) if <code>x,y</code> are binary
+numeric vectors (taking values 0 or 1 only; in this case success is
+assumed to correspond to 1) or a logical vector (in these cases success
+is assumed to correspond to <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pdiff0</code></td>
+<td>
+<p>Numeric value that specifies the null hypothesis to test for
+(default is 0).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>A length-one character vector specifying the direction
+of the alternative hypothesis. Allowed values are <code>"two.sided"</code>
+(difference between populations' proportions differs from <code>pdiff0</code>; default), or <code>"less"</code>
+(difference between populations' proportions is lower than <code>pdiff0</code>), or <code>"greater"</code>
+(difference between populations' proportions is higher than <code>pdiff0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by</code></td>
+<td>
+<p>Optional unquoted string identifying a variable
+(of any type), defined same way as <code>x</code>,
+taking only <b>two</b> values used to split
+<code>x</code> into two independent samples. Given the two
+<em>ordered</em> values taken by <code>by</code>
+(alphabetical or numerical order,
+or order of the levels for factors), say <em>by1</em> and <em>by2</em>,
+hypotheses are tested on the difference between the
+populations proportions in the <em>by1</em>- and  in the <em>by2</em>-group.
+Note that only <b>one</b> between <code>y</code> and <code>by</code> can be
+specified.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Integer value specifying the number of
+decimals used to round statistics; default to 2. If the chosen rounding formats some
+non-zero values as zero, the number of decimals is increased
+so that all values have at least one significant digit, unless the argument
+<code>force.digits</code> is set to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.digits</code></td>
+<td>
+<p>Logical value indicating whether reported values
+should be forcedly rounded to the number of decimals specified in
+<code>digits</code> even if non-zero values are
+rounded to zero (default to <code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.scientific</code></td>
+<td>
+<p>Logical value indicating whether numbers
+in tables should be displayed using
+scientific notation (<code>TRUE</code>); default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>An optional data frame containing <code>x</code> and/or
+<code>y</code> or <code>by</code>. If not found in <code>data</code>, the variables
+are taken from the environment
+from which <code>TEST.diffprop()</code> is called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to low level functions.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A table reporting the results of the test on the difference
+between the proportions of successes in two independent populations.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raffaella Piccarreta <a href="mailto:raffaella.piccarreta@unibocconi.it">raffaella.piccarreta@unibocconi.it</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>CI.diffprop()</code> to build confidence intervals for
+the difference between two populations' proportions of successes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(MktDATA, package = "UBStats")
+
+# Proportions of success defined on non-binary and 
+#  non-logical vectors; 'success' coded same way
+#  for both vectors
+#  - Using x,y: build vectors with data on the two groups
+WouldSuggest_F &lt;- MktDATA$WouldSuggest[MktDATA$Gender == "F"]
+WouldSuggest_M &lt;- MktDATA$WouldSuggest[MktDATA$Gender == "M"]
+TEST.diffprop(x = WouldSuggest_M, y = WouldSuggest_F, 
+              success.x = "Yes", pdiff0 = 0.1, alternative = "less")
+
+PastCampaigns_F&lt;-MktDATA$PastCampaigns[MktDATA$Gender=="F"]
+PastCampaigns_M&lt;-MktDATA$PastCampaigns[MktDATA$Gender=="M"]
+TEST.diffprop(x = PastCampaigns_M, y = PastCampaigns_F,
+              success.x = 0, pdiff0 = 0.2)
+
+#  - Using x,by: groups identified by ordered levels of by
+TEST.diffprop(x = PastCampaigns, by = Gender,
+              success.x=0, pdiff0 = 0.2, data = MktDATA)
+#    Since order is F, M, test is on prop(F) - prop(M)
+#    To get the interval for prop(M) - prop(F)
+Gender.R &lt;- factor(MktDATA$Gender, levels = c("M", "F"))
+TEST.diffprop(x = PastCampaigns, by = Gender.R,
+              success.x=0, pdiff0 = 0.2, data = MktDATA)
+
+# Proportions of success defined based on 
+#  binary or logical vectors; 'success'
+#  coded same way for both vectors
+#  - Binary variable (success=1): based on x,y
+LastCampaign_F&lt;-MktDATA$LastCampaign[MktDATA$Gender=="F"]
+LastCampaign_M&lt;-MktDATA$LastCampaign[MktDATA$Gender=="M"]
+TEST.diffprop(x = LastCampaign_M, y = LastCampaign_F)
+#  - Binary variable (success=1): based on x,y
+#    see above for recoding of levels of Gender
+TEST.diffprop(x = LastCampaign, by = Gender, data = MktDATA)
+Gender.R &lt;- factor(MktDATA$Gender, levels = c("M", "F"))
+TEST.diffprop(x = LastCampaign, by = Gender.R, data = MktDATA)
+#  - Logical variable (success=TRUE): based on x,y
+Deals_w_child &lt;- MktDATA$Deals.ge50[MktDATA$Children&gt;0]
+Deals_no_child &lt;- MktDATA$Deals.ge50[MktDATA$Children==0]
+TEST.diffprop(x = Deals_w_child, y = Deals_no_child, 
+              pdiff0 = 0.2, alternative = "less",)
+# Proportions defined on 
+#  non-binary and non-logical vectors, with 'success'
+#  coded differently (only specification x,y is reasonable here)
+WouldSuggest_Other&lt;-c(rep("OK",310),rep("KO",650-310))
+TEST.diffprop(x = WouldSuggest, y = WouldSuggest_Other, 
+              success.x = "Yes", success.y = "OK",
+              pdiff0 = 0.1, alternative = "greater",
+              data = MktDATA)
+
+# Proportions based on combined conditions
+# - Build logical vector/s indicating whether a condition 
+#   is satisfied
+IsTop&lt;-MktDATA$AOV&gt;80
+IsTop_OK&lt;-IsTop[MktDATA$WouldSuggest == "Yes"]
+IsTop_KO&lt;-IsTop[MktDATA$WouldSuggest == "No"]
+TEST.diffprop(x = IsTop_OK, y = IsTop_KO, pdiff0 = 0.05,
+              alternative = "greater")
+
+Deals&lt;-MktDATA$NDeals&gt;=5
+Deals_Married &lt;- Deals[MktDATA$Marital_Status=="Married" &amp; 
+                         MktDATA$Children==0] 
+Deals_Single &lt;- Deals[MktDATA$Marital_Status=="Single"] 
+TEST.diffprop(x = Deals_Married, y = Deals_Single,
+              alternative = "less")
+
+# Output results           
+out.test_diffP&lt;-TEST.diffprop(x = Deals_Married, y = Deals_Single,
+                              alternative = "less")
+
+# Arguments force.digits and use.scientific
+#  An input variable taking very low values
+HighAOV &lt;- MktDATA$AOV&gt;150
+# - Default: manages possible excess of rounding
+TEST.diffprop(x = HighAOV[MktDATA$Gender=="M"], 
+              y = HighAOV[MktDATA$Gender=="F"])
+#  - Force to the exact number of digits (default, 2)
+TEST.diffprop(x = HighAOV[MktDATA$Gender=="M"], 
+              y = HighAOV[MktDATA$Gender=="F"],
+              force.digits = TRUE)
+#  - Allow scientific notation
+TEST.diffprop(x = HighAOV[MktDATA$Gender=="M"], 
+              y = HighAOV[MktDATA$Gender=="F"],
+              use.scientific = TRUE)
+
+</code></pre>
+
+
+</div>

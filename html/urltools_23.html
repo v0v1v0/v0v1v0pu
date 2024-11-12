@@ -1,0 +1,45 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>suffix_dataset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dataset of public suffixes</h2>
+
+<h3>Description</h3>
+
+<p>This dataset contains a registry of public suffixes, as retrieved from
+and defined by the <a href="https://publicsuffix.org/">public suffix list</a>. It is
+sorted by how many periods(".") appear in the suffix, to optimise it for
+<code>suffix_extract</code>.  It is a data.frame with two columns, the first is
+the list of suffixes and the second is our best guess at the comment or owner 
+associated with the particular suffix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(suffix_dataset)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data.frame of 8030 rows and 2 columns</p>
+
+
+<h3>Note</h3>
+
+<p>Last updated 2016-07-31.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>suffix_extract</code> for extracting suffixes from domain names,
+and <code>suffix_refresh</code> for getting a new, totally-up-to-date dataset
+version.
+</p>
+
+
+</div>

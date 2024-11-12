@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>reddrum</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Growth of red drum</h2>
+
+<h3>Description</h3>
+
+<p>Simulated length-at-age data for the red drum.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(reddrum)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 100 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>age</dt>
+<dd>
+<p>age</p>
+</dd>
+<dt>length</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>This data is simulated from values reported in a paper by Porch,
+Wilson and Nieland titled "A new growth model for red drum (Sciaenops
+ocellaus) that accommodates seasonal and ontogenic changes in growth
+rates" which appeard in <em>Fishery Bulletin</em> 100(1)
+(was at http://fishbull.noaa.gov/1001/por.pdf, now off-line). They attribute the data
+to Beckman et. al and say it comes from measurements in the Northern
+Gulf of Mexico, between September 1985 and October 1998.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(reddrum)
+plot(length ~ age, reddrum)
+</code></pre>
+
+
+</div>

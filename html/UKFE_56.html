@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Lcv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Linear coefficient of variation (Lcv)</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the Lcv from a sample of data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Lcv(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric vector. The sample of interest</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Lcv calculated according to methods outlined by Hosking &amp; Wallis (1997): Regional Frequency Analysis and approach based on LMoments. Also in the Flood Estimation Handbook (1999), volume 3.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric. The Lcv of a sample.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get an AMAX sample and calculate the Lmoments
+AM.27051 &lt;- GetAM(27051)
+Lcv(AM.27051$Flow)
+</code></pre>
+
+
+</div>

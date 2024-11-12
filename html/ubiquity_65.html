@@ -1,0 +1,131 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_plot_cohorts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Estimation Results</h2>
+
+<h3>Description</h3>
+
+<p>Generates figures for each cohort/output for a given set of
+parameter estimates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_plot_cohorts(
+  erp,
+  plot_opts = c(),
+  cfg,
+  analysis_name = "analysis",
+  archive_results = TRUE,
+  prefix = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>erp</code></td>
+<td>
+<p>output from <code>system_simulate_estimation_results</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_opts</code></td>
+<td>
+<p>list controling how predictions and data are overlaid</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>archive_results</code></td>
+<td>
+<p>boolean variable to control whether results will be archived</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>depreciated input mapped to analysis_name</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The general format for a plot option for a given output (<code>OUTPUT</code>) is:
+</p>
+<p><code>plot_opts$outputs$OUTPUTt$option = value</code>
+</p>
+<p>The following options are:
+</p>
+
+<ul>
+<li> <p><code>yscale</code> and  <code>xscale</code> <code>= "linear" or "log"</code>
+</p>
+</li>
+<li> <p><code>ylabel</code> and  <code>xlabel</code> <code>= "text"</code>
+</p>
+</li>
+<li> <p><code>xlim</code>   and  <code>ylim</code>   <code>= c(min, max)</code>
+</p>
+</li>
+</ul>
+<p>It is also possible to control the <code>height</code> and <code>width</code> of the time course <code>tc</code> and observed vs predicted <code>op</code> file by specifying the following in the default units of <code>ggsave</code>.
+</p>
+
+<ul>
+<li> <p><code>plot_opts$tc$width  = 10</code>  
+</p>
+</li>
+<li> <p><code>plot_opts$tc$height = 5.5</code> 
+</p>
+</li>
+<li> <p><code>plot_opts$op$width  = 10</code>  
+</p>
+</li>
+<li> <p><code>plot_opts$op$height = 8.0</code> 
+</p>
+</li>
+</ul>
+<p>To control the figures that are generated you can set the purpose to either "print", "present" (default) or "shiny".
+</p>
+<p><code>plot_opts$purpose = "present"</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>List of plot outputs containing two elements <code>timecourse</code> and
+<code>obs_pred</code>, for the time course of and observed vs predicted,
+respectively. Both of these fields contain three elements for a given
+output. For example, say there is an output named <code>PK</code> the both the
+<code>timecourse</code> and <code>obs_pred</code> elements will have a field named
+<code>PK</code> containing a ggplot object
+and two fields <code>PK_png</code> and <code>PK_pdf</code> containing the paths to the
+files containing that figure in the respective formats.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The estimation vignette (<code>vignette("Estimation", package = "ubiquity")</code>)
+</p>
+
+
+</div>

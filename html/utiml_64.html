@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.CCmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predict Method for Classifier Chains</h2>
+
+<h3>Description</h3>
+
+<p>This function predicts values based upon a model trained by <code>cc</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'CCmodel'
+predict(
+  object,
+  newdata,
+  probability = getOption("utiml.use.probs", TRUE),
+  ...,
+  cores = NULL,
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class '<code>CCmodel</code>'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>An object containing the new input data. This must be a
+matrix, data.frame or a mldr object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>Logical indicating whether class probabilities should be
+returned. (Default: <code>getOption("utiml.use.probs", TRUE)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm prediction for all
+subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>Ignored because this method does not support multi-core.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed.
+(Default: <code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of type mlresult, based on the parameter probability.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The Classifier Chains prediction can not be parallelized
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Classifier Chains (CC)</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- cc(toyml, "RANDOM")
+pred &lt;- predict(model, toyml)
+
+
+# Predict SVM bipartitions
+pred &lt;- predict(model, toyml, prob = FALSE)
+
+# Passing a specif parameter for SVM predict algorithm
+pred &lt;- predict(model, toyml, na.action = na.fail)
+
+</code></pre>
+
+
+</div>

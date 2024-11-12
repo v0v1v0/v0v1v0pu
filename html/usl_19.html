@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print objects of class "<code>USL</code>"</h2>
+
+<h3>Description</h3>
+
+<p><code>print</code> prints its argument and returns it invisibly (via
+<code>invisible(x)</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+print(x, digits = max(3L, getOption("digits") - 3L), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object from class <code>USL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Minimal number of <em>significant</em> digits, see
+print.default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments passed to other methods.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>print</code> returns the object <code>x</code> invisibly.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>, <code>USL-class</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(raytracer)
+
+## Print result from USL model for demo dataset
+print(usl(throughput ~ processors, raytracer))
+
+</code></pre>
+
+
+</div>

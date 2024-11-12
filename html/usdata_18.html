@@ -1,0 +1,177 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>state_stats</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>State-level data</h2>
+
+<h3>Description</h3>
+
+<p>Information about each state collected from both the official US Census
+website and from various other sources.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">state_stats
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 51 observations on the following 23 variables.
+</p>
+
+<dl>
+<dt>state</dt>
+<dd>
+<p>State name.</p>
+</dd>
+<dt>abbr</dt>
+<dd>
+<p>State abbreviation (e.g. <code>"MN"</code>).</p>
+</dd>
+<dt>fips</dt>
+<dd>
+<p>FIPS code.</p>
+</dd>
+<dt>pop2010</dt>
+<dd>
+<p>Population in 2010.</p>
+</dd>
+<dt>pop2000</dt>
+<dd>
+<p>Population in 2000.</p>
+</dd>
+<dt>homeownership</dt>
+<dd>
+<p>Home ownership rate.</p>
+</dd>
+<dt>multiunit</dt>
+<dd>
+<p>Percent of living units that are in multi-unit
+structures.</p>
+</dd>
+<dt>income</dt>
+<dd>
+<p>Average income per capita.</p>
+</dd>
+<dt>med_income</dt>
+<dd>
+<p>Median household income.</p>
+</dd>
+<dt>poverty</dt>
+<dd>
+<p>Poverty rate.</p>
+</dd> <dt>fed_spend</dt>
+<dd>
+<p>Federal
+spending per capita.</p>
+</dd>
+<dt>land_area</dt>
+<dd>
+<p>Land area.</p>
+</dd>
+<dt>smoke</dt>
+<dd>
+<p>Percent of population that smokes.</p>
+</dd>
+<dt>murder</dt>
+<dd>
+<p>Murders per 100,000 people.</p>
+</dd>
+<dt>robbery</dt>
+<dd>
+<p>Robberies per 100,000.</p>
+</dd>
+<dt>agg_assault</dt>
+<dd>
+<p>Aggravated assaults per 100,000.</p>
+</dd>
+<dt>larceny</dt>
+<dd>
+<p>Larcenies per 100,000.</p>
+</dd>
+<dt>motor_theft</dt>
+<dd>
+<p>Vehicle theft per 100,000.</p>
+</dd>
+<dt>soc_sec</dt>
+<dd>
+<p>Percent of individuals collecting social security.</p>
+</dd>
+<dt>nuclear</dt>
+<dd>
+<p>Percent of power coming from nuclear sources.</p>
+</dd>
+<dt>coal</dt>
+<dd>
+<p>Percent of power coming from coal sources.</p>
+</dd>
+<dt>tr_deaths</dt>
+<dd>
+<p>Traffic deaths per 100,000.</p>
+</dd>
+<dt>tr_deaths_no_alc</dt>
+<dd>
+<p>Traffic deaths per 100,000 where alcohol was
+not a factor.</p>
+</dd>
+<dt>unempl</dt>
+<dd>
+<p>Unemployment rate (February 2012, preliminary).</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Census Quick Facts (no longer available as of 2020),
+InfoChimps (also no longer available as of 2020),
+<a href="https://www-fars.nhtsa.dot.gov/Main/index.aspx">National Highway Traffic Safety Administration</a>
+(<code>tr_deaths</code>, <code>tr_deaths_no_alc</code>),
+<a href="https://www.bls.gov/web/laus/laumstrk.htm">Bureau of Labor Statistics</a>
+(<code>unempl</code>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(ggplot2)
+library(dplyr)
+library(maps)
+
+states_selected &lt;- state_stats |&gt;
+  mutate(region = tolower(state)) |&gt;
+  select(region, unempl, murder, nuclear)
+
+states_map &lt;- map_data("state") |&gt;
+  inner_join(states_selected)
+
+# Unemployment map
+ggplot(states_map, aes(map_id = region)) +
+  geom_map(aes(fill = unempl), map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  scale_fill_viridis_c() +
+  labs(x = "", y = "", fill = "Unemployment\n(%)")
+
+# Murder rate map
+states_map |&gt;
+  filter(region != "district of columbia") |&gt;
+  ggplot(aes(map_id = region)) +
+  geom_map(aes(fill = murder), map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  scale_fill_viridis_c() +
+  labs(x = "", y = "", fill = "Murders\nper 100k")
+
+# Nuclear energy map
+ggplot(states_map, aes(map_id = region)) +
+  geom_map(aes(fill = nuclear), map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  scale_fill_viridis_c() +
+  labs(x = "", y = "", fill = "Nuclear energy\n(%)")
+</code></pre>
+
+
+</div>

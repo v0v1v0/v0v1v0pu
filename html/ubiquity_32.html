@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simulate_subjects</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Run Population Simulations</h2>
+
+<h3>Description</h3>
+
+<p>Used to run Population/Monte Carlo simulations with subjects
+generated from either provided variance/covariance information or a dataset.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simulate_subjects(
+  parameters,
+  cfg,
+  show_progress = TRUE,
+  progress_message = "Simulating Subjects:"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>list containing the typical value of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show_progress</code></td>
+<td>
+<p>Boolean value controlling the display of a progress indicator (<code>TRUE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>progress_message</code></td>
+<td>
+<p>text string to prepend when called from the ShinyApp</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Failures due to numerical instability or other integration errors will be
+captured within the function. Data for those subjects will be removed from the
+output. Their IDs will be displayed as messages and stored in the output. 
+</p>
+<p>For more information on setting options for population simulation see the
+stochastic section of the <code>system_set_option</code> help file.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Mapped simulation output with individual predictions, individual
+parameters, and summary statistics of the parameters. The Vignettes below
+details on the format of the output.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Vignette on simulation (<code>vignette("Simulation", package = "ubiquity")</code>) titration (<code>vignette("Titration", package = "ubiquity")</code>) as well as <code>som_to_df</code>
+</p>
+
+
+</div>

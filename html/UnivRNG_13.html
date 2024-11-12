@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>draw.pareto</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates variates from Pareto distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function implements pseudo-random number generation for a Pareto distribution with pdf
+</p>
+<p style="text-align: center;"><code class="reqn">f(x|\alpha,\beta)=\frac{ab^{a}}{x^{a+1}}</code>
+</p>
+
+<p>for <code class="reqn">0 &lt; b \leq x &lt; \infty</code> and <code class="reqn">a&gt;0</code> where <code class="reqn">a</code> and <code class="reqn">b</code> are the shape and location parameters, respectively.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">draw.pareto(nrep,shape,location)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrep</code></td>
+<td>
+<p>Number of data points to generate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape</code></td>
+<td>
+<p>Shape parameter of the desired Pareto distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>Location parameter of the desired Pareto distribution.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of length five containing generated data, the theoretical mean, the empirical mean, the theoretical variance, and the empirical variance with names y, theo.mean, emp.mean, theo.var, and emp.var, respectively.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">draw.pareto(nrep=100000,shape=11,location=11)
+
+draw.pareto(nrep=100000,shape=8,location=10)
+</code></pre>
+
+
+</div>

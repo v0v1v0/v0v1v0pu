@@ -1,0 +1,314 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.utility.aggregation</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Node Definition or Underlying Objectives Hierarchy</h2>
+
+<h3>Description</h3>
+
+<p>Plot node definition or underlying objective hierarchy.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'utility.aggregation'
+plot(x, 
+     u           = NA, 
+     uref        = NA, 
+     par         = NA, 
+     type        = c("hierarchy", "table", "node", "nodes"), 
+     nodes       = NA, 
+     col         = utility.calc.colors(), 
+     gridlines   = c(0.2, 0.4, 0.6, 0.8), 
+     main        = "", 
+     cex.main    = 1, 
+     cex.nodes   = 1, 
+     cex.attrib  = 1, 
+     f.reaches   = 0.2,
+     f.nodes     = 0.2,
+     with.attrib = TRUE,
+     levels      = NA,
+     plot.val    = TRUE,
+     col.val     = "black",
+     lwd.val     = 1,
+     print.val   = TRUE,
+     two.lines   = FALSE,
+     ticks       = c(0,0.2,0.4,0.6,0.8,1),
+     ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>node to be plotted.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+
+<p>(optional) vector or data frame with elements or columns labelled
+according to the nodes of the hierarchy containing values or utilities.
+Typically, this will be the complete output or an output row of
+the function <br><code>evaluate.utility.aggregation</code>. <br>
+This input is only considered if the argument <code>type</code> is specified
+to be either <code>"hierarchy"</code> or <code>"table"</code>.
+It is then used to color-code the boxes of the hierarchy representing value nodes or the table.
+If <code>u</code> is a data frame with more than one row and the argument <code>type</code> 
+is equal to <code>"hierarchy"</code>, then
+the median and quantile boxes are plotted for value nodes or the expected utility for utility nodes unless the argument <code>main</code>
+contains as many elements as the number of rows of <code>u</code>.
+In the latter case, separate hierarchies with color-coded boxes for value nodes are produced for all rows of <code>u</code>.
+For <code>type</code> equals <code>"table"</code>, this argument can be a list of data frames
+to make it possible to plot uncertainty ranges from the samples provided
+in the list.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uref</code></td>
+<td>
+
+<p>(optional) vector or data frame with elements or columns labelled
+according to the nodes of the hierarchy containing values or utilities.
+Typically, this will be the complete output or an output row of
+the function <br><code>evaluate.utility.aggregation</code>. <br> 
+This input is only considered if the argument <code>type</code> is specified
+to be <code>"hierarchy"</code>.
+It is then used to color-code the upper part of the boxes of the hierarchy
+to allow for a comparison with the results provided by the argument <code>u</code> which are shown in the lower part of the boxes.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>(optional) labelled numeric parameter vector providing parameters to
+modify the value or utility function before plotting the node.
+Note that this affects only the node definitions plotted if the argument <code>type</code>
+is specified to be <code>"node"</code> or <code>"nodes"</code>.
+To color-code hierarchies or tables for different parameter values,
+the parameters have to be passed to <br><code>evaluate.utility.aggregation</code> <br> before passing the results of this function to this plotting routine.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+
+<p>(optional) specifies the type of plot to be produced. <br> Options: 
+<code>"hierarchy"</code>, <code>"table"</code>, <code>"node"</code> or <code>"nodes"</code>. <br><code>"hierarchy"</code>: produces a plot of the objectives hierarchy including
+color-coded results for values or utilities if these values are provided
+by the arguments <code>u</code> and/or <code>uref</code>. <br><code>"table"</code>: produces a table with color-coded results for values or
+utilities if these values are provided by the argument <code>u</code>. <br><code>"node"</code>: produces a plot of the definition of the current node. <br><code>"nodes"</code>: produces plots of node definitions for all nodes defined
+by the attribute <code>nodes</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nodes</code></td>
+<td>
+
+<p>(optional) character vector specifying the nodes for which the definitions
+will be plotted or which will be considered in a table. 
+The default value of NA indicates that all nodes will be plotted.
+This argument only affects the output if the argument <code>type</code> was indicated to be either <code>"table"</code> or <code>"nodes"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+
+<p>(optional) character vector of colors to be used to color the interval
+between zero and unity in equidistant sections (use repetitions of the
+same color if you want to have a non-equidistant color-coding).
+This attribute is only used for value nodes and if values are provided
+by the arguments <code>u</code> and/or <code>uref</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gridlines</code></td>
+<td>
+
+<p>(optional) numeric vector of levels at which gridlines are plotted
+in node definitions.
+This attribute is only used if the argument <code>type</code> is specified to be either <code>"node"</code> or <code>"nodes"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+
+<p>(optional) title(s) of the plot.
+If the argument <code>type</code> is equal to <code>"hierarchy"</code> and the a vector of titles with the same length as the number of rows of the argument <code>u</code> is provided, a color-coded hierarchy is plotted for each row of <code>u</code>.
+Otherwise, the medians and colored boxes indicating 90% credibility or occurrence ranges are plotted at all nodes.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex.main</code></td>
+<td>
+
+<p>(optional) scaling factor for title of the plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex.nodes</code></td>
+<td>
+
+<p>(optional) scaling factor for node labels used in the plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex.attrib</code></td>
+<td>
+
+<p>(optional) scaling factor for attribute labels used in the plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>f.reaches</code></td>
+<td>
+
+<p>(optional) fraction of the width of the plot reserved for the row labels of the table if the argument <code>type</code> is equal to <code>"table"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>f.nodes</code></td>
+<td>
+
+<p>(optional) fraction of the height of the plot reserved for the column labels of the table if the argument <code>type</code> is equal to <code>"table"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>with.attrib</code></td>
+<td>
+
+<p>(optional) indicates if attributes should be listed if the argument <code>type</code> is equal to <code>"hierarchy"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>levels</code></td>
+<td>
+
+<p>(optional) how many levels of the hierarchy should be plotted (NA means to plot all levels).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.val</code></td>
+<td>
+
+<p>(optional) plot value (for hierarchy without uncertainty) or median (for hierarchy with uncertainty) as a vertical line within the box.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.val</code></td>
+<td>
+
+<p>(optional) color of the vertical line indicating the value or median within the box (default black).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd.val</code></td>
+<td>
+
+<p>(optional) line width of the vertical line indicating the value or median within the box (default 1).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>print.val</code></td>
+<td>
+
+<p>(optional) print value as a number when plotting a table of boxes.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>two.lines</code></td>
+<td>
+
+<p>(optional) choose whether two lines should be used for the labels in the hierarchy plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ticks</code></td>
+<td>
+
+<p>(optional) positions of tick marks for hierarchy and table plots (NA or numeric(0) avoids tick marks).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>additional arguments passed to the R plotting routine.
+</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>Note that the plotting routines <br><code>plot.utility.conversion.intpol</code> <br><code>plot.utility.conversion.parfun</code> <br>
+are exactly the same so that all hierarchies can be plotted with exactly
+the same commands irrespective of the type of the top-level node.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code>utility.aggregation.create</code> for how to construct such a node and <code>evaluate.utility.aggregation</code> for how to evaluate the node. <br><br>
+See <code>utility.calc.colors</code> for an example of how to construct color schemes and <code>utility.get.colors</code> for how to get colors for specifed value levels.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># see
+help(utility)
+# for examples.
+</code></pre>
+
+
+</div>

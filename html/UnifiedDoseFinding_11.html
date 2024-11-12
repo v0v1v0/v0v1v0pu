@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>next_QuasiBOIN</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Determine the dose for the next cohort of new patients based on equivalent score (ET)-defined target using gBOIN design
+</h2>
+
+<h3>Description</h3>
+
+<p>Determine the dose for the next cohort of new patients for single-agent trials that aim to find a MTD defined by the Equivalent Score (ET) in Quasi-CRM design (Yuan et al. 2007) and Robust-Quasi-CRM design (Pan et al. 2014) using the gBOIN design (Mu et al. 2017)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">next_QuasiBOIN(target, n, y, d, p.saf = 0.6 * target, p.tox = 1.4 * target,
+               cutoff.eli = 0.95, extrasafe = FALSE, n.earlystop = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the target DLT rate
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+
+<p>the number of patients enrolled at each dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+
+<p>the toxicity score at each dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+
+<p>the current dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.saf</code></td>
+<td>
+
+<p>the lower bound. The default value is p.saf = 0.6 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.tox</code></td>
+<td>
+
+<p>the upper bound. The default value is p.tox = 1.4 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff.eli</code></td>
+<td>
+
+<p>the cutoff to eliminate an overly toxic dose for safety. The default value is cutoff.eli = 0.95
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extrasafe</code></td>
+<td>
+
+<p>extrasafe	set extrasafe = TRUE to impose a more stringent stopping . The default value is extrasafe = FALSE
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.earlystop</code></td>
+<td>
+
+<p>the early stopping parameter. The default value is n.earlystop = 100
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>next_QuasiBOIN()</code> returns recommended dose level for the next cohort as a numeric value under quasi-binary measure
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>Yuan, Z., R. Chappell, and H. Bailey. "The continual reassessment method for multiple toxicity grades: a Bayesian quasi-likelihood approach." Biometrics 63, no. 1 (2007): 173-179.
+</p>
+<p>Pan, Haitao, Cailin Zhu, Feng Zhang, Ying Yuan, Shemin Zhang, Wenhong Zhang, Chanjuan Li, Ling Wang, and Jielai Xia. "The continual reassessment method for multiple toxicity grades: a Bayesian model selection approach." PloS one 9, no. 5 (2014): e98147.
+</p>
+<p>Mu, Rongji, Ying Yuan, Jin Xu, Sumithra J. Mandrekar, and Jun Yin. "gBOIN: a unified model-assisted phase I trial design accounting for toxicity grades, and binary or continuous end points." Journal of the Royal Statistical Society. Series C: Applied Statistics 68, no. 2 (2019): 289-308.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">target &lt;- 0.47 / 1.5
+n &lt;- c(3, 3, 6, 3, 3, 0)
+y &lt;- c(0, 0, 1.333333, 0, 1, 0)
+d &lt;- 5
+next_QuasiBOIN(target = target, n = n, y = y, d = d)
+
+</code></pre>
+
+
+</div>

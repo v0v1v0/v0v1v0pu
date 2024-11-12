@@ -1,0 +1,402 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.aggregation.create</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct an aggregation node</h2>
+
+<h3>Description</h3>
+
+<p>Function to construct an aggregation node for value or utlity functions.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.aggregation.create(name.node, 
+                           nodes, 
+                           name.fun, 
+                           par, 
+                           names.par    = rep(NA, length(par)), 
+                           required     = FALSE, 
+                           num.required = 1, 
+                           col          = "black", 
+                           shift.levels = 0,
+                           add.arg.fun  = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name.node</code></td>
+<td>
+
+<p>name of the node to be constructed as a character string.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nodes</code></td>
+<td>
+
+<p>list of nodes to be aggregated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name.fun</code></td>
+<td>
+
+<p>name of the function to be used for aggregation.
+This function must accept the arguments <code>u</code> and <code>par</code> which
+pass a vector of values or utilities to be aggregated and the parameters
+of the function, respectively.
+The function can have an additional argument specified below as <code>add.arg.fun</code>.
+The function must then return the corresponding aggregated value or utility.<br>
+Examples of functions provided by the package are <br><code>utility.aggregate.add</code> for additive aggregation (weighted arithmetic mean), <br><code>utility.aggregate.min</code> for minimum aggregation, <br><code>utility.aggregate.max</code> for maximum aggregation, <br><code>utility.aggregate.geo</code> or <code>utility.aggregate.cobbdouglas</code> for geometric or Cobb-Douglas aggregation (weighted geometric mean), <br><code>utility.aggregate.geooff</code> for geometric aggregation with offset, <br><code>utility.aggregate.revgeo</code> for reverse geometric aggregation, <br><code>utility.aggregate.revgeooff</code> for reverse geometric aggregation with offset, <br><code>utility.aggregate.harmo</code> for harmonic aggregation (weighted harmonic mean), <br><code>utility.aggregate.harmooff</code> for harmonic aggregation with offset, <br><code>utility.aggregate.revharmo</code> for reverse harmonic aggregation, <br><code>utility.aggregate.revharmooff</code> for reverse harmonic aggregation with offset, <br><code>utility.aggregate.mult</code> for multiplicative aggregation, <br><code>utility.aggregate.mix</code> for a mixture of additive, minimum, and geometric aggregation, <br><code>utility.aggregate.addmin</code> for a mixture of additive and minimum aggregation. <br><code>utility.aggregate.addpower</code> for additive power aggregation (weighted power mean), <br><code>utility.aggregate.revaddpower</code> for reverse additive power aggregation, <br><code>utility.aggregate.addsplitpower</code> for splitted additive power aggregation, <br><code>utility.aggregate.revaddsplitpower</code> for reverse splitted additive power aggregation, <br><code>utility.aggregate.bonusmalus</code> for an aggregation technique that considers some of the values or utilities of sub-objectives only as bonus or malus. <br>
+Follow the links for the aggregation functions for their use, for the underlying mathematical expressions and for graphical illustrations.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>numeric vector of parameter values to be passed to the function specified unter <code>name.fun</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names.par</code></td>
+<td>
+
+<p>(optional) vector of parameter names corresponging to the vector of values specified under <code>par</code>.
+Only required to provide access to the values through a named parameter vector.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>required</code></td>
+<td>
+
+<p>(optional) logical variable indicating if the value of this node is required for aggregation at the next higher level.
+If this variable is <code>TRUE</code>, aggregation at the next higher level is not possible if this node returns NA.
+Default value is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>num.required</code></td>
+<td>
+
+<p>number of lower-level values or utilities that must at least be available to make the evaluation possible.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+
+<p>(optional) color used for plotting the bounding box of the node in the objective hierarchy.
+Default value is <code>"black"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shift.levels</code></td>
+<td>
+
+<p>(optional) number of hierarchical levels by which the node in the objective hierarchy is shifted to make a branch fit better to other branches.
+Default value is <code>0</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add.arg.fun</code></td>
+<td>
+
+<p>(optional) an additional argument to the aggregation function <code>name.fun</code>.
+The value(s) given here will alway be passed to the aggregation function.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns the created object of type <code>utility.aggregation</code> with the properties specified in the arguments of the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Description of aggregation techniques: <br><br>
+Langhans, S.D., Reichert, P. and Schuwirth, N.,
+The method matters: A guide for indicator aggregation in ecological assessments. 
+Ecological Indicators 45, 494-507, 2014. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Print, evaluate and plot the node with <br><br><code>print.utility.aggregation</code>, <br><code>summary.utility.aggregation</code>, <br><code>evaluate.utility.aggregation</code> and <br><code>plot.utility.aggregation</code>. <br><br>
+Create end nodes with <br><br><code>utility.endnode.discrete.create</code>, <br><code>utility.endnode.intpol1d.create</code>, <br><code>utility.endnode.intpol2d.create</code>, <br><code>utility.endnode.parfun1d.create</code>, <br><code>utility.endnode.cond.create</code>, or <br><code>utility.endnode.firstavail.create</code>. <br><br>
+Create conversion nodes with <br><br><code>utility.conversion.intpol.create</code>, or <br><code>utility.conversion.parfun.create</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  # define discrete end node for width variability
+  # (attribute "widthvariability_class" with levels "high", 
+  # "moderate" and "none")
+  
+  widthvar &lt;- 
+    utility.endnode.discrete.create(
+      name.node     = "width variability",
+      attrib.levels = data.frame(widthvariability_class=
+                                 c("high","moderate","none")),
+      u             = c(1,0.4125,0),
+      names.u       = c("u.high","u_moderate","u.none"),
+      required      = FALSE,
+      utility       = FALSE)
+
+  # define 1d interpolation end node for bed modification with 
+  # riprap
+  # (attribute "bedmodfract_percent" with levels from 0 to 100)
+  
+  bedmod_riprap &lt;-
+    utility.endnode.intpol1d.create(
+      name.node   = "bed modification riprap",
+      name.attrib = "bedmodfract_percent",
+      range       = c(0,100),
+      x           = c(0,10,30,100),
+      u           = c(1,0.775,0.5625,0.24),
+      required    = FALSE,
+      utility     = FALSE)
+  
+  # define 1d interpolation end node for bed modification with 
+  # other material
+  # (attribute "bedmodfract_percent" with levels from 0 to 100)
+  
+  bedmod_other &lt;-
+    utility.endnode.intpol1d.create(
+      name.node   = "bed modification other",
+      name.attrib = "bedmodfract_percent",
+      range       = c(0,100),
+      x           = c(0,10,30,100),
+      u           = c(1,0.775,0.5625,0),
+      required    = FALSE,
+      utility     = FALSE)
+  
+  # define combination end node for bed modification
+  # (attributes "bedmodtype_class" and "bedmodfract_percent")
+  
+  bedmod &lt;-
+    utility.endnode.cond.create(
+      name.node     = "bed modification",
+      attrib.levels = data.frame(bedmodtype_class=
+                                 c("riprap","other")),
+      nodes         = list(bedmod_riprap,bedmod_other),
+      required      = FALSE,
+      utility       = FALSE)
+ 
+  # define 1d interpolation end node for bank modification with 
+  # permeable material
+  # (attribute "bankmodfract_percent" with levels from 0 to 100)
+  
+  bankmod_perm &lt;-
+    utility.endnode.intpol1d.create(
+      name.node   = "bank modification perm",
+      name.attrib = "bankmodfract_percent",
+      range       = c(0,100),
+      x           = c(0,10,30,60,100),
+      u           = c(1,0.8667,0.675,0.4125,0.24),
+      required    = FALSE,
+      utility     = FALSE)
+  
+  # define 1d interpolation end node for bank modification with 
+  # impermeable material
+  # (attribute "bankmodfract_percent" with levels from 0 to 100)
+  
+  bankmod_imperm &lt;-
+    utility.endnode.intpol1d.create(
+      name.node   = "bank modification imperm",
+      name.attrib = "bankmodfract_percent",
+      range       = c(0,100),
+      x           = c(0,10,30,60,100),
+      u           = c(1,0.775,0.5625,0.24,0),
+      required    = FALSE,
+      utility     = FALSE)
+  
+  # define combination end node for bank modification
+  # (attributes "bankmodtype_class" and "bankmodfract_percent")
+  
+  bankmod &lt;-
+    utility.endnode.cond.create(
+      name.node     = "bank modification",
+      attrib.levels = data.frame(bankmodtype_class=
+                                 c("perm","imperm")),
+      nodes         = list(bankmod_perm,bankmod_imperm),
+      required      = FALSE,
+      utility       = FALSE)
+
+  # define 2d interpolation end node for riparian zone width
+  # (attributes "riparianzonewidth_m" and "riparianzonewidth_m")
+
+  riparzone_width &lt;-
+    utility.endnode.intpol2d.create(
+      name.node   = "riparian zone width",
+      name.attrib = c("riverbedwidth_m","riparianzonewidth_m"),
+      ranges      = list(c(0,16),c(0,30)),
+      isolines    = list(list(x=c(0,16),y=c(0,0)),
+                         list(x=c(0,2,10,16),y=c(5,5,15,15)),
+                         list(x=c(0,16),y=c(15,15)),
+                         list(x=c(0,16),y=c(30,30))),
+      u           = c(0.0,0.6,1.0,1.0),
+      lead         = 1,
+      utility      = FALSE)
+
+  # define discrete end node for riparian zone vegetation
+  # (attriute "riparianzoneveg_class" with levels "natural", 
+  # "seminatural" and "artificial")
+
+  riparzone_veg &lt;-
+    utility.endnode.discrete.create(
+      name.node     = "riparian zone veg.",
+      attrib.levels = data.frame(riparianzoneveg_class=
+                                 c("natural","seminatural","artificial")),
+      u             = c(1,0.5625,0),
+      required      = FALSE,
+      utility       = FALSE)
+  
+  # define aggregation node for riparian zone
+  
+  riparzone &lt;-
+    utility.aggregation.create(
+      name.node = "riparian zone",
+      nodes     = list(riparzone_width,riparzone_veg),
+      name.fun  = "utility.aggregate.cobbdouglas",
+      par       = c(1,1),
+      required  = FALSE)
+  
+  # define aggregation node for ecomorphological state
+  
+  morphol &lt;-
+    utility.aggregation.create(
+      name.node = "ecomorphology",
+      nodes     = list(widthvar,bedmod,bankmod,riparzone),
+      name.fun  = "utility.aggregate.mix",
+      par       = c(0.25,0.25,0.25,0.25,0,0,1),
+      names.par = c("w_widthvar","w_bedmod","w_bankmod","w_riparzone",
+                    "w_add","w_min","w_cobbdouglas"),
+      required  = TRUE)
+      
+  # print individual definitions
+  
+  print(widthvar)
+  print(bedmod)
+      
+  # print all definitions
+  
+  print(morphol)
+  
+  # plot objectives hierarchy with attributes
+  
+  plot(morphol)
+  
+  # plot individual nodes:
+
+  plot(widthvar)
+  plot(widthvar,par=c(u_moderate=0.2))
+  plot(bedmod_other)
+  plot(bankmod)
+  #plot(riparzone_width)
+  
+  # plot selected node definitions of a hierarchy
+  
+  plot(morphol,type="nodes",nodes=c("width variability",
+                                    "bed modification other",
+                                    "bank modification"))
+
+  # evaluate value function for data sets and plot colored hierarchies
+  # and table
+  
+  attrib_channelized &lt;- data.frame(widthvariability_class = "none",
+                                   bedmodtype_class       = "riprap",
+                                   bedmodfract_percent    = 50,
+                                   bankmodtype_class      = "imperm",
+                                   bankmodfract_percent   = 70,
+                                   riverbedwidth_m        = 10,
+                                   riparianzonewidth_m    = 5,
+                                   riparianzoneveg_class  = "seminatural")
+  attrib_rehab       &lt;- data.frame(widthvariability_class = "high",
+                                   bedmodtype_class       = "riprap",
+                                   bedmodfract_percent    = 50,
+                                   bankmodtype_class      = "imperm",
+                                   bankmodfract_percent   = 20,
+                                   riverbedwidth_m        = 15,
+                                   riparianzonewidth_m    = 15,
+                                   riparianzoneveg_class  = "natural")
+                                   
+  res_channelized     &lt;- evaluate(morphol,attrib=attrib_channelized)
+  res_channelized_add &lt;- evaluate(morphol,attrib=attrib_channelized,
+                                  par=c(w_add=1,w_min=0,w_cobbdouglas=0))
+  res_rehab           &lt;- evaluate(morphol,attrib=attrib_rehab)
+  res_both            &lt;- rbind(res_channelized,res_rehab)
+  rownames(res_both)  &lt;- c("channelized","rehabilitated")
+  
+  plot(morphol,u=res_channelized)
+  plot(morphol,u=res_channelized_add)
+  plot(morphol,u=res_rehab)
+  plot(morphol,u=res_rehab,uref=res_channelized)
+  plot(morphol,u=res_both,type="table")
+
+  # consideration of uncertain attribute levels (higher uncertainty for 
+  # predicted state after rehabilitation than for observed channelized state):
+  
+  sampsize &lt;- 2000
+  
+  attrib_channelized_unc &lt;- data.frame(
+    widthvariability_class = rep("high",sampsize),
+    bedmodtype_class       = rep("riprap",sampsize),
+    bedmodfract_percent    = rnorm(sampsize,mean=50,sd=5),
+    bankmodtype_class      = rep("imperm",sampsize),
+    bankmodfract_percent   = rnorm(sampsize,mean=70,sd=5),
+    riverbedwidth_m        = rep(10,sampsize),
+    riparianzonewidth_m    = rep(5,sampsize),
+    riparianzoneveg_class  = c("seminatural","artificial")[rbinom(sampsize,1,0.5)+1])
+
+  attrib_rehab_unc &lt;- data.frame(
+    widthvariability_class = c("moderate","high")[rbinom(sampsize,1,0.5)+1],
+    bedmodtype_class       = rep("riprap",sampsize),
+    bedmodfract_percent    = rnorm(sampsize,mean=50,sd=15),
+    bankmodtype_class      = rep("imperm",sampsize),
+    bankmodfract_percent   = rnorm(sampsize,mean=20,sd=5),
+    riverbedwidth_m        = rnorm(sampsize,mean=10,sd=2),
+    riparianzonewidth_m    = rnorm(sampsize,mean=10,sd=2),
+    riparianzoneveg_class  = c("natural","seminatural")[rbinom(sampsize,1,0.5)+1])
+
+  res_channelized_unc &lt;- evaluate(morphol,attrib=attrib_channelized_unc)
+  res_rehab_unc       &lt;- evaluate(morphol,attrib=attrib_rehab_unc)
+
+  plot(morphol,u=res_channelized_unc)
+  plot(morphol,u=res_rehab_unc)
+  plot(morphol,u=res_rehab_unc,uref=res_channelized_unc)
+</code></pre>
+
+
+</div>

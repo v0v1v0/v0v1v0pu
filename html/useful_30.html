@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>load_packages</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>load_packages</h2>
+
+<h3>Description</h3>
+
+<p>Loads multiple packages
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">load_packages(packages)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>packages</code></td>
+<td>
+<p>A 'character' vector of packages to be installed</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Allows the user to load multiple packages with one line of code. Delivers a message saying which packages have been loaded. If a user requests packages that are not installed there is an error.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Nothing, loads packages
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+load_packages('ggplot2')
+load_packages(c('ggplot2', 'dplyr'))
+</code></pre>
+
+
+</div>

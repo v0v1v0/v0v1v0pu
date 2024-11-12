@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>checkPkgs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check for presence of a package</h2>
+
+<h3>Description</h3>
+
+<p>This function efficiently checks for the presence of a package
+without loading it (unlike <code>library()</code> or <code>require()</code>.
+This is useful to force yourself to use the package::function
+syntax for addressing functions; you can make sure required packages
+are installed, but their namespace won't attach to the search path.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">checkPkgs(
+  ...,
+  install = FALSE,
+  load = FALSE,
+  repos = "https://cran.rstudio.com"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>A series of packages. If the packages are named, the
+names are the package names, and the values are the minimum required
+package versions (see the second example).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>install</code></td>
+<td>
+<p>Whether to install missing packages from <code>repos</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>load</code></td>
+<td>
+<p>Whether to load packages (which is exactly <em>not</em> the point
+of this package, but hey, YMMV).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repos</code></td>
+<td>
+<p>The repository to use if installing packages; default
+is the RStudio repository.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Invisibly, a vector of the available packages.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+ufs::checkPkgs('base');
+
+### Require a specific version
+ufs::checkPkgs(ufs = "0.3.1");
+
+### This will show the error message
+tryCatch(
+  ufs::checkPkgs(
+    base = "99",
+    stats = "42.5",
+    ufs = 20
+  ),
+  error = print
+);
+
+</code></pre>
+
+
+</div>

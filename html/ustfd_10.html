@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ustfd_simple</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Fiscal Data API in a single call</h2>
+
+<h3>Description</h3>
+
+<p><code>ustfd_simple()</code> aggregates the workflow for retrieving data from the API
+into a single call.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ustfd_simple(
+  endpoint,
+  filter = NULL,
+  fields = NULL,
+  sort = NULL,
+  page_size = NULL,
+  page_number = NULL,
+  user_agent = "http://github.com/groditi/ustfd"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>endpoint</code></td>
+<td>
+<p>required string representing an API endpoint</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter</code></td>
+<td>
+<p>optional list used to subset the data. See filter-syntax for
+more information.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fields</code></td>
+<td>
+<p>optional character vector of the fields to be retrieved</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sort</code></td>
+<td>
+<p>optional string or character vector. Ordering defaults to
+ascending, to specify descending order precede the field name with '-'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>page_size</code></td>
+<td>
+<p>optional integer for pagination</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>page_number</code></td>
+<td>
+<p>optional integer for pagination</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>user_agent</code></td>
+<td>
+<p>optional string</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list containing the following items
+</p>
+
+<ul>
+<li> <p><code>meta</code> - the metadata returned by the API
+</p>
+</li>
+<li> <p><code>data</code> - the payload returned by the API in table form.
+See <code>ustfd_response_payload()</code>
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Other ustfd_user: 
+<code>endpoint_exists()</code>,
+<code>ustfd_all_pages()</code>,
+<code>ustfd_datasets()</code>,
+<code>ustfd_query()</code>,
+<code>ustfd_table_columns()</code>,
+<code>ustfd_tables()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+library(ustfd)
+
+exchange_rates &lt;- ustfd_simple(
+  'v1/accounting/od/rates_of_exchange',
+   fields = c(
+    'country_currency_desc', 'exchange_rate','record_date','effective_date'
+   ),
+   filter = list(
+     record_date = c('&gt;=' = '2020-01-01'),
+     country_currency_desc = list('in' = c('Canada-Dollar','Mexico-Peso'))
+   )
+)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

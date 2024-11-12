@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>colsToFront</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>colsToFront</h2>
+
+<h3>Description</h3>
+
+<p>Moves column names to the front or back of the names
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">colsToFront(data, cols = names(data))
+
+colsToBack(data, cols = names(data))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data.frame or tbl</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>Columns that should be moved</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Moves column names to the front or back of the names
+</p>
+
+
+<h3>Value</h3>
+
+<p>Character vector of column names
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">theDF &lt;- data.frame(A=1:10, B=11:20, C=1:10, D=11:20)
+colsToFront(theDF, c('B', 'C'))
+colsToFront(theDF, c('C', 'B'))
+colsToFront(theDF, c('C', 'C'))
+colsToBack(theDF, c('C', 'C'))
+colsToBack(theDF, c('C', 'B'))
+colsToBack(theDF, c('C', 'C'))
+
+</code></pre>
+
+
+</div>

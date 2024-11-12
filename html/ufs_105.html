@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>exportToHTML</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Exporting tables to HTML</h2>
+
+<h3>Description</h3>
+
+<p>This function exports data frames or matrices to
+HTML, sending output to one or more of the console,
+viewer, and one or more files.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">exportToHTML(
+  input,
+  output = ufs::opts$get("tableOutput"),
+  tableOutputCSS = ufs::opts$get("tableOutputCSS")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Either a <code>data.frame</code>, <code>table</code>, or <code>matrix</code>,
+or a list with three elements: <code>pre</code>, <code>input</code>, and <code>post</code>.
+The <code>pre</code> and <code>post</code> are simply prepended and postpended to
+the HTML generated based on the <code>input$input</code> element.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>The output: a character vector with one or more
+of "<code>console</code>" (the raw concatenated input, without conversion
+to HTML), "<code>viewer</code>", which uses the RStudio viewer if available,
+and one or more filenames in existing directories.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tableOutputCSS</code></td>
+<td>
+<p>The CSS to use for the HTML table.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Invisibly, the (potentially concatenated) <code>input</code> as character
+vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">exportToHTML(mtcars[1:5, 1:5]);
+</code></pre>
+
+
+</div>

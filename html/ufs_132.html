@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>insertFigureCaption</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Insert numbered caption</h2>
+
+<h3>Description</h3>
+
+<p>These functions can be used to manually insert a numbered caption. These
+functions have been designed to work well with <code>setFigCapNumbering()</code> and
+<code>setTabCapNumbering()</code>. This is useful when
+inserting figures or tables in an RMarkdown document when you
+use automatic caption numbering for <code>knitr</code> chunks, but are inserting a
+table or figure that isn't produced in a <code>knitr</code> chunk while
+still retaining the automatic numbering. <code>insertNumberedCaption()</code> is the
+general-purpose function; you will typically only use <code>insertFigureCaption()</code>
+and <code>insertTableCaption()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">insertFigureCaption(
+  captionText = "",
+  captionName = "fig.cap",
+  prefix = getOption(paste0(optionName, "_prefix"), "Figure %s: "),
+  suffix = getOption(paste0(optionName, "_suffix"), ""),
+  optionName = paste0("setCaptionNumbering_", captionName),
+  resetCounterTo = NULL
+)
+
+insertNumberedCaption(
+  captionText = "",
+  captionName = "fig.cap",
+  prefix = getOption(paste0(optionName, "_prefix"), "Figure %s: "),
+  suffix = getOption(paste0(optionName, "_suffix"), ""),
+  optionName = paste0("setCaptionNumbering_", captionName),
+  resetCounterTo = NULL
+)
+
+insertTableCaption(
+  captionText = "",
+  captionName = "tab.cap",
+  prefix = getOption(paste0(optionName, "_prefix"), "Table %s: "),
+  suffix = getOption(paste0(optionName, "_suffix"), ""),
+  optionName = paste0("setCaptionNumbering_", captionName),
+  resetCounterTo = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>captionText</code></td>
+<td>
+<p>The text of the caption.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>captionName</code></td>
+<td>
+<p>The name of the caption; by default, for tables,
+"<code>tab.cap</code>".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix, suffix</code></td>
+<td>
+<p>The prefix and suffix texts; <code>base::sprintf()</code> is used
+to insert the number in the position taken up by <code style="white-space: pre;">⁠\%s⁠</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>optionName</code></td>
+<td>
+<p>The name of the option to use to save the number counter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resetCounterTo</code></td>
+<td>
+<p>If a numeric value, the counter is reset to that value.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The caption in a character vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">insertNumberedCaption("First caption");
+insertNumberedCaption("Second caption");
+sectionNumber &lt;- 12;
+insertNumberedCaption("Third caption",
+                      prefix = paste0("Table ",
+                                      sectionNumber,
+                                      ".%s: "));
+</code></pre>
+
+
+</div>

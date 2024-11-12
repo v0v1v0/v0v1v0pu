@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>disguise</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Disguise the sample mean and sample deviation</h2>
+
+<h3>Description</h3>
+
+<p>Disguises the sample mean and standard deviation via a choice of methods.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">disguise(usersample, method = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>usersample</code></td>
+<td>
+<p>A vector of all individual sample values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Approach for disguising mean and standard deviation. (default = 1)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>*Method 1*
+</p>
+<p>Randomly split the sample into two (approx. equal size) samples A, and B.
+For sample A calculate and report mean. For sample B calculate and
+standard deviation.
+</p>
+<p>*Method 2* (default)
+</p>
+<p>Take a sample of size N with replacement; calculate and report mean.
+Repeat to calculate and report standard deviation.
+</p>
+<p>*Method 3*
+</p>
+<p>Generate a random number (RN1) between N/2 and N. Sample with
+replacement a sample size of RN1; calculate and report mean.
+Generate a random number (RN2) between N/2 and N. Sample with
+replacement a sample size of RN2; calculate and report standard deviation.
+</p>
+<p>*Method 4*
+</p>
+<p>As Method 3, but sampling without replacement.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Outputs disguised mean and disguised standard deviation.
+</p>
+
+
+<h3>References</h3>
+
+<p>Derrick, B., Green, L., Kember, K., Ritchie, F. &amp; White P, 2022, Safety in numbers: Minimum thresholding, Maximum bounds, and Little White Lies.
+Scottish Economic Society Annual Conference, University of Glasgow, 25th-27th April 2022
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+usersample&lt;-c(1,1,2,3,4,4,5)
+
+disguise(usersample,method=1)
+disguise(usersample,method=2)
+disguise(usersample,method=3)
+disguise(usersample,method=4)
+
+
+</code></pre>
+
+
+</div>

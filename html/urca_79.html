@@ -1,0 +1,140 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.pp-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class ur.pp</h2>
+
+<h3>Description</h3>
+
+<p>This class contains the relevant information by applying the Phillips
+and Perron unit root test to a time series.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>y</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The time series to
+be tested.</p>
+</dd>
+<dt>
+<code>type</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: Test type of
+Z statistic, either <code>"Z-alpha"</code> or <code>"Z-tau"</code>.</p>
+</dd>
+<dt>
+<code>model</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The type of
+the deterministic part, either <code>"constant"</code> or
+<code>"trend"</code>. The latter includes a constant term, too.</p>
+</dd>
+<dt>
+<code>lag</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: Number of lags
+for error correction.</p>
+</dd>
+<dt>
+<code>cval</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: Critical values
+at the 1%, 5% and 10% level of significance.</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>: Value of
+the test statistic.</p>
+</dd>
+<dt>
+<code>testreg</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The summary
+output of the test regression.</p>
+</dd>
+<dt>
+<code>auxstat</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: Test
+statistic(s) of the deterministic part.</p>
+</dd>
+<dt>
+<code>res</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The residuals of
+the test regression.</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+name of the test, <em>i.e</em> ‘Phillips-Perron’.</p>
+</dd>
+</dl>
+<h3>Extends</h3>
+
+<p>Class <code>urca</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Type <code>showMethods(classes="ur.pp")</code> at the R prompt for a
+complete list of methods which are available for this class.
+</p>
+<p>Useful methods include
+</p>
+
+<dl>
+<dt>
+<code>show</code>:</dt>
+<dd>
+<p>test statistic.</p>
+</dd>
+<dt>
+<code>summary</code>:</dt>
+<dd>
+<p>like show, but critical value and summary of
+test regression added.</p>
+</dd>
+<dt>
+<code>plot</code>:</dt>
+<dd>
+<p>Diagram of fit plot, residual plot and their
+acfs' and pacfs'.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Phillips, P.C.B. and Perron, P. (1988), Testing for a unit root in
+time series regression, <em>Biometrika</em>,  <b>75(2)</b>, 335–346.
+</p>
+<p>MacKinnon, J.G. (1991), Critical Values for Cointegration Tests,
+<em>Long-Run Economic Relationships</em>, eds. R.F. Engle and
+C.W.J. Granger, London, Oxford, 267–276.
+</p>
+<p>Download possible at: <a href="https://cowles.yale.edu/">https://cowles.yale.edu/</a>, see rubric
+'Discussion Papers (CFDPs)'.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.pp</code> and <code>urca-class</code>
+</p>
+
+
+</div>

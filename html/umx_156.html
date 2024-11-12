@@ -1,0 +1,187 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummaryGxEbiv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summarize a bivariate GxE twin model</h2>
+
+<h3>Description</h3>
+
+<p><code>umxSummaryGxEbiv</code> summarizes a bivariate moderation model, as returned by <code>umxGxEbiv()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummaryGxEbiv(
+  model = NULL,
+  digits = 2,
+  xlab = NA,
+  location = "topleft",
+  separateGraphs = FALSE,
+  file = getOption("umx_auto_plot"),
+  comparison = NULL,
+  std = NULL,
+  reduce = FALSE,
+  CIs = NULL,
+  report = c("markdown", "html"),
+  returnStd = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A fitted <code>umxGxEbiv()</code> model to summarize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>label for the x-axis of plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>default = "topleft"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>separateGraphs</code></td>
+<td>
+<p>Std and raw plots in separate graphs? (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>mxCompare model with this model if offered up (default = NULL).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to show the standardized model (not implemented! TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reduce</code></td>
+<td>
+<p>Whether to run and tabulate a complete model reduction...(Defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Confidence intervals (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>markdown or html (html opens in browser)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStd</code></td>
+<td>
+<p>Whether to return the standardized form of the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxGxEbiv()</code>, <code>plot()</code>, <code>umxSummary()</code> work for IP, CP, GxE, and ACE models.
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(twinData)
+df = umx_scale_wide_twin_data(twinData, varsToScale = c("ht", "wt"), sep = "")
+mzData  = subset(df, zygosity %in% c("MZFF", "MZMM"))
+dzData  = subset(df, zygosity %in% c("DZFF", "DZMM", "DZOS"))
+
+## Not run: 
+m1 = umxGxEbiv(selDVs = "wt", selDefs = "ht", 
+	dzData = dzData, mzData = mzData, sep = "", dropMissingDef = TRUE)
+# Plot Moderation
+umxSummary(m1)
+umxSummary(m1, location = "topright")
+umxSummary(m1, separateGraphs = FALSE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UNC Men's Basketball Match Results From 1949 - 1950 Season.</h2>
+
+<h3>Description</h3>
+
+<p>UNC men's basketball match results from 1949 - 1950 season. Data is scraped from
+https://www.sports-reference.com/cbb/schools/north-carolina/, and according to the source,
+may contain missing records especially for matches with non Div-1 teams
+prior to 1995 - 1996 season. Those missing records were later filled in using data from other source (http://www.tarheeltimes.com/schedulebasketball-1949.aspx)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unc
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with variables:
+</p>
+
+<dl>
+<dt>Season</dt>
+<dd>
+<p>season year, ending</p>
+</dd>
+<dt>Game_Date</dt>
+<dd>
+<p>date of match, yyyy-mm-dd</p>
+</dd>
+<dt>Game_Day</dt>
+<dd>
+<p>day of match</p>
+</dd>
+<dt>Type</dt>
+<dd>
+<p>match type, one of REG, CTOURN, NIT, or NCAA</p>
+</dd>
+<dt>Where</dt>
+<dd>
+<p>match location, one of H(ome), A(way), or N(eutral)</p>
+</dd>
+<dt>Opponent_School</dt>
+<dd>
+<p>match opponent</p>
+</dd>
+<dt>Result</dt>
+<dd>
+<p>match result, W for UNC win</p>
+</dd>
+<dt>Tm</dt>
+<dd>
+<p>UNC score in the match</p>
+</dd>
+<dt>Opp</dt>
+<dd>
+<p>opponent's score in the match</p>
+</dd>
+<dt>OT</dt>
+<dd>
+<p>overtime indicator, one of NA, OT, 2OT, or 3OT</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://www.sports-reference.com/cbb/schools/north-carolina/">https://www.sports-reference.com/cbb/schools/north-carolina/</a>
+</p>
+
+
+</div>

@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mlinvgamma</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Inverse Gamma distribution maximum likelihood estimation</h2>
+
+<h3>Description</h3>
+
+<p>Transforms the data and uses Newton-Raphson to estimate the parameters of
+the Gamma distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mlinvgamma(x, na.rm = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a (non-empty) numeric vector of data values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values be removed?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>passed to <code>mlgamma</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For the density function of the inverse Gamma distribution see
+InvGamma.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named numeric vector with maximum likelihood estimates for
+<code>alpha</code> and <code>beta</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Choi, S. C, and R. Wette. "Maximum likelihood estimation of
+the parameters of the gamma distribution and their bias."
+Technometrics 11.4 (1969): 683-690.
+</p>
+<p>Johnson, N. L., Kotz, S. and Balakrishnan, N. (1995)
+Continuous Univariate Distributions, Volume 1, Chapter 17. Wiley, New York.
+</p>
+<p>Witkovsky, V. (2001). "Computing the Distribution of a Linear Combination
+of Inverted Gamma Variables". Kybernetika. 37 (1): 79–90
+</p>
+
+
+<h3>See Also</h3>
+
+<p>InvGamma for the Inverse Gamma density.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">mlinvgamma(precip)
+</code></pre>
+
+
+</div>

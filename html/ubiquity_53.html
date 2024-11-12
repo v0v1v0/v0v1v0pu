@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_load_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Loading Datasets</h2>
+
+<h3>Description</h3>
+
+<p>Loads datasets at the scripting level from  a variable if
+<code>data_file</code> is a data.frame or from the following
+formats (based on the file extension)
+</p>
+
+<ul>
+<li>
+<p> csv - comma delimited 
+</p>
+</li>
+<li>
+<p> tab - tab delimited
+</p>
+</li>
+<li>
+<p> xls or xlsx - excel spread sheet
+</p>
+</li>
+</ul>
+<p>Multiple datasets can be loaded as long as they are given different
+names. Datasets should be in a NONMEM-ish format with the
+first row containing the column header names.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_load_data(cfg, dsname, data_file, data_sheet)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dsname</code></td>
+<td>
+<p>short name of the dataset to be used to link this dataset to different operations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_file</code></td>
+<td>
+<p>the file name of the dataset or a data frame containing the data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_sheet</code></td>
+<td>
+<p>argument identifying the name of the sheet in an excel file</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Ubiquity system object with the dataset loaded
+</p>
+
+
+</div>

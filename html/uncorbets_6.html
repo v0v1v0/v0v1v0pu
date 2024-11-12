@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>torsion</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes the Minimum Torsion Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Computes the Principal Components Torsion and the Minimum Torsion
+for diversification analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">torsion(sigma, model = "minimum-torsion", method = "exact", max_niter = 10000L)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>A <code>n x n</code> covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>One of: "pca" or "minimum-torsion".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>One of: "approximate" or "exact". Only used when <code>model = "minimum-torsion"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_niter</code></td>
+<td>
+<p>An <code>integer</code> with the maximum number of iterations.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>n x n</code> torsion matrix.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># extract the invariants from the data
+set.seed(123)
+log_ret &lt;- matrix(rnorm(400), ncol = 4) / 10
+
+# calculate the covariance matrix
+sigma &lt;- stats::cov(log_ret)
+
+# torsion
+torsion(sigma = sigma, model = 'minimum-torsion', method ='exact')
+</code></pre>
+
+
+</div>

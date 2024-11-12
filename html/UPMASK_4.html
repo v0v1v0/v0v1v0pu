@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>analyse_randomKde2d_smart</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perform analysis of random 2d distributions</h2>
+
+<h3>Description</h3>
+
+<p><code>analyse_randomKde2d_smart</code> will compute statistics from uniformly 
+randomly created 2D fields based on Kernel Density Estimations (calling the code 
+<code>analyse_randomKde2d</code>). However, if a random field using the same number of stars
+was already computed in this run of UPMASK, it will avoid computing it again and will
+return the value that is stored in a SQLite database table. If the random field was 
+not yet analysed, it will run the analysis, store the result in the database table, and 
+return the value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">analyse_randomKde2d_smart(nfields=100, nstars, maxX, maxY, nKde=50, 
+showStats=FALSE, returnStats=TRUE, smartTableDB)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nfields</code></td>
+<td>
+<p>an integer with the number of individual field realisations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstars</code></td>
+<td>
+<p>an integer with the number of stars to consider</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxX</code></td>
+<td>
+<p>the length of the field in X</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxY</code></td>
+<td>
+<p>the length of the field in Y</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nKde</code></td>
+<td>
+<p>the number of samplings of the kernel in each direction</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showStats</code></td>
+<td>
+<p>a boolean indicating if the user wants to see statistics</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStats</code></td>
+<td>
+<p>a boolean indicating if the user wants statistics to be returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smartTableDB</code></td>
+<td>
+<p>a database connection to the smart look-up table</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with the <code>mean</code> and <code>sd</code> fields containing the results 
+of the random field analysis.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create the smart look-up table
+library(RSQLite)
+stcon &lt;- create_smartTable()
+
+# Runs the analysis on random fields
+system.time(
+toyRes1 &lt;- analyse_randomKde2d_smart(300, 200, 100, 100, smartTableDB=stcon)) # slow
+system.time(
+toyRes2 &lt;- analyse_randomKde2d_smart(300, 200, 100, 100, smartTableDB=stcon)) # quick
+
+# Clean the environment
+rm(list=c("toyRes1", "toyRes2"))
+dbDisconnect(stcon)
+ 
+</code></pre>
+
+
+</div>

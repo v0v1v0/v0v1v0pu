@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>codec</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Reduce and restore dimenstions for sparse data matrix
+</h2>
+
+<h3>Description</h3>
+
+<p><code>compress</code> reduces dimension of source image matrix and assigns indices. <code>decompress</code> uses indices for expansion of reduced image matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">decompress(obj)
+compress(obj)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+
+<p>After masking, vectorization of lines, points and small polygons image matrix is often sparse.
+Compressing (<code>compress</code>) is an option to reduce object size in memory. Decompressing (<code>decompress</code>) restore original data matrix.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+
+
+<h3>Note</h3>
+
+<p>Currently, usage of compressed image matrix is limited. Spatial filtering (e.g. <code>focal_mean</code>) does not operate with compressed data.
+
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+b &lt;- as.data.frame(pixelsize())
+b &lt;- subset(b,x&gt;1000000 &amp; x&lt;2000000 &amp; y&gt;3000000 &amp; y&lt;4000000)
+a1 &lt;- as.ursa(b)
+print(a1)
+print(object.size(a1))
+a2 &lt;- compress(a1)
+print(a2)
+print(object.size(a2))
+a3 &lt;- decompress(a2)
+print(a3)
+print(object.size(a3))
+print(identical(a1,a3))
+</code></pre>
+
+
+</div>

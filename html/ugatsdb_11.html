@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>transpose_wide</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Transpose a Wide Dataset to a Row-Based Format</h2>
+
+<h3>Description</h3>
+
+<p>This function is called by <code>wide2excel</code> with option <code>transpose = TRUE</code> to generate a row-based tabular data format from a wide data frame in R that is suitable for exporting to Excel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">transpose_wide(data, date.format = "%d/%m/%Y")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a wide format data frame where each column is a variable and the first variable uniquely identifies the data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>date.format</code></td>
+<td>
+<p>a format for date columns which is passed to <code>format.Date</code>. When transposing wide, dates are converted to character. The default R YYYY-MM-DD format for dates is often not recognized by Excel. By default dates are transformed to DD/MM/YYYY format which Excel (UK English) recognizes. Putting <code>FALSE</code> here does not transform dates into another format.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A transposed data frame or <code>data.table</code> (the class of the input is preserved).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>transpose</code>, <code>long2wide</code>, <code>wide2excel</code>, <code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+transpose_wide(get_data("BOU_CPI"))
+
+</code></pre>
+
+
+</div>

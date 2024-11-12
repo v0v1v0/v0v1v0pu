@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.kmeans</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>plot.kmeans</h2>
+
+<h3>Description</h3>
+
+<p>Plot the results from a k-means object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'kmeans'
+plot(x, data = NULL, class = NULL, size = 2,
+  legend.position = c("right", "bottom", "left", "top", "none"),
+  title = "K-Means Results", xlab = "Principal Component 1",
+  ylab = "Principal Component 2", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A <code>kmeans</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The data used to kit the <code>kmeans</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>class</code></td>
+<td>
+<p>Character name of the "true" classes of the data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>Numeric size of points</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend.position</code></td>
+<td>
+<p>Character indicating where the legend should be placed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Title for the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>Label for the x-axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Label for the y-axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Not Used.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Plots the results of k-means with color-coding for the cluster membership.  If <code>data</code> is not provided, then just the center points are calculated.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>See Also</h3>
+
+<p>kmeans fortify ggplot plot.kmeans
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+k1 &lt;- kmeans(x=iris[, 1:4], centers=3)
+plot(k1)
+plot(k1, data=iris)
+
+</code></pre>
+
+
+</div>

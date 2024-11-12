@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>extractSetsFromDataFrame</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>extract the sets from a data frame (rows = elems, columns = sets, cell = contained)</h2>
+
+<h3>Description</h3>
+
+<p>extract the sets from a data frame (rows = elems, columns = sets, cell = contained)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">extractSetsFromDataFrame(
+  df,
+  attributes = NULL,
+  order.by = "cardinality",
+  limit = NULL,
+  colors = NULL,
+  store.elems = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>the data.frame like structure</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attributes</code></td>
+<td>
+<p>the optional column list or data frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.by</code></td>
+<td>
+<p>order intersections by cardinality or degree</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>limit the ordered sets to the given limit</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>the optional list with set name to color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>store.elems</code></td>
+<td>
+<p>store the elements in the sets (default TRUE)</p>
+</td>
+</tr>
+</table>
+</div>

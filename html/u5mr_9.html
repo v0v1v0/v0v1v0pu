@@ -1,0 +1,299 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u5mr_trussell</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimating under-five mortality using Coale-Demeny life table models</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="../help/figures/lifecycle-stable.svg" alt="[Stable]"></a>
+</p>
+<p><code>u5mr_trussell()</code> uses the Trussell version of the BRASS method
+and calculates under-five mortality estimates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">u5mr_trussell(
+  data,
+  women = "women",
+  child_born = "child_born",
+  child_dead = "child_dead",
+  agegrp = "agegrp",
+  model = "west",
+  svy_year = 1976.5,
+  sex
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>processed data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>women</code></td>
+<td>
+<p>total number of women</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>child_born</code></td>
+<td>
+<p>children ever born</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>child_dead</code></td>
+<td>
+<p>children dead</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>agegrp</code></td>
+<td>
+<p>age grouping</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>Coale-Demeny life table model:
+<code>north</code>, <code>south</code>, <code>east</code>, and <code>west</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>svy_year</code></td>
+<td>
+<p>end of the survey</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sex</code></td>
+<td>
+<p>indicates sex-specific estimates: <code>both</code>, <code>male</code>, and <code>female</code></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>T. J. Trussell developed the Trussell version of the Brass method to estimate
+child mortality using summary birth history (United Nations,  1983b, Chapter III).
+It is based on the Coale-Demeny life table models of either North, South, East, or West.
+</p>
+<p><strong>Computational Procedure</strong>
+</p>
+<p>Step 1. Preparing the dataset
+</p>
+<p>The function needs four variables from the input data:
+</p>
+<p>a) <code>agegrp</code>: age groups representing <code>15-19</code>, <code>20-24</code>, <code>25-29</code>, <code>30-34</code>,
+<code>35-39</code>, <code>40-44</code>, and <code>45-49</code>.
+</p>
+<p>b) <code>women</code>: the total number of women in the age group irrespective of their marital
+or reporting status
+</p>
+<p>c) <code>child_born</code>: the total number of children ever borne by these women
+</p>
+<p>d) <code>child_dead</code>: the number of children dead reported by these women
+</p>
+<p>Step 1.1. Calculation of average parity per woman <code>P(i)</code>
+</p>
+<p style="text-align: center;"><code class="reqn">P(i) = CEB(i) / FP(i)</code>
+</p>
+
+
+<ul>
+<li> <p><code>CEB(i)</code> is the total number of children ever borne by these women
+</p>
+</li>
+<li> <p><code>FP(i)</code> is the total number of women in the
+age group irrespective of their marital or reporting status.
+</p>
+</li>
+</ul>
+<p>Step 1.2. Calculation of the proportions dead among children ever borne <code>D(i)</code>
+</p>
+<p style="text-align: center;"><code class="reqn">D(i) = CD(i) / CEB(i)</code>
+</p>
+
+
+<ul><li> <p><code>CD(i)</code> is the number of children dead for women of age group i
+</p>
+</li></ul>
+<p>Step 2. Calculating the multipliers <code>k(i)</code> and probabilities of dying by age x <code>q(x)</code>
+</p>
+<p style="text-align: center;"><code class="reqn">k(i) = a(i) + b(i) P(1)/P(2) + c(i) P(2)/P(3)</code>
+</p>
+
+<p>where <code>a(i)</code>, <code>b(i)</code>, and <code>c(i)</code> are coefficients estimated by regression analysis of
+simulated model cases, and <code>P(1)/P(2)</code> and <code>P(2)/P(3)</code> are parity ratios.
+</p>
+<p style="text-align: center;"><code class="reqn">q(x) = k(i) x D(i)</code>
+</p>
+
+<p>Step 3. Calculating the reference dates for <code>q(x)</code> and interpolating <code>q5</code>
+</p>
+<p>Under conditions of steady mortality change over time, a reference time <code>t(i)</code>
+can be estimated for each <code>q(x)</code>.
+</p>
+<p style="text-align: center;"><code class="reqn">t(i) = a(i) + b(i) P(1)/P(2) + c(i) P(2)/P(3)</code>
+</p>
+
+<p>Actual dates can be obtained by subtracting <code>t(i)</code> from the reference date of
+the survey or census, expressed in decimal terms.
+</p>
+<p>Step 4. Interpolating between <code>q(x)</code> and model life table
+</p>
+<p>A common index, in this case, under-five mortality <code>q(5)</code> can be obtained by
+conversions of corresponding <code>q(x)</code> values to the specified family of
+the Coale-Demeny life table models. In a given life table family and sex,
+the first step is to identify the mortality levels with q(x) values that
+enclose the estimated value <code class="reqn">q^e(x)</code>.
+</p>
+<p style="text-align: center;"><code class="reqn">q^j(x) &gt; q^e(x) &gt; q^j+1(x)</code>
+</p>
+
+<p>where <code class="reqn">q^j(x)</code> and <code class="reqn">q^j+1(x)</code> are the model values of <code>q(x)</code> for
+levels <code>j</code> and <code>j+1</code>, and <code class="reqn">q^e(x)</code> is the estimated value.
+</p>
+<p>The desired common index <code class="reqn">q^c(5)</code>, or <code>q5</code> is given by
+</p>
+<p style="text-align: center;"><code class="reqn">q^c(5) = (1.0 - h) x q^j(5) + h x q^e(5)</code>
+</p>
+
+<p>where h is the interpolation factor calculated in the following way:
+</p>
+<p style="text-align: center;"><code class="reqn">h = q^e(x) - q^j(x) / q^j+1(x) - q^j(x)</code>
+</p>
+
+<p>Step 5. Finalizing the calculation
+</p>
+<p>The final output is combined into a <code>data.frame</code>, which contains original dataset
+as well as statistics produced during the computational procedure.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>data.frame</code>
+</p>
+
+<ul>
+<li> <p><code>agegrp</code>      - five-year age groups
+</p>
+</li>
+<li> <p><code>women</code> - total number of women
+</p>
+</li>
+<li> <p><code>child_born</code>  - total number of children ever born
+</p>
+</li>
+<li> <p><code>child_dead</code>  - number of children dead
+</p>
+</li>
+<li> <p><code>pi</code> - average parity
+</p>
+</li>
+<li> <p><code>di</code> - proportion of dead among children ever born
+</p>
+</li>
+<li> <p><code>ki</code> - multipliers
+</p>
+</li>
+<li> <p><code>qx</code> - probabilities of dying at age x
+</p>
+</li>
+<li> <p><code>ti</code> - time between survey year and interpolated year
+</p>
+</li>
+<li> <p><code>year</code> - reference year
+</p>
+</li>
+<li> <p><code>h</code>  - interpolation factor
+</p>
+</li>
+<li> <p><code>q5</code> - under-five mortality
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ol>
+<li>
+<p> United Nations (1990) "Step-by-step guide to the estimation of the child mortality"
+<a href="https://www.un.org/en/development/desa/population/publications/pdf/mortality/stepguide_childmort.pdf">https://www.un.org/en/development/desa/population/publications/pdf/mortality/stepguide_childmort.pdf</a>
+</p>
+</li>
+<li>
+<p> United Nations (1983) "Manual X indirect techniques for demographic estimation"
+<a href="https://www.un.org/en/development/desa/population/publications/pdf/mortality/stepguide_childmort.pdf">https://www.un.org/en/development/desa/population/publications/pdf/mortality/stepguide_childmort.pdf</a>
+</p>
+</li>
+</ol>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Using Bangladesh survey data to estimate child mortality
+data("bangladesh")
+bang_both &lt;- u5mr_trussell(bangladesh, sex = "both", model = "south", svy_year = 1974.3)
+bang_male &lt;- u5mr_trussell(bangladesh, child_born = "male_born",
+                 child_dead = "male_dead", sex = "male",
+                 model = "south", svy_year = 1974.3)
+bang_female &lt;- u5mr_trussell(bangladesh, child_born = "female_born",
+                 child_dead = "female_dead", sex = "female",
+                 model = "south", svy_year = 1974.3)
+
+## plotting all data points
+with(bang_both,
+    plot(year, q5, type = "b", pch = 19,
+         ylim = c(0, .45),
+         col = "black", xlab = "Reference date", ylab = "u5MR",
+         main = paste0("Under-five mortality, q(5) in Bangladesh, estimated\n",
+                       "using model South and the Trussell version of the Brass method")))
+with(bang_both, text(year, q5, agegrp, cex=0.65, pos=3,col="purple"))
+with(bang_male,
+    lines(year, q5, pch = 18, col = "red", type = "b", lty = 2))
+with(bang_female,
+    lines(year, q5, pch = 18, col = "blue", type = "b", lty = 3))
+legend("bottomright", legend=c("Both sexes", "Male", "Female"),
+      col = c("Black", "red", "blue"), lty = 1:3, cex=0.8)
+
+
+## Using panama survey data to estimate child mortality
+data("panama")
+pnm_both &lt;- u5mr_trussell(panama, sex = "both", model = "west", svy_year = 1976.5)
+pnm_male &lt;- u5mr_trussell(panama, child_born = "male_born",
+                child_dead = "male_dead", sex = "male",
+                model = "west", svy_year = 1976.5)
+pnm_female &lt;- u5mr_trussell(panama, child_born = "female_born",
+                child_dead = "female_dead", sex = "female",
+                model = "west", svy_year = 1976.5)
+
+## plotting all data points
+with(pnm_both,
+    plot(year, q5, type = "b", pch = 19,
+        ylim = c(0, .2), col = "black", xlab = "Reference date", ylab = "u5MR",
+         main = paste0("Under-five mortality, q(5) in Panama, estimated\n",
+                       "using model West and the Trussell version of the Brass method")))
+with(pnm_both, text(year, q5, agegrp, cex=0.65, pos=3,col="purple"))
+with(pnm_male,
+    lines(year, q5, pch = 18, col = "red", type = "b", lty = 2))
+with(pnm_female,
+    lines(year, q5, pch = 18, col = "blue", type = "b", lty = 3))
+legend("bottomleft", legend=c("Both sexes", "Male", "Female"),
+      col = c("Black", "red", "blue"), lty = 1:3, cex=0.8)
+
+</code></pre>
+
+
+</div>

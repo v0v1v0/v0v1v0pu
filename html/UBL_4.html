@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BagModel-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Class "BagModel"</h2>
+
+<h3>Description</h3>
+
+<p><strong>BagModel</strong> is an S4 class that contains the information of a bagging ensemble model.
+Besides the base learning algorithms–<code>baseModels</code> –
+<strong>BagModel</strong> class contains information regarding the
+type of weak learners selected, the learned models and the aggregation method to apply in the 
+test set for obtaining the final predictions.
+</p>
+
+
+<h3>Objects from BagModel Class</h3>
+
+<p>Objects can be created by calls to the constructor
+<code>BagModel(...)</code>. The constructor requires a formula and a training set,
+the selected model type, the base models learned and the aggregation method
+to use for obtaining the final predictions.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt><code>form</code></dt>
+<dd>
+<p>formula</p>
+</dd>
+<dt><code>train</code></dt>
+<dd>
+<p>training set used to train the <code>baseModels</code></p>
+</dd>
+<dt><code>learner</code></dt>
+<dd>
+<p>the weak learners type used</p>
+</dd>
+<dt><code>learner.pars</code></dt>
+<dd>
+<p>the parameters of the used learners</p>
+</dd>
+<dt><code>baseModels</code></dt>
+<dd>
+<p>a list of base learners</p>
+</dd>
+<dt><code>aggregation</code></dt>
+<dd>
+<p>the aggregation method
+used to obtain the final predictions. For now, only the <code>average</code> method is available.</p>
+</dd>
+<dt><code>rel</code></dt>
+<dd>
+<p>optional information regarding the relevance function definde for the problem. Should be provided as a matrix. 
+</p>
+</dd>
+<dt><code>thr.rel</code></dt>
+<dd>
+<p>Optional number setting the threshold on the relevance values.
+</p>
+</dd>
+<dt><code>quiet</code></dt>
+<dd>
+<p>logical specifying if development should be shown or not. Defaults to TRUE</p>
+</dd>
+</dl>
+<h3>See Also</h3>
+
+<p><code>BaggingRegress</code>
+</p>
+
+
+</div>

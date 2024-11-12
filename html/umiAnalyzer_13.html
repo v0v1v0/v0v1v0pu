@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>filterUmiObject</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Method for filtering UMIexperiment and sample objects</h2>
+
+<h3>Description</h3>
+
+<p>Method for filtering UMIexperiment and sample objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">filterUmiObject(
+  object,
+  name = "default",
+  minDepth = 3,
+  minCoverage = 100,
+  minFreq = 0,
+  minCount = 0
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Requires a UMI sample or UMI experiment object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>String. Name of the filter. Default is "default".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minDepth</code></td>
+<td>
+<p>Consensus depth to analyze. Default is 3.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minCoverage</code></td>
+<td>
+<p>Minimum coverage required for amplicons. Default is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minFreq</code></td>
+<td>
+<p>Minimum variant allele frequency to keep. Default is 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minCount</code></td>
+<td>
+<p>Minimum variant allele count to keep. Default is 3.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A UMI sample or UMI experiment object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main = system.file('extdata', package = 'umiAnalyzer')
+
+samples &lt;- list.dirs(path = main, full.names = FALSE, recursive = FALSE)
+
+simsen &lt;- createUmiExperiment(experimentName = 'simsen',mainDir = main,sampleNames = samples)
+
+simsen &lt;- filterUmiObject(simsen)
+
+</code></pre>
+
+
+</div>

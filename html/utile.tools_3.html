@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>chunk_data_</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Break data into chunks</h2>
+
+<h3>Description</h3>
+
+<p>Creates a factory function which returns a different chunk
+of a given data object with each function call.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">chunk_data_(x, size = 10, reverse = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data frame or vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>An integer. The number of items (e.g. rows in a tibble)
+that make up a given chunk. Must be a positive integer.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reverse</code></td>
+<td>
+<p>A logical. Calculate chunks from back to front.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A factory function which returns a chunk of data from the provided
+object with each call. Once all data has been returned, function returns
+NULL perpetually.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create chunk factory function
+chunked_data &lt;- chunk_data_(mtcars, size = 6)
+
+# Chunk #1 (rows 1-6)
+paste0(rownames(chunked_data()), collapse = ', ')
+
+# Chunk #2 (rows 7-12)
+paste0(rownames(chunked_data()), collapse = ', ')
+</code></pre>
+
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>residuals.pclm2D</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract PCLM-2D Deviance Residuals</h2>
+
+<h3>Description</h3>
+
+<p>Extract PCLM-2D Deviance Residuals
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'pclm2D'
+residuals(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object for which the extraction of model residuals is
+meaningful.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Residuals extracted from the object <code>object</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+Dx &lt;- ungroup.data$Dx
+Ex &lt;- ungroup.data$Ex
+
+# Aggregate data to ungroup it in the example below
+x      &lt;- c(0, 1, seq(5, 85, by = 5))
+nlast  &lt;- 26
+n      &lt;- c(diff(x), nlast)
+group  &lt;- rep(x, n)
+y      &lt;- aggregate(Dx, by = list(group), FUN = "sum")[, -1]
+
+# Example
+P1 &lt;- pclm2D(x, y, nlast)
+
+residuals(P1)
+</code></pre>
+
+
+</div>

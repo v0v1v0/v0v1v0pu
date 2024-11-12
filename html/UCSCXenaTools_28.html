@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>XenaQueryProbeMap</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Query ProbeMap URL of Datasets</h2>
+
+<h3>Description</h3>
+
+<p>If dataset has no ProbeMap, it will be ignored.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">XenaQueryProbeMap(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a XenaHub object</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> contains hosts, datasets and url
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Shixiang Wang <a href="mailto:w_shixiang@163.com">w_shixiang@163.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">xe = XenaGenerate(subset = XenaHostNames == "tcgaHub")
+hosts(xe)
+## Not run: 
+xe_query = XenaQueryProbeMap(xe)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

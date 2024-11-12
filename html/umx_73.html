@@ -1,0 +1,139 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxAlgebra</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A simple wrapper for mxAlgebra with name as the first parameter for more readable compact code.</h2>
+
+<h3>Description</h3>
+
+<p>umxAlgebra is a wrapper for mxAlgebra which has the name parameter first in order.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxAlgebra(
+  name = NA,
+  expression,
+  dimnames = NA,
+  ...,
+  joinKey = as.character(NA),
+  joinModel = as.character(NA),
+  verbose = 0L,
+  initial = matrix(as.numeric(NA), 1, 1),
+  recompute = c("always", "onDemand"),
+  fixed = "deprecated_use_recompute"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>The name of the algebra (Default = NA). Note the different order compared to mxAlgebra!</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expression</code></td>
+<td>
+<p>The algebra</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dimnames</code></td>
+<td>
+<p>Dimnames of the algebra</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>joinKey</code></td>
+<td>
+<p>See mxAlgebra documentation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>joinModel</code></td>
+<td>
+<p>See mxAlgebra documentation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Quiet or informative</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initial</code></td>
+<td>
+<p>See mxAlgebra documentation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>recompute</code></td>
+<td>
+<p>See mxAlgebra documentation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fixed</code></td>
+<td>
+<p>= See mxAlgebra documentation</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxAlgebra()</code>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxMatrix()</code>
+</p>
+</li></ul>
+<p>Other Advanced Model Building Functions: 
+<code>umxFixAll()</code>,
+<code>umxJiggle()</code>,
+<code>umxRun()</code>,
+<code>umxThresholdMatrix()</code>,
+<code>umxUnexplainedCausalNexus()</code>,
+<code>umx</code>,
+<code>xmuLabel()</code>,
+<code>xmuValues()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+A = umxMatrix("A", "Full", nrow = 3, ncol = 3, values=2)
+B = umxAlgebra("B", A)
+C = umxAlgebra(A + B, name = "C")
+D = umxAlgebra(sin(C), name = "D")
+m1 = mxRun(mxModel("AlgebraExample", A, B, C, D ))
+mxEval(D, m1)
+	
+x = umxAlgebra("circ", expression = 2 * pi)
+class(x$formula)
+x = mxAlgebra(name = "circ", 2 * pi)
+class(x$formula) # "call"
+
+## End(Not run)
+</code></pre>
+
+
+</div>

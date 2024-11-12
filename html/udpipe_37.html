@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_chisq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compare term usage across 2 document groups using the Chi-square Test for Count Data</h2>
+
+<h3>Description</h3>
+
+<p>Perform a <code>chisq.test</code> to compare if groups of documents have more prevalence of specific terms.<br>
+The function looks to each term in the document term matrix and applies a <code>chisq.test</code> comparing the frequency 
+of occurrence of each term compared to the other terms in the document group.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_chisq(dtm, groups, correct = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>a document term matrix: an object returned by <code>document_term_matrix</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>groups</code></td>
+<td>
+<p>a logical vector with 2 groups (TRUE / FALSE) where the size of the <code>groups</code> vector 
+is the same as the number of rows of <code>dtm</code> and where element i corresponds row i of <code>dtm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>correct</code></td>
+<td>
+<p>passed on to <code>chisq.test</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed on to <code>chisq.test</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame with columns term, chisq, p.value, freq, freq_true, freq_false indicating for each term in the <code>dtm</code>,
+how frequently it occurs in each group, the Chi-Square value and it's corresponding p-value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(brussels_reviews_anno)
+##
+## Which nouns occur in text containing the term 'centre'
+##
+x &lt;- subset(brussels_reviews_anno, xpos == "NN" &amp; language == "fr")
+x &lt;- x[, c("doc_id", "lemma")]
+x &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(x)
+relevant &lt;- dtm_chisq(dtm, groups = dtm[, "centre"] &gt; 0)
+head(relevant, 10)
+
+##
+## Which adjectives occur in text containing the term 'hote'
+##
+x &lt;- subset(brussels_reviews_anno, xpos == "JJ" &amp; language == "fr")
+x &lt;- x[, c("doc_id", "lemma")]
+x &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(x)
+
+group &lt;- subset(brussels_reviews_anno, lemma %in% "hote")
+group &lt;- rownames(dtm) %in% group$doc_id
+relevant &lt;- dtm_chisq(dtm, groups = group)
+head(relevant, 10)
+
+
+## Not run: 
+# do not show scientific notation of the p-values
+options(scipen = 100)
+head(relevant, 10)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

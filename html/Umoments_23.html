@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uMpool</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pooled central moment estimates - two-sample</h2>
+
+<h3>Description</h3>
+
+<p>Calculate unbiased pooled estimates of central moments and their powers and
+products up to specified order.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uMpool(smp, a, order)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>smp</code></td>
+<td>
+<p>sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>vector of the same length as <code>smp</code> specifying categories of
+observations (should contain two unique values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>highest order of the estimates to calclulate. Estimates of lower
+orders will be included.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Pooled estimates up to the 6th order can be calculated. Second and third
+orders contain estimates of the variance and third central moment, fourth
+order includes estimates of fourth moment and squared variance
+(<code class="reqn">\mu_2^2</code>), fifth order - of fifth moment and a product of
+second and third moments (<code class="reqn">\mu_2 \mu_3</code>), sixth order - of
+sixth moment, a product of second and fourth moments (<code class="reqn">\mu_2
+\mu_4</code>), squared third moment (<code class="reqn">\mu_3^2</code>), and
+cubed variance (<code class="reqn">\mu_2^3</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of estimates of central moments and their powers and
+products up to <code>order</code>. The highest order available is 6th. The names
+of the elements are <code>"M2", "M3", "M4", "M5", "M6"</code> for corresponding
+central moments, <code>"M2M3", "M2M4"</code> for products of the moments (second
+and third, second and fourth), and <code>"M2pow2", "M2pow3", "M3pow2"</code> for
+powers of the moments - corresponding to estimates of squared variance,
+cubed variance, and squared third moment.
+</p>
+
+
+<h3>References</h3>
+
+<p>Gerlovina, I. and Hubbard, A.E. (2019). <em>Computer algebra
+and algorithms for unbiased moment estimation of arbitrary order.</em> Cogent
+Mathematics &amp; Statistics, 6(1).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uM</code> for one-sample unbiased estimates.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">nsmp &lt;- 23
+smp &lt;- rgamma(nsmp, shape = 3)
+treatment &lt;- sample(0:1, size = nsmp, replace = TRUE)
+uMpool(smp, treatment, 6)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,128 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_make_twin_data_nice</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert a twin dataset into umx standard format.</h2>
+
+<h3>Description</h3>
+
+<p><code>umx_make_twin_data_nice</code> is a function to convert your twin data into a format used across <code>umx</code>. Specifically:
+</p>
+
+<ol>
+<li>
+<p> Existing column for zygosity is renamed to "zygosity".
+</p>
+</li>
+<li> <p><code>sep</code> is set to "_T"
+</p>
+</li>
+<li>
+<p> The twinID is is set to sequential digits, i.e. 1,2...
+</p>
+</li>
+</ol>
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_make_twin_data_nice(
+  data,
+  sep = "",
+  zygosity = "zygosity",
+  numbering,
+  labelNumericZygosity = FALSE,
+  levels = 1:5,
+  labels = c("MZFF", "MZMM", "DZFF", "DZMM", "DZOS")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a <code>data.frame()</code> to check/convert.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>existing separator string (will be updated to "_T").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zygosity</code></td>
+<td>
+<p>existing zygosity column name (will be renamed <code>zygosity</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numbering</code></td>
+<td>
+<p>existing twin sequence string (will be updated to _T1, _T2, _T3).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labelNumericZygosity</code></td>
+<td>
+<p>If TRUE numeric zygosity levels will be set to labels.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>levels</code></td>
+<td>
+<p>legal levels of zygosity (ignored if labelNumericZygosity = FALSE (default 1:5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>labels for each zyg level c("MZFF", "MZMM", "DZFF", "DZMM", "DZOS").</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li> <p><code>data.frame()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">tutorials</a>, <a href="https://github.com/tbates/umx">tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_wide2long()</code>, <code>umx_long2wide()</code>,
+</p>
+</li></ul>
+<p>Other Twin Data functions: 
+<code>umx_long2wide()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_residualize()</code>,
+<code>umx_scale_wide_twin_data()</code>,
+<code>umx_wide2long()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(twinData)
+tmp = twinData
+tmp2 = umx_make_twin_data_nice(twinData, sep="", numbering = 1:5, zygosity="zygosity")
+tmp$zygosity=NULL
+tmp = umx_make_twin_data_nice(twinData, sep="", numbering = 1:5, zygosity="zygosity")
+namez(tmp, "zyg")
+levels(tmp$zygosity)
+
+</code></pre>
+
+
+</div>

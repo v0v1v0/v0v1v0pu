@@ -1,0 +1,131 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.ers-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class ur.ers</h2>
+
+<h3>Description</h3>
+
+<p>This class contains the relevant information by applying the Elliott,
+Rothenberg and Stock unit root test.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>y</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The time series to
+be tested.</p>
+</dd>
+<dt>
+<code>yd</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The detrended
+time series.</p>
+</dd>
+<dt>
+<code>type</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: Test type,
+either <code>"DF-GLS"</code> (default), or <code>"P-test"</code>.</p>
+</dd>
+<dt>
+<code>model</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+deterministic model used for detrending, either intercept only, or
+intercept with linear trend.</p>
+</dd>
+<dt>
+<code>lag</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: The number of
+lags used in the test/auxiliary regression.</p>
+</dd>
+<dt>
+<code>cval</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The critical
+values of the test at the 1%, 5% and 10% level of significance.</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>: The value
+of the test statistic.</p>
+</dd>
+<dt>
+<code>testreg</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The test
+regression, only set for <code>"DF-GLS"</code>.</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+name of the test, <em>i.e.</em> ‘Elliott, Rothenberg and Stock’.</p>
+</dd>
+</dl>
+<h3>Extends</h3>
+
+<p>Class <code>urca</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Type <code>showMethods(classes="ur.ers")</code> at the R prompt for a
+complete list of methods which are available for this class.
+</p>
+<p>Useful methods include
+</p>
+
+<dl>
+<dt>
+<code>show</code>:</dt>
+<dd>
+<p>test statistic.</p>
+</dd>
+<dt>
+<code>summary</code>:</dt>
+<dd>
+<p>like show, but test type, test regression (<code>type="DF-GLS"</code>) and critical values added.</p>
+</dd>
+<dt>
+<code>plot</code>:</dt>
+<dd>
+<p>Diagram of fit, residual plot and their acfs'
+and pacfs' for <code>type="DF-GLS"</code>.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Elliott, G., Rothenberg, T.J. and Stock, J.H. (1996), Efficient Tests
+for an Autoregressive Unit Root, <em>Econometrica</em>,
+<b>Vol. 64, No. 4</b>, 813–836.
+</p>
+<p>MacKinnon, J.G. (1991), Critical Values for Cointegration Tests,
+<em>Long-Run Economic Relationships</em>, eds. R.F. Engle and
+C.W.J. Granger, London, Oxford, 267–276.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.ers</code> and <code>urca-class</code>.
+</p>
+
+
+</div>

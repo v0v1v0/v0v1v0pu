@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_check_requirements</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check For Perl and C Tools</h2>
+
+<h3>Description</h3>
+
+<p>Check the local installation for perl and verify C compiler is installed and working.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_check_requirements(
+  checklist = list(perl = list(check = TRUE, perlcmd = "perl"), C = list(check = TRUE)),
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>checklist</code></td>
+<td>
+<p>list with names corresponding to elements of the system to check.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>enable verbose messaging</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List fn result of all packages
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+invisible(system_check_requirements())
+
+</code></pre>
+
+
+</div>

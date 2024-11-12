@@ -1,0 +1,212 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Engine-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "Engine" Class</h2>
+
+<h3>Description</h3>
+
+<p>The <code>Engine</code> class is a tool (i.e., an algorithm) used to simulate
+vectors of gene expression from some underlying distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Engine(components)
+## S4 method for signature 'Engine'
+nComponents(object, ...)
+## S4 method for signature 'Engine'
+alterMean(object, TRANSFORM, ...)
+## S4 method for signature 'Engine'
+alterSD(object, TRANSFORM, ...)
+## S4 method for signature 'Engine'
+nrow(x)
+## S4 method for signature 'Engine'
+rand(object, n, ...)
+## S4 method for signature 'Engine'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>components</code></td>
+<td>
+<p>object of class <code>list</code>, each element of which
+contains the parameters for the underlying distribution that the
+gene expression follows. A component can be viewed as a special case
+of an engine that only has one component.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object, x</code></td>
+<td>
+<p>object of class <code>Engine</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TRANSFORM</code></td>
+<td>
+<p>function takes as its input a vector of mean expression
+or standard deviation and returns a transformed vector that can be used
+to alter the appropriate slot of the object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric scalar representing number of samples to be simulated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments for generic or plotting routines</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In most cases, an engine object is an instantiation of a more general
+family or class that we call an ABSTRACT ENGINE. Every abstract engine
+is an ordered list of components, which can also be thought of as an
+engine with parameters. We instantiate an engine by binding all the
+free parameters of an abstract engine to actual values. Note that
+partial binding (of a subset of the free parameters) produces another
+abstract engine.
+</p>
+<p>For all practical purposes, a COMPONENT should be viewed as an
+irreducible abstract engine. Every component must have an IDENTIFIER
+that is unique within the context of its enclosing abstract engine.
+The identifer may be implicitly taken to be the position of the
+component in the ordered list.
+</p>
+<p>We interpret an <code>Engine</code> as the gene expression generator for a
+homogenous population; effects of cancer on gene expression are modeled
+at a higher level.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The <code>Engine</code> generator returns an object of class <code>Engine</code>.
+</p>
+<p>The <code>alterMean</code> method returns an object of class <code>Engine</code> with
+altered mean.
+</p>
+<p>The <code>alterSD</code> method returns an object of class <code>Engine</code> with
+altered standard deviation.
+</p>
+<p>The <code>nrow</code> method returns the number of genes (i.e, the length of the
+vector) the <code>Engine</code> object will generate.
+</p>
+<p>The <code>rand</code> method returns <code class="reqn">nrow(Engine)*n</code> matrix representing the
+expressions of <code>nrow(Engine)</code> genes and <code>n</code> samples.
+</p>
+<p>The <code>summary</code> method prints out the number of components included
+in the <code>Engine</code> object.
+</p>
+<p>The <code>nComponents</code> method returns the number of components in the
+<code>Engine</code> object.
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Objects can be created by calls of the form <code>new("Engine",
+    components=components)</code>, or use the <code>Engine</code> generator function.
+Every engine is an ordered list of components, which generates a contiguous
+subvector of the total vector of gene expression.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>alterMean(object, TRANSFORM, ...)</dt>
+<dd>
+<p>Takes an object of class
+<code>Engine</code>, loops over the components in the <code>Engine</code>, alters
+the mean as defined by <code>TRANSFORM</code> function, and returns a modified
+object of class <code>Engine</code>.</p>
+</dd>
+<dt>alterSD(object, TRANSFORM, ...)</dt>
+<dd>
+<p>Takes an object of class
+<code>Engine</code>, loops over the components in the <code>Engine</code>, alters
+the standard deviation as defined by <code>TRANSFORM</code> function, and
+returns a modified object of class <code>Engine</code>.</p>
+</dd>
+<dt>nrow(x)</dt>
+<dd>
+<p>Counts the total number of genes (i.e, the
+length of the vector the <code>Engine</code> will generate).</p>
+</dd>
+<dt>rand(object, n, ...)</dt>
+<dd>
+<p>Generates <code class="reqn">nrow(Engine)*n</code> matrix
+representing gene expressions of <code>n</code> samples following the
+underlying distribution captured in the object of <code>Engine</code>.</p>
+</dd>
+<dt>summary(object, ...)</dt>
+<dd>
+<p>Prints out the number of components included
+in the object of <code>Engine</code>.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Jiexin Zhang <a href="mailto:jiexinzhang@mdanderson.org">jiexinzhang@mdanderson.org</a>,
+</p>
+
+
+<h3>References</h3>
+
+<p>Zhang J, Coombes KR.<br><em>Sources of variation in false discovery rate estimation include
+sample size, correlation, and inherent differences between groups.</em><br>
+BMC Bioinformatics. 2012; 13 Suppl 13:S1. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>EngineWithActivity</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("Engine")
+nComp &lt;- 10
+nGenes &lt;- 100
+comp &lt;- list()
+for (i in 1:nComp) {
+  comp[[i]] &lt;- IndependentNormal(rnorm(nGenes/nComp, 6, 1.5),
+                                 1/rgamma(nGenes/nComp, 44, 28))
+}
+myEngine &lt;- Engine(comp)
+nrow(myEngine)
+nComponents(myEngine)
+summary(myEngine)
+myData &lt;- rand(myEngine, 5)
+dim(myData)
+summary(myData)
+OFFSET &lt;- 2
+myEngine.alterMean &lt;- alterMean(myEngine, function(x){x+OFFSET})
+myData.alterMean &lt;- rand(myEngine.alterMean, 5)
+summary(myData.alterMean)
+SCALE &lt;- 2
+myEngine.alterSD &lt;- alterSD(myEngine, function(x){x*SCALE})
+myData.alterSD &lt;- rand(myEngine.alterSD, 5)
+summary(myData.alterSD)
+</code></pre>
+
+
+</div>

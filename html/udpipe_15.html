@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cbind_morphological</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add morphological features to an annotated dataset</h2>
+
+<h3>Description</h3>
+
+<p>The result of <code>udpipe_annotate</code> which is put into a data.frame 
+returns a field called <code>feats</code> containing morphological features as defined at 
+<a href="https://universaldependencies.org/u/feat/index.html">https://universaldependencies.org/u/feat/index.html</a>. If there are several of these features,
+these are concatenated with the <code>|</code> symbol. This function extracts each of these morphological 
+features separately and adds these as extra columns to the data.frame
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cbind_morphological(x, term = "feats", which)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame or data.table as returned by <code>as.data.frame(udpipe_annotate(...))</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>term</code></td>
+<td>
+<p>the name of the field in <code>x</code> which contains the morphological features. Defaults to 'feats'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which</code></td>
+<td>
+<p>a character vector with names of morphological features to uniquely parse out. These 
+features are one of the 24 lexical and grammatical properties of words defined at <a href="https://universaldependencies.org/u/feat/index.html">https://universaldependencies.org/u/feat/index.html</a>.
+Possible values are:
+</p>
+
+<ul>
+<li>
+<p>"lexical": "PronType", "NumType", "Poss", "Reflex", "Foreign", "Abbr", "Typo"
+</p>
+</li>
+<li>
+<p>"inflectional_noun": "Gender", "Animacy", "NounClass", "Number", "Case", "Definite", "Degree"
+</p>
+</li>
+<li>
+<p>"inflectional_verb": "VerbForm", "Mood", "Tense", "Aspect", "Voice", "Evident", "Polarity", "Person", "Polite", "Clusivity"
+</p>
+</li>
+</ul>
+<p>See the examples.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>x</code> in the same order with extra columns added (at least the column has_morph is added indicating
+if any morphological features are present and as well extra columns for each possible morphological feature in the data)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+udmodel &lt;- udpipe_download_model(language = "english-ewt")
+udmodel &lt;- udpipe_load_model(file = udmodel$file_model)
+x &lt;- udpipe_annotate(udmodel, 
+                     x = "The economy is weak but the outlook is bright")
+x &lt;- as.data.frame(x)
+x &lt;- cbind_morphological(x, term = "feats")
+
+## End(Not run)
+
+f &lt;- system.file(package = "udpipe", "dummydata", "traindata.conllu")
+x &lt;- udpipe_read_conllu(f)
+x &lt;- cbind_morphological(x, term = "feats")
+
+f &lt;- system.file(package = "udpipe", "dummydata", "traindata.conllu")
+x &lt;- udpipe_read_conllu(f)
+x &lt;- cbind_morphological(x, term = "feats", 
+                         which = c("Mood", "Gender", "VerbForm", "Polarity", "Polite"))
+
+# extract all features from the feats column even if not present in the data
+f &lt;- system.file(package = "udpipe", "dummydata", "traindata.conllu")
+x &lt;- udpipe_read_conllu(f)
+x &lt;- cbind_morphological(x, term = "feats", 
+                         which = c("lexical", "inflectional_noun", "inflectional_verb"))
+</code></pre>
+
+
+</div>

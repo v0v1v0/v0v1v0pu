@@ -1,0 +1,150 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_fetch_template</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create New Analysis Template</h2>
+
+<h3>Description</h3>
+
+<p>Building a system file will produce templates for R and other languages.
+This function provides a method to make local copies of these templates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_fetch_template(
+  cfg,
+  template = "Simulation",
+  overwrite = FALSE,
+  output_directory = getwd()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template</code></td>
+<td>
+<p>template type</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+<p>if <code>TRUE</code> the new system file will overwrite any existing files present</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_directory</code></td>
+<td>
+<p>directory where workshop files will be placed (getwd())</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The template argument can have the following values for the R
+workflow:
+</p>
+
+<ul>
+<li>
+<p>"Simulation"       produces <code>analysis_simulate.R</code>: R-Script named with placeholders used to run simulations
+</p>
+</li>
+<li>
+<p>"Estimation"       produces <code>analysis_estimate.R</code>: R-Script named with placeholders used to perform naive-pooled parameter estimation
+</p>
+</li>
+<li>
+<p>"NCA"              produces <code>analysis_nca.R</code>: R-Script to perform non-compartmental analysis (NCA) and report out the results
+</p>
+</li>
+<li>
+<p>"ShinyApp"         produces <code>ubiquity_app.R</code>, <code>server.R</code> and <code>ui.R</code>: files needed to run the model through a Shiny App either locally or on a Shiny Server
+</p>
+</li>
+<li>
+<p>"Model Diagram"    produces <code>system.svg</code>: SVG template for producing a model diagram (Goto <a href="https://inkscape.org">https://inkscape.org</a> for a free SVG editor)
+</p>
+</li>
+<li>
+<p>"Shiny Rmd Report" produces <code>system_report.Rmd</code> and <code>test_system_report.R</code>: R-Markdown file used to generate report tabs for the Shiny App and a script to test it
+</p>
+</li>
+<li>
+<p>"myOrg"            produces <code>myOrg.R</code>: R-Script for defining functions used within your organization
+</p>
+</li>
+</ul>
+<p>And this will create files to use in other software:
+</p>
+
+<ul>
+<li>
+<p>"Adapt"            produces <code>system_adapt.for</code> and <code>system_adapt.prm</code>: Fortran and parameter files for the currently selected parameter set in Adapt format.
+</p>
+</li>
+<li>
+<p>"Berkeley Madonna" produces <code>system_berkeley_madonna.txt</code>: text file with the model and the currently selected parameter set in Berkeley Madonna format
+</p>
+</li>
+<li>
+<p>"nlmixr"           produces <code>system_nlmixr.R</code> For the currently selected parameter set to define the system in the 'nlmixr' format.
+</p>
+</li>
+<li>
+<p>"NONMEM"           produces <code>system_nonmem.R</code> For the currently selected parameter set as a NONMEM conntrol stream.
+</p>
+</li>
+<li>
+<p>"Monolix"          produces <code>system_monolix.txt</code> For the currently selected parameter set as a NONMEM conntrol stream.
+</p>
+</li>
+<li>
+<p>"mrgsolve"         produces <code>system_mrgsolve.cpp</code>: text file with the model and the currently selected parameter set in mrgsolve format  
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>List with vectors of template <code>sources</code>, <code>destinations</code>
+and corresponding write success (<code>write_file</code>), also a list element
+indicating the overall success of the function call (<code>isgood</code>)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+# Creating a simulation template
+fr =  system_fetch_template(cfg, 
+      template         = "Simulation", 
+      output_directory = tempdir())
+
+</code></pre>
+
+
+</div>

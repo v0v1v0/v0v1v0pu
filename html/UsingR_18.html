@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BushApproval</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>U.S. President George Bush approval ratings</h2>
+
+<h3>Description</h3>
+
+<p>Approval ratings as reported by six different polls.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(BushApproval)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 323 observations on the following 3 variables.
+</p>
+
+<dl>
+<dt>date</dt>
+<dd>
+<p>The date poll was begun (some take a few days)</p>
+</dd>
+<dt>approval</dt>
+<dd>
+<p>a numeric number between 0 and 100</p>
+</dd>
+<dt>who</dt>
+<dd>
+<p>a factor with levels <code>fox</code> <code>gallup</code> <code>newsweek</code> <code>time.cnn</code> <code>upenn</code> <code>zogby</code></p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>A data set of approval ratings of George Bush over the time of his
+presidency, as reported by several agencies. Most polls were of size
+approximately 1,000 so the margin of error is about 3 percentage points.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data was found at
+http://www.pollingreport.com/BushJob.htm. The idea came from an
+article in <em>Salon</em>
+http://salon.com/opinion/feature/2004/02/09/bush_approval/index.html  by James K. Galbraith.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(BushApproval)
+attach(BushApproval)
+
+## Plot data with confidence intervals. Each poll gets different line type
+## no points at first
+plot(strptime(date,"%m/%d/%y"),approval,type="n",
+     ylab = "Approval Rating",xlab="Date",
+     ylim=c(30,100)
+     )
+
+## plot line for CI. Margin or error about 3
+## matlines has trouble with dates from strptime()
+colors = rainbow(6)
+
+for(i in 1:nrow(BushApproval)) {
+  lines(rep(strptime(date[i],"%m/%d/%y"),2),
+        c(approval[i]-3,approval[i]+3),
+        lty=as.numeric(who[i]),
+        col=colors[as.numeric(who[i])]
+        )
+  
+}
+
+## plot points
+points(strptime(date,"%m/%d/%y"),approval,pch=as.numeric(who))
+
+## add legend
+legend((2003-1970)*365*24*60*60,90,legend=as.character(levels(who)),lty=1:6,col=1:6)
+detach(BushApproval)
+</code></pre>
+
+
+</div>

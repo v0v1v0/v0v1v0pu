@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>galton</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Galton's height data for parents and children</h2>
+
+<h3>Description</h3>
+
+<p>Data set from tabulated data set used by Galton in 1885 to study the
+relationship between a parent's height and their childrens.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(galton)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 928 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>child</dt>
+<dd>
+<p>The child's height</p>
+</dd>
+<dt>parent</dt>
+<dd>
+<p>The “midparent” height</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The midparent's height is an average of the fathers height and 1.08 times
+the mother's. In the data there are 205 different parents and 928 children.
+The data here is truncated at the ends for both parents and
+children so that it can be treated as numeric data. The data were
+tabulated and consequently made discrete. The <code>father.son</code> data set is
+similar data used by Galton and is continuous.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data was found at
+http://www.bun.kyoto-u.ac.jp/~suchii/galton86.html.
+</p>
+<p>See also the data.set father.son which was found from
+http://stat-www.berkeley.edu/users/juliab/141C/pearson.dat. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(galton)
+plot(galton)
+## or with some jitter.
+plot(jitter(child,5) ~ jitter(parent,5),galton)
+## sunflowerplot shows flowers for multiple plots (Thanks MM)
+sunflowerplot(galton)
+</code></pre>
+
+
+</div>

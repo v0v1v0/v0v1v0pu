@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_scale_wide_twin_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Scale wide twin data</h2>
+
+<h3>Description</h3>
+
+<p>Scale wide data across all twins. You offer up a list of variables to scale, e.g. c("DEP", "bmi")
+and the separator (e.g. <code>sep = "_T"</code>) and twin suffixes e.g. 1:2 that paste together to make
+complete variable names: e.g. "DEP_T1" and "DEP_T2".
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_scale_wide_twin_data(varsToScale, sep, data, twins = 1:2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>varsToScale</code></td>
+<td>
+<p>The base names of the variables ("weight" etc.)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The suffix that distinguishes each case, e.g. "_T")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A wide dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>twins</code></td>
+<td>
+<p>Legal digits following sep (default 1:2)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> dataframe with varsToScale standardized
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>umx_scale
+</p>
+<p>Other Twin Data functions: 
+<code>umx_long2wide()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_twin_data_nice()</code>,
+<code>umx_residualize()</code>,
+<code>umx_wide2long()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(twinData) 
+df = umx_scale_wide_twin_data(data = twinData, varsToScale = c("ht", "wt"), sep = "")
+plot(wt1 ~ wt2, data = df)
+</code></pre>
+
+
+</div>

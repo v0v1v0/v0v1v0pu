@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multiple.identity</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>multiple.identity</h2>
+
+<h3>Description</h3>
+
+<p>Order of Magnitude Formatter
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multiple.identity(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector of numbers to be formatted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments to be passed on to <code>link{multiple}</code></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Simply a wrapper for multiple that prespecifies the extra identity.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Character vector of formatted numbers.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+vect &lt;- c(1000, 1500, 23450, 21784, 875003780)
+multiple.identity(vect)
+multiple.identity(vect, multiple="k")
+multiple.identity(vect, multiple="h")
+
+require(ggplot2)
+data(diamonds)
+ggplot(diamonds, aes(x=x, y=y, color=price*100)) + geom_point() + 
+scale_color_gradient2(labels=multiple.identity)
+
+</code></pre>
+
+
+</div>

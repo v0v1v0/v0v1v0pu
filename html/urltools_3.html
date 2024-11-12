@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>domain</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or set a URL's domain</h2>
+
+<h3>Description</h3>
+
+<p>as in the lubridate package, individual components of a URL
+can be both extracted or set using the relevant function call - see the
+examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">domain(x)
+
+domain(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a URL, or vector of URLs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>a replacement value (or vector of replacement values)
+for x's scheme.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>scheme</code>, <code>port</code>, <code>path</code>,
+<code>parameters</code> and <code>fragment</code> for other accessors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get a component
+example_url &lt;- "http://cran.r-project.org/submit.html"
+domain(example_url)
+
+#Set a component
+domain(example_url) &lt;- "en.wikipedia.org"
+</code></pre>
+
+
+</div>

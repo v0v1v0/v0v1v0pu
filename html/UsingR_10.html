@@ -1,0 +1,158 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>batting</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Batting statistics for 2002 baseball season</h2>
+
+<h3>Description</h3>
+
+<p>This dataset contains batting statistics for the 2002 baseball
+season. The data allows you to compute batting averages, on base
+percentages, and other statistics of interest to baseball fans. The
+data only contains players with more than 100 atbats for a team in the
+year. The data is excerpted with permission from the Lahman baseball
+database at <a href="http://www.seanlahman.com/">http://www.seanlahman.com/</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(batting)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 438 observations on the following 22 variables.
+</p>
+
+<dl>
+<dt>playerID</dt>
+<dd>
+<p>This is coded, but those familiar with the players
+should be able to find their favorites.</p>
+</dd>
+<dt>yearID</dt>
+<dd>
+<p>a numeric vector. Always 2002 in this dataset.</p>
+</dd>
+<dt>stintID</dt>
+<dd>
+<p>a numeric vector. Player's stint (order of appearances within a season)</p>
+</dd>
+<dt>teamID</dt>
+<dd>
+<p>a factor with Team</p>
+</dd>
+<dt>lgID</dt>
+<dd>
+<p>a factor with levels <code>AL</code> <code>NL</code></p>
+</dd>
+<dt>G</dt>
+<dd>
+<p>number of games played</p>
+</dd>
+<dt>AB</dt>
+<dd>
+<p>number of at bats</p>
+</dd>
+<dt>R</dt>
+<dd>
+<p>number of runs</p>
+</dd>
+<dt>H</dt>
+<dd>
+<p>number of hits</p>
+</dd>
+<dt>DOUBLE</dt>
+<dd>
+<p>number of doubles. "2B" in original dat
+a base.</p>
+</dd>
+<dt>TRIPLE</dt>
+<dd>
+<p>number of triples. "3B" in original data base</p>
+</dd>
+<dt>HR</dt>
+<dd>
+<p>number of home runs</p>
+</dd>
+<dt>RBI</dt>
+<dd>
+<p>number of runs batted in</p>
+</dd>
+<dt>SB</dt>
+<dd>
+<p>number of stolen bases</p>
+</dd>
+<dt>CS</dt>
+<dd>
+<p>number of times caught stealing</p>
+</dd>
+<dt>BB</dt>
+<dd>
+<p>number of base on balls (walks)</p>
+</dd>
+<dt>SO</dt>
+<dd>
+<p>number of strikeouts</p>
+</dd>
+<dt>IBB</dt>
+<dd>
+<p>number of intentional walks</p>
+</dd>
+<dt>HBP</dt>
+<dd>
+<p>number of hit by pitches</p>
+</dd>
+<dt>SH</dt>
+<dd>
+<p>number of sacrifice hits</p>
+</dd>
+<dt>SF</dt>
+<dd>
+<p>number of sacrifice flies</p>
+</dd>
+<dt>GIDP</dt>
+<dd>
+<p>number of grounded into double plays</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Baseball fans are “statistics” crazy. They love to talk about things
+like RBIs, BAs and OBPs. In order to do so, they need the
+numbers. This data comes from the Lahman baseball
+database at <a href="http://www.seanlahman.com/">http://www.seanlahman.com/</a>. The complete dataset
+includes data for all of baseball not just the year 2002 presented here.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Lahman baseball database, <a href="http://www.seanlahman.com/)">http://www.seanlahman.com/)</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>In addition to the data set above, the book
+<em>Curve Ball</em>, by Albert, J. and Bennett, J., Copernicus Books,
+gives an extensive statistical analysis of baseball.
+</p>
+<p>See <a href="https://www.baseball-almanac.com/stats.shtml">https://www.baseball-almanac.com/stats.shtml</a> for definitions
+of common baseball statistics.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(batting)
+attach(batting)
+BA = H/AB			# batting average
+OBP = (H + BB + HBP) / (AB + BB + HBP + SF) # On base "percentage"
+</code></pre>
+
+
+</div>

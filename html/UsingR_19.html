@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bycatch</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Number of Albatrosses accidentaly caught during a fishing haul</h2>
+
+<h3>Description</h3>
+
+<p>This data set from Hillborn and Mangel contains data on the number of
+Albatrosses accidentally caught while fishing by commercial
+fisheries. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(bycatch)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 18 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>no.albatross</dt>
+<dd>
+<p>The number of albatross caught</p>
+</dd>
+<dt>no.hauls</dt>
+<dd>
+<p>Number of hauls with this many albatross caught</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>During fishing operations non-target species are often captured. These
+are called “incidental catch”. In some cases, large-scale observer
+programs are used to monitor this incidental catch.
+</p>
+<p>When fishing for squid, albatrosses are caught while feeding on the
+squid at the time of fising. This feeding is encouraged while the net
+is being hauled in, as the squid are clustered making it  an opportunistic
+time for the albatross to eat.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This is from Hilborn and Mangel, <em>The Ecological Detective</em>,
+Princeton University Press, 1997. Original source of data is Bartle.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(bycatch)
+hauls = with(bycatch,rep(no.albatross,no.hauls))
+</code></pre>
+
+
+</div>

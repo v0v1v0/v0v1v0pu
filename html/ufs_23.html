@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>checkDataIntegrity</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Conveniently checking data integrity</h2>
+
+<h3>Description</h3>
+
+<p>This function is designed to make it easy to perform some data integrity
+checks, specifically checking for values that are impossible or unrealistic.
+These values can then be replaced by another value, or the offending cases
+can be deleted from the dataframe.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">checkDataIntegrity(
+  x,
+  dat,
+  newValue = NA,
+  removeCases = FALSE,
+  validValueSuffix = "_validValue",
+  newValueSuffix = "_newValue",
+  totalVarName = "numberOfInvalidValues",
+  append = TRUE,
+  replace = TRUE,
+  silent = FALSE,
+  rmarkdownOutput = FALSE,
+  callingSelf = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>This can be either a vector or a list. If it is a vector, it should
+have two elements, the first one being a regular expression matching one or
+more variables in the dataframe specified in <code>dat</code>, and second one
+being the condition the matching variables have to satisfy. If it is a list,
+it should be a list of such vectors. The conditions should start with a
+<code>Comparison</code> operator followed by a value (e.g. "&lt;30" or "&gt;=0).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>The dataframe containing the variables of which we should check
+the integrity.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newValue</code></td>
+<td>
+<p>The new value to be assigned to cases not satisfying the
+specified conditions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>removeCases</code></td>
+<td>
+<p>Whether to delete cases that do not satisfy the criterion
+from the dataframe (if <code>FALSE</code>, they're not deleted, but the offending
+value is replaced by <code>newValue</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>validValueSuffix</code></td>
+<td>
+<p>Suffix to append to variable names when creating
+variable names for new variables that contain TRUE and FALSE to specify for
+each original variable whether its value satisfied the specified criterion.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newValueSuffix</code></td>
+<td>
+<p>If <code>replace</code> is <code>FALSE</code>, original values are
+not replaced, but instead new variables are created where the offending
+values have been replaced. This suffix is appended to each original variable
+name to create the new variable name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>totalVarName</code></td>
+<td>
+<p>This is the name of a variable that contains, for each
+case, the total number of invalid values among all variables checked.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>append</code></td>
+<td>
+<p>Whether to append the columns to the dataframe, or only return
+the new columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replace</code></td>
+<td>
+<p>Whether to replace the offending values with the value
+specified in <code>newValue</code> or whether to create new columns (see
+<code>newValueSuffix</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Whether to display the log, or only set it as attribute of the
+returned dataframe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rmarkdownOutput</code></td>
+<td>
+<p>Whether to format the log so that it's ready to be
+included in RMarkdown reports.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>callingSelf</code></td>
+<td>
+<p>For internal use; whether the function calls itself.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The dataframe with the corrections, and the log stored in attribute
+<code>checkDataIntegrity_log</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### Default behavior: return dataframe with
+### offending values replaced by NA
+
+checkDataIntegrity(c('mpg', '&lt;30'),
+                   mtcars);
+
+### Check two conditions, and instead of returning the
+### dataframe with the results appended, only return the
+### columns indicating which cases 'pass', what the new
+### values would be, and how many invalid values were
+### found for each case (to easily remove cases that
+### provided many invalid values)
+
+checkDataIntegrity(list(c('mpg', '&lt;30'),
+                        c('gear', '&lt;5')),
+                   mtcars,
+                   append=FALSE);
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>untb-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Unified neutral theory of biodiversity
+</h2>
+
+<h3>Description</h3>
+
+<p>Numerical simulations, and visualizations, of the unified
+neutral theory of biodiversity
+</p>
+
+
+<h3>Details</h3>
+
+<p>Package <code>untb</code> uses two classes of object to represent an
+ecosystem: class <code>count</code> and class <code>census</code>.  In essence, a
+<code>count</code> object is a table of species abundances and a <code>census</code>
+object is a list of individuals.  See <code>?census</code> and <code>?count</code>
+for more details.  Although objects of either class can be coerced to
+the other, class <code>count</code> is the preferred form: it is a more
+compact representation, especially for large ecosystems.
+</p>
+<p>The package simulates neutral ecological drift using function
+<code>untb()</code>.  Function <code>display.untb()</code> displays a semi-animated
+graphic of an ecosystem undergoing neutral drift.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin
+</p>
+<p>Maintainer: &lt;hankin.robin@gmail.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> S. P. Hubbell 2001.  “The Unified Neutral Theory of
+Biodiversity”.   Princeton University Press.
+</p>
+</li>
+<li>
+<p> R. K. S. Hankin 2007.  <em>Introducing <b>untb</b>, an R
+package for simulating ecological drift under the unified neutral
+theory of biodiversity</em>.  Journal of Statistical Software, volume
+22, issue 12
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">a &lt;- untb(start=rep(1,100),prob=0.005,gens=5000,keep=FALSE)
+preston(a)
+no.of.spp(a)
+
+display.untb(start=rep(1,100),prob=0.1,gens=1000)
+
+data(butterflies)
+plot(butterflies,uncertainty=TRUE)
+
+</code></pre>
+
+
+</div>

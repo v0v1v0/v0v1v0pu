@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>filter_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prepare input data</h2>
+
+<h3>Description</h3>
+
+<p>This function prepares the raw input data for model fitting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">filter_data(data, detection_threshold = 20, censortime = 365,
+  censor_value = 10, decline_buffer = 500, initial_buffer = 3,
+  n_min_single = 3, threshold_buffer = 10, nsuppression = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>raw data set. Must be a data frame with the following columns: 'id' - stating the unique identifier for each subject; 'vl' - numeric vector with the viral load measurements for each subject; 'time' - numeric vector of the times at which each measurement was taken.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>detection_threshold</code></td>
+<td>
+<p>numeric value indicating the detection threshold of the assay used to measure viral load. Measurements below this value will be assumed to represent undetectable viral load levels. Default value is 20.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>censortime</code></td>
+<td>
+<p>numeric value indicating the maximum time point to include in the analysis. Subjects who do not suppress viral load below the detection threshold within this time will be discarded. Units are assumed to be the same as the 'time' column. Default value is 365.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>censor_value</code></td>
+<td>
+<p>positive numeric value indicating the maximum time point to include in the analysis. Subjects who do not suppress viral load below the detection threshold within this time will be discarded. Units are assumed to be the same as the 'time' column. Default value is 365.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decline_buffer</code></td>
+<td>
+<p>numeric value indicating the value assigned to measurements below the detection threshold. Must be less than or equal to the detection threshold.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initial_buffer</code></td>
+<td>
+<p>numeric (integer) value indicating the maximum number of initial observations from which the beginning of each trajectory will be chosen. Default value is 3.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_min_single</code></td>
+<td>
+<p>numeric value indicating the minimum number of data points required to be included in the analysis. Defaults to 3. It is highly advised not to go below this threshold.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold_buffer</code></td>
+<td>
+<p>numerical value indicating the range above the detection threshold which represents potential skewing of model fits. Subjects with their last two data points within this range will have the last point removed. Default value is 10.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nsuppression</code></td>
+<td>
+<p>numerical value (1 or 2) indicating whether suppression is defined as having one observation below the detection threshold, or two sustained observations. Default value is 1.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Steps include:
+1. Setting values below the detection threshold to half the detection threshold (following standard practice).
+2. Filtering out subjects who do not suppress viral load below the detection threshold by a certain time.
+3. Filtering out subjects who do not have a decreasing sequence of viral load (within some buffer range).
+4. Filtering out subjects who do not have enough data for model fitting.
+5. Removing the last data point of subjects with the last two points very close to the detection threshold. This prevents skewing of the model fit.
+Further details can be found in the Vignette.
+</p>
+
+
+<h3>Value</h3>
+
+<p>data frame of individuals whose viral load trajectories meet the criteria for model fitting. Includes columns for 'id', 'vl', and 'time'.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(1234567)
+
+simulated_data &lt;- simulate_data(nsubjects = 20)
+
+filter_data(simulated_data)
+
+</code></pre>
+
+
+</div>

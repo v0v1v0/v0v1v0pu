@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>generate_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generative ESOM</h2>
+
+<h3>Description</h3>
+
+<p>Function to generate new data with the same structure as the input data.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">    generate_data(Data, density_radius, Cls = NULL, gen_per_data = 10)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Data</code></td>
+<td>
+<p>Matrix of data (as submitted to Umatrix generation)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density_radius</code></td>
+<td>
+<p>Numeric value of data generation radius</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Cls</code></td>
+<td>
+<p>Classification of the data as a  vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gen_per_data</code></td>
+<td>
+<p>New isntances per original iunstance to be generated</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a list of results.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>original_data</code></td>
+<td>
+<p>The input data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>original_classes</code></td>
+<td>
+<p>The input classes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>generated_data</code></td>
+<td>
+<p>The generated data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>generated_classes</code></td>
+<td>
+<p>The generated classes.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Ultsch A, Lotsch J: Machine-learned cluster identification in high-dimensional data. J Biomed Inform. 2017 Feb;66:95-104. doi: 10.1016/j.jbi.2016.12.011. Epub 2016 Dec 28. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data("Hepta")
+data("HeptaBMU")
+HeptaData &lt;- Hepta$Data
+HeptaCls &lt;y- Hepta$Cls
+HeptaGenerated &lt;- generate_data(HeptaData, 1, HeptaCls )
+
+## End(Not run)</code></pre>
+
+
+</div>

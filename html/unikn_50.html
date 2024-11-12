@@ -1,0 +1,141 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>usecol</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Use a color or color palette</h2>
+
+<h3>Description</h3>
+
+<p><code>usecol</code> allows using a color or color palette <code>pal</code> (e.g., for plotting).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">usecol(
+  pal = pal_unikn,
+  n = "all",
+  alpha = NA,
+  distinct = FALSE,
+  use_names = FALSE,
+  use_col_ramp = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pal</code></td>
+<td>
+<p>A color palette (as a vector of colors or color palettes). 
+Default: <code>pal = pal_unikn</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>An integer value specifying the desired number of colors from the palette. 
+Default: <code>n = "all"</code> (i.e., use all colors of a color palette).  
+For the palettes defined by <strong>unikn</strong>, <code>n</code> is set to a pre-defined selection of 
+colors if the desired number of colors is smaller than the available number.  
+For all other palettes and values of <code>n</code> larger than <code>length(pal)</code>, 
+<code>n</code> compresses or extends the palette using <code>colorRampPalette</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>A factor modifying the opacity alpha 
+(as <code>alpha.f</code> in <code>adjustcolor</code>) to a value in <code>[0, 1]</code>. 
+Default: <code>alpha = NA</code> (i.e., no modification of opacity).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distinct</code></td>
+<td>
+<p>Boolean: Return only visually distinct colors? 
+Default: <code>distinct = FALSE</code> (i.e., include duplicate colors).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use_names</code></td>
+<td>
+<p>A logical value indicating whether colors should be returned as a named vector.
+Default: <code>use_names = FALSE</code>, for compatibility with <code>ggplot</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use_col_ramp</code></td>
+<td>
+<p>A logical value specifying whether the default of using pre-selected colors
+should be overridden and <code>colorRampPalette</code> should be used to process <code>n</code>. 
+Default: <code>use_col_ramp = FALSE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>usecol</code> also allows modifying and combining color palettes in various ways.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A (named) vector of colors (of type character).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for viewing and comparing color palettes; 
+<code>simcol</code> for finding similar colors; 
+<code>newpal</code> for defining new color palettes; 
+<code>grepal</code> for finding named colors; 
+<code>shades_of</code> to defining shades of a given color; 
+<code>ac</code> for adjusting color transparency; 
+<code>pal_unikn</code> for the default uni.kn color palette.
+</p>
+<p>Other color functions: 
+<code>ac()</code>,
+<code>demopal()</code>,
+<code>grepal()</code>,
+<code>newpal()</code>,
+<code>seecol()</code>,
+<code>shades_of()</code>,
+<code>simcol()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">usecol(pal = pal_unikn, n = "all")  # default color palette 
+usecol(pal = pal_unikn, n =  4)     # selecting n dedicated colors
+usecol(pal = pal_unikn, n = 20)     # extending color palette  
+
+# Mixing a new color palette: 
+pal_1 &lt;- usecol(pal = c(rev(pal_seeblau), "white", pal_pinky))  
+seecol(pal_1)
+
+# Mixing and extending a color palette: 
+pal_2 &lt;- usecol(pal = c(rev(pal_seegruen), "white", pal_bordeaux), n = 20)  
+seecol(pal_2)
+
+# Defining and using a custom color palette:
+pal_princeton_1 &lt;- c("#E77500", "white", "black")
+names(pal_princeton_1) &lt;- c("orange_w", "white", "black")
+
+pal_3 &lt;- usecol(pal_princeton_1, n = 7)
+seecol(pal_3)
+
+# Removing visual duplicates:
+usecol(c("black", "#000000", "gray", "grey", "red", "red1"), distinct = TRUE)
+seecol(usecol(c(pal_unikn, pal_seeblau), distinct = TRUE), title = "Using distinct colors")
+
+</code></pre>
+
+
+</div>

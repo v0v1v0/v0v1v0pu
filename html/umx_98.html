@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxFixAll</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umxFixAll: Fix all free parameters</h2>
+
+<h3>Description</h3>
+
+<p>Fix all free parameters in a model using omxGetParameters()
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxFixAll(model, name = "_fixed", run = FALSE, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an <code>mxModel()</code> within which to fix free parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>optional new name for the model. if you begin with a _ it will be made a suffix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>run</code></td>
+<td>
+<p>whether to fix and re-run the model, or just return it (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>whether to mention how many paths were fixed (default is FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> the fixed <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Advanced Model Building Functions: 
+<code>umxAlgebra()</code>,
+<code>umxJiggle()</code>,
+<code>umxRun()</code>,
+<code>umxThresholdMatrix()</code>,
+<code>umxUnexplainedCausalNexus()</code>,
+<code>umx</code>,
+<code>xmuLabel()</code>,
+<code>xmuValues()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+
+m1 = umxRAM("OneFactor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+m2 = umxFixAll(m1, run = TRUE, verbose = TRUE)
+mxCompare(m1, m2)
+
+
+## End(Not run)
+</code></pre>
+
+
+</div>

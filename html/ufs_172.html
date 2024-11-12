@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pomegaSq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The distribution of Omega Squared</h2>
+
+<h3>Description</h3>
+
+<p>These functions use some conversion to and from the <em>F</em> distribution to
+provide the Omega Squared distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pomegaSq(q, df1, df2, populationOmegaSq = 0, lower.tail = TRUE)
+
+qomegaSq(p, df1, df2, populationOmegaSq = 0, lower.tail = TRUE)
+
+romegaSq(n, df1, df2, populationOmegaSq = 0)
+
+domegaSq(x, df1, df2, populationOmegaSq = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df1, df2</code></td>
+<td>
+<p>Degrees of freedom for the numerator and the denominator,
+respectively.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>populationOmegaSq</code></td>
+<td>
+<p>The value of Omega Squared in the population; this
+determines the center of the Omega Squared distribution. This has not been
+implemented yet in this version of <code>ufs</code>. If anybody
+has the inverse of <code>convert.ncf.to.omegasq()</code> for me, I'll happily
+integrate this.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are the
+likelihood of finding an Omega Squared smaller than the specified value;
+otherwise, the likelihood of finding an Omega Squared larger than the
+specified value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Vector of probabilites (<em>p</em>-values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Desired number of Omega Squared values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>Vector of quantiles, or, in other words, the value(s) of Omega
+Squared.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The functions use <code>convert.omegasq.to.f()</code> and
+<code>convert.f.to.omegasq()</code> to provide the Omega Squared
+distribution.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>domegaSq</code> gives the density, <code>pomegaSq</code> gives the
+distribution function, <code>qomegaSq</code> gives the quantile function, and
+<code>romegaSq</code> generates random deviates.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>convert.omegasq.to.f()</code>,
+<code>convert.f.to.omegasq()</code>, <code>df()</code>, <code>pf()</code>,
+<code>qf()</code>, <code>rf()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### Generate 10 random Omega Squared values
+romegaSq(10, 66, 3);
+
+### Probability of findings an Omega Squared
+### value smaller than .06 if it's 0 in the population
+pomegaSq(.06, 66, 3);
+
+</code></pre>
+
+
+</div>

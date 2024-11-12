@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>us_fertilizer_county</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>us_fertilizer_county</h2>
+
+<h3>Description</h3>
+
+<p>This is data adapted from the county-level estimates of fertilizer nitrogen and phosphorus based on
+commercial sales from 1945 to 2012.  Please visit [here](https://www.sciencebase.gov/catalog/item/5851b2d1e4b0f99207c4f238)
+for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">us_fertilizer_county
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 582012rows and 11 variables:
+</p>
+
+<dl>
+<dt>FIPS</dt>
+<dd>
+<p>FIPS is a combination of state and county codes, in character format.</p>
+</dd>
+<dt>State</dt>
+<dd>
+<p>The state abbr. of U.S.</p>
+</dd>
+<dt>County</dt>
+<dd>
+<p>County name in U.S.</p>
+</dd>
+<dt>ALAND</dt>
+<dd>
+<p>The land area in each county, unit: km squared</p>
+</dd>
+<dt>AWATER</dt>
+<dd>
+<p>The water area in each county, unit: km squared</p>
+</dd>
+<dt>INTPTLAT</dt>
+<dd>
+<p>The latitude of centriod in each county, e.g. 32.53638</p>
+</dd>
+<dt>INTPTLONG</dt>
+<dd>
+<p>The longitude of centriod in each county, e.g. -86.64449</p>
+</dd>
+<dt>Quantity</dt>
+<dd>
+<p>The quantity of fertilizeation as N or P, e.g. kg N or kg P</p>
+</dd>
+<dt>Year</dt>
+<dd>
+<p>The year of estimated data, e.g. 1994</p>
+</dd>
+<dt>Nutrient</dt>
+<dd>
+<p>The fertilizer type, e.g. N or P</p>
+</dd>
+<dt>Farm.Type</dt>
+<dd>
+<p>The land use type of fertilizer, e.g. farm and nonfarm</p>
+</dd>
+<dt>Input.Type</dt>
+<dd>
+<p>The input type of nutrient, e.g. Fertilizer or Manure</p>
+</dd>
+</dl>
+<p>...
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  require(usfertilizer)
+  data(us_fertilizer_county)
+</code></pre>
+
+
+</div>

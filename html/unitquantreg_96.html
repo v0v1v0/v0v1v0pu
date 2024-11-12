@@ -1,0 +1,146 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vuong.test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Vuong test</h2>
+
+<h3>Description</h3>
+
+<p>Performs Vuong test between two fitted objects of class
+<code>unitquantreg</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vuong.test(object1, object2, alternative = c("two.sided", "less", "greater"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object1, object2</code></td>
+<td>
+<p>objects of class <code>unitquantreg</code>
+containing the fitted models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>indicates the alternative hypothesis and must be one
+of <code>"two.sided"</code> (default), <code>"less"</code>, or <code>"greater"</code>. You can
+specify just the initial letter of the value, but the argument name must be
+given in full. See ‘Details’ for the meanings of the possible values.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The statistic of Vuong likelihood ratio test for compare two
+non-nested regression models is defined by
+</p>
+<p style="text-align: center;"><code class="reqn">T = \frac{1}{\widehat{\omega}^2\,\sqrt{n}}\,\sum_{i=1}^{n}\,
+\log\frac{f(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\theta}})}{
+g(y_i \mid \boldsymbol{x}_i,\widehat{\boldsymbol{\gamma}})}</code>
+</p>
+
+<p>where
+</p>
+<p style="text-align: center;"><code class="reqn">\widehat{\omega}^2 = \frac{1}{n}\,\sum_{i=1}^{n}\,\left(\log \frac{f(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\theta}})}{g(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\gamma}})}\right)^2 - \left[\frac{1}{n}\,\sum_{i=1}^{n}\,\left(\log \frac{f(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\theta}})}{ g(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\gamma}})}\right)\right]^2</code>
+</p>
+
+<p>is an estimator for the variance of
+<code class="reqn">\frac{1}{\sqrt{n}}\,\displaystyle\sum_{i=1}^{n}\,\log\frac{f(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\theta}})}{g(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\gamma}})}</code>,
+<code class="reqn">f(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\theta}})</code> and
+<code class="reqn">g(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\gamma}})</code>
+are the corresponding rival densities evaluated at the maximum likelihood estimates.
+</p>
+<p>When <code class="reqn">n \rightarrow \infty</code> we have that <code class="reqn">T \rightarrow N(0, 1)</code> in distribution.
+Therefore, at <code class="reqn">\alpha\%</code> level of significance  the null hypothesis of
+the equivalence of the competing models is rejected if <code class="reqn">|T| &gt; z_{\alpha/2}</code>,
+where <code class="reqn">z_{\alpha/2}</code> is the <code class="reqn">\alpha/2</code> quantile of standard normal distribution.
+</p>
+<p>In practical terms, <code class="reqn">f(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\theta}})</code>
+is better (worse) than <code class="reqn">g(y_i \mid \boldsymbol{x}_i, \widehat{\boldsymbol{\gamma}})</code>
+if <code class="reqn">T&gt;z_{\alpha/2}</code> (or <code class="reqn">T&lt; -z_{\alpha/2}</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with class <code>"htest"</code> containing the following
+components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>statistic</code></td>
+<td>
+<p>the value of the test statistic.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.value</code></td>
+<td>
+<p>the p-value of the test.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>a character string describing the alternative hypothesis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string with the method used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.name</code></td>
+<td>
+<p>a character string ginven the name of families models under comparison.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>André F. B. Menezes
+</p>
+<p>Josmar Mazucheli
+</p>
+
+
+<h3>References</h3>
+
+<p>Vuong, Q. (1989). Likelihood ratio tests for model selection and
+non-nested hypotheses. <em>Econometrica</em>, <b>57</b>(2), 307–333.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(sim_bounded, package = "unitquantreg")
+sim_bounded_curr &lt;- sim_bounded[sim_bounded$family == "uweibull", ]
+
+fit_uweibull &lt;- unitquantreg(formula = y1 ~ x, tau = 0.5,
+                             data = sim_bounded_curr,
+                             family = "uweibull")
+fit_kum &lt;- unitquantreg(formula = y1 ~ x, tau = 0.5,
+                             data = sim_bounded_curr,
+                             family = "kum")
+
+ans &lt;- vuong.test(object1 = fit_uweibull, object2 = fit_kum)
+ans
+str(ans)
+
+
+</code></pre>
+
+
+</div>

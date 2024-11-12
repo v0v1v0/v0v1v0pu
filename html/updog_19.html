@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>oracle_mis_vec</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns the oracle misclassification rates for each genotype.</h2>
+
+<h3>Description</h3>
+
+<p>Given perfect knowledge of the data generating parameters,
+<code>oracle_mis_vec</code> calculates the misclassification error
+rate at each genotype. This differs from <code>oracle_mis</code>
+in that this will <em>not</em> average over the genotype distribution to
+get an overall misclassification error rate. That is, <code>oracle_mis_vec</code>
+returns a vector of misclassification error rates <em>conditional</em> on
+each genotype.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">oracle_mis_vec(n, ploidy, seq, bias, od, dist)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The read-depth.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ploidy</code></td>
+<td>
+<p>The ploidy of the individual.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seq</code></td>
+<td>
+<p>The sequencing error rate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bias</code></td>
+<td>
+<p>The allele-bias.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>od</code></td>
+<td>
+<p>The overdispersion parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>The distribution of the alleles.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is an ideal level of the misclassification error rate and
+any real method will have a larger rate than this. This is a useful
+approximation when you have a lot of individuals.
+</p>
+<p>To come up with <code>dist</code>, you need some additional assumptions.
+For example, if the population is in Hardy-Weinberg equilibrium and
+the allele frequency is <code>alpha</code> then you could calculate
+<code>dist</code> using the R code: <code>dbinom(x = 0:ploidy, size = ploidy, prob = alpha)</code>.
+Alternatively, if you know the genotypes of the individual's two parents are, say,
+<code>ref_count1</code> and <code>ref_count2</code>, then you could use the <code>get_q_array</code>
+function from the updog package: <code>get_q_array(ploidy)[ref_count1 + 1, ref_count2 + 1, ]</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of numerics. Element i is the oracle misclassification
+error rate when genotyping an individual with actual
+genotype i + 1.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li>
+<p>Gerard, D., Ferrão, L. F. V., Garcia, A. A. F., &amp; Stephens, M. (2018). Genotyping Polyploids from Messy Sequencing Data. <em>Genetics</em>, 210(3), 789-807. <a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a>.
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Hardy-Weinberg population with allele-frequency of 0.75.
+## Moderate bias and moderate overdispersion.
+ploidy &lt;- 4
+dist &lt;- stats::dbinom(0:ploidy, ploidy, 0.75)
+om &lt;- oracle_mis_vec(n = 100, ploidy = ploidy, seq = 0.001,
+                     bias = 0.7, od = 0.01, dist = dist)
+om
+
+## Get same output as oracle_mis this way:
+sum(dist * om)
+oracle_mis(n = 100, ploidy = ploidy, seq = 0.001,
+           bias = 0.7, od = 0.01, dist = dist)
+
+</code></pre>
+
+
+</div>

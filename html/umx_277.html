@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_wide2long</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Change data family data from wide (2 twins per row) to long format.</h2>
+
+<h3>Description</h3>
+
+<p>Just detects the data columns for twin 1, and twin 2, then returns them stacked
+on top of each other (rbind) with the non-twin specific columns copied for each as well.
+</p>
+<p>*Note*, zygosity codings differ among labs. One scheme uses 1 = MZFF, 2 = MZMM, 3 = DZFF, 4 = DZMM, 
+5 = DZOS or DZFM, 6 = DZMF, with 9 = unknown, and then 50, 51,... for siblings.
+</p>
+<p>Typically, OS twins are ordered Female/Male.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_wide2long(data, sep = "_T", verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a dataframe containing twin data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>the string between the var name and twin suffix, i.e., var_T1 = _T</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Report the non-twin and twin columns (default = FALSE).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- long-format dataframe
+</p>
+
+
+<h3>See Also</h3>
+
+<p>[reshape()], [umx_merge_randomized_columns()], [umx_select_valid()]
+</p>
+<p>Other Twin Data functions: 
+<code>umx_long2wide()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_twin_data_nice()</code>,
+<code>umx_residualize()</code>,
+<code>umx_scale_wide_twin_data()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">long = umx_wide2long(data = twinData, sep = "")
+long = umx_wide2long(data = twinData, sep = "", verbose = TRUE)
+str(long)
+str(twinData)
+</code></pre>
+
+
+</div>

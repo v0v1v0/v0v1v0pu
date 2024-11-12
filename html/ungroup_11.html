@@ -1,0 +1,105 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>control.pclm2D</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Auxiliary for Controlling <code>pclm2D</code> Fitting</h2>
+
+<h3>Description</h3>
+
+<p>Auxiliary for Controlling <code>pclm2D</code> Fitting
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">control.pclm2D(lambda     = c(1, 1),
+               kr         = 7,
+               deg        = 3,
+               int.lambda = c(0.1, 1e+3),
+               diff       = 2,
+               opt.method = c("BIC", "AIC"),
+               max.iter   = 1e+3,
+               tol        = 1e-3)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Smoothing parameter to be used in pclm estimation.
+If <code>lambda = NA</code> an algorithm will find the optimal values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kr</code></td>
+<td>
+<p>Knot ratio. Number of internal intervals used for defining 1 knot in 
+B-spline basis construction. See <code>MortSmooth_bbase</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>Degree of the splines needed to create equally-spaced B-splines 
+basis over an abscissa of data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>int.lambda</code></td>
+<td>
+<p>If <code>lambda</code> is optimized an interval to be searched 
+needs to be specified. Format: vector containing the end-points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diff</code></td>
+<td>
+<p>An integer indicating the order of differences of the components 
+of PCLM coefficients. Default value: 2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt.method</code></td>
+<td>
+<p>Selection criterion of the model.
+Possible values are <code>"AIC"</code> and <code>"BIC"</code>. Default: <code>"BIC"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.iter</code></td>
+<td>
+<p>Maximal number of iterations used in fitting procedure.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>Relative tolerance in PCLM fitting procedure. Default: 0.1% i.e. 
+the estimated aggregate bins should be in the 0.1% error margin.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list with exactly eight control parameters.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pclm2D</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">control.pclm2D()
+</code></pre>
+
+
+</div>

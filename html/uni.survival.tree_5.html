@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uni.tree</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A survival tree based on stabilized score tests</h2>
+
+<h3>Description</h3>
+
+<p>This function returns a classification (decision) tree for a given survival dataset. The decision of making inner nodes (splitting criterion) is 
+based on the univariate score tests.
+The decision of declaring terminal nodes (stopping criterion) is the P-value threshold given by an argument.
+This tree construction algorithm is proposed by Emura et al. (2021).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uni.tree(
+  t.vec,
+  d.vec,
+  X.mat,
+  P.value = 0.01,
+  d0 = 0.01,
+  S.plot = FALSE,
+  score = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>t.vec</code></td>
+<td>
+<p>:Vector of survival times (time to either death or censoring)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d.vec</code></td>
+<td>
+<p>:Vector of censoring indicators (1=death, 0=censoring)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X.mat</code></td>
+<td>
+<p>:n by p matrix of covariates (features), where n is the sample size and p is the number of covariates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>P.value</code></td>
+<td>
+<p>:the threshold of P-value for stop splitting (stopping criterion)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d0</code></td>
+<td>
+<p>:A positive constant to stabilize the variance of score statistics (Witten &amp; Tibshirani 2010)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>S.plot</code></td>
+<td>
+<p>:call for plot the KM estimator for each split</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>score</code></td>
+<td>
+<p>:TRUE = score test (Emura et al. 2019); FALSE = log-rank test</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In order to stabilize the univariate score tests, a small value "d0" is added to the variance of the score statistics (Witten and Tibshirani 2010).
+d0=0 corresponds to the logrank test. To perform a large number of the score tests, the "compound.Cox" packages (Emura et al.2019) is applied with d0 as a option.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A nested list describing a classification tree, consisting of inner nodes and terminal node.
+</p>
+
+
+<h3>References</h3>
+
+<p>Emura T, Hsu WC, Chou WC (2021). A survival tree based on stabilized score tests for high-dimensional covariates, in review
+</p>
+<p>Emura T, Matsui S, Chen HY (2019). compound.Cox: Univariate Feature Selection and Compound Covariate for Predicting Survival, Computer Methods and Programs in Biomedicine 168: 21-37.
+</p>
+<p>Witten DM, Tibshirani R (2010) Survival analysis with high-dimensional covariates. Stat Method Med Res 19:29-51
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Lung,package="compound.Cox")
+train_Lung=Lung[which(Lung[,"train"]==TRUE),] #select training data
+t.vec=train_Lung[,1]
+d.vec=train_Lung[,2]
+x.mat=train_Lung[,-c(1,2,3)]
+uni.tree(t.vec,d.vec,x.mat,P.value=0.01,d0=0.01,S.plot=FALSE,score=TRUE)
+</code></pre>
+
+
+</div>

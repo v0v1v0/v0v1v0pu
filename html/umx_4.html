@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dl_from_dropbox</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>dl_from_dropbox</h2>
+
+<h3>Description</h3>
+
+<p>Download a file from Dropbox, given either the url, or the name and key
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dl_from_dropbox(x, key = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Either the file name, or full dropbox URL (see example below)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>key</code></td>
+<td>
+<p>the code after s/ and before the file name in the dropbox url</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Improvements would include error handling...
+</p>
+
+
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+<p>- <a href="https://thebiobucket.blogspot.kr/2013/04/download-files-from-dropbox.html">https://thebiobucket.blogspot.kr/2013/04/download-files-from-dropbox.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other File Functions: 
+<code>umx_file_load_pseudo()</code>,
+<code>umx_make_sql_from_excel()</code>,
+<code>umx_move_file()</code>,
+<code>umx_open()</code>,
+<code>umx_rename_file()</code>,
+<code>umx_write_to_clipboard()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+dl_from_dropbox("https://dl.dropboxusercontent.com/s/7kauod48r9cfhwc/tinytwinData.rda")
+dl_from_dropbox("tinytwinData.rda", key = "7kauod48r9cfhwc")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_new</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create New <code>system.txt</code> File</h2>
+
+<h3>Description</h3>
+
+<p>Copy a blank template (<code>system_file="template"</code>) file to the working directory or an example by specifying the following:
+</p>
+
+<ul>
+<li> <p><code>"template"</code> - Empty system file template
+</p>
+</li>
+<li> <p><code>"adapt"</code> - Parent/metabolite model taken from the adapt manual used in estimation examples [ADAPT]
+</p>
+</li>
+<li> <p><code>"two_cmt_cl"</code> - Two compartment model parameterized in terms of clearances 
+</p>
+</li>
+<li> <p><code>"one_cmt_cl"</code> - One compartment model parameterized in terms of clearances 
+</p>
+</li>
+<li> <p><code>"two_cmt_micro"</code> - Two compartment model parameterized in terms of rates (micro constants)
+</p>
+</li>
+<li> <p><code>"one_cmt_micro"</code> - One compartment model parameterized in terms of rates (micro constants)
+</p>
+</li>
+<li> <p><code>"mab_pk"</code> - General compartmental model of mAb PK from Davda 2014 [DG]
+</p>
+</li>
+<li> <p><code>"pbpk"</code> - PBPK model of mAb disposition in mice from Shah 2012 [SB]
+</p>
+</li>
+<li> <p><code>"pbpk_template"</code> - System parameters from Shah 2012 [SB] have been defined for all species along with the set notation to be used as a template for developing models with physiological parameters
+</p>
+</li>
+<li> <p><code>"pwc"</code> - Example showing how to make if/then or piece-wise continuous variables  
+</p>
+</li>
+<li> <p><code>"tmdd"</code> - Model of antibody with target-mediated drug disposition
+</p>
+</li>
+<li> <p><code>"tumor"</code> - Transit tumor growth model taken from Lobo 2002 [LB] 
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_new(
+  file_name = "system.txt",
+  system_file = "template",
+  overwrite = FALSE,
+  output_directory = getwd()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file_name</code></td>
+<td>
+<p>name of the new file to create</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>system_file</code></td>
+<td>
+<p>name of the system file to copy</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+<p>if <code>TRUE</code> the new system file will overwrite any existing files present</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_directory</code></td>
+<td>
+<p><code>getwd()</code> directory where system file will be placed</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>References
+</p>
+
+<ul>
+<li>
+<p>[ADAPT] Adapt 5 Users Guide <a href="https://bmsr.usc.edu/files/2013/02/ADAPT5-User-Guide.pdf">https://bmsr.usc.edu/files/2013/02/ADAPT5-User-Guide.pdf</a>
+</p>
+</li>
+<li>
+<p>[DG] Davda et. al. mAbs (2014) 6(4):1094-1102  <a href="https://doi.org/10.4161/mabs.29095">doi:10.4161/mabs.29095</a>
+</p>
+</li>
+<li>
+<p>[LB] Lobo, E.D. &amp; Balthasar, J.P. AAPS J (2002) 4, 212-222  <a href="https://doi.org/10.1208/ps040442">doi:10.1208/ps040442</a>
+</p>
+</li>
+<li>
+<p>[SB] Shah, D.K. &amp; Betts, A.M. JPKPD (2012) 39 (1), 67-86 <a href="https://doi.org/10.1007/s10928-011-9232-2">doi:10.1007/s10928-011-9232-2</a>
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p><code>TRUE</code> if the new file was created and <code>FALSE</code> otherwise
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# To create an example system file named example_system.txt:
+system_new(system_file      = "mab_pk", 
+           file_name        = "system_example.txt", 
+           overwrite        = TRUE,  
+           output_directory = tempdir())
+
+</code></pre>
+
+
+</div>

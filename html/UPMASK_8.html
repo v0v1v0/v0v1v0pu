@@ -1,0 +1,193 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>innerLoop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UPMASK inner loop</h2>
+
+<h3>Description</h3>
+
+<p><code>innerLoop</code> executes the UPMASK method's inner loop and returns 
+the stars which were considered as cluster member stars.
+</p>
+<p>The <code>innerLoop</code> perform the PCA, runs the clustering algorithm and check for 
+overdensities in the spatial distribution for the clustered stars in the PC space using
+a 2d kernel density estimation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">innerLoop(ocdata_full, ocdata, classAlgol="kmeans", autoThresholdLevel=3, 
+autoThreshold=TRUE, iiter=0, plotIter=FALSE, verbosity=1, starsPerClust_kmeans=50, 
+nstarts_kmeans=50, runId=0, autoCalibrated=FALSE, stopIfEmpty=FALSE, 
+positionDataIndexes=c(1,2), smartTableDB, nDimsToKeep=4, dimRed="PCA", scale=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ocdata_full</code></td>
+<td>
+<p>a data frame with the data to perform the analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ocdata</code></td>
+<td>
+<p>a data frame with the data to consider in the PCA step</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>classAlgol</code></td>
+<td>
+<p>a string indicating the type of clustering algorithm to consider. Only k-means is implemented at this moment (defaults to kmeans)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoThresholdLevel</code></td>
+<td>
+<p>an integer indicating the level for thresholding of the spatial distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoThreshold</code></td>
+<td>
+<p>a boolean indicating if autoThresolding should be adopted (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iiter</code></td>
+<td>
+<p>and integer indicating the number of the iteration (passed by the <code>outerLoop</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plotIter</code></td>
+<td>
+<p>a boolean indicating if the user wants to see iteration plots (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbosity</code></td>
+<td>
+<p>a flag indicating the verbosity level: it can be 0 (no screen output at all), 1 (minimum), &gt;=2 (all)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>starsPerClust_kmeans</code></td>
+<td>
+<p>an integer with the average number of stars per k-means cluster</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstarts_kmeans</code></td>
+<td>
+<p>an integer the amount of random re-initializations of the k-means clustering method (usually it is not necessary to modify this)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runId</code></td>
+<td>
+<p>an integer greater than zero indicating the run Id (passed by the <code>outerLoop</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoCalibrated</code></td>
+<td>
+<p>a boolean indicating if the number of random field realizations for the clustering check in the position space should be autocalibrated (experimental code, defaults to FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stopIfEmpty</code></td>
+<td>
+<p>a boolean indicating if the code should completely stop if no spatial clustering is detected (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>positionDataIndexes</code></td>
+<td>
+<p>an array of integers indicating the columns of the data frame containing the spatial position measurements</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smartTableDB</code></td>
+<td>
+<p>a database connection to the smart look-up table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nDimsToKeep</code></td>
+<td>
+<p>an integer with the number of dimensions to consider (defaults to 4)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dimRed</code></td>
+<td>
+<p>a string with the dimensionality reduction method to use (defaults to PCA. The only other options are LaplacianEigenmaps or None)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale</code></td>
+<td>
+<p>a boolean indicating if the data should be scaled and centered</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with objects considered as members at this iteration.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://dx.doi.org/10.1051/0004-6361/201321143">Krone-Martins, A. &amp; Moitinho, A., A&amp;A, v.561, p.A57, 2014</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Perform a one run of the innerLoop using a simulated open cluster with 
+# spatial and photometric data 
+# Load the data into a data frame
+fileName &lt;- "oc_12_500_1000_1.0_p019_0880_1_25km_120nR_withcolors.dat"
+inputFileName &lt;- system.file("extdata", fileName, package="UPMASK")
+ocData &lt;- read.table(inputFileName, header=TRUE)
+ocData &lt;- data.frame(ocData, id=(1:length(ocData[,1]))) # create an id
+
+# Prepare the data to run the inner loop
+posIdx &lt;- c(1,2)
+photIdx &lt;- c(3,5,7,9,11,19,21,23,25,27)
+
+# Create the look up table
+library(RSQLite)
+stcon &lt;- create_smartTable()
+
+# Run the inner loop 
+innerLoopRes &lt;- innerLoop(ocData, ocData[,photIdx], autoThresholdLevel=1, verbosity=2,
+                          starsPerClust_kmeans=25, positionDataIndexes=posIdx, 
+                          smartTableDB=stcon)
+
+# Clean the environment
+rm(list=c("inputFileName", "ocData", "posIdx", "photIdx", "innerLoopRes", 
+   "fileName"))
+dbDisconnect(stcon)
+
+## End(Not run) 
+ 
+</code></pre>
+
+
+</div>

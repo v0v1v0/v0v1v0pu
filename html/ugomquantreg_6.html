@@ -1,0 +1,190 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UGOM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The unit-Gompertz distribution - quantile parameterization</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>UGOM()</code> define the unit-Gompertz distribution for a <code>gamlss.family</code> object to be used in GAMLSS fitting. <code>UGOM()</code> has the <code class="reqn">\tau</code>-th quantile equal to the parameter mu and sigma as the shape parameter. The functions <code>dUGOM</code>, <code>pUGOM</code>, <code>qUGOM</code> and <code>rUGOM</code> define the density, distribution function, quantile function and random generation for unit-Gompertz distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dUGOM(x, mu, sigma, tau = 0.5, log = FALSE)
+
+pUGOM(q, mu, sigma, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+qUGOM(p, mu, sigma, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+rUGOM(n, mu, sigma, tau = 0.5)
+
+UGOM(mu.link = "logit", sigma.link = "log")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>vector of quantiles on the (0,1) interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>vector of quantile parameter values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>vector of shape parameter values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>the <code class="reqn">\tau</code>-th fixed quantile in [d-p-q-r]-UGOM function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>logical; If TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; If TRUE, (default), <code class="reqn">P(X \leq{x})</code> are returned, otherwise <code class="reqn">P(X &gt; x)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of observations. If <code>length(n) &gt; 1</code>, the length is taken to be the number required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu.link</code></td>
+<td>
+<p>the mu link function with default logit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma.link</code></td>
+<td>
+<p>the sigma link function with default logit.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Probability density function
+</p>
+<p style="text-align: center;"><code class="reqn">f\left( {x\mid \mu ,\sigma ,\tau } \right)=\left ( \frac{\log \left( \tau \right) }{1-\mu ^{-\sigma }} \right ) \sigma x^{-\left( 1+\sigma \right) }\exp \left[ \left ( \frac{\log \left( \tau \right) }{1-\mu ^{-\sigma }} \right ) \left( 1-x^{-\sigma }\right) \right] </code>
+</p>
+
+<p>Cumulative distribution function
+</p>
+<p style="text-align: center;"><code class="reqn">F\left({x\mid \mu ,\sigma ,\tau } \right) = \exp \left[ \left ( \frac{\log \left( \tau \right) }{1-\mu ^{-\sigma }} \right ) \left( 1-x^{-\sigma }\right) \right]</code>
+</p>
+
+<p>Mean
+</p>
+<p style="text-align: center;"><code class="reqn">E(X)=\left( \frac{\log \left( \tau \right) }{1-\mu ^{-\sigma }}\right) ^{\frac{1}{\theta }}\exp \left(\frac{\log \left( \tau \right) }{1-\mu ^{-\sigma }}\right)\Gamma \left( \frac{\sigma -1}{\sigma },\frac{\log \left( \tau \right) }{  1-\mu ^{-\sigma }}\right)</code>
+</p>
+
+<p>where <code class="reqn">0 &lt; (x, \mu)&lt;1</code>, <code class="reqn">\mu</code> is, for a fixed and known value of <code class="reqn">\tau</code>, the <code class="reqn">\tau</code>-th quantile, <code class="reqn">\sigma</code> is the shape parameter and <code class="reqn">\Gamma(a, b)</code> is the upper incomplete gamma function.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>UGOM()</code> return a gamlss.family object which can be used to fit a unit-Gompertz distribution by gamlss() function.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Note that for <code>UGOM()</code>, mu is the <code class="reqn">\tau</code>-th quantile and sigma a shape parameter. The <code>gamlss</code> function is used for parameters estimation.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Josmar Mazucheli <a href="mailto:jmazucheli@gmail.com">jmazucheli@gmail.com</a>
+</p>
+<p>Bruna Alves <a href="mailto:pg402900@uem.br">pg402900@uem.br</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hastie, T. J. and Tibshirani, R. J. (1990). <em>Generalized Additive Models</em>. Chapman and Hall, London.
+</p>
+<p>Mazucheli, J., Alve, B. (2021). The Unit-Gompertz quantile regression model for bounded responses. <em>preprint</em>, <b>0</b>(0), 1-20.
+</p>
+<p>Mazucheli, J., Menezes, A. F. and Dey S. (2019). Unit-Gompertz distribution with applications. <em>Statistica</em>, <b>79</b>(1), 25–43.
+</p>
+<p>Rigby, R. A. and  Stasinopoulos, D. M. (2005). Generalized additive models for location, scale and shape (with discussion). <em>Applied. Statistics</em>, <b>54</b>(3), 507–554.
+</p>
+<p>Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z. and De Bastiani, F. (2019). <em>Distributions for modeling location, scale, and shape: Using GAMLSS in R</em>. Chapman and Hall/CRC.
+</p>
+<p>Stasinopoulos, D. M. and Rigby, R. A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R. <em>Journal of Statistical Software</em>, <b>23</b>(7), 1–45.
+</p>
+<p>Stasinopoulos, D. M., Rigby, R. A., Heller, G., Voudouris, V. and De Bastiani F. (2017) <em>Flexible Regression and Smoothing: Using GAMLSS in R</em>, Chapman and Hall/CRC.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(123)
+x &lt;- rUGOM(n = 1000, mu = 0.50, sigma = 1.69, tau = 0.50)
+R &lt;- range(x)
+S &lt;- seq(from = R[1], to = R[2], length.out = 1000)
+
+hist(x, prob = TRUE, main = 'unit-Gompertz')
+lines(S, dUGOM(x = S, mu = 0.50, sigma = 1.69, tau = 0.50), col = 2)
+
+plot(ecdf(x))
+lines(S, pUGOM(q = S, mu = 0.50, sigma = 1.69, tau = 0.50), col = 2)
+
+plot(quantile(x, probs = S), type = "l")
+lines(qUGOM(p = S, mu = 0.50, sigma = 1.69, tau = 0.50), col = 2)
+
+library(gamlss)
+set.seed(123)
+data &lt;- data.frame(y =  rUGOM(n = 100, mu = 0.5, sigma = 2.0, tau = 0.5))
+
+tau &lt;- 0.50
+fit &lt;- gamlss(y ~ 1, data = data, family = UGOM)
+
+set.seed(123)
+n &lt;- 100
+x &lt;- rbinom(n, size = 1, prob = 0.5)
+eta &lt;- 0.5 + 1 * x;
+mu &lt;- 1 / (1 + exp(-eta));
+sigma &lt;- 1.5;
+y &lt;- rUGOM(n, mu, sigma, tau = 0.5)
+data &lt;- data.frame(y, x)
+
+tau &lt;- 0.50
+fit &lt;- gamlss(y ~ x, data = data, family = UGOM(mu.link = "logit", sigma.link = "log"))
+</code></pre>
+
+
+</div>

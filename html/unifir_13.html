@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_unity_project</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a new Unity project.</h2>
+
+<h3>Description</h3>
+
+<p>Create a new Unity project.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_unity_project(path, quit = TRUE, unity = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>The path to create a new Unity project at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quit</code></td>
+<td>
+<p>Logical: quit Unity after creating the project?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unity</code></td>
+<td>
+<p>The path to the Unity executable on your system (importantly,
+<em>not</em> the UnityHub executable). If <code>NULL</code>, checks to see if the environment
+variable or option <code>unifir_unity_path</code> is set; if so, uses that path
+(preferring the environment variable over the option if the two disagree).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>TRUE, invisibly.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other utilities: 
+<code>add_default_player()</code>,
+<code>add_prop()</code>,
+<code>find_unity()</code>,
+<code>get_asset()</code>,
+<code>load_png()</code>,
+<code>load_scene()</code>,
+<code>new_scene()</code>,
+<code>read_raw()</code>,
+<code>save_scene()</code>,
+<code>set_active_scene()</code>,
+<code>validate_path()</code>,
+<code>waiver()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+if (interactive()) create_unity_project(file.path(tempdir(), "project"))
+
+
+</code></pre>
+
+
+</div>

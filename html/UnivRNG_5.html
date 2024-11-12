@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>draw.gamma.alpha.less.than.one</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates variation from Gamma distribution with <code class="reqn">\alpha&lt;1</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements pseudo-random number generation for a gamma distribution for <code class="reqn">\alpha&lt;1</code> with pdf
+</p>
+<p style="text-align: center;"><code class="reqn">f(x|\alpha,\beta)=\frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}</code>
+</p>
+
+<p>for <code class="reqn">0 \leq x &lt; \infty</code> and <code class="reqn">\min(\alpha,\beta)&gt;0</code> where <code class="reqn">\alpha</code> and <code class="reqn">\beta</code> are the shape and scale parameters, respectively.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">draw.gamma.alpha.less.than.one(nrep,alpha,beta)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrep</code></td>
+<td>
+<p>Number of data points to generate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Shape parameter for desired gamma distribution. Must be less than 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Scale parameter for desired gamma distribution.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of length five containing generated data, the theoretical mean, the empirical mean, the theoretical variance, and the empirical variance with names y, theo.mean, emp.mean, theo.var, and emp.var, respectively.</p>
+
+
+<h3>References</h3>
+
+<p>Ahrens, J. H., &amp; Dieter, U. (1974). Computer methods for sampling from gamma, beta, poisson and binomial distributions. <em>Computing</em>, <b>1</b>, 223-246.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">draw.gamma.alpha.less.than.one(nrep=100000,alpha=0.5,beta=2)
+</code></pre>
+
+
+</div>

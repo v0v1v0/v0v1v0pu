@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simulate_time_fixed</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate timepoints for subjects according to fixed design.</h2>
+
+<h3>Description</h3>
+
+<p>This function simulates observed timepoints for each subject according to a fixed sampling design.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simulate_time_fixed(npoints, censortime, id, index, max_datapoints)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>npoints</code></td>
+<td>
+<p>numeric value indicating the number of observations to be sampled.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>censortime</code></td>
+<td>
+<p>numeric value indicating the maximum time point to include in the analysis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>subject id. Can be numeric or a character.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>index</code></td>
+<td>
+<p>numeric identifier for each subject/model combination.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_datapoints</code></td>
+<td>
+<p>numeric value indicating the maximum number of data points collected from any subject.</p>
+</td>
+</tr>
+</table>
+</div>

@@ -1,0 +1,125 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.aggregate.bonusmalus</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Bonus-malus aggregation of values or utilities</h2>
+
+<h3>Description</h3>
+
+<p>Function to perform an aggregation of valus or utilities that considers some of the 
+inputs only as bonus (only considered if value is larger then the aggregated value
+of the non bonus or malus input) or malus (only considered if value is smaller then 
+the aggregated value of the non bonus or malus input).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.aggregate.bonusmalus(u,par,def.agg="utility.aggregate.add")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+
+<p>numeric vector of values or utilities to be aggregated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>numeric vector combining the parameters of the default aggregation technique
+(see argument <code>def.agg</code>) with those specifying the bonus-malus behaviour.
+The arguments of <code>def.agg</code>) must match the number of arguments of this
+function for the number of inputs reduced to those that are not treated as 
+bonus or malus.
+This parameter vector is then appended by the parameters characterizing the
+bonus-malus behavior. 
+This is a parameter vector of the same length as the number of sub-objectives.
+Its elements must be NA for the sub-objectives onsidered for the default aggregation
+technique, the weights relative to the aggregated value of the non-bonus and non-malus sub-objectives for the sub-objectives to be considered as bonus objectives, and the weights with a negative sign for those to be considered as malus objectives.
+Note that the weights of the bonus or malus attributes are relative to the 
+aggregated result of the non-bonus and non-malus inputs and the negative signs will only be used for identifying malus sub-objectives and will be eliminated when calculating the weighted mean.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>def.agg</code></td>
+<td>
+
+<p>(optional) character string specifying the name of the function used for aggregation
+of the non-bonus and non-malus sub-objectives. 
+Note that for use of this aggregation technique in the function 
+<code>utility.aggregation.create</code>, this argument has to be specified as the
+input argument <code>def.agg</code> (default aggregation) unless it should be additive (default).
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The aggregation function is defined by
+</p>
+<p style="text-align: center;"><code class="reqn">u = \frac{\displaystyle u^{\mathrm{agg}}_{i \notin b,i \notin m} + \sum_{\begin{array}{l}i \in b \wedge u_i &gt; u^{\mathrm{agg}}_{i \notin b,i \notin m}\\i \in m \wedge u_i &lt; u^{\mathrm{agg}}_{i \notin b,i \notin m}\end{array}}\mid w_i \mid u_i}{\displaystyle 1 + \sum_{\begin{array}{l}i \in b \wedge u_i &gt; u^{\mathrm{agg}}_{i \notin b,i \notin m}\\i \in m \wedge u_i &lt; u^{\mathrm{agg}}_{i \notin b,i \notin m}\end{array}}\mid w_i \mid}</code>
+</p>
+
+<p>The following figure shows examples of the behaviour of this aggregation function for the two-dimensional case:<br><img src="../help/figures/aggregationbonusmalus.png" width="80%" alt="aggregationbonusmalus.png"></p>
+
+
+<h3>Value</h3>
+
+<p>The function returns the aggregated value or utility.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This is the same function as <code>utility.aggregate.cobbdouglas</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Description of aggregation techniques: <br><br>
+Langhans, S.D., Reichert, P. and Schuwirth, N.,
+The method matters: A guide for indicator aggregation in ecological assessments. 
+Ecological Indicators 45, 494-507, 2014. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Constructor of aggregation node: <br><br><code>utility.aggregation.create</code> <br><br>
+Aggregation techniques provided by uncsim: <br><br><code>utility.aggregate.add</code> for additive aggregation (weighted arithmetic mean), <br><code>utility.aggregate.min</code> for minimum aggregation, <br><code>utility.aggregate.max</code> for maximum aggregation, <br><code>utility.aggregate.geo</code> or <code>utility.aggregate.cobbdouglas</code> for geometric or Cobb-Douglas aggregation (weighted geometric mean), <br><code>utility.aggregate.geooff</code> for geometric aggregation with offset, <br><code>utility.aggregate.revgeo</code> for reverse geometric aggregation, <br><code>utility.aggregate.revgeooff</code> for reverse geometric aggregation with offset, <br><code>utility.aggregate.harmo</code> for harmonic aggregation (weighted harmonic mean), <br><code>utility.aggregate.harmooff</code> for harmonic aggregation with offset, <br><code>utility.aggregate.revharmo</code> for reverse harmonic aggregation, <br><code>utility.aggregate.revharmooff</code> for reverse harmonic aggregation with offset, <br><code>utility.aggregate.mult</code> for multiplicative aggregation, <br><code>utility.aggregate.mix</code> for a mixture of additive, minimum, and geometric aggregation, <br><code>utility.aggregate.addmin</code> for a mixture of additive and minimum aggregation. <br><code>utility.aggregate.addpower</code> for additive power aggregation (weighted power mean), <br><code>utility.aggregate.revaddpower</code> for reverse additive power aggregation, <br><code>utility.aggregate.addsplitpower</code> for splitted additive power aggregation, <br><code>utility.aggregate.revaddsplitpower</code> for reverse splitted additive power aggregation, <br><code>utility.aggregate.bonusmalus</code> for an aggregation technique that considers some of the values or utilities of sub-objectives only as bonus or malus. <br></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utility.aggregate.bonusmalus(c(0.2,0.8), par=c(1,NA,1))
+utility.aggregate.bonusmalus(c(0.2,0.8), par=c(1,1,NA))
+utility.aggregate.bonusmalus(c(0.2,0.8), par=c(1,NA,-1))
+utility.aggregate.bonusmalus(c(0.2,0.8), par=c(1,-1,NA))
+</code></pre>
+
+
+</div>

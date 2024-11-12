@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>shift.column</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>shift.column</h2>
+
+<h3>Description</h3>
+
+<p>Shift a column of data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">shift.column(data, columns, newNames = sprintf("%s.Shifted", columns),
+  len = 1L, up = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p><code>data.frame</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>columns</code></td>
+<td>
+<p>Character vector specifying which columns to shift.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newNames</code></td>
+<td>
+<p>Character vector specifying new names for the columns that will be created by the shift.  Must be same length as <code>columns</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>len</code></td>
+<td>
+<p>Integer specifying how many rows to shift the data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>up</code></td>
+<td>
+<p>logical indicating if rows should be shifted up or down.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Shifts a column of data up or down a certain number of rows
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>data.frame</code> with the specified columns shifted.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+myData &lt;- data.frame(Upper=LETTERS, lower=letters)
+shift.column(data=myData, columns="lower")
+shift.column(data=myData, columns="lower", len=2)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u_scripts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Scripts</h2>
+
+<h3>Description</h3>
+
+<p>Unicode scripts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">u_scripts(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector with the names of Unicode scripts.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>If <code>x</code> is missing, a list of the Unicode scripts given as
+<code>u_char_range</code> Unicode character ranges, with the (full)
+block names as names.
+</p>
+<p>If <code>x</code> is given, a (sub)list of the specific Unicode scripts.
+</p>
+
+
+<h3>References</h3>
+
+<p>Unicode Character Database (<a href="https://www.unicode.org/ucd/">https://www.unicode.org/ucd/</a>)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>u_char_property</code> to find the script (property) of Unicode
+characters.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">scripts &lt;- u_scripts()
+names(scripts)
+## Total number of code points assigned to the scripts:
+sort(vapply(scripts, function(s) sum(n_of_u_chars(s)), 0),
+     decreasing = TRUE)
+</code></pre>
+
+
+</div>

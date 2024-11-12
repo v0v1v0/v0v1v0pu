@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukppd_get</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Price Paid Data</h2>
+
+<h3>Description</h3>
+
+<p>Price Paid Data tracks property sales in England and Wales submitted to HM Land
+Registry for registration.  Price Paid Data is based on the raw data released each month.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukppd_get(
+  postcode = "PL6 8RU",
+  item = NULL,
+  optional_item = NULL,
+  start_date = NULL,
+  end_date = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>postcode</code></td>
+<td>
+<p>postcode to select, see <code>ukppd_avail_postcode()</code> for
+available postcodes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>item</code></td>
+<td>
+<p>item to select, see <code>ukppd_avail_items()</code> for
+available items.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>optional_item</code></td>
+<td>
+<p>optional item to select that describes the location of
+the transaction, , see <code>ukppd_avail_optional_items()</code> for available
+items.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start_date</code></td>
+<td>
+<p>the start date as YYYY-MM-DD.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>end_date</code></td>
+<td>
+<p>the end date as YYYY-MM-DD.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>query modifiers passed through <code>rdf_modifiers</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a tibble in long format.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+ukppd_get("PL6 8RU")
+
+ukppd_get("PL6 8RU", start_date = "2001-01-01")
+
+ukppd_get("PL6 8RU", item = "newBuild", optional_item = "street")
+
+</code></pre>
+
+
+</div>

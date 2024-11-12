@@ -1,0 +1,153 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GaussNoiseRegress</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Introduction of Gaussian Noise for the generation of synthetic examples to handle imbalanced regression problems
+</h2>
+
+<h3>Description</h3>
+
+<p>This strategy performs both over-sampling and under-sampling. The under-sampling is randomly performed on the examples below the relevance threshold defined by the user. Regarding the over-sampling method, this is based on the generation of new synthetic examples with the introduction of a small perturbation on existing examples through Gaussian noise. A new example from a rare "class"" is obtained by perturbing all the features and the target variable a percentage of its standard deviation (evaluated on the rare examples). The value of nominal features of the new example is randomly selected according to the frequency of the values existing in the rare cases of the bump in consideration.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GaussNoiseRegress(form, dat, rel = "auto", thr.rel = 0.5, C.perc = "balance", 
+                  pert = 0.1, repl = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+
+<p>A data frame containing the original (unbalanced) data set
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rel</code></td>
+<td>
+
+<p>The relevance function which can be automatically ("auto") determined (the default) or may be provided by the user through a matrix with interpolating points.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thr.rel</code></td>
+<td>
+
+<p>A number indicating the relevance threshold above which a case is considered as belonging to the rare "class".
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C.perc</code></td>
+<td>
+
+<p>A list containing the percentage(s) of under- or/and  over-sampling to apply to each "class" (bump) obtained with the threshold. The <code>C.perc</code> values should be provided in ascending order of target variable values. The over-sampling percentage(s) should be numbers above 1 and represent the increase that is applied to the examples of the bump. The under-sampling percentage(s) should be numbers below 1 and represent the decrease applied to the cases in the corresponding bump. If the value of 1 is provided for a given bump, then the examples in that bump will remain unchanged. Alternatively it may be "balance" (the default) or "extreme", cases where the sampling percentages are automatically estimated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pert</code></td>
+<td>
+
+<p>A number indicating the level of perturbation to introduce when generating synthetic examples. Assuming as center the base example, this parameter defines the radius (based on the standard deviation) where the new example is generated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repl</code></td>
+<td>
+
+<p>A boolean value controlling the possibility of having repetition of examples when performing under-sampling by selecting among the "normal" examples.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns a data frame with
+the new data set resulting from the application of random under-sampling and over-sampling through the generation of synthetic examples using Gaussian noise. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>References</h3>
+
+<p>Sauchi Stephen Lee. (1999) <em>Regularization in skewed binary classification.</em> Computational Statistics Vol.14, Issue 2, 277-292.
+</p>
+<p>Sauchi Stephen Lee. (2000) <em>Noisy replication in skewed binary classification.</em> Computaional stistics and data analysis Vol.34, Issue 2, 165-191.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>SmoteRegress</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  if (requireNamespace("DMwR2", quietly = TRUE)) {
+  data(algae, package ="DMwR2")
+  clean.algae &lt;- data.frame(algae[complete.cases(algae), ])
+  C.perc = list(0.5, 3) 
+  mygn.alg &lt;- GaussNoiseRegress(a7~., clean.algae, C.perc = C.perc)
+  gnB.alg &lt;- GaussNoiseRegress(a7~., clean.algae, C.perc = "balance", 
+                               pert = 0.1)
+  gnE.alg &lt;- GaussNoiseRegress(a7~., clean.algae, C.perc = "extreme")
+  
+  plot(density(clean.algae$a7))
+  lines(density(gnE.alg$a7), col = 2)
+  lines(density(gnB.alg$a7), col = 3)
+  lines(density(mygn.alg$a7), col = 4)
+
+
+} else {
+  ir &lt;- iris[-c(95:130), ]
+  mygn1.iris &lt;- GaussNoiseRegress(Sepal.Width~., ir, C.perc = list(0.5, 2.5))
+  mygn2.iris &lt;- GaussNoiseRegress(Sepal.Width~., ir, C.perc = list(0.2, 4),
+                                  thr.rel = 0.8)
+  gnB.iris &lt;- GaussNoiseRegress(Sepal.Width~., ir, C.perc = "balance")
+  gnE.iris &lt;- GaussNoiseRegress(Sepal.Width~., ir, C.perc = "extreme")
+  
+  # defining a relevance function
+  rel &lt;- matrix(0, ncol = 3, nrow = 0)
+  rel &lt;- rbind(rel, c(2, 1, 0))
+  rel &lt;- rbind(rel, c(3, 0, 0))
+  rel &lt;- rbind(rel, c(4, 1, 0))
+
+  gn.rel &lt;- GaussNoiseRegress(Sepal.Width~., ir, rel = rel,
+                              C.perc = list(5, 0.2, 5))
+  plot(density(ir$Sepal.Width), ylim = c(0,1))
+  lines(density(gnB.iris$Sepal.Width), col = 3)
+  lines(density(gnE.iris$Sepal.Width, bw = 0.3), col = 4)
+  # check the impact of a different relevance threshold
+  lines(density(gn.rel$Sepal.Width), col = 2)
+  }
+</code></pre>
+
+
+</div>

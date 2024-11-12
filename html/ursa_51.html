@@ -1,0 +1,143 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>band_stat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Computes statistics for each band of raster.
+</h2>
+
+<h3>Description</h3>
+
+<p>For each band of <code>ursaRaster</code> object, <code>band_stat</code> returns certain statistics (mean, sd, sum, min, max, number of non-<code>NA</code> pixels, number of <code>NA</code> pixels). Regarding to each band, it is <em>global</em> operations of map algebra.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">band_stat(x, grid = FALSE, raw = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grid</code></td>
+<td>
+
+<p>Logical. If <code>TRUE</code> then metadata are returned instead of statistics. Default is <code>FALSE</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>raw</code></td>
+<td>
+
+<p>Logical. For the case of raster values are categories, if <code>raw=TRUE</code>, then function returns statistics of categories; if <code>raw=FALSE</code> and names of categories can be transformed to numerical values, then function returns statistics for decategorized values. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If raster values are not in memory or <code>grid=TRUE</code> then <code>ursa_info</code> is returned.
+</p>
+<p>Generic function <code>print</code> for object of class <code>ursaRaster</code> uses returned value of <code>band_stat</code> function with formatted columns.
+</p>
+<p>Statistics is computed for omitted <code>NA</code> values.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>data.frame</code>. Row names are indices of bands. Column names are:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Band name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mean</code></td>
+<td>
+<p>Mean value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd</code></td>
+<td>
+<p>Value of standard deviation with <code>n-1</code> denomination.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sum</code></td>
+<td>
+<p>Sum of values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>Minimal value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>Maximal value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of non-<code>NA</code> pixels.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nNA</code></td>
+<td>
+<p>Number of <code>NA</code> pixels.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Columns extraction from returned data frame is in the group of <code>band.*</code> functions.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+s &lt;- substr(as.character(sessionInfo()),1,48)
+a &lt;- reclass(ursa_dummy(mul=1/2,bandname=s),ramp=FALSE)
+band_stat(a,grid=TRUE)
+b2 &lt;- band_stat(a)
+b3 &lt;- band_stat(a,raw=TRUE)
+str(b2)
+str(b3)
+print(b2)
+print(a) ## 'print.ursaRaster' uses 'band_stat'
+print(a,raw=TRUE)
+</code></pre>
+
+
+</div>

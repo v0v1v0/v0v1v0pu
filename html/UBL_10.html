@@ -1,0 +1,201 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EvalRegressMetrics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Utility metrics for assessing the performance of utility-based regression tasks. 
+</h2>
+
+<h3>Description</h3>
+
+<p>This function allows to evaluate utility-based metrics in regression problems which have defined a cost, benefit, or utility surface.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">EvalRegressMetrics(trues, preds, util.vals, type = "util",
+metrics = NULL, thr = 0.5, control.parms = NULL, 
+beta = 1, maxC = NULL, maxB = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>trues</code></td>
+<td>
+<p>A vector with the true target variable values of the problem.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preds</code></td>
+<td>
+<p>A vector with the prediction values obtained for the vector of trues.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>util.vals</code></td>
+<td>
+<p>Either the cost, benefit or utility values corresponding to 
+the provided points (trues, preds).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+
+<p>A character specifying the type of surface under consideration. Can be set to "cost", 
+"benefit" or "utility" (the default).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>metrics</code></td>
+<td>
+<p>A character vector with the metrics names to be evaluated. 
+If not specified (the default), all the metrics avaliable for the type of
+surface provided are evaluated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thr</code></td>
+<td>
+<p>A numeric value between 0 and 1 setting a threshold on the
+relevance values for determining which are the important cases to consider.
+This threshold is only necessary for the following metrics: precPhi, recPhi
+and FPhi. Moreover, these metrics are only available for problems based on 
+utility surfaces. Defaults to 0.5.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control.parms</code></td>
+<td>
+<p>the control.parms of the relevance function phi. 
+Can be obtained through function phi.control.
+These are only necessary for evaluating the following utility metrics:
+recPhi, precPhi and FPhi.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+
+<p>The numeric value of the beta parameter for F-score.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxC</code></td>
+<td>
+<p>the maximum cost achievable in the cost surface. Parameter 
+only required when the problem depends on a cost surface.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxB</code></td>
+<td>
+<p>the maximum Benefit achievable in the benefit surface. 
+Parameter only required when the problem depends on a benefit surface.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns a named list with the evaluated metrics results. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>References</h3>
+
+<p>Ribeiro, R., 2011. Utility-based regression 
+(Doctoral dissertation, PhD thesis, 
+Dep. Computer Science, Faculty of Sciences - 
+University of Porto).
+</p>
+<p>Branco, P., 2014. Re-sampling Approaches for Regression Tasks under Imbalanced Domains 
+(Msc thesis, Dep. Computer Science, Faculty of Sciences - 
+University of Porto).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>phi.control</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+#Example using a utility surface interpolated and observing the performance of 
+# two models: i) a model obtained with a strategy designed for maximizing 
+# predictions utility and a model obtained through a standard random Forest.
+
+data(Boston, package = "MASS")
+
+tgt &lt;- which(colnames(Boston) == "medv")
+sp &lt;- sample(1:nrow(Boston), as.integer(0.7*nrow(Boston)))
+train &lt;- Boston[sp,]
+test &lt;- Boston[-sp,]
+
+control.parms &lt;- phi.control(Boston[,tgt], method="extremes", extr.type="both")
+# the boundaries of the domain considered
+minds &lt;- min(train[,tgt])
+maxds &lt;- max(train[,tgt])
+
+# build m.pts to include at least (minds, maxds) and (maxds, minds) points
+# m.pts must only contain points in [minds, maxds] range.
+m.pts &lt;- matrix(c(minds, maxds, -1, maxds, minds, -1),
+                byrow=TRUE, ncol=3)
+
+pred.res &lt;- UtilOptimRegress(medv~., train, test, type = "util", strat = "interpol",
+                             strat.parms=list(method = "bilinear"),
+                             control.parms = control.parms,
+                             m.pts = m.pts, minds = minds, maxds = maxds)
+
+# assess the performance
+eval.util &lt;- EvalRegressMetrics(test$medv, pred.res$optim, pred.res$utilRes,
+                                thr = 0.8, control.parms = control.parms)
+
+# now train a normal model
+model &lt;- randomForest(medv~.,train)
+normal.preds &lt;- predict(model, test)
+
+#obtain the utility of this model predictions
+NormalUtil &lt;- UtilInterpol(test$medv, normal.preds, type = "util",
+                           control.parms = control.parms,
+                           minds, maxds, m.pts, method = "bilinear")
+
+#check the performance
+eval.normal &lt;- EvalRegressMetrics(test$medv, normal.preds, NormalUtil,
+                                  thr=0.8, control.parms = control.parms)
+
+# 3 check visually the utility surface and the predictions of both models 
+UtilInterpol(NULL,NULL, type = "util", control.parms = control.parms,
+                           minds, maxds, m.pts, method = "bilinear", 
+                           visual=TRUE, full.output = TRUE)
+points(test$medv, normal.preds) # standard model predition points
+points(test$medv, pred.res$optim, col="blue") # model with optimized predictions
+
+## End(Not run)
+</code></pre>
+
+
+</div>

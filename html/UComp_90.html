@@ -1,0 +1,323 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UCmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UCmodel</h2>
+
+<h3>Description</h3>
+
+<p>Estimates and forecasts UC general univariate models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UCmodel(
+  y,
+  u = NULL,
+  model = "?/none/?/?",
+  h = 9999,
+  lambda = 1,
+  outlier = 9999,
+  tTest = FALSE,
+  criterion = "aic",
+  periods = NA,
+  verbose = FALSE,
+  stepwise = FALSE,
+  p0 = -9999.9,
+  arma = TRUE,
+  TVP = NULL,
+  trendOptions = "none/rw/llt/dt",
+  seasonalOptions = "none/equal/different",
+  irregularOptions = "none/arma(0,0)"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a time series to forecast (it may be either a numerical vector or
+a time series object). This is the only input required. If a vector, the additional
+input <code>periods</code> should be supplied compulsorily (see below).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+<p>a matrix of external regressors included only in the observation equation. 
+(it may be either a numerical vector or a time series object). If the output wanted 
+to be forecast, matrix <code>u</code> should contain future values for inputs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>the model to estimate. It is a single string indicating the type of 
+model for each component. It allows two formats "trend/seasonal/irregular" or 
+"trend/cycle/seasonal/irregular". The possibilities available for each component are:
+</p>
+
+<ul>
+<li>
+<p> Trend: ? / none / rw / irw / llt / dt / td; 
+</p>
+</li>
+<li>
+<p> Seasonal: ? / none / equal / different;
+</p>
+</li>
+<li>
+<p> Irregular: ? / none / arma(0, 0) / arma(p, q) - with p and q integer positive orders;
+</p>
+</li>
+<li>
+<p> Cycles: ? / none / combination of positive or negative numbers. Positive numbers fix
+the period of the cycle while negative values estimate the period taking as initial
+condition the absolute value of the period supplied. Several cycles with positive or negative values are possible
+and if a question mark is included, the model test for the existence of the cycles
+specified. The following are valid examples with different meanings: 48, 48?, -48, -48?,
+48+60, -48+60, -48-60, 48-60, 48+60?, -48+60?, -48-60?, 48-60?.
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>h</code></td>
+<td>
+<p>forecast horizon. If the model includes inputs h is not used, the lenght of u is used instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Box-Cox transformation lambda, NULL for automatic estimation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outlier</code></td>
+<td>
+<p>critical level of outlier tests. If NA it does not carry out any 
+outlier detection (default). A positive value indicates the critical minimum
+t test for outlier detection in any model during identification. Three types of outliers are
+identified, namely Additive Outliers (AO), Level Shifts (LS) and Slope Change (SC).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tTest</code></td>
+<td>
+<p>augmented Dickey Fuller test for unit roots used in stepwise algorithm (TRUE / FALSE). 
+The number of models to search for is reduced, depending on the result of this test.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion</code></td>
+<td>
+<p>information criterion for identification ("aic", "bic" or "aicc").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>periods</code></td>
+<td>
+<p>vector of fundamental period and harmonics required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>intermediate results shown about progress of estimation (TRUE / FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stepwise</code></td>
+<td>
+<p>stepwise identification procedure (TRUE / FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p0</code></td>
+<td>
+<p>initial parameter vector for optimisation search.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>arma</code></td>
+<td>
+<p>check for arma models for irregular components (TRUE / FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TVP</code></td>
+<td>
+<p>vector of zeros and ones to indicate TVP parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trendOptions</code></td>
+<td>
+<p>trend models to select amongst (e.g., "rw/llt").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seasonalOptions</code></td>
+<td>
+<p>seasonal models to select amongst (e.g., "none/differentt").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>irregularOptions</code></td>
+<td>
+<p>irregular models to select amongst (e.g., "none/arma(0,1)").</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>UCmodel</code> is a function for modelling and forecasting univariate
+time series according to Unobserved Components models (UC). 
+It sets up the model with a number of control variables that
+govern the way the rest of functions in the package work. It also estimates 
+the model parameters by Maximum Likelihood and forecasts the data.
+Standard methods applicable to UComp objects are print, summary, plot,
+fitted, residuals, logLik, AIC, BIC, coef, predict, tsdiag.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>UComp</code>. It is a list with fields including all the inputs and
+the fields listed below as outputs. All the functions in this package fill in
+part of the fields of any <code>UComp</code> object as specified in what follows (function 
+<code>UC</code> fills in all of them at once):
+</p>
+<p>After running <code>UCmodel</code> or <code>UCestim</code>:
+</p>
+
+<ul>
+<li>
+<p> p:        Estimated parameters
+</p>
+</li>
+<li>
+<p> v:        Estimated innovations (white noise in correctly specified models)
+</p>
+</li>
+<li>
+<p> yFor:     Forecasted values of output
+</p>
+</li>
+<li>
+<p> yForV:    Forecasted values +- one standard error
+</p>
+</li>
+<li>
+<p> criteria: Value of criteria for estimated model
+</p>
+</li>
+<li>
+<p> iter:     Number of iterations in estimation
+</p>
+</li>
+<li>
+<p> grad:     Gradient at estimated parameters
+</p>
+</li>
+<li>
+<p> covp:     Covariance matrix of parameters
+</p>
+</li>
+</ul>
+<p>After running <code>UCvalidate</code>:
+</p>
+
+<ul><li>
+<p> table: Estimation and validation table
+</p>
+</li></ul>
+<p>After running <code>UCcomponents</code>:
+</p>
+
+<ul>
+<li>
+<p> comp:  Estimated components in matrix form
+</p>
+</li>
+<li>
+<p> compV: Estimated components variance in matrix form
+</p>
+</li>
+</ul>
+<p>After running <code>UCfilter</code>, <code>UCsmooth</code> or  <code>UCdisturb</code>:
+</p>
+
+<ul>
+<li>
+<p> yFit:  Fitted values of output
+</p>
+</li>
+<li>
+<p> yFitV: Variance of fitted values of output
+</p>
+</li>
+<li>
+<p> a:     State estimates
+</p>
+</li>
+<li>
+<p> P:     Variance of state estimates
+</p>
+</li>
+<li>
+<p> aFor:  Forecasts of states
+</p>
+</li>
+<li>
+<p> PFor:  Forecasts of states variances
+</p>
+</li>
+</ul>
+<p>After running <code>UCdisturb</code>:
+</p>
+
+<ul>
+<li>
+<p> eta: State perturbations estimates
+</p>
+</li>
+<li>
+<p> eps: Observed perturbations estimates
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UC</code>, <code>UCvalidate</code>, <code>UCfilter</code>, <code>UCsmooth</code>, 
+<code>UCdisturb</code>, <code>UCcomponents</code>,
+<code>UChp</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+y &lt;- log(AirPassengers)
+m1 &lt;- UCmodel(y)
+m1 &lt;- UCmodel(y, model = "llt/equal/arma(0,0)")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

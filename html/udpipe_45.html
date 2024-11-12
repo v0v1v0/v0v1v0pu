@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_remove_tfidf</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove terms from a Document-Term-Matrix and documents with no terms based on the term frequency inverse document frequency</h2>
+
+<h3>Description</h3>
+
+<p>Remove terms from a Document-Term-Matrix and documents with no terms based on the term frequency inverse document frequency.
+Either giving in the maximum number of terms (argument <code>top</code>), the tfidf cutoff (argument <code>cutoff</code>)
+or a quantile (argument <code>prob</code>)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_remove_tfidf(dtm, top, cutoff, prob, remove_emptydocs = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>an object returned by <code>document_term_matrix</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>top</code></td>
+<td>
+<p>integer with the number of terms which should be kept as defined by the highest mean tfidf</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff</code></td>
+<td>
+<p>numeric cutoff value to keep only terms in <code>dtm</code> where the tfidf obtained by <code>dtm_tfidf</code> is higher than this value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prob</code></td>
+<td>
+<p>numeric quantile indicating to keep only terms in <code>dtm</code> where the tfidf obtained by <code>dtm_tfidf</code> is higher than 
+the <code>prob</code> percent quantile</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_emptydocs</code></td>
+<td>
+<p>logical indicating to remove documents containing no more terms after the term removal is executed. Defaults to <code>TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a sparse Matrix as returned by <code>sparseMatrix</code> 
+where terms with high tfidf are kept and documents without any remaining terms are removed
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(brussels_reviews_anno)
+x &lt;- subset(brussels_reviews_anno, xpos == "NN")
+x &lt;- x[, c("doc_id", "lemma")]
+x &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(x)
+dtm &lt;- dtm_remove_lowfreq(dtm, minfreq = 10)
+dim(dtm)
+
+## Keep only terms with high tfidf
+x &lt;- dtm_remove_tfidf(dtm, top=50)
+dim(x)
+x &lt;- dtm_remove_tfidf(dtm, top=50, remove_emptydocs = FALSE)
+dim(x)
+
+## Keep only terms with tfidf above 1.1
+x &lt;- dtm_remove_tfidf(dtm, cutoff=1.1)
+dim(x)
+
+## Keep only terms with tfidf above the 60 percent quantile
+x &lt;- dtm_remove_tfidf(dtm, prob=0.6)
+dim(x)
+</code></pre>
+
+
+</div>

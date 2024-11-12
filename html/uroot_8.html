@@ -1,0 +1,149 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>hegy.boot.pval</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Bootstrapped P-Values for the HEGY Test Statistics</h2>
+
+<h3>Description</h3>
+
+<p>Compute p-values for the HEGY test statistics by means of bootstrap.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">hegy.boot.pval(x, model0, stats0, 
+  deterministic = c(1,0,0), lag.method = c("fixed", "AIC", "BIC"), maxlag = 0, 
+  byseason = FALSE, nb = 500, u = NULL, debug.tid = -1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a univariate seasonal time series.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>model0</code></td>
+<td>
+<p>the <code>fitted.model</code> returned by <code>hegy.test</code> for the original data.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>stats0</code></td>
+<td>
+<p>the <code>statistics</code> returned by <code>hegy.test</code> for the original data.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>deterministic</code></td>
+<td>
+<p>a vector of length three containing zeros or ones to indicate, respectively,
+whether a constant, a trend or seasonal dummies are included in the regression equation 
+of the test.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>lag.method</code></td>
+<td>
+<p>a character specifying the lag order selection method.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>maxlag</code></td>
+<td>
+<p>the maximum lag order to be considered by <code>lag.method</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>byseason</code></td>
+<td>
+<p>logical, should the residuals be resampled by season? If <code>TRUE</code>, 
+the residuals are split by the season they belong to and resampled accordingly;
+otherwise, the entire series of residuals is resampled regardless of the season they belong to.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>nb</code></td>
+<td>
+<p>the number of bootstrap replicates.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+<p>optional matrix of integers giving the indices of the resampled residuals. 
+Intended for debugging.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>debug.tid</code></td>
+<td>
+<p>numeric, if positive, the bootstrap replicate of the data generated 
+at iteratin <code>debug.tid</code> is returned (intended for debugging).</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>See <code>hegy.test</code> for further details about the arguments that have the 
+same name in both functions (<code>deterministic</code>, <code>lag.method</code>, <code>maxlag</code>).
+</p>
+<p>Bootstrapped p-values follow the approach described in 
+Burridge and Robert Taylor (2004), except that here, the residuals
+are resampled regardless of the season they belong to.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector containing the p-values of the the test statistics.
+The vector is named following the same convention as <code>statistics</code> and 
+<code>pvalues</code> returned by <code>hegy.test</code>.
+</p>
+<p>If the number of bootstrap replicates is <code>nb = 1</code>, the resampled 
+series is returned (relevant for inspection of how the resampled series look like and 
+for debugging).
+</p>
+
+
+<h3>References</h3>
+
+<p>Burridge, P. and Taylor, R.  (2004)
+"Bootstrapping the HEGY seasonal unit root tests."
+<em>Journal of Econometrics</em> <b>123</b>(1), pp. 67-87.
+DOI: <a href="https://doi.org/10.1016/j.jeconom.2003.10.029">doi:10.1016/j.jeconom.2003.10.029</a>.
+</p>
+<p>Hylleberg, S., Engle, R., Granger, C. and Yoo, B. (1990)
+"Seasonal integration and cointegration."
+<em>Journal of Econometrics</em> <b>44</b>(1), pp. 215-238.
+DOI: <a href="https://doi.org/10.1016/0304-4076%2890%2990080-D">doi:10.1016/0304-4076(90)90080-D</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>hegy.test</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+x &lt;- bgt.data[["LCONSEXPCO"]]
+# this requires CUDA capable GPU
+hegy.test(x, deterministic = c(1,1,1), lag.method = "fixed", maxlag = 1, 
+  pvalue = "bootstrap")
+# alternatively, full R non-parallel version
+res &lt;- hegy.test(x, deterministic = c(1,1,1), lag.method = "fixed", maxlag = 1)
+hegy.boot.pval(x, res$fit, res$stat, deterministic = c(1,1,1), 
+  lag.method = "fixed", maxlag = 1, nb = 1000)
+## End(Not run)
+</code></pre>
+
+
+</div>

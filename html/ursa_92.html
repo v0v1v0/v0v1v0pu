@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>discolor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Destroy color table for raster images.
+</h2>
+
+<h3>Description</h3>
+
+<p>If raster's categories are integer or numeric, then raster values are restored from names of categories. Otherwise only category names are dropped.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">discolor(obj, nodata = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nodata</code></td>
+<td>
+
+<p>Numeric. Flag value for "no-data". If <code>NA</code>, then no-data values are missed. Default is <code>NA</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code> without color table.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- colorize(pixelsize(),ncolor=7)
+print(ursa_colortable(a))
+print(a)
+b &lt;- discolor(a)
+print(ursa_colortable(b))
+print(b)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uscgh.2010.decode</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return text describing the meaning of a value in a column</h2>
+
+<h3>Description</h3>
+
+<p>uscgh.2010.decode() returns a textual description of a cell
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uscgh.2010.decode(colname, colvalue = "", warnings = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>colname</code></td>
+<td>
+<p>Name of the column to be described.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colvalue</code></td>
+<td>
+<p>Value whose description is wanted (\"""\" – the
+default – to describe, generically, 'colname' itself).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>warnings</code></td>
+<td>
+<p>Whether a '(colname,colvalue)' tuple that is
+not successfully decoded should produce a warning message.  (In
+any event, the result will be NULL.)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>takes as input the name of a column in the Geographic Header file
+from the 2010 US census, and a value found in that column, and
+attempts to return a description of the meaning of that value.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A character string describing the 'colname' or
+'(colname,colvalue)' tuple, if found.  If not found, 'NULL' is
+returned (and, if 'warnings' is 'TRUE', a warning is generated).
+</p>
+
+
+<h3>See Also</h3>
+
+<p>'RShowDoc("a-tour", package="us.census.geoheader")' for a
+short tour of a few columns of the database
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">uscgh.2010.decode('SUMLEV', 40)
+
+</code></pre>
+
+
+</div>

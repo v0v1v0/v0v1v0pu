@@ -1,0 +1,217 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simulate_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate data under Unico model assumption</h2>
+
+<h3>Description</h3>
+
+<p>Simulate all model parameters and sample source specific data from multivariate gaussian with full covariance structure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simulate_data(
+  n,
+  m,
+  k,
+  p1,
+  p2,
+  mus_mean = 10,
+  mus_std = 2,
+  gammas_mean = 1,
+  gammas_std = 0.1,
+  betas_mean = 1,
+  betas_std = 0.1,
+  sigmas_lb = 0,
+  sigmas_ub = 1,
+  taus_std = 0.1,
+  log_file = "Unico.log",
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>A positive integer indicating the number of observations to simulate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>A positive integer indicating the number of features to simulate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>A positive integer indicating the number of sources to simulate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p1</code></td>
+<td>
+<p>A non-negative integer indicating the number of source-specific covariates to simulate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p2</code></td>
+<td>
+<p>A non-negative indicating the number of non-source-specific covariates to simulate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mus_mean</code></td>
+<td>
+<p>A numerical value indicating the average of the source specific means.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mus_std</code></td>
+<td>
+<p>A positive value indicating the variation of the source specific means across difference sources.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gammas_mean</code></td>
+<td>
+<p>A numerical value indicating the average effect sizes of the source-specific covariates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gammas_std</code></td>
+<td>
+<p>A non-negative numerical value indicating the variation of the effect sizes of the source-specific covariates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betas_mean</code></td>
+<td>
+<p>A numerical value indicating the average effect sizes of the non-source-specific covariates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betas_std</code></td>
+<td>
+<p>A non-negative numerical value indicating the variation of the effect sizes of the non-source-specific covariates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigmas_lb</code></td>
+<td>
+<p>A numerical value indicating the lower bound of a uniform distribution from which we sample entries of matrix <code>A</code> used to construct the feature specific <code>k</code> by <code>k</code> variance-covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigmas_ub</code></td>
+<td>
+<p>A numerical value indicating the upper bound of a uniform distribution from which we sample entries of matrix <code>A</code> used to construct the feature specific <code>k</code> by <code>k</code> variance-covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taus_std</code></td>
+<td>
+<p>non-negative numerical value indicating the variation of the measurement noise across difference features.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log_file</code></td>
+<td>
+<p>A path to an output log file. Note that if the file <code>log_file</code> already exists then logs will be appended to the end of the file. Set <code>log_file</code> to <code>NULL</code> to prevent output from being saved into a file; note that if <code>verbose == FALSE</code> then no output file will be generated regardless of the value of <code>log_file</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>A logical value indicating whether to print logs.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Simulate data based on the generative model described in function Unico.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list of simulated model parameters, covariates, observed mixture, and source-specific data.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>An <code>m</code> by <code>n</code> matrix of the simulated mixture for <code>m</code> features and <code>n</code> observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+<p>An <code>n</code> by <code>k</code> matrix of the weights/proportions of <code>k</code> source for each of the <code>n</code> observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C1</code></td>
+<td>
+<p>An <code>n</code> by <code>p1</code> matrix of the simulated covariates that affect the source-specific values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C2</code></td>
+<td>
+<p>An <code>n</code> by <code>p2</code> matrix of the simulated covariates that affect the mixture values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z</code></td>
+<td>
+<p>A <code>k</code> by <code>m</code> by <code>n</code> tensor of the source specific values for each of the <code>k</code> sources</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mus</code></td>
+<td>
+<p>An <code>m</code> by <code>k</code> matrix of the mean of each of the <code>m</code> features for each of the <code>k</code> sources.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gammas</code></td>
+<td>
+<p>An <code>m</code> by <code>k*p1</code> matrix of the effect sizes of the <code>p1</code> covariates in <code>C1</code> on each of the <code>m</code> features in <code>X</code>, where the first <code>p1</code> columns are the source-specific effects of the <code>p1</code> covariates on the first source, the following <code>p1</code> columns are the source-specific effects on the second source and so on.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betas</code></td>
+<td>
+<p>An <code>m</code> by <code>p2</code> matrix of the effect sizes of the <code>p2</code> covariates in <code>C2</code> on the mixture values of each of the <code>m</code> features.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigmas</code></td>
+<td>
+<p>An <code>m</code> by <code>k</code> by <code>k</code> tensor of the variance-covariance matrix of each of the <code>m</code> features.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taus</code></td>
+<td>
+<p>An <code>m</code> by <code>1</code> matrix of the feature specific variance of the measurement noise for all m features.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">data = simulate_data(n=100, m=2, k=3, p1=1, p2=1, taus_std=0, log_file=NULL)
+
+</code></pre>
+
+
+</div>

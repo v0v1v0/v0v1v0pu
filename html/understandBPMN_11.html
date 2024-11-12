@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>control_flow_complexity</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Control flow complexity</h2>
+
+<h3>Description</h3>
+
+<p>Control flow complexity is defined as the sum of the outgoing of exclusive gateways, the number of parallel gateways
+and two to the power of all outgoing sequence flows of the inclusive gateways
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">control_flow_complexity(file_path, signavio = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file_path</code></td>
+<td>
+<p>document object created using the create_internal_document function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signavio</code></td>
+<td>
+<p>boolean which indicates whether the file stems from signavio</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an integer indicating the control flow complexity
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+control_flow_complexity(file_path)
+</code></pre>
+
+
+</div>

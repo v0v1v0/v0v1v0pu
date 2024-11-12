@@ -1,0 +1,138 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>RandOverRegress</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Random over-sampling for imbalanced regression problems
+</h2>
+
+<h3>Description</h3>
+
+<p>This function performs a random over-sampling strategy for imbalanced regression problems. 
+Basically a percentage of cases of the "class(es)"
+(bumps above a relevance threshold defined) selected by the user are randomly over-sampled. 
+Alternatively, it can either balance all the existing "classes" 
+(the default) or it can "smoothly invert" the frequency
+of the examples in each class.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">RandOverRegress(form, dat, rel = "auto", thr.rel = 0.5, 
+                C.perc = "balance", repl = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+
+<p>A data frame containing the original imbalanced data set.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rel</code></td>
+<td>
+
+<p>The relevance function which can be automatically ("auto") determined (the default) or may be provided by the user through a matrix with the interpolating points.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thr.rel</code></td>
+<td>
+
+<p>A number indicating the relevance threshold above which a case is considered as belonging to the rare "class".
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C.perc</code></td>
+<td>
+
+<p>A list containing the over-sampling percentage/s to apply to all/each
+"class" (bump) obtained with the relevance threshold. Replicas of the examples are are randomly added in each "class".
+If only one percentage is provided this value is reused in all the "classes" that have values above the relevance threshold. A different percentage can be provided to each "class". In this case, the percentages should be provided in ascending order of target variable value. The over-sampling percentage(s), should be numbers above 1, meaning that the important cases (cases above the threshold) are over-sampled by the corresponding percentage. If the number 1 is provided then those examples are not changed. 
+Alternatively, <code>C.perc</code> parameter may be set to "balance" or "extreme",
+cases where the over-sampling percentages are automatically estimated to either balance or invert the frequencies of the examples in the "classes" (bumps).        
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repl</code></td>
+<td>
+
+<p>A boolean value controlling the possibility of having repetition of examples when choosing the examples to repeat in the over-sampled data set. 
+Defaults to TRUE because this is a necessary condition if the selected percentage is greater than 2. This parameter is only important when the over-sampling percentage is between 1 and 2. In this case, it controls if all the new examples selected from a given "class" can be repeated or not.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function performs a random over-sampling strategy for dealing with imbalanced regression problems. The new examples included in the new data set are randomly selected replicas of the examples already present in the original data set. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns a data frame with
+the new data set resulting from the application of the random over-sampling strategy.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>See Also</h3>
+
+<p><code>RandUnderRegress</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(morley)
+
+C.perc = list(2, 4)
+myover &lt;- RandOverRegress(Speed~., morley, C.perc=C.perc)
+Bal &lt;- RandOverRegress(Speed~., morley, C.perc= "balance")
+Ext &lt;- RandOverRegress(Speed~., morley, C.perc= "extreme")
+
+  if (requireNamespace("DMwR2", quietly = TRUE)) {
+data(algae, package ="DMwR2")
+clean.algae &lt;- data.frame(algae[complete.cases(algae), ])
+# all automatic
+ROB &lt;-RandOverRegress(a7~., clean.algae)
+# user defined percentage for the only existing extreme (high)
+myRO &lt;-RandOverRegress(a7~., clean.algae, rel = "auto", thr.rel = 0.7,
+                        C.perc = list(5))
+
+# check the results
+plot(clean.algae[,c(1,ncol(clean.algae))])
+plot(ROB[,c(1,ncol(clean.algae))])
+plot(myRO[,c(1,ncol(clean.algae))])
+}
+</code></pre>
+
+
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>chartKarnaughMapLayout</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>specify the chart karnaugh map layout</h2>
+
+<h3>Description</h3>
+
+<p>specify the chart karnaugh map layout
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">chartKarnaughMapLayout(
+  upsetjs,
+  padding = NULL,
+  bar.padding = NULL,
+  numerical.scale = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs_kmap</code> or <code>upsetjs_kmap_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>padding</code></td>
+<td>
+<p>padding around the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bar.padding</code></td>
+<td>
+<p>padding ratio (default 0.1) for the bar charts</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numerical.scale</code></td>
+<td>
+<p>numerical scale: linear (default) or log</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjsKarnaughMap() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  chartKarnaughMapLayout(padding = 10)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>makeGWASFiles</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate files for GWAS Software. SAIGE and Plink currently supported.</h2>
+
+<h3>Description</h3>
+
+<p>Generate files for GWAS Software. SAIGE and Plink currently supported.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">makeGWASFiles(
+  ukb.data,
+  pheno,
+  covariates,
+  phe.name,
+  cov.name = NULL,
+  includeSampsFile = NULL,
+  software = "SAIGE",
+  outDir = "",
+  prefix
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ukb.data</code></td>
+<td>
+<p>tab delimited UK Biobank phenotype file, containing sample qc fields (with default UKBiobank codes as column names)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pheno</code></td>
+<td>
+<p>phenotype dataframe - output from makePhenotype function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>covariates</code></td>
+<td>
+<p>covariate dataframe - output from risk.factor function.  Optional.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phe.name</code></td>
+<td>
+<p>phenotypes to be included in outputted data. multiple phenotypes can be specified as a vector. if null, all phenotypes will be outputted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cov.name</code></td>
+<td>
+<p>covariates to be included in outputted data. Optional. multiple covariates can be specified as a vector. if null, all covariates in file will be outputted</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>includeSampsFile</code></td>
+<td>
+<p>list of samples to be included GWAS. File with the first column containing sample IDs to be kept. Can contain other columns. output from sampleQC function may be used.  Optional - if null, all samples will be outputted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>software</code></td>
+<td>
+<p>specify "SAIGE" or "plink" - defaults to "SAIGE"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outDir</code></td>
+<td>
+<p>specify directory to output file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>prefix for file - optional</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>outputs file, suitable for reading by chosen GWAS software
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+makeGWASFiles(ukb.data=covid_example("sim_ukb.tab.gz"), 
+pheno=phe, 
+covariates=covar, 
+phe.name="hospitalisation", 
+cov.name=NULL, 
+includeSampsFile=NULL, 
+software="SAIGE", 
+outDir=covid_example("results"), 
+prefix="hospitalisation")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

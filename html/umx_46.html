@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.percent</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print a percent object</h2>
+
+<h3>Description</h3>
+
+<p>Print method for "percent" objects: e.g. <code>fin_percent()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'percent'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>percent object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> invisible
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>fin_percent()</code>
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Percent needed to return to original value after 10% off
+fin_percent(-10)
+# Percent needed to return to original value after 10% on
+fin_percent(10)
+
+# Percent needed to return to original value after 50% off 34.50
+fin_percent(-50, value = 34.5)
+
+</code></pre>
+
+
+</div>

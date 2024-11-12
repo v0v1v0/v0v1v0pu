@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>paste_freq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Paste frequency</h2>
+
+<h3>Description</h3>
+
+<p>Creates a formatted frequency from count(able) data. Automatically
+tallies non-numeric data types (nrow or length) and supports vectorized data
+methods.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">paste_freq(x, y, na.rm = TRUE, percent.sign = TRUE, digits = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data.frame, numeric, or non-numeric. The numerator.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>A data.frame, numeric, or non-numeric. The denominator. A single
+denominator may be used for multiple numerators or one denominator for each
+numerator.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>A logical. Whether to ignore NA's when tallying non-numeric data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>percent.sign</code></td>
+<td>
+<p>A logical. Indicates percent sign should be printed
+with frequencies.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>An integer. Number of digits to round to.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector of count(s) with frequencies.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Numeric
+paste_freq(20, 100)
+
+# data.frame
+df &lt;- data.frame(x = c(1:100), y = TRUE)
+paste_freq(df[1:20,], df)
+
+# Mixed data types
+paste_freq(20, df)
+
+# Single denominator for multiple numerators
+paste_freq(c(10,20,30), 100)
+</code></pre>
+
+
+</div>

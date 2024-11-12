@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plotres</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Graphical inspection of VECM residuals</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>plotres</code> should be used for graphical inspection
+of the VAR residuals, <em>i.e.</em> the estimated specification as
+elaborated in the ‘Details’ section of <code>ca.jo</code>. It displays the
+residuals for each equation within a VAR and their acf's and pacf's.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plotres(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object of class ‘ca.jo’.</p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code> and <code>ca.jo-class</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.vecm &lt;- ca.jo(sjd, ecdet="const", type="eigen", K=2, spec="longrun",
+season=4)
+plotres(sjd.vecm)
+</code></pre>
+
+
+</div>

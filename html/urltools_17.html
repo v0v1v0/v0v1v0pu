@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>port</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or set a URL's port</h2>
+
+<h3>Description</h3>
+
+<p>as in the lubridate package, individual components of a URL
+can be both extracted or set using the relevant function call - see the
+examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">port(x)
+
+port(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a URL, or vector of URLs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>a replacement value (or vector of replacement values)
+for x's port. If NULL, the port will be entirely removed.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>scheme</code>, <code>domain</code>, <code>path</code>,
+<code>parameters</code> and <code>fragment</code> for other accessors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Get the port
+example_url &lt;- "http://cran.r-project.org:80/submit.html"
+port(example_url)
+
+# Set the port
+port(example_url) &lt;- "12"
+
+# Remove the port
+port(example_url) &lt;- NULL
+</code></pre>
+
+
+</div>

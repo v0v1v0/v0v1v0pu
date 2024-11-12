@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lttest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Likelihood ratio test for no linear trend in VAR</h2>
+
+<h3>Description</h3>
+
+<p>Conducts a likelihood ratio test for no inclusion of a linear trend in a
+VAR. That is, the Null hypothesis is for not including a linear trend
+and is assigned as 'H2*(r)'. The test statistic is distributed as
+<code class="reqn">\chi^2</code> square with <code class="reqn">(p-r)</code> degrees of freedom.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lttest(z, r)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class ‘ca.jo’.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The count of cointegrating relationships.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The count of cointegrating relations should be given as integer and
+should be in the interval <code class="reqn">1 \leq r &lt; P</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>lttest</code></td>
+<td>
+<p>Matrix containing the value of the test statistic and its
+p-value.</p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code> and <code>ca.jo-class</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- as.matrix(denmark[, c("LRM", "LRY", "IBO", "IDE")])
+sjd.vecm &lt;- ca.jo(sjd, ecdet = "const", type="eigen", K=2, spec="longrun",
+season=4)
+lttest(sjd.vecm, r=1)
+#
+data(finland)
+sjf &lt;- as.matrix(finland)
+sjf.vecm &lt;- ca.jo(sjf, ecdet = "none", type="eigen", K=2,
+spec="longrun", season=4)
+lttest(sjf.vecm, r=3)
+</code></pre>
+
+
+</div>

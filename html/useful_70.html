@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>WhichCorner</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>WhichCorner</h2>
+
+<h3>Description</h3>
+
+<p>Function to build the right row selection depending on the desired corner.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">WhichCorner(corner = c("topleft", "bottomleft", "topright",
+  "bottomright"), r = 5L, c = 5L, object = "x")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>corner</code></td>
+<td>
+<p>(character) which corner to display c("topleft", "bottomleft", "topright", "bottomright")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>(numeric) the number of rows to show</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c</code></td>
+<td>
+<p>(numeric) the number of columns to show</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>The name of the object that is being subsetted</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function to build the right row selection depending on the desired corner.  Helper function for getting the indexing for data.frame's, matrices
+</p>
+
+
+<h3>Value</h3>
+
+<p>An expression that is evaluated to return the proper portion of the data
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+WhichCorner('topleft')
+WhichCorner('bottomleft')
+WhichCorner('topright')
+WhichCorner('bottomright')
+
+WhichCorner('topleft', r=6)
+WhichCorner('bottomleft', r=6)
+WhichCorner('topright', r=6)
+WhichCorner('bottomright', r=6)
+
+WhichCorner('topleft', c=7)
+WhichCorner('bottomleft', c=7)
+WhichCorner('topright', c=7)
+WhichCorner('bottomright', c=7)
+
+WhichCorner('topleft', r=8, c=3)
+WhichCorner('bottomleft', r=8, c=3)
+WhichCorner('topright', r=8, c=3)
+WhichCorner('bottomright', r=8, c=3)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

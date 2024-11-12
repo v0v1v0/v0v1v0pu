@@ -1,0 +1,265 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LocScaleB</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Univariate outlier detection with bounds based on robust location and scale estimates
+</h2>
+
+<h3>Description</h3>
+
+<p>This function identifies outliers in the tails of a distribution by detecting the observations outside the bounds built using a robust estimate of both location and scale parameters.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">LocScaleB(x, k=3, method='MAD',  weights=NULL, id=NULL, 
+          exclude=NA, logt=FALSE, return.dataframe=FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Numeric vector that will be searched for outliers.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+
+<p>Nonnegative constant that determines the extension of bounds. Commonly used values are 2, 2.5 and 3 (default).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+
+<p>character identifying how to estimate the scale of the distribution. Available choices are:
+</p>
+<p><code>method='IQR'</code> for using the Inter-Quartile Range, i.e. Q3-Q1; 
+</p>
+<p><code>method='IDR'</code> for using the Inter-Decile Range; i.e. P90-P10 
+</p>
+<p><code>method='MAD'</code> for using the Median Absolute Deviation;
+</p>
+<p><code>method='Gini'</code> robust scale estimate based on Gini's Mean Difference (see  <code>GiniMd</code>); 
+</p>
+<p><code>method='ScaleTau2'</code> robust tau-estimate of univariate scale, as proposed by Maronna and Zamar (2002) (see also<code>scaleTau2</code>); 
+</p>
+<p><code>method='Qn'</code> for using the Qn estimator proposed by Rousseeuw and Croux (1993) (see also <code>Qn</code>); 
+</p>
+<p><code>method='Sn'</code> for using the Sn estimator proposed by Rousseeuw and Croux (1993) (see also <code>Sn</code>). 
+</p>
+<p>When <code>method='dQ'</code> the estimated scale for the left tail is (Q2-Q1)/0.6745, while for the right tail it is considered (Q3-Q2)/0.6745 (Q2 is the median); this double estimate should be able to account for slight skewness.
+</p>
+<p>When <code>method='dD'</code> the estimated scale for the left tail is (P50-P10)/1.2816, while for the right tail it is considered (P90-P50)/1.2816 (P50 is the median); this double estimate should be able to account for skewness.
+</p>
+<p>Finally, when <code>method='AdjOut'</code>, bounds are based on the adjusted outlyingness method as proposed by Hubert and Van der Veeken (2008).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+
+<p>Optional numeric vector that provides weights associated to observations. Only nonnegative weights  are allowed. Note that weights can only be used when <code>method='MAD'</code>, <code>method='IQR'</code>,  <code>method='IDR'</code>, <code>method='dQ'</code> or <code>method='dD'</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+
+<p>Optional numeric or character vector, with identifiers of units in <code>x</code>. If <code>id=NULL</code> (default) units' identifiers will be set equal to their position in <code>x</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+
+<p>Values of <code>x</code> that will be excluded by the analysis. By default missing values (<code>exclude = NA</code>)
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logt</code></td>
+<td>
+
+<p>Logical, if <code>TRUE</code>, before searching outliers the <code>x</code> variable is log-transformed (<code>log(x+1)</code> is considered). Note that in this case that summary output (bounds, etc.) will refer to log-transformed variable.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return.dataframe</code></td>
+<td>
+
+<p>Logical, if <code>TRUE</code> the output will save all the relevant information for outlier detection in a dataframe with the following columns: ‘id’ (units' identifiers), ‘x’, ‘log.x’ (only if <code>logt=TRUE</code>), ‘weight’ (only when argument <code>weights</code> is provided), ‘score’ (the standardized scores, see Details) and, finally, ‘outliers’, where value 1 indicates observations detected as an outlier, 0 otherwise.  
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The intervals are derived by considering the median <code class="reqn">Q_2</code> as a robust location estimate while different robust scale estimators are considered:
+</p>
+<p style="text-align: center;"><code class="reqn">[Q_2 - k \times \tilde{s}_L; \quad Q_2 + k \times \tilde{s}_R]</code>
+</p>
+
+<p>where <code class="reqn">\tilde{s}_L</code> and <code class="reqn"> \tilde{s}_R</code> are robust scale estimates. 
+With most of the methods <code class="reqn">\tilde{s}_L=\tilde{s}_R</code> with exception of <code>method='dQ'</code> and <code>method='dD'</code> where respectively:
+</p>
+<p style="text-align: center;"><code class="reqn">\tilde{s}_L = (Q_2 - Q_1)/0.6745 \qquad \mbox{and} \qquad \tilde{s}_R = (Q_3 - Q_2)/0.6745</code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn">\tilde{s}_L = (P_{50} - P_{10})/1.2816 \qquad \mbox{and} \qquad \tilde{s}_R = (P_{90} - P_{50})/1.2816</code>
+</p>
+
+<p>Note that when <code>method='dQ'</code> or <code>method='dD'</code> the function calculates and prints a the Bowley's coefficient of skewness, that uses Q1, Q2 and Q3 (they are replaced by respectively P10, P50 and P90 when <code>method='dD'</code>). 
+</p>
+<p>With <code>method='AdjOut'</code> the following estimates are considered: 
+</p>
+<p style="text-align: center;"><code class="reqn">\tilde{s}_L = (Q_2 - f_L) \qquad \mbox{and} \qquad \tilde{s}_R = (f_R - Q_2)</code>
+</p>
+
+<p>being <code class="reqn">f_R</code> and <code class="reqn">f_L</code> derived starting from the fences of the adjusted boxplot (Hubert and Vandervieren, 2008; see <code>adjboxStats</code>). In addition the medcouple (<code>mc</code>) measure of skewness is calculated and printed on the screen.
+</p>
+<p>When weights are available (passed via the argument <code>weights</code>) then they are used in the computation of the quartiles. In particular, the quartiles are derived using the function  <code>wtd.quantile</code> in the package <span class="pkg">Hmisc</span>. Note that their use is allowed just with <code>method='IQR'</code>, <code>method='IDR'</code>, <code>method='dQ'</code>, <code>method='dD'</code> or   <code>method='AdjOut'</code>.
+</p>
+<p>The ‘score’ variable reported in the the <code>data</code> dataframe when <code>return.dataframe=TRUE</code> is the standardized score derived as (x - Median)/scale.  
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list whose components depend on the <code>return.dataframe</code> argument. When <code>return.dataframe = FALSE</code> just the following components are provided:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>pars</code></td>
+<td>
+<p>Vector with estimated median and scale parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bounds</code></td>
+<td>
+<p>The bounds of the interval, values outside the interval are considered outliers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>excluded</code></td>
+<td>
+
+<p>The position or identifiers of <code>x</code> values excluded by outlier detection, according to the argument <code>exclude</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outliers</code></td>
+<td>
+
+<p>The position or identifiers of <code>x</code> values detected as outliers (outside bounds).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lowOutl</code></td>
+<td>
+
+<p>The identifiers or positions (when <code>id=NULL</code>) of units in <code>x</code> detected as outliers in the lower tail of the distribution.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>upOutl</code></td>
+<td>
+
+<p>The identifiers or positions (when <code>id=NULL</code>) of units in <code>x</code> detected as outliers in the upper tail of the distribution.
+</p>
+</td>
+</tr>
+</table>
+<p>When <code>return.dataframe=TRUE</code> the latter two components are substituted with two dataframes:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>excluded</code></td>
+<td>
+
+<p>A dataframe with the subset of observations excluded.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+
+<p>A dataframe with the the not excluded observations and the following columns: ‘id’ (units' identifiers), ‘x’, ‘log.x’ (only if <code>logt=TRUE</code>), ‘weight’ (only when argument <code>weights</code> is provided), ‘score’ (the standardized scores, see Details) and, finally, ‘outliers’, where value 1 indicates observations detected as an outlier and 0 otherwise.
+</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Marcello D'Orazio <a href="mailto:mdo.statmatch@gmail.com">mdo.statmatch@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hubert, M. and Van der Veeken, S. (2008) ‘Outlier Detection for Skewed Data’. <em>Journal of Chemometrics</em>, 22, pp. 235-246.
+</p>
+<p>Maronna, R.A. and Zamar, R.H. (2002) ‘Robust estimates of location and dispersion of high-dimensional datasets’ <em>Technometrics</em>, 44, pp. 307-317.
+</p>
+<p>Rousseeuw, P.J. and Croux, C. (1993) ‘Alternatives to the Median Absolute Deviation’, <em>Journal of the American Statistical Association</em> 88, pp. 1273-1283.
+</p>
+<p>Vanderviere, E. and Huber, M. (2008) ‘An Adjusted Boxplot for Skewed Distributions’, <em>Computational Statistics &amp; Data Analysis</em>, 52, pp. 5186-5201
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>mad</code>, <code>scaleTau2</code>, <code>Qn</code>, <code>Sn</code>, <code>GiniMd</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(333)
+x &lt;- rnorm(30, 50, 1)
+x[10] &lt;- 1
+x[20] &lt;- 100
+
+out &lt;- LocScaleB(x = x,  k = 3, method='MAD')
+out$pars
+out$bounds
+out$outliers
+x[out$outliers]
+
+out &lt;- LocScaleB(x = x,  k = 3, method='MAD',
+                 return.dataframe = TRUE)
+head(out$data)
+
+out &lt;- LocScaleB(x = x, k = 3, method='AdjOut')
+out$outliers
+
+
+</code></pre>
+
+
+</div>

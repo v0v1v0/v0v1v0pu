@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>FitKMeans</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit a series of kmeans clusterings and compute Hartigan's Number</h2>
+
+<h3>Description</h3>
+
+<p>Given a numeric dataset this function fits a series of kmeans clusterings with increasing number of centers.  k-means is compared to k+1-means using Hartigan's Number to determine if the k+1st cluster should be added.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">FitKMeans(x, max.clusters = 12L, spectral = FALSE, nstart = 1L,
+  iter.max = 10L, algorithm = c("Hartigan-Wong", "Lloyd", "Forgy",
+  "MacQueen"), seed = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The data, numeric, either a matrix or data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.clusters</code></td>
+<td>
+<p>The maximum number of clusters that should be tried</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spectral</code></td>
+<td>
+<p>logical; If the data being fit are eigenvectors for spectral clustering</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>The number of random starts for the kmeans algorithm to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter.max</code></td>
+<td>
+<p>Maximum number of tries before the kmeans algorithm gives up on conversion</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>algorithm</code></td>
+<td>
+<p>The desired algorithm to be used for kmeans.  Options are c("Hartigan-Wong", "Lloyd", "Forgy", "MacQueen").  See <code>kmeans</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>If not null, the random seed will be reset before each application of the kmeans algorithm</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A consecutive series of kmeans is computed with increasing k (number of centers).  Each result for k and k+1 are compared using Hartigan's Number.  If the number is greater than 10, it is noted that having k+1 clusters is of value.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame consisting of columns, for the number of clusters, the Hartigan Number and whether that cluster should be added, based on Hartigan's Number.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+www.jaredlander.com
+</p>
+
+
+<h3>References</h3>
+
+<p>http://www.stat.columbia.edu/~madigan/DM08/descriptive.ppt.pdf
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>kmeans</code> <code>PlotHartigan</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(iris)
+hartiganResults &lt;- FitKMeans(iris[, -ncol(iris)])
+PlotHartigan(hartiganResults)
+
+</code></pre>
+
+
+</div>

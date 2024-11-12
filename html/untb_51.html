@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>optimal.prob</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns an estimate of the fundamental biodiversity number</h2>
+
+<h3>Description</h3>
+
+<p>Returns a maximum likelihood estimate for the fundamental biodiversity
+number <code class="reqn">\theta</code> (function <code>optimal.theta()</code>) or the
+probability of mutation (function <code>optimal.prob()</code>) and optionally
+return information about the likely error
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">optimal.prob(x,  interval=NULL, N=NULL, like=NULL, ...)
+optimal.theta(x, interval=NULL, N=NULL, like=NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Ecosystem vector or species count table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>Bracketing interval for probability of mutation to be
+passed to the optimization routine (here <code>optimize()</code>).  
+Default of <code>NULL</code> means to use a wide interval.  Note that this
+argument is interpreted as an interval of <em><code class="reqn">\theta</code></em> for
+both <code>optimal.prob()</code> and <code>optimal.theta()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>Integer; the number of parametric resampled estimates to
+give.  Default of <code>NULL</code> means to return just the maximum
+likelihood estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>like</code></td>
+<td>
+<p>Units of likelihood to calculate credible interval.
+Edwards recommends using 2</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code>optimize()</code></p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>The fundamental biodiversity parameter <code class="reqn">\theta</code> is
+<code class="reqn">2\nu J</code>, where <code class="reqn">\nu</code> is the probability of
+mutation (ie, as estimated by <code>optimal.prob()</code>), and <code class="reqn">J</code> is
+the size of the ecosystem.
+</p>
+<p>For the general case of dispersal limitation, see functions
+<code>etienne()</code> and <code>optimal.params()</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>See Also</h3>
+
+<p><code>etienne</code>,<code>optimal.params.sloss</code>,<code>optimal.params.gst</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(butterflies)
+optimal.prob(butterflies)
+optimal.theta(butterflies)
+</code></pre>
+
+
+</div>

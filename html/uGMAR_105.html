@@ -1,0 +1,41 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>warn_ar_roots</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Warn about near-unit-roots in some regimes</h2>
+
+<h3>Description</h3>
+
+<p><code>warn_ar_roots</code> warns if the model contains near-unit-roots in some regimes
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">warn_ar_roots(gsmar, tol = 0.005)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>if some root is smaller that <code>1 + tol</code>, a warning is thrown</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Warns if some moduli of the autoregressive polynomial's roots are close to one.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Doesn't return anything.
+</p>
+
+
+</div>

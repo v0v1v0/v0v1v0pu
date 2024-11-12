@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>faConfInt</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract confidence bounds from psych's factor analysis object</h2>
+
+<h3>Description</h3>
+
+<p>This function contains some code from a function in psych::psych-package
+that's not exported <code>print.psych.fa.ci</code> but useful nonetheless. It
+basically takes the outcomes of a factor analysis and extracted the
+confidence intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">faConfInt(fa)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>fa</code></td>
+<td>
+<p>The object produced by the <code>psych::fa()</code> function from the
+psych::psych-package package. It is important that the <code>n.iter</code> argument
+of<code>psych::fa()</code> was set to a realistic number, because otherwise, no
+confidence intervals will be available.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>THis function extract confidence interval bounds and combines them with
+factor loadings using the code from the <code>print.psych.fa.ci</code> in
+psych::psych-package.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list of dataframes, one for each extracted factor, with in each
+dataframe three variables: </p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>lo</code></td>
+<td>
+<p>lower bound of the confidence interval</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>est</code></td>
+<td>
+<p>point estimate of the factor loading</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hi</code></td>
+<td>
+<p>upper bound of
+the confidence interval</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>William Revelle (extracted by Gjalt-Jorn Peters)
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+### Not run because it takes too long to run to test it,
+### and may produce warnings, both because of the bootstrapping
+### required to generate the confidence intervals in fa
+faConfInt(psych::fa(Thurstone.33, 2, n.iter=100, n.obs=100));
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

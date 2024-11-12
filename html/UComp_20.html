@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dif</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>dif</h2>
+
+<h3>Description</h3>
+
+<p>Discrete differencing of time series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dif(y, difs = 1, seas = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a vector, ts or tsibble object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>difs</code></td>
+<td>
+<p>vector with differencing orders</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seas</code></td>
+<td>
+<p>vector of seasonal periods</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Differenced time series
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>colMedians</code>, <code>rowMedians</code>, <code>tests</code>,
+<code>sumStats</code>, <code>gaussTest</code>, <code>ident</code>,
+<code>cusum</code>, <code>varTest</code>, <code>conv</code>,
+<code>armaFilter</code>, <code>roots</code>,
+<code>zplane</code>, <code>acft</code>, <code>slide</code>,
+<code>plotSlide</code>, <code>Accuracy</code>, <code>tsDisplay</code>,
+<code>size</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dif(AirPassengers)
+dif(AirPassengers, 2)
+dif(AirPassengers, c(1, 1), c(1, 12))
+</code></pre>
+
+
+</div>

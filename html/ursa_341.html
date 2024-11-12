@@ -1,0 +1,148 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Replace</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+assign values to the portion of raster images
+</h2>
+
+<h3>Description</h3>
+
+<p>This operator is used to set or replace values in portion of bands or lines in <code>ursaRaster</code> object in memory or data writing to file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 replacement method for class 'ursaRaster'
+x[i, j, ...] &lt;- value
+
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>ursaRaster</code> object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>i</code></td>
+<td>
+
+<p>Integer or character. If integer, then band index, specifying bands to replace. If character, either list of band names or character sting for <code>regular expression</code> to match band index. In the <em>(spatial, temporal)</em> interpretation of <code>ursaRaster</code> object <code>j</code> points to <em>temporal</em> component.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>j</code></td>
+<td>
+
+<p>Mentioned for consistence with internal generic function <code>[&lt;-</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Mentioned for consistence with internal generic function <code>[&lt;-</code>.
+<br>
+Use <code>regexp=FALSE</code> for matching by <code>match</code>, and <code>regexp=TRUE</code> for matching by Perl-compatible regexps case insensitive <code>grep</code>. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+
+<p><code>ursaRaster</code> object or numeric (scalar, <code>matrix</code>, <code>array</code>). The latter is coerced to internal matrix of <code>$value</code> item of <code>ursaRaster</code> object.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Operator <code style="white-space: pre;">⁠\sQuote{[&lt;-}⁠</code> is high-level implementation for data writing. If <code>x$value</code> item is not applicable, then value of <code>ursaRaster</code> is not in memory. In this case the controlled by <code>i</code> and <code>j</code> portion is written to file. If both <code>i</code> and <code>j</code> are missing, then <code>x[] &lt;- value</code> writes values to file wholly.
+</p>
+<p>It is not implemented the simultaneously writing to file portion of bands and portion of lines.
+</p>
+<p>Files (currently, ENVI Binary) are opened for reading and writing.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If values of <code>ursaRaster</code> object are in memory, then modified <code>ursaRaster</code> object with replaced bands or lines.
+<br>
+If values of <code>ursaRaster</code> object are not applicable, then <code>ursaRaster</code> object <em>as is</em>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Extract</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+## Prepare
+session_grid(regrid(mul=1/4))
+a &lt;- pixelsize()
+w &lt;- c("first","second","third","fourth","fifth","sixth")
+b1 &lt;- rep(a/mean(a),length(w))+seq(length(w))-1
+bandname(b1) &lt;- w
+nr &lt;- ursa_rows(b1)
+bottom &lt;- (as.integer(nr/2)):nr
+write_envi(b1,"tmp1",compress=FALSE,interleave="bil")
+b2 &lt;- b1
+print(b1)
+
+## Replace
+b2[1] &lt;- 10+b1["second"]
+b2[2] &lt;- 20
+try({
+   data(volcano)
+   b2[3] &lt;- 30+volcano
+}) ## error: unable to coerce
+b2["fourth"] &lt;- 40+as.matrix(b1[3])
+b2[5] &lt;- 50+as.array(b1[4])
+set.seed(352)
+try(b2["six"] &lt;- 60+6+runif(5,min=-1,max=1)) ## Data structures mismatching
+print(b2)
+print(object.size(b2))
+
+## Write
+b3 &lt;- create_envi(b2,"tmp2")
+print(object.size(b3))
+for (i in chunk_line(b3,0.04))
+{
+   b3[,i] &lt;- b2[,i]+100
+   if (5 %in% i)
+      print(object.size(b3))
+}
+close(b3)
+print(object.size(b3))
+b4 &lt;- read_envi("tmp2")
+print(b4)
+envi_remove("tmp[12]")
+</code></pre>
+
+
+</div>

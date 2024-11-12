@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.DBRmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predict Method for DBR</h2>
+
+<h3>Description</h3>
+
+<p>This function predicts values based upon a model trained by <code>dbr</code>.
+In general this method is a restricted version of
+<code>predict.BRPmodel</code> using the 'NU' strategy.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'DBRmodel'
+predict(
+  object,
+  newdata,
+  estimative = NULL,
+  probability = getOption("utiml.use.probs", TRUE),
+  ...,
+  cores = getOption("utiml.cores", 1),
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class '<code>DBRmodel</code>'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>An object containing the new input data. This must be a
+matrix, data.frame or a mldr object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>estimative</code></td>
+<td>
+<p>A matrix containing the bipartition result of other
+multi-label classification algorithm or an mlresult object with the
+predictions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>Logical indicating whether class probabilities should be
+returned. (Default: <code>getOption("utiml.use.probs", TRUE)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm prediction for all
+subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the training. Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed. This is useful when
+the method is run in parallel. (Default: <code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>As new feature is possible to use other multi-label classifier to predict the
+estimate values of each label. To this use the prediction argument to inform
+a result of other multi-label algorithm.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of type mlresult, based on the parameter probability.
+</p>
+
+
+<h3>References</h3>
+
+<p>Montanes, E., Senge, R., Barranquero, J., Ramon Quevedo, J., Jose Del Coz,
+J., &amp; Hullermeier, E. (2014). Dependent binary relevance models for
+multi-label classification. Pattern Recognition, 47(3), 1494-1508.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Dependent Binary Relevance (DBR)</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Predict SVM scores
+model &lt;- dbr(toyml)
+pred &lt;- predict(model, toyml)
+
+# Passing a specif parameter for SVM predict algorithm
+pred &lt;- predict(model, toyml, na.action = na.fail)
+
+# Using other classifier (EBR) to made the labels estimatives
+estimative &lt;- predict(ebr(toyml), toyml)
+model &lt;- dbr(toyml, estimate.models = FALSE)
+pred &lt;- predict(model, toyml, estimative = estimative)
+
+</code></pre>
+
+
+</div>

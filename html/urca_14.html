@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cajools</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>OLS regression of VECM</h2>
+
+<h3>Description</h3>
+
+<p>This function returns the OLS regressions of an unrestricted VECM,
+<em>i.e.</em> it returns an object of class <code>lm</code>. The user can provide a
+certain number of which equation in the VECM should be estimated and
+reported, or if <code>"reg.number=NULL"</code> each equation in the VECM
+will be estimated and its results are reported.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cajools(z, reg.number = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class <code>ca.jo</code> or <code>cajo.test</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reg.number</code></td>
+<td>
+<p>The number of the equation in the VECM that should
+be estimated or if set to <code>NULL</code> (the default), all equations
+within the VECM are estimated.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns an object of class <code>lm</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1988), Statistical Analysis of Cointegration Vectors,
+<em>Journal of Economic Dynamics and Control</em>, <b>12</b>, 231–254.
+</p>
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code>, <code>cajorls</code>, <code>lm</code>,
+<code>ca.jo-class</code> and <code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.vecm1 &lt;- ca.jo(sjd, ecdet = "const", type="eigen", K=2, spec="longrun",
+season=4)
+sjd.vecm2 &lt;- ca.jo(sjd, ecdet = "const", type="eigen", K=2, spec="transitory",
+season=4)
+sjd.vecm.ols1 &lt;- cajools(sjd.vecm1)
+sjd.vecm.ols2 &lt;- cajools(sjd.vecm2)
+summary(sjd.vecm.ols1)
+summary(sjd.vecm.ols2)
+</code></pre>
+
+
+</div>

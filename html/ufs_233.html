@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spearmanBrown</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Spearman-Brown formula</h2>
+
+<h3>Description</h3>
+
+<p>Spearman-Brown formula
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">spearmanBrown(nrOfItems, itemReliability)
+
+spearmanBrown_reversed(nrOfItems, scaleReliability)
+
+spearmanBrown_requiredLength(scaleReliability, itemReliability)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrOfItems</code></td>
+<td>
+<p>Number of items (or 'subtests') in the scale (or 'test').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>itemReliability</code></td>
+<td>
+<p>The reliability of one item (or 'subtest').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scaleReliability</code></td>
+<td>
+<p>The reliability of the scale (or, desired reliability of the scale).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>For <code>spearmanBrown</code>, the predicted scale reliability; for <code>spearmanBrown_requiredLength</code>,
+the number of items required to achieve the desired scale reliability; and for <code>spearmanBrown_reversed</code>,
+the reliability of one item.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">spearmanBrown(10, .4);
+spearmanBrown_reversed(10, .87);
+spearmanBrown_requiredLength(.87, .4);
+</code></pre>
+
+
+</div>

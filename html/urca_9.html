@@ -1,0 +1,240 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ca.jo-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class ca.jo</h2>
+
+<h3>Description</h3>
+
+<p>This class contains the relevant information by applying the Johansen
+procedure to a matrix of time series data.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>x</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: A data matrix, or an
+object that can be coerced to it.</p>
+</dd>
+<dt>
+<code>Z0</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of the
+differenced series.</p>
+</dd>
+<dt>
+<code>Z1</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The regressor
+matrix, except for the lagged variables in levels.</p>
+</dd>
+<dt>
+<code>ZK</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of the
+lagged variables in levels.</p>
+</dd>
+<dt>
+<code>type</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The type of the
+test, either <code>"trace"</code> or <code>"eigen"</code>.</p>
+</dd>
+<dt>
+<code>model</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The model
+description in prose, with respect to the inclusion of a linear
+trend.</p>
+</dd>
+<dt>
+<code>ecdet</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: Specifies
+the deterministic term to be included in the cointegration
+relation. This can be either "none", "const", or "trend".</p>
+</dd>
+<dt>
+<code>lag</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: The lag order
+for the variables in levels.</p>
+</dd>
+<dt>
+<code>P</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: The count of
+variables.</p>
+</dd>
+<dt>
+<code>season</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The frequency of
+the data, if seasonal dummies should be included, otherwise NULL.</p>
+</dd>
+<dt>
+<code>dumvar</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: A matrix
+containing dummy variables. The row dimension must be equal to
+<code>x</code>, otherwise NULL.</p>
+</dd>
+<dt>
+<code>cval</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The critical
+values of the test at the 1%, 5% and 10% level of significance.</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The values
+of the test statistics.</p>
+</dd>
+<dt>
+<code>lambda</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The eigenvalues.</p>
+</dd>
+<dt>
+<code>Vorg</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of
+eigenvectors, such that <code class="reqn">\hat V'S_{kk}\hat V = I</code>.</p>
+</dd>
+<dt>
+<code>V</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of
+eigenvectors, normalised with respect to the first variable.</p>
+</dd>
+<dt>
+<code>W</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of
+loading weights.</p>
+</dd>
+<dt>
+<code>PI</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The coeffcient
+matrix of the lagged variables in levels.</p>
+</dd>
+<dt>
+<code>DELTA</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The
+variance/covarinace matrix of <code>V</code>.</p>
+</dd>
+<dt>
+<code>GAMMA</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The
+coeffecient matrix of <code>Z1</code>.</p>
+</dd>
+<dt>
+<code>R0</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of
+residuals from the regressions in differences.</p>
+</dd>
+<dt>
+<code>RK</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of
+residuals from the regression in lagged levels.</p>
+</dd>
+<dt>
+<code>bp</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: Potential break
+point, only set if function <code>cajolst</code> is called, otherwise
+<code>NA</code>.</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+name of the test, <em>i.e.</em> ‘Johansen-Procedure’.</p>
+</dd>
+<dt>
+<code>spec</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+specification of the VECM.</p>
+</dd>
+<dt>
+<code>call</code>:</dt>
+<dd>
+<p>Object of class <code>"call"</code>: The
+call of function <code>ca.jo</code>.</p>
+</dd>
+</dl>
+<h3>Extends</h3>
+
+<p>Class <code>urca</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Type <code>showMethods(classes="ca.jo")</code> at the R prompt for a
+complete list of methods which are available for this class.
+</p>
+<p>Useful methods include
+</p>
+
+<dl>
+<dt>
+<code>show</code>:</dt>
+<dd>
+<p>test statistic.</p>
+</dd>
+<dt>
+<code>summary</code>:</dt>
+<dd>
+<p>like show, but critical values, eigenvectors
+and loading matrix added.</p>
+</dd>
+<dt>
+<code>plot</code>:</dt>
+<dd>
+<p>The series of the VAR and their potential
+cointegration relations.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1988), Statistical Analysis of Cointegration Vectors,
+<em>Journal of Economic Dynamics and Control</em>, <b>12</b>, 231–254.
+</p>
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code>, <code>plotres</code> and <code>urca-class</code>.
+</p>
+
+
+</div>

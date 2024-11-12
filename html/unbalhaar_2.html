@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>best.unbal.haar</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Best top-down Unbalanced Haar decomposition</h2>
+
+<h3>Description</h3>
+
+<p>The function finds the “best” top-down Unbalanced Haar (UH) decomposition of the input vector
+<code>x</code>, according to a selection rule (<code>criterion</code>) which specifies which 
+UH vector gets chosen at each scale and location.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">best.unbal.haar(x, criterion = inner.prod.max)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>            a vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion</code></td>
+<td>
+<p>    a function which takes a vector of length <em>n</em> and returns an integer between 1 and <em>n</em>-1</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>tree</code></td>
+<td>
+<p>      A list of J matrices, where J represents the number of “scales”. Each matrix is of size 5 x (the number of UH
+coefficients at a given scale). Each column (= vector of length 5) contains an Unbalanced Haar coefficient
+in the following format: 1st component - an index of the coefficient; 2nd component - the value of the coefficient;
+3rd component - time point where the corresponding UH vector starts; 4th component - last time point before the 
+breakpoint of the UH vector; 5th component - end point of the UH vector.  </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smooth</code></td>
+<td>
+<p>    the “smooth” component of <code>x</code>, equal to <code>sum(x) / sqrt(n)</code>, where <code>n</code> is the length of <code>x</code>  </p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Piotr Fryzlewicz</p>
+
+
+<h3>See Also</h3>
+
+<p><code>inner.prod.max</code>, <code>inner.prod.max.p</code>, <code>best.unbal.haar.bu</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">best.unbal.haar(rnorm(100), inner.prod.max.p)
+</code></pre>
+
+
+</div>

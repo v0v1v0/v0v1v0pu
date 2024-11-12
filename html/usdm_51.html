@@ -1,0 +1,144 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vif</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variance Inflation Factor and test for multicollinearity</h2>
+
+<h3>Description</h3>
+
+<p>Calculates variance inflation factor (VIF) for a set of variables and exclude the highly correlated variables from the set through a stepwise procedure. This method can be used to deal with multicollinearity problems when you fit statistical models</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vif(x, size, ...)
+vifcor(x, th = 0.9, keep = NULL, size, method = 'pearson', ...)
+vifstep(x, th = 10, keep = NULL, size, method = 'pearson', ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> Numeric explanatory variables (predictors), defined as a raster object (<code>RasterStack</code> or <code>RasterBrick</code> or <code>SpatRaster</code>), or as a <code>matrix</code>, or as a <code>data.frame</code>. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>th</code></td>
+<td>
+<p> a numeric value specifying the correlation threshold for vifcor, and VIF threshold for vifstep (see details).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keep</code></td>
+<td>
+<p>A character vector with the name of variables that should not be excluded even if they are collinear, e.g., because of ecological reasons</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>When the data is big, a random sample of the records (cells from raster or rows from data.frame) with the specified size is selected; default is 5000.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a chatacter (one of c("pearson","spearman","kendall")) specifies the method to calculate a pairwise correlation; deafult="pearson".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not implemented.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>VIF can be used to detect collinearity (Strong correlation between two or more predictor variables). Collinearity causes instability in parameter estimation in regression-type models. The VIF is based on the square of the multiple correlation coefficient resulting from regressing a predictor variable against all other predictor variables. If a variable has a strong linear relationship with at least one other variables, the correlation coefficient would be close to 1, and VIF for that variable would be large.  A VIF greater than 10 is a signal that the model has a collinearity problem. <code>vif</code> function calculates this statistic for all variables in <code>x</code>. <code>vifcor</code> and <code>vifstep</code> uses two different strategy to exclude highly collinear variable through a stepwise procedure. 
+</p>
+<p>- <code>vifcor</code>, first finds a pair of variables which has the maximum linear correlation (greater than the threshold; th), and exclude the one with a greater VIF. The procedure is repeated untill no pair of variables with a high corrrelation coefficient (grater than the threshold) remains. 
+</p>
+<p>- <code>vifstep</code> calculates VIF for all variables, excludes the one with the highest VIF (if it is greater than the threshold), repeat the procedure untill no variables with a VIF greater than <code>th</code> remains.
+</p>
+<p>addtional arguments:
+</p>
+<p><code>method</code> default is "pearson", specifies the correlation method (one'pearson','kendall','spearman')
+</p>
+<p><code>size</code> a number (default=5000) specifying the maximum number of observations should be contributed in calculation of VIF. When the number of observations (cells in raster or rows in data.frame/matrix) is greater than <code>size</code>, then a random sample with a size of <code>size</code> is drawn to keep the calculation effecient.
+</p>
+<p><code>keep</code>: sometimes we may have strong biological/ecological justification to keep some variables in the model even if the statistical calculations suggest otherwise. In that case, the <code>keep</code> argument can help to introduce the name of such variables (or the number specifying which columns in data.frame or which layers in raster object should be kept) to the functions, then the stepwise procedure take them into account to find which variables should be excluded.
+</p>
+
+
+<h3>Value</h3>
+
+<p>an object of class <code>VIF</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Babak Naimi <a href="mailto:naimi.b@gmail.com">naimi.b@gmail.com</a>
+</p>
+<p><a href="https://r-gis.net/">https://r-gis.net/</a>
+</p>
+<p><a href="https://www.biogeoinformatics.org/">https://www.biogeoinformatics.org/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Chatterjee, S. and Hadi, A. S. 2006. Regression analysis by example. John Wiley and Sons.;
+</p>
+<p>Dormann, C. F. et al. 2012. Collinearity: A review of methods to Deal with it and a simulation study evaluating their performance. Ecography 35: 001-020.;
+</p>
+<p>————–
+</p>
+<p>IF you used this method, please cite the following article for which this package is developed:
+</p>
+<p>Naimi, B., Hamm, N.A.S., Groen, T.A., Skidmore, A.K., and Toxopeus, A.G. 
+2014. Where is positional uncertainty a problem for species distribution modelling?, Ecography 37 (2): 191-203.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code>exclude</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+file &lt;- system.file("external/spain.tif", package="usdm")
+
+r &lt;- rast(file) # reading a SpatRaster object including 10 raster layers in Spain
+
+r 
+
+vif(r) # calculates vif for the variables in r
+
+v1 &lt;- vifcor(r, th=0.9) # identify collinear variables that should be excluded
+
+v1
+
+v2 &lt;- vifstep(r, th=10) # identify collinear variables that should be excluded
+
+v2
+
+v3 &lt;- vifstep(r, th=10, keep = c('Bio4','Bio10')) 
+
+v3
+
+
+## End(Not run)
+</code></pre>
+
+
+</div>

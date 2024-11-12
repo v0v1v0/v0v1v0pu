@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bbase</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Constructs a B-spline basis of degree 'deg' (Code by Paul Eilers, Package JOPS, http://statweb.lsu.edu/faculty/marx/JOPS_0.1.0.tar.gz).</h2>
+
+<h3>Description</h3>
+
+<p>Constructs a B-spline basis of degree 'deg' (Code by Paul Eilers, Package JOPS, http://statweb.lsu.edu/faculty/marx/JOPS_0.1.0.tar.gz).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bbase(x, xl = min(x), xr = max(x), ndx = 20, deg = 6)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>values for the x axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xl</code></td>
+<td>
+<p>minimum value, default is the minimum value of the x-values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xr</code></td>
+<td>
+<p>maximum value, default is maximum value of the x-values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndx</code></td>
+<td>
+<p>number of intervals to partition the distance between xl and xr.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>degree of the B-spline basis.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a B-spline basis of degree deg and ndx + 1 internal knots.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x_finegrid &lt;- seq(0.001, 1.0, (1.0 - 0.001) / 1000)
+bbase(x_finegrid)
+</code></pre>
+
+
+</div>

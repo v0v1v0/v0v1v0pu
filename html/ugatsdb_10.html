@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>series</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Series Table</h2>
+
+<h3>Description</h3>
+
+<p>This function pulls and returns a table called 'SERIES' from the database.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">series(dsid = NULL, dataset.info = TRUE, ordered = TRUE, return.query = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dsid</code></td>
+<td>
+<p>character. (Optional) id's of datasets matching the 'DSID' column of the 'DATASET' table (retrieved using <code>datasets()</code>) for which series information is to be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataset.info</code></td>
+<td>
+<p>logical. <code>TRUE</code> returns additional information from the 'DATASET' table about the
+datasets in which the series are recorded. <code>FALSE</code> only returns the raw 'SERIES' table.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ordered</code></td>
+<td>
+<p>logical. <code>TRUE</code> orders the result in the order data was entered into the database, while <code>FALSE</code> returns the result in a random order, to the benefit of faster query execution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return.query</code></td>
+<td>
+<p>logical. <code>TRUE</code> will not query the database but instead return the constructed SQL query as a character string.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The 'SERIES' table gives information about all of the time series in the database. Each series is given a code which is however not unique across datasets (see <code>.IDvars</code>).
+Each series also has a label describing the series. Further information recorded are the minimum and maximum time coverage, and (optionally) a separate series source and url.
+By default <code>dataset.info = TRUE</code> and the frequency of the data, the date when the dataset containing the series was last updated, the dataset and data source are added to the
+'SERIES' table from the 'DATASET' table.
+</p>
+<p>If <code>dataset.info = FALSE</code>, the 'DATASET' table is not joined to the 'SERIES' table, and <code>ordered = TRUE</code> only orders the series within each dataset to maintain the column order of series in the source data.
+In that case the datasets are returned in alphabetic order of 'DSID', not the order in which they were entered into the 'DATASET' table.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.table</code> with information about the available time series in the database.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>datasets</code>, <code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# By default returns all series with additional information
+series()
+
+# Raw series table
+series(dataset.info = FALSE)
+
+# Only series in the Monthly Macroeconomic Indicators of the BoU
+series("BOU_MMI")
+
+</code></pre>
+
+
+</div>

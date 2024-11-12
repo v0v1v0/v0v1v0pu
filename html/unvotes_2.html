@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>un_roll_call_issues</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data on the issue of each roll call of the United Nations General Assembly</h2>
+
+<h3>Description</h3>
+
+<p>Issue (topic) classifications of roll call votes of the United Nations
+General Assembly. Many votes had no topic, and some have more than one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">un_roll_call_issues
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame (specifically a tbl_df) with one row
+for each pair of a roll call vote and an issue describing that vote.
+Contains the following columns:
+</p>
+
+<dl>
+<dt>rcid</dt>
+<dd>
+<p>The roll call id; used to join with <code>un_votes</code>
+and <code>un_roll_calls</code></p>
+</dd>
+<dt>short_name</dt>
+<dd>
+<p>Two-letter issue codes</p>
+</dd>
+<dt>issue</dt>
+<dd>
+<p>Descriptive issue name</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Erik Voeten "Data and Analyses of Voting in the UN General Assembly"
+Routledge Handbook of International Organization, edited by Bob Reinalda
+(published May 27, 2013)
+<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=hdl:1902.1/12379">https://dataverse.harvard.edu/dataset.xhtml?persistentId=hdl:1902.1/12379</a>
+</p>
+
+
+</div>

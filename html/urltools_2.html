@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>strip_credentials</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or remove user authentication credentials</h2>
+
+<h3>Description</h3>
+
+<p>authentication credentials appear before the domain
+name and look like <em>user:password</em>. Sometimes you want the removed,
+or retrieved; <code>strip_credentials</code> and <code>get_credentials</code> do
+precisely that
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">strip_credentials(urls)
+
+get_credentials(urls)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>urls</code></td>
+<td>
+<p>a URL, or vector of URLs</p>
+</td>
+</tr></table>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Remove credentials
+strip_credentials("http://foo:bar@97.77.104.22:3128")
+
+# Get credentials
+get_credentials("http://foo:bar@97.77.104.22:3128")
+</code></pre>
+
+
+</div>

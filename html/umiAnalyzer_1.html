@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>addMetaData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add metaData</h2>
+
+<h3>Description</h3>
+
+<p>Add metaData
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">addMetaData(object, attributeName, attributeValue)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>R object to which meta data should be added</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attributeName</code></td>
+<td>
+<p>Name of the meta data attribute.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attributeValue</code></td>
+<td>
+<p>Meta data to be saved.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A UMIexperiment object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(umiAnalyzer)
+
+main &lt;- system.file("extdata", package = "umiAnalyzer")
+
+simsen &lt;- createUmiExperiment(main)
+
+metaData &lt;- system.file("extdata", "metadata.txt", package = "umiAnalyzer")
+
+simsen &lt;- addMetaData(simsen,'metaData',metaData)
+
+
+</code></pre>
+
+
+</div>

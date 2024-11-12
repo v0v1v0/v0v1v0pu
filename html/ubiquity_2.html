@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>archive_estimation</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Archive Estimation Results</h2>
+
+<h3>Description</h3>
+
+<p>Archives the estimation results by moving the output files to the same file
+names with <code>'name'</code> prepended to them. This prevents them from being
+overwritten in a different analysis script the following files are
+archived:
+</p>
+
+<ul>
+<li> <p><code>output/parameters_all.csv</code>
+</p>
+</li>
+<li> <p><code>output/parameters_est.csv</code>
+</p>
+</li>
+<li> <p><code>output/report.txt</code>
+</p>
+</li>
+</ul>
+<p>Example:
+</p>
+<p>archive_estimation('mysoln', cfg)
+</p>
+<p>Would rename the files above 
+</p>
+
+<ul>
+<li> <p><code>output/mysoln-parameters_all.csv</code>
+</p>
+</li>
+<li> <p><code>output/mysoln-parameters_est.csv</code>
+</p>
+</li>
+<li> <p><code>output/mysoln-report.txt</code>
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">archive_estimation(name, cfg)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>analysis name</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Boolean variable indicating success (<code>TRUE</code>) or failure (<code>FALSE</code>)
+</p>
+
+
+</div>

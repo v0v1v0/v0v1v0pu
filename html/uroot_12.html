@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>hegy.rs.pvalue</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>P-values based on response surface regressions for the HEGY test statistics </h2>
+
+<h3>Description</h3>
+
+<p>Compute p-values for the Hylleberg, Engle, Granger and Yoo (HEGY) test statistic 
+by interpolation in precompiled response surfaces.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">hegy.rs.pvalue(x, type = c("zero", "pi", "pair", "seasall", "all"), 
+  deterministic = c(1, 0, 0), lag.method = c("fixed", "AIC", "BIC"),
+  lag.order, S, n, nobsreg)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric, the value of the HEGY statistic.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>a character, the type of test statistic, the regressor(s) to which 
+the statistic is related.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>deterministic</code></td>
+<td>
+<p>a vector of length three containing zeros and ones to indicate, respectively,
+whether a constant, a trend or seasonal dummies should be included in the regression equation 
+of the test.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>lag.method</code></td>
+<td>
+<p>a character specifying the lag order selection criterion.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>lag.order</code></td>
+<td>
+<p>a numeric, the lag order employed in the auxiliary regression.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>S</code></td>
+<td>
+<p>numeric, the periodicity of the data.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric, the number of observations.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>nobsreg</code></td>
+<td>
+<p>an integer indicating the number of points employed in the response surface 
+regression.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Ported from Gretl code provided by Díaz-Emparanza (2014).
+
+The original source includes tables with coefficients for the 
+calculation of p-values when the HQC lag order selection criterion is used.
+These tables are not included here.
+
+The case with no deterministic terms (<code>deterministic = c(0,0,0)</code>) is not considered.
+</p>
+<p>This function is mainly intended to be used internally by <code>hegy.test</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric, the p-value.
+</p>
+
+
+<h3>References</h3>
+
+<p>Díaz-Emparanza, I. (2014)
+"Numerical Distribution Functions for Seasonal Unit Root Tests"-
+<em>Computational Statistics and Data Analysis</em> <b>76</b>, pp. 237-247.
+DOI: <a href="https://doi.org/10.1016/j.csda.2013.03.006">doi:10.1016/j.csda.2013.03.006</a>.
+Gretl code: https://www.ehu.eus/ignacio.diaz-emparanza/packages/Canova_Hansen.gfn/
+(seems unavailable, so not linked)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>hegy.test</code>.
+</p>
+
+
+</div>

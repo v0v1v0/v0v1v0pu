@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Lmoms</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Lmoments &amp; Lmoment ratios</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the Lmoments and Lmoment ratios from a sample of data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Lmoms(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric vector. The sample of interest</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Lmoments calculated according to methods outlined by Hosking &amp; Wallis (1997): Regional Frequency Analysis and approach based on LMoments. Also in the Flood Estimation Handbook (1999), volume 3.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with one row and column headings; L1, L2, L3, L4, Lcv, LSkew, and LKurt. The first four are the Lmoments and the next three are the Lmoment ratios.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get an AMAX sample and calculate the Lmoments
+AM.27051 &lt;- GetAM(27051)
+Lmoms(AM.27051$Flow)
+</code></pre>
+
+
+</div>

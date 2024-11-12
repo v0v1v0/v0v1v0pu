@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_neighbourhood_location</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Neighbourhood Location</h2>
+
+<h3>Description</h3>
+
+<p>Find the neighbourhood policing team responsible for a given area, by
+a set of coordinates. Accepts only a single pair of latitude and longitude.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_neighbourhood_location(lat, lng)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lat</code></td>
+<td>
+<p>Latitude</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lng</code></td>
+<td>
+<p>Longitude</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The police force and neighbourhood code of the given coordinates.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukc_neighbourhood_boundary()</code>
+</p>
+<p><code>ukc_neighbourhoods()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+find &lt;- ukc_neighbourhood_location(lat = 51.500617, lng = -0.124629)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

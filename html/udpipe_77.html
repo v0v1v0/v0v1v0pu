@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_recode</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Recode text to other categories</h2>
+
+<h3>Description</h3>
+
+<p>Recode text to other categories. 
+Values of <code>x</code> which correspond to <code>from[i]</code> will be recoded to <code>to[i]</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_recode(x, from = c(), to = c(), na.rm = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+<p>a character vector with values of <code>x</code> which you want to recode</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>a character vector with values of you want to use to recode to where you
+want to replace values of <code>x</code> which correspond to <code>from[i]</code> to <code>to[i]</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical, if set to TRUE, will put all values of <code>x</code> which have no
+matching value in <code>from</code> to NA. Defaults to <code>FALSE</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector of the same length of <code>x</code> where values of <code>x</code>
+which are given in <code>from</code> will be replaced by the corresponding element in <code>to</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>match</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("NOUN", "VERB", "NOUN", "ADV")
+txt_recode(x = x,
+           from = c("VERB", "ADV"),
+           to = c("conjugated verb", "adverb"))
+txt_recode(x = x,
+           from = c("VERB", "ADV"),
+           to = c("conjugated verb", "adverb"),
+           na.rm = TRUE)
+txt_recode(x = x,
+           from = c("VERB", "ADV", "NOUN"),
+           to = c("conjugated verb", "adverb", "noun"),
+           na.rm = TRUE)
+</code></pre>
+
+
+</div>

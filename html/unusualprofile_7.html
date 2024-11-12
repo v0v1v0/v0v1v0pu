@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.maha</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot objects of the maha class (i.e, the results of the cond_maha function
+using dependent variables only).</h2>
+
+<h3>Description</h3>
+
+<p>Plot objects of the maha class (i.e, the results of the cond_maha function
+using dependent variables only).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'maha'
+plot(
+  x,
+  ...,
+  p_tail = 0,
+  family = "sans",
+  score_digits = ifelse(min(x$sigma) &gt;= 10, 0, 2)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The results of the cond_maha function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments passed to print function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p_tail</code></td>
+<td>
+<p>Proportion in violin tail (defaults to 0).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>Font family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>score_digits</code></td>
+<td>
+<p>Number of digits to round scores.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot2-object
+</p>
+
+
+</div>

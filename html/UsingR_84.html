@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>last.tie</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Last tie in 100 coin tosses</h2>
+
+<h3>Description</h3>
+
+<p>Toss a coin 100 times and keep a running count of the number of heads
+and the number of tails. Record the times when the number is tied and
+report the last one. The distribution will have an approximate
+“arc-sine” law or well-shaped distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(last.tie)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>200 numbers between 0 and 100 indicating when the last tie was.
+</p>
+
+
+<h3>Details</h3>
+
+<p>This data comes from simulating the commands:
+<code>x = cumsum(sample(c(-1,1),100,replace=T))</code>
+</p>
+<p>and then finding the
+last tie with
+</p>
+<p><code>last.tie[i]&lt;-max(0,max(which(!sign(x) ==
+    sign(x[length(x)]))))</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(last.tie)
+hist(last.tie)
+</code></pre>
+
+
+</div>

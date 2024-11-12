@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uniqueBidirection</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>uniqueBidirection</h2>
+
+<h3>Description</h3>
+
+<p>Find unique rows of a data.frame regardless of the order they appear
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uniqueBidirection(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Sorts individual rows to get uniques regardless of order of appearance.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame that is unique regardless of direction
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+ex &lt;- data.frame(One=c('a', 'c', 'a', 'd', 'd', 'c', 'b'), 
+Two=c('b', 'd', 'b', 'e', 'c', 'd', 'a'),
+stringsAsFactors=FALSE)
+
+# make a bigger version
+exBig &lt;- ex
+for(i in 1:1000)
+{
+    exBig &lt;- rbind(exBig, ex)
+}
+
+dim(exBig)
+
+uniqueBidirection(ex)
+uniqueBidirection(exBig)
+
+ex3 &lt;- dplyr::bind_cols(ex, dplyr::data_frame(Three=rep('a', nrow(ex))))
+uniqueBidirection(ex3)
+
+</code></pre>
+
+
+</div>

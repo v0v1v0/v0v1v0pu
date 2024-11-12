@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_set_checkpoint</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_set_checkpoint</h2>
+
+<h3>Description</h3>
+
+<p>Set the checkpoint status for a model or global options
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_set_checkpoint(
+  interval = 1,
+  units = c("evaluations", "iterations", "minutes"),
+  prefix = "",
+  directory = getwd(),
+  model = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>How many units between checkpoints: Default =  1.
+A value of zero sets always to 'No' (i.e., do not checkpoint all models during optimization)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>units to count in: Default unit is 'evaluations' ('minutes' is also legal)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>string prefix to add to all checkpoint filenames (default = "")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>directory</code></td>
+<td>
+<p>a directory, i.e "~/Desktop" (defaults to getwd())</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>(optional) model to set options in (default = NULL)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> mxModel if provided
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Get and set: 
+<code>umx_get_checkpoint()</code>,
+<code>umx_get_options()</code>,
+<code>umx_set_auto_plot()</code>,
+<code>umx_set_auto_run()</code>,
+<code>umx_set_condensed_slots()</code>,
+<code>umx_set_cores()</code>,
+<code>umx_set_data_variance_check()</code>,
+<code>umx_set_dollar_symbol()</code>,
+<code>umx_set_optimization_options()</code>,
+<code>umx_set_optimizer()</code>,
+<code>umx_set_plot_file_suffix()</code>,
+<code>umx_set_plot_format()</code>,
+<code>umx_set_plot_use_hrbrthemes()</code>,
+<code>umx_set_separator()</code>,
+<code>umx_set_silent()</code>,
+<code>umx_set_table_format()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+umx_set_checkpoint(interval = 1, "evaluations", dir = "~/Desktop/")
+# Turn off checkpointing with interval = 0
+umx_set_checkpoint(interval = 0)
+umx_set_checkpoint(2, "evaluations", prefix="SNP_1")
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+m1 = umx_set_checkpoint(model = m1)
+m1 = mxRun(m1)
+umx_checkpoint(0)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

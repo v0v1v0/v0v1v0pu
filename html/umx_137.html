@@ -1,0 +1,147 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxReduce</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reduce models, and report the results.</h2>
+
+<h3>Description</h3>
+
+<p>Given a <code>umx</code> model (currently <code>umxACE</code> and <code>umxGxE</code> are supported - ask for more!)
+<code>umxReduce</code> will conduct a formalised reduction process. It will also report
+Akaike weights are also reported showing relative support across models.
+</p>
+<p>Specialized functions are called for different type of input:
+</p>
+
+<ol>
+<li> <p><strong>GxE model reduction</strong> For <code>umxGxE()</code> models <code>umxReduceGxE()</code> is called.
+</p>
+</li>
+<li> <p><strong>ACE model reduction</strong> For <code>umxACE()</code> models,<code>umxReduceACE()</code> is called.
+</p>
+</li>
+</ol>
+<p><code>umxReduce</code> reports the results in a table. Set the format of the table with
+<code>umx_set_table_format()</code>, or set <code>report= "html"</code> to open a
+table for pasting into a word processor.
+</p>
+<p><code>umxReduce</code> is a work in progress, with more automatic reductions coming as demand emerges.
+I am thinking for RAM models to drop NS paths, and report that test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxReduce(
+  model,
+  report = c("markdown", "inline", "html"),
+  intervals = TRUE,
+  baseFileName = "tmp",
+  tryHard = "yes",
+  silent = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The <code>mxModel()</code> which will be reduced.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>How to report the results. "html" = open in browser</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intervals</code></td>
+<td>
+<p>Recompute CIs (if any included) on the best model (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>baseFileName</code></td>
+<td>
+<p>(optional) custom filename for html output (defaults to "tmp")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Default = "yes"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Default = FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters to control model summary</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Wagenmakers, E.J., &amp; Farrell, S. (2004). AIC model selection using Akaike weights.
+<em>Psychonomic Bulletin and Review</em>, <strong>11</strong>, 192-196. <a href="https://doi.org/10.3758/BF03206482">doi:10.3758/BF03206482</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>umxReduceGxE()</code>, <code>umxReduceACE()</code>
+</p>
+<p>Other Model Summary and Comparison: 
+<code>umxCompare()</code>,
+<code>umxEquate()</code>,
+<code>umxMI()</code>,
+<code>umxSetParameters()</code>,
+<code>umxSummary()</code>,
+<code>umx</code>
+</p>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+</div>

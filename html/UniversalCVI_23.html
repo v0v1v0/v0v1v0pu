@@ -1,0 +1,144 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>KWON2.IDX</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+KWON2 index
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the KWON2 (S. H. Kwon et al., 2021) index for a result of either FCM or EM clustering from user specified <code>cmin</code> to <code>cmax</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">KWON2.IDX(x, cmax, cmin = 2, method = "FCM", fzm = 2, nstart = 20, iter = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmax</code></td>
+<td>
+<p>a maximum number of clusters to be considered.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmin</code></td>
+<td>
+<p>a minimum number of clusters to be considered. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which clustering method to be used (<code>"FCM"</code> or <code>"EM"</code>). The default is <code>"FCM"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fzm</code></td>
+<td>
+<p>a number greater than 1 giving the degree of fuzzification for <code>method = "FCM"</code>. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for FCM for <code>method = "FCM"</code>. The default is <code>20</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>a maximum number of iterations for <code>method = "FCM"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>KWON2 is defined as <br></p>
+<p style="text-align: center;"><code class="reqn">KWON2(c) = \frac{w_1\left[w_2\sum_{j=1}^c\sum_{i=1}^n \mu_{ij}^{2^{\sqrt{\frac{m}{2}}}}  \|{x}_i-{v}_j\|^2  + \frac{\sum_{j=1}^c\| {v}_j-{v}_0\|^2}{\max_j \|{v}_j-{v}_0\|^2 } + w_3 \right]}{\min_{i \neq j} \| {v}_i-{v}_j\|^2 + \frac{1}{c}+\frac{1}{c^m-1}}.
+</code>
+</p>
+
+<p>where <code class="reqn">w_1 = \frac{n-c+1}{n}</code>, <code class="reqn">w_2 = \left(\frac{c}{c-1}\right)^{\sqrt{2}}</code> and <code class="reqn">w_3=\frac{nc}{(n-c+1)^2}</code>.<br><br>
+The smallest value of  <code class="reqn">KWON2(c)</code> indicates a valid optimal partition.<br></p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>KWON2</code></td>
+<td>
+<p>the KWON2 index for <code>c</code> from <code>cmin</code> to <code>cmax</code> shown in a data frame where the first and the second columns are <code>c</code> and the KWON2 index, respectively.</p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>S. H. Kwon, J. Kim, and S. H. Son, “Improved cluster validity index
+for fuzzy clustering,” Electronics Letters, vol. 57, no. 21, pp. 792–794,
+2021.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>R1_data, TANG.IDX, FzzyCVIs, WP.IDX, Hvalid</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# The data is from Wiroonsri (2024).
+x = R1_data[,1:2]
+
+# ---- FCM algorithm ----
+
+# Compute the KWON2 index
+FCM.KWON2 = KWON2.IDX(scale(x), cmax = 15, cmin = 2, method = "FCM",
+  fzm = 2, nstart = 20, iter = 100)
+print(FCM.KWON2)
+
+# The optimal number of cluster
+FCM.KWON2[which.min(FCM.KWON2$KWON2),]
+
+# ---- EM algorithm ----
+
+# Compute the KWON2 index
+EM.KWON2 = KWON2.IDX(scale(x), cmax = 15, cmin = 2, method = "EM",
+  nstart = 20, iter = 100)
+print(EM.KWON2)
+
+# The optimal number of cluster
+EM.KWON2[which.min(EM.KWON2$KWON2),]
+</code></pre>
+
+
+</div>

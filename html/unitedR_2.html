@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>formation</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representing a formation</h2>
+
+<h3>Description</h3>
+
+<p>Represents a valid united formation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">formation(
+  GK,
+  SW,
+  DF,
+  MF,
+  ST,
+  hardness = c(0, 0, 0, 0, 0),
+  homeAdv = c(0, 0, 0, 0, 0)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>GK</code></td>
+<td>
+<p><code>integer</code> for the strength goalkeeper</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SW</code></td>
+<td>
+<p><code>vector</code> for the strength of the sweeper, can be 
+<code>NA</code> or a <code>numeric</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DF</code></td>
+<td>
+<p><code>numeric</code> vector for the strengths of the players in the 
+defense</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MF</code></td>
+<td>
+<p><code>numeric</code> vector for the strengths of the players in the 
+midfield</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ST</code></td>
+<td>
+<p><code>numeric</code> vector of integers for the strenghts of the strikers</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hardness</code></td>
+<td>
+<p><code>numeric</code> vector of length five with integers for the used hardness</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>homeAdv</code></td>
+<td>
+<p><code>numeric</code> vector of length five with integers for the used hardness</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>S4</code> object of the class <code>formation</code>.
+</p>
+
+
+</div>

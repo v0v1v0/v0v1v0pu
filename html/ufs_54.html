@@ -1,0 +1,154 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>convert</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>conversion functions</h2>
+
+<h3>Description</h3>
+
+<p>These are a number of functions to convert statistics and effect size
+measures from/to each other.
+</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>chisq, cohensf, cohensfsq, d, etasq, f, logodds, means, omegasq, or, p, r, t, z</code></td>
+<td>
+<p>The value of the relevant statistic or effect size.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncf</code></td>
+<td>
+<p>The value of a noncentrality parameter of the F distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n, n1, n2, N, ns</code></td>
+<td>
+<p>The number of observations that the r or t value is
+based on, or the number of observations in each of the two groups for an
+anova, or the total number of participants when specifying a noncentrality
+parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df, df1, df2</code></td>
+<td>
+<p>The degrees of freedrom for that statistic (for F, the
+first one is the numerator (i.e. the effect), and the second one the
+denominator (i.e. the error term).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>proportion</code></td>
+<td>
+<p>The proportion of participants in each of the two groups
+in a t-test or anova. This is used to compute the sample size in each group
+if the group sizes are unknown.  Thus, if you only provide df1 and df2 when
+converting an F value to a Cohen's d value, equal group sizes are assumed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>The value of a regression coefficient.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se, sds</code></td>
+<td>
+<p>The standard error of standard errors of the relevant
+statistic (e.g. of a regression coefficient) or variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minDim</code></td>
+<td>
+<p>The smallest of the number of columns and the number of rows
+of the crosstable for which the chisquare is translated to a Cramer's V
+value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>For the F and chisquare distributions, whether to get the
+probability of the lower or upper tail.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>akfEq8</code></td>
+<td>
+<p>When converting Cohen's <em>d</em> to <em>r</em>, for small sample
+sizes, bias is introduced when the commonly suggested formula is used
+(Aaron, Kromrey &amp; Ferron, 1998). Therefore, by default, this function uses
+different equations depending on the sample size (for n &lt; 50 and for n &gt;
+50). When <code>akfEq8</code> is set to TRUE or FALSE, the corresponding action is
+taken; when <code>akfEq8</code> is not logical (i.e. TRUE or FALSE), the function
+depends on the sample size.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var.equal</code></td>
+<td>
+<p>Whether to compute the value of <em>t</em> or Cohen's
+<em>d</em> assuming equal variances ('yes'), unequal variances ('no'), or
+whether to test for the difference ('test').</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that by default, the behavior of <code>convert.d.to.r</code> depends on the
+sample size (see Bruce, Kromrey &amp; Ferron, 1998).
+</p>
+
+
+<h3>Value</h3>
+
+<p>The converted value as a numeric value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters and Peter Verboon
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Aaron, B. Kromrey J. D. &amp; Ferron, J. (1998) <em>Equating
+"r"-based and "d"-based Effect Size Indices: Problems with a Commonly
+Recommended Formula.</em> Paper presented at the Annual Meeting of the Florida
+Educational Research Association (43rd, Orlando, FL, November 2-4, 1998).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+convert.t.to.r(t=-6.46, n=200);
+convert.r.to.t(r=-.41, n=200);
+
+### Compute some p-values
+convert.t.to.p(4.2, 197);
+convert.chisq.to.p(5.2, 3);
+convert.f.to.p(8.93, 3, 644);
+
+### Convert d to r using both equations
+convert.d.to.r(d=.2, n1=5, n2=5, akfEq8 = FALSE);
+convert.d.to.r(d=.2, n1=5, n2=5, akfEq8 = TRUE);
+
+</code></pre>
+
+
+</div>

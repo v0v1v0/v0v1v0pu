@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>five.yr.temperature</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Five years of weather in New York City</h2>
+
+<h3>Description</h3>
+
+<p>Five years of maximum temperatures in New York City
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(five.yr.temperature)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 2,439 observations on the following 3 variables.
+</p>
+
+<dl>
+<dt>days</dt>
+<dd>
+<p>Which day of the year</p>
+</dd>
+<dt>years</dt>
+<dd>
+<p>The year</p>
+</dd>
+<dt>temps</dt>
+<dd>
+<p>Maximum temperature</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Dataset found on the internet, but original source is lost.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(five.yr.temperature)
+attach(five.yr.temperature)
+scatter.smooth(temps ~ days,col=gray(.75))
+lines(smooth.spline(temps ~ days), lty=2)
+lines(supsmu(days, temps), lty=3)
+</code></pre>
+
+
+</div>

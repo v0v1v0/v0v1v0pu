@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxUnexplainedCausalNexus</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umxUnexplainedCausalNexus</h2>
+
+<h3>Description</h3>
+
+<p>umxUnexplainedCausalNexus report the effect of a change (delta) in a variable (from) on an output (to)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxUnexplainedCausalNexus(from, delta, to, model = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+<p>A variable in the model for which you want to compute the effect of a change.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delta</code></td>
+<td>
+<p>A the amount to simulate changing ‘from’ by.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>The dependent variable that you want to watch changing.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The model containing variables from and to.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+
+<ul><li>
+<p> https://github.com/tbates/umx/
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>mxCheckIdentification()</code>, <code>mxCompare()</code>
+</p>
+</li></ul>
+<p>Other Advanced Model Building Functions: 
+<code>umxAlgebra()</code>,
+<code>umxFixAll()</code>,
+<code>umxJiggle()</code>,
+<code>umxRun()</code>,
+<code>umxThresholdMatrix()</code>,
+<code>umx</code>,
+<code>xmuLabel()</code>,
+<code>xmuValues()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+umxUnexplainedCausalNexus(from="yrsEd", delta = .5, to = "income35", model)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

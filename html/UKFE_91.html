@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UncSS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uncertainty for the single site</h2>
+
+<h3>Description</h3>
+
+<p>Quantifies the aleatoric uncertainty for a single site estimate, by bootstrapping the sample
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UncSS(x, func, conf = 0.95, RP = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric vector. The sample of interest</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>func</code></td>
+<td>
+<p>the function to be applied</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf</code></td>
+<td>
+<p>the confidence level of the intervals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period. Necessary if func requires RP</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The bootstrapping procedure resamples from a sample N*500 times with replacement. After splitting into 500 samples of size N, the statsitic of interest is calculated on each. upper and lower quantiles of the resulting distribution are used as the quantification of uncertainty. Any function that provides an estimate based on a sample of data can be used. Including any function that provides estimates as a function of return period.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame of three values; central, lower, and upper bootstrapped estimates.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Extract an AMAX sample and quantify uncertainty for the GEV estimated 50-year flow
+AM.203018 &lt;- GetAM(203018)
+UncSS(AM.203018$Flow, func = GEVAM, RP = 50)
+#Quantify uncertainty for the sample standard deviation at the 90 percent confidence level
+UncSS(AM.203018$Flow, func = sd, conf = 0.90)
+</code></pre>
+
+
+</div>

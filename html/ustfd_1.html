@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>endpoint_exists</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Tests if an endpoint is known</h2>
+
+<h3>Description</h3>
+
+<p>See <code>ustfd_tables()</code> for known endpoints.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">endpoint_exists(endpoint)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>endpoint</code></td>
+<td>
+<p>character vector</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>logical matching input size
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other ustfd_user: 
+<code>ustfd_all_pages()</code>,
+<code>ustfd_datasets()</code>,
+<code>ustfd_query()</code>,
+<code>ustfd_simple()</code>,
+<code>ustfd_table_columns()</code>,
+<code>ustfd_tables()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ustfd)
+endpoint_exists('v2/accounting/od/debt_to_penny')
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_gen_write_plink_excl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Writes a PLINK format file for combined exclusions</h2>
+
+<h3>Description</h3>
+
+<p><strong>Defunct. See help("ukb_defunct")</strong>.
+Writes a combined exclusions file including UKB recommended exclusions, heterozygosity exclusions (+/- 3*sd from mean), genetic ethnicity exclusions (based on the UKB genetic ethnic grouping variable, field 1002), and relatedness exclusions (a randomly-selected member of each related pair). For exclusion of individuals from a genetic analysis, the PLINK flag <code>--remove</code> accepts a space/tab-delimited text file with family IDs in the first column and within-family IDs in the second column (i.e., FID IID), without a header.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_gen_write_plink_excl(path)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>A path to a file.</p>
+</td>
+</tr></table>
+<h3>See Also</h3>
+
+<p><code>ukb_gen_meta</code>, <code>ukb_gen_pcs</code> which retrieve variables to be included in a covariate file. <code>ukb_gen_excl_to_na</code> to update a phenotype with NAs for samples to-be-excluded based on genetic metadata, and <code>ukb_gen_write_plink</code> and <code>ukb_gen_write_bgenie</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Supply name of a file to write PLINK format combined exclusions
+ukb_gen_write_plink_excl("combined_exclusions.txt")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

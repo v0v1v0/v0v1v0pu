@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cat0</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Concatenate to screen without spaces</h2>
+
+<h3>Description</h3>
+
+<p>The cat0 function is to cat what paste0 is to paste; it
+simply makes concatenating many strings without a separator easier.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cat0(..., sep = "")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>The character vector(s) to print; passed to cat.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The separator to pass to cat, of course, <code>""</code> by default.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Nothing (invisible <code>NULL</code>, like cat).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">cat0("The first variable is '", names(mtcars)[1], "'.");
+</code></pre>
+
+
+</div>

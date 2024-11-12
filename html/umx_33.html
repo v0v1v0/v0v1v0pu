@@ -1,0 +1,127 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxPlotACEv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Produce a graphical display of an ACE variance-components twin model</h2>
+
+<h3>Description</h3>
+
+<p>Plots an ACE model graphically, opening the result in the browser (or a graphviz application).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxPlotACEv(
+  x = NA,
+  file = "name",
+  digits = 2,
+  means = FALSE,
+  std = TRUE,
+  strip_zero = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>umxACEv()</code> model to plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: Default ("name") = use the name of the model. NA = don't plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>How many decimals to include in path loadings (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether to show means paths (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_zero</code></td>
+<td>
+<p>Whether to strip the leading "0" and decimal point from parameter estimates (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional (optional) parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optionally return the dot code
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+require(umx)
+data(twinData)
+mzData = subset(twinData, zygosity == "MZFF")
+dzData = subset(twinData, zygosity == "DZFF")
+m1 = umxACEv(selDVs = "bmi", dzData = dzData, mzData = mzData, sep = "")
+umxSummary(m1)
+umxPlotACEv(m1, std = FALSE) # Don't standardize
+plot(m1, std = FALSE) # don't standardize
+
+## End(Not run)
+</code></pre>
+
+
+</div>

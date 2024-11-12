@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>calc_duration</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate durations of time</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the duration of time between two provided date objects.
+Supports vectorized data (i.e. <code>dplyr::mutate()</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">calc_duration(x, y, units = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A date or datetime. The start date(s)/timestamp(s).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>A date or datetime. The end date(s)/timestamp(s).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>A character. Units of the returned duration
+(i.e. 'seconds', 'days', 'years').</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If 'units' specified, returns numeric. If 'units' unspecified,
+returns an object of class '<code>Duration</code>'.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Supports multiple calculations against a single time point (i.e.
+multiple start dates with a single end date). Note that start and end
+must otherwise be of the same length.
+</p>
+<p>When the start and end dates are of different types (i.e. x = date,
+y = datetime), a lossy cast will be performed which strips the datetime data
+of its time components. This is done to avoid an assumption of more time
+passing that would otherwise come with casting the date data to datetime.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(lubridate)
+library(purrr)
+
+# Dates -&gt; duration in years
+calc_duration(
+  x = mdy(map_chr(sample(1:9, 5), ~ paste0('01/01/199', .x))),
+  y = mdy(map_chr(sample(1:9, 5), ~ paste0('01/01/200', .x))),
+  units = 'years'
+)
+
+# datetimes -&gt; durations
+calc_duration(
+  x = mdy_hm(map_chr(sample(1:9, 5), ~ paste0('01/01/199', .x, ' 1', .x, ':00'))),
+  y = mdy_hm(map_chr(sample(1:9, 5), ~ paste0('01/01/200', .x, ' 0', .x, ':00')))
+)
+
+# Mixed date classes -&gt; durations
+calc_duration(
+  x = mdy(map_chr(sample(1:9, 5), ~ paste0('01/01/199', .x))),
+  y = mdy_hm(map_chr(sample(1:9, 5), ~ paste0('01/01/200', .x, ' 0', .x, ':00')))
+)
+</code></pre>
+
+
+</div>

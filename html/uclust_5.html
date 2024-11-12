@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot_uhclust</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot function for the result of uhclust</h2>
+
+<h3>Description</h3>
+
+<p>This function plots the p-value annotated dendrogram resulting from <code>uhclust</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plot_uhclust(
+  uhclust,
+  pvalues_cex = 0.8,
+  pvalues_dx = 2,
+  pvalues_dy = 0.08,
+  print_pvalues = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>uhclust</code></td>
+<td>
+<p>Result from <code>uhclust</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pvalues_cex</code></td>
+<td>
+<p>Graphical parameter for p-value font size.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pvalues_dx</code></td>
+<td>
+<p>Graphical parameter for p-value position shift on x axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pvalues_dy</code></td>
+<td>
+<p>Graphical parameter for p-value position shift on y axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>print_pvalues</code></td>
+<td>
+<p>Logical. Should the p-values be printed?</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+x = matrix(rnorm(100000),nrow=50)
+x[1:35,] = x[1:35,]+0.7
+x[1:15,] = x[1:15,]+0.4
+res = uhclust(data=x, plot=FALSE)
+plot_uhclust(res)
+
+</code></pre>
+
+
+</div>

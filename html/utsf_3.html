@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_examples</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build the training examples</h2>
+
+<h3>Description</h3>
+
+<p>Build the training examples for a regressive model to forecast a time series
+using lagged values of the series as autoregressive features.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_examples(timeS, lags)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>timeS</code></td>
+<td>
+<p>The time series.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lags</code></td>
+<td>
+<p>An integer vector with the lags used as feature vector in
+decreasing order.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list with two fields: 1) a matrix with the features of the examples
+and 2) a vector with the targets of the examples
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">build_examples(ts(1:5), lags = 2:1)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ustfd_tables</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return a table of supported and known tables including the API endpoints
+for the specified dataset(s). See <code>ustfd_datasets()</code> for known datasets.</h2>
+
+<h3>Description</h3>
+
+<p><code>ustfd_tables</code> provides details about 85 known endpoints for Fiscal Data.
+A data frame with 85 rows and the following 9 columns:
+</p>
+
+<ul>
+<li> <p><code>dataset</code> - ID of the source dataset
+</p>
+</li>
+<li> <p><code>endpoint</code> - the table's API endpoint (natural key)
+</p>
+</li>
+<li> <p><code>table_name</code> - Name of the table within the data set
+</p>
+</li>
+<li> <p><code>table_description</code> - a description for the data in the endpoint
+</p>
+</li>
+<li> <p><code>row_definition</code> - a description of what each row in the table describes
+</p>
+</li>
+<li> <p><code>path_name</code> - API path name
+</p>
+</li>
+<li> <p><code>date_column</code> - the name of the table column that holds the record's date
+</p>
+</li>
+<li> <p><code>earliest_date</code> - the date of the earliest record available for this table
+</p>
+</li>
+<li> <p><code>update_frequency</code> - "Daily", "Monthly", "Quarterly", "Semi-Annually",
+"Annually", "As Needed", "Daily (Discontinued)", "Monthly (Discontinued)"
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">ustfd_tables(datasets = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>datasets</code></td>
+<td>
+<p>one or more strings representing a valid dataset ID. If
+present, only endpoints belonging to matching datasets will be returned</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>tibble
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://fiscaldata.treasury.gov/api-documentation/#list-of-endpoints">https://fiscaldata.treasury.gov/api-documentation/#list-of-endpoints</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other ustfd_user: 
+<code>endpoint_exists()</code>,
+<code>ustfd_all_pages()</code>,
+<code>ustfd_datasets()</code>,
+<code>ustfd_query()</code>,
+<code>ustfd_simple()</code>,
+<code>ustfd_table_columns()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ustfd)
+ustfd_tables(ustfd_datasets()$dataset[2])$endpoint
+
+
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>som_to_df</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converts the Wide/Verbose Output Simulation Functions into Data Frames</h2>
+
+<h3>Description</h3>
+
+<p>The functions <code>run_simulation_ubiquity</code>, <code>simulate_subjects</code>, or <code>run_simulation_titrate</code>
+provide outputs in a more structured format, but it may be useful to
+convert this "wide" format to a tall/skinny format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">som_to_df(cfg, som)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>som</code></td>
+<td>
+<p>simulation output from <code>run_simulation_ubiquity</code>, <code>simulate_subjects</code>, or  <code>run_simulation_titrate</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Data frame of the format:
+</p>
+<p>When applied to the output of <code>run_simulation_ubiquity</code> or  <code>run_simulation_titrate</code>
+</p>
+
+<ul>
+<li> <p><code>ts.time</code>                   - timescale of the system
+</p>
+</li>
+<li> <p><code>ts.ts1</code>, ... <code>ts.tsn</code> - timescales defined in the system (&lt;TS&gt;)
+</p>
+</li>
+<li> <p><code>pred</code>                      - predicted/simulated response
+</p>
+</li>
+<li> <p><code>tt.ti1.x</code>                  - titration event information (*)
+</p>
+</li>
+<li> <p><code>name</code>                      - state or output (&lt;O&gt;) name corresponding to the prediction
+</p>
+</li>
+</ul>
+<p>When applied to the output of  <code>simulate_subjects</code>
+</p>
+
+<ul>
+<li> <p><code>ID</code>                      - subject ID
+</p>
+</li>
+<li> <p><code>ts.time</code>                 - timescale of the system
+</p>
+</li>
+<li> <p><code>ts.ts1, ... ts.tsn</code>      - timescales defined in the system (&lt;TS&gt;)
+</p>
+</li>
+<li> <p><code>pred</code>                    - predicted/simulated response
+</p>
+</li>
+<li> <p><code>tt.ti1.x</code>                - titration event information (*)
+</p>
+</li>
+<li> <p><code>P1, P2, ... Pn</code>          - system parameters for the subject (&lt;P&gt;)
+</p>
+</li>
+<li> <p><code>name</code>                    - state or output (&lt;O&gt;) name corresponding to the prediction
+</p>
+</li>
+</ul>
+<p>(* - field present when titration is enabled)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>run_simulation_titrate</code> internally when running simulations.
+</p>
+
+
+</div>

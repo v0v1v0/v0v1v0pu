@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>central.park</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Weather in Central Park NY in May 2003</h2>
+
+<h3>Description</h3>
+
+<p>A listing of various weather measurements made at Central Park in New
+York City during the month of May 2003.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(central.park)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 31 observations on the following 19 variables.
+</p>
+
+<dl>
+<dt>DY</dt>
+<dd>
+<p>the day</p>
+</dd>
+<dt>MAX</dt>
+<dd>
+<p>maximum temperature (temperatures in Farenheit)</p>
+</dd>
+<dt>MIN</dt>
+<dd>
+<p>minimum temperature</p>
+</dd>
+<dt>AVG</dt>
+<dd>
+<p>average temperature</p>
+</dd>
+<dt>DEP</dt>
+<dd>
+<p>departure from normal</p>
+</dd>
+<dt>HDD</dt>
+<dd>
+<p>heating degree days</p>
+</dd>
+<dt>CDD</dt>
+<dd>
+<p>cooling degree days</p>
+</dd>
+<dt>WTR</dt>
+<dd>
+<p>Water fall. A factor as "T" is a trace.</p>
+</dd>
+<dt>SNW</dt>
+<dd>
+<p>Amount of snowfall</p>
+</dd>
+<dt>DPTH</dt>
+<dd>
+<p>Depth of snow</p>
+</dd>
+<dt>SPD</dt>
+<dd>
+<p>Average wind speed</p>
+</dd>
+<dt>SPD1</dt>
+<dd>
+<p>Max wind speed</p>
+</dd>
+<dt>DIR</dt>
+<dd>
+<p>2 minimum direction</p>
+</dd>
+<dt>MIN2</dt>
+<dd>
+<p>Sunshine measurement a factor with two levels <code>0</code> <code>M</code></p>
+</dd>
+<dt>PSBL</dt>
+<dd>
+<p>Sunshine measurement a factor with levels <code>0</code> <code>M</code></p>
+</dd>
+<dt>S.S</dt>
+<dd>
+<p>Sunshine measurement. 0-3 = Clear, 4-7 partly cloudy,
+8-10 is cloudy</p>
+</dd>
+<dt>WX</dt>
+<dd>
+<p>(This is not as documented in the data source. Ignore this
+variable. It should be:
+1 = FOG,
+2 = FOG REDUCING VISIBILITY  
+TO 1/4 MILE OR LESS,      
+3 = THUNDER,                  
+4 = ICE PELLETS,              
+5 = HAIL,                     
+6 = GLAZE OR RIME,
+7 = BLOWING DUST OR SAND:    
+VSBY 1/2 MILE OR LESS,    
+8 = SMOKE OR HAZE,            
+9 = BLOWING SNOW,             
+X = TORNADO)
+</p>
+</dd>
+<dt>SPD3</dt>
+<dd>
+<p>peak wind speed</p>
+</dd>
+<dt>DR</dt>
+<dd>
+<p>direction of peak wind</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>This datasets summarizes the weather in New York City during the merry
+month of May 2003.  This data set comes from the daily climate report
+issued by the National Weather Service Office.  
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data was published
+on http://www.noah.gov
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(central.park)
+attach(central.park)
+barplot(rbind(MIN,MAX-MIN),ylim=c(0,80))
+</code></pre>
+
+
+</div>

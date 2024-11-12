@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_smartTable</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a look up table</h2>
+
+<h3>Description</h3>
+
+<p><code>create_smartTable</code> will create a look up table for random 
+field analysis inside an SQLite database. The table is automatically filled each time 
+<code>UPMASK</code> calls the function <code>analyse_randomKde2d_smart</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_smartTable()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>A data base connection to the SQLite database containing the smartTable.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create the table
+library(RSQLite)
+stcon &lt;- create_smartTable() 
+
+# Clean the environment
+dbDisconnect(stcon)
+
+</code></pre>
+
+
+</div>

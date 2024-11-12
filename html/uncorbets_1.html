@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>effective_bets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Effective Number of Bets</h2>
+
+<h3>Description</h3>
+
+<p>Computes the diversification probability distribution and the effective number
+of bets of an allocation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">effective_bets(b, sigma, t)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>A vector of exposures (allocations).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>A <code>n x n</code> covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t</code></td>
+<td>
+<p>A <code>n x n</code> torsion matrix.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>list</code> of length 2 with:
+</p>
+
+<ul>
+<li> <p><code>p</code>: the diversification probability distribution;
+</p>
+</li>
+<li> <p><code>enb</code>: the effective number of bets.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># extract the invariants from the data
+set.seed(123)
+log_ret &lt;- matrix(rnorm(400), ncol = 4) / 10
+
+# compute the covariance matrix
+sigma &lt;- stats::cov(log_ret)
+
+# torsion
+torsion_cov &lt;- torsion(sigma = sigma, model = 'minimum-torsion', method ='exact')
+
+# 1/N reference
+b &lt;- rep(1 / ncol(log_ret), ncol(log_ret))
+
+# ENB
+effective_bets(b = b, sigma = sigma, t = torsion_cov)
+</code></pre>
+
+
+</div>

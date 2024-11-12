@@ -1,0 +1,161 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multilabel_confusion_matrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute the confusion matrix for a multi-label prediction</h2>
+
+<h3>Description</h3>
+
+<p>The multi-label confusion matrix is an object that contains the prediction,
+the expected values and also a lot of pre-processed information related with
+these data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multilabel_confusion_matrix(mdata, mlresult)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mlresult</code></td>
+<td>
+<p>A mlresult prediction</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A mlconfmat object that contains:
+</p>
+
+<dl>
+<dt>Z</dt>
+<dd>
+<p>The bipartition matrix prediction.</p>
+</dd>
+<dt>Fx</dt>
+<dd>
+<p>The score/probability matrix prediction.</p>
+</dd>
+<dt>R</dt>
+<dd>
+<p>The ranking matrix prediction.</p>
+</dd>
+<dt>Y</dt>
+<dd>
+<p>The expected matrix bipartition.</p>
+</dd>
+<dt>TP</dt>
+<dd>
+<p>The True Positive matrix values.</p>
+</dd>
+<dt>FP</dt>
+<dd>
+<p>The False Positive matrix values.</p>
+</dd>
+<dt>TN</dt>
+<dd>
+<p>The True Negative matrix values.</p>
+</dd>
+<dt>FN</dt>
+<dd>
+<p>The False Negative matrix values.</p>
+</dd>
+<dt>Zi</dt>
+<dd>
+<p>The total of positive predictions for each instance.</p>
+</dd>
+<dt>Yi</dt>
+<dd>
+<p>The total of positive expected for each instance.</p>
+</dd>
+<dt>TPi</dt>
+<dd>
+<p>The total of True Positive predictions for each instance.</p>
+</dd>
+<dt>FPi</dt>
+<dd>
+<p>The total of False Positive predictions for each instance.</p>
+</dd>
+<dt>TNi</dt>
+<dd>
+<p>The total of True Negative predictions for each instance.</p>
+</dd>
+<dt>FNi</dt>
+<dd>
+<p>The total False Negative predictions for each instance.</p>
+</dd>
+<dt>Zl</dt>
+<dd>
+<p>The total of positive predictions for each label.</p>
+</dd>
+<dt>Yl</dt>
+<dd>
+<p>The total of positive expected for each label.</p>
+</dd>
+<dt>TPl</dt>
+<dd>
+<p>The total of True Positive predictions for each label.</p>
+</dd>
+<dt>FPl</dt>
+<dd>
+<p>The total of False Positive predictions for each label.</p>
+</dd>
+<dt>TNl</dt>
+<dd>
+<p>The total of True Negative predictions for each label.</p>
+</dd>
+<dt>FNl</dt>
+<dd>
+<p>The total False Negative predictions for each label.</p>
+</dd>
+</dl>
+<h3>See Also</h3>
+
+<p>Other evaluation: 
+<code>cv()</code>,
+<code>multilabel_evaluate()</code>,
+<code>multilabel_measures()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+prediction &lt;- predict(br(toyml), toyml)
+
+mlconfmat &lt;- multilabel_confusion_matrix(toyml, prediction)
+
+# Label with the most number of True Positive values
+which.max(mlconfmat$TPl)
+
+# Number of wrong predictions for each label
+errors &lt;- mlconfmat$FPl + mlconfmat$FNl
+
+# Examples predict with all labels
+which(mlconfmat$Zi == toyml$measures$num.labels)
+
+# You can join one or more mlconfmat
+part1 &lt;- create_subset(toyml, 1:50)
+part2 &lt;- create_subset(toyml, 51:100)
+confmatp1 &lt;- multilabel_confusion_matrix(part1, prediction[1:50, ])
+confmatp2 &lt;- multilabel_confusion_matrix(part2, prediction[51:100, ])
+mlconfmat &lt;- confmatp1 + confmatp2
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,216 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fetch_ucirepo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fetch UCI ML Repository Dataset</h2>
+
+<h3>Description</h3>
+
+<p>Loads a dataset from the UCI ML Repository, including the dataframes and
+metadata information.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fetch_ucirepo(name, id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Character. Dataset name, or substring of name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>Integer. Dataset ID for UCI ML Repository.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Only provide name or id, not both.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing dataset metadata, dataframes, and variable info in its properties.
+</p>
+
+<ul>
+<li> <p><strong>data</strong>: Contains dataset matrices as pandas dataframes
+</p>
+
+<ul>
+<li> <p><strong>ids</strong>: Dataframe of ID columns
+</p>
+</li>
+<li> <p><strong>features</strong>: Dataframe of feature columns
+</p>
+</li>
+<li> <p><strong>targets</strong>: Dataframe of target columns
+</p>
+</li>
+<li> <p><strong>original</strong>: Dataframe consisting of all IDs, features, and targets
+</p>
+</li>
+<li> <p><strong>headers</strong>: List of all variable names/headers
+</p>
+</li>
+</ul>
+</li>
+<li> <p><strong>metadata</strong>: Contains metadata information about the dataset.
+</p>
+
+<ul>
+<li> <p><strong>uci_id</strong>: Unique dataset identifier for UCI repository
+</p>
+</li>
+<li> <p><strong>name</strong>: Name of dataset on UCI repository
+</p>
+</li>
+<li> <p><strong>repository_url</strong>: Link to dataset webpage on the UCI repository
+</p>
+</li>
+<li> <p><strong>data_url</strong>: Link to raw data file
+</p>
+</li>
+<li> <p><strong>abstract</strong>: Short description of dataset
+</p>
+</li>
+<li> <p><strong>area</strong>: Subject area e.g. life science, business
+</p>
+</li>
+<li> <p><strong>tasks</strong>: Associated machine learning tasks e.g. classification, regression
+</p>
+</li>
+<li> <p><strong>characteristics</strong>: Dataset types e.g. multivariate, sequential
+</p>
+</li>
+<li> <p><strong>num_instances</strong>: Number of rows or samples
+</p>
+</li>
+<li> <p><strong>num_features</strong>: Number of feature columns
+</p>
+</li>
+<li> <p><strong>feature_types</strong>: Data types of features
+</p>
+</li>
+<li> <p><strong>target_col</strong>: Name of target column(s)
+</p>
+</li>
+<li> <p><strong>index_col</strong>: Name of index column(s)
+</p>
+</li>
+<li> <p><strong>has_missing_values</strong>: Whether the dataset contains missing values
+</p>
+</li>
+<li> <p><strong>missing_values_symbol</strong>: Indicates what symbol represents the missing entries (if the dataset has missing values)
+</p>
+</li>
+<li> <p><strong>year_of_dataset_creation</strong>: Year that data set was created
+</p>
+</li>
+<li> <p><strong>dataset_doi</strong>: DOI registered for dataset that links to UCI repo dataset page
+</p>
+</li>
+<li> <p><strong>creators</strong>: List of dataset creator names
+</p>
+</li>
+<li> <p><strong>intro_paper</strong>: Information about dataset's published introductory paper
+</p>
+</li>
+<li> <p><strong>external_url</strong>: URL to external dataset page. This field will only exist for linked datasets i.e. not hosted by UCI
+</p>
+</li>
+<li> <p><strong>additional_info</strong>: Descriptive free text about dataset
+</p>
+
+<ul>
+<li> <p><strong>summary</strong>: General summary
+</p>
+</li>
+<li> <p><strong>purpose</strong>: For what purpose was the dataset created?
+</p>
+</li>
+<li> <p><strong>funded_by</strong>: Who funded the creation of the dataset?
+</p>
+</li>
+<li> <p><strong>instances_represent</strong>: What do the instances in this dataset represent?
+</p>
+</li>
+<li> <p><strong>recommended_data_splits</strong>: Are there recommended data splits?
+</p>
+</li>
+<li> <p><strong>sensitive_data</strong>: Does the dataset contain data that might be considered sensitive in any way?
+</p>
+</li>
+<li> <p><strong>preprocessing_description</strong>: Was there any data preprocessing performed?
+</p>
+</li>
+<li> <p><strong>variable_info</strong>: Additional free text description for variables
+</p>
+</li>
+<li> <p><strong>citation</strong>: Citation Requests/Acknowledgements
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li> <p><strong>variables</strong>: Contains variable details presented in a tabular/dataframe format
+</p>
+
+<ul>
+<li> <p><strong>name</strong>: Variable name
+</p>
+</li>
+<li> <p><strong>role</strong>: Whether the variable is an ID, feature, or target
+</p>
+</li>
+<li> <p><strong>type</strong>: Data type e.g. categorical, integer, continuous
+</p>
+</li>
+<li> <p><strong>demographic</strong>: Indicates whether the variable represents demographic data
+</p>
+</li>
+<li> <p><strong>description</strong>: Short description of variable
+</p>
+</li>
+<li> <p><strong>units</strong>: Variable units for non-categorical data
+</p>
+</li>
+<li> <p><strong>missing_values</strong>: Whether there are missing values in the variable's column
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Access Data by Name
+iris_dl &lt;- fetch_ucirepo(name = "iris")
+
+# Access original data
+iris_uci &lt;- iris_dl$data$original
+
+# Access features and targets
+iris_features &lt;- iris_dl$data$features
+iris_targets &lt;- iris_dl$data$targets
+
+# Access Data by ID
+iris_dl &lt;- fetch_ucirepo(id = 53)
+
+</code></pre>
+
+
+</div>

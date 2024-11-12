@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DeTrend</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Linearly detrend a sample</h2>
+
+<h3>Description</h3>
+
+<p>Applies a linear detrend to a sample
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DeTrend(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric vector</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Adjusts all the values in the sample, of size n, by the difference between the linearly modelled ith data point and the linearly modelled nth data point.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector which is a linearly detrended version of x.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Get an annual maximum (AM) sample that looks to have a significant trend
+AM.21025 &lt;- GetAM(21025)
+# plot the resulting AM as a bar plot. Then detrend and compare with another plot
+plot(AM.21025$Flow, type = "h", ylab = "Discharge (m3/s)")
+AM.Detrend &lt;- DeTrend(AM.21025$Flow)
+plot(AM.Detrend, type = "h", ylab = "Discharge (m3/s)")
+</code></pre>
+
+
+</div>

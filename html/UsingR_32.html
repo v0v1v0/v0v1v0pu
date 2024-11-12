@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>coins</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The coins in my change bin</h2>
+
+<h3>Description</h3>
+
+<p>The coins in author's change bin with year and value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(coins)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 371 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>year</dt>
+<dd>
+<p>Year of coin</p>
+</dd>
+<dt>value</dt>
+<dd>
+<p>Value of coin: quarter, dime, nickel, or penny</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(coins)
+years = cut(coins$year,seq(1920,2010,by=10),include.lowest=TRUE,
+  labels = paste(192:200,"*",sep=""))
+table(years)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>oral.lesion</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Oral lesion location by town</h2>
+
+<h3>Description</h3>
+
+<p>A data set on oral lesion location for three Indian towns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(oral.lesion)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 9 observations on the following 3 variables.
+</p>
+
+<dl>
+<dt>Kerala</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Gujarat</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Andhra</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>"Exact Inference for Categorical Data", by
+Cyrus R. Mehta and Nitin R. Patel. Found at
+http://www.cytel.com/papers/sxpaper.pdf. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(oral.lesion)
+chisq.test(oral.lesion)$p.value
+chisq.test(oral.lesion,simulate.p.value=TRUE)$p.value ## exact is.0269
+</code></pre>
+
+
+</div>

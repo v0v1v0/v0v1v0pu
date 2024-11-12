@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unbal.haar.vector</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unbalanced Haar vector</h2>
+
+<h3>Description</h3>
+
+<p>Computes the non-zero part of an Unbalanced Haar vector with a given start-, break-
+and end-point.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unbal.haar.vector(a)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>    a three-component vector of integers such that <code>a[1]</code> &lt;= <code>a[2]</code> &lt; <code>a[3]</code>.
+The three components specify, respectively, the start point, the time point just before the breakpoint,
+and the endpoint of the desired Unbalanced Haar vector.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>the non-zero part of the corresponding Unbalanced Haar vector
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Piotr Fryzlewicz</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">unbal.haar.vector(c(1, 1, 2))
+unbal.haar.vector(c(2, 5, 12))
+</code></pre>
+
+
+</div>

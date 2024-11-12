@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>deflection</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Deflection under load</h2>
+
+<h3>Description</h3>
+
+<p>The data collected in a calibration experiment consisting of a known
+load, applied to the load cell, and the corresponding deflection of
+the cell from its nominal position.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(deflection)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 40 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>Deflection</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Load</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>From an example in <em>Engineering Statistics Handbook</em> from http://www.itl.nist.gov/div898/handbook/
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(deflection)
+res = lm(Deflection ~ Load, data = deflection)
+plot(Deflection ~ Load, data = deflection)
+abline(res)			# looks good?
+plot(res)
+</code></pre>
+
+
+</div>

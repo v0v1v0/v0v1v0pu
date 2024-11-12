@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>make_color_bar_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make a color bar plot</h2>
+
+<h3>Description</h3>
+
+<p>Use this function when you want to visualize some numbers and their
+respective color values. Note that more than 42 colors won't be nice
+to see (too thin bars)!
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">make_color_bar_plot(color.vector, number.vector, title, x.axis.label = "")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>color.vector</code></td>
+<td>
+<p>vector of color values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>number.vector</code></td>
+<td>
+<p>vector of numeric values (same length with
+<code>color.vector</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>string. The title of the barplot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x.axis.label</code></td>
+<td>
+<p>string. The x-axis label. Default value: empty string</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">color.vector = rainbow(10)
+number.vector = 1:10
+title = "First 10 rainbow() colors"
+make_color_bar_plot(color.vector, number.vector, title)
+
+</code></pre>
+
+
+</div>

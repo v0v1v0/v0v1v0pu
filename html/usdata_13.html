@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pop_race_2019</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Population Race 2019 Data.</h2>
+
+<h3>Description</h3>
+
+<p>State level data on population by race.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pop_race_2019
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 2820 rows and 4 variables.
+</p>
+
+<dl>
+<dt>state</dt>
+<dd>
+<p>State as 2 letter abbreviation.</p>
+</dd>
+<dt>state_name</dt>
+<dd>
+<p>State name.</p>
+</dd>
+<dt>race</dt>
+<dd>
+<p>race cohort for population.</p>
+</dd>
+<dt>hispanic</dt>
+<dd>
+<p>indicates whether population is Hispanic or Latino </p>
+</dd>
+<dt>population</dt>
+<dd>
+<p>Population of race cohort.</p>
+</dd>
+<dt>state_total_population</dt>
+<dd>
+<p>total estimated state population in 2019</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://wonder.cdc.gov/Bridged-Race-v2019.HTML">Centers for Disease Control and Prevention</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+
+# List race population for each state with percent of total
+pop_race_2019 |&gt;
+  group_by(state_name, race, hispanic) |&gt;
+  mutate(percent = population / state_total_population * 100) |&gt;
+  select(state_name, race, hispanic, population, percent)
+
+pop_race_2019 |&gt;
+  select(state_name, state_total_population) |&gt;
+  distinct() |&gt;
+  arrange(desc(state_total_population))
+</code></pre>
+
+
+</div>

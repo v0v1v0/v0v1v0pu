@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uncertainUCDP_parameters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parameter extraction for uncertainUCDP-functions</h2>
+
+<h3>Description</h3>
+
+<p>Extracting parameters for the reported-value inflated Gumbel mixture distribution for UCDP events. Primarily intended for internal use by the uncertainUCDP-functions, but can be used to extract parameters for the distribution manually.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uncertainUCDP_parameters(fatalities, tov)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fatalities</code></td>
+<td>
+<p>A vector of non-negative integers representing the number of fatalities of the UCDP event. Non-integer values are allowed but should be considered experimental</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tov</code></td>
+<td>
+<p>A character string or integer value representing the type of violence of the UCDP. Must be one of "sb", "ns", "os", or "any" or their numeric equivalent The options are:
+</p>
+<p>* "sb" or 1 for state-based violence
+* "ns" or 2 for non-state violence
+* "os" or 3 for one-sided violence
+* "any" or 4 for parameters estimated across all type of violence. This is somewhat experimental and should be used with caution. This is possibly useful when the type of violence is unknown or when the user wants to combine all types of violence into a single category.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list with three elements: loc, scale, and w. loc and scale are the location and scale parameters of the Gumbel distribution, respectively. w is the weight parameter for the reported-value inflation
+</p>
+
+
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>copepod</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Copepod data supplied by Phil Pugh</h2>
+
+<h3>Description</h3>
+
+<p>A dataset of copepod (resp: ostracod) abundances supplied by Dr Phil
+Pugh of the National Oceanography Centre, Southampton
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(copepod)
+data(ostracod)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A table with names of different copepod (resp: ostracod) species,
+and entries corresponding to the numbers of individuals of each
+species.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Kindly supplied by Southampton Oceanography Centre.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(copepod)
+optimize(f=theta.likelihood,interval=c(10,100), maximum=TRUE,
+S=no.of.spp(copepod), J=no.of.ind(copepod), give.log=TRUE)
+
+data(ostracod)
+preston(ostracod)
+
+</code></pre>
+
+
+</div>

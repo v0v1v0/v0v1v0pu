@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>yates</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Yates's algorithm</h2>
+
+<h3>Description</h3>
+
+<p>Implementations of Yates's method for obtaining factor effects; and reverse Yates's method for recovering response values; and a generalization for balanced unreplicated experiments having other than two-level factors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">yates(y, labels = LETTERS, sep = "")
+gyates(y, nlevels, basis = "poly")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+
+<p>Numeric vector of response values or effects, in standard order. See Details.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+
+<p>Character labels for 2-level factors to use when <code>y</code> contains resoponse values. The first <code class="reqn">log_2(n)</code> are used, where <code class="reqn">n</code> is <code>length(y).</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+
+<p>Character to use between labels for interaction effects.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nlevels</code></td>
+<td>
+
+<p>Numeric vector of numbers of levels. The number of observations is assumed to be <code>prod(nlevels).</code>  
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>basis</code></td>
+<td>
+
+<p>Character value or vector specifying what method to use to generate orthonormal contrasts. Built-in ones include <code>"poly"</code> and <code>"helmert"</code>, but the user may create others. The elements of <code>basis</code> are recycled cyclically as needed.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>These functions implement a method for computing factor effects for balanced, unreplicated designs without need for a matrix of predictor levels. Instead, the responses must be arranged in standard order. The method is described in Yates (1937) for the case where all factors have two levels (as implemented in <code>yates</code>), and its generalization (<code>gyates</code>) can be found in Good (1958). Both are described in Drum (2005). In this implementation, <code>gyates()</code> uses orthonormal (unitary) matrices, rather than keeping track of needed divisors. 
+</p>
+<p>Standard order (also called Yates order) is that in which the first factor varies the fastest and the last varies the slowest. The <code>expand.grid</code> function creates factor combinations in standard order. The <code>yates</code> function is for experiments with all factors having two levels. The returned effects are also in standard order: with the default labels in <code>yates</code>, the order of the returned effects is (intercept), A, B, AB, C, AC, BC, ABC, D, etc.: note that absence or presence of each factor proceeds in standard order.
+</p>
+<p>In both <code>yates</code> and <code>gyates</code>, if the length of <code>y</code> is one less than expected, <code>y</code> is assumed to be a set of effects, without the intercept. In that instance, the algorithm is reversed and the response values are recovered from the effects. Since the intercept is absent, the mean is arbitrary. If <code>y</code> has a <code>"mean"</code> attribute, the mean is adjusted to that value; otherwise, the recovered responses have a mean of zero. 
+</p>
+<p>In <code>gyates</code>, the values of <code>nlevels</code> and <code>basis</code> are saved as attributes. In a subsequent call on the returned effects, these values are used and will override the <code>nlevels</code> and <code>basis</code> arguments supplied by the user.
+</p>
+<p>Effects are scaled to all have the same variance. In <code>yates</code>, we apply the same convention as in most design texts, e.g., Box et al. (2005): effect = (mean at "+" level) - (mean at "-" level), which is twice the regression coefficient one obtains by regressing <code>y</code> on predictors of -1s and +1s. In <code>gyates</code>, effects are computed using orthonormal contrasts, making the squared effects equal to their ANOVA sums of squares. When effects are reversed, the same scaling is assumed. Also, if the elements of <code>y</code> are independent, so are the effects.
+</p>
+<p>The two basis functions supplied are <code>"poly"</code> and <code>"helmert"</code>, which are based on <code>contr.poly</code> and <code>contr.helmert</code> respectively. Users may create a custom basis, say <code>"foo"</code>, by writing a function <code>foo_gyb = function(k) {...}</code>, and supplying <code>basis = "foo"</code> in the call. The function should return a <code>k</code> by <code>k</code> matrix having its first column equal to <code>1/sqrt(k)</code> and orthonormal contrasts in the remaining columns. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>length(y)</code> is a power of two (in <code>yates</code>) or the product of <code>nlevels</code> (in <code>gyates</code>), a vector of <code>length(y) - 1</code> effects is returned (the intercept is omitted). In addition, the returned value has a <code>"mean"</code> attribute set equal to <code>mean(y)</code>. The effects from <code>yates</code> are named in standard order using the labels provided. The effects from <code>gyates</code> are labeled using patterns of the characters <code>.123456789</code>. Any <code>.</code> in a label indicates a factor whose effect is out of play. For illustration, with 3 factors, the effect named <code>.1.</code> is the first-order effect of the second factor, and the one named <code>23.</code> is the interaction of the second-order effect of the first factor and the third-order effect of the second factor.
+</p>
+<p>If <code>length(y)</code> is one less than a power of two or the product of levels, then a vector one longer of response values is returned. The names of the returned responses are symbol combinations from <code>-+</code> for <code>yates</code>, and <code>123456789</code> from <code>gyates</code>. For example, in <code>yates</code> with <code>length(y) = 7</code>, the returned values are labeled <code>---, +--, -+-, ++-, --+, +-+, -++, +++</code>; and <code>gyates</code> with 5 effects and <code>nlevels = c(3, 2)</code>, the returned effects are labeled <code>11, 21, 31, 12, 22, 32</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Russell V. Lenth
+</p>
+
+
+<h3>References</h3>
+
+<p>Box, GEP, Hunter, JS, and Hunter, WG (2005)
+<em>Statistics for Experimenters</em> (2nd ed)
+New York: John Wiley &amp; Sons
+</p>
+<p>Drum, M (2005)
+Yates's Algorithm. <em>Encyclopedia of Biostatistics</em>, 8. Wiley.
+</p>
+<p>Good, IJ (1958)
+The interaction algorithm and practical Fourier analysis.
+<em>Journal of the Royal Statistical Society, Series B</em> 20, 361-372.
+</p>
+<p>Yates, F (1937) The design and analysis of factorial experiments. Technical Communication of the Commonwealth Bureau of Soils, 35, Commonwealth Agricultural Bureau, Farnham Royal
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require("unrepx")
+
+# pilot-plant example, BH^2 p. 177
+yates(c(60, 72, 54, 68,  52, 83, 45, 80), labels = c("T", "C", "K"))
+
+# recover shrinkage data
+yates(shnkEff)
+
+# A 3 x 2 x 4 example
+y &lt;- c( 214, 193, 207,   193, 178, 188, 
+        225, 206, 213,   221, 214, 216, 
+        227, 213, 221,   231, 215, 225, 
+        228, 203, 206,   190, 178, 195 )
+yeff &lt;- gyates(y, c(3,2,4), basis = "helmert")
+head(eff.test(yeff))  ## Show the largest few effects
+</code></pre>
+
+
+</div>

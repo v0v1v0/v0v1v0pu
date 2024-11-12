@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>student.expenses</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Some simulated data on student expenses</h2>
+
+<h3>Description</h3>
+
+<p>Some data for possible student expenses
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(student.expenses)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame of 5 variables for 10 students. All answers are coded "<code>Y</code>"
+for yes, "<code>N</code>" for no.
+</p>
+
+<dl>
+<dt>cell.phone</dt>
+<dd>
+<p>Does student have cell phone.</p>
+</dd>
+<dt>cable.tv</dt>
+<dd>
+<p>Does student have cable TV.</p>
+</dd>
+<dt>dial.up</dt>
+<dd>
+<p>Does student pay for dial-up internet access.</p>
+</dd>
+<dt>cable.modem</dt>
+<dd>
+<p>Does student pay for high-speed or cable modem access to internet.</p>
+</dd>
+<dt>car</dt>
+<dd>
+<p>Does student own a car.</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Sample dataset of students expenses.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(student.expenses)
+attach(student.expenses)
+table(dial.up,cable.modem)
+</code></pre>
+
+
+</div>

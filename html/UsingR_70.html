@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>grip</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Effects of cross-country ski-pole grip</h2>
+
+<h3>Description</h3>
+
+<p>Simulated data set investigating effects of cross-country ski-pole grip.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(grip)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 36 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>UBP</dt>
+<dd>
+<p>Measurement of upper-body power</p>
+</dd>
+<dt>person</dt>
+<dd>
+<p>One of four skiers</p>
+</dd>
+<dt>grip.type</dt>
+<dd>
+<p>Either classic, modern, or integrated.</p>
+</dd>
+<dt>replicate</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Based on a study originally described at
+http://www.montana.edu/wwwhhd/movementscilab/ and
+mentioned on http://www.xcskiworld.com/. The study investigated
+the effect of grip type on upper body power. As this influences
+performance in races, presumably a skier would prefer the grip that
+provides the best power output.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(grip)
+ftable(xtabs(UBP ~ person + replicate + grip.type,grip))
+</code></pre>
+
+
+</div>

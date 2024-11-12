@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Kappa3GF</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kappa3 distribution growth factors</h2>
+
+<h3>Description</h3>
+
+<p>Estimated growth factors as a function of return period, with inputs of Lcv &amp; LSkew (linear coefficient of variation &amp; linear skewness)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Kappa3GF(lcv, lskew, RP)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lcv</code></td>
+<td>
+<p>linear coefficient of variation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lskew</code></td>
+<td>
+<p>linear skewness</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Growth factors are calculated by the method outlined in Kjeldsen, T (2019), 'The 3-parameter Kappa distribution as an alternative for use with FEH pooling groups.'Circulation - The Newsletter of the British Hydrological Society, no. 142
+</p>
+
+
+<h3>Value</h3>
+
+<p>Kappa3 distribution estimated growth factor
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get a ungauged pooled Lcv and LSkew for catchment 15006
+PooledRes &lt;- as.numeric(QuickResults(GetCDs(15006), plot = FALSE)[[2]])
+#Calculate Kappa growth factor for the 100-year flood
+Kappa3GF(PooledRes[1], PooledRes[2], RP = 100)
+</code></pre>
+
+
+</div>

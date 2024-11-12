@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>generate_report</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate Text Report with Estimation Results</h2>
+
+<h3>Description</h3>
+
+<p>Internal function used to generate a report of estimation results
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">generate_report(parameters, ss, cfg, conv_desc)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>list of parameter estimates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ss</code></td>
+<td>
+<p>output from solution_statistics</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conv_desc</code></td>
+<td>
+<p>description of convergence criteria</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List with the following elements: 
+</p>
+
+<ul>
+<li> <p><code>report_file</code> name of report file          
+</p>
+</li>
+<li> <p><code>report_file_contents</code> contents of report file
+</p>
+</li>
+<li> <p><code>parameters_all_file</code> name of CSV file with all parameters 
+</p>
+</li>
+<li> <p><code>parameters_est_file</code> name of CSV file with only the estimates 
+</p>
+</li>
+</ul>
+</div>

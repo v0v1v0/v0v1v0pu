@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pcut_threshold</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Proportional Thresholding (PCut)</h2>
+
+<h3>Description</h3>
+
+<p>Define the proportion of examples for each label will be positive.
+The Proportion Cut (PCut) method can be a label-wise or global method that
+calibrates the threshold(s) from the training data globally or per label.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pcut_threshold(prediction, ratio, probability = FALSE)
+
+## Default S3 method:
+pcut_threshold(prediction, ratio, probability = FALSE)
+
+## S3 method for class 'mlresult'
+pcut_threshold(prediction, ratio, probability = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>prediction</code></td>
+<td>
+<p>A matrix or mlresult.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ratio</code></td>
+<td>
+<p>A single value between 0 and 1 or a list with ratio values
+contained one value per label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>A logical value. If <code>TRUE</code> the predicted values are
+the score between 0 and 1, otherwise the values are bipartition 0 or 1.
+(Default: <code>FALSE</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A mlresult object.
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>default</code>: Proportional Thresholding (PCut) method for matrix
+</p>
+</li>
+<li> <p><code>mlresult</code>: Proportional Thresholding (PCut) for mlresult
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Al-Otaibi, R., Flach, P., &amp; Kull, M. (2014). Multi-label Classification: A
+Comparative Study on Threshold Selection Methods. In First International
+Workshop on Learning over Multiple Contexts (LMCE) at ECML-PKDD 2014.
+</p>
+<p>Largeron, C., Moulin, C., &amp; Gery, M. (2012). MCut: A Thresholding Strategy
+for Multi-label Classification. In 11th International Symposium, IDA 2012
+(pp. 172-183).
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other threshold: 
+<code>fixed_threshold()</code>,
+<code>lcard_threshold()</code>,
+<code>mcut_threshold()</code>,
+<code>rcut_threshold()</code>,
+<code>scut_threshold()</code>,
+<code>subset_correction()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">prediction &lt;- matrix(runif(16), ncol = 4)
+pcut_threshold(prediction, .45)
+</code></pre>
+
+
+</div>

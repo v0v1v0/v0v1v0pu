@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>USPFunctional</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Independence test for functional data</h2>
+
+<h3>Description</h3>
+
+<p>We implement the permutation independence test described in (Berrett et al. 2021)
+for functional data taking values in <code class="reqn">L^2([0,1])</code>. The discretised functions are
+expressed in a series expansion, and an independence test is carried out between the
+coefficients of the functions, using a Fourier basis to define the test statistic.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">USPFunctional(X, Y, Ntrunc, M, B = 999, ties.method = "standard")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>A matrix of the discretised functional data from the first sample. There are <code class="reqn">n</code> rows,
+where <code class="reqn">n</code> is the sample size, and Ndisc columns, where Ndisc is the grid size such
+that the values of each function on 1/Ndisc, 2/Ndisc, ..., 1 are given.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>A matrix of the discretised functional data from the second sample. The discretisation
+grid may be different to the grid used for <code class="reqn">X</code>, if required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ntrunc</code></td>
+<td>
+<p>The number of coefficients to retain from the series expansions of <code class="reqn">X</code> and <code class="reqn">Y</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+<p>The maximum frequency to use in the Fourier basis when testing the independence of the
+coefficients.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>B</code></td>
+<td>
+<p>The number of permutations used to calibrate the test.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ties.method</code></td>
+<td>
+<p>If "standard" then calculate the p-value as in (5) of (Berrett et al. 2021),
+which is slightly conservative. If "random" then break ties randomly. This preserves Type I error
+control.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A p-value for the test of the independence of <code class="reqn">X</code> and <code class="reqn">Y</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">n=50; r=0.6; Ndisc=1000; t=1/Ndisc
+X=matrix(rep(0,Ndisc*n),nrow=n); Y=matrix(rep(0,Ndisc*n),nrow=n)
+for(i in 1:n){
+ x = rnorm(Ndisc, mean=0, sd= 1)
+ se = sqrt(1 - r^2) #standard deviation of error
+ e = rnorm(Ndisc, mean=0, sd=se)
+ y = r*x + e
+ X[i,] &lt;- cumsum(x*sqrt(t))
+ Y[i,] &lt;- cumsum(y*sqrt(t))
+}
+USPFunctional(X,Y,2,1,999)
+</code></pre>
+
+
+</div>

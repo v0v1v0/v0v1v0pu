@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.BASELINEmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predict Method for BASELINE</h2>
+
+<h3>Description</h3>
+
+<p>This function predicts values based upon a model trained by
+<code>baseline</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'BASELINEmodel'
+predict(object, newdata, probability = getOption("utiml.use.probs", TRUE), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class '<code>BASELINEmodel</code>'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>An object containing the new input data. This must be a
+matrix, data.frame or a mldr object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>Logical indicating whether class probabilities should be
+returned. (Default: <code>getOption("utiml.use.probs", TRUE)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of type mlresult, based on the parameter probability.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Baseline</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- baseline(toyml)
+pred &lt;- predict(model, toyml)
+</code></pre>
+
+
+</div>

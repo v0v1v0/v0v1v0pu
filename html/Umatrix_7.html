@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>iClassification</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>GUI for manual classification</h2>
+
+<h3>Description</h3>
+
+<p>This tool is a 'shiny' GUI that visualizes a given Umatrix and allows the user to select areas and mark them as clusters.</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Umatrix</code></td>
+<td>
+<p>Matrix of Umatrix Heights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BestMatches</code></td>
+<td>
+<p>Array with positions of Bestmatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Cls</code></td>
+<td>
+<p>Classification of the Bestmatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Imx</code></td>
+<td>
+<p>Matrix of an island that will be cut out of the Umatrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>Are BestMatches placed on a toroid grid? TRUE by default</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector containing the selected class ids. The order is corresponding to the given Bestmatches </p>
+
+
+<h3>References</h3>
+
+<p>Thrun, M. C., Lerch, F., Loetsch, J., Ultsch, A.: Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision,Plzen, 2016.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data("Hepta")
+e = esomTrain(Hepta$Data, Key = 1:nrow(Hepta$Data))
+cls = iClassification(e$Umatrix, e$BestMatches)
+
+## End(Not run)</code></pre>
+
+
+</div>

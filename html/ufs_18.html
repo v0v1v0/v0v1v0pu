@@ -1,0 +1,278 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>biAxisDiamondPlot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Diamondplot with two Y axes</h2>
+
+<h3>Description</h3>
+
+<p>This is basically a <code>meansDiamondPlot()</code>, but extended to allow
+specifying subquestions and anchors at the left and right side. This is
+convenient for psychological questionnaires when the anchors or dimensions
+were different from item to item. This function is used to function the left
+panel of the CIBER plot in the <code>behaviorchange</code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">biAxisDiamondPlot(
+  dat,
+  items = NULL,
+  leftAnchors = NULL,
+  rightAnchors = NULL,
+  subQuestions = NULL,
+  decreasing = NULL,
+  conf.level = 0.95,
+  showData = TRUE,
+  dataAlpha = 0.1,
+  dataColor = "#444444",
+  diamondColors = NULL,
+  jitterWidth = 0.45,
+  jitterHeight = 0.45,
+  xbreaks = NULL,
+  xLabels = NA,
+  xAxisLab = paste0("Scores and ", round(100 * conf.level, 2), "% CIs"),
+  drawPlot = TRUE,
+  returnPlotOnly = TRUE,
+  baseSize = 1,
+  dotSize = baseSize,
+  baseFontSize = 10 * baseSize,
+  theme = ggplot2::theme_bw(base_size = baseFontSize),
+  outputFile = NULL,
+  outputWidth = 10,
+  outputHeight = 10,
+  ggsaveParams = ufs::opts$get("ggsaveParams"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>The dataframe containing the variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>The variables to include.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>leftAnchors</code></td>
+<td>
+<p>The anchors to display on the left side of the left hand
+panel. If the items were measured with one variable each, this can be used
+to show the anchors that were used for the respective scales. Must have the
+same length as <code>items</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rightAnchors</code></td>
+<td>
+<p>The anchors to display on the left side of the left hand
+panel. If the items were measured with one variable each, this can be used
+to show the anchors that were used for the respective scales. Must have the
+same length as <code>items</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subQuestions</code></td>
+<td>
+<p>The subquestions used to measure each item. This can
+also be used to provide pretty names for the variables if the items were not
+measured by one question each. Must have the same length as <code>items</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decreasing</code></td>
+<td>
+<p>Whether to sort the items. Specify <code>NULL</code> to not sort
+at all, <code>TRUE</code> to sort in descending order, and <code>FALSE</code> to sort in
+ascending order.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The confidence levels for the confidence intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showData</code></td>
+<td>
+<p>Whether to show the individual datapoints.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataAlpha</code></td>
+<td>
+<p>The alpha level (transparency) of the individual
+datapoints.  Value between 0 and 1, where 0 signifies complete transparency
+(i.e. invisibility) and 1 signifies complete 'opaqueness'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataColor</code></td>
+<td>
+<p>The color to use for the individual datapoints.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diamondColors</code></td>
+<td>
+<p>The colours to use for the diamonds. If NULL, the
+<code>generateColors</code> argument can be used which will then be passed to
+<code>diamondPlot()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>jitterWidth</code></td>
+<td>
+<p>How much to jitter the individual datapoints
+horizontally.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>jitterHeight</code></td>
+<td>
+<p>How much to jitter the individual datapoints vertically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xbreaks</code></td>
+<td>
+<p>Which breaks to use on the X axis (can be useful to override
+<code>ggplot()</code>'s defaults).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xLabels</code></td>
+<td>
+<p>Which labels to use for those breaks (can be useful to
+override <code>ggplot()</code>'s defaults; especially useful in combination
+with <code>xBreaks</code> of course).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xAxisLab</code></td>
+<td>
+<p>Axis label for the X axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drawPlot</code></td>
+<td>
+<p>Whether to draw the plot, or only return it.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnPlotOnly</code></td>
+<td>
+<p>Whether to return the entire object that is generated
+(including all intermediate objects) or only the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>baseSize</code></td>
+<td>
+<p>This can be used to efficiently change the size of most plot
+elements.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dotSize</code></td>
+<td>
+<p>This is the size of the points used to show the individual
+data points in the left hand plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>baseFontSize</code></td>
+<td>
+<p>This can be used to set the font size separately from
+the <code>baseSize</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>This is the theme that is used for the plots.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outputFile</code></td>
+<td>
+<p>A file to which to save the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outputWidth, outputHeight</code></td>
+<td>
+<p>Width and height of saved plot (specified in
+centimeters by default, see <code>ggsaveParams</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ggsaveParams</code></td>
+<td>
+<p>Parameters to pass to ggsave when saving the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>These arguments are passed on to diamondPlot].</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is a diamondplot that can be used for items/questions where the anchors
+of the response scales could be different for every item. For the rest, it
+is very similar to <code>meansDiamondPlot()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Either just a plot (a <code>gtable::gtable()</code> object) or an object with
+all produced objects and that plot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>CIBER() in the behaviorchange package, <code>associationsDiamondPlot()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+biAxisDiamondPlot(dat=mtcars,
+                  items=c('cyl', 'wt'),
+                  subQuestions=c('cylinders', 'weight'),
+                  leftAnchors=c('few', 'light'),
+                  rightAnchors=c('many', 'heavy'),
+                  xbreaks=0:8);
+
+</code></pre>
+
+
+</div>

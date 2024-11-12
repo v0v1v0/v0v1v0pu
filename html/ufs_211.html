@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>regrInfluential</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Detecting influential cases in regression analyses</h2>
+
+<h3>Description</h3>
+
+<p>This function combines a number of criteria for determining whether a
+datapoint is an influential case in a regression analysis. It then sum the
+criteria to compute an index of influentiality. A list of cases with an
+index of influentiality of 1 or more is then displayed, after which the
+regression analysis is repeated without those influantial cases. A
+scattermatrix is also displayed, showing the density curves of each
+variable, and in the scattermatrix, points that are colored depending on how
+influential each case is.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">regrInfluential(formula, data, createPlot = TRUE)
+
+## S3 method for class 'regrInfluential'
+print(x, headingLevel = 3, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>The formule of the regression analysis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The data to use for the analysis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>createPlot</code></td>
+<td>
+<p>Whether to create the scattermatrix (requires the <code>GGally</code>
+package to be installed).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object to print.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headingLevel</code></td>
+<td>
+<p>The number of hash symbols to prepend to the heading.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments are passed on to the <code>regr</code> print function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>regrInfluential</code> object, which, if printed, shows the
+influential cases, the regression analyses repeated without those cases, and
+the scatter matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters &amp; Marwin Snippe
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+regrInfluential(mpg ~ hp, mtcars);
+
+</code></pre>
+
+
+</div>

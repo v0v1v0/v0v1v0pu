@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>c</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Combine bands into raster brick.
+</h2>
+
+<h3>Description</h3>
+
+<p>This function is an instrument for appending bands or for reorganizing bands.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+c(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Objects of class <code>ursaRaster</code> or coerced to class <code>ursaRaster</code>. First argument should be the object of class <code>ursaRaster</code>. The objects in the sequence can be named.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>You may use this function to assign new bandname for single-band raster: <code>objDst &lt;- c('Relative density'=objSrc)</code>
+</p>
+<p>Use also 'Extract' operator <code>[ ]</code> to reorganize band sequence.
+</p>
+<p>The returned object can be interpreted as a <strong><em>brick</em></strong> in the notation of package <span class="pkg">raster</span>. To produce <strong><em>stack</em></strong> just call <code>list</code> or <code>ursa_stack</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>ursaRaster</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ursa_brick</code> converts list of <code>ursaRaster</code> objects (<strong><em>stack</em></strong>) to a singe multiband <code>ursaRaster</code> object (<strong><em>brick</em></strong>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+session_grid(regrid(mul=1/16))
+a1 &lt;- ursa_dummy(nband=2)
+names(a1) &lt;-  weekdays(Sys.Date()+seq(length(a1))-1)
+a2 &lt;- ursa_dummy(nband=2)
+names(a2) &lt;- names(a1)
+print(a1)
+print(a2)
+a3 &lt;- a1[1]
+print(names(a3))
+a4 &lt;- c(today=a3)
+print(names(a4))
+print(b1 &lt;- c(a1,a2))
+print(b2 &lt;- c(a1=a1))
+print(b3 &lt;- c(a1=a1,a2=a2))
+print(b5 &lt;- c(a1=a1,a2=a2[1]))
+print(b4 &lt;- c(a1,'(tomorrow)'=a1[2])) ## raster append
+print(b6 &lt;- c(a1,50))
+</code></pre>
+
+
+</div>

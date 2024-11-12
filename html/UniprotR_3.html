@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ConvertID</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Connect and parse UniProt database identifiers information.</h2>
+
+<h3>Description</h3>
+
+<p>The function is work to convert the UniProtKB AC/ID to any database identifiers
+available by the UniProtKB.
+For more information about available database identifiers
+see https://www.uniprot.org/help/id_mapping.
+see https://raw.githubusercontent.com/MohmedSoudy/UniprotR/master/uniprot_ids.csv
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ConvertID(ProteinAccList,ID_from="UniProtKB_AC-ID",ID_to=NULL,taxId=NULL,path=NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ProteinAccList</code></td>
+<td>
+<p>Vector of UniProt Accession/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ID_from</code></td>
+<td>
+<p>string of database identifier abbreviation, from which the Accession/ID will be converted</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ID_to</code></td>
+<td>
+<p>string of database identifier abbreviation, to which the Accession/ID will be converted.
+default is all database identifier available in UniProtKB</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taxId</code></td>
+<td>
+<p>string Needed when the ID_to is 'UniProtKB' that could be '9606' for human.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>path to save excel file containig results returened by the function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>DataFrame where column one contains the Accession/ID before conversion
+and other columns contains the Accession/ID after conversion
+</p>
+
+
+<h3>Note</h3>
+
+<p>The function also, Creates a csv file with the retrieved information.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mohmed Soudy <a href="mailto:Mohamed.soudy@57357.com">Mohamed.soudy@57357.com</a> and Ali Mostafa <a href="mailto:ali.mo.anwar@std.agr.cu.edu.eg">ali.mo.anwar@std.agr.cu.edu.eg</a>
+</p>
+
+
+</div>

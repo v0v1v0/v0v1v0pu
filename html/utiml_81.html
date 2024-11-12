@@ -1,0 +1,154 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.RDBRmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predict Method for RDBR</h2>
+
+<h3>Description</h3>
+
+<p>This function predicts values based upon a model trained by <code>rdbr</code>.
+In general this method is a recursive version of
+<code>predict.DBRmodel</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'RDBRmodel'
+predict(
+  object,
+  newdata,
+  estimative = NULL,
+  max.iterations = 5,
+  batch.mode = FALSE,
+  probability = getOption("utiml.use.probs", TRUE),
+  ...,
+  cores = getOption("utiml.cores", 1),
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class '<code>RDBRmodel</code>'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>An object containing the new input data. This must be a
+matrix, data.frame or a mldr object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>estimative</code></td>
+<td>
+<p>A matrix containing the bipartition result of other
+multi-label classification algorithm or an mlresult object with the
+predictions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.iterations</code></td>
+<td>
+<p>The maximum allowed iterations of the RDBR technique.
+(Default: 5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>batch.mode</code></td>
+<td>
+<p>Logical value to determine if use the batch re-estimation.
+If <code>FALSE</code> then use the stochastic re-estimation strategy.
+(Default: <code>FALSE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>Logical indicating whether class probabilities should be
+returned. (Default: <code>getOption("utiml.use.probs", TRUE)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm prediction for all
+subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the training. Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed. This is useful when
+the method is run in parallel. (Default: <code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Two versions of the update strategy of the estimated labels are implemented.
+The batch re-estimates the labels only when a complete current label vector
+is available. The stochastic uses re-estimated labels as soon as they become
+available. This second does not support parallelize the prediction, however
+stabilizes earlier than batch mode.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of type mlresult, based on the parameter probability.
+</p>
+
+
+<h3>References</h3>
+
+<p>Rauber, T. W., Mello, L. H., Rocha, V. F., Luchi, D., &amp; Varejao, F. M.
+(2014). Recursive Dependent Binary Relevance Model for Multi-label
+Classification. In Advances in Artificial Intelligence - IBERAMIA, 206-217.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Recursive Dependent Binary Relevance (RDBR)</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Predict SVM scores
+model &lt;- rdbr(toyml)
+pred &lt;- predict(model, toyml)
+
+# Passing a specif parameter for SVM predict algorithm
+pred &lt;- predict(model, toyml, na.action = na.fail)
+
+# Use the batch mode and increase the max number of iteration to 10
+pred &lt;- predict(model, toyml, max.iterations = 10, batch.mode = TRUE)
+
+# Using other classifier (EBR) to made the labels estimatives
+estimative &lt;- predict(ebr(toyml), toyml, probability = FALSE)
+model &lt;- rdbr(toyml, estimate.models = FALSE)
+pred &lt;- predict(model, toyml, estimative = estimative)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fin_percent</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute the percent change needed to return to the original value after percent off (or on).</h2>
+
+<h3>Description</h3>
+
+<p>Determine the percent change needed to "undo" an initial percent change. Has a plot function as well.
+If an amount of $100 has 20% added, what percent do we need to drop it by to return to the original value?
+</p>
+<p><code>fin_percent(20)</code> yields $100 increased by 20% = $120 (Percent to reverse = -17%)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fin_percent(
+  percent,
+  value = 100,
+  symbol = "$",
+  digits = 2,
+  plot = TRUE,
+  logY = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>percent</code></td>
+<td>
+<p>Change in percent (enter 10 for 10%, not 0.1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>Principal</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>symbol</code></td>
+<td>
+<p>value units (default = "$")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Rounding of results (default 2 places)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Whether to plot the result (default TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logY</code></td>
+<td>
+<p>Whether to plot y axis as log (TRUE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> new value and change required to return to baseline.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>fin_interest()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Functions: 
+<code>deg2rad()</code>,
+<code>fin_JustifiedPE()</code>,
+<code>fin_NI()</code>,
+<code>fin_interest()</code>,
+<code>fin_ticker()</code>,
+<code>fin_valuation()</code>,
+<code>rad2deg()</code>,
+<code>umxBrownie()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Percent needed to return to original value after 10% taken off
+fin_percent(-10)
+
+# Percent needed to return to original value after 10% added on
+fin_percent(10)
+
+# Percent needed to return to original value after 50% off 34.50
+fin_percent(-50, value = 34.5)
+</code></pre>
+
+
+</div>

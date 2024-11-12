@@ -1,0 +1,186 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>IndependentNormal-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "IndependentNormal" Class</h2>
+
+<h3>Description</h3>
+
+<p>The <code>IndependentNormal</code> class is a tool used to generate gene
+expressions that follow independent normal distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">IndependentNormal(mu,sigma)
+## S4 method for signature 'IndependentNormal'
+alterMean(object, TRANSFORM, ...)
+## S4 method for signature 'IndependentNormal'
+alterSD(object, TRANSFORM, ...)
+## S4 method for signature 'IndependentNormal'
+nrow(x)
+## S4 method for signature 'IndependentNormal'
+rand(object, n, ...)
+## S4 method for signature 'IndependentNormal'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>numeric vector specifying the mean expression values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>numeric vector specifying the standard deviation of the
+gene expression values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object, x</code></td>
+<td>
+<p>object of class <code>IndependentNormal</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TRANSFORM</code></td>
+<td>
+<p>function that takes a vector of mean expression or
+standard deviation and returns a transformed vector that can be used
+to alter the appropriate slot of the object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric scalar specifying number of samples to be simulated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments for generic or plotting routines</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that we typically work on expression value with its logarithm to
+some appropriate base. That is, the independent normal should
+be used on the logarithmic scale in order to construct the engine.
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Objects can be created by using the <code>IndependentNormal</code> generator
+function. The object of class <code>IndependentNormal</code> contains the mean
+and standard deviation for the normal distribution
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>mu</code>:</dt>
+<dd>
+<p>see corresponding argument above</p>
+</dd>
+<dt>
+<code>sigma</code>:</dt>
+<dd>
+<p>see corresponding argument above</p>
+</dd>
+</dl>
+<h3>Methods</h3>
+
+
+<dl>
+<dt>alterMean(object, TRANSFORM, ...)</dt>
+<dd>
+<p>Takes an object of class
+<code>IndependentNormal</code>, loops over the <code>mu</code> slot, alters
+the mean as defined by <code>TRANSFORM</code> function, and returns an
+object of class <code>IndependentNormal</code> with altered <code>mu</code>.</p>
+</dd>
+<dt>alterSD(object, TRANSFORM, ...)</dt>
+<dd>
+<p>Takes an object of class
+<code>IndependentNormal</code>, loops over the <code>sigma</code> slot, alters
+the standard deviation as defined by <code>TRANSFORM</code> function, and
+returns an object of class <code>IndependentNormal</code> with altered
+<code>sigma</code>.</p>
+</dd>
+<dt>nrow(x)</dt>
+<dd>
+<p>Returns the number of genes (i.e, the length of the
+<code>mu</code> vector).</p>
+</dd>
+<dt>rand(object, n, ...)</dt>
+<dd>
+<p>Generates <code class="reqn">nrow(IndependentNormal)*n</code>
+matrix representing gene expressions of <code>n</code> samples following the
+normal distribution captured in the object of <code>IndependentNormal</code>.</p>
+</dd>
+<dt>summary(object, ...)</dt>
+<dd>
+<p>Prints out the number of independent normal
+random variables in the object of <code>IndependentNormal</code>.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Jiexin Zhang <a href="mailto:jiexinzhang@mdanderson.org">jiexinzhang@mdanderson.org</a>,
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Engine</code>,
+<code>IndependentLogNormal</code>,
+<code>MVN</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("IndependentNormal")
+nGenes &lt;- 20
+mu &lt;- rnorm(nGenes, 6, 1)
+sigma &lt;- 1/rgamma(nGenes, rate=14, shape=6)
+ind &lt;- IndependentNormal(mu, sigma)
+nrow(ind)
+summary(ind)
+if (any(mu - ind@mu)) {
+  print('means do not match')
+} else {
+  print('means verified')
+}
+if (any(sigma - ind@sigma)) {
+  print('standard deviations do not match')
+} else {
+  print('sd verified')
+}
+x &lt;- rand(ind, 3)
+print(dim(x))
+print(summary(x))
+print(paste("'ind' should be valid:", validObject(ind)))
+ind@sigma &lt;- 1:3 # now we break it
+print(paste("'ind' should not be valid:", validObject(ind, test=TRUE)))
+rm(nGenes, mu, sigma, ind, x)
+</code></pre>
+
+
+</div>

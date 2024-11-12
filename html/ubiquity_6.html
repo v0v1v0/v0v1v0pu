@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>calculate_objective</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculates the Value of the Specified Objective Function</h2>
+
+<h3>Description</h3>
+
+<p>For a given set of system parameters the objective function
+will be calculated based on defined cohorts and variance models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">calculate_objective(parameters, cfg, estimation = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>system parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>estimation</code></td>
+<td>
+<p>boolean variable to indicate if the objective function is being called during parameter estimation</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If estimation is <code>TRUE</code> it will return the objective function
+value, if it is <code>FALSE</code> it will return a list with an element
+<code>value</code> containing the objective function value and an element named
+<code>isgood</code> that is <cite>TRUE</cite> if the objective function was successful.
+</p>
+
+
+</div>

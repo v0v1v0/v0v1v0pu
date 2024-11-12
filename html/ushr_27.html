@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot_TTS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot time to suppression distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function plots a histogram of the time to suppression estimates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plot_TTS(TTS_output, textsize = 9, bins = 20)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>TTS_output</code></td>
+<td>
+<p>output from estimating time to suppression (TTS) values using get_TTS()..</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>textsize</code></td>
+<td>
+<p>numeric value for base text size on ggplot. Default is 9.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bins</code></td>
+<td>
+<p>numeric value indicating the number of bins for the histogram. Default is 20.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(1234567)
+
+simulated_data &lt;- simulate_data(nsubjects = 20)
+
+TTSestimates &lt;- get_TTS(data = simulated_data, parametric = FALSE)
+
+plot_TTS(TTSestimates, bins = 5)
+
+</code></pre>
+
+
+</div>

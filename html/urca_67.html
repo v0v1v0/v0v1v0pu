@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sumurca-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class sumurca</h2>
+
+<h3>Description</h3>
+
+<p>A class for objects returned by applying method summary() to objects
+from classes: <code>ur.ers</code>, <code>ca.jo</code>, <code>cajo.test</code>,
+<code>ur.kpss</code>, <code>ca.po</code>, <code>ur.pp</code>, <code>ur.df</code>, <code>ur.sp</code>
+or <code>ur.za</code>.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>classname</code>:</dt>
+<dd>
+<p>The class name of the original object to
+which method summary is applied.</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>The name of the test, <em>i.e.</em>
+‘Johansen-Procedure’.</p>
+</dd>
+<dt>
+<code>testreg</code>:</dt>
+<dd>
+<p>The test regression where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>The test statististic where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>cval</code>:</dt>
+<dd>
+<p>The critical values of the test where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>bpoint</code>:</dt>
+<dd>
+<p>Potential break point where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>signif</code>:</dt>
+<dd>
+<p>Significance level of the test where
+applicable, otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>model</code>:</dt>
+<dd>
+<p>Description of the underlying model where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>type</code>:</dt>
+<dd>
+<p>The test type where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>auxstat</code>:</dt>
+<dd>
+<p>The result of an auxiliary regression where
+applicable, otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>lag</code>:</dt>
+<dd>
+<p>The number of lags included where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>H</code>:</dt>
+<dd>
+<p>The matrix containing the restrictions placed upon
+<code class="reqn">\bold{\beta}</code> where applicable, otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>A</code>:</dt>
+<dd>
+<p>The matrix containing the restrictions placed upon
+<code class="reqn">\bold{\alpha}</code> where applicable, otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>lambda</code>:</dt>
+<dd>
+<p>The eigenvalues where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>pval</code>:</dt>
+<dd>
+<p>The p-value and the degrees of freedom where
+applicable, otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>V</code>:</dt>
+<dd>
+<p>The matrix of eigenvectors, normalised with respect
+to the first variable where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>W</code>:</dt>
+<dd>
+<p>The matrix of loading weights where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+<dt>
+<code>P</code>:</dt>
+<dd>
+<p>The count of variables where applicable,
+otherwise set to <code>NULL</code>.</p>
+</dd>
+</dl>
+<h3>Methods</h3>
+
+<p>For this class a <code>print</code> method is available, that nicely prints the
+summary results of objects belonging to either one of the following
+classes: <code>ur.ers</code>, <code>ca.jo</code>, <code>cajo.test</code>, 
+<code>ur.kpss</code>, <code>ca.po</code>, <code>ur.pp</code>, <code>ur.df</code>, <code>ur.sp</code> or
+<code>ur.za</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary</code>, <code>ur.ers-class</code>,
+<code>ur.kpss-class</code>, <code>ca.jo-class</code>,
+<code>cajo.test-class</code>, <code>ca.po-class</code>,
+<code>ur.pp-class</code>, <code>ur.df-class</code>,
+<code>ur.sp-class</code> and <code>ur.za-class</code>. 
+</p>
+
+
+</div>

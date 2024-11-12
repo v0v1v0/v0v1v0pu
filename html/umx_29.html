@@ -1,0 +1,156 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.MxLISRELModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create and display a graphical path diagram for a LISREL model.</h2>
+
+<h3>Description</h3>
+
+<p><code>plot.MxLISRELModel</code> produces SEM diagrams using <code>DiagrammeR::DiagrammeR()</code> (or a graphviz application) to create the image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxLISRELModel'
+plot(
+  x = NA,
+  std = FALSE,
+  fixed = TRUE,
+  means = TRUE,
+  digits = 2,
+  file = "name",
+  labels = c("none", "labels", "both"),
+  resid = c("circle", "line", "none"),
+  strip_zero = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A LISREL <code>mxModel()</code> from which to make a path diagram</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the model (default = FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fixed</code></td>
+<td>
+<p>Whether to show fixed paths (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether to show means or not (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of decimal places to add to the path coefficients</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Whether to show labels on the paths. both will show both the parameter and the label. ("both", "none" or "labels")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resid</code></td>
+<td>
+<p>How to show residuals and variances default is "circle". Options are "line" &amp; "none"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_zero</code></td>
+<td>
+<p>Whether to strip the leading "0" and decimal point from parameter estimates (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><em>Note:</em> By default, plots open in your browser (or plot pane if using RStudio).
+</p>
+<p><strong>Opening in an external editor/app</strong>
+</p>
+<p>The underlying format is graphviz.
+If you use <code>umx_set_plot_format("graphviz")</code>, figures will open in a graphviz helper app (if installed).
+If you use graphviz, we try and use that app, but YOU HAVE TO INSTALL IT!
+</p>
+<p>On MacOS, you may need to associate the ‘.gv’ extension with your graphviz app.
+Find the .gv file made by plot, get info (cmd-I), then choose “open with”,
+select graphviz.app (or OmniGraffle professional),
+then set “change all”.
+</p>
+<p>The commercial application “OmniGraffle” is great for editing these images.
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://en.wikipedia.org/wiki/DOT_(graph_description_language)">https://en.wikipedia.org/wiki/DOT_(graph_description_language)</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_set_plot_format()</code>, <code>umx_set_auto_plot()</code>, <code>umx_set_plot_format()</code>, <code>plot.MxModel()</code>, <code>umxPlotACE()</code>, <code>umxPlotCP()</code>, <code>umxPlotIP()</code>, <code>umxPlotGxE()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># plot()
+# TODO get LISREL example model
+# Figure out how to map its matrices to plot. Don't do without establishing demand.
+</code></pre>
+
+
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compose_panel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plot raster images and decorations on the multipanel layout.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>compose_panel</code> divides the multi-band raster image (<em>brick</em>) or layers of raster images (<em>stack</em>) on the sequence of single-band images and plots each image on the separate panel of layout. Panel plotting is finalized by adding of decoration (gridlines, coastline, annotation, scalebar).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compose_panel(..., silent = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are passed to <code>panel_new</code>, <code>panel_raster</code>, <code>panel_coastline</code>, <code>panel_graticule</code>, <code>panel_annotation</code>, <code>panel_scalebar</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Logical. Value <code>TRUE</code> cancels progress bar. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For each panel of layout the sequence of called functions is permanent:<br><code>panel_new</code> - - &gt; <code>panel_raster</code> - - &gt; <code>panel_coastline</code> - - &gt; <code>panel_graticule</code> - - &gt; <code>panel_annotation</code> - -&gt; <code>panel_scalebar</code>.
+</p>
+<p>If this order is undesirable, then call these functions in the required sequence.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>NULL</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>compose_plot</code>, <code>compose_legend</code>
+</p>
+<p><code>panel_new</code>, <code>panel_raster</code>, <code>panel_coastline</code>, <code>panel_graticule</code>, <code>panel_annotation</code>, <code>panel_scalebar</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(6)
+b1 &lt;- list(maxi=a[1:4]*1e2,mini=a[5:6]/1e2)
+print(b1)
+b2 &lt;- lapply(b1,function(x) colorize(x,nbreak=ifelse(global_mean(x)&lt;100,5,NA)))
+compose_open(b2,byrow=FALSE
+            ,legend=list(list("bottom",1:2),list("bottom",3),list("left")))
+ct &lt;- compose_panel(b2,scalebar=2,coastline=3:4,gridline=5:6,gridline.margin=5
+                   ,annotation.text=as.character(seq(6)))
+compose_legend(ct)
+legend_mtext(as.expression(substitute(italic("Colorbars are on the bottom"))))
+compose_close()
+</code></pre>
+
+
+</div>

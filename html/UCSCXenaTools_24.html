@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>XenaHub</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate a XenaHub Object</h2>
+
+<h3>Description</h3>
+
+<p>It is used to generate original
+<code>XenaHub</code> object according to hosts, cohorts, datasets or hostName.
+If these arguments not specified, all hosts and corresponding datasets
+will be returned as a <code>XenaHub</code> object. All datasets can be found
+at <a href="https://xenabrowser.net/datapages/">https://xenabrowser.net/datapages/</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">XenaHub(
+  hosts = xena_default_hosts(),
+  cohorts = character(),
+  datasets = character(),
+  hostName = c("publicHub", "tcgaHub", "gdcHub", "icgcHub", "toilHub",
+    "pancanAtlasHub", "treehouseHub", "pcawgHub", "atacseqHub", "singlecellHub",
+    "kidsfirstHub")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>hosts</code></td>
+<td>
+<p>a character vector specify UCSC Xena hosts, all available hosts can be
+found by <code>xena_default_hosts()</code> function. <code>hostName</code> is a more recommend option.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohorts</code></td>
+<td>
+<p>default is empty character vector, all cohorts will be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>datasets</code></td>
+<td>
+<p>default is empty character vector, all datasets will be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hostName</code></td>
+<td>
+<p>name of host, available options can be accessed by <code>.xena_hosts</code>
+This is an easier option for user than <code>hosts</code> option. Note, this option
+will overlap <code>hosts</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a XenaHub object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Shixiang Wang <a href="mailto:w_shixiang@163.com">w_shixiang@163.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+#1 query all hosts, cohorts and datasets
+xe = XenaHub()
+xe
+#2 query only TCGA hosts
+xe = XenaHub(hostName = "tcgaHub")
+xe
+hosts(xe)     # get hosts
+cohorts(xe)   # get cohorts
+datasets(xe)  # get datasets
+samples(xe)   # get samples
+
+## End(Not run)
+</code></pre>
+
+
+</div>

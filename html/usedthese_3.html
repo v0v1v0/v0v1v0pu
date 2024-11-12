@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>used_here</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summarise function usage in a single document</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+</p>
+<p>Consistent with knitr syntax highlighting, <code>used_here()</code> adds a summary
+table of R package &amp; function usage to a knitted Quarto or R Markdown
+document
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">used_here(fil = current_input())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>fil</code></td>
+<td>
+<p>If the usage summary is required in the document you are currently
+knitting, then no argument need be specified.
+</p>
+<p>If you want to create a summary by running just the code chunk, then it is
+necessary to specify the quoted name of the saved file. You should first
+load and attach the packages used in a fresh R session.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>If the rendered summary includes rows where the package name is
+multiple packages separated by a comma, this will be due to an unresolved
+conflict. The recommended approach is to use the 'conflicted' package.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A printed kable table with the css class "usedthese"
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Simple example which mimics a two-line script and creates
+# an html table with a CSS class "usedthese"
+usedthese::used_here("mean(c(1, 2, 3))\nsum(c(1, 2, 3))")
+
+</code></pre>
+
+
+</div>

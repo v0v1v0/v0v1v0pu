@@ -1,0 +1,129 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predict method for Universal Scalability Law models</h2>
+
+<h3>Description</h3>
+
+<p><code>predict</code> is a function for predictions of the scalability of a system
+modeled with the Universal Scalability Law. It evaluates the regression
+function in the frame <code>newdata</code> (which defaults to
+<code>model.frame(object)</code>). Setting <code>interval</code> to "<code>confidence</code>"
+requests the computation of confidence intervals at the specified
+<code>level</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+predict(
+  object,
+  newdata,
+  alpha,
+  beta,
+  interval = c("none", "confidence"),
+  level = 0.95
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A USL model object for which prediction is desired.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>An optional data frame in which to look for variables
+with which to predict. If omitted, the fitted values are used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Optional parameter to be used for evaluation instead of the
+parameter computed for the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Optional parameter to be used for evaluation instead of the
+parameter computed for the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>Type of interval calculation. Default is to calculate no
+confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Confidence level. Default is 0.95.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The parameters <code>alpha</code> or <code>beta</code> are useful to do a what-if
+analysis. Setting these parameters override the model parameters and show
+how the system would behave with a different contention or coherency delay
+parameter.
+</p>
+<p><code>predict</code> internally uses the function returned by
+<code>scalability,USL-method</code> to calculate the result.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>predict</code> produces a vector of predictions or a matrix of
+predictions and bounds with column names <code>fit</code>, <code>lwr</code>, and
+<code>upr</code> if <code>interval</code> is set to "<code>confidence</code>".
+</p>
+
+
+<h3>References</h3>
+
+<p>Neil J. Gunther. Guerrilla Capacity Planning: A Tactical
+Approach to Planning for Highly Scalable Applications and Services.
+Springer, Heidelberg, Germany, 1st edition, 2007.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>, <code>scalability,USL-method</code>,
+<code>USL-class</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(raytracer)
+
+## Print predicted result from USL model for demo dataset
+predict(usl(throughput ~ processors, raytracer))
+
+## The same prediction with confidence intervals at the 99% level
+predict(usl(throughput ~ processors, raytracer),
+        interval = "confidence", level = 0.99)
+
+</code></pre>
+
+
+</div>

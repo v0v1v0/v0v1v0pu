@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ua_parse</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parse a vector of user agents into a data frame</h2>
+
+<h3>Description</h3>
+
+<p>Takes in a character vector of user agent strings and returns a data frame classed as tibble.
+of parsed user agents.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ua_parse(user_agents, .progress = FALSE)
+
+get_cache()
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>user_agents</code></td>
+<td>
+<p>a character vector of user agents</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.progress</code></td>
+<td>
+<p>if 'TRUE'  will display a progress bar in interactive mode</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data frame classed as tibble with columns for user agent family, major &amp; minor versions
+plus patch level along with OS family and major &amp; minor versions plus
+device brand and model.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The regex YAML import date: 2020-03-31
+</p>
+
+
+<h3>References</h3>
+
+<p>&lt;http://www.uaparser.org/&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ua_parse(paste0("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.2 (KHTML, ",
+                "like Gecko) Ubuntu/11.10 Chromium/15.0.874.106 ",
+                "Chrome/15.0.874.106 Safari/535.2", collapse=""))
+</code></pre>
+
+
+</div>

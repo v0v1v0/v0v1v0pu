@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>block_group2000</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Centers of population of US census tracts according to the 2000 census</h2>
+
+<h3>Description</h3>
+
+<p>A data set of the latitude and longitude coordinates of the centers of
+population (centroids) of census block groups in the US states plus the
+District of Columbia and Puerto Rico. Populations according to the 2000
+decennial census are also included.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">block_group2000
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A <code>tibble</code> with 211,267 rows and 7 variables:
+</p>
+
+<dl>
+<dt>STATEFP</dt>
+<dd>
+<p>The two-digit GEOID of the state where the block group is
+located</p>
+</dd>
+<dt>COUNTYFP</dt>
+<dd>
+<p>The last three digits of the five-digit GEOID of the county
+where the block group is located</p>
+</dd>
+<dt>TRACTCE</dt>
+<dd>
+<p>The last six digits of the eleven-digit GEOID of the tract
+where the block group is located</p>
+</dd>
+<dt>BLKGRPCE</dt>
+<dd>
+<p>The last digit of the twelve-digit GEOID of the block
+group</p>
+</dd>
+<dt>POPULATION</dt>
+<dd>
+<p>The population of the block group</p>
+</dd>
+<dt>LATITUDE</dt>
+<dd>
+<p>The latitude coordinate of the center of population
+(centroid) of the block group (positive is north; negative is south)</p>
+</dd>
+<dt>LONGITUDE</dt>
+<dd>
+<p>The longitude coordinate of the center of population
+(centroid) of the block group (positive is east; negative is west)</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p><strong>There are 707 block groups with a <code>POPULATION</code> of 0 and a
+missing value for both <code>LATITUDE</code> and <code>LONGITUDE</code></strong>.
+</p>
+<p>Unlike <code>county2000</code>, <code>block_group2000</code> does not contain data
+from American Samoa, Guam, the Northern Mariana Islands, or the US Virgin
+Islands.
+</p>
+<p>The source data file in the
+<a href="https://www2.census.gov/geo/docs/reference/cenpop2000/blkgrp/bg_popcen.zip">zip
+file</a> on the US census website has different column names than what its
+<a href="https://www.census.gov/geographies/reference-files/time-series/geo/centers-population.2000.html">data
+dictionary</a> reports. The data dictionary's version of the column names were
+used, since they are consistent with the majority of the other data files and
+data dictionaries on the census website.
+</p>
+
+
+<h3>US census data terms of service</h3>
+
+<p><a href="https://www.census.gov/data/developers/about/terms-of-service.html">https://www.census.gov/data/developers/about/terms-of-service.html</a>
+</p>
+
+
+<h3>Source</h3>
+
+<p>The source file is in the .zip file at
+<a href="https://www2.census.gov/geo/docs/reference/cenpop2000/blkgrp/bg_popcen.zip">https://www2.census.gov/geo/docs/reference/cenpop2000/blkgrp/bg_popcen.zip</a>.
+The 2000 center of population info page is at
+<a href="https://www.census.gov/geographies/reference-files/time-series/geo/centers-population.2000.html">https://www.census.gov/geographies/reference-files/time-series/geo/centers-population.2000.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other 2000 census centers of population: <code>state2000</code>;
+<code>county2000</code>; <code>tract2000</code>
+</p>
+<p>2010 census centers of population: <code>state2010</code>;
+<code>county2010</code>; <code>tract2010</code>;
+<code>block_group2010</code>; <code>US_mean_center2010</code>;
+<code>US_median_center2010</code>
+</p>
+<p>2020 census centers of population: <code>state2020</code>;
+<code>county2020</code>; <code>tract2020</code>;
+<code>block_group2020</code>; <code>US_mean_center2020</code>;
+<code>US_median_center2020</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">block_group2000
+</code></pre>
+
+
+</div>

@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unique_identifier</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a unique identifier for each combination of fields in a data frame</h2>
+
+<h3>Description</h3>
+
+<p>Create a unique identifier for each combination of fields in a data frame. 
+This unique identifier is unique for each combination of the elements of the fields. 
+The generated identifier is like a primary key or a secondary key on a table.
+This is just a small wrapper around <code>frank</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unique_identifier(x, fields, start_from = 1L)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fields</code></td>
+<td>
+<p>a character vector of columns from <code>x</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start_from</code></td>
+<td>
+<p>integer number indicating to start from that number onwards</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an integer vector of the same length as the number of rows in <code>x</code> 
+containing the unique identifier
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(brussels_reviews_anno)
+x &lt;- brussels_reviews_anno
+x$doc_sent_id &lt;- unique_identifier(x, fields = c("doc_id", "sentence_id"))
+head(x, 15)
+range(x$doc_sent_id)
+x$doc_sent_id &lt;- unique_identifier(x, fields = c("doc_id", "sentence_id"), start_from = 10)
+head(x, 15)
+range(x$doc_sent_id)
+</code></pre>
+
+
+</div>

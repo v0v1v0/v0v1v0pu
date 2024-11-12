@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>minBB</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Rectangle flight area around points</h2>
+
+<h3>Description</h3>
+
+<p>Creates optimal rectangle area around points
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">minBB(points, buffer = 0, epsg = 25832)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>points</code></td>
+<td>
+<p>a sf object, points you want to fly over</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>buffer</code></td>
+<td>
+<p>buffer distance between the points and the rectangle; defaults 0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>epsg</code></td>
+<td>
+<p>reference system</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The code is based on a Rotating Caliper Algorithm and mostly copy and pasted (see reference)
+</p>
+
+
+<h3>Value</h3>
+
+<p>SpatialPoints: Corners of the flight area
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Marvin Ludwig
+</p>
+
+
+<h3>References</h3>
+
+<p>http://dwoll.de/rexrepos/posts/diagBounding.html
+</p>
+
+
+</div>

@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AccClust</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Accuracy detection for a clustering result with known classes
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the accuracy of a clustering result of a dataset with known classes from the k-means, fuzzy c-means, or EM algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">AccClust(x, label.names = "label", algorithm = "FCM", fzm = 2,
+  scale = TRUE, nstart = 100, iter = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label.names</code></td>
+<td>
+<p>a character string indicating the true label column name. The default is <code>"label"</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>algorithm</code></td>
+<td>
+<p>a character string indicating which clustering methods to be used (<code>"FCM"</code>, <code>"EM"</code>, <code>"Kmeans"</code>). More than one methods may be selected. The default is <code>"FCM"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fzm</code></td>
+<td>
+<p>a number greater than 1 giving the degree of fuzzification for <code>method = "FCM"</code>. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale</code></td>
+<td>
+<p>logical, if <code>TRUE</code> (default), the dataset is normalized before clustering.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for FCM for <code>method = "FCM" or "Kmeans" or c("Kmeans","FCM")</code>. The default is <code>20</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>a maximum number of iterations for <code>method = "FCM"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>kmeans</code></td>
+<td>
+<p>Accuracy score from <code>0</code> to <code>1</code> of the k-means result</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FCM</code></td>
+<td>
+<p>Accuracy score from <code>0</code> to <code>1</code> of the FCM result</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>EM</code></td>
+<td>
+<p>Accuracy score from <code>0</code> to <code>1</code> of the EM result</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>N. Wiroonsri, O. Preedasawakul, A correlation-based fuzzy cluster validity index with secondary options detector, arXiv:2308.14785, 2023
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>R1_data, D1_data, FzzyCVIs, WP.IDX, XB.IDX, Hvalid</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# The data is from Wiroonsri (2024).
+x = R1_data
+
+# Check accuracy of clustering results obtained by kmeans, FCM, and EM clustering
+AccClust(x, label.names = "label",algorithm = c("Kmeans","FCM","EM"), fzm = 2,
+  scale = TRUE, nstart = 20,iter = 100)
+
+# Check accuracy of a clustering result obtained by the FCM algoritm
+AccClust(x, label.names = "label",algorithm = "FCM", fzm = 2,
+  scale = TRUE, nstart = 20,iter = 100)
+</code></pre>
+
+
+</div>

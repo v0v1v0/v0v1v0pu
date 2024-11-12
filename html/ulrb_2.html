@@ -1,0 +1,202 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>check_avgSil</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check average Silhouette score index</h2>
+
+<h3>Description</h3>
+
+<p>Calculates average Silhouette score for a given sample.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">check_avgSil(
+  data,
+  sample_id = NULL,
+  samples_col = "Sample",
+  abundance_col = "Abundance",
+  range = 3:10,
+  with_plot = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample_id</code></td>
+<td>
+<p>String with name of the sample to apply this function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples_col</code></td>
+<td>
+<p>String with name of column with sample names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>abundance_col</code></td>
+<td>
+<p>String with name of column with abundance values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range</code></td>
+<td>
+<p>The range of values of k to test, default is from 3 to 10.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>with_plot</code></td>
+<td>
+<p>If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Extra arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The average Silhouette score index provides a sense of cluster definition and separation.
+It varies between -1 (complete cluster overlap) and 1 (no cluster overlap),
+the closest to 1, the better. Thus,
+<strong>the k value with highest average Silhouette score is the best k</strong>.
+This is the standard metric used by the <strong>ulrb</strong> package for automation of the decision
+of k, in functions <code>suggest_k()</code> and <code>define_rb()</code>.
+</p>
+<p><strong>Note</strong>: The average Silhouette score is different from the common calculation of
+the Silhouette index, which provides a score for each observation in a clustering result.
+Just like the name says, we are taking the average of all silhouette scores
+obtained in a clustering result. In this way we can have a single, comparable
+value for each k we test.
+</p>
+<p><strong>Data input</strong>
+</p>
+<p>This function takes a data.frame with a column for samples and a column for abundance
+(minimum), but can take any number of other columns. It will then filter the specific sample
+that you want to analyze. You can also pre-filter for your specific sample, but you still need to
+provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
+(indicate how you name them with the arguments samples_col and abundance_col).
+</p>
+<p><strong>Output options</strong>
+</p>
+<p>The default option returns a vector with CH scores for each k. This is a simple output that can then be used
+for other analysis. However, we also provide the option to show a plot (set <code>with_plot = TRUE</code>) with
+the CH score for each k.
+</p>
+<p>Note that this function does not plot the classical Silhouette plot of a clustering result.
+To do that particular plot, use the function <code>plot_ulrb_silhouette()</code> instead.
+</p>
+<p><strong>Explanation of average Silhouette score</strong>
+</p>
+<p>To calculate the Silhouette score for a single observation, let:
+</p>
+
+<ul>
+<li> <p><code class="reqn">a</code> be the mean distance between an observation and all other
+observations from the same cluster; and
+</p>
+</li>
+<li> <p><code class="reqn">b</code> be the mean distance between all observations in a cluster and the
+centroid of the nearest cluster.
+</p>
+</li>
+</ul>
+<p>The silhouette score (Sil), is given by:
+</p>
+<p style="text-align: center;"><code class="reqn">Sil = \frac{(b-a)}{max(a,b)}</code>
+</p>
+
+<p>Once you have the Silhouette score for all observations in a clustering result, just
+take the simple mean and get the average Silhouette score.
+</p>
+<p><strong>Silhouette score intuition</strong>
+</p>
+<p>From the above formula, <code class="reqn">Sil = \frac{(b-a)}{max(a,b)}</code>, it is clear that,
+for a given observation:
+</p>
+
+<ul>
+<li>
+<p> if <code class="reqn">a &gt; b</code>, the Silhouette score approaches <strong>1</strong>; this means that the
+distance between an observation and its own cluster is larger than the
+distance to the nearest different cluster. This is the distance that must be
+maximized so that all points in a cluster are more similar with each other,
+than they are with other clusters.
+</p>
+</li>
+<li>
+<p> if <code class="reqn">a = b</code>, then the Silhouette score is <strong>0</strong>; this means that the distance
+between the observation and its own cluster is equivalent to distance between
+the nearest different cluster.
+</p>
+</li>
+<li>
+<p> if <code class="reqn">a &lt; b</code>, then the Silhouette score approaches <strong>-1</strong>; in this
+situation, an observation is nearer the nearest different cluster,
+than it is to its own cluster. Thus, a negative score indicates that the observation
+is not in the correct cluster.
+</p>
+</li>
+</ul>
+<p><strong>average Silhouette score intuition</strong>
+</p>
+<p>If we take the average of the Silhouette score obtained for each observation in
+a clustering result, then we have the ability to compare the overall success of that
+clustering with another clustering. Thus, if we compare the average Silhouette
+score across different k values, i.e. different number of clusters, we can
+select the k with highest average Silhouette score.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Vector with average Silhouette score index for each pre-specified k.
+</p>
+
+
+<h3>References</h3>
+
+<p>Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>define_rb()</code>, <code>suggest_k()</code>, <code>cluster::pam()</code>, <code>cluster::silhouette()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+# Just scores
+check_avgSil(nice_tidy, sample_id = "ERR2044662")
+
+# To change range
+check_avgSil(nice_tidy, sample_id = "ERR2044662", range = 4:11)
+
+# To see a simple plot
+check_avgSil(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
+
+</code></pre>
+
+
+</div>

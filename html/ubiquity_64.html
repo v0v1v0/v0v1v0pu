@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_od_general</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>General Observation Details Function</h2>
+
+<h3>Description</h3>
+
+<p>Used to calculate observation details based on 
+cohorts created with <code>system_define_cohort</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_od_general(pest, cfg, estimation = TRUE, details = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pest</code></td>
+<td>
+<p>vector of parameters to be estimated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>estimation</code></td>
+<td>
+<p><code>TRUE</code> when called during an estimation and <code>FALSE</code> when called to test objective function or generate observation information for plotting</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>details</code></td>
+<td>
+<p><code>TRUE</code> to display information about cohorts as they are simulated (useful for debugging when passed through <code>system_simulate_estimation_results</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If estimation is TRUE then the output is a matrix  of observation details of the format:
+</p>
+<pre>od$pred  = [TIME, OBS, PRED, VAR, OUTPUT, COHORT] </pre>
+<p>The values are the observed (<code>OBS</code>) data, predicted
+values (<code>PRED</code>) and variance (<code>VAR</code>) at the given <code>TIME</code>. The columns <code>OUTPUT</code> and
+<code>COHORT</code> can be used for sorting. These should be unique numbers.
+</p>
+<p>When estimation is <code>FALSE</code> we output <code>od$pred</code> is a data frame with the
+following headings:
+</p>
+<pre>od$pred  = [TIME, OBS, PRED, VAR, SMOOTH, OUTPUT, COHORT] </pre>
+<p>The <code>TIME</code>, <code>OBS</code>, <code>PRED</code> and <code>VAR</code> are the same as those listed above. The <code>SMOOTH</code>
+variable is <code>FALSE</code> for rows that correspond to records in the dataset and
+<code>TRUE</code> when the <code>PRED</code> represents the smooth predictions. The <code>OUTPUT</code> and <code>COHORT</code>
+columns here are text values used when defining the cohorts.
+</p>
+<p>Also the <code>od$all</code> list item is created with all of the simulation information
+stored for each cohort:
+</p>
+<pre>od$all = [ts.time, ts.ts1, ... ts.tsn, pred, name, cohort]</pre>
+
+<ul>
+<li> <p><code>tstime</code>             - timescale of the system
+</p>
+</li>
+<li> <p><code>ts.ts1, ... ts.tsn</code> - timescales defined in the system
+</p>
+</li>
+<li> <p><code>pred</code>               - smooth prediction
+</p>
+</li>
+<li> <p><code>name</code>               - state or output name corresponding to the prediction
+</p>
+</li>
+<li> <p><code>cohort</code>             - name of the cohort for these predictions
+</p>
+</li>
+</ul>
+<p>Lastly the field <code>isgood</code> will be set to <code>FALSE</code> if any problems are encountered, and <code>TRUE</code> if everything worked.
+</p>
+<pre>od$isgood = TRUE</pre>
+
+
+<h3>See Also</h3>
+
+<p><code>system_define_cohort</code> and <code>system_simulate_estimation_results</code>
+</p>
+
+
+</div>

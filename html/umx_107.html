@@ -1,0 +1,368 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxIP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umxIP: Build and run an Independent Pathway twin model</h2>
+
+<h3>Description</h3>
+
+<p>Make a 2-group Independent Pathway twin model.
+</p>
+<p>The independent-pathway model  (aka "biometric model" (McArdle and Goldsmith, 1990) proposes that <code>A</code>,
+<code>C</code>, and <code>E</code> components act directly on the manifest or measured phenotypes. This contrasts with
+the <code>umxCP()</code> model, in which these influences are collected on a hypothesized or latent causal
+variable, which is manifested in the measured phenotypes.
+</p>
+<p>The following figure shows the IP model diagrammatically:
+</p>
+<p><img src="../help/figures/IP.svg" width="50%" alt="Figure: IP model"></p>
+<p>As can be seen, each phenotype also by default has A, C, and E influences specific to that phenotype.
+</p>
+<p>Features of the model include the ability to include add more one set of independent pathways, different numbers
+of pathways for a, c, and e, as well the ability to use ordinal data, and different fit functions, e.g. WLS.
+</p>
+<p><strong>note</strong>: The function <code>umx_set_optimization_options()</code> allows users to see and set <code>mvnRelEps</code> and <code>mvnMaxPointsA</code>
+mvnRelEps defaults to .005. For ordinal models, you might find that '0.01' works better.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxIP(
+  name = "IP",
+  selDVs,
+  dzData,
+  mzData,
+  sep = NULL,
+  nFac = c(a = 1, c = 1, e = 1),
+  data = NULL,
+  zyg = "zygosity",
+  type = c("Auto", "FIML", "cov", "cor", "WLS", "DWLS", "ULS"),
+  allContinuousMethod = c("cumulants", "marginals"),
+  dzAr = 0.5,
+  dzCr = 1,
+  correlatedA = FALSE,
+  numObsDZ = NULL,
+  numObsMZ = NULL,
+  autoRun = getOption("umx_auto_run"),
+  tryHard = c("no", "yes", "ordinal", "search"),
+  optimizer = NULL,
+  equateMeans = TRUE,
+  weightVar = NULL,
+  addStd = TRUE,
+  addCI = TRUE,
+  freeLowerA = FALSE,
+  freeLowerC = FALSE,
+  freeLowerE = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>The name of the model (defaults to "IP").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>selDVs</code></td>
+<td>
+<p>The base names of the variables to model. note: Omit suffixes - just "dep" not c("dep_T1", "dep_T2")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dzData</code></td>
+<td>
+<p>The DZ dataframe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mzData</code></td>
+<td>
+<p>The MZ dataframe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The suffix for twin 1 and twin 2. e.g. selDVs= "dep", sep= "_T" -&gt; c("dep_T1", "dep_T2")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nFac</code></td>
+<td>
+<p>How many common factors for a, c, and e. If one number is given, applies to all three.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>If provided, dzData and mzData are treated as levels of zyg to select() MZ and DZ data sets (default = NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zyg</code></td>
+<td>
+<p>If data provided, this column is used to select rows by zygosity (Default = "zygosity")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Analysis method one of c("Auto", "FIML", "cov", "cor", "WLS", "DWLS", "ULS")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>allContinuousMethod</code></td>
+<td>
+<p>"cumulants" or "marginals". Used in all-continuous WLS data to determine if a means model needed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dzAr</code></td>
+<td>
+<p>The DZ genetic correlation (defaults to .5, vary to examine assortative mating).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dzCr</code></td>
+<td>
+<p>The DZ "C" correlation (defaults to 1: set to .25 to make an ADE model).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>correlatedA</code></td>
+<td>
+<p>Whether factors are allowed to correlate (not implemented yet: FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numObsDZ</code></td>
+<td>
+<p>= For cov data, the number of DZ pairs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numObsMZ</code></td>
+<td>
+<p>= For cov data, the number of MZ pairs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoRun</code></td>
+<td>
+<p>Whether to run and return the model (default), or just to create and return without running.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Whether to tryHard (default 'no' uses normal mxRun). options: "mxTryHard", "mxTryHardOrdinal", or "mxTryHardWideSearch"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>optimizer</code></td>
+<td>
+<p>optionally set the optimizer (default NULL does nothing).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>equateMeans</code></td>
+<td>
+<p>Whether to equate the means across twins (defaults to TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weightVar</code></td>
+<td>
+<p>If a weighting variable is provided, a vector objective will be used to weight the data. (default = NULL).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>addStd</code></td>
+<td>
+<p>Whether to add algebras for a standardized model (defaults to TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>addCI</code></td>
+<td>
+<p>Whether to add CIs (defaults to TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freeLowerA</code></td>
+<td>
+<p>ignore: Whether to leave the lower triangle of A free (default = FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freeLowerC</code></td>
+<td>
+<p>ignore: Whether to leave the lower triangle of C free (default = FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freeLowerE</code></td>
+<td>
+<p>ignore: Whether to leave the lower triangle of E free (default = FALSE).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Like the <code>umxACE()</code> model, the IP model decomposes phenotypic variance
+into additive genetic (A), unique environmental (E) and, optionally, either
+common or shared-environment (C) or
+non-additive genetic effects (D).
+</p>
+<p>Unlike the Cholesky, these factors do not act directly on the phenotype. Instead latent A,
+C, and E influences impact on one or more latent common factors which, in turn, account for
+variance in the phenotypes (see Figure).
+</p>
+<p><strong>Data Input</strong>
+Currently, <code>umxIP</code> accepts only raw data. This may change in future versions. You can
+choose other fit functions, e.g. WLS.
+</p>
+<p><strong>Ordinal Data</strong>
+</p>
+<p>In an important capability, the model transparently handles ordinal (binary or multi-level
+ordered factor data) inputs, and can handle mixtures of continuous, binary, and ordinal
+data in any combination.
+</p>
+<p><strong>Additional features</strong>
+</p>
+<p><code>umxIP</code> supports varying the DZ genetic association (defaulting to .5)
+to allow exploring assortative mating effects, as well as varying the DZ “C” factor
+from 1 (the default for modeling family-level effects shared 100% by twins in a pair),
+to .25 to model dominance effects.
+</p>
+<p><strong>Matrices and Labels in IP model</strong>
+</p>
+<p>A good way to see which matrices are used in umxIP is to run an example model and plot it.
+</p>
+<p>All the shared matrices are in the model "top".
+</p>
+<p>Matrices <code>as</code>, <code>cs</code>, and <code>es</code> contain the path loadings specific to each variable on their diagonals.
+</p>
+<p>To see the 'as' values, you can simply execute:
+</p>
+<p>m1$top#as$values
+</p>
+<p>m1$top#as$labels
+</p>
+<p>m1$top#as$free
+</p>
+<p>Labels relevant to modifying the specific loadings take the form "as_r1c1", "as_r2c2" etc.
+</p>
+<p>The independent-pathway loadings on the manifests are in matrices <code>a_ip</code>, <code>c_ip</code>, <code>e_ip</code>.
+</p>
+<p>Less commonly-modified matrices are the mean matrix <code>expMean</code>.
+This has 1 row, and the columns are laid out for each variable
+for twin 1, followed by each variable for twin 2.
+</p>
+<p>So, in a model where the means for twin 1 and twin 2 had been equated
+(set = to T1), you could make them independent again with this line:
+</p>
+<p><code>m1$top$expMean$labels[1,4:6] = c("expMean_r1c4", "expMean_r1c5", "expMean_r1c6")</code>
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Kendler, K. S., Heath, A. C., Martin, N. G., &amp; Eaves, L. J. (1987). Symptoms of anxiety and symptoms of depression.
+Same genes, different environments? <em>Archives of General Psychiatry</em>, <strong>44</strong>, 451-457. <a href="https://doi.org/10.1001/archpsyc.1987.01800170073010">doi:10.1001/archpsyc.1987.01800170073010</a>.
+</p>
+</li>
+<li>
+<p> McArdle, J. J., &amp; Goldsmith, H. H. (1990). Alternative common factor models for multivariate biometric analyses.
+<em>Behavior Genetics</em>, <strong>20</strong>, 569-608. <a href="https://doi.org/10.1007/BF01065873">doi:10.1007/BF01065873</a>.
+</p>
+</li>
+<li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>plot()</code>, <code>umxSummary()</code>, <code>umxCP()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(GFF)
+mzData = subset(GFF, zyg_2grp == "MZ")
+dzData = subset(GFF, zyg_2grp == "DZ")
+selDVs = c("gff","fc","qol","hap","sat","AD") # These will be expanded into "gff_T1" "gff_T2" etc.
+m1 =    umxIP(selDVs = selDVs, sep = "_T", dzData = dzData, mzData = mzData)
+
+# WLS example: Use "marginals" method to enable all continuous data with missingness.
+m3 = umxIP(selDVs = selDVs, sep = "_T", dzData = dzData, mzData = mzData, 
+	type = "DWLS", allContinuousMethod='marginals')
+# omit missing to enable default WLS method to work on all continuous data
+dzD = na.omit(dzData[, tvars(selDVs, "_T")])
+mzD = na.omit(dzData[, tvars(selDVs, "_T")])
+m4 = umxIP(selDVs = selDVs, sep = "_T", dzData = dzD, mzData = mzD, type = "DWLS")
+
+# ====================================================================
+# = Try with a non-default number of a, c, and e independent factors =
+# ====================================================================
+nFac = c(a = 2, c = 1, e = 1)
+m2 = umxIP(selDVs = selDVs, sep = "_T", dzData = dzData, mzData = mzData, nFac = nFac, 
+	tryHard = "yes")
+umxCompare(m1, m2)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

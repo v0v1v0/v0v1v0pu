@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>transforms</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Transform functions</h2>
+
+<h3>Description</h3>
+
+<p><code>normalOffset</code> is a function that can be used as the
+<code>TRANSFORM</code> argument in an <code>alterMean</code> operation, which adds
+an offset to each value in the mean where the offset is chosen from a
+normal distribution.
+</p>
+<p><code>invGammaMultiple</code> is a function that can be used as the
+<code>TRANSFORM</code> argument in an <code>alterSD</code> operation, which multiplies
+each standard deviation by a positive value chosen from an inverse gamma
+distribution with parameters <code>shape</code> and <code>scale</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">normalOffset(x, delta, sigma)
+invGammaMultiple(x, shape, rate)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>numeric vector of mean expression or standard deviation
+defined in the object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delta, sigma</code></td>
+<td>
+<p>numeric vector used as <code>mean</code> and/or <code>sd</code>
+parameters specifying the normal distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape, rate</code></td>
+<td>
+<p>numeric vector used as <code>shape</code> and/or <code>rate</code>
+parameters specifying the gamma distribution. Must be positive.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>normalOffset</code> returns a new vector, TO each element of which is added
+aN offset chosen from a normal distribution with parameters <code>mean</code>
+and <code>sd</code>.
+</p>
+<p><code>invGammaMultiple</code> returns a new vector, each element of which is
+multiplied by a positive value chosen from an inverse gamma distribution
+with parameters <code>shape</code> and <code>scale</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Jiexin Zhang <a href="mailto:jiexinzhang@mdanderson.org">jiexinzhang@mdanderson.org</a>,
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>alterMean</code>,
+<code>alterSD</code>,
+<code>RNGkind</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">nComp &lt;- 10
+nGenes &lt;- 100
+comp &lt;- list()
+for (i in 1:nComp) {
+  comp[[i]] &lt;- IndependentNormal(rnorm(nGenes/nComp, 6, 1.5),
+                                 1/rgamma(nGenes/nComp, 44, 28))
+}
+myEngine &lt;- Engine(comp)
+nrow(myEngine)
+nComponents(myEngine)
+summary(myEngine)
+myData &lt;- rand(myEngine, 5)
+dim(myData)
+summary(myData)
+MEAN &lt;- 2
+SD &lt;- 2
+myEngine.alterMean &lt;- alterMean(myEngine,
+                                function(x) normalOffset(x, MEAN, SD))
+myData.alterMean &lt;- rand(myEngine.alterMean, 5)
+summary(myData.alterMean)
+RATE &lt;- 1
+SHAPE &lt;- 2
+myEngine.alterSD &lt;- alterSD(myEngine,
+                            function(x) invGammaMultiple(x, SHAPE, RATE))
+myData.alterSD &lt;- rand(myEngine.alterSD, 5)
+summary(myData.alterSD)
+</code></pre>
+
+
+</div>

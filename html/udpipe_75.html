@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_previous</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the n-th previous element of a vector</h2>
+
+<h3>Description</h3>
+
+<p>Get the n-th previous element of a vector
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_previous(x, n = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector where each element is just 1 term or word</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>an integer indicating how far to look back. Defaults to 1.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector of the same length of <code>x</code> with the previous element
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>shift</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- sprintf("%s%s", LETTERS, 1:26)
+txt_previous(x, n = 1)
+
+data.frame(word = x,
+           word_previous1 = txt_previous(x, n = 1),
+           word_previous2 = txt_previous(x, n = 2),
+           stringsAsFactors = FALSE)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ts.plotter</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ts.plotter</h2>
+
+<h3>Description</h3>
+
+<p>Plot a ts object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ts.plotter(data, time = NULL, title = "Series Plot", xlab = "Time",
+  ylab = "Rate")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A <code>ts</code> object to be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time</code></td>
+<td>
+<p>A vector of the same length of <code>data</code> that specifies the time component of each element of <code>data</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Title of plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>X-axis label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Y-axis label.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Fortifies, then plots a <code>ts</code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+ts.plotter(sunspot.year)
+
+</code></pre>
+
+
+</div>

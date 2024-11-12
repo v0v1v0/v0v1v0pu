@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fisher</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Various functionality to implement Fisher's logseries</h2>
+
+<h3>Description</h3>
+
+<p>Various functions connected to Fisher's logseries including creation of
+synthetic datasets and estimation of Fisher's alpha
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fishers.alpha(N, S, give=FALSE)
+fisher.ecosystem(N, S, nmax, alpha=NULL, c=0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>Size of the ecosystem.  In the case of
+<code>fisher.ecosystem()</code>, the expected size of the ecosystem</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>S</code></td>
+<td>
+<p>Number of species in ecosystem</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>In function <code>fisher.ecosystem()</code>, Fisher's
+<code class="reqn">\alpha</code>.   If not supplied, it will be calculated from
+<code>N</code> and <code>S</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>give</code></td>
+<td>
+<p>In function <code>fishers.alpha()</code>, Boolean variable with
+default <code>FALSE</code> meaning to return alpha, and <code>TRUE</code>
+meaning to return a list containing <code>x</code> and <code>alpha</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nmax</code></td>
+<td>
+<p>In function <code>fisher.ecosystem()</code>, the maximum number
+of species abundance classes to consider</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c</code></td>
+<td>
+<p>In function <code>fisher.ecosystem()</code>, the rare species
+advantage term</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function <code>fishers.alpha()</code> solves for <code class="reqn">\alpha</code> given
+<code class="reqn">N</code> and <code class="reqn">S</code>, as per Fisher's table 9, p55.
+</p>
+<p>Given <code class="reqn">N</code> and <code class="reqn">S</code> (or <code class="reqn">\alpha</code>), function
+<code>fisher.ecosystem()</code> generates a Fisherian ecosystem
+with expected size <code class="reqn">N</code> and expected species count <code class="reqn">S</code>.  
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>R. A. Fisher and A. S. Corbet and C. B. Williams 1943. “The
+relation between the number of species and the number of individuals in
+a random sample of an animal population”, <em>Journal of Animal
+Ecology</em>, volume 12, pp 42–58
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"> fishers.alpha(N=100000,S=100)
+#compare the Table value:
+  100000/10^3.95991
+</code></pre>
+
+
+</div>

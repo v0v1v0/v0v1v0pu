@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>udpipe_accuracy</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evaluate the accuracy of your UDPipe model on holdout data</h2>
+
+<h3>Description</h3>
+
+<p>Get precision, recall and F1 measures on finding words / sentences / upos / xpos / features
+annotation as well as UAS and LAS dependency scores on holdout data in conllu format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">udpipe_accuracy(
+  object,
+  file_conllu,
+  tokenizer = c("default", "none"),
+  tagger = c("default", "none"),
+  parser = c("default", "none")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class <code>udpipe_model</code> as returned by <code>udpipe_load_model</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file_conllu</code></td>
+<td>
+<p>the full path to a file on disk containing holdout data in conllu format</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tokenizer</code></td>
+<td>
+<p>a character string of length 1, which is either 'default' or 'none'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tagger</code></td>
+<td>
+<p>a character string of length 1, which is either 'default' or 'none'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parser</code></td>
+<td>
+<p>a character string of length 1, which is either 'default' or 'none'</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list with 3 elements
+</p>
+
+<ul>
+<li>
+<p>accuracy: A character vector with accuracy metrics.
+</p>
+</li>
+<li>
+<p>error: A character string with possible errors when calculating the accuracy metrics
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p><a href="https://ufal.mff.cuni.cz/udpipe">https://ufal.mff.cuni.cz/udpipe</a>, 
+<a href="https://universaldependencies.org/format.html">https://universaldependencies.org/format.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>udpipe_load_model</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- udpipe_download_model(language = "dutch-lassysmall")
+if(!model$download_failed){
+ud_dutch &lt;- udpipe_load_model(model$file_model)
+
+file_conllu &lt;- system.file(package = "udpipe", "dummydata", "traindata.conllu")
+metrics &lt;- udpipe_accuracy(ud_dutch, file_conllu)
+metrics$accuracy
+metrics &lt;- udpipe_accuracy(ud_dutch, file_conllu, 
+                           tokenizer = "none", tagger = "default", parser = "default")
+metrics$accuracy
+metrics &lt;- udpipe_accuracy(ud_dutch, file_conllu, 
+                           tokenizer = "none", tagger = "none", parser = "default")
+metrics$accuracy
+metrics &lt;- udpipe_accuracy(ud_dutch, file_conllu, 
+                           tokenizer = "default", tagger = "none", parser = "none")
+metrics$accuracy
+}
+
+
+## cleanup for CRAN only - you probably want to keep your model if you have downloaded it
+if(file.exists(model$file_model)) file.remove(model$file_model)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unbreak_vals</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unbreak values using regex to match the lagging half of the broken value</h2>
+
+<h3>Description</h3>
+
+<p>Unbreak values using regex to match the lagging half of the broken value
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unbreak_vals(df, regex, ogcol, newcol, sep = " ", slice_groups)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>A data frame with one or more values within a variable broken up
+across two rows.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>Regular expression for matching the trailing (lagging) half of the broken
+values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ogcol</code></td>
+<td>
+<p>Variable to unbreak.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newcol</code></td>
+<td>
+<p>Name of the new variable with the unified values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>Character string to separate the unified values (default is
+space).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>slice_groups</code></td>
+<td>
+<p>Deprecated. See details and Package News.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is limited to quite specific cases, but useful when
+dealing with tables that contain, for example, scientific names broken across two rows.
+For unwrapping values, see <code>unwrap_cols</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A tibble with 'unbroken' values. The variable that originally
+contained the broken values gets dropped, and the new variable with the
+unified values is placed as the first column. The <code>slice_groups</code>
+argument is now deprecated; the extra rows and the variable with broken
+values will be dropped.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(primates2017_broken)
+# regex matches strings starting in lowercase (broken species epithets)
+unbreak_vals(primates2017_broken, "^[a-z]", scientific_name, sciname_new)
+</code></pre>
+
+
+</div>

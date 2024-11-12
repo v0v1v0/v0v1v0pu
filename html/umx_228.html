@@ -1,0 +1,130 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_merge_randomized_columns</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_merge_randomized_columns</h2>
+
+<h3>Description</h3>
+
+<p><code>umx_merge_randomized_columns</code> is designed to merge data where subjects have been randomized
+to conditions, so they have a value in one column, and NA in the other condition columns.
+</p>
+<p>It returns a new column of merged scores, and a new column of associated conditions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_merge_randomized_columns(
+  colNames,
+  df,
+  levels = colNames,
+  newVarName = "score",
+  newCondName = "condition",
+  as.factor = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>colNames</code></td>
+<td>
+<p>Names of the columns containing the condition data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>The data frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>levels</code></td>
+<td>
+<p>optional names for the levels of condition (default = <code>colNames</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newVarName</code></td>
+<td>
+<p>Name for the new column holding the newVarName (default "score").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newCondName</code></td>
+<td>
+<p>Name for the new column holding the condition (default "condition").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as.factor</code></td>
+<td>
+<p>Turn condition into a factor? (FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> df with new cols
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_long2wide()</code>, <code>prolific_check_ID()</code>, <code>prolific_read_demog()</code>, <code>prolific_anonymize()</code>
+</p>
+</li></ul>
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+fp = "~/Desktop/Political Ideology_September 13, 2022_10.47.xlsx"
+df = readxl::read_excel(fp)
+df = df[c(-1,-2), ] # delete temp data and question text
+df = data.frame(df)
+namez(df, "ris", coll = "vec") # c('RiskAversionNoLotter', 'RiskAversionLottery')
+colNames= c('RiskAversionNoLotter', 'RiskAversionLottery')
+df = umx_as_numeric(df, colNames, force=TRUE)
+tmp = umx_merge_randomized_columns(colNames, df); table(tmp$condition)
+tmp = umx_merge_randomized_columns(colNames, df, 
+	levels = c("treatment", "control")); table(tmp$condition)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

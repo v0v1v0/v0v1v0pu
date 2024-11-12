@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.unireg</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print method for <code>unireg</code> objects.
+
+</h2>
+
+<h3>Description</h3>
+
+<p>Prints unimodal regression objects.
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'unireg'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object of class <code>'unireg'</code>, a result of function <code>unireg</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments (currently not used).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Prints a short overview of a fitted unimodal regression object to the console, namely, the type of the fitted model (including degree of the spline and type of constraint and penalty), the coefficients and their mode location, the tuning parameter and the variance estimate.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Invisibly returns the input <code>x</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Claudia Koellmann</p>
+
+
+<h3>See Also</h3>
+
+<p><code>unireg</code>,<code>plot.unireg</code>,<code>points.unireg</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- sort(rep(0:5,20))         
+n &lt;- length(x)               
+set.seed(41333)
+func &lt;- function(mu){rnorm(1,mu,0.05)}
+y &lt;- sapply(dchisq(x,3),func)
+
+# plot of data
+plot(jitter(x), y, xlab="x (jittered)")
+
+# fit with default settings
+fit &lt;- unireg(x, y, g=5)
+# short overview of the fitted spline
+fit
+</code></pre>
+
+
+</div>

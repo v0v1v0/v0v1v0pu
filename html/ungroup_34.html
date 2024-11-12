@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>residuals.pclm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract PCLM Deviance Residuals</h2>
+
+<h3>Description</h3>
+
+<p>Extract PCLM Deviance Residuals
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'pclm'
+residuals(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object for which the extraction of model residuals is
+meaningful.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Residuals extracted from the object <code>object</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c(0, 1, seq(5, 85, by = 5))
+y &lt;- c(294, 66, 32, 44, 170, 284, 287, 293, 361, 600, 998, 
+       1572, 2529, 4637, 6161, 7369, 10481, 15293, 39016)
+M1 &lt;- pclm(x, y, nlast = 26)
+
+residuals(M1)
+</code></pre>
+
+
+</div>

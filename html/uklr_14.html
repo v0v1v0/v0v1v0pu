@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sparql</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Tools to create a custom SPARQL query</h2>
+
+<h3>Description</h3>
+
+<p>Function to create custom queries with the '/landregistry/query endpoint'. All
+necessary prefixes have to be included and output will be parsed from json to
+dataframe. The most prefixes from land registry can be include with <code>prefix_query</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sparql(
+  query,
+  endpoint = "http://landregistry.data.gov.uk/landregistry/query",
+  ...
+)
+
+prefix_query(query)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>query</code></td>
+<td>
+<p>custom query.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>endpoint</code></td>
+<td>
+<p>land registry's web service endpoint.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to <code>httr::GET</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a tibble that has been parsed from json.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">custom_query &lt;- "select * where {
+  &lt;http://landregistry.data.gov.uk/data/ukhpi/region/newport/month/2013-10&gt; ?property ?value
+}"
+sparql(prefix_query(custom_query))
+
+</code></pre>
+
+
+</div>

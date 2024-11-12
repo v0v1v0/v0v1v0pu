@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>initialize_startr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Initialize startr project</h2>
+
+<h3>Description</h3>
+
+<p>Used to initialize a startr template for analysis. Will enforce some startr-required
+standards for analysis (such as removing scientific notation, setting timezones, and
+writing some project configs to 'options').
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">initialize_startr(
+  author = "Firstname Lastname &lt;firstlast@example.com&gt;",
+  title = "startr",
+  scipen = 999,
+  timezone = "America/Toronto",
+  should_render_notebook = FALSE,
+  should_process_data = TRUE,
+  should_timestamp_output_files = FALSE,
+  should_clean_processing_variables = TRUE,
+  should_beep = TRUE,
+  set_minimal_graphics_theme = TRUE,
+  packages = c()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>author</code></td>
+<td>
+<p>Name and email of the startr project author</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Title of the startr project</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scipen</code></td>
+<td>
+<p>Which level of scientific precision to use. (Default: 999)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timezone</code></td>
+<td>
+<p>The timezone for analysis. (Default: 'America/Toronto')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>should_render_notebook</code></td>
+<td>
+<p>Whether the RMarkdown notebook should be rendered. (Default: FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>should_process_data</code></td>
+<td>
+<p>Whether startr's process step should be run. (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>should_timestamp_output_files</code></td>
+<td>
+<p>Whether write_excel's output files should be timestamped. (Default: FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>should_clean_processing_variables</code></td>
+<td>
+<p>Whether processing variables should be cleaned
+from the environment after processing is complete. (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>should_beep</code></td>
+<td>
+<p>Whether startr should beep after tasks like processing or knitting RMarkdown notebooks. (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set_minimal_graphics_theme</code></td>
+<td>
+<p>Whether the minimal graphics theme should be used. (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>packages</code></td>
+<td>
+<p>Vector of package names, from CRAN, Github or Bioconductor to be installed.
+If using GitHub, package names should be in the format 'user/repo', e.g. 'globeandmail/upstartr'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, called for side effects
+</p>
+
+
+</div>

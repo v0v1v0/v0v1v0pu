@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetCDs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get catchment descriptors from the National River Flow Archive sites considered suitable for median annual maximum flow estimation (QMED) and pooling.</h2>
+
+<h3>Description</h3>
+
+<p>Extracts the catchment descriptors for a site of interest from those suitable for QMED and pooling.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetCDs(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the site reference of interest (numeric)</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A data.frame with columns; Descriptor and Value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get CDs and display in the console
+CDs.203018 &lt;- GetCDs(203018)
+CDs.203018
+</code></pre>
+
+
+</div>

@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unsys.station.test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A second-order stationarity of time series based on unsystematic sub-samples</h2>
+
+<h3>Description</h3>
+
+<p>The function implements a stationarity test procedure, where the main statistic is obtained from measuring the difference in the second-order structure over pairs of randomly drawn intervals. Maximising the main statistics after AR Sieve bootstrap-based variance stabilisation, the test statistic is obtained which is reported along with the corresponding pair of intervals and the test outcome.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unsys.station.test(x, M = 2000, sig.lev = 0.05, max.scale = NULL,
+  m = NULL, B = 200, eps = 5, use.all = FALSE, do.parallel = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>input time series</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+<p>number of randomly drawn intervals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig.lev</code></td>
+<td>
+<p>significance level between <code>0</code> and <code>1</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.scale</code></td>
+<td>
+<p>number of wavelet scales used for wavelet periodogram computation; <code>max.scale = NULL</code> activates the default choice (<code>max.scale = round(log(log(length(x), 2), 2))</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>minimum length of a random interval; <code>m = NULL</code> activates the default choice (<code>m = round(sqrt(length(x)))</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>B</code></td>
+<td>
+<p>bootstrap sample size</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eps</code></td>
+<td>
+<p>a parameter used for random interval generation, see the supplementary document of Cho (2016)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.all</code></td>
+<td>
+<p>if <code>use.all=TRUE</code>, all <code>M*M</code> pairs of random intervals are considered in test statistic computation; if <code>use.all=FALSE</code>, only <code>10*M</code> pairs are used; regardless, the whole <code>M*M</code> pairs are considered in test criterion generation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>do.parallel</code></td>
+<td>
+<p>number of copies of R running in parallel, if <code>do.parallel = 0</code>, %do% operator is used, see also foreach</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>intervals</code></td>
+<td>
+<p>a pair of intervals corresponding to the test statistic, exhibiting the most distinct second-order behaviour</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test.stat</code></td>
+<td>
+<p>test statistic</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test.criterion</code></td>
+<td>
+<p>test criterion</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test.res</code></td>
+<td>
+<p>if <code>test.res=TRUE</code>, the null hypothesis of stationarity is rejected at the given significance level</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>H. Cho (2016) A second-order stationarity of time series based on unsystematic sub-samples. Stat, vol. 5, 262-277.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+x &lt;- rnorm(200)
+unsys.station.test(x, M=1000)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

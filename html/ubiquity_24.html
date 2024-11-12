@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>make_forcing_function</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Makes Forcing Function From Times and Values</h2>
+
+<h3>Description</h3>
+
+<p>Takes a list of times, values, and an interpolation method
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">make_forcing_function(
+  times,
+  values,
+  type,
+  output_times,
+  sample_delta_mult = 0.001
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>times</code></td>
+<td>
+<p>time values for the forcing function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>magnitude for each time (same length of time)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>string indicating the type of forcing function can be one of the following:
+</p>
+
+<ul>
+<li>  <p><code>"step"</code> for constant values that switch to new values at the times
+</p>
+</li>
+<li>  <p><code>"linear"</code> to linearly interpolate between the points
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_times</code></td>
+<td>
+<p>vector of simulation output times</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample_delta_mult</code></td>
+<td>
+<p>multiplier used to control the magnitude of spacing around event times</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>matrix with two columns: first column is a vector of times and the second column is a vector of values
+</p>
+
+
+</div>

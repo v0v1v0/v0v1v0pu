@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>blood</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> blood pressure readings </h2>
+
+<h3>Description</h3>
+
+<p>blood pressure of 15 males taken by machine and expert
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(blood)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>Machine</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Expert</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Taken from Kitchen's Exploring Statistics.
+</p>
+
+
+<h3>References</h3>
+
+<p>~~ possibly secondary sources and usages ~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(blood)
+attach(blood)
+t.test(Machine,Expert)
+detach(blood)
+</code></pre>
+
+
+</div>

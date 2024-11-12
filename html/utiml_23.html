@@ -1,0 +1,198 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ecc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Ensemble of Classifier Chains for multi-label Classification</h2>
+
+<h3>Description</h3>
+
+<p>Create an Ensemble of Classifier Chains model for multilabel classification.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ecc(
+  mdata,
+  base.algorithm = getOption("utiml.base.algorithm", "SVM"),
+  m = 10,
+  subsample = 0.75,
+  attr.space = 0.5,
+  replacement = TRUE,
+  ...,
+  cores = getOption("utiml.cores", 1),
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset used to train the binary models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base.algorithm</code></td>
+<td>
+<p>A string with the name of the base algorithm. (Default:
+<code>options("utiml.base.algorithm", "SVM")</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>The number of Classifier Chains models used in the ensemble.
+(Default: 10)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subsample</code></td>
+<td>
+<p>A value between 0.1 and 1 to determine the percentage of
+training instances that must be used for each classifier. (Default: 0.75)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attr.space</code></td>
+<td>
+<p>A value between 0.1 and 1 to determine the percentage of
+attributes that must be used for each classifier. (Default: 0.50)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replacement</code></td>
+<td>
+<p>Boolean value to define if use sampling with replacement
+to create the data of the models of the ensemble. (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm for all subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the training. Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed. This is useful when
+the method is run in parallel. (Default: <code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This model is composed by a set of Classifier Chains models. Classifier
+Chains is a Binary Relevance transformation method based to predict
+multi-label data. It is different from BR method due the strategy of extended
+the attribute space with the 0/1 label relevances of all previous
+classifiers, forming a classifier chain.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ECCmodel</code> containing the set of fitted
+CC models, including:
+</p>
+
+<dl>
+<dt>rounds</dt>
+<dd>
+<p>The number of interactions</p>
+</dd>
+<dt>models</dt>
+<dd>
+<p>A list of BR models.</p>
+</dd>
+<dt>nrow</dt>
+<dd>
+<p>The number of instances used in each training dataset</p>
+</dd>
+<dt>ncol</dt>
+<dd>
+<p>The number of attributes used in each training dataset</p>
+</dd>
+</dl>
+<h3>Note</h3>
+
+<p>If you want to reproduce the same classification and obtain the same
+result will be necessary set a flag utiml.mc.set.seed to FALSE.
+</p>
+
+
+<h3>References</h3>
+
+<p>Read, J., Pfahringer, B., Holmes, G., &amp; Frank, E. (2011). Classifier
+chains for multi-label classification. Machine Learning, 85(3), 333-359.
+</p>
+<p>Read, J., Pfahringer, B., Holmes, G., &amp; Frank, E. (2009).
+Classifier Chains for Multi-label Classification. Machine Learning and
+Knowledge Discovery in Databases, Lecture Notes in Computer Science,
+5782, 254-269.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Transformation methods: 
+<code>brplus()</code>,
+<code>br()</code>,
+<code>cc()</code>,
+<code>clr()</code>,
+<code>dbr()</code>,
+<code>ebr()</code>,
+<code>eps()</code>,
+<code>esl()</code>,
+<code>homer()</code>,
+<code>lift()</code>,
+<code>lp()</code>,
+<code>mbr()</code>,
+<code>ns()</code>,
+<code>ppt()</code>,
+<code>prudent()</code>,
+<code>ps()</code>,
+<code>rakel()</code>,
+<code>rdbr()</code>,
+<code>rpc()</code>
+</p>
+<p>Other Ensemble methods: 
+<code>ebr()</code>,
+<code>eps()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Use all default values
+model &lt;- ecc(toyml, "RANDOM")
+pred &lt;- predict(model, toyml)
+
+
+# Use C5.0 with 100% of instances and only 5 rounds
+model &lt;- ecc(toyml, 'C5.0', m = 5, subsample = 1)
+
+# Use 75% of attributes
+model &lt;- ecc(toyml, attr.space = 0.75)
+
+# Running in 2 cores and define a specific seed
+model1 &lt;- ecc(toyml, cores=2, seed=123)
+
+</code></pre>
+
+
+</div>

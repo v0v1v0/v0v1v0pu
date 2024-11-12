@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_nca_parameters_meta</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>List NCA parameters, text names and descriptions</h2>
+
+<h3>Description</h3>
+
+<p>Provides a verbose information about NCA parameters
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_nca_parameters_meta(cfg)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>List with the following elements:
+</p>
+
+<ul>
+<li> <p><code>isgood</code> Boolean value indicating the success of the function call.
+</p>
+</li>
+<li> <p><code>parameters</code> List with element names for each standard column header for NCA output. Each element name is a list with the following elements:
+</p>
+
+<ul>
+<li> <p><code>label</code> Textual descriptor of the parameter.
+</p>
+</li>
+<li> <p><code>description</code> Verbose description of the parameter.
+</p>
+</li>
+<li> <p><code>from</code> Text indicating the source of the parameter (either PKNCA or ubiquity).
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Vignette on NCA (<code>vignette("NCA", package = "ubiquity")</code>)
+</p>
+
+
+</div>

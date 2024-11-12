@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spatial_read</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Wrapper functions for reading spatial objects.
+</h2>
+
+<h3>Description</h3>
+
+<p>Read either simple features (package <span class="pkg">sf</span>)
+
+from disk using appropriate functionality (<em>“engine”</em>) of respective packages is used. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">spatial_read(dsn, engine = c("native", "sf"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dsn</code></td>
+<td>
+
+<p>Character. File name of spatial object (vector GIS).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>engine</code></td>
+<td>
+
+<p>Character. Functionality of which package is used for reading data. If value is <code>"sf"</code>, then package <span class="pkg">sf</span> is used and simple features are returned. If value is <code>"geojsonsf"</code>, GDAL driver is GeoJSON and package <span class="pkg">geojsonsf</span> can be loaded, then package <span class="pkg">geojsonsf</span> is used and simple features are returned. If value is <code>"sp"</code> and package <span class="pkg">sp</span> can be loaded, then Spatial abstracts (package <span class="pkg">sp</span>) are returned. 
+
+If value is <code>"native"</code> then engine selection depends on has suggested package <span class="pkg">sf</span> been installed and is there possibility to use <span class="pkg">geosonjf</span> for GeoJSON driver.
+
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Currently, list of arguments of this funtion is simplified and can be expanded.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Depending of used engine, either simple features (package <span class="pkg">sf</span>) or Spatial abstracts (<span class="pkg">sp</span>). 
+
+</p>
+
+
+<h3>Note</h3>
+
+<p>For GeoJSON files in the case <code>engine="geojsonsf"</code> reading is faster and the order of fields can be rearranged.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>read_sf</code>
+
+</p>
+
+<p><code>spatial_write</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+n &lt;- 1e2
+x &lt;- runif(n,min=25,max=65)
+y &lt;- runif(n,min=55,max=65)
+z &lt;- runif(n,min=1,max=10)
+da &lt;- data.frame(x=x,y=y,z=z)
+if (requireNamespace("sf",quietly=TRUE)) {
+   obj1 &lt;- sf::st_as_sf(da,coords=c("x","y"),crs=4326)
+   print(series(obj1))
+   fname1 &lt;- file.path(tempdir(),"res1.shp")
+   print(fname1)
+   spatial_write(obj1,fname1)
+   res1 &lt;- spatial_read(fname1,engine="sf")
+   print(series(res1))
+}
+print(spatial_dir(tempdir()))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>var_Tille</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Tillé's Approximate Variance Estimator</h2>
+
+<h3>Description</h3>
+
+<p>Compute an approximate variance estimate using the estimator
+proposed by Tillé (1996).
+Estimator of class 3, it requires only first-order inclusion probabilities but
+for all population units.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">var_Tille(y, pik, sample, maxIter = 1000, eps = 1e-05)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>numeric vector of sample observations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pik</code></td>
+<td>
+<p>numeric vector of first-order inclusion probabilities for all population units</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample</code></td>
+<td>
+<p>Either a numeric vector of length equal to the sample size with
+the indices of sample units, or a boolean vector of the same length of <code>pik</code>, indicating which
+units belong to the sample (<code>TRUE</code> if the unit is in the sample,
+<code>FALSE</code> otherwise.
+Only used with estimators of the third class (see Details for more information).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxIter</code></td>
+<td>
+<p>a scalar indicating the maximum number of iterations for the
+fixed-point procedure</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eps</code></td>
+<td>
+<p>tolerance value for the convergence of the fixed-point procedure</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a scalar, the estimated variance
+</p>
+
+
+</div>

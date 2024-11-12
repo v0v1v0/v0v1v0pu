@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>triphasic_root</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Triphasic root function</h2>
+
+<h3>Description</h3>
+
+<p>This function defines the root equation for the triphasic model, i.e. V(t) - suppression_threshold = 0.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">triphasic_root(timevec, params, suppression_threshold)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>timevec</code></td>
+<td>
+<p>numeric vector of the times, t, at which V(t) should be calculated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>params</code></td>
+<td>
+<p>named vector of all parameters needed to compute the triphasic model, V(t)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppression_threshold</code></td>
+<td>
+<p>suppression threshold: measurements below this value will be assumed to represent viral suppression. Typically this would be the detection threshold of the assay. Default value is 20.</p>
+</td>
+</tr>
+</table>
+</div>

@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>KernStat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Test statistic calculated from two kernel matrices</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the U-statistic measure of dependence given two kernel matrices <code class="reqn">J</code>
+and <code class="reqn">K</code>, as described in Section 7.1 of (Berrett et al. 2021). For the featured
+examples considered these matrices can be calculated using FourierKernel or
+InfKern. Alternatively, if a different basis is to be used, then the kernels
+can be entered separately.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">KernStat(J, K)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>J</code></td>
+<td>
+<p><code class="reqn">n \times n</code> kernel matrix corresponding to first sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p><code class="reqn">n \times n</code> kernel matrix corresponding to second sample.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Test statistic measure the strength of dependence between the two samples.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x=runif(100); y=runif(100); M=3
+J=FourierKernel(x,M); K=FourierKernel(y,M)
+KernStat(J,K)
+</code></pre>
+
+
+</div>

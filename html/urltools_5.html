@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fragment</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or set a URL's fragment</h2>
+
+<h3>Description</h3>
+
+<p>as in the lubridate package, individual components of a URL
+can be both extracted or set using the relevant function call - see the
+examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fragment(x)
+
+fragment(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a URL, or vector of URLs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>a replacement value (or vector of replacement values)
+for x's fragment. If NULL, the fragment will be removed entirely.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>scheme</code>, <code>domain</code>, <code>port</code>,
+<code>path</code> and <code>parameters</code> for other accessors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get a component
+example_url &lt;- "http://en.wikipedia.org/wiki/Aaron_Halfaker?debug=true#test"
+fragment(example_url)
+
+#Set a component
+fragment(example_url) &lt;- "production"
+
+#Remove a component
+fragment(example_url) &lt;- NULL
+</code></pre>
+
+
+</div>

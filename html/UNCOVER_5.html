@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.IBIS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prediction method for IBIS</h2>
+
+<h3>Description</h3>
+
+<p>Predicts the response of new observations using an object of
+class <code>"IBIS"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'IBIS'
+predict(object, newX = NULL, type = "prob", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class <code>"IBIS"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newX</code></td>
+<td>
+<p>Data frame containing new observations to predict. If not
+specified the fitted values will be returned instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Either <code>"prob"</code> for a probabilistic output or <code>"response"</code> for
+a hard output of the predicted response</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments affecting the predictions produced</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that this is a Bayesian prediction method as objects with
+class <code>"IBIS"</code> will provide samples from a posterior.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Either a matrix of response probabilities for each observation or
+a vector of predicted responses for each observation.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>IBIS.logreg()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+# First we generate a co-variate matrix X and binary response vector y
+CM &lt;- data.frame(X1 = rnorm(100),X2 = rnorm(100))
+rv &lt;- sample(0:1,100,replace=TRUE)
+
+# Now we can obtain 1000 samples from the posterior from a standard
+# multivariate normal prior
+out &lt;- IBIS.logreg(X = CM,y = rv)
+
+# The fitted values of out can be obtained
+predict(out)
+predict(out,type = "response")
+
+# We can also predict the response for new data
+CM.2 &lt;- data.frame(X1 = rnorm(10),X2 = rnorm(10))
+cbind(CM.2,predict(out,newX = CM.2))
+
+
+</code></pre>
+
+
+</div>

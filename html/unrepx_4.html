@@ -1,0 +1,121 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dot.plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Resizeable dot plots</h2>
+
+<h3>Description</h3>
+
+<p>Flexible stacked-dot plots of relatively small samples, and provisions for identifying points. The dot plot is responsive to resizing of the plot window: a vertical resizing does not affect the vertical spacing of the dots, and a horizontal resizing may lead to re-binning to fit well within the range.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dot.plot(x, pch = 16, cex.dot = 1, spacing = 1, xlab, xlim = range(x), ...)
+
+dot.id(env, height.id = 2, cex.id = 1, col.id = "black")
+dot.mod(env, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Numeric vector of values to be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pch</code></td>
+<td>
+<p>Plotting character for the dots. Default is a filled circle.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex.dot</code></td>
+<td>
+<p>Size of dots relative to <code>par("cex")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spacing</code></td>
+<td>
+<p>Factor for adjusting the vertical spacing of stacked dots.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab, xlim</code></td>
+<td>
+<p>The usual graphical parameters (see <code>par</code>), but used by <code>dot.plot</code> or <code>dot.id</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>env</code></td>
+<td>
+<p>Environment returned by <code>dot.plot</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height.id</code></td>
+<td>
+<p>Height (in character heights) above the horizontal axis for displaying identification labels.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex.id, col.id</code></td>
+<td>
+<p><code>cex</code> and <code>col</code> settings for labeling identified points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>In <code>dot.plot</code>, additional graphical parameters (see <code>par</code>) used in constructing the plot. In <code>dot.mod</code>, parameters to modify, from among <code>cex.dot</code>, <code>cex.id</code>, <code>col.id</code>, and <code>height.id</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>dot.id</code> and <code>dot.mod</code> work only with interactive graphics devices.
+</p>
+<p>The <code>dot.id</code> works similarly to <code>identify</code>, but all dots in a particular stack are identified at once. The user should click along the bottom row of dots. No labels are displayed until the user exits identify mode (and then it may be necessary to refresh the plot by resizing it slightly). Also, the points that are labeled may change if the plot is resized horizontally, because only the x values are actually identified.
+</p>
+<p>The user may call <code>dot.id(..., modify = FALSE)</code> more than once, if it is desired to change which values are identified.
+</p>
+<p>After a call to <code>dot.id</code> or (especially) to <code>dot.mod</code>, the graph may need to be refreshed. There appears to be no standard way to do this, so the user may need to resize its window slightly.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dot.plot</code> returns an environment that is used to hold information on points that are identified. <code>dot.id</code> modifies this environment; it (invisibly) returns the currently identified x values. (These are values from the original call to <code>dot.plot</code>, not their rounded values used in the plot.)</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Russell V. Lenth
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require("unrepx")
+
+educ = swiss$Education
+names(educ) = abbreviate(row.names(swiss))
+dp &lt;- dot.plot(educ, xlab = "Percent Post-Primary Education (Switzerland, 1888)")
+
+## Not run: 
+    dot.id(dp)
+    
+    dot.mod(dp, height.id = 3, cex.id = .5)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

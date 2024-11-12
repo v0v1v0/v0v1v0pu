@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bh5lrtest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Likelihood ratio test for restrictions under partly known beta</h2>
+
+<h3>Description</h3>
+
+<p>This function estimates a restricted VAR, where some of the
+cointegration vectors are known. The known cointegration relationships
+have to be provided in an <code class="reqn">p x r1</code> matrix <code class="reqn">\bold{H}</code>. The test
+statistic is distributed as <code class="reqn">\chi^2</code> with <code class="reqn">(p-r)r1</code> degrees of
+freedom, with <code class="reqn">r</code> equal to total number of cointegration relations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bh5lrtest(z, H, r)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class <code>ca.jo</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>H</code></td>
+<td>
+<p>The <code class="reqn">(p \times r1)</code> matrix containing the known
+cointegration relations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The count of cointegrating relationships; <br>
+inferred from <code>summary(ca.jo-object)</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Please note, that the number of columns of <code class="reqn">\bold{H}</code> must be
+smaller than the count of cointegration relations <code class="reqn">r</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>cajo.test</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1995), <em>Likelihood-Based Inference in Cointegrated Vector
+Autoregressive Models</em>, Oxford University Press, Oxford.
+</p>
+<p>Johansen, S. and Juselius, K. (1992), Testing structural hypotheses in a
+multivariate cointegration analysis of the PPP and the UIP for UK,
+<em>Journal of Econometrics</em>, <b>53</b>, 211–244.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code>, <code>alrtest</code>, <code>ablrtest</code>,
+<code>blrtest</code>, <code>bh6lrtest</code>, <code>cajo.test-class</code>,
+<code>ca.jo-class</code> and <code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(UKpppuip)
+attach(UKpppuip)
+dat1 &lt;- cbind(p1, p2, e12, i1, i2)
+dat2 &lt;- cbind(doilp0, doilp1)
+H1 &lt;- ca.jo(dat1, type='trace', K=2, season=4, dumvar=dat2)
+H51 &lt;- c(1, -1, -1, 0, 0)
+H52 &lt;- c(0, 0, 0, 1, -1)
+summary(bh5lrtest(H1, H=H51, r=2))
+summary(bh5lrtest(H1, H=H52, r=2))
+</code></pre>
+
+
+</div>

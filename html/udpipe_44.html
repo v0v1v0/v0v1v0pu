@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_remove_terms</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove terms from a Document-Term-Matrix and keep only documents which have a least some terms</h2>
+
+<h3>Description</h3>
+
+<p>Remove terms from a Document-Term-Matrix and keep only documents which have a least some terms
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_remove_terms(dtm, terms, remove_emptydocs = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>an object returned by <code>document_term_matrix</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>terms</code></td>
+<td>
+<p>a character vector of terms which are in <code>colnames(dtm)</code> and which should be removed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_emptydocs</code></td>
+<td>
+<p>logical indicating to remove documents containing no more terms after the term removal is executed. Defaults to <code>TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a sparse Matrix as returned by <code>sparseMatrix</code> 
+where the indicated terms are removed as well as documents with no terms whatsoever
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(brussels_reviews_anno)
+x &lt;- subset(brussels_reviews_anno, xpos == "NN")
+x &lt;- x[, c("doc_id", "lemma")]
+x &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(x)
+dim(dtm)
+x &lt;- dtm_remove_terms(dtm, terms = c("appartement", "casa", "centrum", "ciudad"))
+dim(x)
+x &lt;- dtm_remove_terms(dtm, terms = c("appartement", "casa", "centrum", "ciudad"), 
+                      remove_emptydocs = FALSE)
+dim(x)
+</code></pre>
+
+
+</div>

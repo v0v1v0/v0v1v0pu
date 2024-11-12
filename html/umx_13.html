@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Fischbein_wt</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Weight data across time.</h2>
+
+<h3>Description</h3>
+
+<p>A dataframe containing correlations of weight for 66 females measured 6 times at 6-month intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(Fischbein_wt)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A 6*6 correlation matrix based on n = 66 female subjects.
+</p>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li>
+<p> Weight1: Weight at time 1 (t0)
+</p>
+</li>
+<li>
+<p> Weight2: Weight at time 2 (t0 + 6 months)
+</p>
+</li>
+<li>
+<p> Weight3: Weight at time 3 (t0 + 12 months)
+</p>
+</li>
+<li>
+<p> Weight4: Weight at time 4 (t0 + 18 months)
+</p>
+</li>
+<li>
+<p> Weight5: Weight at time 5 (t0 + 24 months)
+</p>
+</li>
+<li>
+<p> Weight6: Weight at time 6 (t0 + 32 months)
+</p>
+</li>
+</ul>
+<p>Created as follows:
+</p>
+<div class="sourceCode"><pre>Fischbein_wt = umx_read_lower(file = "", diag = TRUE, names = paste0("Weight", 1:6), ensurePD= TRUE)
+1.000
+0.985	1.000
+0.968	0.981	1.000
+0.957	0.970	0.985	1.000
+0.932	0.940	0.964	0.975	1.000
+0.890	0.897	0.927	0.949	0.973	1.000
+</pre></div>
+
+
+<h3>References</h3>
+
+<p>Fischbein, S. (1977). Intra-pair similarity in physical growth of monozygotic and of dizygotic twins during puberty.
+<em>Annals of Human Biology</em>, <strong>4</strong>. 417-430. <a href="https://doi.org/10.1080/03014467700002401">doi:10.1080/03014467700002401</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other datasets: 
+<code>GFF</code>,
+<code>docData</code>,
+<code>iqdat</code>,
+<code>umx</code>,
+<code>us_skinfold_data</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data(Fischbein_wt) # load the data
+str(Fischbein_wt) # data.frame
+as.matrix(Fischbein_wt) # convert to matrix
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>stage_uncertainty</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Stage uncertainty(DEPRECATED)</h2>
+
+<h3>Description</h3>
+
+<p>This function performs uncertainty decomposition by stage based on the second order interaction ANOVA model.
+The uncertainty from interaction effect from two stages is divided equally and assigned to each stage.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">stage_uncertainty(data, var_name, stages = setdiff(names(data),
+  var_name))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data frame containing scenarios(factor or character) for each stages and the variable of interest(numeric).
+data should contain all combinations of scenarios. columns scenarios</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var_name</code></td>
+<td>
+<p>the name of the variable of interest</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stages</code></td>
+<td>
+<p>names of the stages in the model.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List of 4 elements
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>summary</code></td>
+<td>
+<p>summary of uncertainties</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main_uncer</code></td>
+<td>
+<p>a vector of uncertainties from the main effects of the stages</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>int_uncer</code></td>
+<td>
+<p>a vector of uncertainties from the interaction effects of the stages</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scenario_uncer</code></td>
+<td>
+<p>a vector of uncertainties of the stages</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">stage1 &lt;- LETTERS[1:3]
+stage2 &lt;- LETTERS[1:2]
+stage3 &lt;- LETTERS[1:4]
+y &lt;- rnorm(3*2*4)
+data &lt;- expand.grid(stage1=stage1,
+                    stage2=stage2,
+                    stage3=stage3)
+data &lt;- cbind(data, y)
+# stage_uncertainty() is deprecated. Use UD_ANOVA_stage()
+# stage_uncertainty(data,"y", names(data)[-4])
+</code></pre>
+
+
+</div>

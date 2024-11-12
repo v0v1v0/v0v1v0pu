@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.UComp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>predict.UComp</h2>
+
+<h3>Description</h3>
+
+<p>Forecasting using structural Unobseved Components models with prediction intervals
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UComp'
+predict(object, newdata = NULL, n.ahead = NULL, level = 0.95, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class “UComp”.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>New output data to apply “UComp” object to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.ahead</code></td>
+<td>
+<p>Number of steps ahead to forecast or new inputs variables 
+including their predictions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Confidence level for prediction intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Ignored.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See help of <code>UC</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix with the mean forecasts and lower and upper prediction intervals
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UC</code>, <code>UCmodel</code>, <code>UCvalidate</code>, <code>UCfilter</code>, <code>UCsmooth</code>, 
+<code>UCdisturb</code>, <code>UCcomponents</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+y &lt;- log(AirPassengers)
+m1 &lt;- UCmodel(y, model = "llt/eq/arma(0,0)")
+f1 &lt;- predict(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

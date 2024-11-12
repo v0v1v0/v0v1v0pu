@@ -1,0 +1,269 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cohensdCI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The distribution of Cohen's <em>d</em>
+</h2>
+
+<h3>Description</h3>
+
+<p>These functions use some conversion to and from the <em>t</em> distribution to
+provide the Cohen's <em>d</em> distribution. There are four versions that act
+similar to the standard distribution functions (the <code>d.</code>, <code>p.</code>,
+<code>q.</code>, and <code>r.</code> functions, and their longer aliases
+<code>.Cohensd</code>), three convenience functions (<code>pdExtreme</code>,
+<code>pdMild</code>, and <code>pdInterval</code>), a function to compute the confidence
+interval for a Cohen's <em>d</em> estimate <code>cohensdCI</code>, and a function to
+compute the sample size required to obtain a confidence interval around a
+Cohen's <em>d</em> estimate with a specified accuracy (<code>pwr.cohensdCI</code>
+and its alias <code>pwr.confIntd</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cohensdCI(d, n, conf.level = 0.95, plot = FALSE, silent = TRUE)
+
+dCohensd(
+  x,
+  df = NULL,
+  populationD = 0,
+  n = NULL,
+  n1 = NULL,
+  n2 = NULL,
+  silent = FALSE
+)
+
+pCohensd(q, df, populationD = 0, lower.tail = TRUE)
+
+qCohensd(p, df, populationD = 0, lower.tail = TRUE)
+
+rCohensd(n, df, populationD = 0)
+
+pdInterval(ds, n, populationD = 0)
+
+pdExtreme(d, n, populationD = 0)
+
+pdMild(d, n, populationD = 0)
+
+pwr.cohensdCI(d, w = 0.1, conf.level = 0.95, extensive = FALSE, silent = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n, n1, n2</code></td>
+<td>
+<p>Desired number of Cohen's <em>d</em> values for <code>rCohensd</code> and
+<code>rd</code> (<code>n</code>), and the number of participants/datapoints in total (<code>n</code>) or in each
+group (<code>n1</code> and <code>n2</code>) for <code>dd</code>, <code>dCohensd</code>, <code>pdExtreme</code>,
+<code>pdMild</code>, <code>pdInterval</code>, and <code>cohensdCI</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The level of confidence of the confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Whether to show a plot of the sampling distribution of Cohen's
+<em>d</em> and the confidence interval. This can only be used if specifying
+one value for <code>d</code>, <code>n</code>, and <code>conf.level</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Whether to provide <code>FALSE</code> or suppress (<code>TRUE</code>)
+warnings.  This is useful because function 'qt', which is used under the
+hood (see <code>qt()</code> for more information), warns that 'full precision
+may not have been achieved' when the density of the distribution is very
+close to zero. This is normally no cause for concern, because with sample
+sizes this big, small deviations have little impact.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x, q, d</code></td>
+<td>
+<p>Vector of quantiles, or, in other words, the value(s) of
+Cohen's <em>d</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>Degrees of freedom.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>populationD</code></td>
+<td>
+<p>The value of Cohen's <em>d</em> in the population; this
+determines the center of the Cohen's <em>d</em> distribution. I suppose this
+is the noncentrality parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are the
+likelihood of finding a Cohen's <em>d</em> smaller than the specified value;
+otherwise, the likelihood of finding a Cohen's <em>d</em> larger than the
+specified value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Vector of probabilites (<em>p</em>-values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ds</code></td>
+<td>
+<p>A vector with two Cohen's <em>d</em> values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>w</code></td>
+<td>
+<p>The desired maximum 'half-width' or margin of error of the confidence
+interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extensive</code></td>
+<td>
+<p>Whether to only return the required sample size, or more
+extensive results.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The functions use <code>convert.d.to.t()</code> and
+<code>convert.t.to.d()</code> to provide the Cohen's <em>d</em> distribution.
+</p>
+<p>The confidence interval functions, <code>cohensdCI</code> and <code>pwr.cohensdCI</code>,
+now use the same method as MBESS (a slightly adapted version of
+the <code>MBESS</code> function <code>conf.limits.nct</code> is used).
+</p>
+<p>More details about <code>cohensdCI</code> and <code>pwr.cohensdCI</code> are provided in
+Peters &amp; Crutzen (2017).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dCohensd</code> (or <code>dd</code>) gives the density, <code>pCohensd</code>
+(or <code>pd</code>) gives the distribution function, <code>qCohensd</code> (or
+<code>qd</code>) gives the quantile function, and <code>rCohensd</code> (or <code>rd</code>)
+generates random deviates.
+</p>
+<p><code>pdExtreme</code> returns the probability (or probabilities) of finding a
+Cohen's <em>d</em> equal to or more extreme than the specified value(s).
+</p>
+<p><code>pdMild</code> returns the probability (or probabilities) of finding a
+Cohen's <em>d</em> equal to or <em>less</em> extreme than the specified
+value(s).
+</p>
+<p><code>pdInterval</code> returns the probability of finding a Cohen's <em>d</em> that
+lies in between the two specified values of Cohen's <em>d</em>.
+</p>
+<p><code>cohensdCI</code> provides the confidence interval(s) for a given Cohen's
+<em>d</em> value.
+</p>
+<p><code>pwr.cohensdCI</code> provides the sample size required to obtain a
+confidence interval for Cohen's <em>d</em> with a desired width.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters (Open University of the Netherlands), with
+the exported MBESS function conf.limits.nct written by Ken Kelley
+(University of Notre Dame), and with an error noticed by Guy Prochilo
+(University of Melbourne).
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Peters, G. J. Y. &amp; Crutzen, R. (2017) Knowing exactly how effective an
+intervention, treatment, or manipulation is and ensuring that a study
+replicates: accuracy in parameter estimation as a partial solution to the
+replication crisis. https://dx.doi.org/
+</p>
+<p>Maxwell, S. E., Kelley, K., &amp; Rausch, J. R. (2008). Sample size planning for
+statistical power and accuracy in parameter estimation. Annual Review of
+Psychology, 59, 537-63.
+https://doi.org/10.1146/annurev.psych.59.103006.093735
+</p>
+<p>Cumming, G. (2013). The New Statistics: Why and How. Psychological Science,
+(November). https://doi.org/10.1177/0956797613504966
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>convert.d.to.t()</code>, <code>convert.t.to.d()</code>,
+<code>dt()</code>, <code>pt()</code>, <code>qt()</code>, <code>rt()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### Confidence interval for Cohen's d of .5
+### from a sample of 200 participants, also
+### showing this visually: this clearly shows
+### how wildly our Cohen's d value can vary
+### from sample to sample.
+cohensdCI(.5, n=200, plot=TRUE);
+
+### How many participants would we need if we
+### would want a more accurate estimate, say
+### with a maximum confidence interval width
+### of .2?
+pwr.cohensdCI(.5, w=.1);
+
+### Show that 'sampling distribution':
+cohensdCI(.5,
+          n=pwr.cohensdCI(.5, w=.1),
+          plot=TRUE);
+
+### Generate 10 random Cohen's d values
+rCohensd(10, 20, populationD = .5);
+
+### Probability of findings a Cohen's d smaller than
+### .5 if it's 0 in the population (i.e. under the
+### null hypothesis)
+pCohensd(.5, 64);
+
+### Probability of findings a Cohen's d larger than
+### .5 if it's 0 in the population (i.e. under the
+### null hypothesis)
+1 - pCohensd(.5, 64);
+
+### Probability of findings a Cohen's d more extreme
+### than .5 if it's 0 in the population (i.e. under
+### the null hypothesis)
+pdExtreme(.5, 64);
+
+### Probability of findings a Cohen's d more extreme
+### than .5 if it's 0.2 in the population.
+pdExtreme(.5, 64, populationD = .2);
+
+</code></pre>
+
+
+</div>

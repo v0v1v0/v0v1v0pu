@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unhcr_pal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UNHCR color palettes</h2>
+
+<h3>Description</h3>
+
+<p>Creates a color palette from UNHCR branding
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unhcr_pal(n = NULL, name, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of different colors in the palette, minimum depending on palette (2),
+maximum depending on palette (5, 7 or 10)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>A palette name</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments for grDevices::colorRampPalette</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector, the palette hex color codes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">unhcr_pal(3, "pal_unhcr")
+unhcr_pal(3, "pal_blue")
+unhcr_pal(5, "pal_navy")
+unhcr_pal(12, "pal_red")
+</code></pre>
+
+
+</div>

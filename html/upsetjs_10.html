@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>chartLabels</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>specify chart labels</h2>
+
+<h3>Description</h3>
+
+<p>specify chart labels
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">chartLabels(
+  upsetjs,
+  title = NULL,
+  description = NULL,
+  combination.name = NULL,
+  combination.name.axis.offset = NULL,
+  set.name = NULL,
+  set.name.axis.offset = NULL,
+  bar.label.offset = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>the chart title</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>description</code></td>
+<td>
+<p>the chart description</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combination.name</code></td>
+<td>
+<p>the label for the combination chart</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combination.name.axis.offset</code></td>
+<td>
+<p>the offset of the combination label from the axis in pixel</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set.name</code></td>
+<td>
+<p>the label for the set chart</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set.name.axis.offset</code></td>
+<td>
+<p>the offset of the set label from the axis in pixel</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bar.label.offset</code></td>
+<td>
+<p>the offset of the bar label from the bar in pixel</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  chartLabels(set.name = "Test")
+</code></pre>
+
+
+</div>

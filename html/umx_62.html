@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tmx_is.identified</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Test if a factor model is identified</h2>
+
+<h3>Description</h3>
+
+<p>Test if a factor model is identified by establishing if the number of variables is equal too or grater than
+the number of model parameters. See also <code>mxCheckIdentification()</code> for checking actual models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tmx_is.identified(nVariables, nFactors)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nVariables</code></td>
+<td>
+<p>the number of variables measured.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nFactors</code></td>
+<td>
+<p>the number of factors posited.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Binary
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>mxCheckIdentification()</code>
+</p>
+</li></ul>
+<p>Other Teaching and testing Functions: 
+<code>tmx_genotypic_effect()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tmx_is.identified(nVariables = 2, nFactors = 1) # FALSE
+tmx_is.identified(nVariables = 3, nFactors = 1) # TRUE
+tmx_is.identified(nVariables = 4, nFactors = 2) # FALSE
+tmx_is.identified(nVariables = 5, nFactors = 2) # TRUE
+</code></pre>
+
+
+</div>

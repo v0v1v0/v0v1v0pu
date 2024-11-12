@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_shorten_link</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Shorten a Link</h2>
+
+<h3>Description</h3>
+
+<p>See <a href="https://dev.bitly.com/api-reference/#createBitlink">https://dev.bitly.com/api-reference/#createBitlink</a>
+Convert a long url to a Bitlink
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_shorten_link(
+  domain = "bit.ly",
+  group_guid = NULL,
+  long_url = NULL,
+  showRequestURL = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>domain</code></td>
+<td>
+<p>- (optional) the short domain to use; either bit.ly, j.mp, or bitly.com or
+a custom short domain. The default for this parameter is the short domain selected by each
+user in their bitly account settings. Passing a specific domain via this parameter will override
+the default settings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group_guid</code></td>
+<td>
+<p>- a GUID for a Bitly group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>long_url</code></td>
+<td>
+<p>- required, a long URL to be shortened (example: https://www.idnes.cz).
+Must contain http/https</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- show URL which has been build and requested from server. For debug
+purposes.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+bitly_shorten_link(url = "http://www.seznam.cz/")
+bitly_shorten_link(url = "http://www.seznam.cz/", showRequestURL = TRUE)
+
+manyUrls &lt;- list(
+  "http://www.seznam.cz/", "http://www.seznamasdas.cz/",
+  "http://www.seznam.cz/asadasd", "http://www.seznam.cz/adqwrewtregt"
+)
+for (u in 1:length(manyUrls)) {
+  print(bitly_shorten_link(long_url = manyUrls[[u]], showRequestURL = TRUE))
+}
+
+## End(Not run)
+</code></pre>
+
+
+</div>

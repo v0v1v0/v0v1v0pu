@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simplify_string</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simplifies strings for analysis</h2>
+
+<h3>Description</h3>
+
+<p>Takes a character vector and "simplifies" it by uppercasing, removing most non-alphabetic
+(or alphanumeric) characters, removing accents, forcing UTF-8 encoding, removing excess spaces,
+and optionally removing stop words. Useful in cases where you have two large vector of person
+or business names you need to compare, but where misspellings may be common.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simplify_string(
+  x,
+  alpha = TRUE,
+  digits = FALSE,
+  unaccent = TRUE,
+  utf8_only = TRUE,
+  case = "upper",
+  trim = TRUE,
+  stopwords = NA
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A character vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Should alphabetic characters be included in the cleaned up string? (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Should digits be included in the cleaned up string? (Default: FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unaccent</code></td>
+<td>
+<p>Should characters be de-accented? (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>utf8_only</code></td>
+<td>
+<p>Should characters be UTF-8 only? (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>case</code></td>
+<td>
+<p>What casing should characters use? Can be one of 'upper', 'lower', 'sentence', 'title',
+or 'keep' for the existing casing (Default: 'upper')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trim</code></td>
+<td>
+<p>Should strings be trimmed of excess spaces? (Default: TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stopwords</code></td>
+<td>
+<p>An optional vector of stop words to be removed.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector of simplified strings.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">simplify_string(c('J. Jonah Jameson', 'j jonah jameson',
+  'j   jonah 123   jameson', 'J Jónah Jameson...'))
+simplify_string(c('123 Business Inc.', '123 business incorporated',
+  '123 ... Business ... Inc.'), digits = TRUE, stopwords = c('INC', 'INCORPORATED'))
+
+</code></pre>
+
+
+</div>

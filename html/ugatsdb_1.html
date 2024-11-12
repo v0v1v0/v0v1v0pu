@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ugatsdb-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uganda Time Series Database API</h2>
+
+<h3>Description</h3>
+
+<p>An R API providing easy access to a relational database with macroeconomic,
+financial and development related time series data for Uganda.
+Overall more than 5000 series at varying frequency (daily, monthly,
+quarterly, annual in fiscal or calendar years) can be accessed through
+the API. The data is provided by the Bank of Uganda,
+the Ugandan Ministry of Finance, Planning and Economic Development,
+the IMF and the World Bank. The database is being updated once a month.
+</p>
+
+
+<h3>Functions</h3>
+
+<p>Functions to retrieve tables identifying the data
+</p>
+<p><code>datasources()</code><br><code>datasets()</code><br><code>series()</code><br></p>
+<p>Function to retrieve the data from the database
+</p>
+<p><code>get_data()</code>
+</p>
+<p>Functions to reshape data and add temporal identifiers
+</p>
+<p><code>long2wide()</code><br><code>wide2long()</code><br><code>expand_date()</code>
+</p>
+<p>Function to export wide format data to Excel
+</p>
+<p><code>wide2excel()</code><br></p>
+<p>Helper functions (useful esp. for common Excel formats)
+</p>
+<p><code>make_date()</code><br><code>transpose_wide()</code><br></p>
+<p>Global Macros with core ID variables in the database
+</p>
+<p><code>.IDvars</code><br><code>.Tvars</code>
+</p>
+<p>Function to renew database connection without reloading the package
+</p>
+<p><code>ugatsdb_reconnect()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(ugatsdb)
+library(magrittr) # Pipe %&gt;% operators
+library(xts)      # Time series class and pretty plots
+
+# Plotting daily IFEM Buying and Selling Rates from the Bank of Uganda
+get_data("BOU_E", c("E_IFEM_B", "E_IFEM_S"), from = 2020) %&gt;%
+  as.xts %&gt;% plot
+
+library(dygraphs)
+
+# Same generating a dynamic chart
+get_data("BOU_E", c("E_IFEM_B", "E_IFEM_S"), from = 2020) %&gt;%
+  as.xts %&gt;% dygraph
+
+# Static plot but with legend showing variable labels
+get_data("BOU_E", c("E_IFEM_B", "E_IFEM_S"), from = 2020, wide = FALSE) %&gt;%
+  long2wide(names_from = "Label") %&gt;% as.xts %&gt;%
+  plot(legend.loc = "topleft")
+
+</code></pre>
+
+
+</div>

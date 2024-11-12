@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>make_date</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Coerce Vectors to Dates</h2>
+
+<h3>Description</h3>
+
+<p>This function coerces date strings i.e. <code>"YYYY-MM-DD"</code> or <code>"YYYY-MM"</code>, years e.g. <code>2015</code> (numeric or character),
+year-quarters e.g. <code>"2015Q1"</code> or <code>"2015-Q1"</code>, year-months e.g. <code>"2015M01"</code> or <code>"2015-M01"</code>, fiscal years e.g. <code>"1997/98"</code> or numeric values representing dates (e.g. previously imported Excel date) to a regular R date.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">make_date(x, end = FALSE, origin = "1899-12-30")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character date string <code>"YYYY-MM-DD"</code> or <code>"YYYY-MM"</code>, year-quarter <code>"YYYYQN"</code> or <code>"YYYY-QN"</code>, , year-month <code>"YYYYMNN"</code> or <code>"YYYY-MNN"</code>, fiscal year <code>"YYYY/YY"</code> or calendar year <code>YYYY</code> (numeric or character), or a numeric value corresponding to a date that can be passed to <code>as.Date.numeric</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>end</code></td>
+<td>
+<p>logical. <code>TRUE</code> replaces missing time information with a period end-date which is the last day of the period. <code>FALSE</code> replaces missing month and day information with <code>"-01"</code>,
+so the year date is the 1st of January, the fiscal year date the 1st of July, and for months / quarters the 1st day of the month / quarter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>origin</code></td>
+<td>
+<p>a date or date-string that can be used as reference for converting numeric values to dates. The default corresponds to dates generated in Excel for Windows. See <code>as.Date.numeric</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>Date</code> vector.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>expand_date</code>, <code>ugatsdb</code> 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">make_date("2011-05")
+make_date(2011)
+make_date("2011/12")
+make_date("2011/12", end = TRUE)
+make_date("2011Q1")
+make_date("2011Q1", end = TRUE)
+
+</code></pre>
+
+
+</div>

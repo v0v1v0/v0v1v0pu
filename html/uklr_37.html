@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uktrans_get</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Transaction Data</h2>
+
+<h3>Description</h3>
+
+<p>Transaction Data is a dataset that shows how many customer applications we completed,
+in the preceding month for: first registrations, leases, transfers of part,
+dealings, official copies and searches. This is based on customer and location.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uktrans_get(
+  item = "totalApplicationCountByRegion",
+  region = NULL,
+  regexp = TRUE,
+  start_date = NULL,
+  end_date = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>item</code></td>
+<td>
+<p>item to select, see <code>uktrans_avail_items()</code> for
+available items.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>region</code></td>
+<td>
+<p>region to select, see <code>uktrans_avail_regions()</code> for
+available regions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regexp</code></td>
+<td>
+<p>use regular expression in sparql to search for regions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start_date</code></td>
+<td>
+<p>the start date as YYYY-MM-DD.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>end_date</code></td>
+<td>
+<p>the end date as YYYY-MM-DD.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>query modifiers passed through <code>rdf_modifiers</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a tibble in long format.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+uktrans_get(item = "totalApplicationCountByRegion", region = "East Anglia")
+
+# If `region` is left as NULL then it returns all available regions
+uktrans_get(item = "totalApplicationCountByRegion")
+
+# Quering all available transaction data
+uktrans_get(item = uktrans_avail_items())
+
+</code></pre>
+
+
+</div>

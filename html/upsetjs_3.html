@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>addNumericAttribute</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>adds a new numeric attribute to the plot</h2>
+
+<h3>Description</h3>
+
+<p>adds a new numeric attribute to the plot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">addNumericAttribute(upsetjs, name, values, min_value = NULL, max_value = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>name of the attribute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>the values as a numeric vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min_value</code></td>
+<td>
+<p>optional min domain value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_value</code></td>
+<td>
+<p>optional max domain value</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  addNumericAttribute("attr", runif(3))
+</code></pre>
+
+
+</div>

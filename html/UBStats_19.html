@@ -1,0 +1,174 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>TEST.prop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Test on the proportion</h2>
+
+<h3>Description</h3>
+
+<p><code>TEST.prop()</code>  tests hypotheses on the proportion of successes in a
+population.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">TEST.prop(
+  x,
+  success = NULL,
+  p0 = 0.5,
+  alternative = "two.sided",
+  digits = 2,
+  force.digits = FALSE,
+  use.scientific = FALSE,
+  data,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An unquoted string identifying the variable of interest.
+<code>x</code> can be the name of a vector
+or a factor in the workspace or the name of one of the columns in the
+data frame specified in the <code>data</code> argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>success</code></td>
+<td>
+<p>If <code>x</code> is a factor, a character vector, or a numeric
+non-binary vector, <code>success</code> must be used to indicate the category/value
+corresponding to success. The argument can be omitted (<code>NULL</code>,
+default) if <code>x</code> is a binary numeric vector (takes values 0 or 1 only;
+in this case success is assumed to be 1) or a logical vector (in these
+cases success is assumed to be <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p0</code></td>
+<td>
+<p>Numeric value that specifies the null hypothesis to test for
+(default is 0).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>A length-one character vector specifying the direction
+of the alternative hypothesis. Allowed values are <code>"two.sided"</code>
+(population proportion differs from <code>p0</code>; default), or <code>"less"</code>
+(population proportion is lower than <code>p0</code>), or <code>"greater"</code>
+(population proportion is higher than <code>p0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Integer value specifying the number of
+decimals used to round statistics; default to 2. If the chosen rounding formats some
+non-zero values as zero, the number of decimals is increased
+so that all values have at least one significant digit, unless the argument
+<code>force.digits</code> is set to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.digits</code></td>
+<td>
+<p>Logical value indicating whether reported values
+should be forcedly rounded to the number of decimals specified in
+<code>digits</code> even if non-zero values are
+rounded to zero (default to <code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.scientific</code></td>
+<td>
+<p>Logical value indicating whether numbers
+in tables should be displayed using
+scientific notation (<code>TRUE</code>); default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>An optional data frame containing <code>x</code>.
+If not found in <code>data</code>, <code>x</code> is taken from the environment
+from which <code>TEST.prop()</code> is called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to low level functions.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A table reporting the results of the test on the population
+proportion of successes.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raffaella Piccarreta <a href="mailto:raffaella.piccarreta@unibocconi.it">raffaella.piccarreta@unibocconi.it</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>CI.prop()</code> to build confidence intervals for the
+population proportion of successes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(MktDATA, package = "UBStats")
+
+# Success = one value of a character vector or factor
+# - Bilateral test
+TEST.prop(WouldSuggest, success = "Yes", p0 = 0.7, 
+         data = MktDATA)
+# - Unilateral test, change digits
+TEST.prop(Education, success = "Post-Grad", p0 = 0.3, 
+          alternative = "less", digits = 4,data = MktDATA)
+
+# Success = numeric value; bilateral test
+TEST.prop(Children, success = 2, p0 = 0.3, data = MktDATA)
+
+# Binary variable (success = 1 by default); unilateral
+TEST.prop(LastCampaign, p0 = 0.1, alternative = "greater", 
+          digits = 3, data = MktDATA)
+
+# Logical variable (success = TRUE by default); unilateral test
+TEST.prop(Deals.ge50, p0 = 0.13, alternative = "greater", 
+          digits = 3, data = MktDATA)
+
+# Success based on combined conditions
+# - Build a (logical) vector 
+IsTop &lt;- MktDATA$CustClass == "Gold" |
+  MktDATA$CustClass == "Platinum"
+TEST.prop(IsTop, p0 = 0.2, data = MktDATA)
+
+HighAOV &lt;- MktDATA$AOV&gt;150
+TEST.prop(HighAOV, p0 = 0.1)
+TEST.prop(HighAOV, p0 = 0.1, force.digits = TRUE)
+TEST.prop(HighAOV, p0 = 0.1, use.scientific = TRUE)
+
+# Output results
+out_test_prop&lt;-TEST.prop(IsTop, p0 = 0.2, data = MktDATA)
+
+</code></pre>
+
+
+</div>

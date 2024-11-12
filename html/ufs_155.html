@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multiResponse</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate a table for multiple response questions</h2>
+
+<h3>Description</h3>
+
+<p>The <code>multiResponse</code> function mimics the behavior of the table produced
+by SPSS for multiple response questions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multiResponse(
+  data,
+  items = NULL,
+  regex = NULL,
+  perlRegex = TRUE,
+  endorsedOption = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Dataframe containing the variables to display.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items, regex</code></td>
+<td>
+<p>Arguments <code>items</code> and <code>regex</code> can be used to
+specify which variables to process. <code>items</code> should contain the variable
+(column) names (or indices), and <code>regex</code> should contain a regular
+expression used to match to the column names of the dataframe. If none is
+provided, all variables in the dataframe are processed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>perlRegex</code></td>
+<td>
+<p>Whether to use the perl engine to match the regex.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>endorsedOption</code></td>
+<td>
+<p>Which value represents the endorsed option (note that
+producing this kind of table requires dichotomous items, where each variable
+is either endorsed or not endorsed, so this is also a way to treat other
+variables as dichotomous).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A dataframe with columns <code>Option</code>, <code>Frequency</code>,
+<code>Percentage</code>, and <code style="white-space: pre;">⁠Percentage of (X) cases⁠</code>, where X is the number
+of cases.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ananda Mahto; implemented in this package (and tweaked a bit) by
+Gjalt-Jorn Peters.
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>This function is based on the excellent and extensive Stack
+Exchange answer by Ananda Mahto at
+https://stackoverflow.com/questions/9265003/analysis-of-multiple-response.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+multiResponse(mtcars, c('vs', 'am'));
+
+</code></pre>
+
+
+</div>

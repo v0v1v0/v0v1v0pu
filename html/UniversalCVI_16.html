@@ -1,0 +1,128 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DI.IDX</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Dunn index
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the DI (J. C. Dunn, 1973) index for a result either kmeans or hierarchical clustering from user specified <code>kmin</code> to <code>kmax</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DI.IDX(x, kmax, kmin = 2, method = "kmeans", nstart = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kmax</code></td>
+<td>
+<p>a maximum number of clusters to be considered.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kmin</code></td>
+<td>
+<p>a minimum number of clusters to be considered. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which clustering method to be used (<code>"kmeans"</code>, <code>"hclust_complete"</code>, <code>"hclust_average"</code>, <code>"hclust_single"</code>). The default is <code>"kmeans"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for kmeans for <code>method = "kmeans"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The DI index is defined as <br></p>
+<p style="text-align: center;"><code class="reqn">DI(k) = \min_{i \ne j \in [k]}\left\{\frac{\min\left\{d(x_u,x_v)|x_u\in C_i,x_v \in C_j\right\}}{\max_{l \in [k]}\max\left\{d(x_u,x_v)|x_u,x_v \in C_l\right\}}\right\}.</code>
+</p>
+
+<p>The largest value of <code class="reqn">DI(k)</code> indicates a valid optimal partition.
+</p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>DI</code></td>
+<td>
+<p>the DI index for <code>k</code> from <code>kmin</code> to <code>kmax</code> shown in a data frame where the first and the second columns are <code>k</code> and the DI index, respectively.</p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>J. C. Dunn, "A fuzzy relative of the ISODATA process and its use in detecting compact well-separated clusters," <em>J Cybern</em>, 3(3), 32-57 (1973).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Hvalid, Wvalid, DB.IDX, FzzyCVIs,  R1_data</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# The data is from Wiroonsri (2024).
+x = R1_data[,1:2]
+
+# ---- Kmeans ----
+
+# Compute the DI index
+K.DI = DI.IDX(scale(x), kmax = 15, kmin = 2, method = "kmeans", nstart = 100)
+print(K.DI)
+
+# The optimal number of cluster
+K.DI[which.max(K.DI$DI),]
+
+# ---- Hierarchical ----
+
+# Average linkage
+
+# Compute the DI index
+H.DI = DI.IDX(scale(x), kmax = 15, kmin = 2, method = "hclust_average")
+print(H.DI)
+
+# The optimal number of cluster
+H.DI[which.max(H.DI$DI),]
+</code></pre>
+
+
+</div>

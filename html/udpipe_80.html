@@ -1,0 +1,195 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_sentiment</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perform dictionary-based sentiment analysis on a tokenised data frame</h2>
+
+<h3>Description</h3>
+
+<p>This function identifies words which have a positive/negative meaning, with the addition of some basic logic regarding occurrences of amplifiers/deamplifiers and negators
+in the neighbourhood of the word which has a positive/negative meaning.
+</p>
+
+<ul>
+<li>
+<p>If a negator is occurring in the neigbourhood, positive becomes negative or vice versa.
+</p>
+</li>
+<li>
+<p>If amplifiers/deamplifiers occur in the neigbourhood, these amplifier weight is added to the sentiment polarity score.
+</p>
+</li>
+</ul>
+<p>This function took inspiration from qdap::polarity but was completely re-engineered to allow to calculate similar things on 
+a udpipe-tokenised dataset. It works on a sentence level and the negator/amplification logic can not surpass a boundary defined
+by the PUNCT upos parts of speech tag.<br></p>
+<p>Note that if you prefer to build a supervised model to perform sentiment scoring 
+you might be interested in looking at the ruimtehol R package <a href="https://github.com/bnosac/ruimtehol">https://github.com/bnosac/ruimtehol</a> instead.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_sentiment(
+  x,
+  term = "lemma",
+  polarity_terms,
+  polarity_negators = character(),
+  polarity_amplifiers = character(),
+  polarity_deamplifiers = character(),
+  amplifier_weight = 0.8,
+  n_before = 4,
+  n_after = 2,
+  constrain = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame with the columns doc_id, paragraph_id, sentence_id, upos and the column as indicated in <code>term</code>. This is exactly what <code>udpipe</code> returns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>term</code></td>
+<td>
+<p>a character string with the name of a column of <code>x</code> where you want to apply to sentiment scoring upon</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>polarity_terms</code></td>
+<td>
+<p>data.frame containing terms which have positive or negative meaning. This data frame should contain the columns
+term and polarity where term is of type character and polarity can either be 1 or -1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>polarity_negators</code></td>
+<td>
+<p>a character vector of words which will invert the meaning of the <code>polarity_terms</code> such that -1 becomes 1 and vice versa</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>polarity_amplifiers</code></td>
+<td>
+<p>a character vector of words which amplify the <code>polarity_terms</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>polarity_deamplifiers</code></td>
+<td>
+<p>a character vector of words which deamplify the <code>polarity_terms</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>amplifier_weight</code></td>
+<td>
+<p>weight which is added to the polarity score if an amplifier occurs in the neighbourhood</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_before</code></td>
+<td>
+<p>integer indicating how many words before the <code>polarity_terms</code> word one has to look to find negators/amplifiers/deamplifiers to apply its logic</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_after</code></td>
+<td>
+<p>integer indicating how many words after the <code>polarity_terms</code> word one has to look to find negators/amplifiers/deamplifiers to apply its logic</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>constrain</code></td>
+<td>
+<p>logical indicating to make sure the aggregated sentiment scores is between -1 and 1</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list containing 
+</p>
+
+<ul>
+<li>
+<p>data: the <code>x</code> data.frame with 2 columns added: polarity and sentiment_polarity. 
+</p>
+
+<ul>
+<li>
+<p>The column polarity being just the polarity column of the <code>polarity_terms</code> dataset corresponding to the polarity of the <code>term</code> you apply the sentiment scoring 
+</p>
+</li>
+<li>
+<p>The colummn sentiment_polarity is the value where the amplifier/de-amplifier/negator logic is applied on. 
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>overall: a data.frame with one row per doc_id containing the columns doc_id, sentences,
+terms, sentiment_polarity, terms_positive, terms_negative, terms_negation and terms_amplification 
+providing the aggregate sentiment_polarity score of the dataset <code>x</code> by doc_id as well as 
+the terminology causing the sentiment, the number of sentences and the number of non punctuation terms in the document.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("I do not like whatsoever when an R package has soo many dependencies.",
+       "Making other people install java is annoying, 
+        as it is a really painful experience in classrooms.")
+## Not run: 
+## Do the annotation to get the data.frame needed as input to txt_sentiment
+anno &lt;- udpipe(x, "english-gum")
+
+## End(Not run)
+anno &lt;- data.frame(doc_id = c(rep("doc1", 14), rep("doc2", 18)), 
+                   paragraph_id = 1,
+                   sentence_id = 1,
+                   lemma = c("I", "do", "not", "like", "whatsoever", 
+                             "when", "an", "R", "package", 
+                             "has", "soo", "many", "dependencies", ".", 
+                             "Making", "other", "people", "install", 
+                             "java", "is", "annoying", ",", "as", 
+                             "it", "is", "a", "really", "painful", 
+                             "experience", "in", "classrooms", "."),
+                   upos = c("PRON", "AUX", "PART", "VERB", "PRON", 
+                            "SCONJ", "DET", "PROPN", "NOUN", "VERB", 
+                             "ADV", "ADJ", "NOUN", "PUNCT", 
+                             "VERB", "ADJ", "NOUN", "ADJ", "NOUN", 
+                             "AUX", "VERB", "PUNCT", "SCONJ", "PRON", 
+                             "AUX", "DET", "ADV", "ADJ", "NOUN", 
+                             "ADP", "NOUN", "PUNCT"),
+                   stringsasFactors = FALSE)
+scores &lt;- txt_sentiment(x = anno, 
+              term = "lemma",
+              polarity_terms = data.frame(term = c("annoy", "like", "painful"), 
+                                          polarity = c(-1, 1, -1)), 
+              polarity_negators = c("not", "neither"),
+              polarity_amplifiers = c("pretty", "many", "really", "whatsoever"), 
+              polarity_deamplifiers = c("slightly", "somewhat"))
+scores$overall
+scores$data
+scores &lt;- txt_sentiment(x = anno, 
+              term = "lemma",
+              polarity_terms = data.frame(term = c("annoy", "like", "painful"), 
+                                          polarity = c(-1, 1, -1)), 
+              polarity_negators = c("not", "neither"),
+              polarity_amplifiers = c("pretty", "many", "really", "whatsoever"), 
+              polarity_deamplifiers = c("slightly", "somewhat"),
+              constrain = TRUE, n_before = 4,
+              n_after = 2, amplifier_weight = .8)
+scores$overall
+scores$data
+</code></pre>
+
+
+</div>

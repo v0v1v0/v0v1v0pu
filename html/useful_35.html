@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>moveToFront</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>moveToFront</h2>
+
+<h3>Description</h3>
+
+<p>Rearranges column order by moving specified columns to the front or back.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">moveToFront(data, cols)
+
+moveToBack(data, cols)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>Character vector specifying the columns to be moved to the front or back</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Rearranges column order by moving specified columns to the front or back.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the columns in the right order
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">theDF &lt;- data.frame(A=1:10, B=11:20, C=1:10, D=11:20)
+moveToFront(theDF, c('B', 'C'))
+moveToFront(theDF, c('C', 'B'))
+moveToFront(theDF, c('C', 'C'))
+moveToBack(theDF, c('C', 'C'))
+moveToBack(theDF, c('C', 'B'))
+moveToBack(theDF, c('C', 'C'))
+
+</code></pre>
+
+
+</div>

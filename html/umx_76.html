@@ -1,0 +1,208 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxCI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add (and, optionally, run) confidence intervals to a structural model.</h2>
+
+<h3>Description</h3>
+
+<p><code>umxCI</code> adds <code>OpenMx::mxCI()</code> calls for requested (default all) parameters in a model,
+runs these CIs if necessary, and reports them in a neat summary.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxCI(
+  model = NULL,
+  which = c("ALL", NA, "list of your making"),
+  remove = FALSE,
+  run = c("no", "yes", "if necessary", "show"),
+  interval = 0.95,
+  type = c("both", "lower", "upper"),
+  regex = NULL,
+  showErrorCodes = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The <code>mxModel()</code> you wish to report <code>mxCI()</code>s on</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which</code></td>
+<td>
+<p>What CIs to add: c("ALL", NA, "list of your making")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove</code></td>
+<td>
+<p>= FALSE (if set, removes existing specified CIs from the model)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>run</code></td>
+<td>
+<p>Whether or not to compute the CIs. Valid values = "no" (default), "yes", "if necessary".
+'show' means print the intervals if computed, or list their names if not.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>The interval for newly added CIs (defaults to 0.95)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>The type of CI (defaults to "both", options are "lower" and  "upper")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>Add CIs for labels matching this regular expression (over-rides which)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showErrorCodes</code></td>
+<td>
+<p>Whether to show errors (default == TRUE)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>umxCI</code> also reports if any problems were encountered. The codes are standard OpenMx errors and warnings
+</p>
+
+<ul>
+<li>
+<p> 1: The final iterate satisfies the optimality conditions to the accuracy requested, but the sequence of iterates has not yet converged. NPSOL was terminated because no further improvement could be made in the merit function (Mx status GREEN)
+</p>
+</li>
+<li>
+<p> 2: The linear constraints and bounds could not be satisfied. The problem has no feasible solution.
+</p>
+</li>
+<li>
+<p> 3: The nonlinear constraints and bounds could not be satisfied. The problem may have no feasible solution.
+</p>
+</li>
+<li>
+<p> 4: The major iteration limit was reached (Mx status BLUE).
+</p>
+</li>
+<li>
+<p> 6: The model does not satisfy the first-order optimality conditions to the required accuracy, and no improved point for the merit function could be found during the final linesearch (Mx status RED)
+</p>
+</li>
+<li>
+<p> 7: The function derivatives returned by funcon or funobj appear to be incorrect.
+</p>
+</li>
+<li>
+<p> 9: An input parameter was invalid.
+</p>
+</li>
+</ul>
+<p>If <code>run = "no"</code>, the function simply adds the CI requests, but returns the model without running them.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>stats::confint()</code>, <code>umxConfint()</code>, <code>umxCI()</code>, <code>umxModify()</code>
+</p>
+</li></ul>
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxConfint()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+m1$intervals # none yet - empty list()
+m1 = umxCI(m1)
+m1$intervals # $G_to_x1...
+m1 = umxCI(m1, remove = TRUE) # remove CIs from the model and return it
+m1$intervals # none again
+
+# Add CIs by name
+parameters(m1, patt="_with_")
+m1 = umxCI(m1, which = "x1_with_x1")
+m1 = umxCI(m1, which = c("x1_with_x1", "x2_with_x2"))
+m1 = umxCI(m1, regex = "x1_with_", run= "yes")
+#           lbound estimate ubound lbound Code ubound Code
+# x1_with_x1  0.036    0.041  0.047           0           0
+
+# ========================
+# = A twin model example =
+# ========================
+data(twinData) 
+mzData = subset(twinData, zygosity == "MZFF")
+dzData = subset(twinData, zygosity == "DZFF")
+m1 = umxACE(selDVs = c("bmi1","bmi2"), dzData = dzData, mzData = mzData)
+umxCI(m1, run = "show") # show what will be requested
+umxCI(m1, run = "yes") # actually compute the CIs
+# Don't force update of CIs, but if they were just added, then calculate them
+umxCI(m1, run = "if necessary")
+m1 = umxCI(m1, remove = TRUE) # remove them all
+m1$intervals # none!
+# Show what parameters are available to get CIs on
+umxParameters(m1) 
+# Request a CI by label:
+m1 = umxCI(m1, which = "a_r1c1", run = "yes")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

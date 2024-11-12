@@ -1,0 +1,411 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>scaleStructure</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>scaleStructure</h2>
+
+<h3>Description</h3>
+
+<p>The scaleStructure function (which was originally called scaleReliability)
+computes a number of measures to assess scale reliability and internal
+consistency. Note that to compute omega, the <code>MBESS</code> and/or the
+<code>psych</code> packages need to be installed, which are suggested packages and
+therefore should be installed separately (i.e. won't be installed
+automatically).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">scaleStructure(
+  data = NULL,
+  items = "all",
+  digits = 2,
+  ci = TRUE,
+  interval.type = "normal-theory",
+  conf.level = 0.95,
+  silent = FALSE,
+  samples = 1000,
+  bootstrapSeed = NULL,
+  omega.psych = TRUE,
+  omega.psych_nfactors = 3,
+  omega.psych_flip = TRUE,
+  poly = TRUE,
+  suppressSuggestedPkgsMsg = FALSE,
+  headingLevel = 3
+)
+
+## S3 method for class 'scaleStructure'
+print(x, digits = x$input$digits, ...)
+
+scaleStructure_partial(
+  x,
+  headingLevel = x$input$headingLevel,
+  quiet = TRUE,
+  echoPartial = FALSE,
+  partialFile = NULL,
+  ...
+)
+
+## S3 method for class 'scaleStructure'
+knit_print(
+  x,
+  headingLevel = x$input$headingLevel,
+  quiet = TRUE,
+  echoPartial = FALSE,
+  partialFile = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A dataframe containing the items in the scale. All variables in
+this dataframe will be used if items = 'all'. If <code>dat</code> is <code>NULL</code>,
+a the <code>getData</code> function will be called to show the user a
+dialog to open a file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>If not 'all', this should be a character vector with the names
+of the variables in the dataframe that represent items in the scale.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Number of digits to use in the presentation of the results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci</code></td>
+<td>
+<p>Whether to compute confidence intervals as well. This requires the
+suggested MBESS package, which has to be installed separately. If true, the
+method specified in <code>interval.type</code> is used. When specifying a
+bootstrapping method, this can take quite a while!</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval.type</code></td>
+<td>
+<p>Method to use when computing confidence intervals. The
+list of methods is explained in the help file for <code>ci.reliability</code> in MBESS.
+Note that when
+specifying a bootstrapping method, the method will be set to
+<code>normal-theory</code> for computing the confidence intervals for the ordinal
+estimates, because these are based on the polychoric correlation matrix, and
+raw data is required for bootstrapping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The confidence of the confidence intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>If computing confidence intervals, the user is warned that it
+may take a while, unless <code>silent=TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>The number of samples to compute for the bootstrapping of the
+confidence intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrapSeed</code></td>
+<td>
+<p>The seed to use for the bootstrapping - setting this
+seed makes it possible to replicate the exact same intervals, which is
+useful for publications.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>omega.psych</code></td>
+<td>
+<p>Whether to also compute the interval estimate for omega
+using the <code>omega</code> function in the <code>psych</code> package.
+The default point estimate and confidence interval for omega are based on
+the procedure suggested by Dunn, Baguley &amp; Brunsden (2013) using the
+<code>MBESS</code> function <code>ci.reliability</code> (because it has
+more options for computing confidence intervals, not always requiring
+bootstrapping), whereas the <code>psych</code> package point estimate was
+suggested in Revelle &amp; Zinbarg (2008). The <code>psych</code> estimate
+usually (perhaps always) results in higher estimates for omega.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>omega.psych_nfactors</code></td>
+<td>
+<p>The number of factor to use in the factor
+analysis when computing Omega. The default in <code>psych::omega()</code> is 3; to
+obtain the same results as in jamovi's "Reliability", set this to 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>omega.psych_flip</code></td>
+<td>
+<p>Whether to let <code>psych</code> automatically flip items with
+negative correlations. The default in <code>psych::omega()</code> is<code>TRUE</code>; to obtain
+the same results as in jamovi's "Reliability", set this to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>poly</code></td>
+<td>
+<p>Whether to compute ordinal measures (if the items have
+sufficiently few categories).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppressSuggestedPkgsMsg</code></td>
+<td>
+<p>Whether to suppress the message about the
+suggested <code>MBESS</code> and <code>psych</code> packages.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headingLevel</code></td>
+<td>
+<p>The level of the Markdown heading to provide; basically
+the number of hashes ('<code style="white-space: pre;">⁠#⁠</code>') to prepend to the headings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to print</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Any additional arguments for the default print function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>Passed on to <code>knitr::knit()</code> whether it should b
+chatty (<code>FALSE</code>) or quiet (<code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>echoPartial</code></td>
+<td>
+<p>Whether to show the executed code in the R Markdown
+partial (<code>TRUE</code>) or not (<code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>partialFile</code></td>
+<td>
+<p>This can be used to specify a custom partial file. The
+file will have object <code>x</code> available, which is the result of a call to
+<code>scaleStructure()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If you use this function in an academic paper, please cite Peters (2014),
+where the function is introduced, and/or Crutzen &amp; Peters (2015), where the
+function is discussed from a broader perspective.
+</p>
+<p>This function is basically a wrapper for functions from the psych and MBESS
+packages that compute measures of reliability and internal consistency. For
+backwards compatibility, in addition to <code>scaleStructure</code>,
+<code>scaleReliability</code> can also be used to call this function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object with the input and several output variables. Most notably:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Input specified when calling the function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intermediate</code></td>
+<td>
+<p>Intermediate values and objects computed to get to the
+final results</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>Values of reliability / internal consistency
+measures, with as most notable elements:</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$dat</code></td>
+<td>
+<p>A dataframe with
+the most important outcomes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$omega</code></td>
+<td>
+<p>Point estimate for omega</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$glb</code></td>
+<td>
+<p>Point estimate for the Greatest Lower Bound</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$alpha</code></td>
+<td>
+<p>Point estimate for Cronbach's alpha</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$coefficientH</code></td>
+<td>
+<p>Coefficient H</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$omega.ci</code></td>
+<td>
+<p>Confidence
+interval for omega</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$alpha.ci</code></td>
+<td>
+<p>Confidence interval for
+Cronbach's alpha</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters and Daniel McNeish (University of North Carolina,
+Chapel Hill, US).
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Crutzen, R., &amp; Peters, G.-J. Y. (2015). Scale quality: alpha is
+an inadequate estimate and factor-analytic evidence is needed first of all.
+<em>Health Psychology Review.</em>
+<a href="https://doi.org/10.1080/17437199.2015.1124240">doi:10.1080/17437199.2015.1124240</a>
+</p>
+<p>Dunn, T. J., Baguley, T., &amp; Brunsden, V. (2014). From alpha to omega: A
+practical solution to the pervasive problem of internal consistency
+estimation. <em>British Journal of Psychology</em>, 105(3), 399-412.
+<a href="https://doi.org/10.1111/bjop.12046">doi:10.1111/bjop.12046</a>
+</p>
+<p>Eisinga, R., Grotenhuis, M. Te, &amp; Pelzer, B. (2013). The reliability of a
+two-item scale: Pearson, Cronbach, or Spearman-Brown? <em>International
+Journal of Public Health</em>, 58(4), 637-42.
+<a href="https://doi.org/10.1007/s00038-012-0416-3">doi:10.1007/s00038-012-0416-3</a>
+</p>
+<p>Gadermann, A. M., Guhn, M., Zumbo, B. D., &amp; Columbia, B. (2012). Estimating
+ordinal reliability for Likert-type and ordinal item response data: A
+conceptual, empirical, and practical guide. <em>Practical Assessment,
+Research &amp; Evaluation</em>, 17(3), 1-12. <a href="https://doi.org/10.7275/n560-j767">doi:10.7275/n560-j767</a>
+</p>
+<p>Peters, G.-J. Y. (2014). The alpha and the omega of scale reliability and
+validity: why and how to abandon Cronbach's alpha and the route towards more
+comprehensive assessment of scale quality. <em>European Health
+Psychologist</em>, 16(2), 56-69.
+<a href="https://doi.org/10.31234/osf.io/h47fv">doi:10.31234/osf.io/h47fv</a>
+</p>
+<p>Revelle, W., &amp; Zinbarg, R. E. (2009). Coefficients Alpha, Beta, Omega, and
+the glb: Comments on Sijtsma. <em>Psychometrika</em>, 74(1), 145-154.
+<a href="https://doi.org/10.1007/s11336-008-9102-z">doi:10.1007/s11336-008-9102-z</a>
+</p>
+<p>Sijtsma, K. (2009). On the Use, the Misuse, and the Very Limited Usefulness
+of Cronbach's Alpha. <em>Psychometrika</em>, 74(1), 107-120.
+<a href="https://doi.org/10.1007/s11336-008-9101-0">doi:10.1007/s11336-008-9101-0</a>
+</p>
+<p>Zinbarg, R. E., Revelle, W., Yovel, I., &amp; Li, W. (2005). Cronbach's alpha,
+Revelle's beta and McDonald's omega H: Their relations with each other and
+two alternative conceptualizations of reliability. <em>Psychometrika</em>,
+70(1), 123-133. <a href="https://doi.org/10.1007/s11336-003-0974-7">doi:10.1007/s11336-003-0974-7</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>psych::omega()</code>, <code>psych::alpha()</code>, and
+<code>MBESS::ci.reliability()</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+## Not run: 
+### (These examples take a lot of time, so they are not run
+###  during testing.)
+
+### This will prompt the user to select an SPSS file
+scaleStructure();
+
+### Load data from simulated dataset testRetestSimData (which
+### satisfies essential tau-equivalence).
+data(testRetestSimData);
+
+### Select some items in the first measurement
+exampleData &lt;- testRetestSimData[2:6];
+
+### Use all items (don't order confidence intervals to save time
+### during automated testing of the example)
+ufs::scaleStructure(dat=exampleData, ci=FALSE);
+
+### Use a selection of three variables (without confidence
+### intervals to save time
+ufs::scaleStructure(
+  dat=exampleData,
+  items=c('t0_item2', 't0_item3', 't0_item4'),
+  ci=FALSE
+);
+
+### Make the items resemble an ordered categorical (ordinal) scale
+ordinalExampleData &lt;- data.frame(apply(exampleData, 2, cut,
+                                       breaks=5, ordered_result=TRUE,
+                                       labels=as.character(1:5)));
+
+### Now we also get estimates assuming the ordinal measurement level
+ufs::scaleStructure(ordinalExampleData, ci=FALSE);
+
+## End(Not run)
+
+
+</code></pre>
+
+
+</div>

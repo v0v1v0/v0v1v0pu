@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zotero_download_and_export_items</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Download and save all items in a public Zotero group</h2>
+
+<h3>Description</h3>
+
+<p>Download and save all items in a public Zotero group
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zotero_download_and_export_items(
+  group,
+  file,
+  format = "bibtex",
+  showKeys = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group</code></td>
+<td>
+<p>The group ID</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The filename to write to</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>The format to export</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showKeys</code></td>
+<td>
+<p>Whether to show the keys</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The bibliography as a character vector
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+tmpFile &lt;- tempfile(fileext=".bib");
+zotero_download_and_export_items(
+  2425237,
+  tmpFile
+);
+writtenBibliography &lt;- readLines(tmpFile);
+writtenBibliography[1:7];
+
+## End(Not run)
+</code></pre>
+
+
+</div>

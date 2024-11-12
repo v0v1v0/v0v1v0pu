@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>keep_cat_cols</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Keep Only Columns Used for Sample Selection</h2>
+
+<h3>Description</h3>
+
+<p>Keep Only Columns Used for Sample Selection
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">keep_cat_cols(x, keep_sam_cols = TRUE, return_idx = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a <code>data.frame</code> with many columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keep_sam_cols</code></td>
+<td>
+<p>if <code>TRUE</code> (default), keep columns with
+pattern 'sample', 'patient', etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return_idx</code></td>
+<td>
+<p>if <code>TRUE</code> (default), return index of 5 (at most) columns, it is useful in Shiny.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> or a <code>list</code>.
+</p>
+
+
+</div>

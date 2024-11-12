@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sample_around</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Define Sample Times Around Events</h2>
+
+<h3>Description</h3>
+
+<p>When events, such as bolus doses, are applied to the system
+rapid changes can occur. If the system is not sampled heavily around these
+times, these changes may be missed in the output profiles. Based on the total
+duration of the sample times, extra samples can be added near these events.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sample_around(tvals, ot, sample_delta_mult = 1e-06)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>tvals</code></td>
+<td>
+<p>vector of event times</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ot</code></td>
+<td>
+<p>simualtion output times</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample_delta_mult</code></td>
+<td>
+<p>multiplier used to control the magnitude of spacing around and following event times</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For more information on setting options for population simulation see the
+stochastic section of the <code>system_set_option</code> help file.
+</p>
+
+
+<h3>Value</h3>
+
+<p>vector of event times and added samples
+</p>
+
+
+</div>

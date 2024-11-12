@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>RandUnderClassif</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Random under-sampling for imbalanced classification problems
+</h2>
+
+<h3>Description</h3>
+
+<p>This function performs a random under-sampling strategy for imbalanced multiclass problems. Essentially, a percentage of cases of the class(es) selected by the user are randomly removed. Alternatively, the strategy can be applied to either balance all the existing classes or to "smoothly invert" the frequency of the examples in each class.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">RandUnderClassif(form, dat, C.perc = "balance", repl = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+
+<p>A data frame containing the original imbalanced data set.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C.perc</code></td>
+<td>
+
+<p>A named list containing each class name and the corresponding under-sampling percentage, between 0 and 1, where 1 means that no under-sampling is to be applied in the corresponding class. The user may indicate only the classes where he wants to apply random under-sampling. For instance, a percentage of 0.2 means that, in the changed data set, the class is reduced to 20% of its original size. Alternatively, this parameter can be set to "balance" (the defualt) or "extreme", cases where the under-sampling percentages are automatically estimated. The "balance" option tries to balance all the existing classes while the "extreme" option inverts the classes original frequencies.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repl</code></td>
+<td>
+
+<p>A boolean value controlling the possibility of having repetition of examples in the under-sampled data set. Defaults to FALSE.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function performs a random under-sampling strategy for dealing with imbalanced multiclass problems. The examples removed are randomly selected among the examples belonging to each class containing the normal cases. The user can chose one or more classes to be under-sampled. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns a data frame with
+the new data set resulting from the application of the random under-sampling strategy.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>See Also</h3>
+
+<p><code>RandOverClassif</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  if (requireNamespace("DMwR2", quietly = TRUE)) {
+
+  data(algae, package ="DMwR2")
+  clean.algae &lt;- data.frame(algae[complete.cases(algae), ])
+  C.perc = list(autumn = 1, summer = 0.9, winter = 0.4) 
+  # classes autumn and spring remain unchanged
+  
+  myunder.algae &lt;- RandUnderClassif(season~., clean.algae, C.perc)
+  undBalan.algae &lt;- RandUnderClassif(season~., clean.algae, "balance")
+  undInvert.algae &lt;- RandUnderClassif(season~., clean.algae, "extreme")
+} else {
+  library(MASS)
+  data(cats)
+  myunder.cats &lt;- RandUnderClassif(Sex~., cats, list(M = 0.8))
+  undBalan.cats &lt;- RandUnderClassif(Sex~., cats, "balance")
+  undInvert.cats &lt;- RandUnderClassif(Sex~., cats, "extreme")
+
+
+  # learn a model and check results with original and under-sampled data
+  library(rpart)
+  idx &lt;- sample(1:nrow(cats), as.integer(0.7*nrow(cats)))
+  tr &lt;- cats[idx, ]
+  ts &lt;- cats[-idx, ]
+  
+  idx &lt;- sample(1:nrow(cats), as.integer(0.7*nrow(cats)))
+  tr &lt;- cats[idx, ]
+  ts &lt;- cats[-idx, ]
+  ctO &lt;- rpart(Sex ~ ., tr)
+  predsO &lt;- predict(ctO, ts, type = "class")
+  new.cats &lt;- RandUnderClassif(Sex~., tr, "balance")
+  ct1 &lt;- rpart(Sex ~ ., new.cats)
+  preds1 &lt;- predict(ct1, ts, type = "class")
+   
+  table(predsO, ts$Sex)  
+#  predsO  F  M
+#      F  9  3
+#      M  7 25
+
+
+  table(preds1, ts$Sex)   
+# preds1  F  M
+#      F 13  4
+#      M  3 24
+}
+</code></pre>
+
+
+</div>

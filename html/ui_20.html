@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sandImpACE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculates standard error of Average causal effect</h2>
+
+<h3>Description</h3>
+
+<p>This is a support function for <code>ui.causal</code> and calculates standard error of Average causal effect for the regression imputation estimator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sandImpACE(X, y, z, BetaOLSy0, BetaOLSy1, NaivEst, N, p)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Covariate matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Outcome vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>missingness indicator.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BetaOLSy0</code></td>
+<td>
+<p>Coefficients from non-treated regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BetaOLSy1</code></td>
+<td>
+<p>Coefficients from treated regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NaivEst</code></td>
+<td>
+<p>Naiv estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>Total number.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Number of covariates outcome regression.</p>
+</td>
+</tr>
+</table>
+</div>

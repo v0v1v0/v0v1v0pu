@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>phi.control</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimation of parameters used for obtaining the relevance function.
+</h2>
+
+<h3>Description</h3>
+
+<p>This function allows to obtain the parameters of the relevance function (phi). The parameters can be obtained using one of the following methods: "extremes" or "range". If the selected method is "extremes", the distribution of the target variable values is used to assign more importance to the most extreme values according to the boxplot. If the selected method is "range", a matrix should be provided defining the important and unimportant values (see section details).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">phi.control(y, method="extremes", extr.type="both", coef=1.5, control.pts=NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>The target variable values.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>"extremes" (default) or "range".
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extr.type</code></td>
+<td>
+<p>parameter needed for method "extremes" to specify which type of extremes are to be considered relevant: "high", "low" or "both"(default). 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coef</code></td>
+<td>
+<p>parameter needed for method "extremes" to specify how far the wiskers extend to the most extreme data point in the boxplot. The default is 1.5.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control.pts</code></td>
+<td>
+<p>parameter needed for method "range" to specify the interpolating points to the relevance function (phi). It should be a matrix with three columns. The first column represents the y value, the second column represents the corresponding relevance value (phi(y)) in [0,1], and the third optional column represents the corresponding relevance value derivative (phi'(y)).  
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The method "extremes" uses the target variable distribution to automatically determine the most relevant values. This method uses the boxplot to automatically derive a matrix with the interpolating points for the relevance function (phi). According to the <code>extr.type</code> parameter it assigns maximum relevance to: only the "high" extremes, only the "low" extremes or "both". In the latter case, it assigns maximum relevance to "both" types of extremes if they exist. If "both" is selected and only one type of extremes is present, then only the existing extremes are considered.
+</p>
+<p>The method "range" uses the <code>control.pts</code> matrix provided by the user to define the interpolating points for the relevance function (phi). The values supplied in the third column (phi derivative) of the matrix are only indicative, meaning that they will be adjusted afterwards by the relevance function (phi) to create a smooth continuous function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns a list with the parameters needed for obtaining and evaluating the relevance function (phi).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a>, Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>References</h3>
+
+<p>Ribeiro, R., 2011. Utility-based regression 
+(Doctoral dissertation, PhD thesis, 
+Dep. Computer Science, Faculty of Sciences - 
+University of Porto).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>phi</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(morley)
+# the target variable
+y &lt;- morley$Speed
+
+# the target variable has "low" and "high"extremes 
+boxplot(y)
+
+## using method "extremes" considering that 
+## "both" extremes are important
+phiF.argsB &lt;- phi.control(y,method="extremes",extr.type="both")
+y.phiB &lt;- phi(y, control.parms=phiF.argsB)
+plot(y, y.phiB)
+
+## using method "extremes" considering that only the
+## "high" extremes are relevant
+phiF.argsH &lt;- phi.control(y,method="extremes",extr.type="high")
+y.phiH &lt;- phi(y, control.parms=phiF.argsH)
+plot(y, y.phiH)
+
+
+## using method "range" to choose the important values:
+rel &lt;- matrix(0,ncol=3,nrow=0)
+rel &lt;- rbind(rel,c(700,0,0)) 
+rel &lt;- rbind(rel,c(800,1,0))
+rel &lt;- rbind(rel,c(900,0,0))
+rel &lt;- rbind(rel,c(1000,1,0))
+rel
+phiF.argsR &lt;- phi.control(y,method="range",control.pts=rel)
+y.phiR &lt;- phi(y, control.parms=phiF.argsR)
+
+plot(y, y.phiR)
+</code></pre>
+
+
+</div>

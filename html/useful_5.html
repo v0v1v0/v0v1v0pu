@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bottomright</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Grabs the bottom right corner of a data set</h2>
+
+<h3>Description</h3>
+
+<p>Display the bottom right corner of a rectangular data set
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bottomright(x, r = 5L, c = 5L, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>Number of rows to display</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c</code></td>
+<td>
+<p>Number of columns to show</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments passed on to other functions</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Displays the bottom right corner of a rectangular data set.
+</p>
+<p>This is a wrapper function for <code>corner</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>... The bottom right corner of the data set that was requested.  The size depends on r and c.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander www.jaredlander.com
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>head</code> <code>tail</code> <code>corner</code> <code>topright</code> <code>bottomleft</code> <code>topleft</code> <code>left</code> <code>right</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(diamonds)
+head(diamonds)      # displays all columns
+bottomright(diamonds)    # displays last 5 rows and only the last 5 columns
+
+</code></pre>
+
+
+</div>

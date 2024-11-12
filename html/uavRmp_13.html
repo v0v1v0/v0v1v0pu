@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>solo_upload</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Upload MAV compliant mission File to a 3DR Solo</h2>
+
+<h3>Description</h3>
+
+<p>solo_upload provides a crude interface to upload the Solo mission file to the 3dr SOLO
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">solo_upload(
+  missionFile = NULL,
+  connection = "udp:10.1.1.166:14550",
+  prearm = "-1"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>missionFile</code></td>
+<td>
+<p>mission file to upload</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>connection</code></td>
+<td>
+<p>a valid connection string to the Solo default is "udp:10.1.1.166:14550"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prearm</code></td>
+<td>
+<p><code>character</code> controls the prearm status of the Solo prearm check<br> 0=Disabled<br> 1=Enabled<br> -3=Skip Baro<br> -5=Skip Compass<br> -9=Skip GPS<br> -17=Skip INS<br> -33=Skip Params/Rangefinder<br> -65=Skip RC<br> 127=Skip Voltage<br>
+default is <code>-1</code><br><br> Find more information at <a href="https://ardupilot.org">prearm safety</a>,<br><a href="https://github.com/dronekit/dronekit-python">Mission import export script</a>.</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>Becareful with fooling around with the prearm stuff. It is kind of VERY sensitive for the later autonomous flights!<br> For using the Solo stuff you need to install: <br> sudo pip install pymavlink;<br> sudo pip install dronekit-sitl;<br> sudo pip install dronekit; <br> sudo apt-get install sshpass<br> Additionally you need to be connected to a running 3DR Solo uav
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">wp &lt;- system.file("extdata", "MAVLINK_waypoints.txt", package = "uavRmp")
+## Not run: 
+solo_upload( missionFile = wp)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

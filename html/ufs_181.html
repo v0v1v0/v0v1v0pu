@@ -1,0 +1,225 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>normalHist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>normalHist</h2>
+
+<h3>Description</h3>
+
+<p>normalHist generates a histogram with a density curve and a normal density
+curve.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">normalHist(
+  vector,
+  histColor = "#0000CC",
+  distributionColor = "#0000CC",
+  normalColor = "#00CC00",
+  distributionLineSize = 1,
+  normalLineSize = 1,
+  histAlpha = 0.25,
+  xLabel = NULL,
+  yLabel = NULL,
+  normalCurve = TRUE,
+  distCurve = TRUE,
+  breaks = 30,
+  theme = ggplot2::theme_minimal(),
+  rug = NULL,
+  jitteredRug = TRUE,
+  rugSides = "b",
+  rugAlpha = 0.2,
+  returnPlotOnly = FALSE
+)
+
+## S3 method for class 'normalHist'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vector</code></td>
+<td>
+<p>A numeric vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>histColor</code></td>
+<td>
+<p>The colour to use for the histogram.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distributionColor</code></td>
+<td>
+<p>The colour to use for the density curve.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalColor</code></td>
+<td>
+<p>The colour to use for the normal curve.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distributionLineSize</code></td>
+<td>
+<p>The line size to use for the distribution
+density curve.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalLineSize</code></td>
+<td>
+<p>The line size to use for the normal curve.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>histAlpha</code></td>
+<td>
+<p>Alpha value ('opaqueness', as in, versus transparency) of
+the histogram.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xLabel</code></td>
+<td>
+<p>Label to use on x axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yLabel</code></td>
+<td>
+<p>Label to use on y axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalCurve</code></td>
+<td>
+<p>Whether to display the normal curve.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distCurve</code></td>
+<td>
+<p>Whether to display the curve showing the distribution of
+the observed data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>breaks</code></td>
+<td>
+<p>The number of breaks to use (this is equal to the number of
+bins minus one, or in other words, to the number of bars minus one).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>The theme to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rug</code></td>
+<td>
+<p>Whether to add a rug (i.e. lines at the bottom that correspond to
+individual datapoints.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>jitteredRug</code></td>
+<td>
+<p>Whether to jitter the rug (useful for variables with
+several datapoints sharing the same value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rugSides</code></td>
+<td>
+<p>This is useful when the histogram will be rotated; for
+example, this can be set to 'r' if the histogram is rotated 270 degrees.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rugAlpha</code></td>
+<td>
+<p>Alpha value to use for the rug. When there is a lot of
+overlap, this can help get an idea of the number of datapoints at 'popular'
+values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnPlotOnly</code></td>
+<td>
+<p>Whether to return the usual <code>normalHist</code> object
+that also contains all settings and intermediate objects, or whether to only
+return the <code>ggplot2::ggplot()</code> plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to print.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Any additional arguments are passed to the default <code>print</code> method.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object, with the following elements: </p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>The input when the
+function was called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intermediate</code></td>
+<td>
+<p>The intermediate numbers and
+distributions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>The dataframe used to generate the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>The histogram.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">normalHist(mtcars$mpg)
+
+</code></pre>
+
+
+</div>

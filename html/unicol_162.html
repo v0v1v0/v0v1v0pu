@@ -1,0 +1,125 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sfu_brand</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Brand colours of Simon Fraser University, Canada</h2>
+
+<h3>Description</h3>
+
+<p><code>sfu_brand</code> provides the brand colours 
+of <a href="https://www.sfu.ca/">Simon Fraser University</a>, Canada.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sfu_brand
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 4.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The primary colour is 
+<code>"light_red"</code> (defined as HEX #CC0633 or RGB R204/G6/B51). 
+The 3 secondary colours are 
+<code>"dark_red"</code> (defined as HEX #A6192E or RGB R166/G25/B46),
+<code>"dark_grey"</code> (defined as HEX #54585A or RGB R84/G88/B90), and
+<code>"black"</code> (defined as HEX #000000 or RGB R0/G0/B0).
+</p>
+<p>SFU light red is our primary colour, to be used as the dominant colour in all applications. 
+It is supported by SFU dark red which is the colour used in the institutional logo. 
+These two reds are designed to work well together, creating a distinctive tone-on-tone effect. 
+</p>
+<p>SFU dark grey is simply used in the text portion of our academic unit and extension logos, 
+and can be applied to subheads and graphic elements. Black is used for body copy.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of colours (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>unicol</strong>, 2023-06-29.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Colour definitions are based on SFU's 
+<a href="https://www.sfu.ca/communicators-toolkit/guides/brand-guide/colours.html">Brand guide</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for viewing and comparing colour palettes;
+<code>usecol</code> for using colour palettes;
+<code>simcol</code> for finding similar colours;
+<code>newpal</code> for defining new colour palettes;
+<code>grepal</code> for finding named colours.
+</p>
+<p>Other Canadian university color palettes: 
+<code>carleton</code>,
+<code>concordia_1</code>,
+<code>concordia_2</code>,
+<code>concordia_3</code>,
+<code>concordia_4</code>,
+<code>guelph</code>,
+<code>laval</code>,
+<code>manitoba_1</code>,
+<code>manitoba_2</code>,
+<code>mcgill_brights</code>,
+<code>mcgill_darks</code>,
+<code>mcgill_grey</code>,
+<code>mcgill_muted</code>,
+<code>mcgill_pastels</code>,
+<code>mcgill_red</code>,
+<code>mcmaster_brighterworld</code>,
+<code>mcmaster_heritage</code>,
+<code>mun_1</code>,
+<code>mun_2</code>,
+<code>queensu_1</code>,
+<code>queensu_2</code>,
+<code>ubc</code>,
+<code>ucalgary_1</code>,
+<code>ucalgary_2</code>,
+<code>ucalgary_accent</code>,
+<code>ucalgary_warmgreys</code>,
+<code>uottawa</code>,
+<code>utoronto</code>,
+<code>uvic_1</code>,
+<code>uvic_2</code>,
+<code>uwaterloo_arts</code>,
+<code>uwaterloo_engineering</code>,
+<code>uwaterloo_environment</code>,
+<code>uwaterloo_health</code>,
+<code>uwaterloo_main</code>,
+<code>uwaterloo_math</code>,
+<code>uwaterloo_science</code>,
+<code>western_uni</code>,
+<code>yorku_1</code>,
+<code>yorku_2</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">sfu_brand
+unikn::seecol(sfu_brand, main = "SFU brand colours") # view colour palette
+
+</code></pre>
+
+
+</div>

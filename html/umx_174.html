@@ -1,0 +1,266 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxThresholdMatrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create the threshold matrix needed for modeling ordinal data.</h2>
+
+<h3>Description</h3>
+
+<p>High-level helper for ordinal modeling. Creates, labels, and sets smart-starts for this
+complex set set of an algebra and matrices. Big time saver!
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxThresholdMatrix(
+  df,
+  fullVarNames = NULL,
+  sep = NULL,
+  method = c("Mehta", "allFree"),
+  threshMatName = "threshMat",
+  l_u_bound = c(NA, NA),
+  droplevels = FALSE,
+  verbose = FALSE,
+  selDVs = "deprecated"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>The data being modeled (to allow access to the factor levels and quantiles within these for each variable)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fullVarNames</code></td>
+<td>
+<p>The variable names. Note for twin data, just the base names, which sep will be used to fill out.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>(e.g. "_T") Required for wide (twin) data. It is used to break the base names our from their numeric suffixes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>How to implement the thresholds: Mehta, (1 free thresh for binary, first two fixed for ordinal) or "allFree"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshMatName</code></td>
+<td>
+<p>name of the matrix which is returned. Defaults to "threshMat" - best not to change it.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>l_u_bound</code></td>
+<td>
+<p>c(NA, NA) by default, you can use this to bound the first (base) threshold.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>droplevels</code></td>
+<td>
+<p>Whether to drop levels with no observed data (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>How much to say about what was done. (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>selDVs</code></td>
+<td>
+<p>deprecated. Use "fullVarNames"</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>We often need to model ordinal data: sex, low-med-hi, depressed/normal, etc.,
+A useful conceptual strategy to handle these data is to build a standard model for normally-varying data
+and then to threshold this normal distribution to generate the observed data. Thus an observation of "depressed"
+is modeled as a high score on the latent normally distributed trait, with thresholds set so that only scores above
+this threshold (1-minus the number of categories) reach the criteria for the diagnosis.
+</p>
+<p>Making this work can require fixing the first 2 thresholds of ordinal data, or fixing both the mean and variance of
+a latent variable driving binary data, in order to estimate its one-free parameter: where to place the single threshold
+separating low from high cases.
+</p>
+<p>The function returns a 3-item list consisting of:
+</p>
+
+<ol>
+<li>
+<p> A thresholdsAlgebra (named <code>threshMatName</code>)
+</p>
+</li>
+<li>
+<p> A matrix of deviations for the thresholds (<code>deviations_for_thresh</code>)
+</p>
+</li>
+<li>
+<p> A lower matrix of ones (<code>lowerOnes_for_thresh</code>)
+</p>
+</li>
+</ol>
+<p><em>Twin Data</em>
+</p>
+<p>With twin data, make sure to provide the <strong>full names</strong> for twin data... this is not standard I know...
+</p>
+<p>For twins (the function currently handles only pairs), the thresholds are equated for both twins using labels:
+</p>
+<p>$labels
+</p>
+<div class="sourceCode"><pre>  obese_T1         obese_T2
+</pre></div>
+<p>dev_1 "obese_dev1"   "obese_dev1"
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> list of thresholds matrix, deviations, lowerOnes
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>OpenMx::mxThreshold()</code>
+</p>
+<p>Other Advanced Model Building Functions: 
+<code>umxAlgebra()</code>,
+<code>umxFixAll()</code>,
+<code>umxJiggle()</code>,
+<code>umxRun()</code>,
+<code>umxUnexplainedCausalNexus()</code>,
+<code>umx</code>,
+<code>xmuLabel()</code>,
+<code>xmuValues()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# ============================
+# = Simple non-twin examples =
+# ============================
+
+# data: 1 2-level ordered factor
+x = data.frame(ordered(rbinom(100,1,.5))); names(x) = c("x")
+
+tmp = umxThresholdMatrix(x, fullVarNames = "x")
+# The lower ones matrix (all fixed)
+tmp[[1]]$values
+tmp[[1]]$free
+
+# The deviations matrix
+tmp[[2]]$values
+tmp[[2]]$labels # note: for twins, labels will be equated across twins
+
+# The algebra that adds the deviations to create thresholds:
+tmp[[3]]$formula
+
+# Example of a warning to not omit the variable names
+# tmp = umxThresholdMatrix(x)
+# Polite message: For coding safety, when calling umxThresholdMatrix, set fullVarNames...
+
+# One ordered factor with 5-levels
+x = cut(rnorm(100), breaks = c(-Inf,.2,.5, .7, Inf)); levels(x) = 1:5
+x = data.frame(ordered(x)); names(x) &lt;- c("x")
+tmp = umxThresholdMatrix(x, fullVarNames = "x")
+tmp[[2]]$name
+tmp[[2]]$free # last one is free.. (method = Mehta)
+
+tmp = umxThresholdMatrix(x, fullVarNames = "x", l_u_bound= c(-1,1))
+tmp[[2]]$lbound # bounds applied to base threshold
+
+# =================================
+# = Binary example with twin data =
+# =================================
+# ===============================================================
+# = Create a series of binary and ordinal columns to work with =
+# ===============================================================
+data(twinData)
+
+# Make "obese" variable with ~20% subjects categorised as obese
+obesityLevels   = c('normal', 'obese')
+cutPoints       = quantile(twinData[, "bmi1"], probs = .2, na.rm = TRUE)
+twinData$obese1 = cut(twinData$bmi1, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+twinData$obese2 = cut(twinData$bmi2, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+# Step 2: Make the ordinal variables into umxFactors (ordered, with the levels found in the data)
+selVars = c("obese1", "obese2")
+twinData[, selVars] = umxFactor(twinData[, selVars])
+
+# Example 1
+# use verbose = TRUE to see informative messages
+tmp = umxThresholdMatrix(twinData, fullVarNames = selVars, sep = "", verbose = TRUE) 
+
+
+# ======================================
+# = Ordinal (n categories &gt; 2) example =
+# ======================================
+# Repeat for three-level weight variable
+obesityLevels = c('normal', 'overweight', 'obese')
+cutPoints = quantile(twinData[, "bmi1"], probs = c(.4, .7), na.rm = TRUE)
+twinData$obeseTri1 = cut(twinData$bmi1, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+twinData$obeseTri2 = cut(twinData$bmi2, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+selDVs = "obeseTri"; selVars = tvars(selDVs, sep = "", suffixes = 1:2)
+twinData[, selVars] = umxFactor(twinData[, selVars])
+tmp = umxThresholdMatrix(twinData, fullVarNames = selVars, sep = "", verbose = TRUE)
+
+
+# ========================================================
+# = Mix of all three kinds example (and a 4-level trait) =
+# ========================================================
+obesityLevels = c('underWeight', 'normal', 'overweight', 'obese')
+cutPoints = quantile(twinData[, "bmi1"], probs = c(.25, .4, .7), na.rm = TRUE)
+twinData$obeseQuad1 = cut(twinData$bmi1, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+twinData$obeseQuad2 = cut(twinData$bmi2, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+selVars = c("obeseQuad1", "obeseQuad2")
+twinData[, selVars] = umxFactor(twinData[, selVars])
+
+selDVs =c("bmi", "obese", "obeseTri", "obeseQuad")
+tmp = umxThresholdMatrix(twinData, fullVarNames = tvars(selDVs, sep= ""), sep = "", verbose = TRUE)
+# The lower ones matrix (all fixed)
+tmp[[1]]$values
+# The deviations matrix
+tmp[[2]]$values
+tmp[[2]]$labels # note labels are equated across twins
+# Check to be sure twin-1 column labels same as twin-2
+tmp[[2]]$labels[,2]==tmp[[2]]$labels[,4]
+
+# The algebra that assembles these into thresholds:
+tmp[[3]]$formula
+# =================================
+# = Example with method = allFree =
+# =================================
+
+tmp = umxThresholdMatrix(twinData, fullVarNames = tvars(selDVs, sep= ""), sep = "", 
+	method = "allFree")
+all(tmp[[2]]$free)
+
+</code></pre>
+
+
+</div>

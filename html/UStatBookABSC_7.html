@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>WLS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes a weighted least squares linear regression 
+on possibly multivariate responses</h2>
+
+<h3>Description</h3>
+
+<p>Computes a weighted least squares linear regression 
+on possibly multivariate responses
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">WLS(Y, X, W)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>a numeric matrix, to act as response</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>a numeric matrix, to act as covariates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+<p>a numeric matrix, to act as weights</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of regression coefficients
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"> ## Not run: 
+ DataY = cbind(CCU12_Precip$Precip, CCU12_Precip$TMax);
+DataX = cbind(rep(1, length(CCU12_Precip$Precip)), CCU12_Precip$TMin)			
+BetaHat.New = WLS(DataY, DataX)
+    		
+## End(Not run)
+
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_toil_TvsN_cancer</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize Gene TPM in Single Cancer Type (Tumor (TCGA) vs Normal (TCGA &amp; GTEx))</h2>
+
+<h3>Description</h3>
+
+<p>Visualize Gene TPM in Single Cancer Type (Tumor (TCGA) vs Normal (TCGA &amp; GTEx))
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_toil_TvsN_cancer(
+  Gene = "TP53",
+  Mode = c("Violinplot", "Dotplot"),
+  data_type = "mRNA",
+  Show.P.value = FALSE,
+  Show.P.label = FALSE,
+  Method = "wilcox.test",
+  values = c("#DF2020", "#DDDF21"),
+  TCGA.only = FALSE,
+  Cancer = "ACC",
+  opt_pancan = .opt_pancan
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Gene</code></td>
+<td>
+<p>a molecular identifier (e.g., "TP53") or a formula specifying
+genomic signature (<code>"TP53 + 2 * KRAS - 1.3 * PTEN"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Mode</code></td>
+<td>
+<p>"Boxplot" or "Violinplot" to represent data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_type</code></td>
+<td>
+<p>choose gene profile type,
+including "mRNA", "transcript", "protein", "mutation", "cnv", "methylation", "miRNA".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Show.P.value</code></td>
+<td>
+<p><code>TRUE</code> or <code>FALSE</code> whether to count P value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Show.P.label</code></td>
+<td>
+<p><code>TRUE</code> or <code>FALSE</code> present p value with number or label <code>*</code>, <code style="white-space: pre;">⁠**⁠</code>, <code style="white-space: pre;">⁠***⁠</code> and <code style="white-space: pre;">⁠****⁠</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Method</code></td>
+<td>
+<p>default method is wilcox.test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>the color to fill tumor or normal</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TCGA.only</code></td>
+<td>
+<p>include samples only from TCGA dataset</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Cancer</code></td>
+<td>
+<p>select cancer cohort(s).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt_pancan</code></td>
+<td>
+<p>specify one dataset for some molercular profiles</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>ggplot</code> object.
+</p>
+
+
+</div>

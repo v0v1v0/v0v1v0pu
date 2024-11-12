@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_check_OS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_check_OS</h2>
+
+<h3>Description</h3>
+
+<p>Check what OS we are running on (current default is OS X). Returns a boolean.
+Optionally warn or die on failure of the test
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_check_OS(
+  target = c("OSX", "SunOS", "Linux", "Windows"),
+  action = c("ignore", "warn", "die")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+<p>Which OS(s) you wish to check for (default = "OSX")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>action</code></td>
+<td>
+<p>What to do on failure of the test: nothing (default), warn or die</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> TRUE if on the specified OS (else FALSE)
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_check()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">umx_check_OS()
+</code></pre>
+
+
+</div>

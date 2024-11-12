@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>global operator</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Extract certains statistics for whole image
+</h2>
+
+<h3>Description</h3>
+
+<p>Function from this <code style="white-space: pre;">⁠global.⁠</code><em><code style="white-space: pre;">⁠FUN⁠</code></em> list returns required statistics <em>FUN</em> for the whole image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">global_mean(x, ursa = FALSE, ...)
+global_median(x, ursa = FALSE, ...)
+global_sd(x, ursa = FALSE, ...)
+global_sum(x, ursa = FALSE, ...)
+global_min(x, ursa = FALSE, ...)
+global_max(x, ursa = FALSE, ...)
+global_n(x, ursa = FALSE, ...)
+global_nNA(x, ursa = FALSE, ...)
+global_range(x, ursa = FALSE, ...)
+global_quantile(x, ursa = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ursa</code></td>
+<td>
+
+<p>Logical. The class of returned value. If <code>FALSE</code> then numeric vector of length one is returned (for <code>global_range</code> vector has length two). If <code>TRUE</code> then returned value is single-band raster image (two-bands image for <code>global_range</code>) with constant value for all cells (blank image). Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Arguments in function <code style="white-space: pre;">⁠global.⁠</code><em><code style="white-space: pre;">⁠FUN⁠</code></em> which are passed to function <em><code style="white-space: pre;">⁠FUN⁠</code></em>. 
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For any function <code style="white-space: pre;">⁠global⁠</code>.<em><code style="white-space: pre;">⁠FUN⁠</code></em>, if argument <code>na.rm</code> is not in <code>...</code>, then <em><code style="white-space: pre;">⁠FUN⁠</code></em> is called with forced <code>na.rm=TRUE</code>.
+</p>
+<p><code style="white-space: pre;">⁠global_range\emph{list of arguments}⁠</code> is implemented as <code style="white-space: pre;">⁠c(global_min(⁠</code><em><code style="white-space: pre;">⁠list of arguments⁠</code></em><code style="white-space: pre;">⁠), global_max(⁠</code><em><code style="white-space: pre;">⁠list of arguments⁠</code></em><code style="white-space: pre;">⁠))⁠</code> with the same list of arguments.
+</p>
+<p>Alternative method to get global statistics is function applying directly to the raster value. For example, <code>sd(ursa_value(x,na.rm=TRUE))</code>. This way is also appropriate for missing global functions: for example, <code>var(ursa_value(x,na.rm=TRUE))</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>ursa=FALSE</code> then <code>numeric</code>.
+<br>
+If <code>ursa=TRUE</code> then object of class <code>ursaRaster</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(2,min=-40,max=80)
+a[a&lt;0] &lt;- NA
+print(a)
+a.mean &lt;- global_mean(a)
+a.sd &lt;- global_sd(a)
+a.sum &lt;- global_sum(a)
+a.min &lt;- global_min(a)
+a.max &lt;- global_max(a)
+a.median &lt;- global_median(a)
+print(c(mean=a.mean,sd=a.sd,sum=a.sum,min=a.min,max=a.max,median=a.median))
+v.max &lt;- max(ursa_value(a),na.rm=TRUE)
+print(c('global_max()'=a.max,'max(ursa_value())'=v.max,dif=a.max-v.max))
+r.max &lt;- global_max(a,ursa=TRUE)
+print(r.max)
+b &lt;- c(a,'appended scalar value'=a.max)
+print(b)
+print(global_quantile(a))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>un_votes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>United Nations General Assembly voting data by country and roll call</h2>
+
+<h3>Description</h3>
+
+<p>Information on the voting history of the United Nations General Assembly.
+Contains one row for each country-vote pair.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">un_votes
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame (specifically a tbl_df) with one row
+for each country-vote pair, and the following columns:
+</p>
+
+<dl>
+<dt>rcid</dt>
+<dd>
+<p>The roll call id; used to join with <code>un_roll_calls</code>
+and <code>un_roll_call_issues</code></p>
+</dd>
+<dt>country</dt>
+<dd>
+<p>Country name, by official English short name</p>
+</dd>
+<dt>country_code</dt>
+<dd>
+<p>2-character ISO country code</p>
+</dd>
+<dt>vote</dt>
+<dd>
+<p>Vote result as a factor of yes/abstain/no</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The original data included cases where a country was absent
+or was not yet a member. In this dataset these were filtered out to
+include only votes of Yes, Abstain, and No.
+</p>
+<p>Country name can be converted to other unique country identifiers
+(such as 2-character or 3-character ISO codes) using the
+countrycode function from the countrycode
+package.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Erik Voeten "Data and Analyses of Voting in the UN General Assembly"
+Routledge Handbook of International Organization, edited by Bob Reinalda
+(published May 27, 2013)
+<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=hdl:1902.1/12379">https://dataverse.harvard.edu/dataset.xhtml?persistentId=hdl:1902.1/12379</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(dplyr)
+
+# percentage yes by country
+by_country &lt;- un_votes %&gt;%
+  group_by(country) %&gt;%
+  summarize(votes = n(),
+            percent_yes = mean(vote == "yes"))
+
+arrange(by_country, percent_yes)
+arrange(by_country, desc(percent_yes))
+
+# combine with per-vote information
+un_votes %&gt;%
+  inner_join(un_roll_calls, by = "rcid")
+
+# combine with issue
+votes_issues &lt;- un_votes %&gt;%
+  inner_join(un_roll_call_issues, by = "rcid")
+
+# for example, which countries voted yes least often on Colonialism
+votes_issues %&gt;%
+  filter(issue == "Colonialism") %&gt;%
+  group_by(country) %&gt;%
+  summarize(percent_yes = mean(vote == "yes")) %&gt;%
+  arrange(percent_yes)
+
+</code></pre>
+
+
+</div>

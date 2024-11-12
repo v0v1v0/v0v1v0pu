@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>samhda</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Substance Abuse and Mental Health Data for teens </h2>
+
+<h3>Description</h3>
+
+<p>A data frame containing data on health behaviour for school-aged children.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(samhda)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 600 observations on the following 9 variables.
+</p>
+
+<dl>
+<dt>wt</dt>
+<dd>
+<p>A numeric weight used in sampling</p>
+</dd>
+<dt>gender</dt>
+<dd>
+<p>1=Male, 2=Female, 7=not recorded</p>
+</dd>
+<dt>grade</dt>
+<dd>
+<p>1 = 6th, 2 = 8th, 3 = 10th</p>
+</dd>
+<dt>live.with.father</dt>
+<dd>
+<p>1 = Y, 2 = N</p>
+</dd>
+<dt>amt.smoke</dt>
+<dd>
+<p>Amount of days you smoked cigarettes in last 30. 1 = all 30, 2=
+20-29, 3 = 10-19, 4 = 6-9, 5= 3-5, 6 = 1-2, 7=0</p>
+</dd>
+<dt>alcohol</dt>
+<dd>
+<p>Have you ever drank alcohol, 1 = Y, 2 = N</p>
+</dd>
+<dt>amt.alcohol</dt>
+<dd>
+<p>Number of days in last 30 in which you drank
+alcohol </p>
+</dd>
+<dt>marijuana</dt>
+<dd>
+<p>Ever smoke marijuana. 1 = Y, 2= N</p>
+</dd>
+<dt>amt.marijuana</dt>
+<dd>
+<p>Number of days in lst 30 that marijuana was
+used. 1 = Never used, 2 = all 30, 3 =
+20-29, 4 = 10-19, 5 = 6-9, 6 = 3-5, 7 = 1-2, 8 =Used, but not in
+last 30 days</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>A data frame containing data on health behaviour for school-aged children.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data is sampled from the data set  "Health Behavior in School-Aged
+Children, 1996: [United States]" collected by the World Health
+Organization, https://www.icpsr.umich.edu/. It is available at
+the Substance Abuse and Mental Health Data Archive (SAMHDA). Only
+complete cases are given.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(samhda)
+attach(samhda)
+table(amt.smoke)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>benchmark_time</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compare Time with a Benchmark</h2>
+
+<h3>Description</h3>
+
+<p>Compare Time with a Benchmark
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">benchmark_time(
+  data,
+  column,
+  benchmark,
+  alpha,
+  remove_missing = FALSE,
+  input = "long",
+  output = "console"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>column</code></td>
+<td>
+<p>a column or vector of time values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>benchmark</code></td>
+<td>
+<p>benchmark</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>alpha</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_missing</code></td>
+<td>
+<p>TRUE/FALSE (Default is TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Default: "long" - long form of data, "values" to pass values directly. If using this option, must specify count and total.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>Default: "console" - prints output in console and returns tibble invisibly.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>lower_ci, upper_ci, t, probability
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data &lt;- data.frame(time = c(60, 53, 70, 42, 62, 43, 81))
+benchmark_time(data, column = time, benchmark = 60, alpha = 0.05)
+</code></pre>
+
+
+</div>

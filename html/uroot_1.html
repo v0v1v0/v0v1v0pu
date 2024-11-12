@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uroot-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unit Root Tests for Seasonal Time Series</h2>
+
+<h3>Description</h3>
+
+<p>Canova and Hansen (CH) test for seasonal stability and
+Hylleberg, Engle, Granger and Yoo (HEGY) test for seasonal unit roots.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Version &gt;= 2.0.0 is a revival of the former package <span class="pkg">uroot</span>. 
+Some of the functions provided in the original versions have been coded 
+from the scratch.
+</p>
+<p>The current version provides 
+the Canova and Hansen (CH) test for seasonal stability and
+the Hylleberg, Engle, Granger and Yoo (HEGY) test for seasonal unit roots.
+</p>
+
+
+
+
+
+<p><em>New features:</em>
+</p>
+<p>The original functions have been enhanced with the following new features:
+1) the tests are now applicable to series of any seasonal periodicity 
+(not only quarterly and monthly data),
+2) p-values based on response surface regressions are available,
+3) bootstrapped p-values are available for the HEGY test statistics.
+</p>
+<p><em>Old features not currently supported:</em>
+</p>
+<p>Some of the utilities available in the initial versions of the package 
+are not available now: graphics for seasonal series, graphical user interface, 
+bootstrap versions of the statistics, ADF test and KPSS test.
+Some of these utilities are available in other packages and some 
+will probably be incorporated in future versions of this package.
+</p>
+<p><em>System requirements:</em>
+</p>
+<p>Windows systems: GPU parallelization of the bootstrap
+is not currently operational on windows systems.
+</p>
+<p>Unix systems: GPU parallelization of the bootstrap requires a
+CUDA capable GPU with compute capability &gt;= 3.0.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Javier López-de-Lacalle <a href="mailto:javlacalle@yahoo.es">javlacalle@yahoo.es</a>.
+</p>
+
+
+
+<h3>References</h3>
+
+<p>Burridge, P. and Taylor, R.  (2004)
+"Bootstrapping the HEGY seasonal unit root tests."
+<em>Journal of Econometrics</em> <b>123</b>(1), pp. 67-87.
+DOI: <a href="https://doi.org/10.1016/j.jeconom.2003.10.029">doi:10.1016/j.jeconom.2003.10.029</a>.
+</p>
+<p>Canova, F. and Hansen, Bruce E. (1995)
+"Are seasonal patterns constant over time? A test for seasonal stability".
+<em>Journal of Business &amp; Economic Statistics</em>, <b>13</b>(3), pp. 237-252.
+DOI: <a href="https://doi.org/10.1080/07350015.1995.10524598">doi:10.1080/07350015.1995.10524598</a>.
+</p>
+<p>Díaz-Emparanza, I. (2014)
+"Numerical distribution functions for seasonal unit root tests"-
+<em>Computational Statistics and Data Analysis</em>, <b>76</b>, pp. 237-247.
+DOI: <a href="https://doi.org/10.1016/j.csda.2013.03.006">doi:10.1016/j.csda.2013.03.006</a>.
+</p>
+<p>Díaz-Emparanza, I. and Moral, M. P. (2013).
+<em>Seasonal stability tests in gretl. An application to international tourism data</em>.
+Working paper: Biltoki D.T. 2013.03. 
+</p>
+<p>Hylleberg, S., Engle, R., Granger, C. and Yoo, B. (1990)
+"Seasonal integration and cointegration".
+<em>Journal of Econometrics</em> <b>44</b>(1), pp. 215-238.
+DOI: <a href="https://doi.org/10.1016/0304-4076%2890%2990080-D">doi:10.1016/0304-4076(90)90080-D</a>.
+</p>
+
+
+</div>

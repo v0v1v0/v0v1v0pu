@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fin_JustifiedPE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Justified P/E Ratio</h2>
+
+<h3>Description</h3>
+
+<p>Compute the Justified P/E of a stock.
+Justified P/E = ( (DPS / EPS) * (1 + g)) / (k – g)
+DPS is the dividend per share, EPS is the earnings per share,
+g is the sustainable growth rate, and k is the required rate of return.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fin_JustifiedPE(
+  Dividend = 0.02,
+  EPS = 1,
+  growthRate = 0.08,
+  discountRate = 0.12,
+  basePE = 20,
+  yrs = 10
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Dividend</code></td>
+<td>
+<p>The dividend.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>EPS</code></td>
+<td>
+<p>The Earnings per Share.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>growthRate</code></td>
+<td>
+<p>The growth rate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>discountRate</code></td>
+<td>
+<p>Your chosen discount rate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>basePE</code></td>
+<td>
+<p>The base PE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yrs</code></td>
+<td>
+<p>Years.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> A PE that is justified for this stock.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>fin_interest()</code>, <code>fin_percent()</code>, <code>fin_NI()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Functions: 
+<code>deg2rad()</code>,
+<code>fin_NI()</code>,
+<code>fin_interest()</code>,
+<code>fin_percent()</code>,
+<code>fin_ticker()</code>,
+<code>fin_valuation()</code>,
+<code>rad2deg()</code>,
+<code>umxBrownie()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># fin_JustifiedPE(Dividend= .8, EPS = 2, growthRate = .06, discountRate = .1)
+
+</code></pre>
+
+
+</div>

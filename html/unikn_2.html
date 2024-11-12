@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>all_colors</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Provide all unikn colors and base R colors</h2>
+
+<h3>Description</h3>
+
+<p><code>all_colors</code> combines the <strong>unikn</strong> color gradients with the 
+657 named colors provided by <code>colors</code> of <strong>grDevices</strong>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">all_colors(distinct = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>distinct</code></td>
+<td>
+<p>Boolean: Return only colors with unique values and names? 
+Default: <code>distinct = TRUE</code> (i.e., remove duplicate values and names).</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The color values returned (as a named character vector) 
+are either HEX/HTML codes or <strong>base</strong> R color names.
+</p>
+<p>The <code>distinct</code> option removes colors with duplicate color values or names.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of color values (of type character).
+</p>
+
+
+</div>

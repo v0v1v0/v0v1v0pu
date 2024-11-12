@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>clean_columns</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Cleans up column names by forcing them into tidyverse style</h2>
+
+<h3>Description</h3>
+
+<p>Zero-configuration function that takes unwieldy column names and
+coerces them into tidyverse-styled column names.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">clean_columns(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector of column names.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A character vector of column names.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">clean_columns(c("Date of Purchase", "Item No.", "description", "",
+  "Transaction at Jane's Counter?", "Auditing - Worth it?"))
+
+</code></pre>
+
+
+</div>

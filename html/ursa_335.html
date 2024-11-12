@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>whiteboxing</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Wrapper to WhiteboxTools
+</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper to tools from <span class="pkg">"whitebox"</span> package to manipulate with <code>ursaRaster</code> objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">whiteboxing(tool_name, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>tool_name</code></td>
+<td>
+
+<p>Either tool name of Whitebox or function name from <span class="pkg">whitebox</span>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>List of parameters.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Wrapper to function <code>wbt_run_tool</code>.
+</p>
+<p><code>ursaRaster</code> object <code>foo</code> can be passed via parameter <code>input=foo</code> instead of GeoTIFF file name.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If argument <code>output</code> is missed or <code>output=FALSE</code>, then object of class <code>ursaRaster</code>. Otherwise, output GeoTIFF file name.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Internally, for piping support, first character argument without <code>*.tif</code> suffix is interpreted as <code>tool_name</code>. First unnamed character argument with <code>*.tif</code> suffix or <code>ursaRaster</code> object is interpreted as input.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://github.com/jblindsay/whitebox-tools/releases/">WhiteboxTools</a>
+<span class="pkg">whitebox</span>  
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">if ((requireNamespace("whitebox"))&amp;&amp;(isTRUE(whitebox::wbt_init()))) {
+   dem &lt;- whitebox::sample_dem_data()
+   a1 &lt;- c(DEM=read_gdal(dem))
+   a2 &lt;- whiteboxing("BreachDepressions",input=a1)
+   b &lt;- list(value=c(a1,a2),difference=c(diff=a1-a2))
+   print(b)
+   display(b,layout=c(2,NA),legend=list(list("first","left"),list("last","left")))
+   if (getRversion()&gt;="4.1.0") {
+      a5 &lt;- dem |&gt;
+         whiteboxing("feature_preserving_smoothing",filter=9) |&gt;
+         whiteboxing("breach_depressions") |&gt;
+         print()
+   }
+}
+</code></pre>
+
+
+</div>

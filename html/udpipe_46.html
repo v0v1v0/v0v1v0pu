@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_reverse</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Inverse operation of the document_term_matrix function</h2>
+
+<h3>Description</h3>
+
+<p>Inverse operation of the <code>document_term_matrix</code> function. 
+Creates frequency table which contains 1 row per document/term
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_reverse(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object as returned by <code>document_term_matrix</code></p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a data.frame with columns doc_id, term and freq where freq is just the value in each
+cell of the <code>x</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>document_term_matrix</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- data.frame(
+ doc_id = c(1, 1, 2, 3, 4), 
+ term = c("A", "C", "Z", "X", "G"), 
+ freq = c(1, 5, 7, 10, 0))
+dtm &lt;- document_term_matrix(x)
+dtm_reverse(dtm)
+</code></pre>
+
+
+</div>

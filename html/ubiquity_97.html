@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print and Log Messages</h2>
+
+<h3>Description</h3>
+
+<p>Used to print messages to the screen and the log file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vp(cfg, str, fmt = "alert")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>str</code></td>
+<td>
+<p>sequence of strings to print</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fmt</code></td>
+<td>
+<p>string format should be one of the following: <code>"h1"</code>,
+<code>"h2"</code>, <code>"h3"</code>, <code>"verbatim"</code>, <code>"alert"</code> (default), <code>"warning"</code>,
+<code>"danger"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Boolean variable indicating success (<code>TRUE</code>) or failure (<code>FALSE</code>)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+# Initialzing the log file
+vp(cfg, "Message that will be logged")
+
+</code></pre>
+
+
+</div>

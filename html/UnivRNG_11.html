@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>draw.noncentral.F</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates variates from doubly non-central F distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function implements pseudo-random number generation for a doubly non-central <code class="reqn">F</code> distribution 
+</p>
+<p style="text-align: center;"><code class="reqn">F=\frac{X_{1}^{2}/n}{X_{2}^{2}/m}</code>
+</p>
+
+<p>where <code class="reqn">X_{1}^{2}\sim \chi^{2}(n,\lambda_{1})</code>, <code class="reqn">X_{2}^{2}\sim \chi^{2}(m,\lambda_{2})</code>, <code class="reqn">n</code> and <code class="reqn">m</code> are numerator and denominator degrees of freedom, respectively, and <code class="reqn">\lambda_{1}</code> and <code class="reqn">\lambda_{2}</code> are the numerator and denominator non-centrality parameters, respectively. It includes central and singly non-central F distributions as a special case.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">draw.noncentral.F(nrep,dof1,dof2,ncp1,ncp2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrep</code></td>
+<td>
+<p>Number of data points to generate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dof1</code></td>
+<td>
+<p>Numerator degress of freedom.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dof2</code></td>
+<td>
+<p>Denominator degrees of freedom.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncp1</code></td>
+<td>
+<p>Numerator non-centrality parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncp2</code></td>
+<td>
+<p>Denominator non-centrality parameter.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector containing generated data.</p>
+
+
+<h3>See Also</h3>
+
+<p><code>draw.noncentral.chisquared</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">draw.noncentral.F(nrep=100000,dof1=2,dof2=4,ncp1=2,ncp2=4)
+</code></pre>
+
+
+</div>

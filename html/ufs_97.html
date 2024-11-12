@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>disattenuate.d</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Disattenuate a Cohen's d estimate for unreliability in the continuous variable</h2>
+
+<h3>Description</h3>
+
+<p>Measurement error (i.e. the complement of reliability) results in a downward bias
+of observed effect sizes. This attenuation can be reversed by disattenuation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">disattenuate.d(d, reliability)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+<p>The (attenuated) value of Cohen's d (i.e. the value as observed in the sample,
+and therefore attenuated (decreased) by measurement error in the continuous variable).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reliability</code></td>
+<td>
+<p>The reliability of the measurements of the continuous variable</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The disattenuated value of Cohen's d
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters &amp; Stefan Gruijters
+</p>
+
+
+<h3>References</h3>
+
+<p>Bobko, P., Roth, P. L., &amp; Bobko, C. (2001). Correcting
+the Effect Size of d for Range Restriction and Unreliability.
+<em>Organizational Research Methods, 4</em>(1), 46–61.
+<a href="https://doi.org/10.1177/109442810141003">doi:10.1177/109442810141003</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">disattenuate.d(.5, .8);
+</code></pre>
+
+
+</div>

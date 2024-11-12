@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sim_bounded</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulated data set</h2>
+
+<h3>Description</h3>
+
+<p>This data set was simulated from all families of distributions
+available in <code>unitquantreg</code> package considering
+the median, i.e., <code class="reqn">\tau=0.5</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(sim_bounded, package = "unitquantreg")
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p><code>data.frame</code> with 1300 observations and 5 columns:
+</p>
+
+<ul>
+<li> <p><code>y1</code>: simulated response variable with constant shape parameter,
+<code class="reqn">\theta = 2</code>.
+</p>
+</li>
+<li> <p><code>y2</code>: simulated response variable with regression structure in
+the shape parameter, <code class="reqn">\theta_i = \exp(\zeta_i</code>), where
+<code class="reqn">\zeta_i = \mathbf{z}_i^\top\,\boldsymbol{\gamma}</code>.
+</p>
+</li>
+<li> <p><code>x</code>: covariate related to <code class="reqn">\mu_i</code>, i.e., the median.
+</p>
+</li>
+<li> <p><code>z</code>: covariate related to <code class="reqn">\theta_i</code>, i.e., the shape parameter.
+</p>
+</li>
+<li> <p><code>family</code>: string indicating the family of distribution.
+</p>
+</li>
+</ul>
+<h3>Details</h3>
+
+<p>There are two response variable, namely <code>y1</code> and <code>y2</code>.
+The former was simulated considering a regression structure for
+<code class="reqn">\mu</code> and one covariate simulated from a standard uniform distribution,
+where the true vector of coefficients for <code class="reqn">\mu</code> is
+<code class="reqn">\boldsymbol{\beta} = (1, 2)</code> and <code class="reqn">\theta = 2</code>.
+The latter was simulated assuming a regression structure for both <code class="reqn">\mu</code>
+and <code class="reqn">\theta</code> (shape parameter) and only one independent covariates
+simulated from two standard uniform distributions. The true vectors of
+coefficients for <code class="reqn">\mu</code> and <code class="reqn">\theta</code> are
+<code class="reqn">\boldsymbol{\beta} = (1, 2)</code> and <code class="reqn">\boldsymbol{\gamma} = (-1, 1)</code>,
+respectively.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>André F. B. Menezes
+</p>
+
+
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_rcpp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Use C, C++, RcppArmadillo, or RcppEigen</h2>
+
+<h3>Description</h3>
+
+<p>Adds infrastructure commonly needed when using compiled code:
+</p>
+
+<ul>
+<li>
+<p> Creates <code style="white-space: pre;">⁠src/⁠</code>
+</p>
+</li>
+<li>
+<p> Adds required packages to <code>DESCRIPTION</code>
+</p>
+</li>
+<li>
+<p> May create an initial placeholder <code>.c</code> or <code>.cpp</code> file
+</p>
+</li>
+<li>
+<p> Creates <code>Makevars</code> and <code>Makevars.win</code> files (<code>use_rcpp_armadillo()</code> only)
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_rcpp(name = NULL)
+
+use_rcpp_armadillo(name = NULL)
+
+use_rcpp_eigen(name = NULL)
+
+use_c(name = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Either a string giving a file name (without directory) or
+<code>NULL</code> to take the name from the currently open file in RStudio.</p>
+</td>
+</tr></table>
+</div>

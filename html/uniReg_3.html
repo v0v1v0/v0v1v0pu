@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>points.unireg</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Points method for <code>unireg</code> objects.
+
+</h2>
+
+<h3>Description</h3>
+
+<p>Plotting a unimodal regression object into an existing plot.
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'unireg'
+points(x, type="l", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object of class <code>"unireg"</code>, a result of <code>unireg</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Per default plotting type <code>"l"</code> is used for the fitted spline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other parameters to be passed through to the generic <code>points</code> functions.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is a points method for unimodal regression objects. The spline function is plotted using a grid of x-values equally spaced across the interval on which the spline is defined. The distance between the grid values is given by the minimal distance of the observed x-values (used for fitting) divided by 10.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Claudia Koellmann</p>
+
+
+<h3>See Also</h3>
+
+<p><code>unireg</code>,<code>predict.unireg</code>,<code>plot.unireg</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- sort(rep(0:5,20))         
+n &lt;- length(x)               
+set.seed(41333)
+func &lt;- function(mu){rnorm(1,mu,0.05)}
+y &lt;- sapply(dchisq(x,3),func)
+
+# plot of data
+plot(jitter(x), y, xlab="x (jittered)")
+
+# fit with default settings
+fit &lt;- unireg(x, y, g=5)
+# short overview of the fitted spline
+fit
+
+# plot of true and fitted functions
+plot(jitter(x), y, xlab="x (jittered)")
+curve(dchisq(x,3), 0, 5, type="l", col="grey", lwd=2, add=TRUE)
+points(fit, lwd=2, col="orange")
+legend("bottomright", legend = c("true mean function", 
+        "difference penalized unimodal fit"),
+    col=c("grey","orange"),lwd=c(2,2))
+</code></pre>
+
+
+</div>

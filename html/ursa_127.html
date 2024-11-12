@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>hist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Histogram of raster image
+</h2>
+
+<h3>Description</h3>
+
+<p>Two functions for manipulation with histograms. In function <code>hist</code> values of <code>ursaRaster</code> objects are passed to generic function <code>hist</code>, which allows compute and optionally plot histograms. Other function, <code>histogram</code>, plots histogram in the graphical device <code>png</code> directly.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+hist(x, ...)
+
+ursa_hist(obj, width = 800, height = 600, ...)
+histogram(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj, x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width</code></td>
+<td>
+
+<p>Positive integer. Width of histogram's panel.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height</code></td>
+<td>
+
+<p>Positive integer. Height of histogram's panel.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Other arguments, which are passed to <code>colorize</code> and <code>compose_open</code> functions.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>histogram</code> is synonym of <code>ursa_hist</code>.
+</p>
+<p>Function <code>hist</code> for <code>ursaRaster</code> object is defined as <code>hist(ursa_value(obj),...)</code>.
+<br>
+In the function <code>histogram</code> each bin corresponds to category. The image splitting to categories is realized via <code>colorize</code> function. The panel of plotting is constucted using artificial coordinate system without geographical projection. The purpose of <code>compose_open</code> function is prepare layout for plotting raster images; in the case of histogram, the purpose of this function is prepare layout for plotting histogram
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function <code>histogram</code> returns <code>0L</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>colorize</code> is used to define histogram bins.
+<br><code>compose_open</code> prepares panel for histogram plotting.
+<br><code>hist</code> computes and plots histograms.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- pixelsize()
+hist(a)
+histogram(a,breaks=21)
+</code></pre>
+
+
+</div>

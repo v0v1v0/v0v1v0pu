@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>squish_newlines</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Deduplicate and remove trailing line breaks</h2>
+
+<h3>Description</h3>
+
+<p>Deduplicate and remove trailing line breaks
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">squish_newlines(sepstring)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>sepstring</code></td>
+<td>
+<p>A character vector with new line control characters.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Useful for tables with merged cells, often imported from Word or PDF
+files. Can be applied across multiple columns before separating into rows.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector without trailing or multiple consecutive new line sequences.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">vecWithNewlines &lt;- c("dog\n\ncat\n\n\npig\n")
+squish_newlines(vecWithNewlines)
+
+</code></pre>
+
+
+</div>

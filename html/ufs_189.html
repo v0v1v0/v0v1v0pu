@@ -1,0 +1,146 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>testRetestAlpha</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Test-Retest Alpha Coefficient</h2>
+
+<h3>Description</h3>
+
+<p>The testRetestAlpha function computes the test-retest alpha coefficient
+(Green, 2003).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">testRetestAlpha(
+  dat = NULL,
+  moments = NULL,
+  testDat = NULL,
+  retestDat = NULL,
+  sortItems = FALSE,
+  convertToNumeric = TRUE
+)
+
+## S3 method for class 'testRetestAlpha'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>A dataframe containing the items in the scale at both measurement
+moments.  If no dataframe is specified, a dialogue will be launched to allow
+the user to select an SPSS datafile. If only one dataframe is specified,
+either the items have to be ordered chronologically (i.e. first all items
+for the first measurement, then all items for the second measurement), or
+the vector 'moments' has to be used to indicate, for each item, to which
+measurement moment it belongs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>moments</code></td>
+<td>
+<p>Used to indicate to which measurement moment each item in
+'dat' belongs; should be a vector with the same length as dat has columns,
+and with two possible values (e.g. 1 and 2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>testDat, retestDat</code></td>
+<td>
+<p>Dataframes with the items for each measurement
+moment: note that the items have to be in the same order (unless sortItems
+is TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortItems</code></td>
+<td>
+<p>If true, the columns (items) in each dataframe are ordered
+alphabetically before starting. This can be convenient to ensure that the
+order of the items at each measurement moment is the same.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>convertToNumeric</code></td>
+<td>
+<p>When TRUE, the function will attempt to convert all
+vectors in the dataframes to numeric.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to print</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Ignored.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object with the input and several output variables. Most notably:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Input specified when calling the function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intermediate</code></td>
+<td>
+<p>Intermediate values and objects computed to get to the
+final results</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output$testRetestAlpha</code></td>
+<td>
+<p>The value of the test-retest
+alpha coefficient.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Green, S. N. (2003). A Coefficient Alpha for Test-Retest Data.
+Psychological Methods, 8(1), 88-101. <a href="doi:10/bxq9r4">doi:10/bxq9r4</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+### This will prompt the user to select an SPSS file
+testRetestAlpha();
+
+## End(Not run)
+
+### Load data from simulated dataset testRetestSimData (which
+### satisfies essential tau-equivalence).
+data(testRetestSimData);
+
+### The first column is the true score, so it's excluded in this example.
+exampleData &lt;- testRetestSimData[, 2:ncol(testRetestSimData)];
+
+### Compute test-retest alpha coefficient
+testRetestAlpha(exampleData);
+
+</code></pre>
+
+
+</div>

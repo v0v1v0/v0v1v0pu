@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>powerset_icounts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Powerset Intersection Table</h2>
+
+<h3>Description</h3>
+
+<p>This function computes the intersection of elements for all possible
+combinations of the provided sets of IDs.
+A typical use case is in a cohort of patients with incomplete data across
+multiple data types. This function helps determine how many patients
+have complete data for specific combinations of data types, allowing
+you to find the optimal combinations for analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">powerset_icounts(ids)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>ids</code></td>
+<td>
+<p><code>list()</code><br>
+A named list, each element being a numeric vector of ids.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A tibble with columns:
+</p>
+
+<ul>
+<li> <p><code>set_combo</code>: name for combo set/vector
+</p>
+</li>
+<li> <p><code>num_subsets</code>: number of subsets in the combo set
+</p>
+</li>
+<li> <p><code>common_ids</code>: vector of common ids in the combo set
+</p>
+</li>
+<li> <p><code>count</code>: number of common ids
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+ids = list(a = 1:3, b = 2:5, c = 1:4, d = 3:6, e = 2:6)
+res = powerset_icounts(ids)
+
+res |&gt;
+  filter(num_subsets &gt;= 2, count &gt; 2) |&gt;
+  arrange(desc(count), desc(num_subsets))
+
+</code></pre>
+
+
+</div>

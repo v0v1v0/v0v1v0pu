@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ezcor_batch</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Run correlation between two variables in a batch mode and support group by a variable</h2>
+
+<h3>Description</h3>
+
+<p>Run correlation between two variables in a batch mode and support group by a variable
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ezcor_batch(
+  data,
+  var1,
+  var2,
+  split = FALSE,
+  split_var = NULL,
+  cor_method = "pearson",
+  adjust_method = "none",
+  use = "complete",
+  sig_label = TRUE,
+  parallel = FALSE,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a <code>data.frame</code> containing variables</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var1</code></td>
+<td>
+<p>a character, the first variable in correlation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var2</code></td>
+<td>
+<p>a character, the second variable in correlation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>split</code></td>
+<td>
+<p>whether perform correlation grouped by a variable, default is 'FALSE'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>split_var</code></td>
+<td>
+<p>a <code>character</code>, the group variable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cor_method</code></td>
+<td>
+<p>method="pearson" is the default value. The alternatives to be passed to cor are "spearman" and "kendall"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adjust_method</code></td>
+<td>
+<p>What adjustment for multiple tests should be used? ("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use</code></td>
+<td>
+<p>use="pairwise" will do pairwise deletion of cases. use="complete" will select just complete cases</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig_label</code></td>
+<td>
+<p>whether add symbal of significance. P &lt; 0.001,<code style="white-space: pre;">⁠***⁠</code>; P &lt; 0.01,<code style="white-space: pre;">⁠**⁠</code>; P &lt; 0.05,<code>*</code>; P &gt;=0.05,""</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>if <code>TRUE</code>, do parallel computation by <strong>furrr</strong> package.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>if <code>TRUE</code>, print extra info.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yi Xiong, Shixiang Wang
+</p>
+
+
+</div>

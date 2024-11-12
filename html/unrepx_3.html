@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>daniel.paper</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Half-normal graph paper</h2>
+
+<h3>Description</h3>
+
+<p>The <code>daniel.paper</code> function draws a graph-paper grid suitable for manually constructing a half-normal plot of effects. The paper is customized to the number of effects to be plotted, thus making the task as simple as possible.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">daniel.paper(n.effects = 15, linear = 0:40, a = 0.375, 
+    rank.axis = c("y", "x"), type = c("half.normal", "normal"), 
+    theme = "blue", lin.lab, rank.lab)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n.effects</code></td>
+<td>
+<p>Numeric vector of effects or contrasts to be explored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linear</code></td>
+<td>
+<p>sequence of numbers to use for the linear scale.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>The adjustment used in scaling and centering ranks in the interval (0, 1). The <code class="reqn">i</code>th ordered (half-) normal score is computed as the <code class="reqn">(i - a) / (n + 1 - 2*a)</code> quantile of the reference distribution. The value should always be less than 1, and is recommended to be in [0,.5]. The scale becomes somewhat more nonlinear as <code class="reqn">a</code> increases. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rank.axis</code></td>
+<td>
+<p>Character value of <code>"y"</code> or <code>"x"</code> selecting whether the ranks of effects should be plotted as the vertical or the horizontal coordinate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Character value matching <code>"half.normal"</code> or <code>"normal"</code> specifying whether the scaling is for a half-normal or a normal plot. The latter is not recommended.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>Character giving the name of the theme to use for the grid lines. The default of <code>"blue"</code> plots the major grid lines in blue and the minor ones in cyan. Other built-in themes are <code>"bw"</code> (black majors, and dotted black minors), <code>"gray"</code> (black majors and gray minors), and <code>"bold"</code> (all lines black, but major lines are heavier). See details below for information on how to create one's own theme.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lin.lab, rank.lab</code></td>
+<td>
+<p>Labels for the linear and rank scales.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Use of <code>type = "normal"</code> is discouraged, as is discussed in the Details section in <code>hnplot</code>.
+</p>
+<p>A custom theme, say <code>"foo"</code>, may be created by creating a <code>list</code> named <code>foo_thm</code>, which should contain two elements named <code>major</code> and <code>minor</code>, and (optionally) <code>axis</code>. <code>major</code> must be a named <code>list</code> with graphical parameters <code>col</code>, <code>lty</code>, and <code>lwd</code> as described in <code>par</code>. <code>minor</code> only requires <code>col</code> and <code>lty</code>, as minor lines are always drawn using <code>lwd = 1</code>. <code>axis</code> must contain <code>col</code> and <code>lwd</code>, which are used for the tick marks and labels on the rank scale. If <code>axis</code> is not included, <code>major</code> is used.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Nothing is returned.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Russell V. Lenth
+</p>
+
+
+<h3>References</h3>
+
+<p>Daniel, C (1959)
+Use of Half-Normal Plots in Interpreting Factorial Two-Level Experiments.
+<em>Technometrics</em>, 1(4), 311-341
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>hnplot</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require("unrepx")
+
+old.par &lt;- par(mar = c(5, 5, 1, 1) + .1)
+daniel.paper(15)
+
+neon_thm &lt;- list(
+    major = list(col = "green", lty = 1, lwd = 2),
+    minor = list(col = "orange", lty = 1),
+    axis = list(col = "magenta", lwd = 2)
+)
+daniel.paper(31, rank.axis = "x", theme = "neon")
+
+par(old.par)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,361 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unitize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unitize an R Test Script</h2>
+
+<h3>Description</h3>
+
+<p>Turn standard R scripts into unit tests by storing the expressions therein
+along with the results of their evaluation, and provides an interactive
+prompt to review tests.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unitize(
+  test.file = NULL,
+  store.id = NULL,
+  state = getOption("unitizer.state"),
+  pre = NULL,
+  post = NULL,
+  history = getOption("unitizer.history.file"),
+  interactive.mode = interactive(),
+  force.update = FALSE,
+  auto.accept = character(0L),
+  use.diff = getOption("unitizer.use.diff"),
+  show.progress = getOption("unitizer.show.progress", TRUE),
+  transcript = getOption("unitizer.transcript", !interactive.mode)
+)
+
+review(
+  store.id = NULL,
+  use.diff = getOption("unitizer.use.diff"),
+  show.progress = getOption("unitizer.show.progress", TRUE)
+)
+
+unitize_dir(
+  test.dir = NULL,
+  store.ids = filename_to_storeid,
+  pattern = "^[^.].*\\.[Rr]$",
+  state = getOption("unitizer.state"),
+  pre = NULL,
+  post = NULL,
+  history = getOption("unitizer.history.file"),
+  interactive.mode = interactive(),
+  force.update = FALSE,
+  auto.accept = character(0L),
+  use.diff = getOption("unitizer.use.diff"),
+  show.progress = getOption("unitizer.show.progress", TRUE),
+  transcript = getOption("unitizer.transcript", !interactive.mode)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>test.file</code></td>
+<td>
+<p>path to the file containing tests, if supplied path does not
+match an actual system path, <code>unitizer</code> will try to infer a possible
+path.  If NULL, will look for a file in the “tests/unitizer” package
+folder if it exists, or in “.” if it does not.
+See <code>infer_unitizer_location</code>) for details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>store.id</code></td>
+<td>
+<p>if NULL (default), <code>unitizer</code> will select a directory
+based on the <code>test.file</code> name by replacing <code>.[rR]</code> with
+<code>.unitizer</code>.  You can also specify a directory name, or pass any
+object that has a defined <code>get_unitizer</code> method which allows
+you to specify non-standard <code>unitizer</code> storage mechanisms (see
+<code>get_unitizer</code>).  Finally, you can pass an actual
+<code>unitizer</code> object if you are using <code>review</code>; see <code>store.ids</code>
+for <code>unitize_dir</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>state</code></td>
+<td>
+<p>character(1L) one of
+<code>c("prisitine", "suggested", "basic", "off", "safe")</code>, an
+environment, or a state object produced by <code>state</code> or
+<code>in_pkg</code>; modifies how <code>unitizer</code> manages aspects of
+session state that could affect test evaluation, including the parent
+evaluation environment.  For more details see <code>unitizerState</code>
+documentation and <code>vignette("unitizer_reproducible_tests")</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pre</code></td>
+<td>
+<p>NULL, or a character vector pointing to files and/or directories.
+If a character vector, then any files referenced therein will be sourced,
+and any directories referenced therein will be scanned non-recursively for
+visible files ending in ".r" or ".R", which are then also sourced.  If
+NULL, then <code>unitizer</code> will look for a directory named "_pre" in the
+directory containing the first test file and will treat it as if you had
+specified it in <code>pre</code>.  Any objects created by those scripts will be
+put into a parent environment for all tests.  This provides a mechanism for
+creating objects that are shared across different test files, as well as
+loading shared packages.  Unlike objects created during test evaluation,
+any objects created here will not be stored in the <code>unitizer</code> so you
+will have not direct way to check whether these objects changed across
+<code>unitizer</code> runs.  Additionally, typing <code>ls</code> from the review
+prompt will not list these objects.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>post</code></td>
+<td>
+<p>NULL, or a character vector pointing to files and/or directories.
+See <code>pre</code>.  If NULL will look for a directory named "_post" in the
+directory containing the first test file.  Scripts are run just prior to
+exiting <code>unitizer</code>. <code>post</code> code will be run in an environment
+with the environment used to run <code>pre</code> as the parent.  This means that
+any objects created in <code>pre</code> will be available to <code>post</code>, which
+you can use to your advantage if there are some things you do in <code>pre</code>
+you wish to undo in <code>post</code>. Keep in mind that <code>unitizer</code> can
+manage most aspects of global state, so you should not need to use this
+parameter to unload packages, remove objects, etc.  See details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>history</code></td>
+<td>
+<p>character(1L) path to file to use to store history generated
+during interactive unitizer session; the default is an empty string, which
+leads to <code>unitizer</code> using a temporary file, set to NULL to disable
+history capture.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interactive.mode</code></td>
+<td>
+<p>logical(1L) whether to run in interactive mode (
+request user input when needed) or not (error if user input is required,
+e.g. if all tests do not pass).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.update</code></td>
+<td>
+<p>logical(1L) if TRUE will give the option to re-store a
+unitizer after re-evaluating all the tests even if all tests passed.
+You can also toggle this option from the unitizer prompt by typing <code>O</code>
+(capital letter "o"), though <code>force.update=TRUE</code> will force update
+irrespective of whether you type <code>O</code> at the prompt</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>auto.accept</code></td>
+<td>
+<p>character(X) ADVANCED USE ONLY: YOU CAN EASILY DESTROY
+YOUR <code>unitizer</code> WITH THIS; whether to auto-accept tests without
+prompting, use values in <code>c("new", "failed", "deleted", "error")</code> to
+specify which type(s) of test you wish to auto accept (i.e. same as typing
+<code>"Y"</code> at the <code>unitizer</code> prompt) or empty character vector to turn
+off (default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.diff</code></td>
+<td>
+<p>TRUE or FALSE, whether to use diffs when there is an error,
+if FALSE uses <code>all.equal</code> instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show.progress</code></td>
+<td>
+<p>TRUE or FALSE or integer(1L) in 0:3, whether to show
+progress updates for each part of the process (TRUE or &gt; 0), for each file
+processed (TRUE or &gt; 1), and for each test processed (TRUE or &gt; 2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>transcript</code></td>
+<td>
+<p>TRUE (default in non-interactive mode) or FALSE (default in
+interactive mode) causes immediate output of stdout/stderr during test
+evaluation instead of deferred display during test review.  This also
+causes progress updates to display on new lines instead of overlaying on
+the same line.  One limitation of running in this mode is that stderr is no
+longer captured at all so is unavailable in the review stage.  stderr
+text that is also part of a signalled condition (e.g. "boom" in
+'stop("boom")') is still shown with the conditions in the review step.  To
+see direct stderr output in transcript mode scroll up to the test
+evaluation point.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test.dir</code></td>
+<td>
+<p>the directory to run the tests on; if NULL will use the
+“tests/unitizer” package folder if it exists, or “.” if it
+does not.  See <code>infer_unitizer_location</code>) for details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>store.ids</code></td>
+<td>
+<p>one of </p>
+
+<ul>
+<li>
+<p> a function that converts test file names to <code>unitizer</code> ids; if
+<code>unitize</code>ing multiple files will be <code>lapply</code>ed over each file
+</p>
+</li>
+<li>
+<p> a character vector with <code>unitizer</code> ids, must be the same
+length as the number of test files being reviewed (see <code>store.id</code>)
+</p>
+</li>
+<li>
+<p> a list of unitizer ids, must be the same length as the number of
+test files being reviewed; useful when you implement special storage
+mechanisms for the <code>unitizers</code> (see <code>get_unitizer</code>)
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>a regular expression used to match what subset of files in
+<code>test.dir</code> to <code>unitize</code></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>unitize</code> creates unit tests from a single R file, and
+<code>unitize_dir</code> creates tests from all the R files in the specified
+directory (analogous to <code>testthat::test_dir</code>).
+</p>
+<p><code>unitizer</code> stores are identified by <code>unitizer</code> ids, which by
+default are character strings containing the location of the folder the
+<code>unitizer</code> RDS files are kept in.  <code>unitize</code> and
+friends will create a <code>unitizer</code> id for you based on the test file
+name and location, but you can specify your own location as an id, or even
+use a completely different mechanism to store the <code>unitizer</code> data by
+implementing S3 methods for <code>get_unitizer</code> and
+<code>set_unitizer</code>.  For more details about storage see those
+functions.
+</p>
+<p><code>review</code> allows you to review existing <code>unitizer</code>s and modify them
+by dropping tests from them.  Tests are not evaluated in this mode; you are
+just allowed to review the results of previous evaluations of the tests
+Because of this, no effort is made to create reproducible state in the
+browsing environments, unlike with <code>unitize</code> or <code>unitize_dir</code>
+(see <code>state</code> parameter).
+</p>
+<p>You are strongly encouraged to read through the vignettes
+for details and examples (<code>browseVignettes("unitizer")</code>).  The demo
+(<code>demo("unitizer")</code>) is also a good introduction to these functions.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>unitize</code> and company are intended to be used primarily for
+the interactive environment and side effects.  The functions do return
+summary data about test outcomes and user input as
+<code>unitizer_result</code> objects, or for <code>unitize_dir</code> as
+<code>unitizer_results</code> objects, invisibly.  See
+<code>unitizer_result</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p><code>unitizer</code> approximates the semantics of sourcing an R file when running
+tests, and those of the interactive prompt when reviewing them.  The
+semantics are not identical, and in some cases you may notice differences.
+For example, when running tests:
+</p>
+
+<ul>
+<li>
+<p> All expressions are run with <code>options(warn=1)</code>,
+irrespective of what the user sets that option to.
+</p>
+</li>
+<li> <p><code>on.exit(...)</code> expressions will be evaluated immediately for
+top-level statements (either in the test file or in an
+<code>unitizer_sect</code>, thereby defeating their purpose).
+</p>
+</li>
+<li>
+<p> Each test expression is run in its own environment, which is enclosed
+by that of previous tests.
+</p>
+</li>
+<li>
+<p> Output and Message streams are sunk so any attempt to debug directly
+will be near-impossible as you won't see anything.
+</p>
+</li>
+<li>
+<p> For portable tests it is best to use ASCII only string literals
+(avoiding even escaped bytes or Unicode characters), round numbers, etc.,
+because <code>unitizer</code> uses deparsed test expressions as indices
+to retrieve reference values.  See <code>vignette('u1_intro',
+    package='unitizer')</code> for details and work-arounds.
+</p>
+</li>
+</ul>
+<p>When reviewing them:
+</p>
+
+<ul>
+<li> <p><code>ls()</code> and <code>q()</code> are over-ridden by <code>unitizer</code> utility
+functions.
+</p>
+</li>
+<li>
+<p> Expressions are evaluated with <code>options(warn=1)</code> or greater,
+although unlike in test running it is possible to set and keep
+<code>options(warn=2)</code>.
+</p>
+</li>
+<li>
+<p> Some single upper case letters will be interpreted as <code>unitizer</code>
+meta-commands.
+</p>
+</li>
+</ul>
+<p>For a more complete discussion of these differences see the introductory
+vignette (<code>vignette('u1_intro')</code>), the "Special Semantics" section of
+the tests vignette (<code>vignette('u2_tests')</code>), and the "Evaluating
+Expressions at the <code>unitizer</code> Prompt" section of the interactive
+environment vignette (<code>vignette('u3_interactive-env')</code>).
+</p>
+
+
+<h3>Default Settings</h3>
+
+<p>Many of the default settings are specified in the form <code>getOption("...")</code>
+to allow the user to "permanently" set them to their preferred modes by
+setting options in their <code>.Rprofile</code> file.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>unitizerState</code>, <code>unitizer.opts</code>,
+<code>get_unitizer</code>, <code>infer_unitizer_location</code>,
+<code>unitizer_result</code>
+</p>
+
+
+</div>

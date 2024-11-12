@@ -1,0 +1,143 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spatter</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Spread key-value pairs of mixed types across multiple columns</h2>
+
+<h3>Description</h3>
+
+<p><code>spatter()</code> is like <code>tidyr::spread()</code> but for when different columns have
+different data types.  It works on data that has come via <code>as_cells()</code> or
+<code>tidyxl::xlsx_cells()</code>, where each row represents one cell of a table, and
+the value of the cell is represented in a different column, depending on the
+data type.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">spatter(cells, key, values = NULL, types = data_type, formatters = list())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cells</code></td>
+<td>
+<p>A data frame where each row represents a cell, with columns
+<code>row</code> and <code>col</code>, usually a column <code>data_type</code>, and additional columns of
+cell values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>key</code></td>
+<td>
+<p>The name of the column whose values will become column names</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>Optional. The column of <code>cells</code> to use as the value of each
+cell.  Given as a bare variable name.  If omitted (the default), the <code>type</code>
+argument will be used instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>types</code></td>
+<td>
+<p>Optional. The column that names, for each row of <code>cells</code>, which
+column contains the cell value.  Defaults to <code>data_type</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>formatters</code></td>
+<td>
+<p>A named list of functions for formatting particular data
+types, named by the data type (the name of the column of <code>cells</code> that
+contains the cell value.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># A tidy representation of cells of mixed data types
+x &lt;- data.frame(stringsAsFactors = FALSE,
+        row = c(1L, 1L, 2L, 2L, 3L, 3L, 4L, 4L),
+        col = c(1L, 2L, 1L, 2L, 1L, 2L, 1L, 2L),
+  data_type = c("character", "character", "character", "numeric", "character",
+                "numeric", "character", "numeric"),
+  character = c("Name", "Age", "Matilda", NA, "Nicholas", NA, "Olivia", NA),
+    numeric = c(NA, NA, NA, 1, NA, 3, NA, 5))
+x
+
+# How it would look in a spreadsheet
+rectify(x)
+
+# How it looks after treating the cells in row 1 as headers
+y &lt;- behead(x, "N", header)
+y$col &lt;- NULL # Drop the 'col' column
+y
+
+# At this point you might want to do tidyr::spread(), but it won't work because
+# you want to use both the `character` and `numeric` columns as the values.
+tidyr::spread(y, header, numeric)
+tidyr::spread(y, header, character)
+spatter(y, header)
+
+# The difference between spatter() and tidyr::spread() is that spatter()
+# needs to know which data-type to use for each cell beneath the headers.  By
+# default, it looks at the `data_type` column to decide, but you can change
+# that with the `types` argument.
+y %&gt;%
+  dplyr::select(-data_type, -numeric) %&gt;%
+  dplyr::mutate(data_type_2 = "character") %&gt;%
+  spatter(header, types = data_type_2)
+
+# Alternatively you can name one specific column to use for the cell values.
+y %&gt;%
+  dplyr::mutate(foo = letters[1:6]) %&gt;%
+  dplyr::select(header, row, foo) %&gt;%
+  spatter(header, values = foo)
+
+# The column used for the values is consumed before the spread occurs. If
+# it's necessary for demarking the rows, then make a copy of it first,
+# otherwise you'll get an error like "Duplicate identifiers for rows ..."
+y %&gt;%
+  dplyr::mutate(row2 = row) %&gt;%
+  dplyr::select(row, header, row2) %&gt;%
+  spatter(header, values = row2)
+
+# Like tidyr::spread(), you need to discard extraneous columns beforehand.
+# Otherwise you can get more rows out than you want.
+y$extra &lt;- 11:16
+spatter(y, header)
+
+# pack() is an easy way to keep just the columns you need, without knowing
+# in advance which data-type columns you need.  This examples adds a new
+# column, which is then removed by the pack-unpack sequence without having to
+# mention it by name.
+x$extra &lt;- 11:18
+x %&gt;%
+  pack() %&gt;%
+  dplyr::select(row, col, value) %&gt;%
+  unpack()
+
+# spatter() automatically converts data types so that they can coexist in the
+# same column.  Ordered factors in particular will always be coerced to
+# unordered factors.
+
+# You can control data type conversion by supplying custom functions, named
+# by the data type of the cells they are to convert (look at the `data_type`
+# column).  If your custom functions aren't sufficient to avoid the need for
+# coercion, then they will be overridden.
+spatter(y, header,
+        formatters = list(character = ~ toupper(.), numeric = as.complex))
+</code></pre>
+
+
+</div>

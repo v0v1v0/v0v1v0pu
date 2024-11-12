@@ -1,0 +1,123 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mlkumar</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kumaraswamy distribution maximum likelihood estimation</h2>
+
+<h3>Description</h3>
+
+<p>Uses Newton-Raphson to estimate the parameters of the Kumaraswamy
+distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mlkumar(x, na.rm = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a (non-empty) numeric vector of data values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values be removed?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p><code>a0</code> is an optional starting value for the <code>a</code> parameter.
+<code>rel.tol</code> is the relative accuracy requested, defaults
+to <code>.Machine$double.eps^0.25</code>. <code>iterlim</code> is a positive integer
+specifying the maximum number of iterations to be performed before the
+program is terminated (defaults to <code>100</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For the density function of the Kumaraswamy distribution see
+Kumaraswamy.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>mlkumar</code> returns an object of class <code>univariateML</code>.
+This is a named numeric vector with maximum likelihood estimates for <code>a</code>
+and <code>b</code> and the following attributes:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The name of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density</code></td>
+<td>
+<p>The density associated with the estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logLik</code></td>
+<td>
+<p>The loglikelihood at the maximum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>support</code></td>
+<td>
+<p>The support of the density.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The call as captured my <code>match.call</code></p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Jones, M. C. "Kumaraswamy's distribution: A beta-type
+distribution with some tractability advantages." Statistical Methodology
+6.1 (2009): 70-81.
+</p>
+<p>Kumaraswamy, Ponnambalam. "A generalized probability density function
+for double-bounded random processes." Journal of Hydrology 46.1-2 (1980):
+79-88.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Kumaraswamy for the Kumaraswamy density.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">AIC(mlkumar(USArrests$Rape / 100))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,262 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>associationsDiamondPlot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A diamondplot with confidence intervals for associations</h2>
+
+<h3>Description</h3>
+
+<p>This function produces is a diamondplot that plots the confidence intervals
+for associations between a number of covariates and a criterion. It
+currently only supports the Pearson's r effect size metric; other effect
+sizes are converted to Pearson's r.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">associationsDiamondPlot(
+  dat,
+  covariates,
+  criteria,
+  labels = NULL,
+  criteriaLabels = NULL,
+  decreasing = NULL,
+  sortBy = NULL,
+  conf.level = 0.95,
+  criteriaColors = viridisPalette(length(criteria)),
+  criterionColor = "black",
+  returnLayerOnly = FALSE,
+  esMetric = "r",
+  multiAlpha = 0.33,
+  singleAlpha = 1,
+  showLegend = TRUE,
+  xlab = "Effect size estimates",
+  ylab = "",
+  theme = ggplot2::theme_bw(),
+  lineSize = 1,
+  outputFile = NULL,
+  outputWidth = 10,
+  outputHeight = 10,
+  ggsaveParams = ufs::opts$get("ggsaveParams"),
+  ...
+)
+
+associationsToDiamondPlotDf(
+  dat,
+  covariates,
+  criterion,
+  labels = NULL,
+  decreasing = NULL,
+  conf.level = 0.95,
+  esMetric = "r"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>The dataframe containing the relevant variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>covariates</code></td>
+<td>
+<p>The covariates: the list of variables to associate to the
+criterion or criteria, usually the predictors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criteria, criterion</code></td>
+<td>
+<p>The criteria, usually the dependent variables; one
+criterion (one dependent variable) can also be specified of course. The
+helper function <code>associationsToDiamondPlotDf</code> always accepts only one
+criterion.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>The labels for the covariates, for example the questions that
+were used (as a character vector).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criteriaLabels</code></td>
+<td>
+<p>The labels for the criteria (in the legend).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decreasing</code></td>
+<td>
+<p>Whether to sort the covariates by the point estimate of
+the effect size of their association with the criterion. Use <code>NULL</code> to
+not sort at all, <code>TRUE</code> to sort in descending order, and <code>FALSE</code>
+to sort in ascending order.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortBy</code></td>
+<td>
+<p>When specifying multiple criteria, this can be used to
+indicate by which criterion the items should be sorted (if they should be
+sorted).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The confidence of the confidence intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criteriaColors, criterionColor</code></td>
+<td>
+<p>The colors to use for the different
+associations can be specified in <code>criteriaColors</code>. This should be a
+vector of valid colors with at least as many elements as criteria are
+specified in <code>criteria</code>. If only one criterion is specified, the color
+in <code>criterionColor</code> is used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnLayerOnly</code></td>
+<td>
+<p>Whether to return the entire object that is
+generated, or just the resulting ggplot2 layer.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>esMetric</code></td>
+<td>
+<p>The effect size metric to plot - currently, only 'r' is
+supported, and other values will return an error.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multiAlpha, singleAlpha</code></td>
+<td>
+<p>The transparency (alpha channel) value of the
+diamonds for each association can be specified in <code>multiAlpha</code>, and if
+only one criterion is specified, the alpha level of the diamonds can be
+specified in <code>singleAlpha</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showLegend</code></td>
+<td>
+<p>Whether to show the legend.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab, ylab</code></td>
+<td>
+<p>The label to use for the x and y axes (for
+<code>duoComparisonDiamondPlot</code>, must be vectors of two elements). Use
+<code>NULL</code> to not use a label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>The <code>ggplot()</code> theme to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lineSize</code></td>
+<td>
+<p>The thickness of the lines (the diamonds' strokes).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outputFile</code></td>
+<td>
+<p>A file to which to save the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outputWidth, outputHeight</code></td>
+<td>
+<p>Width and height of saved plot (specified in
+centimeters by default, see <code>ggsaveParams</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ggsaveParams</code></td>
+<td>
+<p>Parameters to pass to ggsave when saving the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Any additional arguments are passed to
+<code>diamondPlot()</code> and eventually to <code>ggDiamondLayer()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>associationsToDiamondPlotDf is a helper function that produces the required
+dataframe.
+</p>
+<p>This function can be used to quickly plot multiple confidence intervals.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A plot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>diamondPlot()</code>, <code>ggDiamondLayer()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### Simple diamond plot with correlations
+### and their confidence intervals
+
+associationsDiamondPlot(mtcars,
+                        covariates=c('cyl', 'hp', 'drat', 'wt',
+                                     'am', 'gear', 'vs', 'carb', 'qsec'),
+                        criteria='mpg');
+
+### Same diamond plot, but now with two criteria,
+### and colouring the diamonds based on the
+### correlation point estimates: a gradient
+### is created where red is used for -1,
+### green for 1 and blue for 0.
+
+associationsDiamondPlot(mtcars,
+                        covariates=c('cyl', 'hp', 'drat', 'wt',
+                                     'am', 'gear', 'vs', 'carb', 'qsec'),
+                        criteria=c('mpg', 'disp'),
+                        generateColors=c("red", "blue", "green"),
+                        fullColorRange=c(-1, 1));
+
+</code></pre>
+
+
+</div>

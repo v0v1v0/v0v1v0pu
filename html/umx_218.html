@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_lower.tri</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get values from lower triangle of a matrix</h2>
+
+<h3>Description</h3>
+
+<p><code>umx_lower.tri</code> is a wrapper for <code>lower.tri()</code> and a selection to return
+values from a lower matrix in one step.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_lower.tri(x, diag = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a <code>matrix()</code> from which to extract values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diag</code></td>
+<td>
+<p>whether to include the diagonal (default = FALSE).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> values of cells of the lower triangle.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>lower.tri()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = qm(1,2,3|4,5,6|7,8,9)
+umx_lower.tri(x)
+# 4,7,8
+umx_lower.tri(x, diag=TRUE) # 1 4 7 5 8 9
+
+</code></pre>
+
+
+</div>

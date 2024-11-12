@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>edit_file</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Open file for editing</h2>
+
+<h3>Description</h3>
+
+<p>Opens a file for editing in RStudio, if that is the active environment, or
+via <code>utils::file.edit()</code> otherwise. If the file does not exist, it is
+created. If the parent directory does not exist, it is also created.
+<code>edit_template()</code> specifically opens templates in <code>inst/templates</code> for use
+with <code>use_template()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">edit_file(path, open = rlang::is_interactive())
+
+edit_template(template = NULL, open = rlang::is_interactive())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>Path to target file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>open</code></td>
+<td>
+<p>Whether to open the file for interactive editing.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template</code></td>
+<td>
+<p>The target template file. If not specified, existing template
+files are offered for interactive selection.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Target path, invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+edit_file("DESCRIPTION")
+edit_file("~/.gitconfig")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

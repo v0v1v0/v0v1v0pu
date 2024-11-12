@@ -1,0 +1,219 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>panel_new</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Start plotting on the new image panel
+</h2>
+
+<h3>Description</h3>
+
+<p><code>panel_new</code> finishes plotting on previuos image panel and starts plotting on next image panel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">panel_new(...)
+
+# non-public
+.panel_new(col = "chessboard", alpha = NA, density = NA, angle = NA,
+           lwd = 1, lty = 1, asp = NA, mar = rep(0, 4), grid = NULL, verbose = FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are recognized via their names (using regular expressions) and classes. Passed to non-public <code>.panel_new</code>. Optional prefix <code>"blank"</code> is used for indirect use. Separated by a dot <code>"."</code>, e.g., <code>blank.fill="transparent"</code>.
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+         <strong>Pattern</strong> (<code>panel_new</code>) </td>
+<td style="text-align: left;"> <strong>Argument</strong> (<code>.panel_new</code>) </td>
+<td style="text-align: left;"> <strong>Description</strong>
+
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*(^$|bg|fill)</code> </td>
+<td style="text-align: left;"> <code>col</code> </td>
+<td style="text-align: left;"> <var>See below.</var> Keyword <code>"chessboard"</code> is used by default to produce original background texture. However argument <code>col</code> has other default value.
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*aphpa</code> </td>
+<td style="text-align: left;"> <code>alpha</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*density</code> </td>
+<td style="text-align: left;"> <code>density</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*angle</code> </td>
+<td style="text-align: left;"> <code>angle</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*lwd</code> </td>
+<td style="text-align: left;"> <code>lwd</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*lty</code> </td>
+<td style="text-align: left;"> <code>lty</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*asp</code> </td>
+<td style="text-align: left;"> <code>asp</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*mar</code> </td>
+<td style="text-align: left;"> <code>mar</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*grid</code> </td>
+<td style="text-align: left;"> <code>grid</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(blank\\.)*verb(ose)*</code> </td>
+<td style="text-align: left;"> <code>verbose</code> </td>
+<td style="text-align: left;"> <var>See below.</var>
+         
+      </td>
+</tr>
+</table>
+</td>
+</tr></table>
+<table>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>Character. Color code/name for panel filling/shadowing. Default is <code>"chessboard"</code> (lightened background for controlling transparency) for georeferenced images, and <code>"grey90"</code> for non-projected images.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Numeric, <code style="white-space: pre;">⁠0 &lt;= alpha &lt;= 1⁠</code>. Level of transparency. Default is <code>1</code>, without transparency.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density</code></td>
+<td>
+<p>Numeric. The density of shading lines for fill/shadowing. If <code>NA</code> then no shading lines are drawn. Default is <code>NA</code>. See <code>density</code> in <code>rect</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>angle</code></td>
+<td>
+<p>Numeric. The slope of shading lines, given as an angle in degrees (counter-clockwise). If <code>NA</code> then no shading lines are drawn. Default is <code>NA</code>. See <code>angle</code> in <code>rect</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd</code></td>
+<td>
+<p>Positive numeric. Width of coastline. Default is <code>1</code>. See <code>lwd</code> in <code>rect</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lty</code></td>
+<td>
+<p>Character or positive integer. Type (pattern) of coastline. Default is <code>1L</code> (solid). See <code>lty</code> in <code>rect</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>asp</code></td>
+<td>
+<p>Positive numeric. The <em>y/x</em> aspect ration. Default is <code>1</code>. See <code>asp</code> in <code>plot.window</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mar</code></td>
+<td>
+<p>Positive numeric of length 4. Plot margins. Default is <code>rep(0,4L)</code>. See <code>mar</code> in <code>par</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grid</code></td>
+<td>
+<p>Object of class <code>ursaGrid</code> or converted to it, to define spatial extent and projection for this panel. Default is <code>NULL</code>, which repeats previous state.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Logical. Value <code>TRUE</code> may provide some additional information on console. Default is <code>FALSE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Prefix <code>blank</code> is introduced for manipulations with <code>panel_new</code> inside of high-level functions (e.g., <code>display</code>). Prefix skipping is the subject for confict with functions, which use the same name of arguments.
+</p>
+<p>It is required to call <code>panel_new</code> for every image panel. First calling starts plotting on the first panel. Second and next callings change image panels.
+</p>
+<p>The panel sequence is set in function <code>compose_design</code>, which is called directly or indirectly from <code>compose_open</code>, and keeps in the options (access via <code>getOption("ursaPngLayout")$layout</code>).
+</p>
+<p>Image background is formed via consecutive call of functions <code>plot(...,type="n")</code>, and <code>rect(...)</code>.
+
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+# example no.1 -- direct use
+compose_open(layout=c(1,3),legend=NULL)
+panel_new()
+panel_annotation(label="Default + Empty")
+panel_new(col="#0000FF3F",density=15,angle=45,lwd=3)
+panel_decor()
+panel_annotation(label="Settings + Grid")
+panel_new("#FFFF0040",grid=regrid(expand=0.5))
+panel_decor()
+panel_annotation(label="Another spatial extent")
+compose_close()
+
+# example no.2 -- indirect use
+a &lt;- pixelsize()
+a &lt;- a[a&gt;560]
+display(a,blank.col="#0000FF3F",blank.density=15,blank.angle=45,blank.lwd=3
+       ,coast.fill="#007F005F",coast.density=20,coast.angle=c(-30,60))
+</code></pre>
+
+
+</div>

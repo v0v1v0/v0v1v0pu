@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_random_subset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a random subset of a dataset</h2>
+
+<h3>Description</h3>
+
+<p>Create a random subset of a dataset
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_random_subset(
+  mdata,
+  instances,
+  attributes = mdata$measures$num.inputs,
+  replacement = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>instances</code></td>
+<td>
+<p>The number of expected instances</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attributes</code></td>
+<td>
+<p>The number of expected attributes.
+(Default: all attributes)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replacement</code></td>
+<td>
+<p>A boolean value to define sample with replacement or not.
+(Default: FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A new mldr subset
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other sampling: 
+<code>create_holdout_partition()</code>,
+<code>create_kfold_partition()</code>,
+<code>create_subset()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">small.toy &lt;- create_random_subset(toyml, 10, 3)
+medium.toy &lt;- create_random_subset(toyml, 50, 5)
+</code></pre>
+
+
+</div>

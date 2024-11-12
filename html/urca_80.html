@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.sp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Schmidt and Phillips Unit Root Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs the Schmidt and Phillips unit root test, where under the Null
+and Alternative Hypothesis the coefficients of the deterministic
+variables are included.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ur.sp(y, type = c("tau", "rho"), pol.deg = c(1, 2, 3, 4),
+      signif = c(0.01, 0.05, 0.1))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vector to be tested for a unit root.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Test type, either <code>tau</code> or <code>rho</code> test.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pol.deg</code></td>
+<td>
+<p>Degree of polynomial in the test regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signif</code></td>
+<td>
+<p>Significance level for the critical value of the test statistic.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Under the Null and the Alternative hypothesis the coefficients of the
+deterministic part of the test regression are included. Two test types
+are available: the <code>rho</code>-test and the <code>tau</code>-test.
+Both test are extracted from the LM principle.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>"ur.sp"</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Schmidt, P. and Phillips, P.C.B. (1992), LM Test for a Unit Root in
+the Presence of Deterministic Trends, <em>Oxford Bulletin of Economics and
+Statistics</em>, <b>54(3)</b>, 257–287.
+</p>
+<p>Download possible at: <a href="https://cowles.yale.edu/">https://cowles.yale.edu/</a>, see rubric
+'Discussion Papers (CFDPs)'.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.sp-class</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nporg)
+gnp &lt;- na.omit(nporg[, "gnp.r"])
+sp.gnp &lt;- ur.sp(gnp, type="tau", pol.deg=1, signif=0.01)
+summary(sp.gnp)
+</code></pre>
+
+
+</div>

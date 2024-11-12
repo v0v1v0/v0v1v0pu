@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mw.ages</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Age distribution in year 2000 in Maplewood New Jersey </h2>
+
+<h3>Description</h3>
+
+<p>Age distribution in Maplewood New Jersey, a suburb of New York
+City. Data is broken down by Male and Female.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(mw.ages)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 103 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>Male</dt>
+<dd>
+<p>Counts per age group. Most groups are 1 year, except for
+100-104, 105-110, 110+</p>
+</dd>
+<dt>Female</dt>
+<dd>
+<p>Same</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>US Census 2000 data from <a href="http://factfinder.census.gov/">http://factfinder.census.gov/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(mw.ages)
+barplot(mw.ages$Male + mw.ages$Female)
+</code></pre>
+
+
+</div>

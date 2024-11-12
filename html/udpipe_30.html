@@ -1,0 +1,235 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>document_term_matrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a document/term matrix</h2>
+
+<h3>Description</h3>
+
+<p>Create a document/term matrix from either
+</p>
+
+<ul>
+<li>
+<p> a data.frame with 1 row per document/term as returned by <code>document_term_frequencies</code>
+</p>
+</li>
+<li>
+<p> a list of tokens from e.g. from package sentencepiece, tokenizers.bpe or just by using strsplit
+</p>
+</li>
+<li>
+<p> an object of class DocumentTermMatrix or TermDocumentMatrix from the tm package
+</p>
+</li>
+<li>
+<p> an object of class simple_triplet_matrix from the slam package
+</p>
+</li>
+<li>
+<p> a regular dense matrix
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">document_term_matrix(x, vocabulary, weight = "freq", ...)
+
+## S3 method for class 'data.frame'
+document_term_matrix(x, vocabulary, weight = "freq", ...)
+
+## S3 method for class 'matrix'
+document_term_matrix(x, ...)
+
+## S3 method for class 'integer'
+document_term_matrix(x, ...)
+
+## S3 method for class 'numeric'
+document_term_matrix(x, ...)
+
+## Default S3 method:
+document_term_matrix(x, vocabulary, ...)
+
+## S3 method for class 'DocumentTermMatrix'
+document_term_matrix(x, ...)
+
+## S3 method for class 'TermDocumentMatrix'
+document_term_matrix(x, ...)
+
+## S3 method for class 'simple_triplet_matrix'
+document_term_matrix(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame with columns doc_id, term and freq indicating how many times a term occurred in that specific document. This is what <code>document_term_frequencies</code> returns.<br>
+This data.frame will be reshaped to a matrix with 1 row per doc_id, the terms will be put 
+in the columns and the freq in the matrix cells. Note that the column name to use for freq can be set in the <code>weight</code> argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vocabulary</code></td>
+<td>
+<p>a character vector of terms which should be present in the document term matrix even if they did not occur in <code>x</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weight</code></td>
+<td>
+<p>a column of <code>x</code> indicating what to put in the matrix cells. Defaults to 'freq' indicating to use column <code>freq</code> from <code>x</code> to put into the matrix cells</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments currently not used</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an sparse object of class dgCMatrix with in the rows the documents and in the columns the terms containing the frequencies
+provided in <code>x</code> extended with terms which were not in <code>x</code> but were provided in <code>vocabulary</code>.
+The rownames of this resulting object contain the doc_id from <code>x</code>
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>data.frame</code>: Construct a document term matrix from a data.frame with columns doc_id, term, freq
+</p>
+</li>
+<li> <p><code>matrix</code>: Construct a sparse document term matrix from a matrix
+</p>
+</li>
+<li> <p><code>integer</code>: Construct a sparse document term matrix from an named integer vector
+</p>
+</li>
+<li> <p><code>numeric</code>: Construct a sparse document term matrix from a named numeric vector
+</p>
+</li>
+<li> <p><code>default</code>: Construct a document term matrix from a list of tokens
+</p>
+</li>
+<li> <p><code>DocumentTermMatrix</code>: Convert an object of class <code>DocumentTermMatrix</code> from the tm package to a sparseMatrix
+</p>
+</li>
+<li> <p><code>TermDocumentMatrix</code>: Convert an object of class <code>TermDocumentMatrix</code> from the tm package to a sparseMatrix with
+the documents in the rows and the terms in the columns
+</p>
+</li>
+<li> <p><code>simple_triplet_matrix</code>: Convert an object of class <code>simple_triplet_matrix</code> from the slam package to a sparseMatrix
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>sparseMatrix</code>, <code>document_term_frequencies</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+x &lt;- data.frame(doc_id = c(1, 1, 2, 3, 4), 
+ term = c("A", "C", "Z", "X", "G"), 
+ freq = c(1, 5, 7, 10, 0))
+document_term_matrix(x)
+document_term_matrix(x, vocabulary = LETTERS)
+
+## Example on larger dataset
+data(brussels_reviews_anno)
+
+x   &lt;- document_term_frequencies(brussels_reviews_anno[, c("doc_id", "lemma")])
+dtm &lt;- document_term_matrix(x)
+dim(dtm)
+x   &lt;- document_term_frequencies(brussels_reviews_anno[, c("doc_id", "lemma")])
+x   &lt;- document_term_frequencies_statistics(x)
+dtm &lt;- document_term_matrix(x)
+dtm &lt;- document_term_matrix(x, weight = "freq")
+dtm &lt;- document_term_matrix(x, weight = "tf_idf")
+dtm &lt;- document_term_matrix(x, weight = "bm25")
+x   &lt;- split(brussels_reviews_anno$lemma, brussels_reviews_anno$doc_id)
+dtm &lt;- document_term_matrix(x)
+## example showing the vocubulary argument
+## allowing you to making sure terms which are not in the data are provided in the resulting dtm
+allterms &lt;- unique(x$term)
+dtm &lt;- document_term_matrix(head(x, 1000), vocabulary = allterms)
+
+## example for a list of tokens
+x &lt;- list(doc1 = c("aa", "bb", "cc", "aa", "b"), 
+          doc2 = c("bb", "bb", "dd", ""), 
+          doc3 = character(),
+          doc4 = c("cc", NA), 
+          doc5 = character())
+document_term_matrix(x)
+dtm &lt;- document_term_matrix(x, vocabulary = c("a", "bb", "cc"))
+dtm &lt;- dtm_conform(dtm, rows = c("doc1", "doc2", "doc7"), columns = c("a", "bb", "cc"))
+data(brussels_reviews)
+x   &lt;- strsplit(setNames(brussels_reviews$feedback, brussels_reviews$id), split = " +")
+x   &lt;- document_term_matrix(x)
+
+
+##
+## Example adding bigrams/trigrams to the document term matrix
+## Mark that this can also be done using ?dtm_cbind
+##
+library(data.table)
+x &lt;- as.data.table(brussels_reviews_anno)
+x &lt;- x[, token_bigram  := txt_nextgram(token, n = 2), by = list(doc_id, sentence_id)]
+x &lt;- x[, token_trigram := txt_nextgram(token, n = 3), by = list(doc_id, sentence_id)]
+x &lt;- document_term_frequencies(x = x, 
+                               document = "doc_id", 
+                               term = c("token", "token_bigram", "token_trigram"))
+dtm &lt;- document_term_matrix(x)
+
+##
+## Convert dense matrix to sparse matrix
+##
+x &lt;- matrix(c(0, 0, 0, 1, NA, 3, 4, 5, 6, 7), nrow = 2)
+x
+dtm &lt;- document_term_matrix(x)
+dtm
+x &lt;- matrix(c(0, 0, 0, 0.1, NA, 0.3, 0.4, 0.5, 0.6, 0.7), nrow = 2)
+x
+dtm &lt;- document_term_matrix(x)
+dtm
+x   &lt;- setNames(c(TRUE, NA, FALSE, FALSE), c("a", "b", "c", "d"))
+x   &lt;- as.matrix(x)
+dtm &lt;- document_term_matrix(x)
+dtm
+
+##
+## Convert vectors to sparse matrices
+##
+x   &lt;- setNames(-3:3, c("a", "b", "c", "d", "e", "f"))
+dtm &lt;- document_term_matrix(x)
+dtm
+x   &lt;- setNames(runif(6), c("a", "b", "c", "d", "e", "f"))
+dtm &lt;- document_term_matrix(x)
+dtm
+
+##
+## Convert lists to sparse matrices
+##
+x   &lt;- list(a = c("some", "set", "of", "words"), 
+            b1 = NA,
+            b2 = NA,  
+            c1 = character(),
+            c2 = 0,  
+            d = c("words", "words", "words"))
+dtm &lt;- document_term_matrix(x)
+dtm
+</code></pre>
+
+
+</div>

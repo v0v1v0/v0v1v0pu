@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>usl.solve.nlxb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Solve a USL model using non linear regression</h2>
+
+<h3>Description</h3>
+
+<p>This function solves a USL model using non linear regression with least
+squares. It uses the function <code>nlxb</code> from the <span class="pkg">nlsr</span>
+package to perform the calculation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">usl.solve.nlxb(model)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A data frame with two columns containing the values of the
+predictor variable in the first column and the values of the response
+variable in the second column.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A list containing three elements: the model coefficients alpha,
+beta and gamma.
+</p>
+
+
+<h3>References</h3>
+
+<p>John C. Nash. nlsr: Functions for nonlinear least squares
+solutions, 2017. R package version 2017.6.18.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>
+</p>
+
+
+</div>

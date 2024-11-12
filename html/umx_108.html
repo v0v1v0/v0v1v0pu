@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxJiggle</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umxJiggle</h2>
+
+<h3>Description</h3>
+
+<p>umxJiggle takes values in a matrix and jiggles them
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxJiggle(matrixIn, mean = 0, sd = 0.1, dontTouch = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>matrixIn</code></td>
+<td>
+<p>an <code>mxMatrix()</code> to jiggle the values of</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mean</code></td>
+<td>
+<p>the mean value to add to each value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd</code></td>
+<td>
+<p>the sd of the jiggle noise</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dontTouch</code></td>
+<td>
+<p>A value, which, if found, will be left as-is (defaults to 0)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxMatrix()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Advanced Model Building Functions: 
+<code>umxAlgebra()</code>,
+<code>umxFixAll()</code>,
+<code>umxRun()</code>,
+<code>umxThresholdMatrix()</code>,
+<code>umxUnexplainedCausalNexus()</code>,
+<code>umx</code>,
+<code>xmuLabel()</code>,
+<code>xmuValues()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+mat1 = umxJiggle(mat1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

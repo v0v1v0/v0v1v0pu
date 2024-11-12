@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multiple_format</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>multiple_format</h2>
+
+<h3>Description</h3>
+
+<p>Multiple Style Formatting
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multiple_format(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments to be passed onto <code>multiple</code></p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Since ggplot requires a function for formatting this allows the user to specify the function's arguments, which will return a function that can be used by ggplot.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function <code>multiple</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(scales)
+vect &lt;- c(1000, 1500, 23450, 21784, 875003780)
+multiple_format()(vect)
+multiple_format(extra=dollar)(vect)
+multiple_format(extra=identity)(vect)
+
+require(ggplot2)
+data(diamonds)
+ggplot(diamonds, aes(x=x, y=y, color=price*100)) + geom_point() + 
+scale_color_gradient2(labels=multiple_format(extra=dollar))
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_crime_no_location</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Crimes without location</h2>
+
+<h3>Description</h3>
+
+<p>Returns details of crimes that cannot be mapped to a particular location.
+Note that the police force must be specified.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_crime_no_location(force, crime_category = NULL, date = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>force</code></td>
+<td>
+<p>A string containing the name of the police force to return data
+for. Must be specified, and is not case sensitive.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>crime_category</code></td>
+<td>
+<p>The category of crime to return. Defaults to
+returning all crimes. See <code>ukc_crime_category()</code> for details.
+See <code>ukc_forces()</code> for details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>The year and month in "YYYY-MM" form. If <code>NULL</code>, latest
+available month will be returned. Also accepts dates in formats that can be
+coerced to <code>Date</code> class with <code>as.Date()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>tibble</code> with details of crimes without a specific location.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+no_location &lt;- ukc_crime_no_location(force = "city-of-london")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

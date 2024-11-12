@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>generate_parameter</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates a Parameter Based on <code>&lt;IIV:?&gt;</code> in the System File</h2>
+
+<h3>Description</h3>
+
+<p>Internal function used to generate parameters based on IIV information
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">generate_parameter(
+  SIMINT_parameters,
+  SIMINT_cfg,
+  SIMINT_PARAMETER_TV,
+  SIMINT_IIV_VALUE,
+  SIMINT_equation
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_parameters</code></td>
+<td>
+<p>parameters vector containing the typical values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_PARAMETER_TV</code></td>
+<td>
+<p>Typical value of the parameter in question</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_IIV_VALUE</code></td>
+<td>
+<p>sample from mvr distribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_equation</code></td>
+<td>
+<p>equation relating IIV and typical value to the parameter value with variability</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>parameter value with the variability applied
+</p>
+
+
+</div>

@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unicol_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The color palettes of the <strong>unicol</strong> package</h2>
+
+<h3>Description</h3>
+
+<p><code>unicol_data</code> summarizes the color palettes 
+included in the <strong>unicol</strong> package 
+(as a data frame).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unicol_data
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>data.frame</code> with 269 rows and 4 columns.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame summarizing the <strong>unicol</strong> color palettes.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes;
+<code>simcol</code> for finding similar colors;
+<code>newpal</code> for defining new color palettes;
+<code>grepal</code> for finding named colors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dim(unicol_data)
+head(unicol_data)
+
+# Descriptives: 
+length(unique(unicol_data$pal))   # number of color palettes
+length(unique(unicol_data$inst))  # number of institutions
+
+</code></pre>
+
+
+</div>

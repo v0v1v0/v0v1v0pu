@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxModelNames</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return names of models found within a model</h2>
+
+<h3>Description</h3>
+
+<p><code>umxModelNames</code> returns the names of each model contained in the model provided to it
+(optionally excluding the out model itself).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxModelNames(model, includeOuterModelName = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an <code>mxModel()</code> to search for model names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>includeOuterModelName</code></td>
+<td>
+<p>FALSE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> All models names
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>mxRename()</code>, <code>umxSuperModel()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data(GFF)
+mzData = subset(GFF, zyg_2grp == "MZ")
+dzData = subset(GFF, zyg_2grp == "DZ")
+selDVs = c("gff", "fc", "qol")
+m1 = umxCP(selDVs= selDVs, nFac= 1, dzData= dzData, mzData= mzData, sep= "_T", autoRun= TRUE)
+m2 = mxRename(m1, "model2")
+umxModelNames(m1) # "top" "MZ" "DZ"
+umxModelNames(m2) # "top" "MZ" "DZ"
+
+super = umxSuperModel("myModel", m1, m2, autoRun = TRUE)
+umxModelNames(super)
+
+plot(super$CP1fac)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

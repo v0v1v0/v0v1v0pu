@@ -1,0 +1,204 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pivec</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Key Probability Vectors of Up-and-Down Designs</h2>
+
+<h3>Description</h3>
+
+<p>Dose-allocation probability vectors that quantify the instantaneous, cumulative, and asymptotic behavior of Up-and-Down designs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pivec(cdf, matfun, ...)
+
+currentvec(cdf, matfun, n, startdose = NULL, ...)
+
+cumulvec(
+  cdf,
+  matfun,
+  n,
+  startdose = NULL,
+  proportions = TRUE,
+  exclude = 0,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cdf</code></td>
+<td>
+<p>monotone increasing vector with positive-response probabilities. The number of dose levels <code class="reqn">M</code> is deduced from vector's length.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>matfun</code></td>
+<td>
+<p>The function to calculate the TPM. Depends on the specific design; see <code>bcdmat</code>. For all functions except <code>classicmat</code>, user must provide auxiliary parameters via <code>...</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments passed on to the design's matrix-calculating function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>For <code style="white-space: pre;">⁠currentvec, cumulvec⁠</code>, at what step (= after how many observations) in the experiment would you like the vector calculated?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>startdose</code></td>
+<td>
+<p>For <code style="white-space: pre;">⁠currentvec, cumulvec⁠</code>, where does the experiment start? To be given as a dose-level index between 1 and <code class="reqn">M</code>. If left as <code>NULL</code> (default), function will assume the equivalent of <em>"fair die roll"</em> among all doses. User can also specify your own <code class="reqn">M</code>-length probability vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>proportions</code></td>
+<td>
+<p>Logical (<code>cumulvec</code> only) Would you like the results returned as proportions (= a probability vector; <code>TRUE</code>, default), or as cumulative allocation counts?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+<p>Integer (<code>cumulvec</code> only) Should the cumulative distribution exclude a certain number of initial observations? Default 0.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Up-and-Down designs (UDDs) generate random walk behavior, which concentrates doses around the target quantile. Asymptotically, dose allocations follow a stationary distribution <code class="reqn">\boldsymbol{\pi}</code> which can be calculated given the number of doses <code class="reqn">M</code>, and the value of the cdf <code class="reqn">F</code> at each dose (i.e., the positive-response probabilities), and the specific UDD rules. No matter the starting dose, the allocation distribution converges to <code class="reqn">\boldsymbol{\pi}</code> at a geometric rate (Diaconis and Stroock, 1991).
+</p>
+<p>Three functions are offered:
+</p>
+
+<ul>
+<li> <p><code>pivec()</code> returns <code class="reqn">\boldsymbol{\pi}</code>.
+</p>
+</li>
+<li> <p><code>currentvec()</code> returns the current (instantaneous) allocation distribution at step <code>n</code>, using the formula from Diaconis and Stroock (1991).
+</p>
+</li>
+<li> <p><code>cumulvec()</code> returns the <em>cumulative</em> allocations, i.e., the expected proportions (or counts) of allocations during the experiment after <code>n</code> observations. This function is perhaps of greatest practical use.
+</p>
+</li>
+</ul>
+<p>All functions first calculate the transition probability matrix (TPM), by calling one of the functions described under <code>bcdmat</code>. See that help page for more details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of allocation frequencies/probabilities for the doses, summing up to 1. Exception: <code>cumulvec(propotions = FALSE)</code> returns a vector of expected allocation counts, summing up to <code>n - exclude</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>When using the k-in-a-row design, set <code>matfun = kmatMarg</code>, not <code>kmatFull</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Assaf P. Oron <code>&lt;assaf.oron.at.gmail.com&gt;</code>
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Diaconis P, Stroock D. Geometric Bounds for Eigenvalues of Markov Chains. <em>Ann. Appl. Probab.</em> 1991;1(1):36-61.
+</p>
+</li>
+<li>
+<p> Hughes BD. <em>Random Walks and Random Environments, Vol. 1.</em> Oxford University Press, 1995.
+</p>
+</li>
+<li>
+<p> Oron AP, Souter MJ, Flournoy N. Understanding Research Methods: Up-and-down Designs for Dose-finding. <em>Anesthesiology</em> 2022; 137:137–50.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+
+<ul>
+<li> <p><code>bcdmat</code> for the functions calculating transition probability matrices for various up-and-down designs.
+</p>
+</li>
+<li> <p><code>k2targ</code> for target-finding design aids.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">#----- Classical UD Example -----#
+
+# An example used in Oron et al. 2022, Fig. 2.
+# It is presented here via the original motivating story:
+# "Ketofol"  is a commonly-used anesthesia-inducing mix known to combine its 2 components' 
+# beneficial properties, while each component mitigates the other's harmful side-effects. 
+# In particular:
+#     Propofol reduces blood pressure while ketamine raises it.
+# What is *not* known at present, is which mix proportions produce 
+# 0 "delta-BP" on average among the population. 
+
+# The classical UD design below administers the mix 0-100% ketamine in 10% increments.
+#    The design will concentrate doses around the point where half the population 
+#    experiences 0 "delta-BP". (the 'zeroPt' parameter in the code)
+
+doses = seq(0, 100, 10)
+m=length(doses) # 11 dose levels
+
+zeroPt=63 # the zero-BP point, in units of percent ketamine
+
+# We assume a Normal ("Probit") dose-response curve,
+#   and calculate the value of F (i.e.,  prob (delta BP &gt; 0) at the doses:
+equivF = pnorm( (doses - zeroPt) / 20)
+round(equivF, 3)
+
+# The vector below represents the values feeding into the Fig. 2B barplot.
+# "startdose = 6" means the experiment begins from the 6th out of 11 doses, i.e., a 50:50 mix.
+
+
+  round(cumulvec(cdf = equivF, matfun = classicmat, startdose = 6, n = 30), 3)
+
+# Compare with the *instantaneous* probability distribution to the 30th patient:
+
+round(currentvec(cdf = equivF, matfun = classicmat, startdose = 6, n = 30), 3)
+# Classic up-and-down has quasi-periodic behavior with a (quasi-)period of 2. 
+# Compare the instantaneous vectors at n=30 and 29:
+round(currentvec(cdf = equivF, matfun = classicmat, startdose = 6, n = 29), 3)
+# Note the alternating near-zero values. Distributions at even/odd n "communicate"
+#    with each other only via the dose boundaries.
+
+# Lastly, the asymptotic/stationary distribution. Notice there is no 'n' argument.
+
+round(pivec(cdf = equivF, matfun = classicmat), 3)
+
+# The cumulative vector at n=30 is not very far from the asymptotic vector. 
+# The main difference is that at n=30 there's still a bit more
+#    probability weight at the starting dose.
+# We can check how much of that extra weight is from the 1st patient, by excluding that data point:
+
+round(cumulvec(cdf = equivF, matfun = classicmat, startdose = 6, n = 30, exclude = 1), 3)
+
+
+</code></pre>
+
+
+</div>

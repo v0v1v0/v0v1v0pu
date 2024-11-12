@@ -1,0 +1,170 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_nca_summary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summarize NCA Results in Tabular Format</h2>
+
+<h3>Description</h3>
+
+<p>Creates tabular summaries of NCA results
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_nca_summary(
+  cfg,
+  analysis_name = "analysis",
+  treat_as_factor = c("ID", "Dose_Number", "Dose"),
+  params_include = c("ID", "cmax", "tmax", "auclast"),
+  params_header = NULL,
+  rptname = "default",
+  label_format = NULL,
+  summary_stats = NULL,
+  summary_labels = list(MEAN = "Mean", STD = "Std Dev", MEDIAN = "Median", N = "N obs",
+    SE = "Std Err."),
+  summary_location = NULL,
+  ds_wrangle = NULL,
+  digits = 3,
+  table_theme = "theme_zebra"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the analysis (default <code>'analysis'</code>) that was previously run</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>treat_as_factor</code></td>
+<td>
+<p>sequence of column names to be treated as factors (default <code>c("ID", "Dose_Number", "Dose")</code>). Use this to report values without added decimals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>params_include</code></td>
+<td>
+<p>vector with names of parameters to include (default c("ID", "cmax", "tmax", "auclast"))</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>params_header</code></td>
+<td>
+<p>list with names of parameters followed by a vector of headers. You can use the placeholder "&lt;label&gt;" to include the standard label (e.g. list(cmax=c("&lt;label&gt;", "(ng/ml)"))), with a default of <code>NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rptname</code></td>
+<td>
+<p>report name (either PowerPoint or Word) that this table will be used in (<code>"default"</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label_format</code></td>
+<td>
+<p>string containing the format in which headers and labels are being specified, either <code>"text"</code>, or <code>"md"</code> (default <code>NULL</code> assumes <code>"text"</code> format)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>summary_stats</code></td>
+<td>
+<p>list with strings as names containing placeholders for
+summary statistics and the values indicate the parameters to apply those
+statistics to. for example, if you want to calculate mean and standard deviation of
+AUClast you could use <code>list("&lt;MEAN&gt; (&lt;STD&gt;)"=c("auclast")</code>. This would create
+a row at the bottom of the table with this information for just the listed
+parameters. To split this up across two rows just do the following:
+<code>list("&lt;MEAN&gt;"=c("auclast"), "&lt;STD&gt;"=c("auclast"))</code>. Any NA values
+will be ignored when calculating statistics.  The allowed
+summary statistics are the mean (&lt;MEAN&gt;), median (&lt;MEDIAN&gt;), standard
+deviation (&lt;STD&gt;), standard error (&lt;SE&gt;), and the number of observations
+used to calculate statistics. (&lt;N&gt;). The default value of <code>NULL</code>
+prevents any summary statistics from being included.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>summary_labels</code></td>
+<td>
+<p>list containing the mapping of summary statistics
+defined by <code>summary_stats</code> with their text labels in the output tables: 
+</p>
+<pre>
+list(MEAN   = "Mean", 
+     STD    = "Std Dev", 
+     MEDIAN = "Median", 
+     N      = "N obs", 
+     SE     = "Std Err.")</pre>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>summary_location</code></td>
+<td>
+<p>column where to put the labels (e.g. Mean (Std)) for
+summary statistic. The default (<code>NULL</code>) will leave these labels off.
+If you set this to the "ID" column it will put them under the subject IDs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ds_wrangle</code></td>
+<td>
+<pre>
+ ds_wrangle = list(Dose=c(30), Dose_Number = c(1))
+</pre>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>number of significant digits to report (3) or <code>NULL</code> to prevent rounding</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table_theme</code></td>
+<td>
+<p>flextable theme see the flextable package for available themes, and set to <code>NULL</code> to prevent themes from being applied. (default=<code>"theme_zebra"</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list with the following elements
+</p>
+
+<ul>
+<li>
+<p>isgood Boolean variable indicating success (<code>TRUE</code>) or failure (<code>FALSE</code>) if the call is successful the following will be defined (<code>NULL</code> 
+</p>
+</li>
+<li>
+<p>nca_summary dataframe containing the summary table with headers and any summary statistics appended to the bottom
+</p>
+</li>
+<li>
+<p>nca_summary_ft same information in the <code>nca_summary</code> ouput as a flextable object
+</p>
+</li>
+<li>
+<p>components  list with the elements of the summary table each as dataframes (header, data, and summary)
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Vignette on NCA (<code>vignette("NCA", package = "ubiquity")</code>)
+</p>
+
+
+</div>

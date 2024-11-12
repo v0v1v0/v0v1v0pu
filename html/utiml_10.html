@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>baseline</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Baseline reference for multilabel classification</h2>
+
+<h3>Description</h3>
+
+<p>Create a baseline model for multilabel classification.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">baseline(
+  mdata,
+  metric = c("general", "F1", "hamming-loss", "subset-accuracy", "ranking-loss"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset used to train the binary models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>metric</code></td>
+<td>
+<p>Define the strategy used to predict the labels.
+</p>
+<p>The possible values are: <code>'general'</code>, <code>'F1'</code>,
+<code>'hamming-loss'</code> or <code>'subset-accuracy'</code>. See the description
+for more details. (Default: <code>'general'</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Baseline is a naive multi-label classifier that maximize/minimize a specific
+measure without induces a learning model. It uses the general information
+about the labels in training dataset to estimate the labels in a test
+dataset.
+</p>
+<p>The follow strategies are available:
+</p>
+
+<dl>
+<dt><code>general</code></dt>
+<dd>
+<p>Predict the k most frequent labels, where k is the
+integer most close of label cardinality.</p>
+</dd>
+<dt><code>F1</code></dt>
+<dd>
+<p>Predict the most frequent labels that obtain the best F1
+measure in training data. In the original paper, the authors use the less
+frequent labels.</p>
+</dd>
+<dt><code>hamming-loss</code></dt>
+<dd>
+<p>Predict the labels that are associated with more
+than 50% of instances.</p>
+</dd>
+<dt><code>subset-accuracy</code></dt>
+<dd>
+<p>Predict the most common labelset.</p>
+</dd>
+<dt><code>ranking-loss</code></dt>
+<dd>
+<p>Predict a ranking based on the most frequent
+labels.</p>
+</dd>
+</dl>
+<h3>Value</h3>
+
+<p>An object of class <code>BASELINEmodel</code> containing the set of fitted
+models, including:
+</p>
+
+<dl>
+<dt>labels</dt>
+<dd>
+<p>A vector with the label names.</p>
+</dd>
+<dt>predict</dt>
+<dd>
+<p>A list with the labels that will be predicted.</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+<p>Metz, J., Abreu, L. F. de, Cherman, E. A., &amp; Monard, M. C. (2012). On the
+Estimation of Predictive Evaluation Measure Baselines for Multi-label
+Learning. In 13th Ibero-American Conference on AI (pp. 189-198).
+Cartagena de Indias, Colombia.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- baseline(toyml)
+pred &lt;- predict(model, toyml)
+
+## Change the metric
+model &lt;- baseline(toyml, "F1")
+model &lt;- baseline(toyml, "subset-accuracy")
+</code></pre>
+
+
+</div>

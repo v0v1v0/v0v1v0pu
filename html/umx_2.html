@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bucks</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print a money object</h2>
+
+<h3>Description</h3>
+
+<p>Print function for "money" objects, e.g. <code>fin_interest()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bucks(
+  x,
+  symbol = "$",
+  big.mark = ",",
+  decimal.mark = ".",
+  trim = TRUE,
+  largest_with_cents = 1e+05,
+  negative_parens = c("hyphen", "minus", "parens"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>money object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>symbol</code></td>
+<td>
+<p>Default prefix if not set.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>big.mark</code></td>
+<td>
+<p>option defaulting to ","</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decimal.mark</code></td>
+<td>
+<p>option defaulting to "."</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trim</code></td>
+<td>
+<p>option defaulting to TRUE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>largest_with_cents</code></td>
+<td>
+<p>option defaulting to 1e+05</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>negative_parens</code></td>
+<td>
+<p>option defaulting to "hyphen"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods. also cat =F to return string</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> invisible
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>fin_percent()</code>, <code>fin_interest()</code>, <code>scales::dollar()</code>
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">bucks(100 * 1.05^32)
+fin_interest(deposits = 20e3, interest = 0.07, yrs = 20)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_specific_outcome</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Outcomes for a specific crime</h2>
+
+<h3>Description</h3>
+
+<p>Returns the outcomes (case history) for a specified crime.
+The ID of a crime is a 64-character string, named <code>persistent_id</code> and
+returned by other methods.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_specific_outcome(persistent_id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>persistent_id</code></td>
+<td>
+<p>The 64 character string that is the unique ID of a
+particular crime.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Either a <code>tibble</code> with basic details of a crime if no outcome
+is available, or a list with basic details and a <code>tibble</code> containing
+the outcome if one is available.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+no_location &lt;- ukc_crime_no_location(force = "city-of-london")
+
+crime_id &lt;- no_location$persistent_id[[1]]
+
+outcome &lt;- ukc_specific_outcome(crime_id)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

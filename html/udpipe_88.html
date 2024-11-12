@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>udpipe_load_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Load an UDPipe model</h2>
+
+<h3>Description</h3>
+
+<p>Load an UDPipe model so that it can be use in <code>udpipe_annotate</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">udpipe_load_model(file)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>full path to the model or the value returned by a call to <code>udpipe_download_model</code></p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>An object of class <code>udpipe_model</code> which is a list with 2 elements
+</p>
+
+<ul>
+<li>
+<p>file: The path to the model as provided by <code>file</code>
+</p>
+</li>
+<li>
+<p>model: An Rcpp-generated pointer to the loaded model which can be used in <code>udpipe_annotate</code>
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p><a href="https://ufal.mff.cuni.cz/udpipe">https://ufal.mff.cuni.cz/udpipe</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>udpipe_annotate</code>, <code>udpipe_download_model</code>, <code>udpipe_train</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+x &lt;- udpipe_download_model(language = "dutch-lassysmall")
+x$file_model
+ud_english &lt;- udpipe_load_model(x$file_model)
+
+x &lt;- udpipe_download_model(language = "english")
+x$file_model
+ud_english &lt;- udpipe_load_model(x$file_model)
+
+x &lt;- udpipe_download_model(language = "hebrew")
+x$file_model
+ud_hebrew &lt;- udpipe_load_model(x$file_model)
+
+## End(Not run)
+
+
+x &lt;- udpipe_download_model(language = "dutch-lassysmall", model_dir = tempdir())
+x$file_model
+if(!x$download_failed){
+  ud_dutch &lt;- udpipe_load_model(x$file_model)
+}
+
+## cleanup for CRAN
+if(file.exists(x$file_model)) file.remove(x$file_model)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tempsalinity</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Temperature/Salinity measurements along a moving Eddy</h2>
+
+<h3>Description</h3>
+
+<p>Simulated measurements of temperature and salinity in the center of
+'Eddy Juggernaut', a huge anti-cyclone (clockwise rotating) Loop
+Current Ring in the Gulf of Mexico. The start date is October 18, 1999.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(tempsalinity)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The data is stored as multivariate zooreg object with variables
+longitude, latitude, temperature (Celsius), and salinity (psu -
+practical salinity units, originally from <a href="https://toptotop.org/2014/10/21/climate_solutio/">https://toptotop.org/2014/10/21/climate_solutio/</a>).
+</p>
+
+
+<h3>Details</h3>
+
+<p>The temperature salinity profile of body of water can be
+characteristic. This data shows a change in the profile in time as the
+eddy accumulates new water.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Data from simulation by Andrew Poje.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(tempsalinity)
+if(require(zoo)) {
+  plot(tempsalinity[,3:4])
+  ## overide plot.zoo method
+  plot.default(tempsalinity[,3:4])
+  abline(lm(salinity ~ temperature, tempsalinity, subset = 1:67))
+  abline(lm(salinity ~ temperature, tempsalinity, subset = -(1:67)))
+  }
+</code></pre>
+
+
+</div>

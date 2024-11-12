@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_count</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Count the number of times a pattern is occurring in text</h2>
+
+<h3>Description</h3>
+
+<p>Count the number of times a pattern is occurring in text. 
+Pattern counting is performed by executing a regular expression using <code>gregexpr</code> and 
+checking how many times the regular expression occurs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_count(x, pattern, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector with text</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>a text pattern which might be contained in <code>x</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments, passed on to <code>gregexpr</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an integer vector of the same length as <code>x</code> indicating how many times the pattern is occurring in <code>x</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("abracadabra", "ababcdab", NA)
+txt_count(x, pattern = "ab")
+txt_count(x, pattern = "AB", ignore.case = TRUE)
+txt_count(x, pattern = "AB", ignore.case = FALSE)
+</code></pre>
+
+
+</div>

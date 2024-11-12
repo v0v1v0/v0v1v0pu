@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MortSmooth_bbase</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct B-spline basis</h2>
+
+<h3>Description</h3>
+
+<p>This is an internal function of package MortalitySmooth which creates 
+equally-spaced B-splines basis over an abscissa of data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">MortSmooth_bbase(x, xl, xr, ndx, deg)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>vector for the abscissa of data;</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xl</code></td>
+<td>
+<p>left boundary;</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xr</code></td>
+<td>
+<p>right boundary;</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndx</code></td>
+<td>
+<p>number of internal knots minus one or number of internal intervals;</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>degree of the splines.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function reproduce an algorithm presented by Eilers and Marx 
+(2010) using differences of truncated power functions 
+(see MortSmooth_tpower). The final matrix has a single B-spline for each 
+of the [ndx + deg] columns. The number of rows is equal to the length of x.
+</p>
+<p>The function differs from bs in the package splines since it automatically 
+constructed B-splines with identical shape. This would allow a simple 
+interpretation of coefficients and application of simple differencing.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix containing equally-spaced B-splines of degree deg along 
+x for each column.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Carlo G Camarda
+</p>
+
+
+</div>

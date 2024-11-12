@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_update_user</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Update your name and/or default group ID</h2>
+
+<h3>Description</h3>
+
+<p>This will overwrite your (display) username and/or group ID you belong to.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_update_user(default_group_guid = NULL, name = "", showRequestURL = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>default_group_guid</code></td>
+<td>
+<p>- group id to change, see NOTE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>- username to change</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>User</h3>
+
+<p>User operations such as changing your name or fetching basic user information apply only to the authenticated user.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Applies only to the authenticated user:
+Changing group/org ID is only permitted to premium users. Thus, if you are a "free" user and will try to change your
+default group id to something else, you will get an error. In that case, only changing display name is permitted.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference/#updateUser">https://dev.bitly.com/api-reference/#updateUser</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# this applies only for "free" users
+uu &lt;- bitly_update_user(name = "Malc")
+
+# if you are premium user, you can additionally adjust your group id
+uug &lt;- bitly_update_user(name = "Malc", default_group_guid = "TestGroupID")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

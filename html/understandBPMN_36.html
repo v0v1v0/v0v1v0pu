@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>token_split</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Token Split</h2>
+
+<h3>Description</h3>
+
+<p>Token split is defined as the sum of the outgoing flows of parallel, inclusive and complex gateways minus one,
+because otherwise the token_split value is always one, while it should be zero if there are
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">token_split(file_path, signavio = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file_path</code></td>
+<td>
+<p>document object created using the create_internal_document function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signavio</code></td>
+<td>
+<p>boolean which indicates whether the file stems from signavio</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an integer indicating the token_split
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+token_split(file_path)
+</code></pre>
+
+
+</div>

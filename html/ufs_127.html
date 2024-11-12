@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ggSave</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Save a ggplot with specific defaults</h2>
+
+<h3>Description</h3>
+
+<p>This function is vectorized over all argument except 'plot': so if you
+want to save multiple versions, simply provide vectors. Vectors of length
+1 will be recycled using <code>rep()</code>; otherwise vectors have to all be the same
+length as <code>file</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ggSave(
+  file = NULL,
+  plot = ggplot2::last_plot(),
+  width = ufs::opts$get("ggSaveFigWidth"),
+  height = ufs::opts$get("ggSaveFigHeight"),
+  units = ufs::opts$get("ggSaveUnits"),
+  dpi = ufs::opts$get("ggSaveDPI"),
+  device = NULL,
+  type = NULL,
+  bg = "transparent",
+  preventType = ufs::opts$get("ggSavePreventType"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The file where to save to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>The plot to save; if omitted, the last drawn plot is saved.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height, width</code></td>
+<td>
+<p>The dimensions of the plot, specified in <code>units</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>The units, <code>'cm'</code>, '<code>mm</code>', or <code>'in'</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dpi</code></td>
+<td>
+<p>The resolution (dots per inch). This argument is vectorized.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>device</code></td>
+<td>
+<p>The graphic device; is inferred from the file if not specified.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>An additional arguments for the graphic device.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bg</code></td>
+<td>
+<p>The background (e.g. 'white').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preventType</code></td>
+<td>
+<p>Whether to prevent passing a value for the <code>type</code> argument
+to <code>ggplot2::ggsave()</code>. This is prevented by default since <code>ggplot2::ggplot()</code> switched
+to using the ragg device by default, resulting in throwing a warning
+("Warning: Using ragg device as default. Ignoring <code>type</code> and <code>antialias</code> arguments")
+if something if passed for 'type'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Any additional arguments are passed on to <code>ggplot2::ggsave()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The plot, invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot &lt;- ufs::ggBoxplot(mtcars, 'mpg');
+ggSave(file=tempfile(fileext=".png"), plot=plot);
+</code></pre>
+
+
+</div>

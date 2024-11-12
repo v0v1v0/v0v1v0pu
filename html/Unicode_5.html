@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>n_of_u_chars</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Character Counts</h2>
+
+<h3>Description</h3>
+
+<p>Compute the number of Unicode characters (code points) in sequences
+or ranges of Unicode characters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">n_of_u_chars(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector of Unicode characters, character ranges, or
+character sequences.
+</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>An integer vector with the numbers of Unicode characters specified by
+the elements of <code>x</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## How many code points are assigned to the Latin and Cyrillic scripts?
+x &lt;- u_scripts(c("Latn", "Cyrl"))
+## Numbers in the respective ranges:
+n &lt;- lapply(x, n_of_u_chars)
+n
+## Total number:
+vapply(n, sum, 0)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,127 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>residuals.MxModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get residuals from an MxModel</h2>
+
+<h3>Description</h3>
+
+<p>Return the <code>residuals()</code> from an OpenMx RAM model. You can format these (with digits), and suppress small values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxModel'
+residuals(object, digits = 2, suppress = NULL, reorder = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>An fitted <code>mxModel()</code> from which to get residuals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppress</code></td>
+<td>
+<p>smallest deviation to print out (default = NULL = show all)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reorder</code></td>
+<td>
+<p>optionally reorder the variables in the residuals matrix to show patterns</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> matrix of residuals
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxConfint()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1.0)
+)
+
+# ===================================
+# = Show the residuals of the model =
+# ===================================
+residuals(m1)
+# |   |x1   |x2    |x3   |x4    |x5 |
+# |:--|:----|:-----|:----|:-----|:--|
+# |x1 |.    |.     |0.01 |.     |.  |
+# |x2 |.    |.     |0.01 |-0.01 |.  |
+# |x3 |0.01 |0.01  |.    |.     |.  |
+# |x4 |.    |-0.01 |.    |.     |.  |
+# |x5 |.    |.     |.    |.     |.  |
+# [1] "nb: You can zoom in on bad values with, e.g. suppress = .01, which
+#      will hide values smaller than this. Use digits = to round"
+
+residuals(m1, digits = 3)
+residuals(m1, digits = 3, suppress = .005)
+# residuals are returned as an invisible object you can capture in a variable
+a = residuals(m1); a
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

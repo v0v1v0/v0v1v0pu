@@ -1,0 +1,177 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ggEasyBar</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convenience functions for ggplots based on multiple variables</h2>
+
+<h3>Description</h3>
+
+<p>These are convenience functions to quickly generate plots for multiple
+variables, with the variables in the y axis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ggEasyBar(
+  data,
+  items = NULL,
+  labels = NULL,
+  sortByMean = TRUE,
+  xlab = NULL,
+  ylab = NULL,
+  scale_fill_function = NULL,
+  fontColor = "white",
+  fontSize = 2,
+  labelMinPercentage = 1,
+  showInLegend = "both",
+  legendRows = 2,
+  legendValueLabels = NULL,
+  biAxisLabels = NULL
+)
+
+ggEasyRidge(
+  data,
+  items = NULL,
+  labels = NULL,
+  sortByMean = TRUE,
+  xlab = NULL,
+  ylab = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataframe containing the variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>The variable names (if not provided, all variables will be
+used).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Labels can optionally be provided; if they are, these will be
+used instead of the variable names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortByMean</code></td>
+<td>
+<p>Whether to sort the variables by mean value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab, ylab</code></td>
+<td>
+<p>The labels for the x and y axes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale_fill_function</code></td>
+<td>
+<p>The function to pass to <code>ggplot()</code> to
+provide the colors of the bars. If <code>NULL</code>, set to
+<code>ggplot2::scale_fill_viridis_d(labels = legendValueLabels, guide = ggplot2::guide_legend(title = NULL, nrow=legendRows, byrow=TRUE))</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fontColor, fontSize</code></td>
+<td>
+<p>The color and size of the font used to display the
+labels</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labelMinPercentage</code></td>
+<td>
+<p>The minimum percentage that a category must reach
+before the label is printed (in whole percentages, i.e., on a scale from 0
+to 100).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showInLegend</code></td>
+<td>
+<p>What to show in the legend in addition to the values;
+nothing ("<code>none</code>"), the frequencies ("<code>freq</code>"), the percentages
+("<code>perc</code>"), or both ("<code>both</code>"). This is only used if only one
+variable is shown in the plot; afterwise, after all, the absolute
+frequencies and percentages differ for each variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legendRows</code></td>
+<td>
+<p>Number or rows in the legend.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legendValueLabels</code></td>
+<td>
+<p>Labels to use in the legend; must be a vector of
+the same length as the number of categories in the variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>biAxisLabels</code></td>
+<td>
+<p>This can be used to specify labels to use if you want to
+use labels on both the left and right side. This is mostly useful when
+plotting single questions or semantic differentials. This must be a list
+with two character vectors, <code>leftAnchors</code> and <code>rightAnchors</code>,
+which must each have the same length as the number of items specified in
+<code>items</code>. See the examples for, well, examples.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>ggplot()</code> plot is returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>geom_ridgeline()</code>, <code>geom_bar()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+ggEasyBar(mtcars, c('gear', 'carb'));
+ggEasyRidge(mtcars, c('disp', 'hp'));
+
+### When plotting single questions, if you want to show the anchors:
+ggEasyBar(mtcars, c('gear'),
+          biAxisLabels=list(leftAnchors="Fewer",
+                            rightAnchors="More"));
+
+### Or for multiple questions (for e.g. semantic differentials):
+ggEasyBar(mtcars, c('gear', 'carb'),
+          biAxisLabels=list(leftAnchors=c("Fewer", "Lesser"),
+                            rightAnchors=c("More", "Greater")));
+</code></pre>
+
+
+</div>

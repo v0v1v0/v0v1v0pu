@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>paste_median</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Paste median</h2>
+
+<h3>Description</h3>
+
+<p>Creates a formatted median with inter-quartile range from numeric data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">paste_median(x, less.than.one = FALSE, digits = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A numeric. Data to summarize.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>less.than.one</code></td>
+<td>
+<p>A logical. Indicates a median that rounds to 0 should
+be printed as &lt;1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>An integer. Number of digits to round to.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector of the median(s) with interquartile range(s).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">paste_median(mtcars$mpg)
+</code></pre>
+
+
+</div>

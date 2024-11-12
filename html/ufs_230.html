@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>setCaptionNumberingKnitrHook</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set a knitr hook for caption numbering</h2>
+
+<h3>Description</h3>
+
+<p>Set a knitr hook to automatically number captions for, e.g., figures
+and tables. <code>setCaptionNumberingKnitrHook()</code> is the general purpose
+function; you normally use <code>setFigCapNumbering()</code> or <code>setTabCapNumbering()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">setCaptionNumberingKnitrHook(
+  captionName = "fig.cap",
+  prefix = "Figure %s: ",
+  suffix = "",
+  optionName = paste0("setCaptionNumbering_", captionName),
+  resetCounterTo = 1
+)
+
+setFigCapNumbering(
+  captionName = "fig.cap",
+  prefix = "Figure %s: ",
+  suffix = "",
+  optionName = paste0("setCaptionNumbering_", captionName),
+  resetCounterTo = 1
+)
+
+setTabCapNumbering(
+  captionName = "tab.cap",
+  prefix = "Table %s: ",
+  suffix = "",
+  optionName = paste0("setCaptionNumbering_", captionName),
+  resetCounterTo = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>captionName</code></td>
+<td>
+<p>The name of the caption; for example, <code>fig.cap</code>
+or <code>tab.cap</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix, suffix</code></td>
+<td>
+<p>The prefix and suffix; any occurrences of
+<code style="white-space: pre;">⁠\%s⁠</code> will be replaced by the number.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>optionName</code></td>
+<td>
+<p>THe name to use for the option that keeps track
+of the numbering.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resetCounterTo</code></td>
+<td>
+<p>Whether to reset the counter (as stored in the
+options), and if so, to what value (set to <code>FALSE</code> to prevent resetting).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>NULL</code>, invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### To start automatically numbering figure captions
+setFigCapNumbering();
+
+### To start automatically numbering table captions
+setTabCapNumbering();
+</code></pre>
+
+
+</div>

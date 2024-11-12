@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>seasonal.dummies</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Seasonal Dummies and Seasonal Cycles</h2>
+
+<h3>Description</h3>
+
+<p>Generate variables of seasonal dummies and seasonal cycles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">seasonal.dummies(x)
+seasonal.cycles(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a univariate seasonal time series.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A multivariate time series containing the dummies or cycles by columns. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># In terms of model fitting
+# both sets of variables are equivalent
+x &lt;- diff(log(AirPassengers))
+sd &lt;- seasonal.dummies(x)
+fit1 &lt;- lm(x ~ sd[,-1])
+summary(fit1)
+sc &lt;- seasonal.cycles(x)
+fit2 &lt;- lm(x ~ sc)
+summary(fit1)
+all.equal(fitted(fit1), fitted(fit2))
+</code></pre>
+
+
+</div>

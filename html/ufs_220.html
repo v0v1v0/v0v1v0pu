@@ -1,0 +1,259 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>scaleDiagnosis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>scaleDiagnosis</h2>
+
+<h3>Description</h3>
+
+<p>scaleDiagnosis provides a number of diagnostics for a scale (an aggregative
+measure consisting of several items).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">scaleDiagnosis(
+  data = NULL,
+  items = NULL,
+  plotSize = 180,
+  sizeMultiplier = 1,
+  axisLabels = "none",
+  scaleReliability.ci = FALSE,
+  conf.level = 0.95,
+  normalHist = TRUE,
+  poly = TRUE,
+  digits = 3,
+  headingLevel = 3,
+  scaleName = NULL,
+  ...
+)
+
+## S3 method for class 'scaleDiagnosis'
+print(x, digits = x$digits, ...)
+
+scaleDiagnosis_partial(
+  x,
+  headingLevel = x$input$headingLevel,
+  quiet = TRUE,
+  echoPartial = FALSE,
+  partialFile = NULL,
+  ...
+)
+
+## S3 method for class 'scaleDiagnosis'
+knit_print(
+  x,
+  headingLevel = x$headingLevel,
+  quiet = TRUE,
+  echoPartial = FALSE,
+  partialFile = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A dataframe containing the items in the scale. All variables in
+this dataframe will be used if items is NULL.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>If not NULL, this should be a character vector with the names
+of the variables in the dataframe that represent items in the scale.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plotSize</code></td>
+<td>
+<p>Size of the final plot in millimeters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sizeMultiplier</code></td>
+<td>
+<p>Allows more flexible control over the size of the plot
+elements</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axisLabels</code></td>
+<td>
+<p>Passed to ggpairs function to set axisLabels.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scaleReliability.ci</code></td>
+<td>
+<p>TRUE or FALSE: whether to compute confidence
+intervals for Cronbach's Alpha and Omega (uses bootstrapping function in
+MBESS, takes a while).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>Confidence of confidence intervals for reliability
+estimates (if requested with scaleReliability.ci).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalHist</code></td>
+<td>
+<p>Whether to use the default ggpairs histogram on the
+diagonal of the scattermatrix, or whether to use the <code>normalHist()</code> version.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>poly</code></td>
+<td>
+<p>Whether to also request the estimates based on the polychoric
+correlation matrix when calling <code>scaleStructure()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits to pass to the <code>print</code> method for the
+descriptives dataframe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headingLevel</code></td>
+<td>
+<p>The level of the heading (number of hash characters to insert
+before the heading, to be rendered as headings of that level in Markdown).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scaleName</code></td>
+<td>
+<p>Optionally, a name for the scale to print as heading for
+the results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments for <code>scaleDiagnosis()</code> are passed on to
+<code>scatterMatrix()</code>, and additional arguments for the <code>print</code> method are passed
+to the default <code>print</code> method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to print.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>Whether to be chatty (<code>FALSE</code>) or quiet (<code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>echoPartial</code></td>
+<td>
+<p>Whether to show the code in the partial (<code>TRUE</code>) or hide it (<code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>partialFile</code></td>
+<td>
+<p>The file with the Rmd partial (if you want to overwrite the default).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function to generate an object with several useful statistics and a plot to
+assess how the elements (usually items) in a scale relate to each other,
+such as Cronbach's Alpha, omega, the Greatest Lower Bound, a factor
+analysis, and a correlation matrix.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object with the input and several output variables. Most notably:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>scaleReliability</code></td>
+<td>
+<p>The results of scaleReliability.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pca</code></td>
+<td>
+<p>A
+Principal Components Analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fa</code></td>
+<td>
+<p>A Factor Analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>describe</code></td>
+<td>
+<p>Decriptive statistics about the items</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scatterMatrix</code></td>
+<td>
+<p>A scattermatrix with histograms on the diagonal and
+correlation coefficients in the upper right half.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### Note: the 'not run' is simply because running takes a lot of time,
+###       but these examples are all safe to run!
+## Not run: 
+### This will prompt the user to select an SPSS file
+scaleDiagnosis();
+
+### Generate a datafile to use
+exampleData &lt;- data.frame(item1=rnorm(100));
+exampleData$item2 &lt;- exampleData$item1+rnorm(100);
+exampleData$item3 &lt;- exampleData$item1+rnorm(100);
+exampleData$item4 &lt;- exampleData$item2+rnorm(100);
+exampleData$item5 &lt;- exampleData$item2+rnorm(100);
+
+### Use a selection of two variables
+scaleDiagnosis(data=exampleData, items=c('item2', 'item4'));
+
+### Use all items
+scaleDiagnosis(data=exampleData);
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

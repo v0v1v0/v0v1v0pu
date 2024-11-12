@@ -1,0 +1,429 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>makeAP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UAV Mission Planning tool for autonomous monitoring flight tasks with respect to DSM/DEM, orthophoto data retrieval.</h2>
+
+<h3>Description</h3>
+
+<p>The basic idea is to provide an easy to use workflow for controlling rtf-UAVs for planning autonomous surveys to retrieve aerial data sets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">makeAP(
+  projectDir = tempdir(),
+  locationName = "flightArea",
+  surveyArea = NULL,
+  flightAltitude = 100,
+  launchAltitude = NULL,
+  followSurface = FALSE,
+  followSurfaceRes = 25,
+  demFn = NULL,
+  noFiles = 1,
+  altFilter = 1,
+  horizonFilter = 30,
+  flightPlanMode = "track",
+  useMP = FALSE,
+  presetFlightTask = "remote",
+  overlap = 0.8,
+  maxSpeed = 20,
+  maxFlightTime = 10,
+  picRate = 2,
+  windCondition = 0,
+  uavType = "pixhawk",
+  cameraType = "MAPIR2",
+  buf_mult = 1.5,
+  cmd = 16,
+  uavViewDir = 0,
+  maxwaypoints = 9999,
+  above_ground = FALSE,
+  djiBasic = c(0, 0, 0, -90, 0),
+  dA = FALSE,
+  picFootprint = FALSE,
+  rcRange = NULL,
+  copy = FALSE,
+  runDir = tempdir(),
+  gdalLink = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>projectDir</code></td>
+<td>
+<p><code>character</code> path to the main folder where several locations can be hosted, default is <code>tempdir()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>locationName</code></td>
+<td>
+<p><code>character</code> path to the location folder where all tasks of this plot are hosted, default is <code>"flightArea"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>surveyArea</code></td>
+<td>
+<p>you may provide either the coordinates by
+c(lon1,lat1,lon2,lat2,lon3,lat3,launchLat,launchLon) or
+an OGR compatible file (prefunable to find an inherited method for function ‘makeAP’ for signature ‘"missing"’erably geoJSON or KML) with
+at least 4 coordinates that describe the flight area.
+The fourth coordinate is the launch position.
+You will find further explanation under seealso.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flightAltitude</code></td>
+<td>
+<p>set the default flight altitude of the mission. It is
+assumed that the UAV is started at the highest point of the surveyArea
+otherwise you have to defined the position of launching.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>launchAltitude</code></td>
+<td>
+<p>absolute altitude of launching position.
+It will overwrite the DEM based estimation if any other value than -9999</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>followSurface</code></td>
+<td>
+<p><code>boolean</code>  TRUE performs an altitude correction
+of the mission's flight altitude using additional DEM data.
+If no DEM data is provided and <code>followSurface</code> is TRUE,
+SRTM data will be downloaded and used.
+Further explanation at seealso</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>followSurfaceRes</code></td>
+<td>
+<p>horizontal step distance for analyzing the DEM altitudes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>demFn</code></td>
+<td>
+<p>filename of the corresponding DEM data file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>noFiles</code></td>
+<td>
+<p>manual split number of files</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>altFilter</code></td>
+<td>
+<p>if <code>followSurface</code> is equal <code>TRUE</code> then
+<code>altFilter</code> is the threshold value of accepted altitude difference (m) between two way points.
+If this value is not exceeded, the way point is omitted due to the fact that only 99 way points per mission are allowed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>horizonFilter</code></td>
+<td>
+<p>integer filter size of the rolling filter kernel for the flight track. Must be multiplied by the <code>followSurfaceRes</code> to get the spatial extent</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flightPlanMode</code></td>
+<td>
+<p>type of flight plan. Available are: <code>"waypoints"</code>,
+<code>"track"</code>, <code>"manual"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>useMP</code></td>
+<td>
+<p>default is FALSE switches to use a missionplanner/Qgroundcontrolplanner survey as planning base</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>presetFlightTask</code></td>
+<td>
+<p>(DJI only) strongly recommended to use "remote"
+<br>
+Options are:
+<code>"simple_ortho"</code> takes one picture/way point,
+<code>"multi_ortho"</code> takes 4 picture at a waypoint, two vertically down and two in forward and backward viewing direction and an angle of -60deg,
+<code>"simple_pano"</code> takes a 360 deg panorama picture and
+<code>"remote"</code> which assumes that the camera is controlled by the remote control (RC)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overlap</code></td>
+<td>
+<p>overlapping of the pictures in percent (1.0 = 100)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxSpeed</code></td>
+<td>
+<p>cruising speed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxFlightTime</code></td>
+<td>
+<p>user defined estimation of the lipo lifetime (20 min default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>picRate</code></td>
+<td>
+<p>fastest stable interval (s) for shooting pictures</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>windCondition</code></td>
+<td>
+<p>1= calm 2= light air 1-5km/h, 3= light breeze 6-11km/h, 4=gentle breeze 12-19km/h 5= moderate breeze 20-28km/h</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uavType</code></td>
+<td>
+<p>type of UAV. currently "dji_csv" for Litchi CSV export and "pixhawk" for MAVlink compatible flightplans are supported</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cameraType</code></td>
+<td>
+<p>depending on the UAV Platform and integrated camera choose for DJI Mini 1/2/3, Phantom 3/Phantom 4 , Inspire 1) the <code>dji43</code>  and for the DJI Air 2S the <code>dji32</code> tag. For GoPro action cams on whatever aircraft you can choose <code>GP3_7MP</code> or <code>GP3_11MP</code>. Flying the Mapir 2 camera choose  <code>MAPIR2</code>. For the E90X camera of Yuneec you choose <code>YUN90</code>. Please note the calculation of the flight pathes is done via the ratio of vertical and horizontal resolution of the camera in the NON 16:9 and Landscape Modus.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>buf_mult</code></td>
+<td>
+<p>multiplier for defining the zone in which the waypoints  are assumed to be turning waypoints according to  buf_mult * <code>followSurfaceRes</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmd</code></td>
+<td>
+<p>mavlink command</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uavViewDir</code></td>
+<td>
+<p>view direction of uav</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxwaypoints</code></td>
+<td>
+<p>maximal number of waypoints for Litchi default is 90</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>above_ground</code></td>
+<td>
+<p>Litchi setting if the waypoint altitudes are interpreted as AGL default = FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>djiBasic</code></td>
+<td>
+<p>c(0,0,0,-90)
+<br> curvesize (DJI only) controls the curve angle of the uav passing way points.
+By default it is set to (<code style="white-space: pre;">⁠= 0.0⁠</code>).
+<br> rotationdir (DJI only) camera control parameter set the UAV basic turn direction to right (0) or left (1)
+<br> gimbalmode (DJI only) camera control parameter
+<code>0</code> deactivates the gimbal control
+<code>1</code> activates the gimbal for focusing POIs
+<code>2</code> activates the gimbal for focus and interpolate a field of view in an angel of <code>gimbalpitchangle</code>
+<br> gimbalpitchangle (DJI only) vertical angle of camera  <code style="white-space: pre;">⁠+30 deg..-90 deg⁠</code>
+<br> actiontype (DJI only) individual actionype settings of the camera c(1,1,...)
+<br> actionparam (DJI only) corresponding parameter for the above individual actiontype c(0,0,...)
+<code>uavViewDir</code> viewing direction of camera default is <code>0</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dA</code></td>
+<td>
+<p>if TRUE the real extent of the used DEM is returned helpful for low altitudes flight planning</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>picFootprint</code></td>
+<td>
+<p>switch for calculating the footprint at all way points</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rcRange</code></td>
+<td>
+<p>range of estimated range of remote control</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>copy</code></td>
+<td>
+<p>copy switch</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runDir</code></td>
+<td>
+<p><code>character</code> runtime folder</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gdalLink</code></td>
+<td>
+<p>link to GDAL binaries</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>makeAP (make aerial plan) creates either intermediate flight control files for the
+DJI phantom x UAVs or ready to upload control files for the 3DR Solo/PixHawk flight controller. The
+DJI control files are designed for using with the proprietary litchi flight
+control app exchange format, while the 3DR Solo/PixHawk flight controller files are using the MAVLINK
+common message set, that is used by the PixHawk flight controller family.
+Both are implemented very rudimentary.<br><br> DJI:<br> The reason using DJI
+is their absolute straightforward usage. Everybody can fly with a DJI but
+the price is a more or less closed system at least in the low budget segment. There are workarounds like the litchi app that provides
+additionally to a cloud based mission planner an offline/standalone
+interface to upload a CSV formatted way point file for autonomous flights to
+the Phantom.<br><br> PixHawk flight controller/3DR Solo:<br> The open UAV community is focused
+on the PixHawk autopilot unit and the Mission Planner software. It is well
+documented and several APIs are provided. Nevertheless a high resolution
+terrain following flight planning tool for  autonomous obstacle avoiding flight missions
+is not available. <code>makeAP</code> creates a straightforward version of MAV format flight control
+rules that are ready to be uploaded directly on the Pixhawk controller using the <code>solo_upload</code> function.<br><br></p>
+
+
+<h3>Warning</h3>
+
+<p>Take care! There are still a lot of construction zones
+around. This script is far beyond to be in a mature state. Please control
+and backup all controls again while planning and performing autonomous
+flight plans and missions. You will have a lot of chances to make a small
+mistake what may yield in a damage of your UAV or even worse in involving
+people, animals or non-cash assets. Check your risk, use parachute systems
+and even if it is running like a charm, keep alert!
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The underlying concept, a tutorial and a field guide can be found in the package vignettes. See <code>browseVignettes("uavRmp")</code> or <code>vignette(package = "uavRmp")</code> or
+at <a href="https://gisma.github.io/uavRmp/articles/uavRmp_1.html">Github uavRmp manual</a>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Depending on the arguments, the following spatial data sets can be returned:
+
+# lp      the planned launching position of the UAV.
+# wp      waypoints inclusive all information
+# oDEM    the original (input) digital surface model (DSM)
+# rDEM    the resampled (used) DSM
+# fp      optimized footprints of the camera
+# fA      flight area with at least 2 overlaps
+# rcA     area covered by the RC according to the range and line of sight
+
+## for visualisation and vecDraw load mapview
+require(mapview)
+
+## (1) get example DEM data
+demFn &lt;- system.file("extdata", "mrbiko.tif", package = "uavRmp")
+tutorial_flightArea &lt;- system.file("extdata", "flightarea.kml", package = "uavRmp")
+
+## (2) simple flight, 100 meters above ground
+##     assuming a flat topography,
+
+fp &lt;- makeAP(surveyArea = tutorial_flightArea,
+              demFn = demFn)
+              
+## (3) typical real case scenario (1)
+##     A flight altitudes BELOW 50 m is ambitious and risky
+##     You have to use a high quality high resulution DSM
+##     (here simulated with a standard DEM)
+
+fp &lt;- makeAP(surveyArea=tutorial_flightArea,
+          followSurface = TRUE,
+          flightAltitude = 45,
+          demFn = demFn,
+          windCondition = 1,
+          uavType = "dji_csv",cameraType = "dji32",
+          followSurfaceRes = 5,
+          altFilter = .75)
+
+
+## (4) typical real case scenario (2)
+##     A flight altitudes BELOW 50 m is ambitious and risky
+##     You have to use a high quality high resolution DSM
+##     (here simulated with a standard DEM)
+##     NOTE All settings are taken from QGroundcontrol so adapt the survey settings according 
+##          to "calc above terain" and use the "YUN90" camera tag for camera flight speed etc.
+##     NOTE EXPERIMENTAL 
+
+demFn &lt;- system.file("extdata", "mrbiko.tif", package = "uavRmp")
+tutorial_flightArea &lt;- system.file("extdata", "tutdata_qgc_survey.plan", package = "uavRmp")
+fp &lt;- makeAP(surveyArea=tutorial_flightArea,
+            useMP = TRUE,
+            followSurface = TRUE,
+            demFn = demFn,
+            windCondition = 1,
+            uavType = "pixhawk",
+            cameraType = "YUN90",
+            followSurfaceRes = 5,
+             altFilter = .75)
+
+## (5) typical real case scenario (3)
+##     This examples uses a flight planning from the QGroundcotrol Survey planning tool
+##     It also used the all calculations for camera flight speed etc.
+##     The flight plan is modyfied by splitting up the task according to 99 Waypoints
+##     and flight time and saved as litchi csv format 
+##     NOTE EXPERIMENTAL tested with DJI mavic mini 2
+
+demFn &lt;- system.file("extdata", "mrbiko.tif", package = "uavRmp")
+tutorial_flightArea &lt;- system.file("extdata", "tutdata_qgc_survey.plan", package = "uavRmp")
+fp &lt;- makeAP(surveyArea=tutorial_flightArea,
+            useMP = TRUE,
+            demFn = demFn,
+            maxFlightTime = 25,
+            cameraType = "dji32",
+            uavType = "dji_csv")
+            
+## call a simple shiny interface
+shiny::runApp(system.file("shiny/plan2litchi/", "app.R", package = "uavRmp"))
+        
+        
+## (6) view results
+
+mapview::mapview(fp$wp,cex=4, lwd=0.5)+
+mapview::mapview(fp$lp,color = "red", lwd=1,cex=4)+
+mapview::mapview(fp$fA,color="blue", alpha.regions = 0.1,lwd=0.5)+
+mapview::mapview(fp$oDEM,col=terrain.colors(256))
+
+
+
+## (6) digitize flight area using the small "onboard" tool vecDraw()
+##     save vectors as "kml" or "json" files
+##     provide full filename  +  extension!
+
+
+vecDraw(preset="uav")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

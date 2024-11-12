@@ -1,0 +1,223 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>boxB</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+BoxPlot based outlier detection
+</h2>
+
+<h3>Description</h3>
+
+<p>Identifies univariate outliers by using methods based on BoxPlots
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">boxB(x, k=1.5, method='asymmetric', weights=NULL, id=NULL, 
+     exclude=NA, logt=FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Numeric vector that will be searched for outliers. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+
+<p>Nonnegative constant that determines the extension of the 'whiskers'. Commonly used values are 1.5 (default), 2, or 3.
+Note that when <code>method="adjbox"</code> then <code>k</code> is set automatically equal to 1.5
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+
+<p>Character, identifies the method to be used: <code>method="resistant"</code> provides the ‘standard’ boxplot fences; <code>method="asymmetric"</code> is a modification of standard method to deal with (moderately) skewed data; <code>method="adjbox"</code> uses Hubert and Vandervieren (2008) adjusted boxplot for skewed distributions.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+
+<p>Optional numeric vector with units' weights associated to the observations in <code>x</code>. Only nonnegative weights are allowed. Weights are used in estimating the quartiles (see Details).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+
+<p>Optional vector with identifiers of units in <code>x</code>. If missing (<code>id=NULL</code>, default) the identifiers will be set equal to the positions in the vector (i.e. <code>id=1:length(x)</code>). 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+
+<p>Values of <code>x</code> that will be excluded by the analysis. By default missing values are excluded (<code>exclude=NA</code>). 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logt</code></td>
+<td>
+
+<p>Logical, if <code>TRUE</code>, before searching outliers the <code>x</code> variable is log-transformed (<code>log(x+1)</code> is considered). In this case the summary outputs (bounds, etc.) will refer to the log-transformed <code>x</code>
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>When <code>method="resistant"</code> the outlying observations are those outside the interval:
+</p>
+<p style="text-align: center;"><code class="reqn">[Q_1 - k \times IQR;\quad  Q_3 + k \times IQR] </code>
+</p>
+
+<p>where <code class="reqn">Q_1</code> and <code class="reqn">Q_3</code> are respectively the 1st and the 3rd quartile of <code>x</code>, while <code class="reqn">IQR=(Q_3 - Q_1)</code> is the Inter-Quartile Range. The value <code class="reqn">k=1.5</code> (said 'inner fences') is commonly used when drawing a boxplot. Values <code class="reqn">k=2</code> and  <code class="reqn">k=3</code> provide middle and outer fences, respectively.
+</p>
+<p>When <code>method="asymmetric"</code> the outlying observations are those outside the interval: 
+</p>
+<p style="text-align: center;"><code class="reqn">[Q_1 - 2k \times (Q_2-Q_1);\quad  Q_3 + 2k \times (Q_3-Q_2)] </code>
+</p>
+
+<p>being <code class="reqn">Q_2</code> the median; such a modification allows to account for slight skewness of the distribution. 
+</p>
+<p>Finally, when <code>method="adjbox"</code> the outlying observations are identified using the method proposed by Hubert and Vandervieren (2008) and based on the Medcouple measure of skewness; in practice the bounds are: 
+</p>
+<p style="text-align: center;"><code class="reqn">[Q_1-1.5 \times e^{aM} \times IQR;\quad  Q_3+1.5 \times e^{bM}\times IQR ]</code>
+</p>
+
+<p>Where M is the medcouple; when <code class="reqn">M &gt; 0</code> (positive skewness) then <code class="reqn">a = -4</code> and <code class="reqn">b = 3</code>; on the contrary <code class="reqn">a = -3</code> and <code class="reqn">b = 4</code> for negative skewness (<code class="reqn">M &lt; 0</code>). This adjustment of the boxplot, according to Hubert and Vandervieren (2008), works with moderate skewness (<code class="reqn">-0.6 \leq M \leq 0.6</code>). The bounds of the adjusted boxplot are derived by applying the function <code>adjboxStats</code> in the package <span class="pkg">robustbase</span>.
+</p>
+<p>When weights are available (passed via the argument <code>weights</code>) then they are used in the computation of the quartiles. In particular, the quartiles are derived using the function  <code>wtd.quantile</code> in the package <span class="pkg">Hmisc</span>.  
+</p>
+<p>Remember that when asking a log transformation (argument <code>logt=TRUE</code>) all the estimates (quartiles, etc.) will refer to <code class="reqn">log(x+1)</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The output is a list containing the following components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>quartiles</code></td>
+<td>
+
+<p>The quartiles of <code>x</code> after discarding the values in the <code>exclude</code> argument. When weights are provided they are used in quartiles estimation trough the function  <code>wtd.quantile</code> in the package <span class="pkg">Hmisc</span>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fences</code></td>
+<td>
+
+<p>The bounds of the interval, values outside the interval are detected as outliers.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>excluded</code></td>
+<td>
+
+<p>The identifiers or positions (when <code>id=NULL</code>) of units in <code>x</code> excluded by the computations, according to the argument <code>exclude</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outliers</code></td>
+<td>
+
+<p>The identifiers or positions (when <code>id=NULL</code>) of units in <code>x</code> detected as outliers.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lowOutl</code></td>
+<td>
+
+<p>The identifiers or positions (when <code>id=NULL</code>) of units in <code>x</code> detected as outliers in the lower tail of the distribution.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>upOutl</code></td>
+<td>
+
+<p>The identifiers or positions (when <code>id=NULL</code>) of units in <code>x</code> detected as outliers in the upper tail of the distribution.
+</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Marcello D'Orazio <a href="mailto:mdo.statmatch@gmail.com">mdo.statmatch@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>McGill, R., Tukey, J. W. and Larsen, W. A. (1978) ‘Variations of box plots’. <em>The American Statistician</em>, 32, pp. 12-16.
+</p>
+<p>Hubert, M., and Vandervieren, E. (2008) ‘An Adjusted Boxplot for Skewed Distributions’, <em>Computational Statistics and Data Analysis</em>, 52, pp. 5186-5201.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>adjboxStats</code>, <code>wtd.quantile</code> 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(321)
+x &lt;- rnorm(30, 50, 10)
+x[10] &lt;- 1
+x[20] &lt;- 100
+
+out &lt;- boxB(x = x, k = 1.5, method = 'asymmetric')
+out$fences
+out$outliers
+x[out$outliers]
+
+out &lt;- boxB(x = x, k = 1.5, method = 'adjbox')
+out$fences
+out$outliers
+x[out$outliers]
+
+x[24] &lt;- NA
+x.ids &lt;- paste0('obs',1:30)
+out &lt;- boxB(x = x, k = 1.5, method = 'adjbox', id = x.ids)
+out$excluded
+out$fences
+out$outliers
+
+set.seed(111)
+w &lt;- round(runif(n = 30, min=1, max=10))
+out &lt;- boxB(x = x, k = 1.5, method = 'adjbox', id = x.ids, weights = w)
+out$excluded
+out$fences
+out$outliers
+
+</code></pre>
+
+
+</div>

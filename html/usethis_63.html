@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rename_files</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Automatically rename paired <code style="white-space: pre;">⁠R/⁠</code> and <code style="white-space: pre;">⁠test/⁠</code> files</h2>
+
+<h3>Description</h3>
+
+
+<ul>
+<li>
+<p> Moves <code style="white-space: pre;">⁠R/{old}.R⁠</code> to <code style="white-space: pre;">⁠R/{new}.R⁠</code>
+</p>
+</li>
+<li>
+<p> Moves <code style="white-space: pre;">⁠src/{old}.*⁠</code> to <code style="white-space: pre;">⁠src/{new}.*⁠</code>
+</p>
+</li>
+<li>
+<p> Moves <code style="white-space: pre;">⁠tests/testthat/test-{old}.R⁠</code> to <code style="white-space: pre;">⁠tests/testthat/test-{new}.R⁠</code>
+</p>
+</li>
+<li>
+<p> Moves <code style="white-space: pre;">⁠tests/testthat/test-{old}-*.*⁠</code> to <code style="white-space: pre;">⁠tests/testthat/test-{new}-*.*⁠</code>
+and updates paths in the test file.
+</p>
+</li>
+<li>
+<p> Removes <code>context()</code> calls from the test file, which are unnecessary
+(and discouraged) as of testthat v2.1.0.
+</p>
+</li>
+</ul>
+<p>This is a potentially dangerous operation, so you must be using Git in
+order to use this function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">rename_files(old, new)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>old, new</code></td>
+<td>
+<p>Old and new file names (with or without extensions).</p>
+</td>
+</tr></table>
+</div>

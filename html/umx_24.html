@@ -1,0 +1,195 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_names</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_names</h2>
+
+<h3>Description</h3>
+
+<p>Convenient equivalent of running grep on names, with value = TRUE and ignore.case = TRUE.
+</p>
+<p><strong>Plus</strong>:<code>umx_names</code> can handle dataframes, a model, list of models, model summary, or a vector of strings as input.
+</p>
+<p>In these cases, it will search column names, parameter or summary output names, or
+the literal string values themselves respectively.
+</p>
+<p>In addition, <code>umx_names</code> can do replacement of a found string (see examples). It can also collapse the result (using paste0)
+</p>
+<p><em>Note</em>: <code>namez</code> (with a z) is a shortcut for <code>umx_names</code>, which makes it easy to replace where you would otherwise use names.
+</p>
+<p>You can learn more about the matching options (like inverting the selection etc.) in the help for base-R grep.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_names(
+  df,
+  pattern = ".*",
+  replacement = NULL,
+  ignore.case = TRUE,
+  perl = FALSE,
+  value = TRUE,
+  fixed = FALSE,
+  useBytes = FALSE,
+  invert = FALSE,
+  global = FALSE,
+  collapse = c("as.is", "vector", "formula")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>dataframe (or other objects, or a list of models) from which to get names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>Used to find only matching names (supports grep/regular expressions)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replacement</code></td>
+<td>
+<p>If not NULL, replaces the found string. Use backreferences ("\1" to "\9") to refer to (subexpressions).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore.case</code></td>
+<td>
+<p>default = TRUE (opposite default to grep)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>perl</code></td>
+<td>
+<p>Should Perl-compatible regexps be used? Default = FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>Return matching elements themselves (TRUE) or their indices (FALSE) default = TRUE (opposite default to grep)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fixed</code></td>
+<td>
+<p>= FALSE (grep option If TRUE, pattern is a string to be matched as is. Overrides all conflicting arguments.)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>useBytes</code></td>
+<td>
+<p>= FALSE logical. grep option. If TRUE, matching is by byte rather than by character.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>invert</code></td>
+<td>
+<p>Return indices or values for elements that do not match (default = FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>global</code></td>
+<td>
+<p>replace all instances in each strong, or just the first (Default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>collapse</code></td>
+<td>
+<p>"as.is" leaves alone. as.vector formats as pasteable code, i.e., "c('a', 'b')", not "a"  "b" (default NULL), etc.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> vector of matches
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li>
+<p> Base-R pattern matching functions: <code>grep()</code>.
+And <code>umx_check_names()</code> to check for existence of names in a dataframe.
+</p>
+</li></ul>
+<p>Other String Functions: 
+<code>umx_explode_twin_names()</code>,
+<code>umx_explode()</code>,
+<code>umx_grep()</code>,
+<code>umx_paste_names()</code>,
+<code>umx_rot()</code>,
+<code>umx_str_chars()</code>,
+<code>umx_str_from_object()</code>,
+<code>umx_trim()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Names from a dataframe, with character matching
+umx_names(mtcars, "mpg") # only "mpg" matches this
+
+# Easy-to-type alias "namez"
+namez(mtcars, "mpg")
+
+# Use a regular expression to match a pattern
+namez(mtcars, "r[ab]") # "drat", "carb"
+namez(mtcars, "^d") # vars beginning with 'd' = "disp", drat
+
+# Use this function to replace text in names!
+umx_names(mtcars, "mpg", replacement = "hello") # "mpg" replaced with "hello"
+
+
+# ========================================================================
+# = Using the custom collapse option to quote each item, and wrap in c() =
+# ========================================================================
+namez(mtcars, "m", collapse = "vector") # Paste-able R-code for a vector
+
+# Other options passed to R's grep command
+umx_names(mtcars, "mpg" , invert = TRUE)  # Non-matches (instead of matches)
+umx_names(mtcars, "disp", value  = FALSE) # Return indices of matches 
+umx_names(mtcars, "disp", value  = "grepl")  # which var matches disp
+umx_names(mtcars, "^d"  , fixed  = TRUE)  # Vars containing literal '^d' (none...)
+
+# =======================================
+# = Examples using built-in GFF dataset =
+# =======================================
+
+# Just show phenotypes for Twin 1
+umx_names(GFF, "_T1$") # twin 1
+# "zyg" "sex1" "age_T1" "gff_T1" "fc_T1" "qol_T1" "hap_T1"...
+
+umx_names(GFF, "2$") # names ending in 2
+umx_names(GFF, "[^12bs]$") # doesn't end in `1`, `2`, `b`, or `s`
+# "zyg_6grp" "zyg_2grp" "divorce"
+umx_names(mxData(twinData[, c("wt1", "wt2")], type= "raw"))
+umx_names(mxData(cov(twinData[, c("wt1", "wt2")], use="comp"), type= "cov", numObs= 1000))
+umx_names(mxDataWLS(na.omit(twinData[, c("wt1", "wt2")]), type= "WLS"))
+
+namez(umxMatrix("bob", "Full", 3,3)$labels)
+
+</code></pre>
+
+
+</div>

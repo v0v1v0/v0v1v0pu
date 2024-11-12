@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>PoolEst</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pooled flood estimates</h2>
+
+<h3>Description</h3>
+
+<p>Provides pooled results from a pooling group - gauged, ungauged and with urban adjustment if necessary.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">PoolEst(
+  x,
+  gauged = FALSE,
+  QMED,
+  dist = "GenLog",
+  RP = c(2, 5, 10, 20, 50, 75, 100, 200, 500, 1000),
+  UrbAdj = FALSE,
+  CDs = NULL,
+  URBEXT = NULL,
+  fseQMED = 1.46
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>pooling group derived from the Pool function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gauged</code></td>
+<td>
+<p>logical argument with a default of FALSE. TRUE for gauged results and FALSE for ungauged</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>QMED</code></td>
+<td>
+<p>estimate of the median annual maximum flow</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>a choice of distribution for the estimates. The choices are "GenLog", "GEV", "Kappa3", or "Gumbel"; the generalised logistic, generalised extreme value, Kappa3, and Gumbel distribution, respectively. The default is "GenLog"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period of interest. By default the following RPs are provided: 2, 5, 10, 20, 50, 75, 100, 200, 500, 1000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>UrbAdj</code></td>
+<td>
+<p>logical argument with a default of FALSE. When TRUE, an urban adjustment is applied to the pooled Lcv and LSkew</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CDs</code></td>
+<td>
+<p>catchment descriptors derived from either GetCDs or CDsXML</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>URBEXT</code></td>
+<td>
+<p>the catchment URBEXT2000, to be supplied if UrbAdj is TRUE and if CDs have not been</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fseQMED</code></td>
+<td>
+<p>factorial standard error of the median annual maximum (QMED) estimate, used for quantifying ungauged uncertainty. Default is 1.46</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>PoolEst is a function to provide results from a pooling group derived using the Pool function. QMED (median annual maximum flow) needs to be supplied and can be derived from the QMED function for ungauged estimates or the annual maximum sample for gauged estimates. If the catchment of interest is urban, the UrbAdj argument can be set to TRUE. If this is done, either URBEXT (urban extent) needs to be provided or the catchment descriptors, derived from CDsXML or GetCDs. The methods for estimating pooled growth curves are according to Science Report: SC050050 - Improving the FEH statistical procedures for flood frequency estimation. The methods for estimating the L-moments and growth factors are outlined in the Flood Estimation Handbook (1999), volume 3. The methods for quantifying uncertainty are detailed in Hammond, A. (2022). Easy methods for quantifying the uncertainty of FEH pooling analysis. Circulation - The Newsletter of the British Hydrological Society (152). When UrbAdj = TRUE, urban adjustment is applied to the QMED estimate according to the method outlined in the guidance by Wallingford HydroSolutions: 'WINFAP 4 Urban Adjustment Procedures'.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If RP is default then a list of length 4. Element one is a data frame with columns; return period (a range from 2 - 1000), peak flow estimates (Q), growth factor estimates (GF), lower and upper intervals of uncertainty (68 percent intervals for ungauged and 95 percent for gauged). The second element is the estimated Lcv and Lskew. The third provides distribution parameters for the growth curve. The fourth provides distribution parameters for the frequency curve. If RP is not the default only the first two elements are returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get some catchment descriptors and form a pooling group. It's urban and
+#therefore the site of interest is not included.
+CDs.27083 &lt;- GetCDs(27083)
+Pool.27083 &lt;- Pool(CDs.27083)
+#Get results for the ungauged case, with urban adjustment
+PoolEst(Pool.27083, QMED = 12, UrbAdj = TRUE, CDs = CDs.27083)
+#Form the group again with the urban gauge included &amp; undertake a gauged estimate
+#with urban adjustment. QMED in this example is estimated as the median of the annual
+#maximum series for site 27083.
+PoolG.27083 &lt;- PoolG.27083 &lt;- Pool(CDs.27083, iug = TRUE, DeUrb = TRUE)
+PoolEst(PoolG.27083, QMED = 12.5, UrbAdj = TRUE, CDs = CDs.27083)
+
+</code></pre>
+
+
+</div>

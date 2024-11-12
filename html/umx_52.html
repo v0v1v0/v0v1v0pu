@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>qm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>qm</h2>
+
+<h3>Description</h3>
+
+<p>Quickmatrix function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">qm(..., rowMarker = "|")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>the components of your matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rowMarker</code></td>
+<td>
+<p>mark the end of each row</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- matrix
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># simple example
+qm(0, 1 |
+   2, NA)
+## Not run: 
+# clever example
+M1 = M2 = diag(2)
+qm(M1,c(4,5) | c(1,2),M2 | t(1:3))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

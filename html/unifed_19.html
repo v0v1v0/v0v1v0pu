@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unifed.stan</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Stan functions for working with the unifed distribution</h2>
+
+<h3>Description</h3>
+
+<p>Stan functions for working with the unifed distribution
+</p>
+
+
+<h3>Details</h3>
+
+<p>A script with stan functions of the unifed is provided. The script
+can be included in stan code. The full path to the script can be
+obtained with the function <code>unifed.stan.path</code>. The
+following list are the names of functions that take one real value:
+</p>
+
+<dl>
+<dt><code>real unifed_kappa(real theta)</code></dt>
+<dd>
+<p>Computes the cumulant generator of the
+unifed distribution.</p>
+</dd>
+<dt><code>real unifed_kappa_prime(real theta)</code></dt>
+<dd>
+<p>Computes the first derivative of
+the cumulant generator.</p>
+</dd>
+<dt><code>real unifed_kappa_double_prime(real theta)</code></dt>
+<dd>
+<p>Computes the second
+derivative of the cumulant generator.</p>
+</dd>
+<dt><code>real unifed_lpdf(real x,real theta)</code></dt>
+<dd>
+<p>Computes the
+logarithm of the probability density function of a unifed
+distribution. <code>theta</code> is the value of the canonical
+parameter of the unifed and <code>x</code> if the value where the
+density is evaluated.</p>
+</dd>
+<dt><code>real unifed_quantile(real p,real theta)</code></dt>
+<dd>
+<p>Returns the
+p-th quantile of a unifed distribution with canonical parameter
+<code>theta</code></p>
+</dd>
+</dl>
+<p>.
+</p>
+<dl>
+<dt><code>real unifed_rng(real theta)</code></dt>
+<dd>
+<p>Returns a simulated value
+of a unifed distribution with canonical parameter
+<code>theta</code>.</p>
+</dd>
+<dt><code>real unifed_lcdf(real x,real theta)</code></dt>
+<dd>
+<p>Computes the
+logarithm of the cumulative density function of a unifed
+distribution. <code>theta</code> is the value of the canonical
+parameter of the unifed and <code>x</code> if the value where the
+density is evaluated.</p>
+</dd>
+<dt><code>real unifed_kappa_prime_inverse(real mu)</code></dt>
+<dd>
+<p>Returns the
+inverse of the derivative of the unifed cumulant generator</p>
+</dd>
+<dt><code>real unifed_unit_deviance(real y,real mu)</code></dt>
+<dd>
+<p>Unit
+deviance function of the unifed.</p>
+</dd>
+</dl>
+<p>The following functions take vectors as arguments
+</p>
+
+<dl>
+<dt><code>vector unifed_kappa_v(vector theta)</code></dt>
+<dd>
+<p>Vectorized
+version of <code>unifed_kappa</code>.</p>
+</dd>
+<dt><code>vector unifed_kappa_prime_inverse_v(vector
+    mu)</code></dt>
+<dd>
+<p>Vectorized version of <code>unifed_kappa_prime_inverse</code>.</p>
+</dd>
+<dt><code>void unifed_glm_lp(vector y, vector theta, vector
+    weights)</code></dt>
+<dd>
+<p>Adds to the Log Probability Accumulator the
+logarithm of the likelihood function of a GLM with observed
+response <code>y</code>, estimated canonical parameter <code>theta</code>
+and weights <code>weights</code>.</p>
+</dd>  </dl>
+</div>

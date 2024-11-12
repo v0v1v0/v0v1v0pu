@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>summary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Summary of raster image.
+</h2>
+
+<h3>Description</h3>
+
+<p>Function <code>summary</code> for <code>ursaRaster</code> object produces summaries for each band.
+<br>
+Function <code>summary</code> for <code>ursaValue</code> object produces summaries for all values of raster image regardless of bands. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+summary(object, ...)
+
+## S3 method for class 'ursaNumeric'
+summary(object, ...)
+
+## S3 method for class 'ursaCategory'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+
+<p>Object of classes <code>ursaRaster</code>, <code>ursaNumeric</code>, or <code>ursaCategory</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Additional arguments affecting the summary produced.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>summary</code> for <code>ursaRaster</code> object applies <code>summary</code> to each column of two-dimensions value matrix and collating the results.
+<br><code>summary</code> for <code>ursaValue</code> object drops dimensions and applies <code>summary</code> to a vector.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>summary</code> for <code>ursaRaster</code> object returns value of function <code>summary.matrix</code>.
+<br><code>summary</code> for <code>ursaValue</code> object returns object of class <code style="white-space: pre;">⁠\dQuote{summaryDefault}⁠</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary</code> in package <span class="pkg">base</span>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+session_grid(regrid(mul=1/4))
+a &lt;- ursa_dummy(nband=3)
+print(summary(a))
+print(summary(ursa_value(a)))
+print(a)
+</code></pre>
+
+
+</div>

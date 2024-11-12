@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>updata</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Update the CRM dataframe after new patients' collected data
+</h2>
+
+<h3>Description</h3>
+
+<p>This function uptdates the CRM dataframe (result of the CreData routine) with new treated patients or observed DLTs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">updata(data = data, lastdose, npt, ndlt)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+
+<p>Dataframe to be updated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lastdose</code></td>
+<td>
+
+<p>Integer representing the dose to be updated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>npt</code></td>
+<td>
+
+<p>Number of new treated patients.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndlt</code></td>
+<td>
+
+<p>Number of DLTs among the npt patients.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Updated dataframe.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Benjamin Esterni, Baboukar Mane. Unite de Biostatistique et de Methodologie, Institut Paoli-Calmettes, Marseille, France.
+</p>
+
+
+<h3>References</h3>
+
+<p>O'Quigley J., Pepe M., Fisher L. (1990). Continual Reassessment Method: a practical design for Phase I clinical trials in cancer. Biometrics 46, 33-48. &lt;https://doi.org/10.2307/2531628&gt;
+</p>
+<p>O'Quigley J., Shen LZ. (1996). Continual Reassessment Method: a likelihood approach. Biometrics 52, 673-684. &lt;https://doi.org/10.2307/2532905&gt;
+</p>
+<p>Paoletti X., Kramar A. (2009). A comparison of model choices for the Continual Reassessment Method in phase I cancer trials. Statistics in Medecine 28, 3012-3028. &lt;https://doi.org/10.1002/sim.3682&gt;
+</p>
+<p>Chamorey Emmanuel. (2009). Methodologie des essais de phase precoce en cancerologie: evolution des schemas et apport de la pharmacologie. These.
+</p>
+<p>Garret-Mayer Elizabeth. (2006). The Continual Reassessment Method for dose-finding studies: a tutorial. Clinical Trials: 57-71. &lt;https://doi.org/10.1191/1740774506cn134oa&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>CreData</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Study initialization
+data&lt;- CreData(5,c("5 mg/m2","7 mg/m2","10 mg/m2","15 mg/m2","20 mg/m2"))
+data
+
+# Three patients are treated at the dose 1, without any observed DLT:
+data&lt;- updata(data,lastdose=1,npt=3,ndlt=0)
+data
+</code></pre>
+
+
+</div>

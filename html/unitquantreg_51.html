@@ -1,0 +1,144 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ashw</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The arcsecant hyperbolic Weibull distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function and random number generation function
+for the arcsecant hyperbolic Weibull distribution reparametrized in terms of the <code class="reqn">\tau</code>-th quantile, <code class="reqn">\tau \in (0, 1)</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dashw(x, mu, theta, tau = 0.5, log = FALSE)
+
+pashw(q, mu, theta, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+qashw(p, mu, theta, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+rashw(n, mu, theta, tau = 0.5)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>vector of positive quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>location parameter indicating the <code class="reqn">\tau</code>-th quantile, <code class="reqn">\tau \in (0, 1)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>shape parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>the parameter to specify which quantile use in the parametrization.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>logical; If TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; If TRUE, (default), <code class="reqn">P(X \leq x)</code> are returned, otherwise <code class="reqn">P(X &gt; x)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is taken to be the number required.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Probability density function
+</p>
+<p style="text-align: center;"><code class="reqn">f(y;\alpha, \theta)=\frac{\alpha \theta}{y\sqrt{1-y^2}} \mathrm{arcsech}(y)^{\theta-1}\exp\left [ -\alpha \mathrm{arcsech}(y)^\theta \right ]</code>
+</p>
+
+<p>Cumulative distribution function
+</p>
+<p style="text-align: center;"><code class="reqn">F(y;\alpha, \theta)=\exp\left [ -\alpha \mathrm{arcsech}(y)^\theta \right ]</code>
+</p>
+
+<p>Quantile function
+</p>
+<p style="text-align: center;"><code class="reqn">Q(\tau;\alpha, \theta)= \mathrm{sech}\left \{ \left [ -\alpha^{-1} \log(\tau)\right ]^{\frac{1}{\theta}} \right \}</code>
+</p>
+
+<p>Reparameterization
+</p>
+<p style="text-align: center;"><code class="reqn">\alpha = g^{-1}(\mu) = -\frac{\log(\tau)}{\mathrm{arcsech}(\mu)^\theta}</code>
+</p>
+
+<p>where <code class="reqn">\theta &gt;0</code> is the shape parameter and <code class="reqn">\mathrm{arcsech}(y)= \log\left[\left( 1+\sqrt{1-y^2} \right)/y \right]</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dashw</code> gives the density, <code>pashw</code> gives the distribution function,
+<code>qashw</code> gives the quantile function and <code>rashw</code> generates random deviates.
+</p>
+<p>Invalid arguments will return an error message.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Josmar Mazucheli
+</p>
+<p>André F. B. Menezes
+</p>
+
+
+<h3>References</h3>
+
+<p>Korkmaz, M. C., Chesneau, C. and Korkmaz, Z. S., (2021). A new alternative quantile regression model for the bounded response with educational measurements applications of OECD countries. <em>Journal of Applied Statistics</em>, 1–25.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(6969)
+x &lt;- rashw(n = 1000, mu = 0.5, theta = 2.5, tau = 0.5)
+R &lt;- range(x)
+S &lt;- seq(from = R[1L], to = R[2L], by = 0.01)
+hist(x, prob = TRUE, main = 'arcsecant hyperbolic Weibull')
+lines(S, dashw(x = S, mu = 0.5, theta = 2.5, tau = 0.5), col = 2)
+plot(ecdf(x))
+lines(S, pashw(q = S, mu = 0.5, theta = 2.5, tau = 0.5), col = 2)
+plot(quantile(x, probs = S), type = "l")
+lines(qashw(p = S, mu = 0.5, theta = 2.5, tau = 0.5), col = 2)
+</code></pre>
+
+
+</div>

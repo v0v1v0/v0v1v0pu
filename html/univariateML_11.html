@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mlbetapr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Beta prime distribution maximum likelihood estimation</h2>
+
+<h3>Description</h3>
+
+<p>This function does not estimate the scale parameter for the <code>BetaPrime</code>
+distribution. Transforms the data and uses <code>stat::nlm</code> to estimate
+the parameters of the Beta distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mlbetapr(x, na.rm = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a (non-empty) numeric vector of data values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values be removed?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>passed to <code>mlbeta</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For the density function of the Beta prime distribution see
+BetaPrime.
+</p>
+<p>For <code>type</code>, the option <code>none</code> is fastest.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>mlbetapr</code> returns an object of class <code>univariateML</code>.
+This is a named numeric vector with maximum likelihood estimates for
+<code>shape1</code> and <code>shape2</code> and the following attributes:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The name of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density</code></td>
+<td>
+<p>The density associated with the estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logLik</code></td>
+<td>
+<p>The loglikelihood at the maximum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>support</code></td>
+<td>
+<p>The support of the density.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The call as captured my <code>match.call</code></p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Johnson, N. L., Kotz, S. and Balakrishnan, N. (1995)
+Continuous Univariate Distributions, Volume 2, Chapter 25. Wiley, New York.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>BetaPrime for the Beta prime density,
+nlm for the optimizer this function uses, mlbeta for
+the Beta distribution maximum likelihood estimator.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">AIC(mlbetapr(USArrests$Rape))
+</code></pre>
+
+
+</div>

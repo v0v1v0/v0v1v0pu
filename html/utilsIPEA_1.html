@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>abrevia_nome_meio</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Abrevia o nome do meio.</h2>
+
+<h3>Description</h3>
+
+<p><code>abrevia_nome_meio</code> return names .
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">abrevia_nome_meio(base, ..., suffixo = "_abrev")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>A data table, data frame or character vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>columns for apply the function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffixo</code></td>
+<td>
+<p>A character indicating the final part of the new columns' names</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the base parameter with a new column.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">   base &lt;- data.frame(nome = c("Carlos Pereira Neves", "Pedro Aparecido Anjos"))
+   base &lt;- remove_preposicao_nomes(base, "nome")
+</code></pre>
+
+
+</div>

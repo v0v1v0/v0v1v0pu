@@ -1,0 +1,177 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_define_cohort</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Define Estimation Cohort</h2>
+
+<h3>Description</h3>
+
+<p>Define a cohort to include in a parameter estimation
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_define_cohort(cfg, cohort)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohort</code></td>
+<td>
+<p>list with cohort information</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Each cohort has a name (eg <code>d5mpk</code>), and the dataset containing the
+information for this cohort is identified (the name defined in <code>system_load_data</code>)
+</p>
+<pre>cohort = list(
+  name         = "d5mpk",
+  dataset      = "pm_data",
+  inputs       = NULL,
+  outputs      = NULL)</pre>
+<p>Next if only a portion of the dataset applies to the current cohort, you
+can define a filter (<code>cf</code> field). This will be 
+applied to the dataset to only return values relevant to this cohort. For
+example, if we only want records where the column <code>DOSE</code> is 5 (for the 5
+mpk cohort). We can use the following: 
+</p>
+<pre>cohort[["cf"]]   = list(DOSE   = c(5))</pre>
+<p>If the dataset has the headings <code>ID</code>, <code>DOSE</code> and <code>SEX</code>  and
+cohort filter had the following format:
+</p>
+<pre>cohort[["cf"]]   = list(ID    = c(1:4),
+                        DOSE  = c(5,10),
+                        SEX   = c(1))</pre>
+<p>It would be translated into the boolean filter:
+</p>
+<pre>(ID==1) | (ID==2) | (ID==3) | (ID==4)) &amp; ((DOSE == 5) | (DOSE==10)) &amp; (SEX == 1)</pre>
+<p>Optionally you may want to fix a system parameter to a different value for a
+given cohort. This can be done using the cohort parameter (<code>cp</code>) field.
+For example if you had the body weight defined as a system parameter 
+(<code>BW</code>), and you wanted to fix the body weight to 70 for the current
+cohort you would do the following:
+</p>
+<pre>cohort[["cp"]]   = list(BW        = c(70))</pre>
+<p>Note that you can only fix parameters that are not being estimated.
+</p>
+<p>By default the underlying simulation output times will be taken from the
+general output_times option (see <code>system_set_option</code>). However It may also be 
+necessary to specify simulation output times for a specific cohort. The
+<code>output_times</code> field can be used for this. Simply provide a vector of
+output times:
+</p>
+<pre>cohort[["output_times"]]   = seq(0,100,2)</pre>
+<p>Next we define the dosing for this cohort. It is only necessary to define
+those inputs that are non-zero. So if the data here were generated from
+animals given a single 5 mpk IV at time 0. Bolus dosing is defined 
+using <code>&lt;B:times&gt;</code> and <code>&lt;B:events&gt;</code>. If <code>Cp</code> is the central
+compartment, you would pass this information to the cohort in the
+following manner:
+</p>
+<pre>cohort[["inputs"]][["bolus"]] = list()
+cohort[["inputs"]][["bolus"]][["Cp"]] = list(TIME=NULL, AMT=NULL)
+cohort[["inputs"]][["bolus"]][["Cp"]][["TIME"]] = c( 0) 
+cohort[["inputs"]][["bolus"]][["Cp"]][["AMT"]]  = c( 5)</pre>
+<p>Inputs can also include any infusion rates (<code>infusion_rates</code>) or
+covariates (<code>covariates</code>). Covariates will have the default value
+specified in the system file unless overwritten here. The units here are
+the same as those in the system file
+</p>
+<p>Next we need to map the outputs in the model to the observation data in the
+dataset. Under the <code>outputs</code> field there is a field for each output. Here 
+the field <code>ONAME</code> can be replaced with something more useful (like 
+<code>PK</code>). 
+</p>
+<pre>cohort[["outputs"]][["ONAME"]] = list()</pre>
+<p>If you want to further filter the dataset. Say for example you
+have two outputs and the <code>cf</code> applied above reduces your dataset
+down to both outputs. Here you can use the  "of" field to apply an "output filter"
+to further filter the records down to those that apply to the current output ONAME. 
+</p>
+<pre>cohort[["outputs"]][["ONAME"]][["of"]] = list(
+       COLNAME          = c(),
+       COLNAME          = c())</pre>
+<p>If you do not need further filtering of data, you can you can just omit the field.
+</p>
+<p>Next you need to identify the columns in the dataset that contain your
+times and observations. This is found in the <code>obs</code> field for the 
+current observation:
+</p>
+<pre>cohort[["outputs"]][["ONAME"]][["obs"]] = list(
+         time           = "TIMECOL",
+         value          = "OBSCOL",
+         missing        = -1)</pre>
+<p>The times and observations in the dataset are found in the <code>’TIMECOL’</code> column 
+and the <code>’OBSCOL’</code> column (optional missing data option specified by -1). 
+</p>
+<p>These observations in the dataset need to be mapped to the appropriate
+elements of your model defined in the system file. This is done with the
+<code>model</code> field:
+</p>
+<pre>cohort[["outputs"]][["ONAME"]][["model"]] = list(
+         time           = "TS",       
+         value          = "MODOUTPUT",
+         variance       = "PRED^2")</pre>
+<p>First the system time scale indicated by the <code>TS</code> placeholder above
+must be specfied. The time scale must correspond to the data found in
+<code>TIMECOL</code> above.  Next the model output indicated by the <code>MODOUTPUT</code>
+placeholder needs to be specified. This is defined in the system file using
+<code>&lt;O&gt;</code> and should correspond to <code>OBSCOL</code> from the dataset. Lastly the
+<code>variance</code> field specifies the variance model. You can use the keyword
+<code>PRED</code> (the model predicted output) and any variance parameters. Some
+examples include:
+</p>
+
+<ul>
+<li> <p><code>variance = "1"</code> - Least squares
+</p>
+</li>
+<li> <p><code>variance = "PRED^2"</code> -  Weighted least squares proportional to the prediction squared
+</p>
+</li>
+<li> <p><code>variance = "(SLOPE*PRED)^2"</code>  Maximum likelihood estimation where <code>SLOPE</code> is defined as a variance parameter (<code>&lt;VP&gt;</code>)
+</p>
+</li>
+</ul>
+<p>The following controls the plotting aspects associated with this output. The
+color, shape and line values are the values used by ggplot functions. 
+</p>
+<pre>cohort[["outputs"]][["ONAME"]][["options"]] = list(
+        marker_color   = "black",
+        marker_shape   = 16,
+        marker_line    = 1 )</pre>
+<p>If the cohort has multiple outputs, simply repeat the process above for the. 
+additional cohorts. The estimation vignettes contains examples of this. 
+</p>
+<p><b>Note: Output names should be consistent between cohorts so they will be grouped together when plotting results.</b>
+</p>
+
+
+<h3>Value</h3>
+
+<p>ubiquity system object with cohort defined
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Estimation vignette (<code>vignette("Estimation", package = "ubiquity")</code>)
+</p>
+
+
+</div>

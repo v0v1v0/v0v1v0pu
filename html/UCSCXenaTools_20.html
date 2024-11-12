@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>XenaDataUpdate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or Update Newest Data Information of UCSC Xena Data Hubs</h2>
+
+<h3>Description</h3>
+
+<p>Get or Update Newest Data Information of UCSC Xena Data Hubs
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">XenaDataUpdate(saveTolocal = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>saveTolocal</code></td>
+<td>
+<p>logical. Whether save to local R package data directory for permanent use
+or Not.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> contains all datasets information of Xena.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Shixiang Wang <a href="mailto:w_shixiang@163.com">w_shixiang@163.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+XenaDataUpdate()
+XenaDataUpdate(saveTolocal = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

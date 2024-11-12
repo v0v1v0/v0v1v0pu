@@ -1,0 +1,185 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>scale_color_unhcr_c</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UNHCR ggplot2 color scales</h2>
+
+<h3>Description</h3>
+
+<p>UNHCR ggplot2 color scales
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">scale_color_unhcr_c(
+  ...,
+  type = "sequential",
+  palette = 1,
+  direction = 1,
+  na.value = "#E9E9E9",
+  guide = "colourbar"
+)
+
+scale_color_unhcr_d(
+  ...,
+  type = "qualitative",
+  palette = 1,
+  direction = 1,
+  nmax = NULL,
+  order = NULL,
+  na.value = "#E9E9E9"
+)
+
+scale_color_unhcr_b(
+  ...,
+  type = "qualitative",
+  palette = 1,
+  direction = 1,
+  nmax = NULL,
+  order = NULL,
+  na.value = "#E9E9E9",
+  guide = "coloursteps"
+)
+
+scale_colour_unhcr_c(
+  ...,
+  type = "sequential",
+  palette = 1,
+  direction = 1,
+  na.value = "#E9E9E9",
+  guide = "colourbar"
+)
+
+scale_colour_unhcr_d(
+  ...,
+  type = "qualitative",
+  palette = 1,
+  direction = 1,
+  nmax = NULL,
+  order = NULL,
+  na.value = "#E9E9E9"
+)
+
+scale_colour_unhcr_b(
+  ...,
+  type = "qualitative",
+  palette = 1,
+  direction = 1,
+  nmax = NULL,
+  order = NULL,
+  na.value = "#E9E9E9",
+  guide = "coloursteps"
+)
+
+scale_fill_unhcr_c(
+  ...,
+  type = "sequential",
+  palette = 1,
+  direction = 1,
+  na.value = "#E9E9E9",
+  guide = "colourbar"
+)
+
+scale_fill_unhcr_d(
+  ...,
+  type = "qualitative",
+  palette = 1,
+  direction = 1,
+  nmax = NULL,
+  order = NULL,
+  na.value = "#E9E9E9"
+)
+
+scale_fill_unhcr_b(
+  ...,
+  type = "qualitative",
+  palette = 1,
+  direction = 1,
+  nmax = NULL,
+  order = NULL,
+  na.value = "#E9E9E9",
+  guide = "coloursteps"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code>discrete_scale()</code> or
+<code>continuous_scale()</code> to control name, limits, breaks, labels and so forth</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>One of \"sequential\", \"diverging\" or \"qualitative\"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>palette</code></td>
+<td>
+<p>If a string, will use that named palette. If a number, will
+index into the list of palettes of appropriate <code>type</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>Sets the order of colors in the scale. If 1, the default,
+colors are as output by <code>unhcr_pal()</code>. If -1, the order of colors is reversed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.value</code></td>
+<td>
+<p>Missing values will be replaced with this value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>guide</code></td>
+<td>
+<p>A function used to create a guide or its name. See
+<code>guides()</code> for more information.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nmax</code></td>
+<td>
+<p>Maximum number of different colors the palette should contain. If not provided, is calculated automatically
+from the data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>Numeric vector listing the order in which the colors should be used. Default is <code>1:nmax</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A discrete, continuous or binned <code>Scale</code> object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ggplot2)
+
+data(msleep, package = "ggplot2")
+
+ggplot(msleep, aes(vore, sleep_total, fill = vore)) +
+  geom_boxplot() +
+  scale_fill_unhcr_d(palette = 1, direction = -1)
+
+</code></pre>
+
+
+</div>

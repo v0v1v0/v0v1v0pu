@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_P_matrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct Penalty Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Construct Penalty Matrix
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_P_matrix(BA, BY, lambda, type)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>BA</code></td>
+<td>
+<p>B-spline basis object for age axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BY</code></td>
+<td>
+<p>B-spline basis object for year axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Smoothing parameter to be used in pclm estimation.
+If <code>lambda = NA</code> an algorithm will find the optimal values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of PCLM model. Options: <code>"1D", "2D"</code> for 
+univariate and two-dimensional model respectively.</p>
+</td>
+</tr>
+</table>
+</div>

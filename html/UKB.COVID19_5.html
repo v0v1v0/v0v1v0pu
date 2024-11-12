@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>log_cov</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perform association tests between phenotype and covariates</h2>
+
+<h3>Description</h3>
+
+<p>Perform association tests between phenotype and covariates
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">log_cov(pheno, covariates, phe.name, cov.name = c("sex", "age", "bmi"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pheno</code></td>
+<td>
+<p>phenotype dataframe - output from makePhenotypes function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>covariates</code></td>
+<td>
+<p>covariate dataframe - output from risk_factor function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phe.name</code></td>
+<td>
+<p>Phenotype name in the data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cov.name</code></td>
+<td>
+<p>Selected covariate names in the data. By default, cov.name=c("sex","age","bmi"), covariates include sex, age and BMI.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Outputs association test results with OR, 95% CI, and p-value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+log_cov(pheno=phe, covariates=covar, phe.name="hospitalisation", cov.name=c("sex","age","bmi"))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

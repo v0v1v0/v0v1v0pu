@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>make_unique</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make character strings unique.</h2>
+
+<h3>Description</h3>
+
+<p>Append sequence numbers to duplicate elements to make all elements of a character vector unique.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">make_unique(xs, sep = "-")
+
+make_unique_duplicates(xs, sep = "-")
+
+make_unique_all(xs, sep = "-")
+
+make_unique_all_or_none(xs, sep = "-")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>xs</code></td>
+<td>
+<p>a character vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>a character string used to separate a duplicate string from its sequence number</p>
+</td>
+</tr>
+</table>
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>make_unique</code>: Append a sequence number to duplicated elements, including the first occurrence.
+</p>
+</li>
+<li> <p><code>make_unique_duplicates</code>: Append a sequence number to duplicated elements, except the first occurrence.
+</p>
+<p>This function behaves similarly to make.unique
+</p>
+</li>
+<li> <p><code>make_unique_all</code>: Append a sequence number to every element.
+</p>
+</li>
+<li> <p><code>make_unique_all_or_none</code>: Append a sequence number to every element or no elements.
+</p>
+<p>Return <code>xs</code> unchanged if the elements of the character vector <code>xs</code> are already unique.
+Otherwise append a sequence number to every element.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>make.unique
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">abcb &lt;- c("a", "b", "c", "b")
+make_unique(abcb)
+make_unique_duplicates(abcb)
+make_unique_all(abcb)
+make_unique_all_or_none(abcb)
+make_unique_all_or_none(c("a", "b", "c"))
+x &lt;- make_unique(abbreviate(state.name, 3, strict = TRUE))
+x[grep("-", x)]
+</code></pre>
+
+
+</div>

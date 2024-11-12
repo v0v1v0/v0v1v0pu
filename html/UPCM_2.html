@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.UPCM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot function for UPCM</h2>
+
+<h3>Description</h3>
+
+<p>Plot function for a <code>UPCM</code> or a <code>UGPCM</code> object. Plots show coefficient estimates together with
+confidence intervals displayed as star plots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UPCM'
+plot(x, sig = 0.05, KIfactor = 0.9, xlim, ylim, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>UPCM</code> object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig</code></td>
+<td>
+<p>Significance level for confidence intervals, default is <code>sig = 0.05</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>KIfactor</code></td>
+<td>
+<p>Parameter to regulate the shape of the resulting star.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlim</code></td>
+<td>
+<p>See <code>xlim</code> in <code>plot.default</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylim</code></td>
+<td>
+<p>See <code>ylim</code> in <code>plot.default</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further plot arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, called for side effects
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gunther Schauberger<br><a href="mailto:gunther.schauberger@tum.de">gunther.schauberger@tum.de</a><br><a href="https://www.sg.tum.de/epidemiologie/team/schauberger/">https://www.sg.tum.de/epidemiologie/team/schauberger/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Tutz, Gerhard and Schauberger, Gunther (2020): Uncertainty in Latent Trait Models, 
+<em>Applied Psychological Measurement</em>, <a href="https://journals.sagepub.com/doi/abs/10.1177/0146621620920932?journalCode=apma">https://journals.sagepub.com/doi/abs/10.1177/0146621620920932?journalCode=apma</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UPCM</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(tenseness)
+
+Y &lt;- data.matrix(tenseness[,1:4])
+X &lt;- model.matrix(~ Gender + Age, data = tenseness)[,-1]
+
+m_upcm &lt;- UPCM(Y = Y, X = X, cores = 2, GPCM = FALSE)
+m_upcm
+plot(m_upcm)
+
+</code></pre>
+
+
+</div>

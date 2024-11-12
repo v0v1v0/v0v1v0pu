@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sp_line</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>create an spatiallineobject from 2 points</h2>
+
+<h3>Description</h3>
+
+<p>create an spatiallineobject from 2 points, optional export as shapefile
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sp_line(
+  Y_coords,
+  X_coords,
+  ID = "ID",
+  proj4 = "+proj=longlat +datum=WGS84 +no_defs",
+  export = FALSE,
+  runDir
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Y_coords</code></td>
+<td>
+<p>Y/lat coordinates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X_coords</code></td>
+<td>
+<p>X/lon coordinates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ID</code></td>
+<td>
+<p>id of line</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>proj4</code></td>
+<td>
+<p>projection</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>export</code></td>
+<td>
+<p>write shafefile default = F</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runDir</code></td>
+<td>
+<p><code>character</code> runtime folder</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## creating sp spatial point object
+line &lt;- sp_line(c(8.770367,8.771161,8.771536),
+                c(50.815172,50.814743,50.814875),
+                runDir=tempdir())
+
+## plot it
+plot(line)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

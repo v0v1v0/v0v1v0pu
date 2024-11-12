@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>knitAndSave</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>knitAndSave</h2>
+
+<h3>Description</h3>
+
+<p>knitAndSave
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">knitAndSave(
+  plotToDraw,
+  figCaption,
+  file = NULL,
+  path = NULL,
+  figWidth = ufs::opts$get("ggSaveFigWidth"),
+  figHeight = ufs::opts$get("ggSaveFigHeight"),
+  units = ufs::opts$get("ggSaveUnits"),
+  dpi = ufs::opts$get("ggSaveDPI"),
+  catPlot = ufs::opts$get("knitAndSave.catPlot"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>plotToDraw</code></td>
+<td>
+<p>The plot to knit using <code>knitFig()</code> and save using <code>ggSave()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>figCaption</code></td>
+<td>
+<p>The caption of the plot (used as filename if no filename is specified).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file, path</code></td>
+<td>
+<p>The filename to use when saving the plot, or the path where to save the
+file if no filename is provided (if <code>path</code> is also omitted, <code>getWd()</code> is used).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>figWidth, figHeight</code></td>
+<td>
+<p>The plot dimensions, by default specified in inches (but 'units' can
+be set which is then passed on to <code>ggSave()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units, dpi</code></td>
+<td>
+<p>The units and DPI of the image which are then passed on to <code>ggSave()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>catPlot</code></td>
+<td>
+<p>Whether to use <code>cat()</code> to print the knitr fragment.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments are passed on to <code>ggSave()</code>. Note that file (and ...) are
+vectorized (see the <code>ggSave()</code> manual page).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The <code>knitFig()</code> result, visibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: plot &lt;- ggBoxplot(mtcars, 'mpg');
+knitAndSave(plot, figCaption="a boxplot", file=tempfile(fileext=".png"));
+## End(Not run)
+</code></pre>
+
+
+</div>

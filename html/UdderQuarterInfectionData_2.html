@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Gamma_Frailty_Interval_Censoring</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Gamma Frailty Interval Censoring</h2>
+
+<h3>Description</h3>
+
+<p>Application of the Gamma Frailty Interval Censoring Model on the Udder Quarter Infection Data Set. For more information see Details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Gamma_Frailty_Interval_Censoring(print.level = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>print.level</code></td>
+<td>
+<p>Parameter of <code>nlm</code> (default=2): this argument determines the level of printing which is done during the minimization process. The default value of 0 means that no printing occurs, a value of 1 means that initial and final details are printed and a value of 2 means that full tracing information is printed.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function fits a parametric Weibull baseline hazard frailty model with gamma distributed frailties for the udder quarter infection data taking into consideration the interval censored nature of the data. Further theoretical details can be found in the paper in the reference
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with the NLM result in <code>nlm</code> and the covariance matrix in <code>covmat</code>.
+</p>
+
+
+<h3>R Code for Model </h3>
+
+<p>The source R code for this model can found:
+</p>
+
+<ul>
+<li>
+<p> in the <code>doc/Models_R_Code.R</code> file in the package installation folder.
+</p>
+</li>
+<li>
+<p> by accessing the function by calling <code>Gamma_Frailty_Interval_Censoring</code> (without brackets) or <code>getAnywhere("Gamma_Frailty_Interval_Censoring")</code>.
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Klara Goethals
+</p>
+<p>Luc Duchateau
+</p>
+
+
+<h3>References</h3>
+
+<p>Goethals, K., Ampe, B., Berkvens, D., Laevens, H., Janssen, P. and Duchateau, L. (2009). Modeling interval-censored, clustered cow udder quarter infection times through the shared gamma frailty model. Journal of Agricultural Biological and Environmental Statistics 14, 1-14.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+library(UdderQuarterInfectionData)
+data("udderquarterinfection")
+
+Gamma_Frailty_Interval_Censoring()
+# $nlm
+# $nlm$minimum
+# [1] 5670.491
+#
+# $nlm$estimate
+# [1] 3.7967246 0.1201593 1.9672298 0.8590531
+#
+# $nlm$gradient
+# [1]  0.0002924871  0.0017653292 -0.0005460029  0.0003265086
+#
+# $nlm$hessian
+# [,1]       [,2]      [,3]       [,4]
+# [1,]   23.22965  -117.7682 -39.93813  -10.10561
+# [2,] -117.76825 15471.4753 567.24283 1228.87332
+# [3,]  -39.93813   567.2428 664.76359   24.63047
+# [4,]  -10.10561  1228.8733  24.63047  147.76479
+#
+# $nlm$code
+# [1] 1
+#
+# $nlm$iterations
+# [1] 22
+#
+#
+# $covmat
+# [,1]          [,2]          [,3]         [,4]
+# [1,] 0.049281911  0.0001242730  0.0027853686  0.001872592
+# [2,] 0.000124273  0.0001982213 -0.0001015391 -0.001623066
+# [3,] 0.002785369 -0.0001015391  0.0017306214  0.000746460
+# [4,] 0.001872592 -0.0016230660  0.0007464600  0.020269244
+
+## End(Not run)
+</code></pre>
+
+
+</div>

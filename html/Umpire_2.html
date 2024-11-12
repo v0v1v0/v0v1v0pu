@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>addControl-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Method "addControl"</h2>
+
+<h3>Description</h3>
+
+<p><code>addControl</code> is a generic function used to add a control group to
+a simulated patient cohort. Implementations exists for a
+<code>CancerModel</code> and for a <code>CancerEngine</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'ANY'
+addControl(object, fraction = 0.5, ...)
+## S4 method for signature 'CancerModel'
+addControl(object, fraction = 0.5, ...)
+## S4 method for signature 'CancerEngine'
+addControl(object, fraction = 0.5, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object to which adding a contrl group is desired</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fraction</code></td>
+<td>
+<p>a real number between zero oand one; the fraction of
+the final cohort that shoudl consist of controls</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments; not yet used</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a new object of the same class as its first argument.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+</p>
+
+
+</div>

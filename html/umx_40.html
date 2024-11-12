@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxPlotSimplex</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Draw and display a graphical figure of a simplex model</h2>
+
+<h3>Description</h3>
+
+<p>Options include digits (rounding), showing means or not, and which output format is desired.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxPlotSimplex(
+  x = NA,
+  file = "name",
+  digits = 2,
+  means = FALSE,
+  std = TRUE,
+  format = c("current", "graphviz", "DiagrammeR"),
+  strip_zero = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The <code>umxSimplex()</code> model to display graphically</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>How many decimals to include in path loadings (defaults to 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether to show means paths (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the model (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>= c("current", "graphviz", "DiagrammeR")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_zero</code></td>
+<td>
+<p>Whether to strip the leading "0" and decimal point from parameter estimates (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Optionally return the dot code
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>plot()</code>, <code>umxSummary()</code> work for IP, CP, GxE, SAT, simplex, ACEv, or ACE model.
+</p>
+</li></ul>
+<ul><li> <p><code>umxSimplex()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data(iqdat)
+mzData = subset(iqdat, zygosity == "MZ")
+dzData = subset(iqdat, zygosity == "DZ")
+selDVs = c("IQ_age1", "IQ_age2", "IQ_age3", "IQ_age4")
+m1 = umxSimplex(selDVs = selDVs, sep = "_T", dzData = dzData, mzData = mzData)
+# plot(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

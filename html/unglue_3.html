@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unglue_detect</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Detect if strings are matched by a set of unglue patterns</h2>
+
+<h3>Description</h3>
+
+<p>Returns a logical indicating whether input strings were matched by one or more patterns
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unglue_detect(
+  x,
+  patterns,
+  open = "{",
+  close = "}",
+  convert = FALSE,
+  multiple = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector to unglue.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>patterns</code></td>
+<td>
+<p>a character vector or a list of character vectors, if a list,
+items will be pasted using an empty separator (<code>""</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>open</code></td>
+<td>
+<p>The opening delimiter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>close</code></td>
+<td>
+<p>The closing delimiter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>convert</code></td>
+<td>
+<p>If <code>TRUE</code>, will convert columns of output using
+<code>utils::type.convert()</code> with parameter <code>as.is = TRUE</code>, alternatively, can
+be a converting function, such as <code>readr::type_convert</code>. Formula notation
+is supported if the package <code>rlang</code> is installed, so things like
+<code>convert = ~type_convert(., numerals = "warn.loss")</code> are possible.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multiple</code></td>
+<td>
+<p>The aggregation function to use if several subpatterns are
+named the same, by default no function is used and subpatterns named the
+same will match the same value. If a function is provided it will be fed
+the conflicting values as separate arguments. Formula notation
+is supported if the package <code>rlang</code> is installed.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of logical.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">sentences &lt;- c("666 is [a number]", "foo is [a word]",
+               "42 is [the answer]", "Area 51 is [unmatched]")
+patterns &lt;- c("{number=\\d+} is [{what}]", "{word=\\D+} is [{what}]")
+unglue_detect(sentences, patterns)
+</code></pre>
+
+
+</div>

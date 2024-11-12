@@ -1,0 +1,334 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unitquantreg</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parametric unit quantile regression models</h2>
+
+<h3>Description</h3>
+
+<p>Fit a collection of parametric unit quantile regression model
+by maximum likelihood using the log-likelihood function, the score vector
+and the hessian matrix implemented in <code>C++</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unitquantreg(
+  formula,
+  data,
+  subset,
+  na.action,
+  tau,
+  family,
+  link = c("logit", "probit", "cloglog", "cauchit"),
+  link.theta = c("identity", "log", "sqrt"),
+  start = NULL,
+  control = unitquantreg.control(),
+  model = TRUE,
+  x = FALSE,
+  y = TRUE
+)
+
+unitquantreg.fit(
+  y,
+  X,
+  Z = NULL,
+  tau,
+  family,
+  link,
+  link.theta,
+  start = NULL,
+  control = unitquantreg.control()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>symbolic description of the quantile model like <code>y ~ x</code>
+or <code>y ~ x | z</code>. See below for details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data.frame contain the variables in the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subset</code></td>
+<td>
+<p>an optional vector specifying a subset of observations to
+be used in the fitting process.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.action</code></td>
+<td>
+<p>a function which indicates what should happen when the
+data contain <code>NA</code>s.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>numeric vector. The quantile(s) to be estimated, i.e.,
+number between 0 and 1. If just one quantile is specified an object of class
+<code>unitquantreg</code> is returned. If a numeric vector of values between 0 and 1
+is specified an object of class <code>unitquantregs</code> is returned. See below for
+details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>character. Specify the distribution family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>link</code></td>
+<td>
+<p>character. Specify the link function in the quantile model.
+Currently supported are <code>logit</code>, <code>probit</code>, <code>cloglog</code> and
+<code>cauchit</code>. Default is <code>logit</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>link.theta</code></td>
+<td>
+<p>character. Specify the link function in the shape model.
+Currently supported are <code>identity</code>, <code>log</code> and <code>sqrt</code>.
+Default is <code>log</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>numeric vector. An optional vector with starting values for all parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>list. Control arguments specified via <code>unitquantreg.control</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>logical. Indicates whether model frame should be included as a
+component of the returned value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x, y</code></td>
+<td>
+<p>logical. If <code>TRUE</code> the corresponding components of the fit
+(model frame, response, model matrix) are returned. For <code>unitquantreg.fit</code>
+<code>y</code> should be the numeric response vector with values in (0,1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X, Z</code></td>
+<td>
+<p>numeric matrix. Regressor matrix for the quantile and shape model,
+respectively. Default is constant shape model, i.e., <code>Z</code> is matrix with
+column of ones.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The parameter estimation and inference are performed under the frequentist paradigm.
+The <code>optimx</code> R package is use, since allows different optimization
+technique to maximize the log-likelihood function.  The analytical score function are
+use in the maximization and the standard errors are computed using the
+analytical hessian matrix, both are implemented in efficient away using <code>C++</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>unitquantreg</code> can return an object of
+class <code>unitquantreg</code> if <code>tau</code> is a scalar, i.e., a list with
+the following components.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>the distribution family name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coefficients</code></td>
+<td>
+<p>a list with elements <code>"quantile"</code> and <code>"shape"</code>
+containing the coefficients from the respective models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fitted.values</code></td>
+<td>
+<p>a list with elements <code>"quantile"</code> and <code>"shape"</code>
+containing the fitted parameters from the respective models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linear.predictors</code></td>
+<td>
+<p>a list with elements <code>"quantile"</code> and <code>"shape"</code>
+containing the fitted linear predictors from the respective models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>link</code></td>
+<td>
+<p>a list with elements <code>"quantile"</code> and <code>"shape"</code>
+containing the link objects from the respective models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>the quantile specify.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>loglik</code></td>
+<td>
+<p>log-likelihood of the fitted model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gradient</code></td>
+<td>
+<p>gradient evaluate at maximum likelihood estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vcov</code></td>
+<td>
+<p>covariance matrix of all parameters in the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nobs</code></td>
+<td>
+<p>number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>npar</code></td>
+<td>
+<p>number of parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df.residual</code></td>
+<td>
+<p>residual degrees of freedom in the fitted model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta_const</code></td>
+<td>
+<p>logical indicating if the <code class="reqn">\theta</code> parameter was treated as nuisance parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>the control parameters used to fit the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iterations</code></td>
+<td>
+<p>number of iterations of optimization method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>converged</code></td>
+<td>
+<p>logical, if <code>TRUE</code> indicates successful convergence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kkt</code></td>
+<td>
+<p>a list of logical  <code>kkt1</code> and <code>kkt2</code> provide check on
+Kuhn-Karush-Tucker conditions, first-order KKT test (<code>kkt1</code>) checks
+whether the gradient at the final parameters estimates is "small" and the
+second-order KKT test (<code>kkte</code>) checks whether the Hessian at the final
+parameters estimates is positive definite.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>elapsed_time</code></td>
+<td>
+<p>time elapsed to fit the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>the original function call.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>the original model formula.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>terms</code></td>
+<td>
+<p>a list with elements <code>"quantile"</code>, <code>"shape"</code> and
+<code>"full"</code> containing the <code>terms</code> objects for the respective models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>the full model frame, if <code>model = TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>the response vector, if <code>y = TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a list with elements <code>"quantile"</code> and <code>"shape"</code>
+containing the model matrices from the respective models, if <code>x = TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<p>While <code>unitquantreg.fit</code> returns an unclassed list with
+components up to <code>elapsed_time</code>.
+</p>
+<p>If <code>tau</code> is a numeric vector with length greater than one an object of
+class <code>unitquantregs</code> is returned, which consist of list of objects of
+class <code>unitquantreg</code> for each specified quantiles.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>André F. B. Menezes
+</p>
+
+
+</div>

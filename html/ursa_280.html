@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>trackline</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Create segmented line from points' sequence
+</h2>
+
+<h3>Description</h3>
+
+<p>Connect sequence of points (locations) by direct lines (tracks)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">trackline(obj, by=NULL, connect=c("united", "consequent"), gentle=FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Simple feature (package <span class="pkg">sf</span>) or Spatial abstract class (package <span class="pkg">sp</span>) with POINTS spatial geometry.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by</code></td>
+<td>
+
+<p>Either field name or <code>NULL</code>. If specified, then value <code>"united"</code> is applied for argument <code>connect</code>, returned spatial object is splitted regarding values of <code>by</code> with linked single-column attribute table with specified field. Default is <code>NULL</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>connect</code></td>
+<td>
+
+<p>Structure of output segments; either sequence of single segments (<code>"consequent"</code>) or single multi-segment (<code>"united"</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gentle</code></td>
+<td>
+
+<p>Logical. Value <code>TRUE</code> directs repetition of binded columns of data table. Value <code>FALSE</code> omits duplicated column values. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function generates <code>n-1</code> segments from <code>n</code> input points. Data (attribute table) is trasfered to output object with excluding of first row.
+</p>
+<p><code>gentle=TRUE</code> may be useful to keep geterogenic data structure for spatial binding (<code>spatial_bind</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Simple feature (package <span class="pkg">sf</span>) or Spatial abstract class (package <span class="pkg">sp</span>) with LINESTRING spatial geometry.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+n &lt;- 15
+lon &lt;- rev(sort(runif(n,min=40,max=60)))
+lat &lt;- sort(runif(n,min=30,max=50))
+pt &lt;- data.frame(lon=lon,lat=lat,value=seq(n))
+if (requireNamespace("sp")) {
+   sp::coordinates(pt) &lt;- c("lon","lat")
+   sp::proj4string(pt) &lt;- "EPSG:4326"
+} else {
+   pt &lt;- sf::st_as_sf(pt,coords=c("lon","lat"),crs="WGS84")
+}
+ct &lt;- ursa_colortable(colorize(pt$value))
+tr &lt;- trackline(pt,connect="consequent")
+#opW &lt;- options(warn=0)
+session_grid(pt,expand=1.1)
+compose_open(2)
+panel_new()
+panel_plot(pt,col=ct)
+panel_decor()
+panel_new()
+panel_plot(tr,col=ct,lwd=3)
+panel_decor()
+compose_legend(ct,unit="step number")
+compose_close()
+</code></pre>
+
+
+</div>

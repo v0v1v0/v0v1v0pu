@@ -1,0 +1,187 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>drplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualizing the dose-response summary of an up-and-down experiment</h2>
+
+<h3>Description</h3>
+
+<p>Dose-response plotting function for up-and-down data, with doses/stimuli on the x-axis, and the proportion of positive responses on the y-axis. Includes an option to plot the target-dose estimate. Uses utilities from the <code>cir</code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">drplot(
+  x,
+  y,
+  shape = "X",
+  connect = FALSE,
+  symbcol = 1,
+  percents = FALSE,
+  addest = FALSE,
+  addcurve = FALSE,
+  target = NULL,
+  balancePt = target,
+  conf = 0.9,
+  estcol = "purple",
+  estsize = 2,
+  estsymb = 19,
+  esthick = 2,
+  curvecol = "blue",
+  ytitle = "Frequency of Positive Response",
+  xtitle = "Dose / Stimulus",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>numeric vector: sequence of administered doses, treatments, stimuli, etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>numeric vector: sequence of observed responses. Must be same length as <code>x</code>, and must be coded <code>TRUE/FALSE</code> or 0/1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape</code></td>
+<td>
+<p>the plotting shape (DRtrace only): <code>'circle'</code> (default), <code>'square'</code>, or <code>'triangle'</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>connect</code></td>
+<td>
+<p>logical: whether to connect the symbols (generic plotting type <code>'b'</code>). Default <code>TRUE</code> for <code>udplot()</code> and <code>FALSE</code> for <code>drplot()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>symbcol</code></td>
+<td>
+<p>The color of the main plotting symbols and connecting lines. Default 1 (the current palette's first color). Note: if you change the color and inadvertently use <code>col</code> instead, there might be an error message.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>percents</code></td>
+<td>
+<p>logical, whether to represent the y-axis as percents rather than a fraction.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>addest</code></td>
+<td>
+<p>logical: should we add the CIR target-dose estimate and its confidence interval? If <code>FALSE</code> (default), then arguments <code style="white-space: pre;">⁠addcurve, target, balancePt, conf, estcol, estsize, estsymb, esthick, curvecol⁠</code> - are all ignored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>addcurve</code></td>
+<td>
+<p>logical: should we add the complete estimated CIR dose-response curve? Default <code>FALSE</code>, and only relevant when <code>addest = TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+<p>The target response rate for which target dose estimate is requested. Must be a single number in <code class="reqn">(0,1).</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>balancePt</code></td>
+<td>
+<p>In case the design's inherent balance point differs somewhat from <code>target</code>, specify it here to improve estimation accuracy. See Details for further explanation. Otherwise, this argument defaults to be equal to <code>target</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf</code></td>
+<td>
+<p>The desired confidence level for the confidence interval. Default <code class="reqn">90\%.</code> We do not recommend increasing to <code class="reqn">95\%</code> unless you have <code class="reqn">\sim 100</code> or more observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>estcol, estsize, estsymb, esthick, curvecol</code></td>
+<td>
+<p>graphical parameters controlling the colors, symbol choice, size, thickness, of the target-dose and CIR-curve visuals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xtitle, ytitle</code></td>
+<td>
+<p>x-axis and y-axis titles. Some reasonable defaults are provided, to avoid an annoying error message.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code>plot</code> (e.g., <code>main</code> for the main title).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>After an up-and-down experiment, it is highly recommended to plot not just the experiment's <em>"trace"</em>  time-series (<code>udplot</code>), but also the dose-response summaries. This utility provides a convenient interface for doing that.
+</p>
+
+<ul>
+<li>
+<p> It summarizes the response rates at each participating dose, and plots them. At default, symbol area is proportional to the number of observations at each dose.
+</p>
+</li>
+<li>
+<p> Optionally, the centered-isotonic-regression (CIR) target-dose estimate and its confidence interval are also calculated and plotted.
+</p>
+</li>
+<li>
+<p> A further option allows for plotting the entire estimated CIR dose-response curve.
+</p>
+</li>
+</ul>
+<p><code>drplot()</code> is a convenience wrapper to <code>cir::plot.doseResponse</code>, with the added option of plotting the estimate. Some specific options, such as disabling the proportional-area symbol plotting, are accessible only via <code>plot.doseResponse</code> arguments (specified in your <code>drplot()</code> call and passed through the <code>...</code>).
+</p>
+<p>This is a base-R plot, so you can use additional options, including preceding the plot command with <code>par</code> statements, or following up with <code>legend</code>. When wishing to save to a file, I recommend utilities such as <code>png()</code> or <code>pdf()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns invisibly after plotting. If you would like to save the plot to a file, embed the plotting code in a standard R graphics export code sequence, (e.g., <code>pdf(...)</code> before the plotting function, and <code>dev.off()</code> after it).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Assaf P. Oron <code>&lt;assaf.oron.at.gmail.com&gt;</code>
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li>
+<p> Oron AP, Souter MJ, Flournoy N. Understanding Research Methods: Up-and-down Designs for Dose-finding. <em>Anesthesiology</em> 2022; 137:137–50.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul>
+<li> <p><code>plot.doseResponse</code>, <code>cir</code> package.
+</p>
+</li>
+<li> <p><code>udplot</code> for the "trace" time-series plot.
+</p>
+</li>
+<li> <p><code>cir</code> package vignette.
+</p>
+</li>
+</ul>
+</div>

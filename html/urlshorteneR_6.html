@@ -1,0 +1,151 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_create_bitlink</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a short Bitlink</h2>
+
+<h3>Description</h3>
+
+<p>See <a href="https://dev.bitly.com/docs/getting-started/rate-limits">https://dev.bitly.com/docs/getting-started/rate-limits</a> and
+<a href="https://dev.bitly.com/api-reference/#createFullBitlink">https://dev.bitly.com/api-reference/#createFullBitlink</a>
+Convert a long url to a Bitlink and set additional parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_create_bitlink(
+  long_url = NULL,
+  domain = "bit.ly",
+  title = NULL,
+  tags = NULL,
+  group_guid = NULL,
+  deeplinks_list = list(app_uri_path = NULL, install_type = NULL, install_url = NULL,
+    app_id = NULL),
+  showRequestURL = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>long_url</code></td>
+<td>
+<p>- required, a long URL to be shortened (example: https://www.idnes.cz).
+Must contain http/https</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>domain</code></td>
+<td>
+<p>- (optional) the short domain to use; either bit.ly, j.mp, or bitly.com or
+a custom short domain. The default for this parameter is the short domain selected by each
+user in their bitly account settings. Passing a specific domain via this parameter will override
+the default settings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>- title of the bitlink</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tags</code></td>
+<td>
+<p>- Array of string, use e.g. <code>c("test1", "test2")</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group_guid</code></td>
+<td>
+<p>- a GUID for a Bitly group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deeplinks_list</code></td>
+<td>
+<p>- a list containing parameters below</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- show URL which has been build and requested from server. For debug
+purposes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>app_uri_path</code></td>
+<td>
+<p>- app_uri_path</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>install_type</code></td>
+<td>
+<p>- install_type</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>install_url</code></td>
+<td>
+<p>- install_url</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>app_id</code></td>
+<td>
+<p>- app_id</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>id - a short bitly identifier for long_url which is unique to the given account.
+</p>
+<p>long_url - This may not always be equal to the URL requested, as some URL normalization
+may occur (e.g., due to encoding differences, or case
+differences in the domain). This long_url will always be functionally identical the the request
+parameter.
+</p>
+<p>link - an bitly id with http(s) prefix
+</p>
+
+
+<h3>Note</h3>
+
+<p>Look in the vignette for bulk shortening of URLs. Each call of this function == 1 API call.
+Take that into consideration due to limits etc.
+</p>
+<p>The bitly API does not support shortening more than one long URL with a single API call.
+Meaning 1 Long URL = 1 Function call.
+</p>
+<p>Long URLs should be URL-encoded. You can not include a longUrl in the request
+that has &amp;, ?, #, or other reserved parameters without first encoding it.
+</p>
+<p>The default value for the domain parameter is selected by each user from within their bitly
+account settings at &lt;https://app.bitly.com/settings/api/&gt;.
+</p>
+<p>Long URLs should not contain spaces: any longUrl with spaces will be rejected. All spaces
+should be either percent encoded 
+spaces are all indications of errors. Please remember to strip leading and trailing whitespace
+from any user input before shortening.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+bitly_create_bitlink(long_url = "http://slovnik.seznam.cz/")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

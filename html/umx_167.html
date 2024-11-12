@@ -1,0 +1,188 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummaryGxE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summarize a GxE model</h2>
+
+<h3>Description</h3>
+
+<p>Summarize a genetic moderation model, as returned by <code>umxGxE()</code>. Prints graphs of A, C, and E, standardized and raw.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummaryGxE(
+  model = NULL,
+  digits = 2,
+  xlab = NA,
+  location = "topleft",
+  separateGraphs = FALSE,
+  gg = TRUE,
+  file = getOption("umx_auto_plot"),
+  returnStd = NULL,
+  std = NULL,
+  reduce = FALSE,
+  CIs = NULL,
+  report = c("markdown", "html"),
+  show = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A fitted <code>umxGxE()</code> model to summarize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>label for the x-axis of plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>default = "topleft"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>separateGraphs</code></td>
+<td>
+<p>If TRUE, both std and raw plots in one figure (default FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gg</code></td>
+<td>
+<p>Whether to use ggplot to create the graphs (default TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStd</code></td>
+<td>
+<p>Whether to return the standardized form of the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to show the standardized model (not implemented! TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reduce</code></td>
+<td>
+<p>Whether run and tabulate a complete model reduction...(Defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Confidence intervals (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>"markdown" or "html" = open a browser for copyable tables</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show</code></td>
+<td>
+<p>not doing anything yet (required for all summary functions)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note: see also <code>umxReduce()</code> which knows how to reduce a GxE model.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxGxE()</code>, <code>umxReduce()</code>, <code>plot()</code>, [umxSummary)] all work for IP, CP, GxE, and ACE models.
+</p>
+</li></ul>
+<p>[umxSummary)]: R:umxSummary)
+</p>
+<p>Other Summary functions: 
+<code>umxSummary.MxModel()</code>,
+<code>umxSummaryACEcov()</code>,
+<code>umxSummaryCP()</code>,
+<code>umxSummaryIP()</code>,
+<code>umxSummaryMRDoC()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# The total sample has been subdivided into a young cohort, 
+# aged 18-30 years, and an older cohort aged 31 and above.
+# Cohort 1 Zygosity is coded as follows 1 == MZ females 2 == MZ males 
+# 3 == DZ females 4 == DZ males 5 == DZ opposite sex pairs
+require(umx)
+data(twinData) 
+twinData$age1 = twinData$age2 = twinData$age
+selDVs  = c("bmi1", "bmi2")
+selDefs = c("age1", "age2")
+selVars = c(selDVs, selDefs)
+mzData  = subset(twinData, zygosity == "MZFF", selVars)
+dzData  = subset(twinData, zygosity == "DZMM", selVars)
+# Exclude cases with missing Def
+mzData = mzData[!is.na(mzData[selDefs[1]]) &amp; !is.na(mzData[selDefs[2]]),]
+dzData = dzData[!is.na(dzData[selDefs[1]]) &amp; !is.na(dzData[selDefs[2]]),]
+m1 = umxGxE(selDVs = "bmi", selDefs = "age", sep="", dzData = dzData, mzData = mzData)
+# Plot Moderation
+umxSummaryGxE(m1)
+umxSummaryGxE(m1, location = "topright")
+umxSummaryGxE(m1, separateGraphs = FALSE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

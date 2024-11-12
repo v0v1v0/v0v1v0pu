@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>chartFontSizes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>specify chart font sizes</h2>
+
+<h3>Description</h3>
+
+<p>specify chart font sizes
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">chartFontSizes(
+  upsetjs,
+  font.family = NULL,
+  chart.label = NULL,
+  set.label = NULL,
+  axis.tick = NULL,
+  bar.label = NULL,
+  legend = NULL,
+  title = NULL,
+  description = NULL,
+  export.label = NULL,
+  value.label = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>font.family</code></td>
+<td>
+<p>specify the font family to render</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chart.label</code></td>
+<td>
+<p>font size of the chart label, default: 16px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set.label</code></td>
+<td>
+<p>font size of the set label, default: 10px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis.tick</code></td>
+<td>
+<p>font size of the axis tick, default: 16px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bar.label</code></td>
+<td>
+<p>font size of the bar label, default: 10px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend</code></td>
+<td>
+<p>font size of the legend label, default: 10px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>font size of the chart title, default: 24px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>description</code></td>
+<td>
+<p>font size of the chart description, default: 16px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>export.label</code></td>
+<td>
+<p>font size of the export label, default: 10px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value.label</code></td>
+<td>
+<p>font size of the value label, (venn diagram only) default: 12px</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  chartFontSizes(font.family = "serif")
+</code></pre>
+
+
+</div>

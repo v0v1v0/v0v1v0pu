@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>optimal.params.gst</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Estimation of local immigration using GST(k) statistics</h2>
+
+<h3>Description</h3>
+
+<p>Functions <code>optimal.params.gst()</code>, <code>GST.k()</code> and <code>I.k()</code>
+apply to count data collected over a network of community samples k
+(species by sample matrix).  A theoretical relationship between
+<code>GST(k)</code> statistics and local immigration numbers <code>I(k)</code>, in
+the context of a spatially-implicit neutral community model (Munoz et
+al 2008), is used to provide <code>GST(k)</code> and <code>I(k)</code> statistics
+any sample k.
+</p>
+<p>If requested, <code>optimal.params.gst()</code> further provides the user with
+confidence bounds.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">optimal.params.gst(D, exact = TRUE, ci = FALSE, cint = c(0.025, 0.975), nbres = 100)
+GST.k(D, exact = TRUE)
+I.k(D, exact = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>D</code></td>
+<td>
+<p> A data table including species counts in a network of
+community samples (columns) </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exact</code></td>
+<td>
+<p> If <code>TRUE</code>, exact similarity statistics are
+calculated (sampling without replacement) while, if false, approximate
+statistics (sampling with replacement) are considered (see Munoz et al
+2008 for further statistical discussion)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci</code></td>
+<td>
+<p> Specifies whether bootstraps confidence intervals of
+immigration estimates are to be calculated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cint</code></td>
+<td>
+<p> Bounds of the confidence interval, if <code>ci = TRUE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nbres</code></td>
+<td>
+<p> Number of rounds of the bootstrap procedure for
+confidence interval calculation, if ci = T</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>GST</code></td>
+<td>
+<p>A vector of 0 to 1 <code>GST(k)</code> numbers (specific output of <code>GST.k</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nk</code></td>
+<td>
+<p>Number of individuals within samples (length = number of samples)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distrib</code></td>
+<td>
+<p>Species counts of the merged dataset (output of <code>GST.k</code> and <code>I.k</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>I</code></td>
+<td>
+<p>Immigration estimates (output of <code>I.k</code> and <code>optimal.params.gst</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>Corresponding immigration rates (output of <code>I.k</code> and
+<code>optimal.params.gst</code>).  Specific outputs of <code>optimal.params.gst</code> when ci = T (bootstrap procedure)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ici</code></td>
+<td>
+<p>Confidence interval of <code>I(k)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mci</code></td>
+<td>
+<p>Confidence interval of <code>m(k)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Iboot</code></td>
+<td>
+<p>Table of bootstrapped values of <code>I(k)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mboot</code></td>
+<td>
+<p>Table of bootstrapped values of i<code>m(k)</code></p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p> Francois Munoz </p>
+
+
+<h3>References</h3>
+
+<p>Francois Munoz, Pierre Couteron and B.R. Ramesh
+(2008). “Beta-diversity in spatially implicit neutral models:
+a new way to assess species migration.” <em>The American
+Naturalist</em> 172(1): 116-127
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code>optimal.params</code>,<code>optimal.params.sloss</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(ghats)
+optimal.params.gst(ghats)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uniset_copyFilesToPackage</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Copy Uniset Files into Target Package</h2>
+
+<h3>Description</h3>
+
+<p>Generate the four files required in the target
+package (i.e. the package that should be enabled to use the package 'uniset').
+The generated files will be copied directly into their required destination
+folders in the target package. The name of the target package will be extracted
+from the description file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uniset_copyFilesToPackage(
+  pathToPackage,
+  setupFunc = NULL,
+  taPaSH = "def",
+  taPaObj = "settings",
+  tmpl = "_TEMPLATE"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pathToPackage</code></td>
+<td>
+<p>Character length one. The path to the root of the
+target package.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>setupFunc</code></td>
+<td>
+<p>Character length one. The name of the function
+<strong>in the target package</strong> that is containing the setup-function
+<code>uniset_setup</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taPaSH</code></td>
+<td>
+<p>Character length one. The name of the variable to be defined in
+the '.Renviron' file, leading to the place where the settings.R file for the
+target package will be stored. If left at the default 'def', <code>'taPaName_SH'</code>
+will be used, with 'taPaName' being the value provided at the argument
+'taPaName'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taPaObj</code></td>
+<td>
+<p>Character length one. The name of the object holding the list
+with the key-value pairs that can be defined to be used in the target package.
+Can be left at the default 'settings'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tmpl</code></td>
+<td>
+<p>Character length one. the Character string that will be appended
+to the fresh settings file that is copied (by the target package) to the users
+settings home directory if updating the key=value pairs was not successful.
+Can be left at the default '_TEMPLATE'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Writes the four required files directly into a valid R-package folder
+structure. Returns (invisible) NULL.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Please refer to <code>uniset</code> for a link to examples
+and a real-world demo.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uniset_getFiles</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">{
+library(uniset)
+# first copy the target package example into tempdir
+to &lt;- tempdir()
+from &lt;- paste0(path.package("uniset"), "/examples/dogPack")
+file.copy(from, to, recursive = TRUE) 
+# now copy the four required files directly into the package 'dogPack'
+path &lt;- paste0(to, "/dogPack")
+uniset_copyFilesToPackage(path, "nameOfSetupFunc")
+}
+</code></pre>
+
+
+</div>

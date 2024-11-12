@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>WERCSClassif</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+WEighted Relevance-based Combination Strategy (WERCS) algorithm for imbalanced classification problems
+</h2>
+
+<h3>Description</h3>
+
+<p>This function handles imbalanced classification problems using the importance/relevance provided to re-sample the data set. The relevance is used to introduce replicas of the most important examples and to remove the least important examples. This function combines random over-sampling with random under-sampling which are applied in the problem classes according to the corresponding relevance.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">WERCSClassif(form, dat, C.perc = "balance")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+
+<p>A data frame containing the original (unbalanced) data set
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C.perc</code></td>
+<td>
+
+<p>A list containing the percentage(s) of random under- or 
+over-sampling to apply to each class. The over-sampling percentage is a number above 1 while the under-sampling percentage should be a number below 1. If the number 1 is provided for a given class then that class remains unchanged. Alternatively it may be "balance" (the default) or "extreme",
+cases where the sampling percentages are automatically estimated. 
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns a data frame with
+the new data set resulting from the application of the importance sampling strategy. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>See Also</h3>
+
+<p><code>RandUnderClassif, RandOverClassif</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  data(iris)
+  # generating an artificially imbalanced data set
+  ir &lt;- iris[-c(51:70,111:150), ]
+  IS.ext &lt;-WERCSClassif(Species~., ir, C.perc = "extreme")
+  IS.bal &lt;-WERCSClassif(Species~., ir, C.perc = "balance")
+  myIS &lt;-WERCSClassif(Species~., ir, C.perc = list(setosa = 0.2,
+                                                    versicolor = 2,
+                                                    virginica = 6))
+  # check the results
+  table(ir$Species)
+  table(IS.ext$Species)
+  table(IS.bal$Species)
+  table(myIS$Species)
+</code></pre>
+
+
+</div>

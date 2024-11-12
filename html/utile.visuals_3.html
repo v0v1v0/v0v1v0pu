@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ggrisktable</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a ggplot2 table showing the number at risk</h2>
+
+<h3>Description</h3>
+
+<p>A simple wrapper function which calculates the
+numbers at risk for a survival model and a given set of time points then
+creates a ggplot2 table with them.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ggrisktable(
+  fit = NULL,
+  times = NULL,
+  text.color = "black",
+  strata.order = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fit</code></td>
+<td>
+<p>Required. survival::survfit() object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>times</code></td>
+<td>
+<p>Required. Numeric. One or more time points to calculate
+the number at risk for.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>text.color</code></td>
+<td>
+<p>Optional. Character. Color of text within table. Defaults
+to 'black'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strata.order</code></td>
+<td>
+<p>Optional. Character. Ordered names of strata factor
+levels.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An unformatted ggplot2 table showing the number at risk.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(survival)
+
+fit &lt;- survfit(Surv(time, status) ~ trt, data = diabetic)
+
+ggrisktable(
+   fit = fit,
+   times = c(0, 10, 20, 30, 40, 50),
+   strata.order = c('0', '1')
+) + theme_risk()
+</code></pre>
+
+
+</div>

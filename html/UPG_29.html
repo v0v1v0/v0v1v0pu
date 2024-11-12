@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UPG.Diag</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>MCMC Diagnostics for <code>UPG.Probit</code>, <code>UPG.Logit</code>, <code>UPG.MNL</code> and <code>UPG.Binomial</code> objects using <code>coda</code>
+</h2>
+
+<h3>Description</h3>
+
+<p><code>UPG.Diag</code> computes a number of MCMC diagnostics based on the Markov chains that are contained in the model output returned by <code>UPG</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UPG.Diag(object = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class <code>UPG.Probit</code>, <code>UPG.Logit</code>, <code>UPG.MNL</code> or <code>UPG.Binomial</code>.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Returns a list containing effective sample size, effective sampling rate and inefficiency factors for each coefficient. In addition, maximum, minimum and median of these measures are returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gregor Zens
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# estimate a probit model using example data
+library(UPG)
+data(lfp)
+y = lfp[,1]
+X = lfp[,-1]
+results.probit = UPG(y = y, X = X, model = "probit")
+
+# compute MCMC diagnostics
+UPG.Diag(results.probit)
+
+
+</code></pre>
+
+
+</div>

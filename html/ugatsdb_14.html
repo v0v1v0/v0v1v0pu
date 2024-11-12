@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>wide2excel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Export Wide Data to Excel</h2>
+
+<h3>Description</h3>
+
+<p>This function exports a wide format dataset to a column- (default) or row-oriented Excel format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">wide2excel(data, ..., transpose = FALSE, transpose.date.format = "%d/%m/%Y")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a wide dataset from <code>get_data</code> or reshaped to a wide format with <code>long2wide</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments to <code>write_xlsx</code>. As a minimum a path needs to be supplied that ends with the name of the Excel file. See Examples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>transpose</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, the result is returned in a row-oriented Excel format. The default is column oriented (same as the dataset in R).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>transpose.date.format</code></td>
+<td>
+<p>argument passed to <code>transpose_wide</code>, setting the format of date columns when data is transposed.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>transpose_wide</code>, <code>write_xlsx</code>, <code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Getting macroeconomic indicators from Bank of Uganda in fiscal years
+data &lt;- get_data("BOU_MMI_FY", from = "2000/01")
+
+# Saving to different Excel formats
+wide2excel(data, "BOU_MMI_FY.xlsx")
+wide2excel(data, "BOU_MMI_FY.xlsx", transpose = TRUE)
+
+# Saving to alternative path
+wide2excel(data, "C:/Users/.../BOU_MMI_FY.xlsx")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

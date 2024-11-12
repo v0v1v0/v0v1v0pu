@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UDtable</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make uncertainty table</h2>
+
+<h3>Description</h3>
+
+<p>This function summarizes the uncertainty into a table.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UD_table(UD, ...)
+
+## S3 method for class 'UD_model'
+UD_table(UD, include.nat = TRUE, include.tot = TRUE,
+  ...)
+
+## S3 method for class 'UD_stage'
+UD_table(UD, include.nat = TRUE, include.tot = TRUE,
+  ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>UD</code></td>
+<td>
+<p>model-wise uncertainty or stage-wise uncertainty</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods. include.nat or include.tot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include.nat</code></td>
+<td>
+<p>If include.nat is TRUE and UD has nat_unc, create a table containing it.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include.tot</code></td>
+<td>
+<p>If include.tot is TRUE, create a table containing it.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>uncertainty table
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(0)
+stage1 &lt;- LETTERS[1:3]
+stage2 &lt;- LETTERS[1:2]
+stage3 &lt;- LETTERS[1:4]
+y &lt;- rnorm(3*2*4)
+data &lt;- expand.grid(stage1=stage1,
+                    stage2=stage2,
+                    stage3=stage3)
+stages &lt;- names(data)
+data &lt;- cbind(data, y)
+
+UD_bal_model_range &lt;- UD_bal_model(data, "y", stages, u_range, flist_range)
+UD_bal_model_range 
+
+UD_bal_stage_range &lt;- UD_model2stage(UD_bal_model_range)
+UD_bal_stage_range 
+
+UD_table(UD_bal_model_range)
+UD_table(UD_bal_stage_range)
+</code></pre>
+
+
+</div>

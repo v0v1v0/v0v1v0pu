@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>gradient</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evaluate gradient of target functional depending on model.</h2>
+
+<h3>Description</h3>
+
+<p>Evaluate gradient of target functional depending on model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">gradient(
+  url,
+  name,
+  out_wrt,
+  in_wrt,
+  parameters,
+  sens,
+  config = jsonlite::fromJSON("{}")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>URL the model is running at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Name of the desired model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out_wrt</code></td>
+<td>
+<p>Output variable to take gradient with respect to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>in_wrt</code></td>
+<td>
+<p>Input variable to take gradient with respect to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>Model input parameter (a list of vectors).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sens</code></td>
+<td>
+<p>Sensitivity of target functional with respect to model output.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>config</code></td>
+<td>
+<p>Model-specific configuration options.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Gradient of target functional.
+</p>
+
+
+</div>

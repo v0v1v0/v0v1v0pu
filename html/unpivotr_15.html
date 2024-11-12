@@ -1,0 +1,165 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>partition</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Divide a grid of cells into partitions containing individual tables</h2>
+
+<h3>Description</h3>
+
+<p>Given the positions of corner cells that mark individual tables in a single
+spreadsheet, <code>partion()</code> works out which table cells belong to which corner
+cells.  The individual tables can then be worked on independently.
+</p>
+<p><code>partition()</code> partitions along both dimensions (rows and columns) at once.
+<code>partition_dim()</code> partitions along one dimension at a time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">partition(cells, corners, align = "top_left", nest = TRUE, strict = TRUE)
+
+partition_dim(positions, cutpoints, bound = "upper")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cells</code></td>
+<td>
+<p>Data frame or tbl, the cells to be partitioned, from
+<code>as_cells()</code> or <code>tidyxl::xlsx_cells()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>corners</code></td>
+<td>
+<p>usually a subset of <code>cells</code>, being the corners of individual
+tables.  Can also be cells that aren't among <code>cells</code>, in which case see the
+<code>strict</code> argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>align</code></td>
+<td>
+<p>Character, the position of the corner cells relative to their
+tables, one of <code>"top_left"</code> (default), <code>"top_right"</code>, <code>"bottom_left"</code>,
+<code>"bottom_right"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nest</code></td>
+<td>
+<p>Logical, whether to nest the partitions in a list-column of data
+frames.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strict</code></td>
+<td>
+<p>Logical, whether to omit partitions that don't contain a corner
+cell.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>positions</code></td>
+<td>
+<p>Integer vector, the positions of cells (either the row
+position or the column position), which are to be grouped between
+cutpoints.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutpoints</code></td>
+<td>
+<p>Integer vector. The <code>positions</code> will be separated into
+groups either side of each cutpoint.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bound</code></td>
+<td>
+<p>One of <code>"upper"</code> or <code>"lower"</code>, controls whether cells that lie
+on a cutpoint are should be grouped with cells below or above the cutpoint.
+For example, if column 5 is a cutpoint, and a cell is in column 5,
+<code>"lower"</code> would group it with cells in columns 1 to 4, whereas <code>"upper"</code>
+would group it with cells in columns 6 to 10.  This is so that you can use
+cells at the bottom or the right-hand side of a table as the cutpoints
+(either of which would be 'upper' bounds because row and column numbers
+count from 1 in the top-left row and column).  When <code>"upper"</code>, any
+<code>cell_positions</code> above the first cutpoint will be in group 0; when
+<code>"lower"</code>, any <code>cell_positions</code> below the final cutpoint will be 0.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>partition_dim()</code> returns an integer vector, numbering the groups of
+cells.  Group 0 represents the cells above the first cutpoint (when <code>bound = "upper"</code>), or below the first cutpoint (when <code>bound = "lower"</code>).  The
+other groups are numbered from 1, where group 1 is adjacent to group 0.
+</p>
+<p><code>partition_dim()</code> returns an integer vector, numbering the groups of cells.
+Group 0 represents the cells above the first cutpoint (when <code>bound = "upper"</code>), or below the first cutpoint (when <code>bound = "lower"</code>).  The other
+groups are numbered from 1, where group 1 is adjacent to group 0.  Divide a
+grid of cells into chunks along both dimensions
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul><li> <p><code>partition_dim()</code>: Divide a grid of cells into chunks along one dimension
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># The `purpose` dataset, represented in four summary tables
+multiples &lt;- purpose$small_multiples
+rectify(multiples, character, numeric)
+
+# The same thing in its raw 'melted' form that can be filtered
+multiples
+
+# First, find the cells that mark a corner of each table
+corners &lt;-
+  dplyr::filter(multiples,
+                !is.na(character),
+                !(character %in% c("Sex", "Value", "Female", "Male")))
+
+# Then find out which cells fall into which partition
+partition(multiples, corners)
+
+# You can also use bottom-left corners (or top-right or bottom-right)
+bl_corners &lt;- dplyr::filter(multiples, character == "Male")
+partition(multiples, bl_corners, align = "bottom_left")
+
+# To complete the grid even when not all corners are supplied, use `strict`
+bl_corners &lt;- bl_corners[-1, ]
+partition(multiples, bl_corners, align = "bottom_left")
+partition(multiples, bl_corners, align = "bottom_left", strict = FALSE)
+# Given a set of cells in rows 1 to 10, partition them at the 3rd, 5th and 7th
+# rows.
+partition_dim(1:10, c(3, 5, 7))
+
+# Given a set of cells in columns 1 to 10, partition them at the 3rd, 5th and
+# 7th column.  This example is exactly the same as the previous one, to show
+# that the function works the same way on columns as rows.
+partition_dim(1:10, c(3, 5, 7))
+
+# Given a set of cells in rows 1 to 10, partition them at the 3rd, 5th and
+# 7th rows, aligned to the bottom of the group.
+partition_dim(1:10, c(3, 5, 7), bound = "lower")
+
+# Non-integer row/column numbers and cutpoints can be used, even though they
+# make no sense in the context of partioning grids of cells.  They are
+# rounded towards zero first.
+partition_dim(1:10 - .5, c(3, 5, 7))
+partition_dim(1:10, c(3, 5, 7) + 1.5)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>write_excel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Write out an Excel file with minimal configuration</h2>
+
+<h3>Description</h3>
+
+<p>Takes a tibble or dataframe variable and saves it out as an Excel file
+using the variable name as the filename.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">write_excel(
+  variable,
+  output_dir = dir_data_out(),
+  should_timestamp_output_files = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>variable</code></td>
+<td>
+<p>A tibble or dataframe object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_dir</code></td>
+<td>
+<p>The directory to save the file out to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>should_timestamp_output_files</code></td>
+<td>
+<p>Either TRUE, FALSE, or pulled from the environment if set.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, called for side effects
+</p>
+
+
+</div>

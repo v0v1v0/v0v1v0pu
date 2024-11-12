@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>nmr_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Nightingale biomarker information</h2>
+
+<h3>Description</h3>
+
+<p>Contains details on the Nightingale biomarkers available in UK Biobank and
+computed by this package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">nmr_info
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data table with 325 rows and 8 columns:
+</p>
+
+<dl>
+<dt>Biomarker</dt>
+<dd>
+<p>Short column name assigned to the biomarker</p>
+</dd>
+<dt>Description</dt>
+<dd>
+<p>Biomarker description, matching the description field provided by UK Biobank and Nightingale Health</p>
+</dd>
+<dt>Units</dt>
+<dd>
+<p>Units of measurement for the biomarker ("mmol/L", "g/L", "nm", "degree", "ratio", or "%")</p>
+</dd>
+<dt>Type</dt>
+<dd>
+<p>Biomarker type ("Non-derived", "Composite", "Ratio", or "Percentage")</p>
+</dd>
+<dt>Group</dt>
+<dd>
+<p>Biomarker group as provided by Nightingale Health</p>
+</dd>
+<dt>Sub.Group</dt>
+<dd>
+<p>Biomarker sub-group as provided by Nightingale Health</p>
+</dd>
+<dt>Nightingale</dt>
+<dd>
+<p>Logical. Indicates biomarker is quantified by the Nightingale Health platform</p>
+</dd>
+<dt>UKB.Field.ID</dt>
+<dd>
+<p>Field ID in UK Biobank, see <a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=220">https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=220</a></p>
+</dd>
+<dt>QC.Flag.Field.ID</dt>
+<dd>
+<p>Field ID in UK Biobank for the biomarker QC Flags, see <a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=220">https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=220</a></p>
+</dd>
+<dt>Full.Formula</dt>
+<dd>
+<p>For composite biomarkers and ratios, details formula through which the biomarker can be derived from the 107 non-derived biomarkers</p>
+</dd>
+<dt>Simplified.Formula</dt>
+<dd>
+<p>Simplified form of the full formula most clearly expressing how each composite biomarker and ratio can be rederived from other biomarkers</p>
+</dd>
+</dl>
+</div>

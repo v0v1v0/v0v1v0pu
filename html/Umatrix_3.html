@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>calculate_Delauny_radius</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate the Delauny graph based radius</h2>
+
+<h3>Description</h3>
+
+<p>Function to calculate the radius for data generation.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">    calculate_Delauny_radius(Data, BestMatches, 
+    Columns = 80,  Lines = 50,  Toroid = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Data</code></td>
+<td>
+<p>Matrix of data (as submitted to Umatrix generation)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BestMatches</code></td>
+<td>
+<p>Array with positions of Bestmatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Columns</code></td>
+<td>
+<p>Number of columns of the Umatrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lines</code></td>
+<td>
+<p>Number of columns of the Umatrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>Whether a toroid Umatrx was used</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a list of results.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>neighbourDistances</code></td>
+<td>
+<p>Distances on the Umatrix neigborhood matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RadiusByEM</code></td>
+<td>
+<p>Radius suggested by EM algorithm.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Ultsch A, Lotsch J: Machine-learned cluster identification in high-dimensional data. J Biomed Inform. 2017 Feb;66:95-104. doi: 10.1016/j.jbi.2016.12.011. Epub 2016 Dec 28. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data("Hepta")
+data("HeptaBMU")
+DelaunyHepta &lt;- calculate_Delauny_radius(Data = Hepta$Data, BestMatches = HeptaBMU,  Toroid = FALSE)
+
+## End(Not run)</code></pre>
+
+
+</div>

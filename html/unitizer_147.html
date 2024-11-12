@@ -1,0 +1,202 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unitizer_sect</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Define a <code>unitizer</code> Section</h2>
+
+<h3>Description</h3>
+
+<p>The purpose of <code>unitizer</code> sections is to allow the user to tag a
+group of test expressions with meta information as well as to modify
+how tests are determined to pass or fail.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unitizer_sect(
+  title = NULL,
+  expr = expression(),
+  details = character(),
+  compare = new("testFuns")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>character 1 length title for the section, can be omitted
+though if you do omit it you will have to refer to the subsequent
+arguments by name (i.e. <code>unitizer_sect(expr=...)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expr</code></td>
+<td>
+<p>test expression(s), most commonly a call to <code>{}</code> with
+several calls inside (see examples)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>details</code></td>
+<td>
+<p>character more detailed description of what the purpose
+of the section is; currently this doesn't do anything.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>compare</code></td>
+<td>
+<p>a function or a <code>testFuns</code> object</p>
+</td>
+</tr>
+</table>
+<h3>Tested Data</h3>
+
+<p><code>unitizer</code> tracks the following:
+</p>
+
+<ul>
+<li>
+<p> value: the return value of the test
+</p>
+</li>
+<li>
+<p> conditions: any conditions emitted by the test (e.g. warnings or
+errors)
+</p>
+</li>
+<li>
+<p> output: screen output
+</p>
+</li>
+<li>
+<p> message: stderr output
+</p>
+</li>
+<li>
+<p> aborted: whether the test issued an 'abort' restart (e.g. by calling
+'stop' directly or indirectly)
+</p>
+</li>
+</ul>
+<p>In the future stdout produced by the test expression itself may be captured
+separately from that produced by print/showing of the return value, but at
+this point the two are combined.
+</p>
+<p>Each of the components of the test data can be tested, although by default
+only <code>value</code> and <code>condition</code> are checked.  Testing <code>output</code> is
+potentially duplicative of testing <code>value</code>, since most often
+<code>value</code> is printed to screen and the screen output of the value closely
+correlates to the actual value.  In some cases it is useful to explicitly
+test the <code>output</code>, such as when testing <code>print</code> or <code>show</code>
+methods.
+</p>
+
+
+<h3>Comparison Functions</h3>
+
+<p>The comparison function should accept at least two parameters, and
+require no more than two.  For each test component, the comparison function
+will be passed the reference data as the first argument, and the newly
+evaluated data as the second.  The function should return TRUE if the
+compared test components are considered equivalent, or FALSE.  Instead of
+FALSE, the function may also return a character vector describing the
+mismatch, as <code>all.equal</code> does.
+</p>
+<p><b>WARNING</b>: Comparison functions that set and/or unset <code>sink</code>
+can potentially cause problems.  If for whatever reason you must really  sink
+and unsink output streams, please take extreme care to restore the streams to
+the state they were in when the comparison function was called.
+</p>
+<p>Any output to <code>stdout</code> or <code>stderr</code> is captured and only checked at
+the end of the <code>unitizer</code> process with the expectation that there will
+be no such output.
+</p>
+<p><code>value</code> and <code>conditions</code> are compared with <code>all_eq</code>,
+which is a wrapper to <code>all.equal</code> except that it returns FALSE
+instead of a descriptive string on failure.  This is because <code>unitizer</code>
+will run <code>diffObj</code> on the test data components that do
+not match and including the <code>all.equal</code> output would be redundant.
+</p>
+<p>If a comparison function signals a condition (e.g. throws a warning) the
+test will not be evaluated, so make sure that your function does not signal
+conditions unless it is genuinely failing.
+</p>
+<p>If you wish to provide custom comparison functions you may do so by passing
+an appropriately initialized <code>testFuns</code> object as the
+value to the <code>compare</code> parameter to <code>unitizer_sect</code>
+(see examples).
+</p>
+<p>Make sure your comparison functions are available to <code>unitize</code>.
+Comparisons will be evaluated in the environment of the test.  By default
+<code>unitize</code> runs tests in environments that are not children to
+the global environment, so functions defined there will not be automatically
+available.  You can either specify the function in the test file before the
+section that uses it, or change the base environment tests are evaluated in
+with <code>unitize(..., par.env)</code>, or make sure that the package that
+contains your function is loaded within the test script.
+</p>
+
+
+<h3>Nested Sections</h3>
+
+<p>It is possible to have nested sections, but titles, etc. are ignored.  The
+only effect of nested sections is to allow you to change the comparison
+functions for a portion of the outermost <code>unitizer_sect</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>if you want to modify the functions used to compare conditions,
+keep in mind that the conditions are stored in <code>conditionList</code>
+objects so your function must loop through the lists and compare conditions
+pairwise.  By default <code>unitizer</code> uses the <code>all.equal</code> method for S4
+class <code>conditionList</code>.
+</p>
+<p><code>untizer</code> does not account for sections when matching new and
+reference tests.  All tests will be displayed as per the section they belong
+to in the newest version of the test file, irrespective of what section they
+were in when the tests were last run.
+</p>
+<p>Calls to <code>unitizer_sect</code> should be at the top level of your test
+script, or nested within other <code>unitizer_sect</code>s (see "Nested Sections").
+Do not expect code like <code>(untizer_sect(..., ...))</code> or
+<code>{unitizer_sect(..., ...)}</code> or <code>fun(unitizer_sect(..., ...))</code> to
+work.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>testFuns</code>, <code>all_eq</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">unitizer_sect("Switch to `all.equal` instead of `all_eq`",
+  {
+    fun(6L)
+    fun("hello")
+  },
+  compare=testFuns(value=all.equal, conditions=all.equal)
+)
+unitizer_sect("Use identical for ALL test data, including stdout, etc.",
+  {
+    fun(6L)
+    fun("hello")
+  },
+  compare=identical
+)
+</code></pre>
+
+
+</div>

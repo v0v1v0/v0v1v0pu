@@ -1,0 +1,324 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_set_tt_cond</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Define Titration Triggers and Actions</h2>
+
+<h3>Description</h3>
+
+<p>Once a rule has been defined using
+<code>system_new_tt_rule</code>, it can then be used by specifying checks at
+each of the titration time points that, when true, will perform some actions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_set_tt_cond(cfg, name, cond, action, value = "-1")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>string containing the name for the titration rule to which this condition applies</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cond</code></td>
+<td>
+<p>string that evaluates a boolean value that is <code>TRUE</code> when the action should be triggered</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>action</code></td>
+<td>
+<p>stringing that evaluates to what should be done when the condition is met (e.g. changing the dose, state change, etc)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>code to be stored in the titration history to track when this condition has been triggered</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The general syntax for setting a new condition is:
+</p>
+<pre>
+cfg = system_new_tt_cond(cfg,
+                        name   = "rname",
+                        cond   = "BOOLEAN EXPRESSION",
+                        action = "EXPRESSION",
+                        value  = "VALUE")
+</pre>
+<p>The <code>name</code>
+input will associate this condition with a previously defined rule. For each
+time defined when the rule was created, the condition (<code>cond</code>) will be
+evaluated. If that condition evaluates as <code>TRUE</code> then the <code>action</code> will be
+evaluated. Lastly, when a condition action is evaluated, the <code>value</code> is stored
+in the titration history.
+</p>
+<p>Multiple conditions can be associated with a rule. The internal titration
+history will track each one where a condition has been evaluated as true, but
+the simulation output will only show the <b>last</b> condition to be evaluated as
+true.
+</p>
+<p>The <code>cond</code> field is a string that, when evaluated, will produce a boolean value
+(<code>TRUE</code> or <code>FALSE</code>). If you simply want to force an action at each of the times
+for a given rule you can use: <code>cond = "TRUE"</code>. Alternatively you can provide
+mathematical expressions or even complicated user defined functions.
+</p>
+<p>The <code>action</code> field is evaluated when <code>cond</code> is true. To modify how a simulation
+is going to be performed, you will want to modify the <code>SIMINT_cfgtt</code>
+variable using the different system commands. Certain common tasks have
+prototype functions created to make it easier for the user:
+</p>
+
+<ul>
+<li> <p><code>SI_TT_BOLUS</code> - Set bolus dosing
+</p>
+</li>
+<li> <p><code>SI_TT_RATE</code> - Set infusion inputs
+</p>
+</li>
+<li> <p><code>SI_TT_STATE</code> - Reset system states
+</p>
+</li>
+</ul>
+<p><b>Note:</b> Protype functions are strings but sometimes it is necessary to
+specify strings within this string. For the main string use double quotes (")
+and for the internal strings use single quotes (')
+</p>
+<p><b><code>SI_TT_BOLUS</code></b>
+</p>
+<p>The simplest way to apply a bolus when the condition is true is to use the following:
+</p>
+<pre>
+action = "SI_TT_BOLUS[state=’At’, 
+                     values=c(10, 10, 10), 
+                     times=c(0, 1, 2)]"
+</pre>
+<p>The <code>values</code> and <code>times</code> are vectors of numbers of equal length. The dosing and
+time units are those specified in the <code>system.txt</code> file for the <code>&lt;B:?&gt;</code> delimiter. The
+times are relative to the titration time. So <code>0</code> above means at the titration time.
+</p>
+<p>It’s possible to specify an interval and a number of times to repeat the last dose
+using the following:
+</p>
+<pre>
+action = "SI_TT_BOLUS[state    = ’At’, 
+                     values   = c(5, 5, 10), 
+                     times    = c(0, 2, 4), 
+                     repdose  = ’last’, 
+                     number   = 7, 
+                     interval = 4]"
+</pre>
+<p>This will give a dose of <code>5</code> at the titration point and <code>2</code> time units later. The dose of <code>10</code>
+at time <code>4</code> will be repeated <code>7</code> times every <code>4</code> time units. So a total of 8 (<code>7 + 1</code>) doses
+at <code>10</code> will be administered. Remember the time units were those defined in <code>&lt;B:?&gt;</code>.
+The input <code>repdose</code> can be either <code>’last’</code> or <code>’none’</code>.
+</p>
+<p><b>Note:</b> The main string is in double quotes <code>" "</code> but the strings in the protype
+argument (e.g. <code>’last’</code>) are in single quotes <code>’ ’</code>.
+</p>
+<p><b><code>SI_TT_RATE</code></b> 
+</p>
+<p>If you created an infusion named <code>Dinf</code> using <code>&lt;R:?&gt;</code> and the infusion units
+are min (times) and mg/min (rates). To have a 60 minute infusion of 20
+mg/min then we would do the following:
+</p>
+<pre>
+action = "SI_TT_RATE[rate=’Dinf’, times=c(0, 60), levels=c(20.0, 0)]"
+</pre>
+<p>If we wanted to do this every day for 9 more days (a total of 10 days) we can repeat
+the sequence:
+</p>
+<pre>
+action = "SI_TT_RATE[rate     = ’Dinf’, 
+                    times    = c(0, 60), 
+                    levels   = c(20, 0), 
+                    repdose  = ’sequence’, 
+                    number   = 9, 
+                    interval = 24*60]"
+</pre>
+<p>The input <code>repdose</code> can be either <code>’sequence’</code> or <code>’none’</code>.
+</p>
+<p><b>Note:</b> The time units and dosing rate are those specified using <code>&lt;R:?&gt;</code>.
+</p>
+<p><b><code>SI_TT_STATE</code></b> 
+</p>
+<p>To provide fine control over states at titration points the state reset
+prototype is provided. For example, if you are modeling an assay where
+there is a wash step and you want to drop a concentration to zero. If you
+have a state named <code>Cc</code> defined in your <code>system.txt</code> and you want to set
+it to <code>0.0</code> in a condition the following action would work.
+</p>
+<pre>
+action = "SI_TT_STATE[Cc][0.0]"
+</pre>
+<p>The value here is a number but you can use any mathematical
+combination of variables available in the titration environment. Also you
+can create your own user function and place the function call within the
+brackets above.
+</p>
+<p><b>Titration Environment</b>
+</p>
+<p>The <code>cond</code>, <code>action</code>, and <code>value</code> statements can use any variables available in
+the titration environment. If you want to perform complicated actions, you can
+simply create a user defined functions and pass it the variables from the
+titration environment that you need. These include named variables from the
+model as well as internal variables used to control the titration.
+</p>
+<p><b>States and Parameters</b>
+</p>
+<p>System parameters (<code>&lt;P&gt;</code>), static secondary parameters (<code>&lt;As&gt;</code>) and 
+the initial value of covariates are available. Also the state values 
+(at the current titration time) can be used. These are all available as 
+the names specified in the <code>system.txt</code> file. Since system resets
+(<code>SI_TT_STATE</code>) are processed first, any changes made to states are 
+the values that are active for other actions.
+</p>
+<p><b>Internal Simulation Variables</b>
+</p>
+<p>Internal variables are used to control titration activities. These variables can also be used in the conditions and actions.
+</p>
+
+<ul>
+<li> <p><code>SIMINT_p</code> - list of system parameters
+</p>
+</li>
+<li> <p><code>SIMINT_cfg</code> - system configuration sent into the titration routine
+</p>
+</li>
+<li> <p><code>SIMINT_cfgtt</code>- system configuration at the current titration event time
+</p>
+</li>
+<li> <p><code>SIMINT_ttimes</code> - vector of titration times (in simulation units)
+</p>
+</li>
+<li> <p><code>SIMINT_ttime</code> - current titration time  (in simulation units)
+</p>
+</li>
+<li> <p><code>SIMINT_tt_ts</code> - list of time scales for the current titration
+</p>
+</li>
+<li> <p><code>SIMINT_history</code> - data frame tracking the history of conditions that evaluated true with the following structure:
+</p>
+</li>
+<li> 
+<ul>
+<li> <p><code>tname</code> - name of titration rule
+</p>
+</li>
+<li> <p><code>value</code> - value indicating condition that was satisfied
+</p>
+</li>
+<li> <p><code>simtime</code> - simulation time when that rule/value were triggered
+</p>
+</li>
+<li> <p><code>timescale</code> -  time at the rule timescale when that rule/value were triggered
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><b>Individual Simulations</b>
+</p>
+<p>To run an individual titration simulation use the following:
+</p>
+<pre>
+som = run_simulation_titrate(parameters, cfg)
+</pre>
+<p>This provides the same output as <code>run_simulation_ubiquity</code> with
+two extra fields. The first, <code>som$titration</code>, contains three columns for each
+titration rule. The columns will have a length equal and corresponding to the
+simulation times. If the rule name is rname, then the column headers will have
+the following names and meanings:
+</p>
+
+<ul>
+<li> <p><code>tt.rname.value</code> - Value of the rule for the active condition or -1 if not triggered
+</p>
+</li>
+<li> <p><code>tt.rname.simtime</code> - Simulation time where the last condition became active
+</p>
+</li>
+<li> <p><code>tt.rname.timescale</code> - Simulation time in the time scale the rule was specified in
+</p>
+</li>
+</ul>
+<p>The second field is <code>som$titration_history</code> which contains a summary list of all of the titration events that were triggered.
+</p>
+
+<ul>
+<li> <p><code>tname</code> - Titration rule name
+</p>
+</li>
+<li> <p><code>value</code> - Value of the rule for the active condition or -1 if not triggered   
+</p>
+</li>
+<li> <p><code>simtime</code> - Simulation time where the last condition became active
+</p>
+</li>
+<li> <p><code>timescale</code> - Simulation time in the time scale the rule was specified in
+</p>
+</li>
+</ul>
+<p>To convert this structured list into a data frame the <code>som_to_df</code> command can be used:
+</p>
+<pre>
+sdf = som_to_df(cfg, som)
+</pre>
+<p>To run stochastic titration simulations, the same function is used:
+</p>
+<pre>
+som = simulate_subjects(parameters, cfg)
+</pre>
+<p>This will add a data a list element called <code>som$titration</code> with three
+fields for each titration rule:
+</p>
+
+<ul>
+<li> <p><code>tt.rname.value</code> - Value of the rule for the active condition or -1 if not triggered
+</p>
+</li>
+<li> <p><code>tt.rname.simtime</code> - Simulation time where the last condition became active
+</p>
+</li>
+<li> <p><code>tt.rname.timescale</code> - Simulation time in the time scale the rule was specified in
+</p>
+</li>
+</ul>
+<p>Each of these fields is a matrix with an entry for each simulation time
+(column) and each subject (row). This data structure can also be converted to
+a data frame using <code>som_to_df</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Ubiquity system object with the titration condition defined
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>system_new_tt_rule</code>, <code>run_simulation_titrate</code>,  <code>som_to_df</code>, <code>simulate_subjects</code>
+</p>
+
+
+</div>

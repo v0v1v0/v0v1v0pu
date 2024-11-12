@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utest3</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>U-test for three groups</h2>
+
+<h3>Description</h3>
+
+<p>Test for the separation of three groups.
+The null hypothesis states that the groups are homogeneous and the alternative
+hypothesis states that at least one is separated from the others.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utest3(group_id, md = NULL, data = NULL, alpha = 0.05, numB = 1000)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group_id</code></td>
+<td>
+<p>A vector of 1s, 2s and 3s indicating to which group the samples belong.
+Must be in the same order as data or md.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>md</code></td>
+<td>
+<p>Matrix of distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data matrix. Each row represents an observation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Significance level</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numB</code></td>
+<td>
+<p>Number of resampling iterations.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Either <code>data</code> or <code>md</code> should be provided.
+If data are entered directly, Bn will be computed considering the squared Euclidean
+distance.
+</p>
+<p>For more detail see
+Bello, Debora Zava,  Marcio Valk and Gabriela Bettella Cybis.
+"Clustering inference in multiple groups." arXiv preprint arXiv:2106.09115 (2021).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with the following elements:</p>
+
+<dl>
+<dt>is.homo</dt>
+<dd>
+<p>Logical of whether test indicates that data is homogeneous</p>
+</dd>
+<dt>Pvalue</dt>
+<dd>
+<p>Replication based p-value</p>
+</dd>
+<dt>Bn</dt>
+<dd>
+<p>Test Statistic</p>
+</dd>
+<dt>sdBn</dt>
+<dd>
+<p>Standard error for Bn statistic computed through resampling</p>
+</dd>
+</dl>
+<h3>See Also</h3>
+
+<p><code>bn3</code>,<code>utest</code>,<code>is_homo3</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Simulate a dataset with two separate groups,
+# the first row has mean -4, the next 5 rows have mean 0 and the last 5 rows have mean 4.
+data &lt;- matrix(c(rnorm(15, -4),rnorm(75, 0), rnorm(75, 4)), nrow = 11, byrow=TRUE)
+# U test for mixed up groups
+utest3(group_id=c(1,2,3,1,2,3,1,2,3,1,2), data=data, numB=3000)
+# U test for correct group definitions
+utest3(group_id=c(1,2,2,2,2,2,3,3,3,3,3), data=data, numB=3000)
+
+
+</code></pre>
+
+
+</div>

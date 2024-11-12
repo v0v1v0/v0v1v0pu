@@ -1,0 +1,137 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.conversion.parfun.create</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct a parametric function conversion node</h2>
+
+<h3>Description</h3>
+
+<p>Function to construct a node converting values into utilities by a parametric function.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.conversion.parfun.create(name.node, 
+                                 node, 
+                                 name.fun, 
+                                 par, 
+                                 names.par    = rep(NA, length(par)), 
+                                 required     = FALSE, 
+                                 col          = "black", 
+                                 shift.levels = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name.node</code></td>
+<td>
+
+<p>name of the node to be constructed as a character string.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>node</code></td>
+<td>
+
+<p>value node that is to be converted into a utility node.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name.fun</code></td>
+<td>
+
+<p>name of the parametric function to be evaluated as a character string.
+The parametric function must have the arguments <code>u</code> and <code>par</code> 
+which pass a vector of values and a vector of parameters
+to the function, respectively.
+The function has to return a vector of corresponding utilities.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>numeric vector of parameter values to be passed to the function specified unter <code>name.fun</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names.par</code></td>
+<td>
+
+<p>(optional) vector of parameter names corresponging to the vector of values specified under <code>par</code>.
+Only required to provide access to the values through a named parameter vector.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>required</code></td>
+<td>
+
+<p>(optional) logical variable indicating if the value of this node is required for aggregation at the next higher level.
+If this variable is <code>TRUE</code>, aggregation at the next higher level is not possible if this node returns NA.
+Default value is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+
+<p>(optional) color used for plotting the bounding box of the node in the objective hierarchy.
+Default value is <code>"black"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shift.levels</code></td>
+<td>
+
+<p>(optional) number of hierarchical levels by which the node in the objective hierarchy is shifted to make a branch fit better to other branches.
+Default value is <code>0</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns the created object of type <code>utility.conversion.parfun</code> with the properties specified in the arguments of the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Print, evaluate and plot the node with <br><br><code>print.utility.conversion.parfun</code>, <br><code>summary.utility.conversion.parfun</code>, <br><code>evaluate.utility.conversion.parfun</code> and <br><code>plot.utility.conversion.parfun</code>. <br><br>
+Create other conversion nodes with
+<code>utility.conversion.intpol.create</code>.
+Create end nodes with <br><br><code>utility.endnode.discrete.create</code>, <br><code>utility.endnode.parfun1d.create</code>, <br><code>utility.endnode.intpol2d.create</code>, <br><code>utility.endnode.parfun1d.create</code>, <br><code>utility.endnode.cond.create</code>, or <br><code>utility.endnode.firstavail.create</code>. <br><br>
+Create aggregation nodes with <br><br><code>utility.aggregation.create</code>.
+</p>
+
+
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>alltime.movies</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Top movies of all time</h2>
+
+<h3>Description</h3>
+
+<p>The top 79 all-time movies as of 2003 by domestic (US) gross receipts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(alltime.movies)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 79 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>Gross</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Release.Year</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<p>The row names are the titles of the movies.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data was found on http://movieweb.com/movie/alltime.html on
+June 17, 2003. The source of the data is attributed to (partially)
+Exhibitor Relations Co. .
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(alltime.movies)
+hist(alltime.movies$Gross)
+</code></pre>
+
+
+</div>

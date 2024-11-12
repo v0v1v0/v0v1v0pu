@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UD_bal_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Model-wise balanced uncertainty</h2>
+
+<h3>Description</h3>
+
+<p>This function performs the balanced uncertainty decomposition. 
+In balanced uncertainty decomposition, we assume that the total uncertainty decomposes into the uncertainty of all main effects and all orders of interaction between models.
+This method distributes the uncertainties of each element evenly among the associated models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UD_bal_model(data, var_name, stages, u = u_var, flist = flist_var)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data frame containing models(factor or character) for each stages and the variable of interest(numeric).
+data should contain all combinations of models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var_name</code></td>
+<td>
+<p>the name of the variable of interest</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stages</code></td>
+<td>
+<p>names of the stages of interest.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+<p>a function that returns uncertainty of each element of the vector like difference or square of difference between each element and summary statistics.
+This package have built-in uncertainty functions u_var(), u_mad() and u_range(). Default is u_var().</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flist</code></td>
+<td>
+<p>list of functions that summarize vector like mean or median.
+This package have built-in uncertainty functions flist_var(), flist_mad() and flist_range(). Default is flist_var().</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>model-wise uncertainties(UD_model class)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(0)
+stage1 &lt;- LETTERS[1:3]
+stage2 &lt;- LETTERS[1:2]
+stage3 &lt;- LETTERS[1:4]
+y &lt;- rnorm(3*2*4)
+data &lt;- expand.grid(stage1=stage1,
+                    stage2=stage2,
+                    stage3=stage3)
+stages &lt;- names(data)
+data &lt;- cbind(data, y)
+
+UD_bal_model_var &lt;- UD_bal_model(data, "y", stages, u_var, flist_var)
+UD_bal_model_var
+UD_bal_model_mad &lt;- UD_bal_model(data, "y", stages, u_mad, flist_mad)
+UD_bal_model_mad 
+UD_bal_model_range &lt;- UD_bal_model(data, "y", stages, u_range, flist_range)
+UD_bal_model_range 
+
+UD_bal_stage_var &lt;- UD_model2stage(UD_bal_model_var)
+UD_bal_stage_var 
+UD_bal_stage_mad &lt;- UD_model2stage(UD_bal_model_mad)
+UD_bal_stage_mad 
+UD_bal_stage_range &lt;- UD_model2stage(UD_bal_model_range)
+UD_bal_stage_range 
+
+UD_list = ppud(UD_bal_model_range)
+plot(UD_list)
+
+lambda = min_lambda_calc(UD_bal_model_range, 0.01)
+UD_1percent = ppud(UD_bal_model_range, lambda)
+UD_1percent$UD[[1]]
+</code></pre>
+
+
+</div>

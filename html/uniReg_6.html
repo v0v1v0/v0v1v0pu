@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unimat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create the matrix of unimodality constraints.
+
+</h2>
+
+<h3>Description</h3>
+
+<p>Returns a matrix <em>C</em> that can be used to specify linear constraints <code class="reqn">C b \ge 0</code> to impose unimodality with mode at the <em>m</em>-th element on a numeric vector <em>b</em> of length <em>p</em>.
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unimat(p, m)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Integer (&gt;=2) giving the length of the vector <em>b</em>.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>Location of the mode within the vector <em>b</em>. Should be in integer between 1 and p.
+
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Matrix <em>C</em> with coefficients for the linear constraints.
+
+
+
+
+
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Claudia Koellmann
+
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>equiknots</code>, <code>unireg</code>
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">unimat(4,2)
+unimat(5,3)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>asCombination</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>creates a new UpSet set combination structure</h2>
+
+<h3>Description</h3>
+
+<p>creates a new UpSet set combination structure
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">asCombination(
+  name,
+  elems = c(),
+  type = "intersection",
+  sets = strsplit(name, "&amp;"),
+  cardinality = length(elems),
+  color = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>name of the set combination</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>elems</code></td>
+<td>
+<p>the elements of the set combination</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>the set combination type (intersection,distinctIntersection,union,combination)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sets</code></td>
+<td>
+<p>the sets this combination is part of</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cardinality</code></td>
+<td>
+<p>the cardinality of the set, default to <code>length(elems)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color</code></td>
+<td>
+<p>the color of the set</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the set object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">asCombination("a", c(1, 2, 3))
+</code></pre>
+
+
+</div>

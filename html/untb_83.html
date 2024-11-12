@@ -1,0 +1,161 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>theta.prob</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Posterior probabilities for theta</h2>
+
+<h3>Description</h3>
+
+<p>Determines the posterior probability and likelihood for theta,
+given a count object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">theta.prob(theta, x=NULL, give.log=TRUE)
+theta.likelihood(theta, x=NULL, S=NULL, J=NULL, give.log=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>biodiversity parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>object of class count or census</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>give.log</code></td>
+<td>
+<p>Boolean, with <code>FALSE</code> meaning to return
+the  value, and default <code>TRUE</code> meaning to return
+the (natural) logarithm of the value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>S, J</code></td>
+<td>
+<p>In function <code>theta.likelihood()</code>, the number of
+individuals (<code>J</code>) and number of species (<code>S</code>) in
+the ecosystem, if <code>x</code> is not
+supplied.  These arguments are provided so that <code>x</code> need
+not be specified if <code>S</code> and <code>J</code> are known.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The formula was originally given by Ewens (1972) and is shown on
+page 122 of Hubbell (2001):
+</p>
+<p style="text-align: center;"><code class="reqn">\frac{J!\theta^S}{
+      1^{\phi_1}2^{\phi_2}\ldots J^{\phi_J}
+      \phi_1!\phi_2!\ldots \phi_J!
+      \prod_{k=1}^J\left(\theta+k-1\right)}.</code>
+</p>
+
+<p>The likelihood is thus given by
+</p>
+<p style="text-align: center;"><code class="reqn">\frac{\theta^S}{\prod_{k=1}^J\left(\theta+k-1\right)}.</code>
+</p>
+
+<p>Etienne observes that the denominator is equivalent to a Pochhammer
+symbol <code class="reqn">(\theta)_J</code>, so is thus readily evaluated as
+<code class="reqn">\Gamma(\theta+J)/\Gamma(\theta)</code>
+(Abramowitz and Stegun 1965, equation 6.1.22). 
+</p>
+
+
+<h3>Note</h3>
+
+<p>If estimating <code>theta</code>, use <code>theta.likelihood()</code> rather than
+<code>theta.probability()</code> because the former function generally
+executes <strong>much</strong> faster: the latter calculates a factor that is
+independent of <code>theta</code>.
+</p>
+<p>The likelihood function <code class="reqn">L(\theta)</code> is any function of
+<code class="reqn">\theta</code> proportional, for fixed observation <code class="reqn">z</code>, to
+the probability density <code class="reqn">f(z,\theta)</code>.  There is thus
+a slight notational inaccuracy in speaking of “the” likelihood
+function which is defined only up to a multiplicative constant.  Note
+also that the “support” function is usually defined as a
+likelihood function with maximum value <code class="reqn">1</code> (at the maximum
+likelihood estimator for <code class="reqn">\theta</code>).  This is not easy to
+determine analytically for <code class="reqn">J&gt;5</code>.
+</p>
+<p>Note that <code class="reqn">S</code> is a sufficient statistic for <code class="reqn">\theta</code>.
+</p>
+<p>Function <code>theta.prob()</code> does <strong>not</strong> give a PDF for
+<code class="reqn">\theta</code> (so, for example, integrating over the real line
+does not give unity).  The PDF is over partitions of <code class="reqn">J</code>; an
+example is given below.
+</p>
+<p>Function <code>theta.prob()</code> requires a count object (as opposed to
+<code>theta.likelihood()</code>, for which  <code class="reqn">J</code> and <code class="reqn">S</code> are
+sufficient) because it needs to call <code>phi()</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> S. P. Hubbell 2001.
+“The Unified Neutral Theory of Biodiversity”,
+Princeton University Press.
+</p>
+</li>
+<li>
+<p> W. J. Ewens 1972.  “The sampling theory of selectively
+neutral alleles”, <em>Theoretical Population Biology</em>, <b>3</b>:87–112
+</p>
+</li>
+<li>
+<p> M. Abramowitz and I. A. Stegun 1965.
+<em>Handbook of Mathematical Functions</em>, New York: Dover
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>phi</code>, <code>optimal.prob</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+theta.prob(1,rand.neutral(15,theta=2))
+
+gg &lt;- as.count(c(rep("a",10),rep("b",3),letters[5:9]))
+theta.likelihood(theta=2,gg)
+
+optimize(f=theta.likelihood,interval=c(0,100),maximum=TRUE,x=gg)
+
+
+## An example showing that theta.prob() is indeed a PMF:
+
+a &lt;- count(c(dogs=3,pigs=3,hogs=2,crabs=1,bugs=1,bats=1))
+x &lt;- partitions::parts(no.of.ind(a))
+f &lt;- function(x){theta.prob(theta=1.123,extant(count(x)),give.log=FALSE)}
+sum(apply(x,2,f))  ## should be one exactly.
+</code></pre>
+
+
+</div>

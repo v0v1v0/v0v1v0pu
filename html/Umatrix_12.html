@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pmatrixForEsom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>pmatrixForEsom</h2>
+
+<h3>Description</h3>
+
+<p>Generates a Pmatrix based on the weights of an ESOM.</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Data</code></td>
+<td>
+<p>A <code>[n,k]</code> matrix containing the data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Weights</code></td>
+<td>
+<p>Weights stored as a list in a 2D matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lines</code></td>
+<td>
+<p>Number of lines of the SOM that is described by weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Columns</code></td>
+<td>
+<p>Number of columns of the SOM that is described by weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Radius</code></td>
+<td>
+<p>The radius for measuring the density within the hypersphere</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PlotIt</code></td>
+<td>
+<p>If set the Pmatrix will also be plotted</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>Are BestMatches placed on a toroid grid? TRUE by default</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>UstarMatrix</p>
+
+
+<h3>References</h3>
+
+<p>Ultsch, A.: Maps for the visualization of high-dimensional data spaces, Proc. Workshop on Self organizing Maps (WSOM), pp. 225-230, Kyushu, Japan, 2003.
+</p>
+<p>Ultsch, A., Loetsch, J.: Computed ABC Analysis for Rational Selection of Most Informative Variables in Multivariate Data, PloS one, Vol. 10(6), pp. e0129767. doi 10.1371/journal.pone.0129767, 2015.
+</p>
+<p>Thrun, M. C., Lerch, F., Loetsch, J., Ultsch, A.: Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision,Plzen, 2016.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data("Hepta")
+e = esomTrain(Hepta$Data, Key = 1:nrow(Hepta$Data))
+Pmatrix = pmatrixForEsom(Hepta$Data,
+                         e$Weights,
+                         e$Lines,
+                         e$Columns,
+                         e$Toroid)
+plotMatrix(Pmatrix, ColorStyle = "Pmatrix")
+</code></pre>
+
+
+</div>

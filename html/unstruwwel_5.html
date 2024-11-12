@@ -1,0 +1,254 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Periods</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set a Period and Get its Time Interval</h2>
+
+<h3>Description</h3>
+
+<p>Set a Period and Get its Time Interval
+</p>
+<p>Set a Period and Get its Time Interval
+</p>
+
+
+<h3>Details</h3>
+
+<p>An Object of <code>R6Class</code> with methods to set
+common time periods and specifications for time periods.
+</p>
+
+
+<h3>Public fields</h3>
+
+<div class="r6-fields">
+
+<dl>
+<dt><code>.interval</code></dt>
+<dd>
+<p>Stores a time interval.</p>
+</dd>
+<dt><code>fuzzy</code></dt>
+<dd>
+<p>Either '-1' (approximate) or '1' (uncertain).</p>
+</dd>
+<dt><code>express</code></dt>
+<dd>
+<p>Either '-1' (before) or '1' (after).</p>
+</dd>
+</dl>
+</div>
+
+
+<h3>Active bindings</h3>
+
+<div class="r6-active-bindings">
+
+<dl>
+<dt><code>.interval</code></dt>
+<dd>
+<p>Stores a time interval.</p>
+</dd>
+<dt><code>interval</code></dt>
+<dd>
+<p>Convert and return a POSIXt time interval.</p>
+</dd>
+<dt><code>time_span</code></dt>
+<dd>
+<p>Convert and return a time span in years.</p>
+</dd>
+<dt><code>iso_format</code></dt>
+<dd>
+<p>Convert and return a date in ISO 8601.</p>
+</dd>
+</dl>
+</div>
+
+
+<h3>Methods</h3>
+
+
+
+<h4>Public methods</h4>
+
+
+<ul>
+<li> <p><a href="#method-Periods-new"><code>Periods$new()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-Periods-set_additions"><code>Periods$set_additions()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-Periods-take"><code>Periods$take()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-Periods-clone"><code>Periods$clone()</code></a>
+</p>
+</li>
+</ul>
+<hr>
+<a id="method-Periods-new"></a>
+
+
+
+<h4>Method <code>new()</code>
+</h4>
+
+<p>Helper function to specify a time period.
+</p>
+<p>Create a time period.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>Periods$new(...)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>...</code></dt>
+<dd>
+<p>Intervals, numerical scalars, or objects of
+class <code>Period</code>.</p>
+</dd>
+<dt><code>x</code></dt>
+<dd>
+<p>A numerical scalar. The range of valid values
+depends on <code>type</code>. If <code>type</code> is <code>"early"</code>,
+<code>"mid"</code>, or <code>"late"</code>, <code>x</code> is ignored.</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>A character scalar. The following values
+are supported: <code>"early"</code>, <code>"mid"</code>, <code>"late"</code>,
+<code>"quarter"</code>, <code>"third"</code>, and <code>"half"</code>. If
+<code>type</code> is 'NULL', <code>x</code> defines a year or decade.</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-Periods-set_additions"></a>
+
+
+
+<h4>Method <code>set_additions()</code>
+</h4>
+
+<p>Set additions for a time period.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>Periods$set_additions(x)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>x</code></dt>
+<dd>
+<p>A character vector.</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-Periods-take"></a>
+
+
+
+<h4>Method <code>take()</code>
+</h4>
+
+<p>Specify a period.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>Periods$take(x = NA, type = NA, ignore_errors = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>x</code></dt>
+<dd>
+<p>A numerical scalar. The range of valid values
+depends on <code>type</code>. If <code>type</code> is <code>"early"</code>,
+<code>"mid"</code>, or <code>"late"</code>, <code>x</code> is ignored.</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>A character scalar. The following values
+are supported: <code>"early"</code>, <code>"mid"</code>, <code>"late"</code>,
+<code>"quarter"</code>, <code>"third"</code>, and <code>"half"</code>. If
+<code>type</code> is 'NULL', <code>x</code> defines a year or decade.</p>
+</dd>
+<dt><code>ignore_errors</code></dt>
+<dd>
+<p>If 'TRUE', error messages are ignored.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>Object of <code>R6Class</code> with methods to set
+common time periods and specifications for time periods.
+</p>
+
+
+<hr>
+<a id="method-Periods-clone"></a>
+
+
+
+<h4>Method <code>clone()</code>
+</h4>
+
+<p>The objects of this class are cloneable with this method.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>Periods$clone(deep = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>deep</code></dt>
+<dd>
+<p>Whether to make a deep clone.</p>
+</dd>
+</dl>
+</div>
+
+
+
+
+</div>

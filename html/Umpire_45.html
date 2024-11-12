@@ -1,0 +1,285 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BlockHyperParameters-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "BlockHyperParameters" Class</h2>
+
+<h3>Description</h3>
+
+<p>Provides tools to create a CancerEngine with block correlation structure.
+Also makes it possible to simulate paired clinical and gene expression data
+with this block structure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">BlockHyperParameters(nExtraBlocks = 100,
+                     meanBlockSize = 100,
+                     sigmaBlockSize = 30,
+                     minBlockSize = 5,
+                     mu0 = 6,
+                     sigma0 = 1.5,
+                     rate = 28.11,
+                     shape = 44.25,
+                     p.cor = 0.6,
+                     wt.cor = 5)
+makeBlockStructure(cm, hyperp, xform = normalOffset, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cm</code></td>
+<td>
+<p>object of class <code>CancerModel</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hyperp</code></td>
+<td>
+<p>object of class <code>BlockHypeParameters</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nExtraBlocks</code></td>
+<td>
+<p>integer scalar specifying number of blocks not
+involved in the "hit" structure defined by the <code>CancerModel</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>meanBlockSize</code></td>
+<td>
+<p>numeric scalar specifying mean number of genes in a
+correlated block</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigmaBlockSize</code></td>
+<td>
+<p>numeric scalar specifying standard deviation of the
+number of genes in a correlated block</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minBlockSize</code></td>
+<td>
+<p>integer scalar specifying minimal number of genes in a
+correlated block</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu0</code></td>
+<td>
+<p>numeric scalar specifying expected mean expression level of a
+gene on the log scale</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma0</code></td>
+<td>
+<p>numeric scalar specifying standard deviation of the mean
+expression level of a gene on the log scale</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rate</code></td>
+<td>
+<p>numeric scalar specifying one of the gamma parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape</code></td>
+<td>
+<p>numeric scalar specifying one of the gamma parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.cor</code></td>
+<td>
+<p>numeric scalar specifying expected correlation within each
+block</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wt.cor</code></td>
+<td>
+<p>numeric scalar specifying weight given to the expected block
+correlation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xform</code></td>
+<td>
+<p>A function that will be passed to the <code>alterMean</code>
+method</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments that wil be passed back to the
+<code>xform</code> function</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Our standard model for gene expression in a homogeneous sample assumes
+that the overall correlation matrix is block diagonal.  Correlation
+between genes in different blocks is assumed to be zero.  Correlation
+for genes in the same block is assumed to be a constant, but different
+correlation constants can be used in different blocks.  The actual
+correlations are assumed to arise from a beta distribution of the form
+Beta(pw, (1-p)w), where p=<code>p.cor</code> and w=<code>wt.cor</code> are two of the
+hyperparameters.
+</p>
+<p>The number of blocks is determined jointly by the <code>CancerModel</code>,
+<code>cm</code>, and the hyperparameter <code>nExtraBlocks</code>.  The size of a
+block is assumed to arise from a normal distribution with mean given
+by <code>meanBlockSize</code> and standard deviaion given by
+<code>sigmaBlockSize</code>.  To avoid accidentally assigning non-postive
+block sizes, this distribution is truncated below by
+<code>minBlockSize</code>.
+</p>
+<p>The expression of each gene is assumed to come from a log-normal
+distribution with parameters describing the per-gene mean (<code class="reqn">\mu_g</code>)
+and standard deviation (<code class="reqn">\sigma_g</code>) n the log scale.  These
+parameters, in turn, are assumed to come from hyperdistributions.
+Specifically, we assume that <code class="reqn">\mu_g</code> comes from a normal distribution
+with  mean <code>mu0</code> and standard deviation <code>sigma0</code>.  We also
+assume that <code class="reqn">\sigma_g</code> comes from an inverse gamma distribution with
+parameters <code>rate</code> and <code>shape</code>.
+</p>
+<p>The <code>BlockHyperParameters</code> class simply bundles the parameters for
+this model into a single structure. The default values are consistent
+with data we have seen from several Affymetrix microarray studies.
+</p>
+<p>The <code>makeBlockStructure</code> function takes a <code>CancerModel</code> and
+a <code>BlockHyperParameters</code> object as arguments and produces a
+<code>CancerEngine</code> object. The <code>rand</code> method for
+this class can be used to generate matched clinical data (with the
+structure defined by the <code>CancerModel</code> object) and gene
+expression data with the specified block correlation structure.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The <code>BlockHyperParameters</code> generator returns an object of class
+<code>BlockHyperParameters</code>.
+</p>
+<p>The function <code>makeBlockStructure</code> returns an object of the
+<code>CancerEngine</code> class.  
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Although objects of the class can be created by a direct call to
+new, the preferred method is to use the
+<code>BlockHyperParameters</code> generator function.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>nExtraBlocks</code>:</dt>
+<dd>
+<p>An integer; the number of blocks not involved in
+the "hit" structure defined by the <code>CancerModel</code>.</p>
+</dd>
+<dt>
+<code>meanBlockSize</code>:</dt>
+<dd>
+<p>A real number; the mean number of genes in a
+correlated block.</p>
+</dd> 
+<dt>
+<code>sigmaBlockSize</code>:</dt>
+<dd>
+<p>A real number; standard deviation of the number of
+genes in a correlated block.</p>
+</dd>
+<dt>
+<code>minBlockSize</code>:</dt>
+<dd>
+<p>An integer; the minimal number of genes in a
+correlated block.</p>
+</dd>
+<dt>
+<code>mu0</code>:</dt>
+<dd>
+<p>A real number; the expected mean expression level of a gene
+on the log scale.</p>
+</dd>
+<dt>
+<code>sigma0</code>:</dt>
+<dd>
+<p>A real number; the standard deviation of the mean
+expression level of a gene on the log scale.</p>
+</dd>
+<dt>
+<code>rate</code>:</dt>
+<dd>
+<p>Gamma parameter; see details.</p>
+</dd>
+<dt>
+<code>shape</code>:</dt>
+<dd>
+<p>Gamma parameter; see details.</p>
+</dd>
+<dt>
+<code>p.cor</code>:</dt>
+<dd>
+<p>A real number; the expected correlation within each block.</p>
+</dd>
+<dt>
+<code>wt.cor</code>:</dt>
+<dd>
+<p>A real number; the weight given to the
+expected block correlation.</p>
+</dd> 
+</dl>
+<h3>Methods</h3>
+
+<p>There are no special methods defind for this class.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>CancerModel</code>,
+<code>CancerEngine</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("BlockHyperParameters")
+sm &lt;- SurvivalModel(baseHazard = 1/3, units = 52, unitName = "weeks")
+cm &lt;- CancerModel("myModel", nPossible = 10, nPattern = 5,
+                  survivalModel = sm)
+hyper &lt;- BlockHyperParameters()
+engine &lt;- makeBlockStructure(cm, hyper)
+outcome &lt;- rand(engine, 100)
+summary(outcome$clinical)
+dim(outcome$data)
+</code></pre>
+
+
+</div>

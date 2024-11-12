@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pol2cart</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>pol2cart</h2>
+
+<h3>Description</h3>
+
+<p>Converts polar coordinates to cartesian coordinates
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pol2cart(r, theta, degrees = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The radius of the point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>The angle of the point, in radians</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>degrees</code></td>
+<td>
+<p>Logical indicating if theta is specified in degrees</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Converts polar coordinates to cartesian coordinates using a simple conversion.  The angle, <code>theta</code> must be in radians.
+</p>
+<p>Somewhat inspired by http://www.r-bloggers.com/convert-polar-coordinates-to-cartesian/ and https://www.mathsisfun.com/polar-cartesian-coordinates.html
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame holding the (x,y) coordinates and original polar coordinates
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+polarRadPosTop &lt;- data.frame(r=c(3, 5, 3, 5, 4, 6, 4, 6, 2), 
+     theta=c(0, pi/6, pi/4, pi/3, pi/2, 2*pi/3, 3*pi/4, 5*pi/6, pi))
+polarRadPosBottom &lt;- data.frame(r=c(3, 5, 3, 5, 4, 6, 4, 6, 2), 
+     theta=c(pi, 7*pi/6, 5*pi/4, 4*pi/3, 3*pi/2, 5*pi/3, 7*pi/4, 9*pi/6, 2*pi))
+polarRadNegTop &lt;- data.frame(r=c(3, 5, 3, 5, 4, 6, 4, 6, 2), 
+     theta=-1*c(0, pi/6, pi/4, pi/3, pi/2, 2*pi/3, 3*pi/4, 5*pi/6, pi))
+polarRadNegBottom &lt;- data.frame(r=c(3, 5, 3, 5, 4, 6, 4, 6, 2), 
+     theta=-1*c(pi, 7*pi/6, 5*pi/4, 4*pi/3, 3*pi/2, 5*pi/3, 7*pi/4, 9*pi/6, 2*pi))
+
+pol2cart(polarRadPosTop$r, polarRadPosTop$theta)
+pol2cart(polarRadPosBottom$r, polarRadPosBottom$theta)
+pol2cart(polarRadNegTop$r, polarRadNegTop$theta)
+pol2cart(polarRadNegBottom$r, polarRadNegBottom$theta)
+
+</code></pre>
+
+
+</div>

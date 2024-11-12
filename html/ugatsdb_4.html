@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>datasets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Datasets Table</h2>
+
+<h3>Description</h3>
+
+<p>This function pulls and return a table called 'DATASET' from the database.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">datasets(ordered = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>ordered</code></td>
+<td>
+<p>logical. <code>TRUE</code> orders the result in the order data was entered into the database, while <code>FALSE</code> returns the result in a random order, to the benefit of faster query execution.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The 'DATASET' table gives information about the different datasets read into the database from various sources. It provides a unique id for each dataset, the frequency of data, the minimum and maximum time coverage, when the dataset was last updated, a description, the source (matching the 'Source' column in the 'DATASOURCE' table), and an (optional) url providing direct access to the raw data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.table</code> with information about the available datasets in the database.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>datasources</code>, <code>series</code>, <code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+datasets()
+
+</code></pre>
+
+
+</div>

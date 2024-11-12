@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simulate_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create data function</h2>
+
+<h3>Description</h3>
+
+<p>This function simulates example data that can be used to explore model fitting and plotting within the package. Subjects are assumed to be observed at regular intervals until either the end of the study or they are lost to follow up.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simulate_data(nsubjects = 10, detection_threshold = 20,
+  censortime = 365, max_datapoints = 24, min_datapoints = 6,
+  sd_noise = 0.1, param_noise = c(1.5, 0.1, 1.5, 0.1),
+  mean_params = c(A = 10000, delta = 0.3, B = 10000, gamma = 0.03))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nsubjects</code></td>
+<td>
+<p>numeric value indicating the number of subjects you want to simulate data for. Default is 10.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>detection_threshold</code></td>
+<td>
+<p>numeric value indicating the detection threshold of the assay used to measure viral load. Measurements below this value will be assumed to represent undetectable viral load levels. Default value is 20.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>censortime</code></td>
+<td>
+<p>numeric value indicating the maximum time point to include in the analysis. Default value is 365.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_datapoints</code></td>
+<td>
+<p>numeric value indicating the maximum number of data points collected from any subject. Defaults to 24.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min_datapoints</code></td>
+<td>
+<p>numeric value indicating the minimum number of data points collected from any subject. Defaults to 6.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd_noise</code></td>
+<td>
+<p>numeric value indicating the standard deviation level to be used when adding noise to the simulated data (on the log10 scale). Default value is 0.1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param_noise</code></td>
+<td>
+<p>numeric vector indicating the standard deviation to be used when selecting parameter values (on the log scale). Order of entries should be: A, delta, B, gamma. Default value is c(1.5, 0.1, 1.5, 0.1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mean_params</code></td>
+<td>
+<p>named numeric vector indicating the mean parameter values for the subject decay curves. Default is c(A = 10000, delta = 0.3, B = 10000, gamma = 0.03).</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(1234567)
+
+simulated_data &lt;- simulate_data(nsubjects = 20)
+
+</code></pre>
+
+
+</div>

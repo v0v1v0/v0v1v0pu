@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fixGPSAlt</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>fixGPSAlt</h2>
+
+<h3>Description</h3>
+
+<p>fixes broken GPS altitudes in the exif data of DJI images  with the given differen value
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fixGPSAlt(path, diff, camType = "YUN")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p><code>character</code>  path to the images</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diff</code></td>
+<td>
+<p><code>number</code> fixing value in meter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>camType</code></td>
+<td>
+<p><code>character</code> default is "YUN" for Yuneec H520RTK alternative is "DJI"</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+picFN &lt;- system.file("extdata", "dji.jpg", package = "uavRmp")
+
+
+## End(Not run)
+</code></pre>
+
+
+</div>

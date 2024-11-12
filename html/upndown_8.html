@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>validUDinput</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data Validation Utilities for <code>upndown</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>Validation of input values
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">validUDinput(cdf, target)
+
+checkTarget(target, tname = "Target")
+
+checkCDF(cdf)
+
+checkNatural(k, parname, toolarge = 1000)
+
+checkDose(x, maxfrac = 0.5)
+
+checkResponse(y)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cdf</code></td>
+<td>
+<p>vector of values, should be nondecreasing between 0 and 1 (inclusive)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+<p>numeric value(s), should be between 0 and 1 (exclusive)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>(<code>checkNatural()</code> only) input number to check whether it's a natural number</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parname, tname</code></td>
+<td>
+<p>string, name of variable to plug in for reporting the error back</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>toolarge</code></td>
+<td>
+<p>(<code>checkNatural()</code> only) what number would be considered too large to be realistic?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>(<code>checkDose()</code> only) input object to be verified as valid dose values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxfrac</code></td>
+<td>
+<p>(<code>checkDose()</code> only) maximum number of unique values (as fraction of sample size) considered realistic for up-and-down data. Default one-half.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>(<code>checkResponse()</code> only) input object to be verified as valid response values ('TRUE/FALSE or 0/1)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If a validation issue is found, these functions stop with a relevant error message. If no issue is found, they run through without returning a value.
+</p>
+
+
+</div>

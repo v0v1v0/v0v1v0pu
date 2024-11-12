@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.UPG.Logit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predicted probabilities from UPG.Logit objects</h2>
+
+<h3>Description</h3>
+
+<p><code>predict</code> generates predicted probabilities from a <code>UPG.Logit</code> object. In addition, credible intervals for these probabilities are computed. Probabilities can be predicted from the data used for estimating the model or for a new data set with the same structure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UPG.Logit'
+predict(object = NULL, ..., newdata = NULL, q = c(0.025, 0.975))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class <code>UPG.Logit</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other predict parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>a matrix or a <code>data.frame</code> containing new explanatory data. The number of columns and the variable ordering must be the same as in the explanatory data used for estimation to generate valid predictions. If no new data is provided, <code>predict</code> will return predicted probabilities for the data used for estimating the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>a numerical vector of length two providing the posterior quantiles to be extracted. Default are 0.025 and 0.975 quantiles.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a list containing posterior means of predicted probabilities as well as the desired credible interval.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gregor Zens
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary.UPG.Logit</code> to summarize a <code>UPG.Logit</code> object and create tables.
+<code>plot.UPG.Logit</code> to plot a <code>UPG.Logit</code> object.
+<code>coef.UPG.Logit</code> to extract coefficients from a <code>UPG.Logit</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# estimate a logit model using example data
+library(UPG)
+data(lfp)
+y = lfp[,1]
+X = lfp[,-1]
+results.logit = UPG(y = y, X = X, model = "logit")
+
+# extract predicted probabilities
+predict(results.logit)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>aosat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Artic Oscillation data based on SAT data</h2>
+
+<h3>Description</h3>
+
+<p>A time series of January, February, and March measurements of the
+annular modes from January 1851 to March 1997.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(aosat)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The format is: first column is date in years with fraction to indicate
+month. The second column is the measurement.
+</p>
+
+
+<h3>Details</h3>
+
+<p>This site http://jisao.washington.edu/ao/ had more details on the
+importance of this time series.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data came from the file AO\_SATindex\_JFM\_Jan1851March1997.ascii at
+http://www.atmos.colostate.edu/ao/Data/ao\_index.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(aosat)
+## Not run: 
+library(zoo)
+z = zoo(aosat[,2], order.by=aosat[,1])
+plot(z)
+## yearly
+plot(aggregate(z, floor(index(z)), mean))
+## decade-long means
+plot(aggregate(z, 10*floor(index(z)/10), mean))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

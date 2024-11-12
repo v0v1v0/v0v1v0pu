@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GumbelAM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Gumbel distribution - estimates directly from sample</h2>
+
+<h3>Description</h3>
+
+<p>Estimated quantiles as a function of return period (RP) and vice versa, directly from the data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GumbelAM(x, RP = 100, q = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>numeric vector (block maxima sample)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period (default = 100)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>quantile (magnitude of variable)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If the argument q is used, it overrides RP and provides RP as a function of q (magnitude of variable) as opposed to q as a function of RP. The parameters are estimated by the method of L-moments, as detailed in 'Hosking J. Wallis J. 1997 Regional Frequency Analysis: An Approach Based on L-moments. Cambridge University Press, New York'.
+</p>
+
+
+<h3>Value</h3>
+
+<p>quantile as a function of RP or vice versa.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get an annual maximum sample and estimate the 50-year RP
+AM.27090 &lt;- GetAM(27090)
+GumbelAM(AM.27090$Flow, RP = 50)
+#Estimate the RP for a 600m3/s discharge
+GumbelAM(AM.27090$Flow, q = 600)
+</code></pre>
+
+
+</div>

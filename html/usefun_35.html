@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>prune_rows_from_df</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prune single-value rows from a data frame</h2>
+
+<h3>Description</h3>
+
+<p>Given a <code>data.frame</code> and an integer value, it checks whether there is a
+row vector whose values match the given one. If so, it prunes that
+single-valued row from the <code>data.frame</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">prune_rows_from_df(df, value)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p><code>data.frame</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>an integer value</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the row-pruned <code>data.frame</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">df = data.frame(c(0,0,0), c(0,1,0), c(1,0,0))
+prune_rows_from_df(df, value = 0)
+
+</code></pre>
+
+
+</div>

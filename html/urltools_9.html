@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>parameters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or set a URL's parameters</h2>
+
+<h3>Description</h3>
+
+<p>as in the lubridate package, individual components of a URL
+can be both extracted or set using the relevant function call - see the
+examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">parameters(x)
+
+parameters(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a URL, or vector of URLs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>a replacement value (or vector of replacement values)
+for x's parameters. If NULL, the parameters will be removed entirely.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>scheme</code>, <code>domain</code>, <code>port</code>,
+<code>path</code> and <code>fragment</code> for other accessors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Get the parameters
+example_url &lt;- "http://en.wikipedia.org/wiki/Aaron_Halfaker?debug=true"
+parameters(example_url)
+
+# Set the parameters
+parameters(example_url) &lt;- "debug=false"
+
+# Remove the parameters
+parameters(example_url) &lt;- NULL
+</code></pre>
+
+
+</div>

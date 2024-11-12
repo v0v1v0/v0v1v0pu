@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.uiprobit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot of UI and CI</h2>
+
+<h3>Description</h3>
+
+<p>Plot function for objects returned from <code>ui.probit</code>.
+Plots confidence intervals, coefficients and significans assuming ignorability and the uncertainty interval under non-ignorability.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'uiprobit'
+plot(x, plot.all = TRUE, which = NA,
+  intercept = FALSE, ylab = NULL, col = c("black", "red"), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object of class uiprobit</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.all</code></td>
+<td>
+<p>If TRUE, plots all covariates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which</code></td>
+<td>
+<p>Specify which variables should be plotted by either sending in their names in a vector or a vector with their numbers (1 for the first covariate, 2 for the second etc.).To plot the intercept, set intercept as TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intercept</code></td>
+<td>
+<p>If TRUE, also plots the intercept.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Vector of names for the y-axis, default is the variable names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>Vector containing the color of confidence intervals (default black) and uncertainty intervals (default red).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments, use is discouraged.</p>
+</td>
+</tr>
+</table>
+</div>

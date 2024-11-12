@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simple.lm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Simplify usage of lm </h2>
+
+<h3>Description</h3>
+
+<p>Simplify usage of lm by avoiding model notation, drawing plot, drawing 
+regression line, drawing confidence intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simple.lm(x, y, show.residuals=FALSE, show.ci=FALSE, conf.level=0.95,pred=)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> The predictor variable </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p> The response variable </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show.residuals</code></td>
+<td>
+<p> set to TRUE to plot residuals </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show.ci</code></td>
+<td>
+<p> set to TRUE to plot confidence intervals </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p> if show.ci=TRUE will plot these CI's at this level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pred</code></td>
+<td>
+<p> values of the x-variable for prediction</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>returns plots and an instance of lm, as though it were called
+<code>lm(y ~ x)</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> John Verzani </p>
+
+
+<h3>See Also</h3>
+
+<p>lm </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## on simulated data
+x&lt;-1:10
+y&lt;-5*x + rnorm(10,0,1)
+tmp&lt;-simple.lm(x,y)
+summary(tmp)
+
+## predict values
+simple.lm(x,y,pred=c(5,6,7))
+</code></pre>
+
+
+</div>

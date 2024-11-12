@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>check_constraint_mat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check the constraint matrices</h2>
+
+<h3>Description</h3>
+
+<p><code>check_constraint_mat</code> checks for some parts that the constraint matrices are correctly set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">check_constraint_mat(p, M, restricted = FALSE, constraints = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a positive integer specifying the autoregressive order of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+
+<dl>
+<dt>For <strong>GMAR</strong> and <strong>StMAR</strong> models:</dt>
+<dd>
+<p>a positive integer specifying the number of mixture components.</p>
+</dd>
+<dt>For <strong>G-StMAR</strong> models:</dt>
+<dd>
+<p>a size (2x1) integer vector specifying the number of <em>GMAR type</em> components <code>M1</code> in the
+first element and <em>StMAR type</em> components <code>M2</code> in the second element. The total number of mixture components is <code>M=M1+M2</code>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>restricted</code></td>
+<td>
+<p>a logical argument stating whether the AR coefficients <code class="reqn">\phi_{m,1},...,\phi_{m,p}</code> are restricted
+to be the same for all regimes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>constraints</code></td>
+<td>
+<p>specifies linear constraints imposed to each regime's autoregressive parameters separately.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>a list of size <code class="reqn">(pxq_{m})</code> constraint matrices <strong><code class="reqn">C_{m}</code></strong> of full column rank
+satisfying <strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> for all <code class="reqn">m=1,...,M</code>, where
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p})</code> and <strong><code class="reqn">\psi_{m}</code></strong><code class="reqn">=(\psi_{m,1},...,\psi_{m,q_{m}})</code>.</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>a size <code class="reqn">(pxq)</code> constraint matrix <strong><code class="reqn">C</code></strong> of full column rank satisfying
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong>, where <strong><code class="reqn">\phi</code></strong><code class="reqn">=(\phi_{1},...,\phi_{p})</code> and
+<strong><code class="reqn">\psi</code></strong><code class="reqn">=\psi_{1},...,\psi_{q}</code>.</p>
+</dd>
+</dl>
+<p>The symbol <code class="reqn">\phi</code> denotes an AR coefficient. Note that regardless of any constraints, the autoregressive order
+is always <code>p</code> for all regimes.
+Ignore or set to <code>NULL</code> if applying linear constraints is not desired.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Doesn't return anything but throws an informative error if finds out that something is wrong.
+</p>
+
+
+</div>

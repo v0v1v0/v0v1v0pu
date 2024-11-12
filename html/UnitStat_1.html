@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UnitStat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Performs Unit Root Test Statistics</h2>
+
+<h3>Description</h3>
+
+<p>'A test to understand the stability of the underlying stochastic data.Helps the user understand whether the random variable under consideration is stationary or non-stationary without any manual interpretation of the results.It further ensures to check all the prerequisites and assumptions which are underlying the unit root test statistics and if the underlying data is found to be non-stationary in all the 4 lags the function diagnoses the input data and returns with an optimised.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UnitStat(y, lag = 0, View_results = "True")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Univariate time series or vector to be tested</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lag</code></td>
+<td>
+<p>Numeric.Default is 0.Select Lags to view results at different lags. Maximum number of lags is 4</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>View_results</code></td>
+<td>
+<p>Boolean.Default is False. If True is selected the function returns results for all the 4 lags.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object with class UnitStat().
+Retunrs with a statement explaining the type of input data and its stability.
+lag - Displays results for the lag number selected
+View_results - Shows all lag results
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ankita Sharma
+</p>
+
+
+<h3>References</h3>
+
+<p>Dickey, D. A. and Fuller, W. A. (1981), Likelihood Ratio Statistics for Autoregressive Time Series with a Unit Root, Econometrica, 49, 1057–1072. Hamilton (1994), Time Series Analysis, Princeton University Press
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">y = runif(50,1,49)
+UnitStat(y)
+UnitStat(y,View_results = "T") #To view results at all lags
+</code></pre>
+
+
+</div>

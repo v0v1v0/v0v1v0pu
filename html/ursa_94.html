@@ -1,0 +1,130 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>display_brick</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plot multi-band homogenous raster image in the PNG format.
+</h2>
+
+<h3>Description</h3>
+
+<p>Raster image is forced to be interpreted as homogenuous (having the same units). It implies creating multi-panel layout with multiple colorbars. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">display_brick(obj, ...)
+display_homo(obj, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code> or <code>list</code> of <code>ursaRaster</code> objects.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Passed to hierarchy of plotting functions:
+</p>
+
+<ul>
+<li> <p><code>compose_open</code>
+</p>
+
+<ul><li> <p><code>compose_design</code>
+</p>
+</li></ul>
+</li>
+<li> <p><code>compose_plot</code>
+</p>
+
+<ul>
+<li> <p><code>panel_new</code>
+</p>
+</li>
+<li> <p><code>panel_raster</code>
+</p>
+</li>
+<li> <p><code>panel_decor</code>
+</p>
+
+<ul>
+<li> <p><code>panel_graticule</code>
+</p>
+</li>
+<li> <p><code>panel_coastline</code>
+</p>
+</li>
+<li> <p><code>panel_scalebar</code>
+</p>
+</li>
+<li> <p><code>panel_annotation</code>
+</p>
+</li>
+</ul>
+</li>
+<li> <p><code>compose_legend</code>
+</p>
+</li>
+</ul>
+</li>
+<li> <p><code>compose_close</code>
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If argument <code>obj</code> is <code>list</code> of <code>ursaRaster</code> objects (or object of class <code>ursaStack</code>) then <code>obj</code> is coerced to class <code>ursaRaster</code> ('stack' is coerced to 'brick').
+</p>
+<p><code>display_homo</code> is a synonym to <code>display_brick</code>. It is introduced to emphasize the plotting of homogenous object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>display</code>, <code>display_stack</code>, <code>display_rgb</code>
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(nband=3,min=0,max=250)
+a[2] &lt;- -a[1]
+a[3] &lt;- sqrt(a[1])
+a2 &lt;- ursa_stack(a) 
+print(a2)
+display(a2) # likely 'display_stack' will be called
+display_brick(a2,stretch="eq",labels=c(-150,-100,0,10,12,20,100,150))
+</code></pre>
+
+
+</div>

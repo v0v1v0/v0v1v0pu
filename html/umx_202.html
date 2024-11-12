@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_grep</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Search for text</h2>
+
+<h3>Description</h3>
+
+<p>Search names if given a data.frame, or strings if given a vector of strings.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_grep(
+  df,
+  grepString,
+  output = c("both", "label", "name"),
+  ignore.case = TRUE,
+  useNames = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>The <code>data.frame()</code> or string to search.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grepString</code></td>
+<td>
+<p>the search string.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>the column name, the label, or both (default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore.case</code></td>
+<td>
+<p>whether to be case sensitive or not (default TRUE = ignore case).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>useNames</code></td>
+<td>
+<p>whether to search the names as well as the labels (for SPSS files with label metadata).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>namez</code> function is more flexible. A handy feature of <code>umx_grep</code> is that it can
+search the labels of data imported from SPSS.
+</p>
+<p><em>nb:</em> To simply grep for a pattern in a string use R's built-in <code>grep()</code> functions, e.g.:
+<code style="white-space: pre;">⁠grepl("^NA\\[0-9]", "NA.3")⁠</code>
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> list of matched column names and/or labels.
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>namez()</code>, <code>umx_aggregate()</code>, <code>grep()</code>
+</p>
+</li></ul>
+<p>Other String Functions: 
+<code>umx_explode_twin_names()</code>,
+<code>umx_explode()</code>,
+<code>umx_names()</code>,
+<code>umx_paste_names()</code>,
+<code>umx_rot()</code>,
+<code>umx_str_chars()</code>,
+<code>umx_str_from_object()</code>,
+<code>umx_trim()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">umx_grep(mtcars, "hp", output="both", ignore.case= TRUE)
+umx_grep(c("hp", "ph"), "hp")
+umx_grep(mtcars, "^h.*", output="both", ignore.case= TRUE)
+## Not run: 
+umx_grep(spss_df, "labeltext", output = "label") 
+umx_grep(spss_df, "labeltext", output = "name") 
+
+## End(Not run)
+</code></pre>
+
+
+</div>

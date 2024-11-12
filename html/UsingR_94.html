@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>movies</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data frome on top 25 movies for some week, many weeks ago</h2>
+
+<h3>Description</h3>
+
+<p>Data on 25 top movies
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(movies)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 26 observations on the following 5 variables.
+</p>
+
+<dl>
+<dt><code>title</code></dt>
+<dd>
+<p>Titles</p>
+</dd>
+<dt><code>current</code></dt>
+<dd>
+<p>Current week</p>
+</dd>
+<dt><code>previous</code></dt>
+<dd>
+<p>Previous weel</p>
+</dd>
+<dt><code>gross</code></dt>
+<dd>
+<p>Total</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Some movie website, sorry lost the url.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(movies)
+boxplot(movies$previous)
+</code></pre>
+
+
+</div>

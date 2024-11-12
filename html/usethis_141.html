@@ -1,0 +1,38 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_github_release</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Publish a GitHub release</h2>
+
+<h3>Description</h3>
+
+<p>Pushes the current branch (if safe) then publishes a GitHub release for the
+latest CRAN submission.
+</p>
+<p>If you use <code>devtools::submit_cran()</code> to submit to CRAN, information about the
+submitted state is captured in a <code>CRAN-SUBMISSION</code> file.
+<code>use_github_release()</code> uses this info to populate the GitHub release notes
+and, after success, deletes the file. In the absence of such a file, we
+assume that current state (SHA of <code>HEAD</code>, package version, NEWS) is the
+submitted state.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_github_release(publish = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>publish</code></td>
+<td>
+<p>If <code>TRUE</code>, publishes a release. If <code>FALSE</code>, creates a draft
+release.</p>
+</td>
+</tr></table>
+</div>

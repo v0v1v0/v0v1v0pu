@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetMetOffice</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get regional Met Office average temperature or rainfall series (monthly, seasonal, and annual).</h2>
+
+<h3>Description</h3>
+
+<p>Extracts regional mean temperature or rainfall from the met office UK &amp; regional series. The total duration of bright sunshine is also available.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetMetOffice(Variable, Region)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Variable</code></td>
+<td>
+<p>Either Tmean, Rainfall, or Sunshine</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Region</code></td>
+<td>
+<p>One of "UK", "England", "Wales", "Scotland", "Northern_Ireland", "England_and_Wales",
+"England_N", "England_S", "Scotland_N", "Scotland_E", "Scotland_W", "England_E_and_NE", "England_NW_and_N_Wales",
+"Midlands", "East_Anglia", "England_SW_and_S_Wales", "England_SE_and_Central_S".</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function returns time series data from the 19th century through to the present month.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with 18 columns; year, months, seasons, and annual. Rows then represent each year of the timeseries.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get the Rainfall series for the UK
+## Not run: UKRain &lt;-  GetMetOffice(Variable = "Rainfall", Region = "UK") 
+#Now we'll get mean temperature data for East Anglia
+## Not run: TempEastAnglia &lt;- GetMetOffice(Variable = "Tmean", Region = "East_Anglia") 
+</code></pre>
+
+
+</div>

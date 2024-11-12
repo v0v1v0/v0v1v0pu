@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_asset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Download prefabs for Unity</h2>
+
+<h3>Description</h3>
+
+<p>This is a simple helper function downloading the assets stored at
+https://github.com/mikemahoney218/unity_assets .
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_asset(asset, directory = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>asset</code></td>
+<td>
+<p>The asset to download. Available asset names are provided in
+available_assets.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>directory</code></td>
+<td>
+<p>Optionally, the directory to extract the downloaded models
+in. If NULL, the default, saves to <code>tools::R_user_dir("unifir")</code>.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p>Other utilities: 
+<code>add_default_player()</code>,
+<code>add_prop()</code>,
+<code>create_unity_project()</code>,
+<code>find_unity()</code>,
+<code>load_png()</code>,
+<code>load_scene()</code>,
+<code>new_scene()</code>,
+<code>read_raw()</code>,
+<code>save_scene()</code>,
+<code>set_active_scene()</code>,
+<code>validate_path()</code>,
+<code>waiver()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+if (interactive()) {
+  get_asset(asset = "tree_1", directory = tempdir())
+}
+</code></pre>
+
+
+</div>

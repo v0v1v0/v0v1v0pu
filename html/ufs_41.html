@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>confIntProp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Confidence intervals for proportions, vectorized over all arguments</h2>
+
+<h3>Description</h3>
+
+<p>This function simply computes confidence intervals for proportions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">confIntProp(x, n, conf.level = 0.95, plot = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The number of 'successes', i.e. the number of events, observations,
+or cases that one is interested in.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The total number of cases or observatons.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The confidence level.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Whether to plot the confidence interval in the binomial distribution.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is the adapted source code of <code>binom.test()</code>. Ir
+uses <code>pbeta()</code>, with some lines of code taken from the
+<code>binom.test()</code> source. Specifically, the count for the low
+category is specified as first 'shape argument' to <code>pbeta()</code>, and
+the total count (either the sum of the count for the low category and the
+count for the high category, or the total number of cases if
+<code>compareHiToLo</code> is <code>FALSE</code>) minus the count for the low category
+as the second 'shape argument'.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The confidence interval bounds in a twodimensional matrix, with the
+first column containing the lower bound and the second column containing the
+upper bound.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Unknown (see <code>binom.test()</code>; adapted by Gjalt-Jorn Peters)
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>binom.test()</code> and <code>ggProportionPlot, the
+function for which this was written.</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+  ### Simple case
+  confIntProp(84, 200);
+
+  ### Using vectors
+  confIntProp(c(2,3), c(10, 20), conf.level=c(.90, .95, .99));
+
+</code></pre>
+
+
+</div>

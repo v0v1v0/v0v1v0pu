@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plotSlide</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>plotSlide</h2>
+
+<h3>Description</h3>
+
+<p>Plot summarised results from slide
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plotSlide(py1, y, orig, step = 1, errorFun, collectFun = mean)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>py1</code></td>
+<td>
+<p>output from slide function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a vector or matrix of time series (the same used in slide call)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>orig</code></td>
+<td>
+<p>starting forecasting origin (the same used in slide call)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>step</code></td>
+<td>
+<p>observations ahead to move the forecasting origin (the same used in slide call)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>errorFun</code></td>
+<td>
+<p>user function to calculate error measures</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>collectFun</code></td>
+<td>
+<p>aggregation function (mean, median, etc.)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Results
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>colMedians</code>, <code>rowMedians</code>, <code>tests</code>,
+<code>sumStats</code>, <code>gaussTest</code>, <code>ident</code>,
+<code>cusum</code>, <code>varTest</code>, <code>conv</code>,
+<code>armaFilter</code>, <code>dif</code>, <code>roots</code>,
+<code>zplane</code>, <code>acft</code>, <code>slide</code>,
+<code>Accuracy</code>, <code>tsDisplay</code>,
+<code>size</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: plotSlide(py1, AirPassengers, 100, 1, errorFun)
+</code></pre>
+
+
+</div>

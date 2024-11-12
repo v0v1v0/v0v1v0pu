@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>direct_parallel_relations</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Direct and parallel relations</h2>
+
+<h3>Description</h3>
+
+<p> This functions returns a table containing all direct and parallel relations between activities. The table contains five columns:
+- the two first represent activity ids
+- the third represents the type of relations, which is parallel or direct
+- the last two columns are the corresponding activity names for the first two columns
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">direct_parallel_relations(repetition_and_path_log, xml_internal_doc)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>repetition_and_path_log</code></td>
+<td>
+<p>repetition and path log list object created by the function create_repetition_and_path_log</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xml_internal_doc</code></td>
+<td>
+<p>document object created using the create_internal_document function</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a table as described in the description
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: direct_parallel_relations(repetition_and_path_log, xml_internal_doc)
+</code></pre>
+
+
+</div>

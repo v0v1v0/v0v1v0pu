@@ -1,0 +1,381 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UNCOVER.opts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Additional argument generator for <code>UNCOVER()</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to specify additional arguments to
+<code>UNCOVER</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UNCOVER.opts(
+  N = 1000,
+  train_frac = 1,
+  max_K = Inf,
+  min_size = 0,
+  reg = 0,
+  n_min_class = 0,
+  SMC_thres = 30,
+  BIC_memo_thres = Inf,
+  SMC_memo_thres = Inf,
+  ess = N/2,
+  n_move = 1,
+  prior.override = FALSE,
+  rprior = NULL,
+  dprior = NULL,
+  diagnostics = TRUE,
+  RIBIS_thres = 30,
+  BIC_cache = cachem::cache_mem(max_size = 1024 * 1024^2, evict = "lru"),
+  SMC_cache = cachem::cache_mem(max_size = 1024 * 1024^2, evict = "lru"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>Number of particles for the SMC sampler. Defaults to 1000.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>train_frac</code></td>
+<td>
+<p>What fraction of the data should be used for training.
+Should only be directly specified if <code style="white-space: pre;">⁠deforest_criterion == "Validation⁠</code>.
+Defaults to <code>1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_K</code></td>
+<td>
+<p>The maximum number of clusters allowed in the final output.
+Should only be directly specified if <code style="white-space: pre;">⁠deforest_criterion == "NoC⁠</code>. Defaults
+to <code>Inf</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min_size</code></td>
+<td>
+<p>The minimum number of observations allowed for any cluster
+in the final model. Should only be directly specified if
+<code style="white-space: pre;">⁠deforest_criterion == "SoC⁠</code>. Defaults to 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reg</code></td>
+<td>
+<p>Numerical natural logarithm of the tolerance parameter. Must be
+positive. Should only be directly specified if
+<code style="white-space: pre;">⁠deforest_criterion == "MaxReg⁠</code>. Defaults to 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_min_class</code></td>
+<td>
+<p>Each cluster will have an associated minority class.
+<code>n_min_class</code> specifies a minimum number of observations that should have
+that class for each and every cluster. Should only be directly specified if
+<code style="white-space: pre;">⁠deforest_criterion == "Diverse⁠</code>. Defaults to 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SMC_thres</code></td>
+<td>
+<p>The threshold for which the number of observations needs to
+exceed to consider using BIC as an estimator. Defaults to 30 if not
+specified.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BIC_memo_thres</code></td>
+<td>
+<p>Only used when estimating the log Bayesian evidence of
+a cluster using BIC. When the number of observations exceeds <code>BIC_memo_thres</code>
+the function checks for similar inputs evaluated previously. See details.
+Defaults to never checking.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SMC_memo_thres</code></td>
+<td>
+<p>Only used when estimating the log Bayesian evidence of
+a cluster using SMC. When the number of observations exceeds <code>SMC_memo_thres</code>
+the function checks for similar inputs evaluated previously. See details.
+Defaults to never checking.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ess</code></td>
+<td>
+<p>Effective Sample Size Threshold: If the effective sample size of
+the particles falls below this value then a resample move step is
+triggered. Defaults to <code>N/2</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_move</code></td>
+<td>
+<p>Number of Metropolis-Hastings steps to apply each time a
+resample move step is triggered. Defaults to 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prior.override</code></td>
+<td>
+<p>Are you overriding the default multivariate normal
+form of the prior? Defaults to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rprior</code></td>
+<td>
+<p>Function which produces samples from your prior if the default
+prior form is to be overridden. If using the default prior form this does
+not need to be specified.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dprior</code></td>
+<td>
+<p>Function which produces your specified priors density for
+inputted samples if the default prior form is to be overridden. If using the
+default prior form this does not need to be specified.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diagnostics</code></td>
+<td>
+<p>Should diagnostic data be recorded and outputted?
+Defaults to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RIBIS_thres</code></td>
+<td>
+<p>The threshold for which the number of observations needs
+to exceed to consider ever using RIBIS as an estimator. Defaults to 30 if
+not specified. See details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BIC_cache</code></td>
+<td>
+<p>The cache for the function which estimates the log Bayesian
+evidence using BIC. Defaults to a cache with standard size and least
+recently used eviction policy.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SMC_cache</code></td>
+<td>
+<p>The cache for the function which estimates the log Bayesian
+evidence using SMC. Defaults to a cache with standard size and least
+recently used eviction policy.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments required for complete specification of the
+two prior functions given, if the default prior form is to be overridden.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function should only be used to provide additional control
+arguments to <code>UNCOVER</code>. Arguments that are for a particular deforestation
+criteria should not be altered from the defaults for other deforestation
+criteria.
+</p>
+<p>BIC refers to the Bayesian Information Criterion. The use of BIC when
+estimating the log Bayesian evidence is valid assuming the number of
+observations is large, and if specifying <code>SMC_thres</code> this should be balanced
+with computational expense (as the function which relies
+on BIC values is much faster than the SMC sampler).
+</p>
+<p>In an attempt to improve computational time, the SMC sampler along with the
+function which uses BIC values are memoised, with the cache for each of
+these memoised functions be specified by <code>SMC_cache</code> and <code>BIC_cache</code>
+respectively. See <code>memoise::memoise()</code> for more details. If we do
+not get and each match from the function input to a previously evaluated
+input, we may wish to search the cache for similar inputs which could
+provide a reasonable starting point. Checking the cache however takes time,
+and so we allow the user to specify at which size of cluster to they deem it
+worthwhile to check. Which value threshold to select to optimise run time is
+problem specific, however for <code>BIC_memo_thres</code> it is almost always
+beneficial to never check the cache (the exception for this being when the
+cluster sizes are extremely large, for example containing a million
+observations). <code>SMC_memo_thres</code> can be much lower as the SMC sampler is a
+much more expensive function to run. See Emerson and Aslett (2023) for more
+details.
+</p>
+<p><code>RIBIS_thres</code> can be specified to have a higher value to ensure that the
+asymptotic properties which Reverse Iterated Batch Importance Sampling
+(RIBIS) relies upon hold. See Emerson and Aslett (2023) for more details.
+</p>
+<p>Specifying <code>rprior</code> and <code>dprior</code> will not override the default prior form
+unless <code>prior.override=TRUE</code>. If a multivariate normal form is required then
+the arguments for this prior should be specified in <code>UNCOVER</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list consisting of:
+</p>
+
+<dl>
+<dt><code>N</code></dt>
+<dd>
+<p>Number of particles for the SMC sampler</p>
+</dd>
+<dt><code>train_frac</code></dt>
+<dd>
+<p>Training data fraction</p>
+</dd>
+<dt><code>max_K</code></dt>
+<dd>
+<p>Maximum number of clusters allowed</p>
+</dd>
+<dt><code>min_size</code></dt>
+<dd>
+<p>Minimum size of clusters allowed</p>
+</dd>
+<dt><code>reg</code></dt>
+<dd>
+<p>Log of the maximum regret tolerance parameter</p>
+</dd>
+<dt><code>n_min_class</code></dt>
+<dd>
+<p>Minimum size of cluster minority class allowed</p>
+</dd>
+<dt><code>SMC_thres</code></dt>
+<dd>
+<p>Threshold for when estimation with BIC is attempted</p>
+</dd>
+<dt><code>BIC_memo_thres</code></dt>
+<dd>
+<p>Threshold for when we review previous inputs of the
+BIC function for similarities</p>
+</dd>
+<dt><code>SMC_memo_thres</code></dt>
+<dd>
+<p>Threshold for when we review previous inputs of the
+SMC function for similarities</p>
+</dd>
+<dt><code>ess</code></dt>
+<dd>
+<p>Effective Sample Size Threshold</p>
+</dd>
+<dt><code>n_move</code></dt>
+<dd>
+<p>Number of Metropolis-Hastings steps</p>
+</dd>
+<dt><code>rprior</code></dt>
+<dd>
+<p>Function which produces samples from your prior. <code>NULL</code> if
+<code>prior.override==FALSE</code>.</p>
+</dd>
+<dt><code>dprior</code></dt>
+<dd>
+<p>Function which produces your specified priors density for
+inputted samples. <code>NULL</code> if <code>prior.override==FALSE</code>.</p>
+</dd>
+<dt><code>prior.override</code></dt>
+<dd>
+<p>Logical value indicating if the prior has been
+overridden or not</p>
+</dd>
+<dt><code>diagnostics</code></dt>
+<dd>
+<p>Logical value indicating whether diagnostic information
+should be included in the output of <code>UNCOVER</code></p>
+</dd>
+<dt><code>RIBIS_thres</code></dt>
+<dd>
+<p>The threshold for allowing the use of RIBIS</p>
+</dd>
+<dt><code>BIC_cache</code></dt>
+<dd>
+<p>Cache for the memoised function which estimates the log
+Bayesian evidence using BIC</p>
+</dd>
+<dt><code>SMC_cache</code></dt>
+<dd>
+<p>Cache for the memoised function which estimates the log
+Bayesian evidence using SMC</p>
+</dd>
+<dt><code>MoreArgs</code></dt>
+<dd>
+<p>A list of the additional arguments required for <code>rprior</code>
+and <code>dprior</code>. <code>NULL</code> if <code>prior.override==FALSE</code>.</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Emerson, S.R. and Aslett, L.J.M. (2023). Joint cohort and prediction
+modelling through graphical structure analysis (to be released)
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>UNCOVER()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+#Specifying a multivariate independent uniform prior
+
+rmviu &lt;- function(n,a,b){
+return(mapply(FUN = function(min.vec,max.vec,pn){stats::runif(pn,a,b)},
+              min.vec=a,max.vec=b,MoreArgs = list(pn = n)))
+}
+dmviu &lt;- function(x,a,b){
+for(ii in 1:ncol(x)){
+  x[,ii] &lt;- dunif(x[,ii],a[ii],b[ii])
+}
+return(apply(x,1,prod))
+}
+
+UNCOVER.opts(prior.override = TRUE,rprior = rmviu,
+                 dprior = dmviu,a=rep(0,3),b=rep(1,3))
+
+
+# If we generate a co-variate matrix and binary response vector
+CM &lt;- matrix(rnorm(200),100,2)
+rv &lt;- sample(0:1,100,replace=TRUE)
+
+# We can then run our algorithm with a SMC threshold of 50 and a SMC cache
+# checking threshold of 25 to see if this is quicker than the standard
+# version
+system.time(UNCOVER(X = CM,y = rv,verbose = FALSE))
+system.time(UNCOVER(X = CM,y = rv,
+                    options = UNCOVER.opts(SMC_thres = 50),
+                    verbose = FALSE))
+system.time(UNCOVER(X = CM,y = rv,
+                    options = UNCOVER.opts(SMC_thres = 50,
+                                           SMC_memo_thres = 25),
+                    verbose = FALSE))
+
+
+</code></pre>
+
+
+</div>

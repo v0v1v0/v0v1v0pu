@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BarcodeFamilyHistogram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Consensus depth histograms</h2>
+
+<h3>Description</h3>
+
+<p>Generate histograms for the frequency of barcode family depths.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">BarcodeFamilyHistogram(
+  object,
+  xMin = 0,
+  xMax = 100,
+  samples = NULL,
+  option = "viridis",
+  direction = 1,
+  theme = "classic"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Requires a UMI sample or UMI experiment object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xMin</code></td>
+<td>
+<p>Minimum consensus family size to plot, default is 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xMax</code></td>
+<td>
+<p>Maximum consensus family size to plot. Default is 100.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>List of samples to be shown.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>option</code></td>
+<td>
+<p>Color scheme to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>If using viridis colors sets the orientation of color scale.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>ggplot theme to use. Defaults to classic.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+main = system.file('extdata', package = 'umiAnalyzer')
+simsen &lt;- createUmiExperiment(main, importBam = TRUE)
+barcode_dist &lt;- BarcodeFamilyHistogram(simsen)
+
+</code></pre>
+
+
+</div>

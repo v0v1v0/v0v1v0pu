@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>no.of.ind</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Ecosystem diagnostics</h2>
+
+<h3>Description</h3>
+
+<p>Ecosystem diagnostics such as species count, individual count, number of
+singletons, etc
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">no.of.ind(x)
+no.of.spp(x, include.extinct=FALSE)
+no.of.singletons(x)
+no.of.extinct(x)
+maximal.abundance(x)
+singletons(x)
+extinct(x)
+extant(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Ecosystem vector; is coerced to class <code>count</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include.extinct</code></td>
+<td>
+<p>In function <code>no.of.spp()</code>, Boolean
+argument with <code>TRUE</code> meaning to include extinct species (ie
+species with an abundance of zero), and default <code>FALSE</code>
+meaning to return the number of extant species</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+
+<ul>
+<li>
+<p>Function <code>no.of.spp()</code> returns the number of species in an
+ecosystem object, treating extinct species in line with argument
+<code>include.extinct</code>
+</p>
+</li>
+<li>
+<p>Function <code>no.of.ind()</code> returns the number of individuals
+</p>
+</li>
+<li>
+<p>Function <code>no.of.singletons()</code> returns the number of singletons
+</p>
+</li>
+<li>
+<p>Function <code>no.of.extinct()</code> returns the number of extinct species
+</p>
+</li>
+<li>
+<p>Function <code>maximal.abundance()</code> returns the abundance of the most
+abundant species
+</p>
+</li>
+<li>
+<p>Function <code>singletons()</code> returns a <code>count</code> object containing
+only the singletons: each abundance is one
+</p>
+</li>
+<li>
+<p>Function <code>extinct()</code> returns a <code>count</code> object containing
+only the extinct species: each abundance is zero
+</p>
+</li>
+<li>
+<p>Function <code>extant()</code> returns a <code>count</code> object containing
+only the extant species: each abundance is greater than zero
+</p>
+</li>
+</ul>
+<h3>Note</h3>
+
+<p>It is sometimes useful to include species with an abundance of
+zero when, for example, taking a single row of the Saunders dataframe.
+</p>
+<p>The default for <code>include.extinct</code> is <code>FALSE</code> because this is
+required for (eg) <code>optimal.theta()</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>S. P. Hubbell.  “The Unified Neutral Theory of Biodiversity”.
+Princeton University Press, 2001.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(butterflies)
+no.of.spp(butterflies)
+no.of.ind(butterflies)
+
+jj1 &lt;- count(c(dogs=7,pigs=3,crabs=0,slugs=1))
+jj2 &lt;- count(c(squid=0,dogs=3,bugs=0))
+jj3 &lt;- count(c(bugs=3,rats=0,crabs=3,cats=0))
+
+extinct(jj1 + jj2) 
+extinct(jj3)               #rats and cats
+extant(jj3)                #bugs and crabs
+
+singletons(jj1)
+singletons(jj2)           # empty 
+singletons(jj1 + jj3)     # slugs
+
+</code></pre>
+
+
+</div>

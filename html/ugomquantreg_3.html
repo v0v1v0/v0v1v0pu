@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bodyfat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Percentage of body fat data set</h2>
+
+<h3>Description</h3>
+
+<p>The body fat percentage of individuals assisted in a public hospital in Curitiba, Paraná, Brazil.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(bodyfat, package = "ugomquantreg")
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data-frame with 298 observations and 9 columns:
+</p>
+
+<ul>
+<li> <p><code>ARMS</code>: arms fat percentage.
+</p>
+</li>
+<li> <p><code>LEGS</code>: legs fat percentage.
+</p>
+</li>
+<li> <p><code>BODY</code>: body fat percentage.
+</p>
+</li>
+<li> <p><code>ANDROID</code>: android fat percentage.
+</p>
+</li>
+<li> <p><code>GYNECOID</code>: ginecoid fat percentage.
+</p>
+</li>
+<li> <p><code>AGE</code>: age of individuals.
+</p>
+</li>
+<li> <p><code>BMI</code>: body mass index.
+</p>
+</li>
+<li> <p><code>SEX</code>: 1 for female, 2 for male.
+</p>
+</li>
+<li> <p><code>IPAQ</code>: 0 for IPAQ = sedentary, 1 for IPAQ = insufficiently active and 2 for IPAQ = active.
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Josmar Mazucheli <a href="mailto:jmazucheli@gmail.com">jmazucheli@gmail.com</a>
+</p>
+<p>Bruna Alves <a href="mailto:pg402900@uem.br">pg402900@uem.br</a>
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="http://www.leg.ufpr.br/doku.php/publications:papercompanions:multquasibeta">http://www.leg.ufpr.br/doku.php/publications:papercompanions:multquasibeta</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Mazucheli, J., Leiva, V., Alves, B., and Menezes A. F. B., (2021). A new quantile regression for modeling bounded data under a unit Birnbaum-Saunders distribution with applications in medicine and politics. <em>Symmetry</em>, <b>13</b>(4) 1–21.
+</p>
+<p>Petterle, R. R., Bonat, W. H., Scarpin, C. T., Jonasson, T., and Borba, V. Z. C., (2020). Multivariate quasi-beta regression models for continuous bounded data. <em>The International Journal of Biostatistics</em>, 1–15, (preprint).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(bodyfat, package = "ugomquantreg")
+
+library(gamlss)
+
+tau &lt;- 0.50
+fit.logit &lt;- gamlss(ARMS ~ AGE + I(BMI / 100) + as.factor(SEX) + as.factor(IPAQ), 
+data = bodyfat, family = UGOM(mu.link = "logit", sigma.link = "log"))
+
+tau &lt;- 0.50;
+fit.probit &lt;- gamlss(ARMS ~ AGE + I(BMI / 100) + as.factor(SEX) + as.factor(IPAQ), 
+data = bodyfat, family = UGOM(mu.link = "probit", sigma.link = "log"))
+
+
+</code></pre>
+
+
+</div>

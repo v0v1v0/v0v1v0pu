@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Plot.MixReparametrized</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+plot of the MCMC output produced by K.MixReparametrized 
+</h2>
+
+<h3>Description</h3>
+
+<p>This is a generic function for a graphical rendering of the MCMC samples produced by K.MixReparametrized function. The
+function draws boxplots for unimodal variables and for multimodal arguments after clustering them by applying a k-means
+algorithm. It also plots line charts for other variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Plot.MixReparametrized(xobs, estimate)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>xobs</code></td>
+<td>
+
+<p>vector of the observations
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>estimate</code></td>
+<td>
+
+<p>output of the K. MixReparametrized function
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Boxplots are produced using the boxplot.default method.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The output of this function consists of 
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>boxplot</code></td>
+<td>
+<p> three boxplots for the radial coordinates, the mean and the standard deviation of the mixture distribution, <code class="reqn">k</code> boxplots for each of the mixture model weights,  component means and component standard deviations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>histogram</code></td>
+<td>
+<p> an histogram of the observations against an overlaid curve of the density estimate, obtained by averaging over all mixtures corresponding to the MCMC draws,</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>line chart</code></td>
+<td>
+<p> line charts that report the evolution of the proposal scales and of the acceptance rates over the number of batch of 50 iterations.</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>The mixture density estimate is based on the draws simulated of the parameters obtained by K.MixReparametrized function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kaniav Kamary
+</p>
+
+
+<h3>References</h3>
+
+<p>Kamary, K., Lee, J.Y., and Robert, C.P. (2017) Weakly informative reparameterisation of location-scale mixtures. arXiv.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>K.MixReparametrized</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#data(faithful)
+#xobs=faithful[,1]
+#estimate=K.MixReparametrized(xobs, k=2, alpha0=.5, alpha=.5, Nsim=20000)
+#plo=Plot.MixReparametrized(xobs, estimate)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_freq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Frequency statistics of elements in a vector</h2>
+
+<h3>Description</h3>
+
+<p>Frequency statistics of elements in a vector
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_freq(x, exclude = c(NA, NaN), order = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+<p>logical indicating to exclude values from the table. Defaults to NA and NaN.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>logical indicating to order the resulting dataset in order of frequency. Defaults to TRUE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame with columns key, freq and freq_pct indicating the how 
+many times each value in the vector <code>x</code> is occurring
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- sample(LETTERS, 1000, replace = TRUE)
+txt_freq(x)
+x &lt;- factor(x, levels = LETTERS)
+txt_freq(x, order = FALSE)
+</code></pre>
+
+
+</div>

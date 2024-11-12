@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uniset_test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simple Test</h2>
+
+<h3>Description</h3>
+
+<p>Test if the input package name etc. was correct / successful.
+This function is meant to be called from inside the  target package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uniset_test(uniset_handover)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>uniset_handover</code></td>
+<td>
+<p>List length two, containing two elements:
+</p>
+
+<ol>
+<li> <p><code>pkgname</code>: The name of the target package.
+</p>
+</li>
+<li> <p><code>funcname</code>: The name of the function handing over the required values.
+</p>
+</li>
+</ol>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Is printing the parameters defined by the target package, and is
+returning those parameters in an (invisible) list.
+</p>
+
+
+<h3>Important</h3>
+
+<p>This function is intended to be called from within the
+target package.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Please refer to <code>uniset</code> for a link to examples
+and a real-world demo.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">{
+## Not run: 
+# to be called from within the target package
+uniset_test(uniset_handover_pkgname, uniset_handover_funcname)
+
+## End(Not run)
+}
+</code></pre>
+
+
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>citypop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Most populous city in each state (2010)</h2>
+
+<h3>Description</h3>
+
+<p>The most populous city in each US state, as of the 2010 US Census.<br><br>
+The data is formatted for transforming with <code>usmap_transform()</code>.
+Once the longitude and latitude is transformed, it can be added to
+<code>plot_usmap()</code> using <code>ggplot2::ggplot()</code> layers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(citypop)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 51 rows and 5 variables.
+</p>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li> <p><code>lon</code> The longitude of the most populous city.
+</p>
+</li>
+<li> <p><code>lat</code> The latitude of the most populous city.
+</p>
+</li>
+<li> <p><code>state</code> The name of the state containing the city.
+</p>
+</li>
+<li> <p><code>abbr</code> The abbreviation of the state containing the city.
+</p>
+</li>
+<li> <p><code>most_populous_city</code> The name of the city.
+</p>
+</li>
+<li> <p><code>city_pop</code> The population of the city.
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://www.census.gov/programs-surveys/decennial-census/decade.2010.html">https://www.census.gov/programs-surveys/decennial-census/decade.2010.html</a>
+</p>
+</li></ul>
+</div>

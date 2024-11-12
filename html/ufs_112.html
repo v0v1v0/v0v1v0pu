@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>formatCI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pretty formatting of confidence intervals</h2>
+
+<h3>Description</h3>
+
+<p>Pretty formatting of confidence intervals
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">formatCI(
+  ci,
+  sep = "; ",
+  prefix = "[",
+  suffix = "]",
+  digits = 2,
+  noZero = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ci</code></td>
+<td>
+<p>A confidence interval (a vector of 2 elements; longer
+vectors work, but I guess that wouldn't make sense).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The separator of the values, usually "; " or ", ".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix, suffix</code></td>
+<td>
+<p>The prefix and suffix, usually a type of
+opening and closing parenthesis/bracket.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits to which to round the values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>noZero</code></td>
+<td>
+<p>Whether to strip the leading zero (before the decimal
+point), as is typically done when following APA style and
+displaying correlations, <em>p</em> values, and other numbers that cannot
+reach 1 or more.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector of one element.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>noZero()</code>, <code>formatR()</code>, <code>formatPvalue()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### With leading zero ...
+formatCI(c(0.55, 0.021));
+
+### ... and without
+formatCI(c(0.55, 0.021), noZero=TRUE);
+</code></pre>
+
+
+</div>

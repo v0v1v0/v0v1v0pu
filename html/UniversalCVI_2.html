@@ -1,0 +1,161 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>CCV.IDX</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Correlation Cluster Validity (CCV) index
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the CCVP and CCVS (M. Popescu et al., 2013) indexes for a result of either FCM or EM clustering from user specified <code>cmin</code> to <code>cmax</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">CCV.IDX(x, cmax, cmin = 2, indexlist = "all", method = 'FCM', fzm = 2,
+  iter = 100, nstart = 20)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmax</code></td>
+<td>
+<p>a maximum number of clusters to be considered.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmin</code></td>
+<td>
+<p>a minimum number of clusters to be considered. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indexlist</code></td>
+<td>
+<p>a character string indicating which The generalized C index be computed ("<code>all</code>","<code>CCVP</code>","<code>CCVS</code>"). More than one indexes can be selected.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which clustering method to be used (<code>"FCM"</code> or <code>"EM"</code>). The default is <code>"FCM"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fzm</code></td>
+<td>
+<p>a number greater than 1 giving the degree of fuzzification for <code>method = "FCM"</code>. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>a maximum number of iterations for <code>method = "FCM"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for FCM for <code>method = "FCM"</code>. The default is <code>20</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A new cluster validity framework that compares the structure in the data to the structure of dissimilarity matrices induced by a matrix transformation of the partition being tested.  The largest value of <code class="reqn">CCV(c)</code> indicates a valid optimal partition.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Each of the followings shows the values of each index for <code>c</code> from <code>cmin</code> to <code>cmax</code> in a data frame.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>CCVP</code></td>
+<td>
+<p>the Pearson Correlation Cluster Validity index.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CCVS</code></td>
+<td>
+<p>the Spearman’s (rho) Correlation Cluster Validity index.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>M. Popescu, J. C. Bezdek, T. C. Havens and J. M. Keller (2013). "A Cluster Validity Framework Based on Induced Partition Dissimilarity." <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6246717&amp;isnumber=6340245">https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6246717&amp;isnumber=6340245</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>R1_data, TANG.IDX, FzzyCVIs, WP.IDX, Hvalid</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# Iris data
+x = iris[,1:4]
+
+# ---- FCM algorithm ----
+
+
+# Compute all the indices by CCV.IDX
+FCM.ALL.CCV = CCV.IDX(scale(x), cmax = 10, cmin = 2, indexlist = "all",
+  method =  'FCM', fzm = 2, iter = 100, nstart = 20)
+print(FCM.ALL.CCV)
+
+# Compute CCVP index
+FCM.CCVP = CCV.IDX(scale(x), cmax = 10, cmin = 2, indexlist = "CCVP",
+  method =  'FCM', fzm = 2, iter = 100, nstart = 20)
+print(FCM.CCVP)
+
+
+# ---- EM algorithm ----
+
+# Compute all the indices by CCV.IDX
+EM.ALL.CCV = CCV.IDX(scale(x), cmax = 10, cmin = 2, indexlist = "all",
+  method =  'EM', iter = 100, nstart = 20)
+print(EM.ALL.CCV)
+
+# Compute CCVP index
+EM.CCVP = CCV.IDX(scale(x), cmax = 10, cmin = 2, indexlist = "CCVP",
+  method =  'EM', iter = 100, nstart = 20)
+print(EM.CCVP)
+</code></pre>
+
+
+</div>

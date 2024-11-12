@@ -1,0 +1,227 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ui.causal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uncertainty intervals for Average Causal Effects</h2>
+
+<h3>Description</h3>
+
+<p>This function allows you to derive uncertainty intervals for the average causal effect (ACE) or the average causal effect on the treated (ACT). The function uses a regression imputation estimator and a doubly robust estimator. The uncertainty intervals can be used as a sensitivity analysis to unconfoundedness. Note that <code>rho</code>=0 render the same results as assuming no unobserved confounding.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ui.causal(out.formula, treat.formula, data, rho = c(-0.3, 0.3),
+  rho0 = NULL, rho1 = NULL, ACT = FALSE, sand = TRUE, gridn = 21,
+  plot = TRUE, rho.plotrange = c(-0.5, 0.5), alpha = 0.05)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>out.formula</code></td>
+<td>
+<p>Formula for the outcome regression models</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>treat.formula</code></td>
+<td>
+<p>Formula for the propensity score model (regression model for treatment assignment).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data.frame containing the variables in the formula.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>Pre-specified interval for <code>rho0</code> and <code>rho1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho0</code></td>
+<td>
+<p>Pre-specified value of <code>rho0</code>, if an interval it has to be the same as <code>rho1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho1</code></td>
+<td>
+<p>Pre-specified value of <code>rho1</code>, if an interval it has to be the same as <code>rho0</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ACT</code></td>
+<td>
+<p>If TRUE Average Causal effect of the Treated is calculated, if FALSE Average Causal effect is calculated. Default is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sand</code></td>
+<td>
+<p>Specifies which estimator of the standard errors should be used for OR, see details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gridn</code></td>
+<td>
+<p>Number of fixed points within the <code>rho</code> interval for which sigma0 and sigma1 should be estimated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>If TRUE the function runs slightly slower but you will be able to plot your results using <code>plot.uicausal</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho.plotrange</code></td>
+<td>
+<p>an interval larger than <code>rho</code> for the plot using <code>plot.uicausal</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Default 0.05 corresponding to a confidence level of 95 for CI and UI.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In order to visualize the results, you can use <code>plot.uicausal</code>. Details about estimators can be found in Genbäck and de Luna (2018)
+</p>
+<p>The standard errors are calculated with the following estimators:
+</p>
+<p>DR ACE - simplified sandwich estimator
+</p>
+<p>DR ACT - sandwich estimator
+</p>
+<p>OR ACE - if sand=TRUE sandwich estimator (default and recommended), if sand=FALSE large sample variance
+</p>
+<p>OR ACT - if sand=TRUE sandwich estimator (default and recommended), if sand=FALSE large sample variance
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The matched call</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho0</code></td>
+<td>
+<p>The rage of <code>rho0</code> from which the ui is calculated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho1</code></td>
+<td>
+<p>If ACT==FALSE,range of <code>rho1</code> from which the ui is calculated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out.model0</code></td>
+<td>
+<p>Outcome regression model for non-treated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out.model1</code></td>
+<td>
+<p>Outcome regression model for treated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>treat.model</code></td>
+<td>
+<p>Regression model for treatment mechanism (propensity score).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma0</code></td>
+<td>
+<p>Consistent estimate of sigma0 for different values of rho0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma1</code></td>
+<td>
+<p>Consistent estimate of sigma1 for different values of rho1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DR</code></td>
+<td>
+<p>DR inference, confidence intervals for different pre-specified values of <code>rho</code> for the OR estimator, uncertainty interval, coefficient estimates, confounding bias, indentification interval, standard error etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>OR</code></td>
+<td>
+<p>OR inference, confidence intervals for different pre-specified values of <code>rho</code> for the OR estimator, uncertainty interval, coefficient estimates, confounding bias, indentification interval, standard error etc.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Minna Genbäck
+</p>
+
+
+<h3>References</h3>
+
+<p>Genbäck, M., de Luna, X. (2018). Causal Inference Accounting for Unobserved Confounding after Outcome Regression and Doubly Robust Estimation. <em>Biometrics</em>. DOI: 10.1111/biom.13001
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(MASS)
+n&lt;-500
+delta&lt;-c(-0.3,0.65)
+rho&lt;-0.3
+X&lt;-cbind(rep(1,n),rnorm(n))
+x&lt;-X[,-1]
+s0&lt;-2
+s1&lt;-3
+error&lt;-mvrnorm(n, c(0,0,0), matrix(c(1,0.6,0.9,0.6,4,0.54,0.9,0.54,9), ncol=3))
+zstar&lt;-X%*%delta+error[,1]
+z&lt;- zstar&gt;0
+y1&lt;-ifelse(x&lt; (-1),0.2*x-0.1*x^2, ifelse(x&lt; 1,0.3*x, ifelse(x&lt;3,0.4-0.1*x^2,-0.2-0.1*x)))+error[,3]
+y0&lt;-ifelse(x&lt;1.5, x-0.4*x^2, ifelse(x&lt;2, -0.15-0.25*x+0.5*x^2, 1.85-0.25*x))+error[,2]
+y&lt;-y0
+y[z==1]&lt;-y1[z==1]
+data&lt;-data.frame(y,z,x)
+
+
+ui&lt;-ui.causal(y~x, z~x, data=data, rho=c(0,0.3), ACT=FALSE)
+ui
+plot(ui)
+profile(ui)
+mean(y1-y0)
+
+ui&lt;-ui.causal(y~x, z~x, data=data, rho=c(0,0.3), ACT=TRUE)
+ui
+plot(ui)
+mean(y1[z==1]-y0[z==1])
+
+</code></pre>
+
+
+</div>

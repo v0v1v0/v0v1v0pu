@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>head</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Extract first and last bands of raster image
+</h2>
+
+<h3>Description</h3>
+
+<p>Functions to extract first bands (<code>head</code>), last bands (<code>tail</code>) and first+last bands (<code>series</code>) of raster image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+head(x, n = 3L, ...)
+
+## S3 method for class 'ursaRaster'
+tail(x, n = 3L, ...)
+
+series(x, n = 3L, s=170, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+
+<p>Positive integer. Number of extracted bands.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+
+<p>Positive numeric. Maximal size of memory in MB for extracted raster image in the assumption that class of values is <code>numeric</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Not used.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function <code>series</code> combines consequtive calling <code>head(x); tail(x)</code> with checking the size of extracted part of raster image. If size exceeds specified value of the argument <code>s</code>, then number of extracted bands <code>n</code> is decreased.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+session_grid(regrid(mul=1/8))
+a &lt;- ursa_dummy(nband=101)
+print(head(a))
+print(tail(a))
+print(series(a,2))
+print(series(a[1:5]))
+</code></pre>
+
+
+</div>

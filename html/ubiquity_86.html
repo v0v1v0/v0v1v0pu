@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_set_tt_rate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Actual Function Called by <code>SI_TT_RATE</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>The prototype function <code>SI_TT_RATE</code> provides an abstract interface to this function. Based on the input from <code>SI_TT_RATE</code>
+infusion rate inputs will be updated for the current titration time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_set_tt_rate(
+  cfg,
+  rate,
+  times,
+  levels,
+  tt_ts,
+  tsinfo,
+  repdose = "none",
+  interval = 1,
+  number = 0
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rate</code></td>
+<td>
+<p>name of the infusion rate to update(Defined in <code>&lt;R:?&gt;</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>times</code></td>
+<td>
+<p>vector of switching times relative to the current titration time (in time units defined by <code>&lt;R:?&gt;</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>levels</code></td>
+<td>
+<p>vector of infusion rates (in dosing units defined by <code>&lt;R:?&gt;</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tt_ts</code></td>
+<td>
+<p>list of timescale values for the current titration time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tsinfo</code></td>
+<td>
+<p>list with timescale information for inputs (bolus, rates, etc)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repdose</code></td>
+<td>
+<p><code>"none"</code> or <code>"sequence"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>interval to repeat in the units defined in <code>&lt;R:?&gt;</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>number</code></td>
+<td>
+<p>number of times to repeat</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>ubiquity system object with the infusion rates updated.
+</p>
+
+
+</div>

@@ -1,0 +1,217 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ui.probit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uncertainty intervals for probit regression</h2>
+
+<h3>Description</h3>
+
+<p>This function allows you to derive uncertainty intervals for probit regression
+when there is missing data in the binary outcome. The uncertainty intervals
+can be used as a sensitivity analysis to ignorability (missing at random), and
+are derived by maximum likelihood. Note that <code>rho</code>=0 render the same results as
+a complete case analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ui.probit(out.formula, mis.formula = NULL, data, rho = c(-0.3, 0.3),
+  progress = TRUE, max.grid = 0.1, alpha = 0.05, method = "NR")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>out.formula</code></td>
+<td>
+<p>Formula for outcome regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mis.formula</code></td>
+<td>
+<p>Formula for missingness mechanism. If NULL the same covariates as in the outcome regression will be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data.frame containing the variables in the formula.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>Vector containing the values of <code>rho</code> for which we want to fit the
+likelihood.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>progress</code></td>
+<td>
+<p>If TRUE prints out process time for each maximization of the likelihood.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.grid</code></td>
+<td>
+<p>Maximum distance between two elements in <code>rho</code>, if two wide there can 
+difficulties with convergence of the maximum likelihood.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Default 0.05 corresponding to a confidence level of 95 for CI and UI.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Maximization method to be passed through <code>maxLik</code></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In order to visualize the results, you can use <code>plot.uiprobit</code> 
+or <code>profile.uiprobit</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>coef</code></td>
+<td>
+<p>Estimated coefficients (outcome regression) for different values of <code>rho</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>The values of <code>rho</code> for which the likelihood is maximized.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vcov</code></td>
+<td>
+<p>Covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci</code></td>
+<td>
+<p>Confidence intervals for different values of <code>rho</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ui</code></td>
+<td>
+<p>Uncertainty intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out.model</code></td>
+<td>
+<p>Outcome regression model when rho=0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mis.model</code></td>
+<td>
+<p>Regression model for missingness mechanism (selection).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se</code></td>
+<td>
+<p>Standard errors from outcome regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>Value of maximum likelihood for different values of <code>rho</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Outcome vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>Indicator variable of observed outcome.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X.y</code></td>
+<td>
+<p>Covariate matrix for outcome regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X.z</code></td>
+<td>
+<p>Covariate matrix for missingness mechanism (selection regression model).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.info</code></td>
+<td>
+<p>Information about the maximization procedure. Includes whether it <code>converged</code>, <code>message</code>, <code>method</code> and <code>number of iterations</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Minna Genbäck
+</p>
+
+
+<h3>References</h3>
+
+<p>Genbäck, M., Ng, N., Stanghellini, E., de Luna, X. (2018). Predictors of Decline in Self-reported Health: Addressing Non-ignorable Dropout in Longitudinal Studies of Aging. <em>European journal of ageing</em>, 15(2), 211-220.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(MASS)
+n&lt;-500
+
+delta&lt;-c(0.5,0.6,0.1,-1,1)
+beta&lt;-c(-0.3,-0.5,0,-0.4,-0.3)
+
+X&lt;-cbind(rep(1,n),rnorm(n),runif(n),rbinom(n,2,0.5),rbinom(n,1,0.5))
+x&lt;-X[,-1]
+rho=0.4
+error&lt;-mvrnorm(n,c(0,0),matrix(c(1,rho,rho,1),2))
+
+zstar&lt;-X%*%delta+error[,1]
+z&lt;-as.numeric(zstar&gt;0)
+
+ystar&lt;-X%*%beta+error[,2]
+y&lt;-as.integer(ystar&gt;0)
+y[z==0]&lt;-NA
+data=data.frame(y=y,x1=x[,1],x2=x[,2],x3=x[,3],x4=x[,4])
+
+m&lt;-ui.probit(y~x1+x2+x3+x4,data=data,rho=c(0,0.5))
+m
+plot(m)
+profile(m)
+</code></pre>
+
+
+</div>

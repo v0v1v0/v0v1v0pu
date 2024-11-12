@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UD_ANOVA_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Model-wise uncertainty based on the second order interaction ANOVA</h2>
+
+<h3>Description</h3>
+
+<p>This function performs uncertainty decomposition by model based on the second order interaction ANOVA model.
+The uncertainty from interaction effect from two models is divided equally and assigned to each model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UD_ANOVA_model(data, var_name, stages = setdiff(names(data), var_name))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data frame containing models(factor or character) for each stages and the variable of interest(numeric).
+data should contain all combinations of models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var_name</code></td>
+<td>
+<p>the name of the variable of interest</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stages</code></td>
+<td>
+<p>names of the stages of interest.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List(UD_model class) including uncertainties of models, uncertainties from main effects, uncertainties from interaction, total uncertainty, names of stages and models
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(0)
+stage1 &lt;- LETTERS[1:3]
+stage2 &lt;- LETTERS[1:2]
+stage3 &lt;- LETTERS[1:4]
+y &lt;- rnorm(3*2*4)
+data &lt;- expand.grid(stage1=stage1,
+                    stage2=stage2,
+                    stage3=stage3)
+stages &lt;- names(data)
+data &lt;- cbind(data, y)
+
+UD_ANOVA_model &lt;- UD_ANOVA_model(data, "y", stages)
+UD_ANOVA_model
+UD_ANOVA_stage &lt;- UD_model2stage(UD_ANOVA_model)
+UD_ANOVA_stage
+</code></pre>
+
+
+</div>

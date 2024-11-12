@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ud_colours</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Set colours for UpAndDown plots
+</h2>
+
+<h3>Description</h3>
+
+<p>Provides a colour scheme for UpAndDown plots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ud_colours(colours = c("grey75", "grey65", "red", "blue", "brown"), colors,
+           gcpal=colorblind_pal()(8))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>colours</code></td>
+<td>
+
+<p>A set of colours for UpAndDown plots.
+</p>
+<p>The first one is used for filling bars and the second for the borders of bars;
+the third one is for colouring the dashed line for the overall percentage change;
+the fourth one is for colouring the borders of rectangles representing the highest grouping level;
+the last one is for colouring the borders of a second grouping level (if there is one).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+
+<p>To allow users to write 'colors' instead of 'colours'.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gcpal</code></td>
+<td>
+
+<p>A colour palette to use if bars are to be coloured by a grouping variable (the parameter barColour in ud_plot).
+The default is the colorblind palette from ggthemes, which has 8 colours.  If more are needed, a palette is generated from the randomcoloR package, always using the same seed for replication purposes.
+The same procedure applies for a user-defined palette—if there are not enough colours, a randomcoloR palette is used.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>ud_colours is provided for assigning colours for UpAndDown plots.</p>
+
+
+<h3>Value</h3>
+
+<p>A named list of colours.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Antony Unwin unwin@math.uni-augsburg.de
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ud_plot</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Using default colours
+yw &lt;- ud_prep(CPIuk, weight="Weight", v1="Aug2017", v2="Aug2018",
+              levs=c("Sector"), sortLev=c("perc"))
+y2 &lt;- ud_plot(yw, labelvar="Sector")
+y2$uadl
+
+# Using individually chosen colours
+library(ggthemes)
+y2a &lt;- ud_plot(yw, ud_control=ud_colours(colours = c("lightblue1", "grey50",
+               "red4", "blue", "brown")))
+y2a$uad
+
+# Using barColour and the default palette
+# A random palette from colorspace is used as there are more than 8 sectors.
+y2b &lt;- ud_plot(yw, barColour="Sector")
+y2b$uad
+
+# Using barColour and a specified palette
+y2c &lt;- ud_plot(yw, levelColour="Sector", ud_control=ud_colours(
+       gcpal=sample(colorspace::qualitative_hcl(n = 20, l = 80))))
+y2c$uad
+</code></pre>
+
+
+</div>

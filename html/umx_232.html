@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_open</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Open a file or folder</h2>
+
+<h3>Description</h3>
+
+<p>Open a file or folder. Works on OS X, mostly on windows, and hopefully on unix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_open(filepath = getwd())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>filepath</code></td>
+<td>
+<p>The file to open</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>NOTE: Your filepath is <code>shQuote()</code>'d by this function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other File Functions: 
+<code>dl_from_dropbox()</code>,
+<code>umx_file_load_pseudo()</code>,
+<code>umx_make_sql_from_excel()</code>,
+<code>umx_move_file()</code>,
+<code>umx_rename_file()</code>,
+<code>umx_write_to_clipboard()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+umx_open() # Default is to open working directory getwd()
+umx_open("~/bin/umx/R/misc_and_utility copy.r")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

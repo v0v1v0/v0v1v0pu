@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compose_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plot layout of images and color bars.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>compose_plot</code> plots images (raster brick or raster stack) and corresponding color bars according to given rectangular layout.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compose_plot(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are passed to <code>compose_panel</code> and <code>compose_legend</code>
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Function merges to functions. The first one plots image layout and returns list of color tables. The second one plots legend (colorbars) based on returned color tables. Simplified description is:</p>
+<pre>
+ct &lt;- compose_panel(...)
+compose_legend(ct,...)
+</pre>
+<p>These two functions are separated to allow use additional plotting on image panel after primary plot of raster and decorations before panel change or legend plot.
+</p>
+
+
+<h3>Value</h3>
+
+<p>This function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>compose_panel</code><br><code>compose_legend</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(nband=6,min=0,max=255,mul=1/4)
+if (example1 &lt;- TRUE) {
+   b1 &lt;- ursa_brick(a)
+  # b1 &lt;- colorize(b1,stretch="positive",ramp=FALSE)
+   compose_open(b1)
+   compose_plot(b1,grid=FALSE,coast=FALSE,scale=FALSE,trim=1
+               ,stretch="positive",ramp=!FALSE)
+   compose_close()
+}
+if (example2 &lt;- TRUE) {
+   b2 &lt;- ursa_stack(a)
+   compose_open(b2)
+   compose_plot(b2,grid=FALSE,coast=FALSE,labels=5,trim=2,las=0)
+   compose_close()
+}
+</code></pre>
+
+
+</div>

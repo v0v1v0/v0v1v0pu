@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pretty_print_vector_names_and_values</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pretty printing of a vector's names and values</h2>
+
+<h3>Description</h3>
+
+<p>It outputs a vector's names and values in this format: <em>name1: value1,
+name2: value2,...</em>. You can choose how many elements to show in this format.
+Use with the chuck option <em>results = 'asis'</em> to get a nice printing in
+an R notebook.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pretty_print_vector_names_and_values(vec, n = -1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vec</code></td>
+<td>
+<p>vector with <code>names</code> attribute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of elements that you want to print in a nice way. Default
+value: -1 (pretty print all elements). For any n &lt; 1, all elements are
+printed.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>pretty_print_name_and_value</code>
+</p>
+
+
+</div>

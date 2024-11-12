@@ -1,0 +1,173 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.uncertainty</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plots a probability density function related to the measurand model
+</h2>
+
+<h3>Description</h3>
+
+<p>Plot a probability density function attributed to the measurand, depending on the selected method to estimate the uncertainty.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'uncertainty'
+plot(x, y = NULL, xlab = parse(text = x$measurand_label), 
+main = "", ylab = "Probability density", from = x$mean - 4 * x$u, to = x$mean + 4 * x$u, 
+lwd = 2, add = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>An uncertainty object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+
+<p>not used, exists only for compatibility with the S3 generic function.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+
+<p>string or expression, label for the x-axis.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+
+<p>string or expression, label for the plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+
+<p>string or expression, label for the y-axis.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+
+<p>numeric, lower value of the x-axis to display.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+
+<p>numeric, upper valur of the x-axis to display.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd</code></td>
+<td>
+
+<p>numeric, line width.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add</code></td>
+<td>
+
+<p>logic, decides to add the curve into an existing plot or to create a new plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>additional parameters.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>none
+</p>
+
+
+<h3>Value</h3>
+
+<p>None (invisible NULL)	
+</p>
+
+
+<h3>Note</h3>
+
+<p>none
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>H. Gasca-Aragon
+</p>
+<p>Maintainer: H. Gasca-Aragon &lt;hugo_gasca_aragon@hotmail.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>JCGM 100:2008. <em>Guide to the expression of uncertainty of measurement</em>
+</p>
+<p>JCGM 100:2005. <em>Supplement 1 Propagation of distributions usign a Monte Carlo method</em>
+</p>
+<p>EURACHEM/CITAC Guide CG 4. <em>Quantifying Uncertainty in Analytical Measurement</em>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uncertainty.default</code>, <code>plot</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># create an uncertainty budget
+cor.mat&lt;- matrix(c(1,-0.7,-0.7,1),2,2)
+
+u.budget&lt;- uncertaintyBudget(x=list(name=c("x0","x1"), 
+	mean=c(10,20), u=c(1,5), dof=c(10,10),
+	label=c("x[0]", "x[1]"), distribution=c("normal","normal")), 
+	y=cor.mat)
+
+# estimate the measurand uncertainty using an uncertainty budget,
+# a measurand definition and a selected estimating method.
+GFO.res&lt;- uncertainty(x=u.budget, 
+y=list(measurand_name="ratio.GFO", measurand_label="ratio[GFO]", 
+measurand_model="x0/x1", method="GFO", alpha=0.05))
+
+# plot the estimated pdf of the measurand
+## Not run: plot(GFO.res)
+</code></pre>
+
+
+</div>

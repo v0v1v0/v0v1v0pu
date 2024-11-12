@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>penaltyGoalsProb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computing goals by united</h2>
+
+<h3>Description</h3>
+
+<p>Computes the distribution function of possible goals by penalties.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">penaltyGoalsProb(posPenalties, penaltyGoalProb, penaltyProb = 0.1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>posPenalties</code></td>
+<td>
+<p>number of possible penalties in a game</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>penaltyGoalProb</code></td>
+<td>
+<p>probability of a goal by a singular penalty</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>penaltyProb</code></td>
+<td>
+<p>occurrence probability of a penalty</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> with two columns: the possible goals and the probability
+for achieving this number of goals.
+</p>
+
+
+</div>

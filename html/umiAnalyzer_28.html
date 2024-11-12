@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UmiCountsPlot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot UMI counts</h2>
+
+<h3>Description</h3>
+
+<p>Visualize the number detected UMI for each consensus depth cut-off. This may
+may helpful in choosing the right consensus depth for your analysis, by
+checking the number of reads still available for each assay and sample
+for your chosen cut-off.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UmiCountsPlot(
+  object,
+  amplicons = NULL,
+  samples = NULL,
+  theme = "classic",
+  option = "viridis",
+  direction = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Requires a UMI sample or UMI experiment object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>amplicons</code></td>
+<td>
+<p>(Optional) user-supplied list of assays to plot. Default is all.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>(Optional) user-supplied list of samples to plot. Default is all.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>Plotting theme, default is classic</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>option</code></td>
+<td>
+<p>Color palette. Default uses ggplot standard, otherwise viridis options.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>If using viridis colors should the scale be inverted or default?</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A UMIexperiment object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main = system.file('extdata', package = 'umiAnalyzer')
+samples &lt;- list.dirs(path = main, full.names = FALSE, recursive = FALSE)
+simsen &lt;- createUmiExperiment(experimentName = 'example',mainDir = main,sampleNames = samples)
+simsen &lt;- filterUmiObject(simsen)
+
+count_plot &lt;- UmiCountsPlot(simsen)
+
+</code></pre>
+
+
+</div>

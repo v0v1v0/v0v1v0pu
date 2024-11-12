@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>NoiseModel-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "NoiseModel" Class</h2>
+
+<h3>Description</h3>
+
+<p>A <code>NoiseModel</code> represents the additional machine noise that is layered
+on top of any biological variabilty when measuring the gene expression in a
+set of samples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">NoiseModel(nu, tau, phi)
+## S4 method for signature 'NoiseModel'
+blur(object, x, ...)
+## S4 method for signature 'NoiseModel'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nu</code></td>
+<td>
+<p>The mean value for the additive noise</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>The standard deviation for the additive noise</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phi</code></td>
+<td>
+<p>The standard deviation for the multiplicative noise. Note that
+the mean of the multiplicative noise is set to <code>0</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>object of class <code>NoiseModel</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The data matrix containing true signal from the gene expression</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments affecting the blur method applied</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>We model both additive and multiplicative noise, so that the observed
+expression of gene <var>g</var> in sample <var>i</var> is given by:
+<code class="reqn">Y_gi = S_gi exp(H_gi) + E_gi</code>, where <var>Y_gi</var> = observed expression,
+<var>S_gi</var> = true biological signal,
+H_gi ~ N(0, phi) defines the multiplicative noise, and
+E_gi ~ N(nu,tau) defines the additive noise.
+Note that we allow a systematic offset/bias in the additive noise model.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>blur(object, x, ...)</dt>
+<dd>
+<p>Adds and multiplies random noise to the
+data matrix <code>x</code> containing the true signal from the gene expression.</p>
+</dd>
+</dl>
+<dl>
+<dt>summary(object, ...)</dt>
+<dd>
+<p>Prints a summary of the object.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Jiexin Zhang <a href="mailto:jiexinzhang@mdanderson.org">jiexinzhang@mdanderson.org</a>,
+</p>
+
+
+<h3>References</h3>
+
+<p>Zhang J, Coombes KR.<br><em>Sources of variation in false discovery rate estimation include
+sample size, correlation, and inherent differences between groups.</em><br>
+BMC Bioinformatics. 2012; 13 Suppl 13:S1. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("NoiseModel")
+nComp &lt;- 10
+nGenes &lt;- 100
+comp &lt;- list()
+for (i in 1:nComp){
+  comp[[i]] &lt;- IndependentLogNormal(rnorm(nGenes/nComp, 6, 1.5),
+                                    1/rgamma(nGenes/nComp, 44, 28))
+}
+myEngine &lt;- Engine(comp)
+myData &lt;- rand(myEngine, 5)
+summary(myData)
+
+nu &lt;- 10
+tau &lt;- 20
+phi &lt;- 0.1
+nm &lt;- NoiseModel(nu, tau, phi)
+realData &lt;- blur(nm, myData)
+summary(realData)
+</code></pre>
+
+
+</div>

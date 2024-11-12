@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>derivative</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes the derivative of a function</h2>
+
+<h3>Description</h3>
+
+<p>Computes the derivative of a function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">derivative(x, coeffs, degree = 1, ndx = 20, deg = 6)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the x values for which the derivative should be computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coeffs</code></td>
+<td>
+<p>the coefficient.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>degree</code></td>
+<td>
+<p>the degree of the derivative.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndx</code></td>
+<td>
+<p>number of intervals to partition the distance between the lowest and highest x-values of the utility points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>degree of the B-spline basis. Determines the degree of the function to be estimated. If deg = 2, the estimated utility function will consist of quadratic functions.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the derivative of the specified degree.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">coeffs &lt;- seq(0.000002, 1.0, (1.0 - 0.000002) / 25)
+x &lt;- seq(0.01, 1.0, (1.0 - 0.01) / 5)
+derivative(x, coeffs)
+</code></pre>
+
+
+</div>

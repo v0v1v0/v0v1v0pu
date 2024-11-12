@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>comorbidity_summary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create comorbidity summary file</h2>
+
+<h3>Description</h3>
+
+<p>summarise disease history records of each individual from the hospital inpatient diagnosis data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">comorbidity_summary(
+  ukb.data,
+  hesin.file,
+  hesin_diag.file,
+  primary = FALSE,
+  ICD10.file,
+  Date.start = NULL,
+  Date.end = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ukb.data</code></td>
+<td>
+<p>tab delimited UK Biobank phenotype file, containing sample qc fields (with default UKBiobank codes as column names)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hesin.file</code></td>
+<td>
+<p>Latest hospital inpatient master file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hesin_diag.file</code></td>
+<td>
+<p>Latest hospital inpatient diagnosis file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>primary</code></td>
+<td>
+<p>TRUE: include primary diagnosis only; FALSE: include all diagnoses.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ICD10.file</code></td>
+<td>
+<p>The ICD10 code file, which is included in the package.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Date.start</code></td>
+<td>
+<p>Date, dd/mm/yyyy, select the start date of hospital inpatient record period.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Date.end</code></td>
+<td>
+<p>Date, dd/mm/yyyy, select the end date of hospital inpatient record period.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Outputs comorbidity summary table, named comorbidity_&lt;Date.start&gt;_&lt;Date.end&gt;.RData, including phenotype, non-genetic risk factors and all comorbidities, which will be used in the comorbidity association tests.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+comorb &lt;- comorbidity_summary(ukb.data=covid_example("sim_ukb.tab.gz"),
+hesin.file=covid_example("sim_hesin.txt.gz"), 
+hesin_diag.file=covid_example("sim_hesin_diag.txt.gz"), 
+ICD10.file=covid_example("ICD10.coding19.txt.gz"),
+primary = FALSE,
+Date.start = "16/03/2020")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

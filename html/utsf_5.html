@@ -1,0 +1,268 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>forecast</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Train an univariate time series forecasting model and make forecasts</h2>
+
+<h3>Description</h3>
+
+<p>This function trains a model from the historical values of a time series using
+an autoregressive approach: the targets are the historical values and the
+features of the targets their lagged values. Then, the trained model is used
+to predict the future values of the series using a recursive strategy.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">forecast(
+  timeS,
+  h,
+  lags = NULL,
+  method = "knn",
+  param = NULL,
+  efa = NULL,
+  tuneGrid = NULL,
+  preProcess = list("additive")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>timeS</code></td>
+<td>
+<p>A time series of class <code>ts</code> or a numeric vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>h</code></td>
+<td>
+<p>A positive integer. Number of values to be forecast into the future,
+i.e., forecast horizon.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lags</code></td>
+<td>
+<p>An integer vector, in increasing order, expressing the lags used
+as autoregressive variables. If the default value (<code>NULL</code>) is provided, a
+suitable vector is chosen.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>A string indicating the method used for training and
+forecasting. Allowed values are:
+</p>
+
+<ul>
+<li> <p><code>"knn"</code>: k-nearest neighbors (the default)
+</p>
+</li>
+<li> <p><code>"rt"</code>: regression trees
+</p>
+</li>
+<li> <p><code>"mt"</code>:  model trees
+</p>
+</li>
+<li> <p><code>"bagging"</code>
+</p>
+</li>
+<li> <p><code>"rf"</code>: random forest.
+</p>
+</li>
+</ul>
+<p>See details for a brief explanation of the models. It is also possible to
+use your own regression model, in that case a function explaining how to
+build your model must be provided, see the vignette for further details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>A list with parameters for the underlying function that builds
+the model. If the default value (<code>NULL</code>) is provided, the model is fitted
+with its default parameters. See details for the functions used to train the
+models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>efa</code></td>
+<td>
+<p>A character value indicating the kind of method used to estimate
+the forecast accuracy of the model using the time series. If the default
+value (<code>NULL</code>) is provided, no estimation is done. Possible values are
+<code>"rolling"</code> and <code>"fixed"</code>, indicating if rolling or fixed origin evaluation
+is done. To estimate forecast accuracy the last <code>h</code> values of the time
+series are used as test set and the previous values as training set.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tuneGrid</code></td>
+<td>
+<p>A data frame with possible tuning values. The columns are
+named the same as the tuning parameters. The estimation of forecast accuracy
+is done as explained for the <code>efa</code> parameter. Rolling or fixed origin
+evaluation is done according to the value of the <code>efa</code> parameter (fixed if
+NULL). The best combination of parameters is used to train the model with
+all the historical values of the time series.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preProcess</code></td>
+<td>
+<p>A list indicating the preprocessings or transformations.
+Currently, the length of the list must be 1 (only one preprocessing). If
+<code>NULL</code> no preprocessing is applied. The element of the list is a character
+value indicating what transformation is applied. By default (<code>"additive"</code>)
+an additive transformation is done. It is also possible a multiplicative
+transformation (<code>"multiplicative"</code>). These transformations are recommended
+if the time series has a trend. Also, taking differences is allowed using
+the <code>differences()</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The functions used to build and train the model are:
+</p>
+
+<ul>
+<li>
+<p> KNN: In this case no model is built and the function <code>FNN::knn.reg()</code> is
+used to predict the future values of the time series.
+</p>
+</li>
+<li>
+<p> Regression trees: Function <code>rpart::rpart()</code> to build the model and the
+method <code>rpart::predict.rpart()</code> associated with the trained model to forecast
+the future values of the time series.
+</p>
+</li>
+<li>
+<p> Model trees: Function <code>Cubist::cubist()</code> to build the model and the
+method <code>Cubist::predict.cubist()</code> associated with the trained model to
+forecast the future values of the time series.
+</p>
+</li>
+<li>
+<p> Bagging: Function <code>ipred::bagging()</code> to build the model and the
+method <code>ipred::predict.regbagg()</code> associated with the trained model to
+forecast the future values of the time series.
+</p>
+</li>
+<li>
+<p> Random forest: Function <code>ranger::ranger()</code> to build the model and the
+method <code>ranger::predict.ranger()</code> associated with the trained model to
+forecast the future values of the time series.
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>An S3 object of class <code>utsf</code>, basically a list with, at least, the
+following components: </p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>ts</code></td>
+<td>
+<p>The time series being forecast.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>features</code></td>
+<td>
+<p>A data frame with the features of the training set. The
+column names of the data frame indicate the autoregressive lags.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>targets</code></td>
+<td>
+<p>A vector with the targets of the training set.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lags</code></td>
+<td>
+<p>An integer vector with the autoregressive lags.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The regression model used recursively to make the forecast.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pred</code></td>
+<td>
+<p>An object of class <code>ts</code> and length <code>h</code> with the forecast.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>efa</code></td>
+<td>
+<p>This component is included if forecast accuracy is estimated.
+A vector with estimates of forecast accuracy according to different
+forecast accuracy measures.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tuneGrid</code></td>
+<td>
+<p>This component is included if the tuneGrid parameter has
+been used. A data frame in which each row contains estimates of forecast
+accuracy for a combination of tuning parameters.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Forecast time series using k-nearest neighbors
+f &lt;- forecast(AirPassengers, h = 12, method = "knn")
+f$pred
+library(ggplot2)
+autoplot(f)
+
+## Using k-nearest neighbors changing the default k value
+forecast(AirPassengers, h = 12, method = "knn", param = list(k = 5))$pred
+
+## Using your own regression model
+
+# Function to build the regression model
+my_knn_model &lt;- function(X, y) {
+  structure(list(X = X, y = y), class = "my_knn")
+}
+# Function to predict a new example
+predict.my_knn &lt;- function(object, new_value) {
+  FNN::knn.reg(train = object$X, test = new_value, y = object$y)$pred
+}
+forecast(AirPassengers, h = 12, method = my_knn_model)$pred
+
+## Estimating forecast accuracy of the model
+f &lt;- forecast(UKgas, h = 4, lags = 1:4, method = "rf", efa = "rolling")
+f$efa
+
+## Estimating forecast accuracy of different tuning parameters
+f &lt;- forecast(UKgas, h = 4, lags = 1:4, method = "knn", tuneGrid = expand.grid(k = 1:5))
+f$tuneGrid
+
+## Forecasting a trending series
+# Without any preprocessing or transformation
+f &lt;- forecast(airmiles, h = 4, method = "knn", preProcess = NULL)
+autoplot(f)
+
+# Applying the additive transformation (default)
+f &lt;- forecast(airmiles, h = 4, method = "knn")
+autoplot(f)
+</code></pre>
+
+
+</div>

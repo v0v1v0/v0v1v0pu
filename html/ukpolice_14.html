@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_neighbourhood_specific</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Specific Neighbourhood</h2>
+
+<h3>Description</h3>
+
+<p>Data on a specific neighbourhood within a given police force area.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_neighbourhood_specific(force, neighbourhood_id)
+
+ukc_neighbourhood_events(force, neighbourhood_id)
+
+ukc_neighbourhood_priorities(force, neighbourhood_id)
+
+ukc_neighbourhood_team(force, neighbourhood_id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>force</code></td>
+<td>
+<p>A string containing the name of the police force to return
+neighbourhoods for. Must be specified, and is not case sensitive.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>neighbourhood_id</code></td>
+<td>
+<p>A string containing the ID of a given neighbourhood,
+returned from <code>ukc_neighbourhoods()</code>. If missing, returns all neighbourhoods
+for the specified police force, using <code>ukc_neighbourhoods()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>ukpolice</code> contains the following functions for specific neighbourhoods:
+</p>
+
+<ul>
+<li> <p><code>ukc_neighbourhood_specific</code> – Basic information and description of a
+specific neighbourhood.
+</p>
+</li>
+<li> <p><code>ukc_neighbourhood_team</code> – Brief biographies of police officers
+responsible for the specified neighbourhood.
+</p>
+</li>
+<li> <p><code>ukc_neighbourhood_events</code> – Police public engagement events taking
+place in the specified neighbourhood.
+</p>
+</li>
+<li> <p><code>ukc_neighbourhood_priorities</code> – Policing priorities for the
+specified neighbourhood.
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>A list with data for a specific neighbourhood, or a tibble with all
+neighbourhood IDs if no neighbourhood is specified.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukc_neighbourhood_boundary()</code>
+</p>
+<p><code>ukc_neighbourhoods()</code>
+</p>
+<p><code>ukc_neighbourhood_location()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# returns a specific neighbourood
+places4 &lt;- ukc_neighbourhood_specific("dorset", "55.CR3001")
+
+# returns all neighbourhoods as specific neighbourhood is unspecified.
+places3 &lt;- ukc_neighbourhood_specific("dorset")
+
+## End(Not run)
+
+## Not run: 
+events &lt;- ukc_neighbourhood_events("dorset", "55.CR3001")
+
+## End(Not run)
+
+## Not run: 
+priorities &lt;- ukc_neighbourhood_team("dorset", "55.CR3001")
+
+## End(Not run)
+
+## Not run: 
+people &lt;- ukc_neighbourhood_team("dorset", "55.CR3001")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

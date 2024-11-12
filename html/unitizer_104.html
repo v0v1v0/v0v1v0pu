@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>show.conditionList</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prints A list of Conditions</h2>
+
+<h3>Description</h3>
+
+<p>S4 method for <code>conditionList</code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'conditionList'
+show(object)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>a <code>conditionList</code> object (list of conditions)</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>object, invisibly
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>conditionList</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Create a test item as you would find normally at the `unitizer` prompt
+## for illustrative purposes:
+.NEW &lt;- mock_item()
+## Show the conditions the test generated (typing `show` here is optional
+## since auto-printing should dispatch to `show`)
+show(.NEW$conditions)
+</code></pre>
+
+
+</div>

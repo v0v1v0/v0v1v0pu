@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_parametricTTS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parametric TTS function</h2>
+
+<h3>Description</h3>
+
+<p>This function computes the parametric form of the time to suppression
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_parametricTTS(params, rootfunction, suppression_threshold, uppertime)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>params</code></td>
+<td>
+<p>named vector of all parameters needed to compute the suppression model, V(t)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rootfunction</code></td>
+<td>
+<p>specifies which function should be used to calculate the root: biphasic or single phase.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppression_threshold</code></td>
+<td>
+<p>suppression threshold: measurements below this value will be assumed to represent viral suppression. Typically this would be the detection threshold of the assay. Default value is 20.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uppertime</code></td>
+<td>
+<p>numeric value indicating the maximum time that will be considered. Default value is 365.</p>
+</td>
+</tr>
+</table>
+</div>

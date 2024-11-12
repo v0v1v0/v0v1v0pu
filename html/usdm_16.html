@@ -1,0 +1,173 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lisa</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Local indicators of spatial association</h2>
+
+<h3>Description</h3>
+
+<p>Calculate different statistics of local indicator of spatial association (LISA) for each cell in a raster data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lisa(x, y, d1=0, d2, cell, statistic="I") 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> a raster object (<code>RasterLayer</code> or <code>RasterStack</code> or <code>RasterBrick</code>) </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p> a <code>SpatialPoints</code> object (optional)   </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d1</code></td>
+<td>
+<p> numeric. A number (distance), specifies local neighborhood size. Default is 0, means that the local neighborhood starts from the cell (distance = 0) and ends to a distance = d2 </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d2</code></td>
+<td>
+<p> numeric. A number (distance), specifies local neighborhood size. It specifies the distance to which should be considered as a local neighborhood around a cell</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cell</code></td>
+<td>
+<p> numeric (optional). A cell number or a vector of cell numbers in the Raster object, at which LISA should be calculated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>statistic</code></td>
+<td>
+<p> a character string specifying the LISA statistic that should be calculated. This can be one of "I", "c", "G", "G*", and "K1" </p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function can calculate different LISA statistics at each grid cell in Raster object. The statistics, implemented in this function, include local Moran's I ("I"), local Geary's c ("c"), local G and G* ("G" and "G*"), and local K1 statistics. This function returns standardized value (Z) for Moran, G and G*, and K1 statistics. If a <code>SpatialPoints</code> or a vector of numbers is defined for <code>y</code> or <code>cell</code>, the LISA is calculated only for the specified locations by points or cells.
+</p>
+<p>Note: A set of similar functions have been implemented in the <code>elsa</code> package by the author of this package, and since the computation part of elsa is written in C programming language, the function in elsa is much faster.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>RasterLayer</code></td>
+<td>
+<p>if <code>x</code> is a <code>RasterLayer</code> and both <code>y</code> and <code>cell</code> are missed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RasterBrick</code></td>
+<td>
+<p>if <code>x</code> is a <code>RasterStack</code> or a <code>RasterBrick</code> and both <code>y</code> and <code>cell</code> are missed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numeric vector</code></td>
+<td>
+<p>if <code>y</code> or <code>cell</code> is specified</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Babak Naimi <a href="mailto:naimi.b@gmail.com">naimi.b@gmail.com</a>
+</p>
+<p><a href="https://r-gis.net/">https://r-gis.net/</a>
+</p>
+<p><a href="https://www.biogeoinformatics.org/">https://www.biogeoinformatics.org/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Anselin, L. 1995. Local indicators of spatial association, Geographical Analysis, 27, 93–115;
+</p>
+<p>Getis, A. and Ord, J. K. 1996 Local spatial statistics: an overview. In P. Longley and M. Batty (eds) <em>Spatial analysis: modelling in a GIS environment</em> (Cambridge: Geoinformation International), 261–277.
+</p>
+<p>Naimi, B., Hamm, N.A.S., Groen, T.A., Skidmore, A.K., and Toxopeus, A.G. 
+2014. Where is positional uncertainty a problem for species distribution modelling?, Ecography 37 (2): 191-203.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+
+file &lt;- system.file("external/spain.tif", package="usdm")
+
+r &lt;- rast(file) # reading a RasterBrick object including 10 rasters in Spain
+
+r
+
+plot(r) # visualize the raster layers
+
+plot(r[[1]]) # visualize the first raster layer
+
+r.I &lt;- lisa(x=r[[1]],d1=0,d2=25000,statistic="I") # local Moran's I
+
+plot(r.I)
+
+# entering r instead of r[[1]], givees the indicator for each layer:
+r.I &lt;- lisa(x=r,d1=0,d2=25000,statistic="I")
+plot(r.I)
+
+r.c &lt;- lisa(x=r[[1]],d1=0,d2=25000,statistic="c") # local Geary's c
+
+plot(r.c)
+
+r.g &lt;- lisa(x=r[[1]],d1=0,d2=25000,statistic="G") # G statistic
+
+plot(r.g)
+
+r.g2 &lt;- lisa(x=r[[1]],d1=0,d2=25000,statistic="G*") # G* statistic
+
+plot(r.g2)
+
+r.K1 &lt;- lisa(x=r[[1]],d1=0,d2=30000,statistic="K1") # gives K1 statistic for each layer
+
+plot(r.K1)
+
+lisa(x=r,d1=0,d2=30000,cell=2000,statistic="I") # gives local Moran's I at cell number 2000
+#for each raster layer in r
+
+lisa(x=r,d1=0,d2=30000,cell=c(2000,2002,2003),statistic="c") # calculates local Moran's I
+# at cell numbers of 2000,2002, and 2003 for each raster layer in r
+
+sp &lt;- sampleRandom(r[[1]],20,sp=TRUE) # draw 20 random points from r, 
+# and returns a SpatialPointsDataFrame
+
+plot(r[[1]])
+
+points(sp)
+
+lisa(x=r,y=sp,d1=0,d2=30000,statistic="I") # calculates the local Moran's I at 
+# point locations in sp for each raster layer in r
+
+## End(Not run)
+
+
+</code></pre>
+
+
+</div>

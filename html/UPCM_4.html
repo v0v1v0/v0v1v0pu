@@ -1,0 +1,237 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UPCM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uncertainty in (Generalized) Partial Credit Models</h2>
+
+<h3>Description</h3>
+
+<p>Performs UPCM, a method to model uncertainty in (Generalized) Partial Credit Models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UPCM(
+  Y,
+  X = NULL,
+  GPCM = TRUE,
+  Q = 10,
+  cores = 2,
+  lambda = 0.01,
+  se = TRUE,
+  method = c("nlminb", "L-BFGS-B"),
+  ctrl.nlminb = list(eval.max = 200, iter.max = 150, abs.tol = 1e-08, rel.tol = 1e-08,
+    trace = 0, step.min = 0.1, x.tol = 1e-08, xf.tol = 1e-08)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>Matrix containing the ordinal item response data (as ordered factors), 
+one row per observation, one column per item.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Matrix containing explanatory variables which are used both for 
+trait parameters and uncertainty parameters, one row per observation, one column per variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>GPCM</code></td>
+<td>
+<p>Specifies the baseline model. <code>GPCM = TRUE</code> results in a <code>UGPCM</code> while  <code>GPCM = FALSE</code> results in a <code>UPCM</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Q</code></td>
+<td>
+<p>Number of nodes to be used (per dimension) in two-dimensional Gauss-Hermite-Quadrature.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>Number of cores to be used in parallelized computation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Tuning parameter for ridge penalty on all coefficients except sigma/slope parameters. Should be small, only used to stabilize results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se</code></td>
+<td>
+<p>Should standard errors be computed? Standard errors are necessary for <code>plot.UPCM</code>. Computation is 
+time-consuming because numerical optimization methods are used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Specifies optimization algorithm used , either <code>nlminb</code> or <code>L-BFGS-B (optim)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ctrl.nlminb</code></td>
+<td>
+<p>List of control arguments for optimization procedure <code>nlminb</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>delta</code></td>
+<td>
+<p>Matrix containing all item parameters for the UPCM pr UGPCM model, one row
+per item, one column per category.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Sigma</code></td>
+<td>
+<p>2*2 covariance matrix for both random effects, namely the trait parameters theta and the
+uncertainty parameters alpha.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xi</code></td>
+<td>
+<p>Estimates for covariate effects on trait parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Estimates for covariate effects on uncertainty parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>slopes</code></td>
+<td>
+<p>Estimates item slope parameters (only for <code>GPCM = TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se.delta</code></td>
+<td>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se.xi</code></td>
+<td>
+<p>Estimates of standard errors for covariate effects on trait parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se.alpha</code></td>
+<td>
+<p>Estimates of standard errors for covariate effects on uncertainty parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se.sigma</code></td>
+<td>
+<p>Estimates of standard errors for covariance parameters. Attention: First and third parameter are estimates of se for
+both variances, the variance of theta and the variance of alpha. Second parameter is the estimate for correlation coefficient between theta and alpha, 
+NOT of the corresponding covariance.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se.slopes</code></td>
+<td>
+<p>Estimates of standard errors of item slope parameters (only for <code>GPCM = TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delta.GPCM</code></td>
+<td>
+<p>Estimates of item parameters theta in the PCM or GPCM model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma.GPCM</code></td>
+<td>
+<p>Estimate of variance of  trait parameters theta in the PCM or GPCM model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>slopes.GPCM</code></td>
+<td>
+<p>Estimates of slope parameters in the GPCM (only for <code>GPCM = TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>Matrix containing the ordinal item response data, one row per obeservation, one column per item.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>loglik</code></td>
+<td>
+<p>Marginal log-likelihood</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coefs</code></td>
+<td>
+<p>Complete vector of all estimated parameters (for internal use).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se.vec</code></td>
+<td>
+<p>Complete vector of all estimated standard errors (for internal use).</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Gunther Schauberger<br><a href="mailto:gunther.schauberger@tum.de">gunther.schauberger@tum.de</a><br><a href="https://www.sg.tum.de/epidemiologie/team/schauberger/">https://www.sg.tum.de/epidemiologie/team/schauberger/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Tutz, Gerhard and Schauberger, Gunther (2020): Uncertainty in Latent Trait Models, 
+<em>Applied Psychological Measurement</em>, <a href="https://journals.sagepub.com/doi/abs/10.1177/0146621620920932?journalCode=apma">https://journals.sagepub.com/doi/abs/10.1177/0146621620920932?journalCode=apma</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>plot.UPCM</code> <code>UPCM-package</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(tenseness)
+
+Y &lt;- data.matrix(tenseness[,1:4])
+X &lt;- model.matrix(~ Gender + Age, data = tenseness)[,-1]
+
+m_upcm &lt;- UPCM(Y = Y, X = X, cores = 2, GPCM = FALSE)
+m_upcm
+plot(m_upcm)
+
+
+</code></pre>
+
+
+</div>

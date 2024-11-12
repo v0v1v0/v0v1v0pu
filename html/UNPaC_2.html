@@ -1,0 +1,192 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UNPaC_num_clust</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unimodal Non-Parametric Cluster (UNPaC) Test for Estimating Number of Clusters</h2>
+
+<h3>Description</h3>
+
+<p>UNPaC for estimating the number of clusters Compares the cluster index (CI) from the original data to that
+produced by clustering a simulated ortho-unimodal reference distribution generated using a Gaussian copula.
+The CI is defined to be the sum of the within-cluster sum of squares about the cluster means divided by the total sum of squares.
+The number of clusters is chosen to maximize the difference between the data cluster index and the
+reference cluster indices, but additional rules are also implemented (See below).  This method is described in Helgeson, Vock, and Bair (2021).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UNPaC_num_clust(
+  x,
+  k = 10,
+  cluster.fun,
+  nsim = 1000,
+  cov = "glasso",
+  rho = 0.02,
+  scale = FALSE,
+  center = FALSE,
+  var_selection = FALSE,
+  p.adjust = "none",
+  gamma = 0.1,
+  d.power = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a dataset with n observations (rows) and p features (columns)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>maximum number of clusters considered. (default=10)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cluster.fun</code></td>
+<td>
+<p>function used to cluster data. Function should return list containing a component "cluster."
+Examples include <code>kmeans</code> and  <code>pam</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nsim</code></td>
+<td>
+<p>a numeric value specifying the number of unimodal reference distributions used for testing (default=1000)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cov</code></td>
+<td>
+<p>method used for approximating the covariance structure.  options include: "glasso"
+(See <code>huge</code>), "banded"  (See <code>band.chol.cv</code>) and
+"est" (default = "glasso")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>a regularization parameter used in implementation of the graphical lasso. See documentation for lambda in
+<code>huge</code>.
+Not used if <code>cov="est"</code> or <code>cov="banded"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale</code></td>
+<td>
+<p>should data be scaled such that each feature has variance equal to one prior to clustering
+(default=FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>center</code></td>
+<td>
+<p>should data be centered such that each feature has mean equal to zero prior to clustering
+(default=TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var_selection</code></td>
+<td>
+<p>should dimension be reduced using feature filtering procedure? See description below. (default=FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.adjust</code></td>
+<td>
+<p>p-value adjustment method for additional feature filtering. See <code>p.adjust</code>
+for options. (default="fdr"). Not used if p.adjust="none."</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gamma</code></td>
+<td>
+<p>threshold for feature filtering procedure. See description below. Not used if var_selection=FALSE (default=0.10)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d.power</code></td>
+<td>
+<p>Power in estimating the low of the within cluster dispersion for comparison to the Gap statistic. See  <code>clusGap</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>There are three options for the covariance matrix used in generating the Gaussian
+copula: sample covariance estimation, <code>cov="est"</code>, which should be used if n&gt;p; the graphical lasso,
+<code>cov="glasso"</code>, which should be used if n&lt;p; and  k-banded covariance, <code>cov="banded"</code>, which can be used if n&lt;p and it can be assumed that
+features farther away in the ordering have weaker covariance. The graphical lasso is implemented using the <code>huge</code> function.
+When <code>cov="banded"</code> is selected the k-banded covariance Cholesky factor of Rothman, Levina, and Zhu (2010) is used to estimate the covariance matrix.
+Cross-validation is used for selecting the banding parameter. See documentation in <code>band.chol.cv</code>.
+</p>
+<p>In high dimensional (n&lt;p) settings a dimension reduction step can be implemented which selects features
+based on an F-test for difference in means across clusters. Features having a p-value less than a threshold
+<code>gamma</code> are retained. For additional feature filtering a p-value adjustment procedure (such as p.adjust="fdr")
+can be used. If no features are retained the resulting p-value for the cluster significance test is given as 1.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns a list with the following components:
+</p>
+
+<ul>
+<li>
+<p><code>BestK</code>: A matrix with 1 row and 4 columns named: "Max_CI","Max_CI_wi_1SE","Max_scaled_CI" and "Max_logWCSS_wi_1SE".
+These correspond to the number of clusters, K, chosen by four different rules. "Max_CI choses K to maximize the difference in CI's between the true data and the
+reference data. "Max_CI_wi_1SE" uses the "1-SE" criterion as in Tibshirani et al (2001), except for the CI.
+"Max_scaled_CI" chooses K to maximize the difference in CIs from the observed and reference data scaled by the standard error of the reference data CIs.
+"Max_logWCSS_wi_1SE" uses the Gap statistic and the "1-SE" criterion (Tibshirani et al, 2001) for choosing K.
+</p>
+</li>
+<li>
+<p><code>full_process</code>: A matrix containing the number of clusters, K, evaluated, the CI from the data, the average CI from the null
+distribution, the difference between the data CI and average null CI, the standard error for the difference in CIs, the log of the within cluster dispersion from the data,
+the average log of within cluster dispersion from the null data, The difference in within cluster dispersion (the Gap statistic), and the standard error for the Gap statistic.
+</p>
+</li>
+<li>
+<p><code>selected_features</code>: A vector of integers indicating the features retained by the feature filtering process.</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Erika S. Helgeson, David Vock, Eric Bair
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Helgeson, ES, Vock, DM, and Bair, E. (2021) “Nonparametric cluster significance testing with reference to a unimodal null distribution."
+Biometrics 77: 1215– 1226. &lt; https://doi.org/10.1111/biom.13376 &gt;
+</p>
+</li>
+<li>
+<p> Tibshirani, R., Walther, G. and Hastie, T. (2001). Estimating the number of data clusters via the Gap statistic. Journal of the Royal Statistical Society B, 63, 411-423.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">	 test1 &lt;- matrix(rnorm(100*50), nrow=100, ncol=50)
+  test1[1:30,1:50] &lt;- rnorm(30*50, 2)
+  test.edit&lt;-scale(test1,center=TRUE,scale=FALSE)
+  UNPaC_k&lt;-UNPaC_num_clust(test.edit,k=5,kmeans,nsim=100,cov="est")
+
+</code></pre>
+
+
+</div>

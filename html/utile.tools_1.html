@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>calc_chunks</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate data chunk indices</h2>
+
+<h3>Description</h3>
+
+<p>Calculates chunk indices of a data object
+for a given chunk size (number of items per chunk).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">calc_chunks(x, size = 10, reverse = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data frame or vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>An integer. The number of items (e.g. rows in a tibble)
+that make up a given chunk. Must be a positive integer. Caps out at data
+maximum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reverse</code></td>
+<td>
+<p>A logical. Calculate chunks from back to front.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An iterable list of row indices for each chunk of data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create chunk map for a data frame
+chunks &lt;- calc_chunks(mtcars, size = 6)
+
+# Iterate through chunks of data
+for (chunk in chunks) print(paste0(rownames(mtcars[chunk,]), collapse = ', '))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,159 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pwr.omegasq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Power calculations for Omega Squared.</h2>
+
+<h3>Description</h3>
+
+<p>This function uses <code>pwr.anova.test</code> from the <code>pwr</code>
+package in combination with <code>convert.cohensf.to.omegasq</code> and
+<code>convert.omegasq.to.cohensf</code> to provide power analyses for Omega
+Squared.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pwr.omegasq(
+  k = NULL,
+  n = NULL,
+  omegasq = NULL,
+  sig.level = 0.05,
+  power = NULL,
+  digits = 4
+)
+
+## S3 method for class 'pwr.omegasq'
+print(x, digits = x$digits, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>The number of groups.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The sample size.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>omegasq</code></td>
+<td>
+<p>The Omega Squared value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig.level</code></td>
+<td>
+<p>The significance level (alpha).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>power</code></td>
+<td>
+<p>The power.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits desired in the output (4, the default, is
+quite high; but omega squared value tend to be quite low).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to print.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments are ignored.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function was written to work similarly to the power functions in the
+<code>pwr</code> package.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An <code>power.htest.ufs</code> object that contains a number of input and
+output values, most notably:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>power</code></td>
+<td>
+<p>The (specified or computed) power</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The (specified or
+computed) sample size in each group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig.level</code></td>
+<td>
+<p>The (specified or
+computed) significance level (alpha)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig.level</code></td>
+<td>
+<p>The (specified or
+computed) Omega Squared value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohensf</code></td>
+<td>
+<p>The computed value for the
+Cohen's <em>f</em> effect size measure</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters &amp; Peter Verboon
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pwr.anova.test</code>,
+<code>convert.cohensf.to.omegasq</code>,
+<code>convert.omegasq.to.cohensf</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+pwr.omegasq(omegasq=.06, k=3, power=.8)
+
+</code></pre>
+
+
+</div>

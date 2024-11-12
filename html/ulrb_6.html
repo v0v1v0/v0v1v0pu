@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>evaluate_k</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evaluate k from all samples in a dataset</h2>
+
+<h3>Description</h3>
+
+<p>This function extends <code>evaluate_sample_k()</code> for any number of samples in a dataset.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">evaluate_k(
+  data,
+  range = 3:10,
+  samples_col = "Sample",
+  abundance_col = "Abundance",
+  with_plot = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range</code></td>
+<td>
+<p>The range of values of k to test, default is from 3 to 10.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples_col</code></td>
+<td>
+<p>String with name of column with sample names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>abundance_col</code></td>
+<td>
+<p>string with name of column with abundance values. Default is "Abundance".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>with_plot</code></td>
+<td>
+<p>If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Extra arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The plot option (with_plot = TRUE) provides centrality metrics for all samples used.
+</p>
+<p>For more details on indices calculation, please see the documentation for <code>evaluate_sample_k()</code>, <code>check_DB()</code>,
+<code>check_CH()</code> and <code>check_avgSil()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A nested data.frame (or a plot) with three indices for each k and for each sample.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>evaluate_sample_k()</code>, <code>check_DB()</code>, <code>check_CH()</code>, <code>check_avgSil()</code>, <code>suggest_k()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(dplyr)
+
+#' evaluate_k(nice_tidy)
+
+
+# To make simple plot
+evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
+
+
+</code></pre>
+
+
+</div>

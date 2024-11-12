@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_rpt_add_slide</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add Slide to a Powerpoint Report</h2>
+
+<h3>Description</h3>
+
+<p>Adds a slide to a ubiquity report.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_rpt_add_slide(
+  cfg,
+  template = NULL,
+  elements = NULL,
+  rptname = "default"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template</code></td>
+<td>
+<p>Name of slide template to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>elements</code></td>
+<td>
+<p>List with content to populate placeholders in the slide. See the
+onbrand functions <code>report_add_slide</code> and
+<code>add_pptx_ph_content</code> for details on the expected
+format of this list.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rptname</code></td>
+<td>
+<p>Report name</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>ubiquity system object with the slide added to the specified
+report
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>report_add_slide</code>, 
+<code>add_pptx_ph_content</code>, and 
+Reporting vignette (<code>vignette("Reporting", package = "ubiquity")</code>)
+</p>
+
+
+</div>

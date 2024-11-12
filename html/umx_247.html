@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_r_test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Test the difference between correlations for significance.</h2>
+
+<h3>Description</h3>
+
+<p><code>umx_r_test</code> is a wrapper around the cocor test of difference between correlations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_r_test(
+  data = NULL,
+  vars = vars,
+  alternative = c("two.sided", "greater", "less")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vars</code></td>
+<td>
+<p>Three or 4 variables forming the two pairs of columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>A two (default) or one-sided (greater less) test.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><strong>Non-overlapping (no variable in common) correlations in the same dataset.</strong>
+If 4 variables are provided in <code>vars</code>, <code>umx_r_test</code> conducts a test of
+the correlation of var 1 &amp; 2 differs in magnitude from the correlation of var 3 with var 4.
+(<code>r.jk</code> and <code>r.hm</code> in cocor speak).
+</p>
+<p><strong>Overlapping (1 variable in common) correlations in the same dataset.</strong>
+If 3 variables are provided in <code>vars</code>, <code>umx_r_test</code> conducts a test of whether
+the correlation of var 1 &amp; 2 differs in magnitude from the correlation of var 1 with var 3.
+(<code>r.jk</code> and <code>r.jh</code> in cocor speak).
+</p>
+<p>In the future it will be expanded to handle other correlations, and to take correlations as input.
+</p>
+
+
+<h3>Value</h3>
+
+<p>cocor result.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Is the correlation of mpg with cylinder count different from that 
+# obtaining between disp and hp?
+vars = c("mpg", "cyl", "disp", "hp")
+umx_r_test(mtcars, vars)
+umx_r_test(mtcars, c("mpg", "disp", "hp"))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>reg_2d</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Isotonic Regression on 2D input.
+</h2>
+
+<h3>Description</h3>
+
+<p>Isotonic regression on weighted or unweighted 2D input with L1, L2 metric and other options.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">    reg_2d(y_vec, w_vec, metric)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y_vec</code></td>
+<td>
+
+<p>The 2D NumericMatrix of input data that we use to regression. It must 
+be the same size as the w_vec argument.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>w_vec</code></td>
+<td>
+
+<p>The 2D NumericMatrix of the weight of the input data. The default 
+value is 1 for every entry. It must be the same size as y_vec.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>metric</code></td>
+<td>
+
+<p>This is an integer input, metric = 1 stands for using L1 metric,
+metric = 2 stands for using L2 metric
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See the paper about 2D regression in the reference.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A 2D NumericMatrix of the regression result which has the same size of y_vec.
+</p>
+
+
+<h3>Error Messages</h3>
+
+
+<ul>
+<li>
+<p> The size of y_vec is 0: Empty data.
+</p>
+</li>
+<li>
+<p> The rows of w_vec doesn't match the rows of y_vec: Data and weight have different number of rows
+</p>
+</li>
+<li>
+<p> The columns of w_vec doesn't match the rows of y_vec: Data and weight have different number of columns
+</p>
+</li>
+<li>
+<p> The entry of w_vec has negative value: Negative weight detected
+</p>
+</li>
+<li>
+<p> Metric input is not in 1,2,3: Metric does not exist
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Zhipeng Xu, Chenkai Sun, Aman Karunakaran, Quentin Stout
+<a href="mailto:xzhipeng@umich.edu">xzhipeng@umich.edu</a>
+<a href="https://github.com/xzp1995/UniIsoRegression">https://github.com/xzp1995/UniIsoRegression</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Q.F. Stout, Isotonic median regression via partitioning, Algorithmica 66 (2013), pp. 93-112 doi.org/10.1007/s00453-012-9628-4
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">    library(UniIsoRegression)
+    #===2d monotonic===
+    y=matrix(c(2, 4, 3, 1, 5, 7,9,0), nrow=2, ncol=4, byrow = TRUE)
+    weight=matrix(c(1, 10, 3, 9, 5, 7,9,10), nrow=2, ncol=4, byrow = TRUE)
+
+    #l_1 metric
+    temp=UniIsoRegression::reg_2d(y, weight, metric = 1)
+    print(temp)
+
+    #l_2 metric
+    temp=UniIsoRegression::reg_2d(y, weight, metric = 2)
+    print(temp)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,174 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u5mr_cohort</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimating under-five mortality using Maternal age cohort-derived methods</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="../help/figures/lifecycle-stable.svg" alt="[Stable]"></a>
+</p>
+<p><code>u5mr_cohort()</code> uses the maternal age cohort-derived methods (MAC) through summary
+birth history information and maternal age (or time since first birth) to
+calculate the under-five mortality estimates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">u5mr_cohort(
+  data,
+  women = "women",
+  child_born = "child_born",
+  child_dead = "child_dead",
+  agegrp = "agegrp",
+  iso3 = "KHM",
+  svy_year = 2010
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>preprocessed data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>women</code></td>
+<td>
+<p>total number of women</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>child_born</code></td>
+<td>
+<p>children ever born</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>child_dead</code></td>
+<td>
+<p>children dead</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>agegrp</code></td>
+<td>
+<p>age grouping or time since first birth</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iso3</code></td>
+<td>
+<p>the <code>iso3</code> code of the country from which the survey data come</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>svy_year</code></td>
+<td>
+<p>end of the survey</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In this cohort-derived method, under-five mortality and reference time are estimated
+through summary birth history information from the mothers and her age or time since
+her first birth.
+</p>
+<p>In case sample weights are available for the mothers, final variables
+should be multiplied by these weights before summarizing.
+</p>
+<p><strong>Computational Procedure</strong>
+</p>
+<p>Two formulas were used to quantify MAC method:
+</p>
+<p><strong><code class="reqn">5q0</code> component</strong>
+</p>
+<p>logit(5q0<sub>ijk</sub>) = <code class="reqn">\beta</code><sub>0i</sub> + U<sub>ij</sub> +
+<code class="reqn">\beta</code><sub>1i</sub> x logit(CD<sub>ijk</sub> /
+CEB<sub>ijk</sub>) + <code class="reqn">\beta</code><sub>2i</sub> x CEB<sub>ijk</sub> +
+<code class="reqn">\beta</code><sub>3i</sub> x PR1 + <code class="reqn">\beta</code><sub>4i</sub> x PR2 +
+<code class="reqn">\epsilon</code><sub>ijk</sub></p>
+<p>where
+</p>
+<p>i = 5-year maternal age group <code class="reqn">\epsilon</code> (15-19, 20-24, ... , 45-49)
+j = country
+k = survey
+CD<sub>i</sub> = total dead children from maternal age group <code>i</code>
+CEB<sub>i</sub> = total children ever born from maternal age group <code>i</code>
+PR1 = ratio of parity among maternal age group 15-19 and parity among maternal age
+group 20-24
+PR2 = ratio of parity among maternal age group 20-24 and parity among maternal age
+group 25-29
+U<sub>ij</sub> = country-specific random effects
+</p>
+<p>All coefficients vary by maternal age group, as indicated by <code>i</code> and the random
+effects also vary by country, as indicated by <code>j</code>.
+</p>
+<p><strong>Reference time component</strong>
+</p>
+reftime<sub>ijk</sub><p> = <code class="reqn">\beta</code><sub>0i</sub> +
+<code class="reqn">\beta</code><sub>1i</sub> x (CD<sub>ijk</sub> /
+CEB<sub>ijk</sub>) +
+<code class="reqn">\beta</code><sub>2i</sub> x CEB<sub>ijk</sub> +
+<code class="reqn">\beta</code><sub>3i</sub> x PR1 + <code class="reqn">\beta</code><sub>4i</sub> x PR2 +
+<code class="reqn">\epsilon</code><sub>ijk</sub></p>
+
+
+<h3>Value</h3>
+
+<p><code>data.frame</code>
+</p>
+
+<ul>
+<li> <p><code>iso3</code> - total number of women
+</p>
+</li>
+<li> <p><code>svy_year</code> - total number of children ever born
+</p>
+</li>
+<li> <p><code>agegrp</code> - five-year age groups
+</p>
+</li>
+<li> <p><code>ref_time</code>  - time between survey year and interpolated year
+</p>
+</li>
+<li> <p><code>year</code>  - reference year
+</p>
+</li>
+<li> <p><code>q5</code> - under-five mortality
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Rajaratnam JK, Tran LN, Lopez AD, Murray CJL (2010) Measuring Under-Five Mortality: Validation of New Low-Cost Methods. PLOS Medicine 7(4): e1000253.
+(doi: <a href="https://doi.org/10.1371/journal.pmed.1000253">10.1371/journal.pmed.1000253</a>10.1371/journal.pmed.1000253)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Example using fake survey data from Cambodia
+data(cambodia)
+camb &lt;- u5mr_cohort(cambodia, women = "women", child_born = "child_born",
+child_dead = "child_dead", agegrp = "agegrp", iso3 = "KHM", svy_year = 1234)
+
+with(camb,
+     plot(year, q5 * 1000, type = "b", pch = 19,
+          col = "black", xlab = "Year", ylab = "U5MR per 1000 live births",
+          main = paste0("Under-five mortality, q(5) in Bangladesh, estimated\n",
+                       "using the maternal age cohort-derived method")))
+
+</code></pre>
+
+
+</div>

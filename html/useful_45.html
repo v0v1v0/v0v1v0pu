@@ -1,0 +1,120 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plotTimesSeries</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>plotTimesSeries</h2>
+
+<h3>Description</h3>
+
+<p>Plot ts object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plotTimesSeries(x, time = NULL, acf = FALSE, lag.max = NULL,
+  na.action = na.fail, demean = TRUE, title = sprintf("%s Plot",
+  name), xlab = "Time", ylab = name, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a <code>ts</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time</code></td>
+<td>
+<p>A vector of the same length of <code>x</code> that specifies the time component of each element of <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>acf</code></td>
+<td>
+<p>Logical indicating if the acf and pacf should be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lag.max</code></td>
+<td>
+<p>maximum lag at which to calculate the acf. Default is 10*log10(N/m) where N is the number of observations and m the number of series. Will be automatically limited to one less than the number of observations in the series.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.action</code></td>
+<td>
+<p>function to be called to handle missing values. na.pass can be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>demean</code></td>
+<td>
+<p>logical. Should the covariances be about the sample means?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Graph title.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>X-axis label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Y-axis label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Plot a ts object and, if desired, it's acf and pacf.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object if <code>acf</code> is <code>FALSE</code>, otherwise <code>TRUE</code> indicating success.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>See Also</h3>
+
+<p>ts.plotter plot.acf fortify.ts
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+plot(sunspot.year)
+plot(sunspot.year, acf=TRUE)
+
+</code></pre>
+
+
+</div>

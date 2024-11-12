@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BIC.UComp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>BIC.UComp</h2>
+
+<h3>Description</h3>
+
+<p>Extract BIC (or SBC) value of UComp object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UComp'
+BIC(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class “UComp”.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional inputs to function.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Selection criteria for models with different number of 
+parameters, the smaller BIC the better. The formula used here is
+<code class="reqn">BIC=(-2 ln(L) + k ln(n)) / n</code>, where <code class="reqn">ln(L)</code> is the log-likelihood
+at the optimum, <code class="reqn">k</code> is the number of parameters plus
+non-stationary states and <code class="reqn">n</code> is the number of observations.
+Mind that this formulation differs from the usual definition that
+does not divide by <code class="reqn">n</code>. This makes that BIC(m) and BIC(logLik(m))
+give different results, being m an UComp object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UC</code>, <code>UCmodel</code>, <code>UCvalidate</code>, <code>UCfilter</code>, <code>UCsmooth</code>, 
+<code>UCdisturb</code>, <code>UCcomponents</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+y &lt;- log(AirPassengers)
+m1 &lt;- UCmodel(y, model = "llt/equal/arma(0,0)")
+BIC(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

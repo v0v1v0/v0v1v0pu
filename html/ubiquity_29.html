@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>run_simulation_titrate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate With Titration or Rule-Based Inputs</h2>
+
+<h3>Description</h3>
+
+<p>Provides an interface to <code>run_simulation_ubiquity</code>
+to start and stop simulations and apply rules to control dosing and state-resets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">run_simulation_titrate(SIMINT_p, SIMINT_cfg, SIMINT_dropfirst = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_p</code></td>
+<td>
+<p>list of system parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_dropfirst</code></td>
+<td>
+<p>when <code>TRUE</code> it will drop the first sample point (prevents bolus doses from starting at 0)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>som
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>system_new_tt_rule</code>, <code>system_set_tt_cond</code> and the titration vignette (<code>vignette("Titration", package = "ubiquity")</code>)
+</p>
+
+
+</div>

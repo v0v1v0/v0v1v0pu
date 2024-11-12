@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ewr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Taxi in and taxi out times at EWR (Newark) airport for 1999-2001 </h2>
+
+<h3>Description</h3>
+
+<p>The <code>ewr</code> data frame has 46 rows and 11 columns.
+</p>
+<p>Gives taxi in and taxi out times for 8 different airlines and several
+months at EWR airport.
+</p>
+<p>Airline codes are
+<code>AA</code> (American Airlines),
+<code>AQ</code> (Aloha Airlines),
+<code>AS</code> (Alaska Airlines),
+<code>CO</code> (Continental Airlines),
+<code>DL</code> (Delta Airlines),
+<code>HP</code> (America West Airlines),
+<code>NW</code> (Northwest Airlines),
+<code>TW</code> (Trans World Airlines),
+<code>UA</code> (United Airlines),
+<code>US</code> (US Airways), and
+<code>WN</code> (Southwest Airlines)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(ewr)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>Year</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Month</dt>
+<dd>
+<p>a factor for months</p>
+</dd>
+<dt>AA</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>CO</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>DL</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>HP</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>NW</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>TW</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>UA</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>US</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>inorout</dt>
+<dd>
+<p>a factor with levels <code>in</code> or <code>out</code> </p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Retrieved from http://www.bts.gov/oai/taxitime/html/ewrtaxi.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(ewr)
+boxplot(ewr[3:10])
+</code></pre>
+
+
+</div>

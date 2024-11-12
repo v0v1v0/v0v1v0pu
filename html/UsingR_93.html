@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MLBattend</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Major league baseball attendance data</h2>
+
+<h3>Description</h3>
+
+<p>Data on home-game attendance in Major League Baseball for the years
+1969-2000.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(MLBattend)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 838 observations on the following 10 variables.
+</p>
+
+<dl>
+<dt>franchise</dt>
+<dd>
+<p>Which team</p>
+</dd>
+<dt>league</dt>
+<dd>
+<p>American or National league</p>
+</dd>
+<dt>division</dt>
+<dd>
+<p>Which division</p>
+</dd>
+<dt>year</dt>
+<dd>
+<p>The year (the year 2000 is recorded as 0)</p>
+</dd>
+<dt>attendance</dt>
+<dd>
+<p>Actual attendance</p>
+</dd>
+<dt>runs.scored</dt>
+<dd>
+<p>Runs scored by the team during year</p>
+</dd>
+<dt>runs.allowed</dt>
+<dd>
+<p>Runs allows by the team during year</p>
+</dd>
+<dt>wins</dt>
+<dd>
+<p>Number of wins for season</p>
+</dd>
+<dt>losses</dt>
+<dd>
+<p>Number of losses for season</p>
+</dd>
+<dt>games.behind</dt>
+<dd>
+<p>A measure of how far from division winner the
+team was. Higher numbers are worse.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>This data was submitted to <em>The Journal of Statistical Education</em>
+by James J. Cochran, <a href="http://jse.amstat.org/v10n2/datasets.cochran.html">http://jse.amstat.org/v10n2/datasets.cochran.html</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(MLBattend)
+boxplot(attendance ~ franchise, MLBattend)
+with(MLBattend, cor(attendance,wins))
+</code></pre>
+
+
+</div>

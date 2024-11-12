@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>subVector</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>subVector</h2>
+
+<h3>Description</h3>
+
+<p>Substitutes multiple patterns and corresponding replacements
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">subVector(x, toSub)
+
+subMultiple(x, pattern, replacement)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector of text to search</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>toSub</code></td>
+<td>
+<p>Named vector where the elements are the pattern and the names are the replacement values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>Vector of patterns to find in each element of x</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replacement</code></td>
+<td>
+<p>Vector of replacement values corresponding to each value of pattern</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Given a vector of text replaces all patterns each each element
+</p>
+
+
+<h3>Value</h3>
+
+<p>The text in x with substitutions made
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">theText &lt;- c('Hi Bob &amp; Cooper how is life today', 
+'Anything happening now?', 
+'Sally &amp; Dave are playing with Jess &amp; Julio | with their kids')
+subVector(theText, toSub=c("and"='&amp;', 'or'='\\|'))
+subVector(theText)
+
+theText &lt;- c('Hi Bob &amp; Cooper how is life today', 
+'Anything happening now?', 
+'Sally &amp; Dave are playing with Jess &amp; Julio | with their kids')
+subMultiple(theText, pattern=c('&amp;', '\\|'), replacement=c('and', 'or'))
+
+</code></pre>
+
+
+</div>

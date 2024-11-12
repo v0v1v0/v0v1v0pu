@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as_cells</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Tokenize data frames into a tidy 'melted' structure</h2>
+
+<h3>Description</h3>
+
+<p>Data frames represent data in a tabular structure.  <code>as_cells()</code>
+takes the row and column position of each 'cell', and returns that
+information in a new data frame, alongside the content and type of each cell.
+</p>
+<p>This makes it easier to deal with complex or non-tabular data (e.g. pivot
+tables) that have been imported into R as data frames.  Once they have been
+'melted' by <code>as_cells()</code>, you can use functions like <code>behead()</code> and
+<code>spatter()</code> to reshape them into conventional, tidy, unpivoted structures.
+</p>
+<p>For HTML tables, the content of each cell is returned as a standalone HTML
+string that can be further parsed with tools such as the rvest package.  This
+is particularly useful when an HTML cell itself contains an HTML table, or
+contains both text and a URL.  If the HTML itself is poorly formatted, try
+passing it through the
+<a href="https://CRAN.R-project.org/package=htmltidy">htmltidy</a> package first.
+</p>
+<p>This is an S3 generic.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as_cells(x, row_names = FALSE, col_names = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data.frame or an HTML document</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>row_names</code></td>
+<td>
+<p>Whether to treat the row names as cells, Default: FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col_names</code></td>
+<td>
+<p>Whether to treat the column names  as cells, Default: FALSE</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For certain non-rectangular data formats, it can be useful to parse
+the data into a melted format where each row represents a single
+token.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the following columns:
+</p>
+
+<ul>
+<li> <p><code>row</code> and <code>col</code> (integer) giving the original position of the 'cells'
+</p>
+</li>
+<li>
+<p> any relevant columns for cell values in their original types: <code>chr</code>,
+<code>cplx</code>, <code>cplx</code>, <code>dbl</code>, <code>fct</code>, <code>int</code>, <code>lgl</code>, <code>list</code>, and <code>ord</code>
+</p>
+</li>
+<li> <p><code>data_type</code> to specify for each cell which of the above columns (<code>chr</code>
+etc.) the value is in.
+</p>
+</li>
+</ul>
+<p>The columns <code>fct</code> and <code>ord</code> are, like <code>list</code>, list-columns (each element is
+independent) to avoid factor levels clashing.  For HTML tables, the column
+<code>html</code> gives the HTML string of the original cell.
+</p>
+<p>Row and column names, when present and required by <code>row_names = TRUE</code> or
+<code>col_names = TRUE</code>, are treated as though they were cells in the table, and
+they appear in the <code>chr</code> column.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- data.frame(a = c(10, 20),
+                b = c("foo", "bar"),
+                stringsAsFactors = FALSE)
+x
+as_cells(x)
+as_cells(x, row_names = TRUE)
+as_cells(x, col_names = TRUE)
+
+# 'list' columns are undisturbed
+y &lt;- data.frame(a = c("a", "b"), stringsAsFactors = FALSE)
+y$b &lt;- list(1:2, 3:4)
+y
+as_cells(y)
+
+# Factors are preserved by being wrapped in lists so that their levels don't
+# conflict.  Blanks are NULLs.
+z &lt;- data.frame(x = factor(c("a", "b")),
+                y = factor(c("c", "d"), ordered = TRUE))
+as_cells(z)
+as_cells(z)$fct
+as_cells(z)$ord
+
+# HTML tables can be extracted from the output of xml2::read_html().  These
+# are returned as a list of tables, similar to rvest::html_table().  The
+# value of each cell is its standalone HTML string, which can contain
+# anything -- even another table.
+
+colspan &lt;- system.file("extdata", "colspan.html", package = "unpivotr")
+rowspan &lt;- system.file("extdata", "rowspan.html", package = "unpivotr")
+nested &lt;- system.file("extdata", "nested.html", package = "unpivotr")
+
+## Not run: 
+browseURL(colspan)
+browseURL(rowspan)
+browseURL(nestedspan)
+
+## End(Not run)
+
+as_cells(xml2::read_html(colspan))
+as_cells(xml2::read_html(rowspan))
+as_cells(xml2::read_html(nested))
+</code></pre>
+
+
+</div>

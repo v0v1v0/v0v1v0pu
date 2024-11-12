@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_retrieve_cust_bitlink_clicks_history</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Clicks for a Custom Bitlink's Entire History (Premium)</h2>
+
+<h3>Description</h3>
+
+<p>Returns the click counts for the specified link. This returns an array with clicks based on a date.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_retrieve_cust_bitlink_clicks_history(
+  custom_bitlink = NULL,
+  showRequestURL = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>custom_bitlink</code></td>
+<td>
+<p>- A Custom Bitlink made of the domain and keyword</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference/#getClicksForCustomBitlink">https://dev.bitly.com/api-reference/#getClicksForCustomBitlink</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+bitly_retrieve_cust_bitlink_clicks_history(custom_bitlink = "es.pn/SuperBowl")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

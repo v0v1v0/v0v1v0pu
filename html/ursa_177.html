@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>panel_decor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Add auxiliary elements to the plotting panel.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>panel_decor</code> adds over plot sequentially the followed elements: coastline, gridline, scalebar. Unlike <code>panel_decor</code>, function <code>layout.grid</code> does not add scalebar.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">panel_decor(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Passed to sequence of plotting functions:
+</p>
+
+<ul>
+<li> <p><code>panel_graticule</code>. To distinguish the same argument names in different functions it is provided to use prefix “<code>grid.*</code>”, e.g., <code>grid.col="grey40"</code>.
+</p>
+</li>
+<li> <p><code>panel_coastline</code>. To distinguish the same argument names in different functions it is provided to use prefix “<code>coast.*</code>”, e.g., <code>coast.col="grey60"</code>.
+</p>
+</li>
+<li> <p><em>(not applicable for <code>layout.grid</code>)</em> <code>panel_scalebar</code>. To distinguish the same argument names in different functions it is provided to use prefix “<code>scalebar.*</code>”, e.g., <code>scalebar.col="black"</code>.
+</p>
+</li>
+</ul>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The sequence of elements is constant. To change order, use direct calling of <code>panel_graticule</code>, <code>panel_coastline</code>, <code>panel_scalebar</code> in any sequence.
+</p>
+<p>Sometimes, for rasters with <code>NA</code> values the followed sequence may be used: </p>
+<pre>
+panel_coastline(col="transparent",fill="grey80")
+panel_raster(a)
+panel_coastline(col="grey40")</pre>
+
+
+<h3>Value</h3>
+
+<p><code>panel_decor</code> returns <code>NULL</code> value.<br><code>layout.grid</code> returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sebin.ru">platonov@sebin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(nband=1,min=0,max=100)
+a[a&lt;30] &lt;- NA
+compose_open()
+panel_new()
+ct &lt;- panel_raster(a)
+panel_decor(graticule.col="green4",graticule.lwd=2,scalebar.col="brown")
+compose_legend(ct)
+compose_close()
+</code></pre>
+
+
+</div>

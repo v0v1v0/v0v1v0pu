@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>diamond</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Price by size for diamond rings</h2>
+
+<h3>Description</h3>
+
+<p>A data set on 48 diamond rings containing price in Singapore dollars
+and size of diamond in carats.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(diamond)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 48 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>carat</dt>
+<dd>
+<p>A measurement of a diamond's size</p>
+</dd>
+<dt>price</dt>
+<dd>
+<p>Price in Singapore dollars</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>This data comes from a collection of the <em>Journal of Statistics
+Education</em>. The accompanying documentation says:
+</p>
+<p>“Data presented in a newspaper advertisement suggest the use of simple
+linear regression to relate the prices of diamond rings to the weights
+of their diamond stones.  The intercept of the resulting regression line
+is negative and significantly different from zero.  This finding raises
+questions about an assumed pricing mechanism and motivates consideration
+of remedial actions.”
+</p>
+
+
+<h3>Source</h3>
+
+<p>This comes from
+<a href="http://jse.amstat.org/datasets/diamond.txt">http://jse.amstat.org/datasets/diamond.txt</a>. Data
+set is contributed by Singfat Chu.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(diamond)
+plot(price ~ carat, diamond, pch=5)
+</code></pre>
+
+
+</div>

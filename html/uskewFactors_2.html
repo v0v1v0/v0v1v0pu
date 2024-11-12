@@ -1,0 +1,130 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uskewFA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Mixtures of 'Unrestricted' Skew-t Factor Analyzers via the EM algorithm
+</h2>
+
+<h3>Description</h3>
+
+<p>Fits a mixture of 'unrestricted' skew-t factor analyzers via the EM algorithm for estimation of model parameters</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uskewFA(x, G, q, init=1, max.it=100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>A numeric matrix.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>G</code></td>
+<td>
+
+<p>The number of mixture components to fit.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+
+<p>The number of latent factors.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init</code></td>
+<td>
+
+<p>This number controls the starting values that are used: (1) k-means, or (2) random.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.it</code></td>
+<td>
+
+<p>The maximum number of iterations of the EM algorithm.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>map</code></td>
+<td>
+<p>A vector of the maximum a posteriori group memberships.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bic</code></td>
+<td>
+<p>The value of the Bayesian Information Criterion.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zhat</code></td>
+<td>
+<p>The matrix of estimated probabilities of group membership.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>likelihood</code></td>
+<td>
+<p>A vector containing the value of the complete-data log-likelihood computed at each iteration of the EM algorithm.</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>This package contains measurements on 200 Swiss banknotes: 100 genuine and 100 counterfeit. The variables are length of bill, width of left edge, width of right edge , bottom margin width and top margin width. All measurements are in millimetres. The data source is noted below. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paula M. Murray, Ryan P. Browne, and Paul D. McNicholas
+</p>
+<p>Maintainer: Paula M. Murray &lt;paula.murray@math.mcmaster.ca&gt;</p>
+
+
+<h3>References</h3>
+
+<p>Murray, P.M., Browne, R.P., and McNicholas, P.D. (2014), "Mixtures of 'Unrestricted' Skew-t Factor Analyzers". Arxiv preprint arXiv:1310.6224</p>
+
+
+<h3>See Also</h3>
+
+<p>Flury, B. and Riedwyl, H. (1988). Multivariate Statistics: A practical approach. London: Chapman and Hall.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data("banknote")
+x=banknote[,c(5,6)]
+# We let max.it=3 for a speedy illustration.
+# More 	iterations are needed to ensure
+# convergence.
+results=uskewFA(x,G=2,q=1,max.it=3)
+results
+</code></pre>
+
+
+</div>

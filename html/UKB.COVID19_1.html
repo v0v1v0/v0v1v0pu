@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>comorbidity_asso</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate comorbidity association result file</h2>
+
+<h3>Description</h3>
+
+<p>Association tests between each co-morbidity and given phenotype (susceptibility, mortality or severity) with the adjustment of covariates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">comorbidity_asso(
+  pheno,
+  covariates,
+  cormorbidity,
+  population = "all",
+  cov.name = c("sex", "age", "bmi"),
+  phe.name,
+  ICD10.file
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pheno</code></td>
+<td>
+<p>phenotype dataframe - output from makePheno function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>covariates</code></td>
+<td>
+<p>covariate dataframe - output from risk.factor function.  Optional.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cormorbidity</code></td>
+<td>
+<p>Comorbidity summary generated from comorbidity.summary.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>population</code></td>
+<td>
+<p>Choose self-report population/ethnic background group from "all", white", "black", "asian", "mixed", or "other". By default, population="all", include all ethnic groups.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cov.name</code></td>
+<td>
+<p>Selected covariates names. By default, cov.name=c("sex","age","bmi"), covariates are sex age and BMI.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phe.name</code></td>
+<td>
+<p>Phenotype name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ICD10.file</code></td>
+<td>
+<p>The ICD10 code file, which is included in the package.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Outputs a comorbidity association test result with OR, 95% CI and p-value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+comorb.asso &lt;- comorbidity_asso(pheno=phe,
+covariates=covar,
+cormorbidity=comorb,
+population="white",
+cov.name=c("sex","age","bmi","SES","smoke","inAgedCare"),
+phe.name="hospitalisation",
+ICD10.file=covid_example("ICD10.coding19.txt.gz"))
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

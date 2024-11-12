@@ -1,0 +1,35 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_blank_slate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Don't save/load user workspace between sessions</h2>
+
+<h3>Description</h3>
+
+<p>R can save and reload the user's workspace between sessions via an <code>.RData</code>
+file in the current directory. However, long-term reproducibility is enhanced
+when you turn this feature off and clear R's memory at every restart.
+Starting with a blank slate provides timely feedback that encourages the
+development of scripts that are complete and self-contained. More detail can
+be found in the blog post <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Project-oriented workflow</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_blank_slate(scope = c("user", "project"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>scope</code></td>
+<td>
+<p>Edit globally for the current <strong>user</strong>, or locally for the
+current <strong>project</strong></p>
+</td>
+</tr></table>
+</div>

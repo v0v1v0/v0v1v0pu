@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>optimal.params.sloss</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Estimation of neutral community parameters using a two-stage maximum-likelihood procedure </h2>
+
+<h3>Description</h3>
+
+<p>Function <code>optimal.params.sloss()</code> returns maximum likelihood
+estimates of <code>theta</code> and <code>m(k)</code> using numerical
+optimization.
+</p>
+<p>It differs from <code>untb</code>'s <code>optimal.params()</code> function as it
+applies to a network of smaller community samples <code>k</code> instead of
+to a single large community sample.
+</p>
+<p>Although there is a single, common <code>theta</code> for all communities,
+immigration estimates are provided for each local community <code>k</code>,
+sharing a same biogeographical background.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">optimal.params.sloss(D, nbres = 100, ci = FALSE, cint = c(0.025, 0.975))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>D</code></td>
+<td>
+<p> Species counts over a network of community samples (species by sample table) </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nbres</code></td>
+<td>
+<p> Number of resampling rounds for <code>theta</code> estimation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci</code></td>
+<td>
+<p> Specifies whether bootstraps confidence intervals should be provided for estimates </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cint</code></td>
+<td>
+<p> Bounds of confidence intervals, if ci = T </p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>Mean <code>theta</code> estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>I</code></td>
+<td>
+<p>The vector of estimated immigration numbers <code>I(k)</code></p>
+</td>
+</tr>
+</table>
+<p>Output of the bootstrap procedure, if ci = T:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>thetaci</code></td>
+<td>
+<p>Confidence interval for <code>theta</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>msampleci</code></td>
+<td>
+<p>Confidence intervals for <code>m(k)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thetasamp</code></td>
+<td>
+<p>theta estimates provided by the resampling procedure</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Iboot</code></td>
+<td>
+<p>Bootstrapped values of <code>I(k)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mboot</code></td>
+<td>
+<p>Bootstrapped values of <code>m(k)</code></p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p> The function returns unhelpful output when run with the
+<code>caruso</code> dataset as in <code>optimal.params.sloss(caruso)</code>.  The
+reason for this behaviour is unknown.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Francois Munoz </p>
+
+
+<h3>References</h3>
+
+<p>Francois Munoz, Pierre Couteron, B. R. Ramesh, and Rampal S. Etienne
+2007. “Estimating parameters of neutral communities: from one
+single large to several small samples”. <em>Ecology</em>
+88(10):2482-2488 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p>optimal.params, optimal.params.gst </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(ghats)
+optimal.params.sloss(ghats)
+</code></pre>
+
+
+</div>

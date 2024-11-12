@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dottodot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dot-to-dot puzzle</h2>
+
+<h3>Description</h3>
+
+<p>A set of points to make a dot-to-dot puzzle
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(dottodot)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 49 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>x</dt>
+<dd>
+<p>x position</p>
+</dd>
+<dt>y</dt>
+<dd>
+<p>y position</p>
+</dd>
+<dt>pos</dt>
+<dd>
+<p>where to put label</p>
+</dd>
+<dt>ind</dt>
+<dd>
+<p>number for label</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Points to make a dot to dot puzzle to illustrate,
+<code>text</code>, <code>points</code>, and the argument <code>pos</code>.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Illustration by Noah Verzani.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(dottodot)
+# make a blank graph
+plot(y~x,data=dottodot,type="n",bty="n",xaxt="n",xlab="",yaxt="n",ylab="")
+# add the points
+points(y~x,data=dottodot)
+# add the labels using pos argument
+with(dottodot, text(x,y,labels=ind,pos=pos))
+# solve the puzzle
+lines(y~x, data=dottodot)
+</code></pre>
+
+
+</div>

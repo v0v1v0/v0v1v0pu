@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>overhead,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Overhead method for Universal Scalability Law models</h2>
+
+<h3>Description</h3>
+
+<p><code>overhead</code> calculates the overhead in processing time for a system
+modeled with the Universal Scalability Law.
+It evaluates the regression function in the frame <code>newdata</code> (which
+defaults to <code>model.frame(object)</code>). The result contains the ideal
+processing time and the additional overhead caused by contention and
+coherency delays.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+overhead(object, newdata)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A USL model object for which the overhead will be calculated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>An optional data frame in which to look for variables
+with which to calculate the overhead.
+If omitted, the fitted values are used.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The calculated processing times are given as percentages of a
+non-parallelized workload. So for a non-parallelized workload the ideal
+processing time will always be given as <em>100%</em> while the overhead
+for contention and coherency will always be zero.
+</p>
+<p>Doubling the capacity will cut the ideal processing time in half but
+increase the overhead percentages. The increase of the overhead depends on
+the values of the parameters <code>alpha</code> and <code>beta</code> estimated by
+<code>usl</code>.
+</p>
+<p>The calculation is based on <em>A General Theory of Computational
+Scalability Based on Rational Functions</em>, equation 26.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>overhead</code> produces a matrix of overhead percentages based on
+a non-parallelized workload. The column <code>ideal</code> contains the ideal
+percentage of execution time. The columns <code>contention</code> and
+<code>coherency</code> give the additional overhead percentage caused by
+the respective effects.
+</p>
+
+
+<h3>References</h3>
+
+<p>Neil J. Gunther. Guerrilla Capacity Planning: A Tactical
+Approach to Planning for Highly Scalable Applications and Services.
+Springer, Heidelberg, Germany, 1st edition, 2007.
+</p>
+<p>Neil J. Gunther. A General Theory of Computational Scalability
+Based on Rational Functions. Computing Research Repository, 2008.
+<code>http://arxiv.org/abs/0808.1431</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>, <code>USL-class</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(specsdm91)
+
+## Print overhead in processing time for demo dataset
+overhead(usl(throughput ~ load, specsdm91))
+
+</code></pre>
+
+
+</div>

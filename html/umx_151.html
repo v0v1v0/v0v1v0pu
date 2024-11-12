@@ -1,0 +1,154 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummaryACEcov</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Present results of a twin ACE-model with covariates in table and graphical forms.</h2>
+
+<h3>Description</h3>
+
+<p>Summarize a Cholesky model with random-effects covariates, as returned by <code>umxACEcov()</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummaryACEcov(
+  model,
+  digits = 2,
+  showRg = FALSE,
+  std = TRUE,
+  comparison = NULL,
+  CIs = TRUE,
+  zero.print = ".",
+  report = c("markdown", "html"),
+  file = getOption("umx_auto_plot"),
+  returnStd = FALSE,
+  extended = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A <code>umxACEcov()</code> model to summarize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRg</code></td>
+<td>
+<p>= Whether to show the genetic correlations (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>= Whether to show the standardized model (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>You can run mxCompare on a comparison model (NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Whether to show Confidence intervals if they exist (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero.print</code></td>
+<td>
+<p>How to show zeros (".")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>If "html", then open an html table of the results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStd</code></td>
+<td>
+<p>Whether to return the standardized form of the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extended</code></td>
+<td>
+<p>How much to report (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters to control model summary</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxACEcov()</code>
+</p>
+</li></ul>
+<p>Other Summary functions: 
+<code>umxSummary.MxModel()</code>,
+<code>umxSummaryCP()</code>,
+<code>umxSummaryGxE()</code>,
+<code>umxSummaryIP()</code>,
+<code>umxSummaryMRDoC()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(twinData)
+mzData = subset(twinData, zygosity == "MZFF")
+dzData = subset(twinData, zygosity == "DZFF")
+m1 = umxACEcov(selDVs = c("bmi", "wt"), selCovs = "ht", dzData = dzData, mzData = mzData, sep="")
+umxSummaryACEcov(m1, file = NA)
+umxSummaryACEcov(m1, file = "name", std = TRUE)
+stdFit = umxSummary(m1, returnStd = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

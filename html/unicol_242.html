@@ -1,0 +1,140 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uni_ulm_1</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Main colors of the University of Ulm, Germany</h2>
+
+<h3>Description</h3>
+
+<p><code>uni_ulm_1</code> provides the basic or main colors 
+of the <a href="https://www.uni-ulm.de">University of Ulm</a>, Germany.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uni_ulm_1
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 5.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The color <code>hellblau</code> is alternatively defined as 
+<code>RGB 125/154/170</code>, <code>HEX #7D9AAA</code>, <code>Pantone 5425 C</code>, or <code>CMYK 30/0/0/35</code>. 
+</p>
+<p>The color <code>dunkelgrau</code> is alternatively defined as 
+<code>RGB 87/87/86</code>, <code>HEX #575756</code>, <code>Pantone 431 C</code>, or <code>CMYK 0/0/0/80</code>. 
+</p>
+<p>The auxiliary color <code>akzent</code> is used for decorative elements. 
+It is alternatively defined as 
+<code>RGB 169/162/141</code>, <code>HEX #A9A28D</code>, <code>Pantone 7536 C</code>, or <code>CMYK 0/0/28/38</code>. 
+</p>
+<p>See the <code>ac</code> and <code>usecol</code> functions for creating color gradients.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of colors (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>unicol</strong>, 2022-12-30.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Color definitions are based on 
+<a href="https://www.uni-ulm.de/misc/corporate-design/#c875952">https://www.uni-ulm.de/misc/corporate-design/#c875952</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uni_ulm_2</code> for the departmental accent colors of the University of Ulm;  
+<code>seecol</code> for viewing and comparing color palettes; 
+<code>usecol</code> for using color palettes; 
+<code>simcol</code> for finding similar colors; 
+<code>newpal</code> for defining new color palettes; 
+<code>grepal</code> for finding named colors.
+</p>
+<p>Other German university color palettes: 
+<code>fu_0</code>,
+<code>fu_1</code>,
+<code>fu_2</code>,
+<code>fu_3</code>,
+<code>hu_1</code>,
+<code>hu_1_2022</code>,
+<code>hu_1_digital</code>,
+<code>hu_2</code>,
+<code>hu_2_2022</code>,
+<code>hu_3_accent</code>,
+<code>lmu_1</code>,
+<code>lmu_2</code>,
+<code>lmu_3</code>,
+<code>rptu</code>,
+<code>uni_bonn_1</code>,
+<code>uni_bonn_2</code>,
+<code>uni_freiburg_0</code>,
+<code>uni_freiburg_1</code>,
+<code>uni_freiburg_2</code>,
+<code>uni_freiburg_blue</code>,
+<code>uni_freiburg_br</code>,
+<code>uni_freiburg_grey</code>,
+<code>uni_freiburg_info</code>,
+<code>uni_goettingen_1</code>,
+<code>uni_goettingen_2</code>,
+<code>uni_goettingen_3</code>,
+<code>uni_halle</code>,
+<code>uni_hamburg_1</code>,
+<code>uni_hamburg_2</code>,
+<code>uni_heidelberg</code>,
+<code>uni_jena_1</code>,
+<code>uni_jena_2</code>,
+<code>uni_kassel</code>,
+<code>uni_kiel_1</code>,
+<code>uni_kiel_2</code>,
+<code>uni_koeln_1</code>,
+<code>uni_koeln_2</code>,
+<code>uni_konstanz_1</code>,
+<code>uni_konstanz_2</code>,
+<code>uni_magdeburg_1</code>,
+<code>uni_magdeburg_2</code>,
+<code>uni_magdeburg_3</code>,
+<code>uni_mannheim_1</code>,
+<code>uni_mannheim_2</code>,
+<code>uni_potsdam</code>,
+<code>uni_regensburg_1</code>,
+<code>uni_regensburg_2</code>,
+<code>uni_regensburg_3</code>,
+<code>uni_stuttgart_1</code>,
+<code>uni_stuttgart_print</code>,
+<code>uni_ulm_2</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">uni_ulm_1
+unikn::seecol(uni_ulm_1, main = "Main colors of the University of Ulm")
+unikn::demopal(uni_ulm_1, type = 1, 
+               main = "Main colors of Ulm University")
+        
+# 5-color gradient:
+uni_ulm_5 &lt;- unikn::usecol(c(uni_ulm_1["hellblau"], "white"), n = 6)[1:5]
+
+</code></pre>
+
+
+</div>

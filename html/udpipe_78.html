@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_recode_ngram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Recode words with compound multi-word expressions</h2>
+
+<h3>Description</h3>
+
+<p>Replace in a character vector of tokens, tokens with compound multi-word expressions.
+So that <code>c("New", "York")</code> will be <code>c("New York", NA)</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_recode_ngram(x, compound, ngram, sep = " ")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector of words where you want to replace tokens with compound multi-word expressions.
+This is generally a character vector as returned by the token column of <code>as.data.frame(udpipe_annotate(txt))</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>compound</code></td>
+<td>
+<p>a character vector of compound words multi-word expressions indicating terms which can be considered as one word. 
+For example <code>c('New York', 'Brussels Hoofdstedelijk Gewest')</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ngram</code></td>
+<td>
+<p>a integer vector of the same length as <code>compound</code> indicating how many terms there are in the specific compound multi-word expressions
+given by <code>compound</code>, where <code>compound[i]</code> contains <code>ngram[i]</code> words. 
+So if <code>x</code> is <code>c('New York', 'Brussels Hoofdstedelijk Gewest')</code>, the ngram would be <code>c(2, 3)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>separator used when the compounds were constructed by combining the words together into a compound multi-word expression. Defaults to a space: ' '.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the same character vector <code>x</code> where elements in <code>x</code> will be replaced by compound multi-word expression. 
+If will give preference to replacing with compounds with higher ngrams if these occur. See the examples.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>txt_nextgram</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("I", "went", "to", "New", "York", "City", "on", "holiday", ".")
+y &lt;- txt_recode_ngram(x, compound = "New York", ngram = 2, sep = " ")
+data.frame(x, y)
+
+keyw &lt;- data.frame(keyword = c("New-York", "New-York-City"), ngram = c(2, 3))
+y &lt;- txt_recode_ngram(x, compound = keyw$keyword, ngram = keyw$ngram, sep = "-")
+data.frame(x, y)
+
+## Example replacing adjectives followed by a noun with the full compound word
+data(brussels_reviews_anno)
+x &lt;- subset(brussels_reviews_anno, language == "nl")
+keyw &lt;- keywords_phrases(x$xpos, term = x$token, pattern = "JJNN", 
+                         is_regex = TRUE, detailed = FALSE)
+head(keyw)
+x$term &lt;- txt_recode_ngram(x$token, compound = keyw$keyword, ngram = keyw$ngram)
+head(x[, c("token", "term", "xpos")], 12)
+</code></pre>
+
+
+</div>

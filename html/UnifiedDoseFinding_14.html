@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>select_mtd_gBOIN_TB</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Select the maximum tolerated dose (MTD) defined by Toxicity Burden (TB) Score for single agent trials using gBOIN design
+</h2>
+
+<h3>Description</h3>
+
+<p>Select the maximum tolerated dose (MTD) defined by the toxicity burden (BT) score proposed by Bekele et al. (2004) when the trial is completed using the generalized Bayesian optimal interval (gBOIN) design (Mu et al. 2017). The algorithm of this function is exactly same to the Select_mtd_gBOIN.Continuous() just the input parameter is used by the TB score
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">select_mtd_gBOIN_TB(target, npts, ntox)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the continuous target score
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>npts</code></td>
+<td>
+
+<p>the number of patients enrolled at each dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ntox</code></td>
+<td>
+
+<p>the toxicity score at each dose level
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>select_mtd_gBOIN_TB()</code> returns the selected dose
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>B. Nebiyou Bekele &amp; Peter F Thall (2004) Dose-Finding Based on Multiple Toxicities in a Soft Tissue Sarcoma Trial, Journal of the American Statistical Association
+</p>
+<p>Mu, Rongji, Ying Yuan, Jin Xu, Sumithra J. Mandrekar, and Jun Yin. "gBOIN: a unified model-assisted phase I trial design accounting for toxicity grades, and binary or continuous end points." Journal of the Royal Statistical Society. Series C: Applied Statistics 68, no. 2 (2019): 289-308.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">target &lt;- 3.344
+n &lt;- c(3, 9, 6, 0, 0, 0, 0, 0, 0, 0)
+y &lt;- c(5.5, 26.95, 25.3, 0, 0, 0, 0, 0, 0, 0)
+select_mtd_gBOIN_TB(target = target, npts = n, ntox = y)
+</code></pre>
+
+
+</div>

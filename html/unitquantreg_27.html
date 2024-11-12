@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>loglike_unitquantreg</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Log-likelihood, score vector and hessian matrix.</h2>
+
+<h3>Description</h3>
+
+<p>Internal functions using in <code>unitquantreg.fit</code>
+to compute the negative log-likelihood function, the score vector and the hessian
+matrix using analytic expressions written in <code>C++</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">loglike_unitquantreg(par, tau, family, linkobj, linkobj.theta, X, Z, y)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+<p>vector of regression model coefficients for <code class="reqn">\mu</code> and/or
+<code class="reqn">\theta</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>quantile level, value between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>specify the distribution family name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linkobj, linkobj.theta</code></td>
+<td>
+<p>a function, usually obtained from
+<code>make.link</code> for link function of <code class="reqn">\mu</code> and <code class="reqn">\theta</code>,
+respectively.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>design matrix related to the <code class="reqn">\mu</code> parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z</code></td>
+<td>
+<p>design matrix related to the <code class="reqn">\theta</code> parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>vector of response variable.</p>
+</td>
+</tr>
+</table>
+</div>

@@ -1,0 +1,141 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_file_load_pseudo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Read in files from pseudocons.</h2>
+
+<h3>Description</h3>
+
+<p>Read in PRS scored files from <a href="https://www.staff.ncl.ac.uk/richard.howey/pseudocons/example.html">pseudocons</a>.
+</p>
+
+<ol>
+<li>
+<p> Read the file
+</p>
+</li>
+<li>
+<p> Break it into pseudo and real rows
+</p>
+</li>
+<li>
+<p> Clean-up by deleting the pseudo suffix
+</p>
+</li>
+<li>
+<p> Rename NT vars with a suffix
+</p>
+</li>
+<li>
+<p> Merge files on ID and return
+</p>
+</li>
+</ol>
+<table>
+<tr>
+<td style="text-align: left;">
+    </td>
+<td style="text-align: left;"> ID </td>
+<td style="text-align: right;"> FID </td>
+<td style="text-align: right;"> BMIS1 </td>
+<td style="text-align: right;"> BMIS2 </td>
+<td style="text-align: right;"> BMIS3 </td>
+<td style="text-align: right;"> BMIS4 </td>
+<td style="text-align: left;"> ... </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   1 </td>
+<td style="text-align: left;"> 1234501 </td>
+<td style="text-align: right;"> 12345 </td>
+<td style="text-align: right;"> -0.032 </td>
+<td style="text-align: right;"> -0.77 </td>
+<td style="text-align: right;"> -0.40 </td>
+<td style="text-align: right;"> -3.87 </td>
+<td style="text-align: left;"> ... </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   2 </td>
+<td style="text-align: left;"> 1234501-pseudo-1 </td>
+<td style="text-align: right;"> 12345 </td>
+<td style="text-align: right;"> 0.117 </td>
+<td style="text-align: right;"> -0.66 </td>
+<td style="text-align: right;"> -0.33 </td>
+<td style="text-align: right;"> -4.08 </td>
+<td style="text-align: left;"> ... </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+</tr>
+</table>
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_file_load_pseudo(fn, bp, suffix = "_NT", chosenp = "S5")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fn</code></td>
+<td>
+<p>The filename</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bp</code></td>
+<td>
+<p>The path to the folder containing the file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffix</code></td>
+<td>
+<p>to add to the NT columns (Default = "_NT")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chosenp</code></td>
+<td>
+<p>The suffix (pvalue) we desire to use (Default = "S5")</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> dataframe of real and pseudo PRS columns
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other File Functions: 
+<code>dl_from_dropbox()</code>,
+<code>umx_make_sql_from_excel()</code>,
+<code>umx_move_file()</code>,
+<code>umx_open()</code>,
+<code>umx_rename_file()</code>,
+<code>umx_write_to_clipboard()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+basepath = "~/Dropbox/2016 (1). project EA/2018/EA3/"
+tmp = umx_file_load_pseudo("PRS_EA3_R9_autosomes_HRC1.1_pseudo.txt", bp = bp)
+str(tmp)
+head(tmp[, c("BMIS4", "BMIS4_NT")]
+
+## End(Not run)
+</code></pre>
+
+
+</div>

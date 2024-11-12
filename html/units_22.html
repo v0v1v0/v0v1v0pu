@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>load_units_xml</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Load a unit system</h2>
+
+<h3>Description</h3>
+
+<p>Load an XML database containing a unit system compatible with UDUNITS2.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">load_units_xml(path = default_units_xml())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>a path to a valid unit system in XML format.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>A unit system comprises a root <code>&lt;unit-system&gt;</code> and a number of children
+defining prefixes (<code>&lt;prefix&gt;</code>) or units (<code>&lt;unit&gt;</code>).
+See the contents of
+</p>
+<p><code>system.file("share/udunits", package="units")</code>
+</p>
+<p>for examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># load a new unit system
+load_units_xml(system.file("share/udunits/udunits2-base.xml", package="units"))
+## Not run: 
+set_units(1, rad) # doesn'twork
+
+## End(Not run)
+
+# reload the default unit system
+load_units_xml()
+set_units(1, rad) # works again
+
+</code></pre>
+
+
+</div>

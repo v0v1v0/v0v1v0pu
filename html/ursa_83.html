@@ -1,0 +1,195 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>identify</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Get value and coordinates from location
+</h2>
+
+<h3>Description</h3>
+
+<p>Functions to extract values of raster image from given location, specified by coordinates in raster projection, by cell position or by geogpaphical coordinates. Additional utils to convert cell position and planar coordinates mutually.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">value_xy(obj, ...)
+
+value_ll(obj, ...)
+
+value_cr(obj, ...)
+
+coord_xy(obj, ...)
+
+coord_cr(obj, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>the set of arguments, which are recognized via their names (using regular expressions) and classes:
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+          <em>Matched pattern</em> </td>
+<td style="text-align: left;"> <em>Function</em> </td>
+<td style="text-align: left;"> <em>Used name</em>
+          
+          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>ind</code> </td>
+<td style="text-align: left;"> <code>*_*</code> </td>
+<td style="text-align: left;"> <code>ind</code> </td>
+<td style="text-align: left;">
+          Index (positive <code>integer</code>) in internal value storage.
+          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>^c</code> </td>
+<td style="text-align: left;"> <code>*_cr</code> </td>
+<td style="text-align: left;"> <code>col</code> </td>
+<td style="text-align: left;">
+          Integer of non-zero length. Index of column/sample Length of column and row indices should be the same for creating set of two-dimension coordinates.</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>^r</code> </td>
+<td style="text-align: left;"> <code>*_cr</code> </td>
+<td style="text-align: left;"> <code>row</code> </td>
+<td style="text-align: left;">
+          Integer of non-zero length. Index of row/line. Length of column and row indices should be the same for creating set of two-dimension coordinates.
+          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>^x</code> </td>
+<td style="text-align: left;"> <code>*_xy</code> </td>
+<td style="text-align: left;"> <code>x</code> </td>
+<td style="text-align: left;">
+          Numeric of non-zero length. X-axis coordinate in grid of <code>obj</code>. The length of X-axis and Y-axis coordinates should be the same for creating set of two-dimension coordinates.
+          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>^y</code> </td>
+<td style="text-align: left;"> <code>*_xy</code> </td>
+<td style="text-align: left;"> <code>y</code> </td>
+<td style="text-align: left;">
+          Numeric of non-zero length. Y-axis coordinate in grid of <code>obj</code>. The length of X-axis and Y-axis coordinates should be the same for creating set of two-dimension coordinates.
+          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>^lon</code> </td>
+<td style="text-align: left;"> <code>value_ll</code> </td>
+<td style="text-align: left;"> <code>lon</code>  </td>
+<td style="text-align: left;">
+          Longitude. The length of longitudes and latitudes should be the same for creating set of two-dimension coordinates.
+          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>^lat</code> </td>
+<td style="text-align: left;"> <code>value_ll</code> </td>
+<td style="text-align: left;"> <code>lat</code> </td>
+<td style="text-align: left;">
+          Latitude. The length of longitudes and latitudes should be the same for creating set of two-dimension coordinates.
+      </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>value_xy</code> returns values for location, which is specified by planar coordinates (x, y).<br><code>value_cr</code> returns values for location, which is specified by cell posisition (column, row) relative to upper-left corner of image .<br><code>value_ll</code> returns values for location, which is specified by longitude and latitude (long, lat).
+</p>
+<p><code>coord_xy</code> transforms planar coordinates (x, y) to cell position (column, row).<br><code>coord_cr</code> transforms cell position (column, row) to planar coordinates (x, y).
+</p>
+<p>It is required to use a couple of coordinate vectors: <code>(x, y)</code>, <code>(c, r)</code> or <code>(lon, lat)</code> of the same length. The unary argument is interpreted as index in internal value storage.
+</p>
+<p>Position in column/row coordinates starts from upper-lever corner. The cell of upper-level corner has (1, 1) coordinates (in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> indices starts from <code>1L</code>), whereas in some GIS the same corner cell has (0, 0) coordinates.
+</p>
+<p>The column names of returned matrix are character format of index in internal value storage. This index can be specify in any function as argument <code>ind</code> instead of coordinates (planar, geographical, cell position).
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>value.*</code> numeric matrix of raster values. Band values for specific coordinates are by column. Set of specific coordinates are by row. <code>rownames</code> are band names, and <code>colnames</code> are index in internal value storage.
+</p>
+<p>For <code>coord.*</code> numeric matrix of coordinates with a vector of couple coordinates, one coordinate per one row. <code>rownames</code> are returned coordinates, and <code>colnames</code> are index in internal value storage.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+set.seed(352)
+a &lt;- as.integer(ursa_dummy(3,min=0,max=999))
+ind &lt;- which(ursa_value(a[1])==890)
+print(ind)
+msk &lt;- a[1]==890
+am &lt;- a[msk]
+b &lt;- as.data.frame(am)
+b$jx &lt;- b$x+runif(nrow(b),min=-1000,max=1000)
+b$jy &lt;- b$y+runif(nrow(b),min=-1000,max=1000)
+print(b)
+cr1 &lt;- coord_xy(a,x=b$jx,y=b$jy)
+cr2 &lt;- coord_xy(a,y=b$y,x=b$x)
+cr3 &lt;- coord_xy(a,ind=ind)
+print(cr1)
+print(list('cr1 and cr2'=all.equal(cr1,cr2)
+          ,'cr2 and cr3'=all.equal(cr2,cr3)
+          ,'cr3 and cr1'=all.equal(cr3,cr1)))
+xy1 &lt;- coord_cr(a,c=cr1["c",],r=cr1["r",])
+print(xy1)
+print(list('in x'=identical(unname(xy1["x",]),b[,"x",drop=TRUE])
+          ,'in y'=identical(unname(xy1["y",]),b[,"y",drop=TRUE])))
+val1 &lt;- value_xy(a,x=b$jx,y=b$jy)
+val2 &lt;- value_xy(a,x=b$x,y=b$y)
+val3 &lt;- value_cr(a,ind=ind)
+val4 &lt;- value_cr(a,c=cr1["c",],r=cr1["r",])
+print(val1)
+print(list('val1 and val2'=all.equal(val1,val2)
+       ,'val2 and val3'=all.equal(val2,val3)
+       ,'val3 and val4'=all.equal(val3,val4)
+       ,'val4 and val1'=all.equal(val4,val1)))
+ps &lt;- pixelsize()
+v &lt;- value_ll(ps,lon=180,lat=70)
+print(c('True scale'=v/with(ursa_grid(ps),1e-6*resx*resy)))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unifir_prop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The class for unifir prop objects</h2>
+
+<h3>Description</h3>
+
+<p>This function is exported so that developers can add their own props
+in new packages, without needing to re-implement the prop and script
+classes themselves. It is not expected that end users will need this
+function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unifir_prop(prop_file, method_name, method_type, parameters, build, using)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>prop_file</code></td>
+<td>
+<p>The system location for the C# template file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method_name</code></td>
+<td>
+<p>The name of the method, in C# code</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method_type</code></td>
+<td>
+<p>The type of the method (usually matches its file name);
+scripts can have multiple versions of the same method, each with different
+method_name values, all sharing the same method_type.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>Method-specific parameters, typically used in the build
+stage.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>build</code></td>
+<td>
+<p>A function that takes three arguments, <code>script</code>, <code>prop</code>, and
+<code>debug</code>, and uses those to construct the C# method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>using</code></td>
+<td>
+<p>A character vector of imports required for the method.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function will check each argument for correctness. To be specific,
+it performs the following checks:
+</p>
+
+<ul>
+<li> <p><code>prop_file</code> must be either a <code>waiver</code> object (created by waiver)
+or a file path of length 1 pointing to a file that exists
+</p>
+</li>
+<li> <p><code>method_name</code> will be automatically generated if not existing. If
+it exists, it must be a character vector of length 1
+</p>
+</li>
+<li> <p><code>method_type</code> must be a character vector of length 1
+</p>
+</li>
+<li> <p><code>build</code> must be a function with the arguments <code>script</code>, <code>prop</code>,
+and <code>debug</code> (in that order, with no other arguments). Any other
+arguments needed by your build function should be passed as prop
+parameters.
+</p>
+</li>
+<li> <p><code>using</code> must be a character vector (of any length, including 0)
+</p>
+</li>
+</ul>
+<p>If your prop needs data or arguments beyond these, store them as a
+list in <code>parameters</code>, which is entirely unchecked.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An R6 object of class <code>unifir_prop</code>
+</p>
+
+
+<h3>The debug argument</h3>
+
+<p>When <code>Sys.getenv(unifir_debugmode)</code> returns anything other than <code>""</code>,
+action runs in "debug mode". In addition to setting <code>exec</code> and <code>write</code>
+to <code>FALSE</code> in action, this mode also attempts to disable any prop
+functionality that would make changes to the user's disk – no files
+or directories should be altered. In this mode, action will pass
+<code>debug = TRUE</code> as an argument to your prop; your prop should respect
+the debug mode and avoid making any changes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">unifir_prop(
+  prop_file = waiver(), # Must be a file that exists or waiver()
+  method_name = NULL, # Auto-generated if NULL or NA
+  method_type = "ExampleProp", # Length-1 character vector
+  parameters = list(), # Not validated, usually a list
+  build = function(script, prop, debug) {},
+  using = character(0)
+)
+</code></pre>
+
+
+</div>

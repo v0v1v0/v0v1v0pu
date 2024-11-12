@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>reliability</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Report coefficient alpha (reliability)</h2>
+
+<h3>Description</h3>
+
+<p>Compute and report Coefficient alpha (extracted from Rcmdr to avoid its dependencies)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">reliability(S)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>S</code></td>
+<td>
+<p>A square, symmetric, numeric covariance matrix</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+<p>- &lt;https://cran.r-project.org/package=Rcmdr&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>- [umx::print.reliability()],
+</p>
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># treat car data as items of a test
+data(mtcars)
+reliability(cov(mtcars))
+</code></pre>
+
+
+</div>

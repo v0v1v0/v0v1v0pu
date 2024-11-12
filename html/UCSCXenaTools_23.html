@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>XenaGenerate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate and Subset a XenaHub Object from 'XenaData'</h2>
+
+<h3>Description</h3>
+
+<p>Generate and Subset a XenaHub Object from 'XenaData'
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">XenaGenerate(XenaData = UCSCXenaTools::XenaData, subset = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>XenaData</code></td>
+<td>
+<p>a <code>data.frame</code>. Default is <code>data(XenaData)</code>.
+The input of this option can only be <code>data(XenaData)</code> or its subset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subset</code></td>
+<td>
+<p>logical expression indicating elements or rows to keep.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a XenaHub object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Shixiang Wang <a href="mailto:w_shixiang@163.com">w_shixiang@163.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># 1 get all datasets
+XenaGenerate()
+# 2 get TCGA BRCA
+XenaGenerate(subset = XenaCohorts == "TCGA Breast Cancer (BRCA)")
+# 3 get all datasets containing BRCA
+XenaGenerate(subset = grepl("BRCA", XenaCohorts))
+</code></pre>
+
+
+</div>

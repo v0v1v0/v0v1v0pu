@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>libs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>load libraries</h2>
+
+<h3>Description</h3>
+
+<p><code>libs</code> allows loading multiple libraries in one call
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">libs(..., force.update = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>library names as strings, e.g. "pwr"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.update</code></td>
+<td>
+<p>install.package even if present (to get new version) FALSE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> nothing.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>library()</code>, <code>install.packages()</code>, <code>remove.packages()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+libs("umx", "OpenMx", "car")
+libs("umx", c("OpenMx", "car"))
+remove.packages()
+
+## End(Not run)
+</code></pre>
+
+
+</div>

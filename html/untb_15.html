@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>census</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct, coerce, and test for a census object</h2>
+
+<h3>Description</h3>
+
+<p>In package untb, ecosystem data is held in one of two preferred forms:
+census data and count data.  Function <code>as.census()</code> coerces to
+census format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">census(a)
+as.census(a)
+is.census(a)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>Ecosystem data.  In function <code>as.census()</code>, if a table,
+interpret as species count data; otherwise, interpret as census data</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>A “census” object is a list of individuals in the form of an
+unnamed vector whose elements indicate the individuals' species;
+compare “count” objects.
+</p>
+<p>An object of class “census” is also an unordered factor.  The
+levels are always in alphabetical order.
+</p>
+<p>Function <code>census()</code> takes an object of class “count” and
+returns an object of class “census”.  This function is not
+really intended for the end user.
+</p>
+<p>Function <code>as.census()</code> coerces to class “count” then
+returns <code>census()</code> of the result.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class “census”.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>See Also</h3>
+
+<p><code>count</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+jj &lt;- c(dogs=4,pigs=10,slugs=0,fish=1)
+
+x &lt;- census(jj)   # slugs appear as zero abundance
+extant(x)  # slugs gone
+
+x+x   # count method for census objects: order of elements lost
+
+
+as.census(jj)  # probably NOT what you meant
+
+a &lt;- c(rep("oak",5) ,rep("ash",2),rep("elm",3),rep("xx",4))
+# note that "a" is a plain vector here.
+as.census(a)
+</code></pre>
+
+
+</div>

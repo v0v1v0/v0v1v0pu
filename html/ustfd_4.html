@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ustfd_datasets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return a table of supported and known datasets</h2>
+
+<h3>Description</h3>
+
+<p><code>ustfd_datasets</code> provides details about 34 known datasets for Fiscal Data.
+A data frame with 34 rows and the following 7 columns:
+</p>
+
+<ul>
+<li> <p><code>dataset</code> - ID of the source dataset (natural key)
+</p>
+</li>
+<li> <p><code>name</code> - name of the source dataset
+</p>
+</li>
+<li> <p><code>summary_text</code> - description of the data set and the data it covers
+</p>
+</li>
+<li> <p><code>earliest_date</code> - the date of the earliest record available for this table
+</p>
+</li>
+<li> <p><code>data_start_year</code> - first year in the data set
+</p>
+</li>
+<li> <p><code>update_frequency</code> - "Daily", "Monthly", "Quarterly", "Semi-Annually",
+"Annually", "As Needed", "Daily (Discontinued)", "Monthly (Discontinued)"
+</p>
+</li>
+<li> <p><code>notes_and_known_limitations</code> - notes about
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">ustfd_datasets()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>tibble
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://fiscaldata.treasury.gov/api-documentation/#list-of-endpoints">https://fiscaldata.treasury.gov/api-documentation/#list-of-endpoints</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other ustfd_user: 
+<code>endpoint_exists()</code>,
+<code>ustfd_all_pages()</code>,
+<code>ustfd_query()</code>,
+<code>ustfd_simple()</code>,
+<code>ustfd_table_columns()</code>,
+<code>ustfd_tables()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ustfd)
+ustfd_datasets()
+
+
+
+</code></pre>
+
+
+</div>

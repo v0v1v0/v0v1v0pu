@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>samples</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Samples of a XenaHub object according to 'by' and 'how' action arguments</h2>
+
+<h3>Description</h3>
+
+<p>One is often interested in identifying samples or features present in each data set,
+or shared by all data sets, or present in any of several data sets.
+Identifying these samples, including samples in arbitrarily chosen data sets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">samples(
+  x,
+  i = character(),
+  by = c("hosts", "cohorts", "datasets"),
+  how = c("each", "any", "all")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a XenaHub object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>i</code></td>
+<td>
+<p>default is a empty character, it is used to specify
+the host, cohort or dataset by <code>by</code> option otherwise
+info will be automatically extracted by code</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by</code></td>
+<td>
+<p>a character specify <code>by</code> action</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>how</code></td>
+<td>
+<p>a character specify <code>how</code> action</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list include samples
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+xe = XenaHub(cohorts = "Cancer Cell Line Encyclopedia (CCLE)")
+# samples in each dataset, first host
+x = samples(xe, by="datasets", how="each")[[1]]
+lengths(x)        # data sets in ccle cohort on first (only) host
+
+## End(Not run)
+</code></pre>
+
+
+</div>

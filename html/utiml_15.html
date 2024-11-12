@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compute_multilabel_predictions</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute the multi-label ensemble predictions based on some vote schema</h2>
+
+<h3>Description</h3>
+
+<p>Compute the multi-label ensemble predictions based on some vote schema
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compute_multilabel_predictions(
+  predictions,
+  vote.schema = "maj",
+  probability = getOption("utiml.use.probs", TRUE)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>predictions</code></td>
+<td>
+<p>A list of multi-label predictions (mlresult).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vote.schema</code></td>
+<td>
+<p>Define the way that ensemble must compute the predictions.
+The default valid options are:
+</p>
+
+<dl>
+<dt>'avg'</dt>
+<dd>
+<p>Compute the mean of probabilities and the bipartitions</p>
+</dd>
+<dt>'maj'</dt>
+<dd>
+<p>Compute the majority of votes</p>
+</dd>
+<dt>'max'</dt>
+<dd>
+<p>Compute the higher probability for each instance/label</p>
+</dd>
+<dt>'min'</dt>
+<dd>
+<p>Compute the lower probability for each instance/label</p>
+</dd>
+</dl>
+<p>. (Default: 'maj')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>A logical value. If <code>TRUE</code> the predicted values are
+the score between 0 and 1, otherwise the values are bipartition 0 or 1.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A mlresult with computed predictions.
+</p>
+
+
+<h3>Note</h3>
+
+<p>You can create your own vote schema, just create a method that receive
+two matrix (bipartitions and probabilities) and return a list with the
+final bipartitions and probabilities.
+</p>
+<p>Remember that this method will compute the ensemble votes for each label.
+Thus the bipartition and probability matrix passed as argument for this
+method is related with the bipartitions and probabilities for a single
+label.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+model &lt;- br(toyml, "KNN")
+predictions &lt;- list(
+ predict(model, toyml[1:10], k=1),
+ predict(model, toyml[1:10], k=3),
+ predict(model, toyml[1:10], k=5)
+)
+
+result &lt;- compute_multilabel_predictions(predictions, "maj")
+
+## Random choice
+random_choice &lt;- function (bipartition, probability) {
+ cols &lt;- sample(seq(ncol(bipartition)), nrow(bipartition), replace = TRUE)
+ list(
+   bipartition = bipartition[cbind(seq(nrow(bipartition)), cols)],
+   probability = probability[cbind(seq(nrow(probability)), cols)]
+ )
+}
+result &lt;- compute_multilabel_predictions(predictions, "random_choice")
+
+</code></pre>
+
+
+</div>

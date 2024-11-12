@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>scale_units</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Position scales for units data</h2>
+
+<h3>Description</h3>
+
+<p>These are the default scales for the <code>units</code> class. These will usually
+be added automatically. To override manually, use <code>scale_*_units</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">scale_x_units(..., guide = ggplot2::waiver(), position = "bottom",
+  sec.axis = ggplot2::waiver(), unit = NULL)
+
+scale_y_units(..., guide = ggplot2::waiver(), position = "left",
+  sec.axis = ggplot2::waiver(), unit = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>arguments passed on to <code>continuous_scale</code>
+(e.g. scale transformations via the <code>trans</code> argument; see examples).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>guide</code></td>
+<td>
+<p>A function used to create a guide or its name. See
+<code>guides()</code> for more information.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>position</code></td>
+<td>
+<p>For position scales, The position of the axis.
+<code>left</code> or <code>right</code> for y axes, <code>top</code> or <code>bottom</code> for x axes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sec.axis</code></td>
+<td>
+<p><code>sec_axis()</code> is used to specify a secondary axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unit</code></td>
+<td>
+<p>A unit specification to use for the axis. If given, the values
+will be converted to this unit before plotting. An error will be thrown if
+the specified unit is incompatible with the unit of the data.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">if (requireNamespace("ggplot2", quietly=TRUE)) {
+
+library(ggplot2)
+
+mtcars$consumption &lt;- set_units(mtcars$mpg, mi / gallon)
+mtcars$power &lt;- set_units(mtcars$hp, hp)
+
+# Use units encoded into the data
+ggplot(mtcars) +
+  geom_point(aes(power, consumption))
+
+# Convert units on the fly during plotting
+ggplot(mtcars) +
+  geom_point(aes(power, consumption)) +
+  scale_x_units(unit = "W") +
+  scale_y_units(unit = "km/l")
+
+# Resolve units when transforming data
+ggplot(mtcars) +
+  geom_point(aes(power, 1 / consumption))
+
+# Reverse the y axis
+ggplot(mtcars) +
+  geom_point(aes(power, consumption)) +
+  scale_y_units(trans="reverse")
+
+}
+</code></pre>
+
+
+</div>

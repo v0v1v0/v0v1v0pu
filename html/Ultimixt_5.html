@@ -1,0 +1,206 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>SM.MAP.MixReparametrized</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+summary of the output produced by K.MixReparametrized
+</h2>
+
+<h3>Description</h3>
+
+<p>Label switching in a simulated Markov chain produced by K.MixReparametrized is removed by the technique of Marin et al.
+(2004). Namely, component labels are reorded by the shortest Euclidian distance between a posterior sample and the maximum a
+posteriori (MAP) estimate. Let <code class="reqn">\theta_i</code> be the <code class="reqn">i</code>-th vector of computed component means, standard deviations
+and weights. The MAP estimate is derived from the MCMC sequence and denoted by <code class="reqn">\theta_{MAP}</code>. For a permutation
+<code class="reqn">\tau \in \Im_k</code> the labelling of <code class="reqn">\theta_i</code> is reordered by
+</p>
+<p style="text-align: center;"><code class="reqn">
+	\tilde{\theta}_i=\tau_i(\theta_i)
+	</code>
+</p>
+
+<p>where <code class="reqn">\tau_i=\arg \min_{\tau \in \Im_k} \mid \mid \tau(\theta_i)-\theta_{MAP}\mid \mid</code>.
+</p>
+<p>Angular parameters <code class="reqn">\xi_1^{(i)}, \ldots, \xi_{k-1}^{(i)}</code> and <code class="reqn">\varpi_1^{(i)}, \ldots, \varpi_{k-2}^{(i)}</code>s are
+derived from <code class="reqn">\tilde{\theta}_i</code>. There exists an unique solution in <code class="reqn">\varpi_1^{(i)}, \ldots, \varpi_{k-2}^{(i)}</code>
+while there are multiple solutions in <code class="reqn">\xi^{(i)}</code> due to the symmetry of <code class="reqn">\mid\cos(\xi) \mid</code> and
+<code class="reqn">\mid\sin(\xi) \mid</code>. The output of <code class="reqn">\xi_1^{(i)}, \ldots, \xi_{k-1}^{(i)}</code> only includes angles on <code class="reqn">[-\pi, \pi]</code>.
+</p>
+<p>The label of components of <code class="reqn">\theta_i</code> (before the above transform) is defined by
+</p>
+<p style="text-align: center;"><code class="reqn">
+	\tau_i^*=\arg \min_{\tau \in \Im_k}\mid \mid \theta_i-\tau(\theta_{MAP}) \mid \mid.
+</code>
+</p>
+
+<p>The number of label switching occurrences is defined by the number of changes in <code class="reqn">\tau^*</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">SM.MAP.MixReparametrized(estimate, xobs, alpha0, alpha)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>estimate</code></td>
+<td>
+
+<p>Output of K.MixReparametrized
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xobs</code></td>
+<td>
+
+<p>Data set
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha0</code></td>
+<td>
+
+<p>Hyperparameter of Dirichlet prior distribution of the mixture model weights
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+
+<p>Hyperparameter of beta prior distribution of the radial coordinate
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Details.</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>MU </code></td>
+<td>
+<p>Matrix of MCMC samples of the component means of the mixture model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIGMA </code></td>
+<td>
+<p>Matrix of MCMC samples of the component standard deviations of the
+mixture model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>P </code></td>
+<td>
+<p>Matrix of MCMC samples of the component weights of the mixture model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ang_SIGMA </code></td>
+<td>
+<p>Matrix of computed <code class="reqn">\xi</code>'s corresponding to SIGMA</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ang_MU </code></td>
+<td>
+<p>Matrix of computed <code class="reqn">\varpi</code>'s corresponding to MU. This output only appears when <code class="reqn">k &gt; 2</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Global_Mean </code></td>
+<td>
+<p>Mean, median and <code class="reqn">95\%</code> credible interval for the global mean parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Global_Std </code></td>
+<td>
+<p>Mean, median and <code class="reqn">95\%</code> credible interval for the global standard deviation parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Phi </code></td>
+<td>
+<p>Mean, median and <code class="reqn">95\%</code> credible interval for the radius parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>component_mu </code></td>
+<td>
+<p>Mean, median and <code class="reqn">95\%</code> credible interval of MU</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>component_sigma </code></td>
+<td>
+<p>Mean, median and <code class="reqn">95\%</code> credible interval of SIGMA</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>component_p </code></td>
+<td>
+<p>Mean, median and <code class="reqn">95\%</code> credible interval of P</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>l_stay </code></td>
+<td>
+<p>Number of MCMC iterations between changes in labelling</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_switch </code></td>
+<td>
+<p>Number of label switching occurrences</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>Note.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kate Lee
+</p>
+
+
+<h3>References</h3>
+
+<p>Marin, J.-M., Mengersen, K. and Robert, C. P. (2004) Bayesian Modelling
+and Inference on Mixtures of Distributions, Handbook of Statistics, Elsevier,
+Volume 25, Pages 459–507.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>K.MixReparametrized</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#data(faithful)
+#xobs=faithful[,1]
+#estimate=K.MixReparametrized(xobs,k=2,alpha0=0.5,alpha=0.5,Nsim=1e4)
+#result=SM.MAP.MixReparametrized(estimate,xobs,alpha0=0.5,alpha=0.5)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fromUTC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>fromUTC</h2>
+
+<h3>Description</h3>
+
+<p>Returns local time from UTC time
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fromUTC(utctime, timeformat = "%Y-%m-%d %H:%M:%S")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>utctime</code></td>
+<td>
+<p>POSIXct UTC time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timeformat</code></td>
+<td>
+<p>string format of local time, by default it will be "%Y-%m-%d %H:%M:%S"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>localtime POSIXct local time
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"> fromUTC( as.POSIXct("1991-06-29 05:27:25", tz = "UTC") )
+
+</code></pre>
+
+
+</div>

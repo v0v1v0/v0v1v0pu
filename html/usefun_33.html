@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>prune_and_reorder_vector</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prune and reorder vector elements</h2>
+
+<h3>Description</h3>
+
+<p>Given two vectors, the first one's elements are pruned and reordered according
+to the common values of the second vector and the elements' <em><code>names</code>
+(attribute) of the first</em>. If there no common such values, an empty vector is
+returned.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">prune_and_reorder_vector(vec, filter.vec)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vec</code></td>
+<td>
+<p>a vector with <code>names</code> attribute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter.vec</code></td>
+<td>
+<p>a character vector whose values will be used to filter the
+<code>vec</code> elements</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the pruned and re-arranged vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">vec = c(1,2,3)
+names(vec) = c("a","b","c")
+
+filter.vec1 = c("a")
+prune_and_reorder_vector(vec, filter.vec1)
+
+filter.vec2 = c("c", "ert", "b")
+prune_and_reorder_vector(vec, filter.vec2)
+
+</code></pre>
+
+
+</div>

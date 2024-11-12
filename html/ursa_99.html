@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>commonGeneric</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Some generic functions for <code>ursaRaster</code> class.
+</h2>
+
+<h3>Description</h3>
+
+<p>Set of generic functions, implemented for objects of <code>ursaRaster</code> class.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+duplicated(x, incomparables = FALSE, MARGIN = 2, fromLast = FALSE, ...)
+
+## S3 method for class 'ursaRaster'
+diff(x, lag = 1, differences = 1, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of <code>ursaRaster</code> class
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>incomparables</code></td>
+<td>
+
+<p>Passed to S3 method <code>duplicated</code> for class <code>matrix</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MARGIN</code></td>
+<td>
+
+<p>Overwitten to value <code>2</code>. Passed to S3 method <code>duplicated</code> for class <code>matrix</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fromLast</code></td>
+<td>
+
+<p>Passed to S3 method <code>duplicated</code> for class <code>matrix</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lag</code></td>
+<td>
+
+<p>Passed to default S3 method <code>diff</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>differences</code></td>
+<td>
+
+<p>Passed to default S3 method <code>diff</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Other arguments, which are passed to the respective S3 method.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>duplicated()</code>: logical of length equal to number of bands.
+</p>
+<p><code>diff()</code>: <code>ursaRaster</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>duplicated</code>, <code>diff</code>,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">a &lt;- ursa_dummy(5)
+a[3] &lt;- a[2]
+a
+duplicated(a)
+diff(a)
+</code></pre>
+
+
+</div>

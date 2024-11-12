@@ -1,0 +1,143 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot_ulrb_clustering</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Rank Abundance Curve of classification results</h2>
+
+<h3>Description</h3>
+
+<p>Plots the clustering results from <code>define_rb()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plot_ulrb_clustering(
+  data,
+  sample_id = NULL,
+  taxa_col,
+  plot_all = FALSE,
+  samples_col = "Sample",
+  classification_col = "Classification",
+  abundance_col = "Abundance",
+  log_scaled = FALSE,
+  colors = c("#009E73", "#F0E442", "#CC79A7"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample_id</code></td>
+<td>
+<p>string with name of selected sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taxa_col</code></td>
+<td>
+<p>string with name of column with phylogenetic units. Usually OTU or ASV.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_all</code></td>
+<td>
+<p>If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples_col</code></td>
+<td>
+<p>name of column with sample ID's.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>classification_col</code></td>
+<td>
+<p>string with name of column with classification for each row. Default value is "Classification".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>abundance_col</code></td>
+<td>
+<p>string with name of column with abundance values. Default is "Abundance".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log_scaled</code></td>
+<td>
+<p>if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>vector with colors. Should have the same lenght as the number of classifications.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This works as a sanity check of the results obtained by the unsupervised learning method used
+to classify species. This is specially important if you used an automatic number of clusters.
+</p>
+<p>The function works for either a single sample (that you specify with sample_id argument), or
+it can apply a centrality metric for species across all your samples (plot_all = TRUE).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object with clustering results from <code>define_rb()</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>define_rb()</code>, <code>plot_ulrb()</code>, <code>plot_ulrb_silhouette()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">classified_species &lt;- define_rb(nice_tidy)
+
+# Standard plot for a single sample
+plot_ulrb_clustering(classified_species,
+                       sample_id = "ERR2044669",
+                       taxa_col = "OTU",
+                       abundance_col = "Abundance")
+# All samples in a dataset
+plot_ulrb_clustering(classified_species,
+          taxa_col = "OTU",
+          abundance_col = "Abundance",
+          plot_all = TRUE)
+
+# All samples with a log scale
+plot_ulrb_clustering(classified_species,
+          taxa_col = "OTU",
+          abundance_col = "Abundance",
+          plot_all = TRUE,
+          log_scaled = TRUE)
+
+</code></pre>
+
+
+</div>

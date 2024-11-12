@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_set_silent</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Turn off most console and summary output from umx</h2>
+
+<h3>Description</h3>
+
+<p>Running multiple analyses or simulations, it can be handy to turn off the automatic summary,
+graphing, and printing that umx does to help interactive sessions. <code>umx_set_silent</code> does this.
+Summary and graph output, as well as progress and durable console output will be suppressed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_set_silent(value = NA, silent = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>Boolean stating if umx Models should run silently (TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>If TRUE, this function itself will just return the state of the option, with no user message.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Not every function knows about silent, but most, like <code>umxRAM()</code> etc do.
+</p>
+<p>Under the hood, <code>umx_set_silent</code> sets options("umx_silent"). This can be set to either <code>TRUE</code> or <code>FALSE</code>.
+If TRUE, then the progress messages from model runs are suppressed. Useful for power simulations etc.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Current silent value
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>, <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Get and set: 
+<code>umx_get_checkpoint()</code>,
+<code>umx_get_options()</code>,
+<code>umx_set_auto_plot()</code>,
+<code>umx_set_auto_run()</code>,
+<code>umx_set_checkpoint()</code>,
+<code>umx_set_condensed_slots()</code>,
+<code>umx_set_cores()</code>,
+<code>umx_set_data_variance_check()</code>,
+<code>umx_set_dollar_symbol()</code>,
+<code>umx_set_optimization_options()</code>,
+<code>umx_set_optimizer()</code>,
+<code>umx_set_plot_file_suffix()</code>,
+<code>umx_set_plot_format()</code>,
+<code>umx_set_plot_use_hrbrthemes()</code>,
+<code>umx_set_separator()</code>,
+<code>umx_set_table_format()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umx)
+old = umx_set_silent() # print &amp; store existing value
+umx_set_silent(FALSE, silent = TRUE) # set to FALSE
+umx_set_silent(old)   # reinstate
+umx_set_silent() # print existing value
+</code></pre>
+
+
+</div>

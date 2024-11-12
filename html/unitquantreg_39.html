@@ -1,0 +1,126 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>likelihood_stats</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Likelihood-based statistics of fit for <code>unitquantreg</code> objects.</h2>
+
+<h3>Description</h3>
+
+<p>Computes the likelihood-based statistics (Neg2LogLike, AIC, BIC and HQIC)
+from <code>unitquantreg</code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">likelihood_stats(..., lt = NULL)
+
+## S3 method for class 'likelihood_stats'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p><code>unitquantreg</code> objects separated by commas.
+Not use in <code>print</code> method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lt</code></td>
+<td>
+<p>a list with one or more <code>unitquantreg</code> objects.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>object of class <code>likelihood_stats</code> obtained from <code>likelihood_stats</code>
+function.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Neg2LogLike: The log-likelihood is reported as </p>
+<p style="text-align: center;"><code class="reqn">Neg2LogLike= -2\log(L)</code>
+</p>
+
+<p>AIC: The Akaike's information criterion (AIC) is defined as </p>
+<p style="text-align: center;"><code class="reqn">AIC = -2\log(L)+2p</code>
+</p>
+
+<p>BIC: The Schwarz Bayesian information criterion (BIC) is defined as </p>
+<p style="text-align: center;"><code class="reqn">BIC =  -2\log(L) + p\log(n)</code>
+</p>
+
+<p>HQIC: The Hannan and Quinn information criterion (HQIC)  is defined as </p>
+<p style="text-align: center;"><code class="reqn">HQIC =  -2\log(L) + 2p\log[\log(n)]</code>
+</p>
+
+<p>where <code class="reqn">L</code> is the likelihood function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with class <code>"likelihood_stats"</code> containing the following
+components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>the matched call.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stats</code></td>
+<td>
+<p>ordered matrix according AIC value containg the likelihood
+based statistics.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>André F. B. Menezes
+</p>
+<p>Josmar Mazucheli
+</p>
+
+
+<h3>References</h3>
+
+<p>Akaike, H. (1974). A new look at the statistical model identification. <em>IEEE Transaction on Automatic Control</em>, <b>19</b>(6), 716–723.
+</p>
+<p>Hannan, E. J. and Quinn, B. G. (1979). The determination of the order of an autoregression. <em>Journal of the Royal Statistical Society, Series B</em>, <b>41</b>(2), 190–195.
+</p>
+<p>Schwarz, G. (1978). Estimating the dimension of a model. <em>Annals of Statistics</em>, <b>6</b>(2), 461–464.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(sim_bounded, package = "unitquantreg")
+sim_bounded_curr &lt;- sim_bounded[sim_bounded$family == "uweibull", ]
+
+models &lt;- c("uweibull", "kum", "ulogistic")
+lt_fits &lt;- lapply(models, function(fam) {
+  unitquantreg(formula = y1 ~ x, tau = 0.5, data = sim_bounded_curr,
+               family = fam)
+})
+
+ans &lt;- likelihood_stats(lt = lt_fits)
+ans
+
+</code></pre>
+
+
+</div>

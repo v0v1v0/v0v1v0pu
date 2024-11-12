@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_icd_prevalence</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns the prevalence for an ICD diagnosis</h2>
+
+<h3>Description</h3>
+
+<p>Returns the prevalence for an ICD diagnosis
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_icd_prevalence(data, icd.code, icd.version = 10)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A UKB dataset (or subset) created with <code>ukb_df</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>icd.code</code></td>
+<td>
+<p>An ICD disease code e.g. "I74". Use a regular expression to specify a broader set of diagnoses, e.g. "I" captures all Diseases of the circulatory system, I00-I99, "C|D[0-4]." captures all Neoplasms, C00-D49.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>icd.version</code></td>
+<td>
+<p>The ICD version (or revision) number, 9 or 10. Default = 10.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>ukb_icd_diagnosis</code>, <code>ukb_icd_code_meaning</code>, <code>ukb_icd_keyword</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# ICD-10 code I74, Arterial embolism and thrombosis
+ukb_icd_prevalence(my_ukb_data, icd.code = "I74")
+
+# ICD-10 chapter 9, disease block I00–I99, Diseases of the circulatory system
+ukb_icd_prevalence(my_ukb_data, icd.code = "I")
+
+# ICD-10 chapter 2, C00-D49, Neoplasms
+ukb_icd_prevalence(my_ukb_data, icd.code = "C|D[0-4].")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,136 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uncertainty.default</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Generic function for calling an uncertainty object
+</h2>
+
+<h3>Description</h3>
+
+<p>Creates an uncertainty estimation object using a measurand model and an uncertainty budget object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## Default S3 method:
+uncertainty(x, y, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>an uncertainty budget object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+
+<p>a list with the measurand description and selected estimation method, the measurand description includes: measurand_name, measurand_model, measurand_label, alpha (significance level), method and method parameters.
+</p>
+<p>the valid methods are: GFO, GSO, MC, Kragten.
+</p>
+<p>currently the only method parameter implemented is the number of simulated samples (B) for the method MC.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>additional parameters
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Creates an uncertainty estimation object. Uses an uncertainty budget object to estimate the expected value and uncertainty of a measurand by applying a selected estimation method.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An uncertainty estimation object with the structure:
+<code>method</code> selected estimating method, 
+<code>call</code> current call invocation,
+<code>uncertaintyBudget</code> an uncertainty budget object,
+<code>measurand</code> name, label, model describing the measurand,
+<code>mean</code> the estimated mean,
+<code>sd</code> the estimated standard deviation,
+<code>u</code> the estimated standard uncertainty,
+<code>alpha</code> the significante level used in the estimation,
+<code>dof</code> the estimated degrees of freedom,
+<code>U</code> the estimated expanded uncertainty,
+<code>lcl</code> the lower confidence interval,
+<code>ucl</code> the upper confidence interval,
+<code>variables</code> a vector with the input quantities,
+<code>contribution</code> a vector with the uncertainty contributions,
+<code>cor.contribution</code> the uncertainty contribution due to overall correlation,
+<code>partial</code> a vector of the partial derivatives of the measurand.model with respect to each input quantity,
+<code>coeff</code> a vector of the sensibility coefficients for each input quantity.
+</p>
+
+
+<h3>Note</h3>
+
+<p>none
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>H. Gasca-Aragon
+</p>
+<p>Maintainer: H. Gasca-Aragon &lt;hugo_gasca_aragon@hotmail.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>JCGM 100:2008. <em>Guide to the expression of uncertainty of measurement</em>
+</p>
+<p>JCGM 100:2005. <em>Supplement 1 Propagation of distributions usign a Monte Carlo method</em>
+</p>
+<p>EURACHEM/CITAC Guide CG 4. <em>Quantifying Uncertainty in Analytical Measurement</em>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uncertainty</code>, <code>uncertaintyBudget.default</code>, <code>print.uncertainty</code>, <code>plot.uncertainty</code>, <code>summary.uncertainty</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># create an uncertainty budget
+cor.mat&lt;- matrix(c(1,-0.7,-0.7,1),2,2)
+
+u.budget&lt;- uncertaintyBudget(x=list(name=c("x0","x1"), 
+	mean=c(10,20), u=c(1,5), dof=c(10,10),
+	label=c("x[0]", "x[1]"), distribution=c("normal","normal")), 
+	y=cor.mat)
+u.budget
+
+# estimate the measurand uncertainty using an uncertainty budget,
+# a measurand definition and a selected estimating method.
+GFO.res&lt;- uncertainty(x=u.budget, 
+y=list(measurand_name="ratio.GFO", measurand_label="ratio[GFO]", 
+measurand_model="x0/x1", method="GFO", alpha=0.05))
+
+GFO.res
+</code></pre>
+
+
+</div>

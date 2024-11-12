@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>caruso</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dataset due to Caruso</h2>
+
+<h3>Description</h3>
+
+<p>A dataframe in standard format due to Migliorini and Caruso presenting
+observations of oribatid mites.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(caruso)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>Dataset <code>caruso</code> is a data frame with 194 observations on 5
+variables.  Each row corresponds to a species; the observations (rows)
+are the species abundances in each of 5 habitats.
+</p>
+<p>Following Migliorini et al 2002, the habitats were:
+</p>
+
+<ul>
+<li>
+<p> a pure beech woodland (‘<code>Beech</code>’)
+</p>
+</li>
+<li>
+<p> a coppice woodland (‘<code>Coppice</code>’)
+</p>
+</li>
+<li>
+<p> grassland (‘<code>Grassland</code>’)
+</p>
+</li>
+<li>
+<p> heathland (‘<code>Heathland</code>’)
+</p>
+</li>
+<li> <p>‘Biancana’ badlands (‘<code>Biancana</code>’)
+</p>
+</li>
+</ul>
+<h3>Details</h3>
+
+<p>Oribatid mites are rather small and very interesting free living soil
+microarthropods.  They have a huge species diversity with populations
+characterised by highly aggregated distributions over multiple spatial
+scales ranging from a few centimetres to hundreds of meters.
+</p>
+<p>Within each habitat, several soil samples were collected (five randomly
+located replicates per each month: see the paper Migliorini et
+al. 2002). So, actually, that is a network of small samples that make a
+single large sample.
+</p>
+<p>The five study areas of this data set belong to five habitats that are
+very typical of that Mediterranean region.  These five areas also
+belong to a rather homogeneous biogeographical region (southern
+Tuscany).  On the ground of what is known on the biology and community
+patterns of Oribatida, several a-priori hypotheses can be made on
+expected changes in the diversity of their assemblages and immigration
+rates respectively between and within the five areas.  For instance,
+under the Neutral Model one might expect that the Beech forest should
+have the highest Theta and an immigration rate of about 1, while one
+might expect the opposite for the Biancana (a very arid habitat, a kind
+of gariga/garrigue with very patchy vegetation).
+</p>
+
+
+<h3>Note</h3>
+
+<p>Executing <code>optimal.params.sloss(caruso)</code> does not return
+useful output.  The reason for this is unknown.</p>
+
+
+<h3>Source</h3>
+
+<p>Data kindly supplied by Tancredi Caruso
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> T. Caruso and others 2007. “The Berger-Parker index as
+an effective tool for monitoring the biodiversity of disturbed
+soils: a case study on Mediterranean oribatid (Acari: Oribatida)
+assemblages”. <em>Biodiversity Conservation</em>, 16:3277-3285
+</p>
+</li>
+<li>
+<p> M. Migliorini, A. Petrioli, and F. Bernini 2002.
+“Comparative analysis of two edaphic zoocoenoses (Oribatid
+mites and Carabid beetles) in five habitats of the
+‘Pietraporciana’ and ‘Lucciolabella’ Nature Reserves
+(Orcia Valley, central Italy)”.  <em>Acta Oecologica</em>, 23:361-374
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>extractor</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(caruso)
+
+summary(count(caruso[,1]))
+
+
+</code></pre>
+
+
+</div>

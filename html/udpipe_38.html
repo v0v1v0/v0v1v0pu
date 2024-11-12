@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_colsums</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Column sums and Row sums for document term matrices</h2>
+
+<h3>Description</h3>
+
+<p>Column sums and Row sums for document term matrices
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_colsums(dtm, groups)
+
+dtm_rowsums(dtm, groups)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>an object returned by <code>document_term_matrix</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>groups</code></td>
+<td>
+<p>optionally, a list with column/row names or column/row indexes of the <code>dtm</code> which should be combined by 
+taking the sum over the rows or columns of these. See the examples</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns either a vector in case argument <code>groups</code> is not provided or a sparse matrix of class <code>dgCMatrix</code>
+in case argument <code>groups</code> is provided
+</p>
+
+<ul>
+<li>
+<p>in case <code>groups</code> is not provided: a vector of row/column sums with corresponding names
+</p>
+</li>
+<li>
+<p>in case <code>groups</code> is provided: a sparse matrix containing summed information over the groups of rows/columns
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- data.frame(
+ doc_id = c(1, 1, 2, 3, 4), 
+ term = c("A", "C", "Z", "X", "G"), 
+ freq = c(1, 5, 7, 10, 0))
+dtm &lt;- document_term_matrix(x)
+x &lt;- dtm_colsums(dtm)
+x
+x &lt;- dtm_rowsums(dtm)
+head(x)
+
+## 
+## Grouped column summation
+## 
+x &lt;- list(doc1 = c("aa", "bb", "aa", "b"), doc2 = c("bb", "bb", "BB"))
+dtm &lt;- document_term_matrix(x)
+dtm
+dtm_colsums(dtm, groups = list(combinedB = c("b", "bb"), combinedA = c("aa", "A")))
+dtm_colsums(dtm, groups = list(combinedA = c("aa", "A")))
+dtm_colsums(dtm, groups = list(
+  combinedB = grep(pattern = "b", colnames(dtm), ignore.case = TRUE, value = TRUE), 
+  combinedA = c("aa", "A", "ZZZ"),
+  test      = character()))
+dtm_colsums(dtm, groups = list())
+
+## 
+## Grouped row summation
+## 
+x &lt;- list(doc1 = c("aa", "bb", "aa", "b"), 
+          doc2 = c("bb", "bb", "BB"),
+          doc3 = c("bb", "bb", "BB"),
+          doc4 = c("bb", "bb", "BB", "b"))
+dtm &lt;- document_term_matrix(x)
+dtm
+dtm_rowsums(dtm, groups = list(doc1 = "doc1", combi = c("doc2", "doc3", "doc4")))
+dtm_rowsums(dtm, groups = list(unknown = "docUnknown", combi = c("doc2", "doc3", "doc4")))
+dtm_rowsums(dtm, groups = list())
+</code></pre>
+
+
+</div>

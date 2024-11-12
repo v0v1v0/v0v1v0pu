@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>loadings.MxModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract factor loadings from an EFA (factor analysis).</h2>
+
+<h3>Description</h3>
+
+<p>loadings extracts the factor loadings from an EFA (factor analysis) model.
+It behaves equivalently to stats::loadings, returning the loadings from an
+EFA (factor analysis). However it does not store the rotation matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxModel'
+loadings(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A RAM model from which to get loadings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters (currently unused)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> loadings matrix
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>factanal()</code>, <code>loadings()</code>
+</p>
+</li></ul>
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxConfint()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+myVars = c("mpg", "disp", "hp", "wt", "qsec")
+m1 = umxEFA(name = "test", factors = 2, data = mtcars[, myVars])
+loadings(m1)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

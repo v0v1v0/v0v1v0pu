@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>profile.uiols</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot of UI and CI</h2>
+
+<h3>Description</h3>
+
+<p>Plot function for objects returned from <code>ui.ols</code>.
+Plots confidence intervals for different values of rho and the uncertainty interval.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'uiols'
+profile(fitted, plot.all = TRUE, which = NA,
+  intercept = FALSE, xlab = NULL, ylab = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fitted</code></td>
+<td>
+<p>An object of class uiols</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.all</code></td>
+<td>
+<p>If TRUE, plots all covariates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which</code></td>
+<td>
+<p>Specify which variables should be plotted by either sending in their names in a vector or a vector with their numbers (1 intercept, 2 for the first covariate etc.).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intercept</code></td>
+<td>
+<p>If TRUE, also plots the intercept.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>Title for x-axis, default is <code>expression(rho)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Title for y-axis, default is the variable names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments, for instance margins.</p>
+</td>
+</tr>
+</table>
+</div>

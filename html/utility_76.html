@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.calc.colors</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Color Scheme for Value Functions</h2>
+
+<h3>Description</h3>
+
+<p>Function to calculate a color scheme for value functions.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.calc.colors(n = 5)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+
+<p>number of colors.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>For <code>n = 5</code> this function produces the standard colors red, orange, yellow, green and blue as used in river assessment programs.
+These colors are provided in a lighter version to improve readability of black text in front of the colored background.
+For large values of <code>n</code> quasi-continuous transitions are defined between these colors.
+Any other vector of colors can be used by the plotting routines.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Character vector of colors.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <br><code>plot.utility.endnode.discrete</code> <br><code>plot.utility.endnode.intpol1d</code> <br><code>plot.utility.endnode.parfun1d</code> <br><code>plot.utility.endnode.intpol2d</code> <br><code>plot.utility.endnode.cond</code> <br><code>plot.utility.aggregation</code> <br><code>plot.utility.conversion.intpol</code> <br><code>plot.utility.conversion.parfun</code> <br>
+for the use of such color vectors in plotting functions and <br><code>utility.get.colors</code> <br>
+for getting colors corresponding to specified values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utility.calc.colors(5)
+utility.calc.colors(100)
+</code></pre>
+
+
+</div>

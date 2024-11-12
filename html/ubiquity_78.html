@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_set_iiv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set Variability Terms</h2>
+
+<h3>Description</h3>
+
+<p>Set elements of the current variance covariance matrix
+specified in the system file with <code>&lt;IIV:?:?&gt; ?</code>, <code>&lt;IIVCOR:?:?&gt;?</code>, <code>&lt;IIVSET:?:?&gt; ?</code>, <code>&lt;IIVCORSET:?:?&gt;?</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_set_iiv(cfg, IIV1, IIV2, value)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>IIV1</code></td>
+<td>
+<p>row name of the variance/covariance matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>IIV2</code></td>
+<td>
+<p>column name of the variance/covariance matrix element</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>value to assign to the variance/covariance matrix element</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Ubiquity system object with IIV information set
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>system_fetch_iiv</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+# Clearing all inputs
+cfg = system_zero_inputs(cfg)
+
+# Setting the covariance element for CL and Vc to 0.03
+cfg = system_set_iiv(cfg,
+                     IIV1 = "ETACL",
+                     IIV2 = "ETAVc",
+                     value=0.03)
+
+</code></pre>
+
+
+</div>

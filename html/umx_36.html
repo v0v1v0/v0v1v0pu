@@ -1,0 +1,151 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxPlotGxE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot the results of a GxE univariate test for moderation of ACE components.</h2>
+
+<h3>Description</h3>
+
+<p>Plot GxE results (univariate environmental moderation of ACE components).
+Options include plotting the raw and standardized graphs separately, or in a combined panel.
+You can also set the label for the x axis (xlab), and choose the location of the legend.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxPlotGxE(
+  x,
+  xlab = NA,
+  location = "topleft",
+  separateGraphs = FALSE,
+  acergb = c("red", "green", "blue", "black"),
+  gg = TRUE,
+  moderatorValues = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A fitted <code>umxGxE()</code> model to plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>String to use for the x label (default = NA, which will use the variable name)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>Where to plot the legend (default = "topleft")
+see ?legend for alternatives like bottomright</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>separateGraphs</code></td>
+<td>
+<p>(default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>acergb</code></td>
+<td>
+<p>Colors to use for plot c(a = "red", c = "green", e = "blue", tot = "black")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gg</code></td>
+<td>
+<p>Use ggplot2 (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>moderatorValues</code></td>
+<td>
+<p>If you want to pass in your own list of moderator values instead of the real ones in the data (Default = NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><em>note</em>: If <code>gg=TRUE</code>, the plots are drawn in ggplot, and also returned as a <code>list(raw, std)</code> so you can edit them.
+</p>
+
+
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>plot()</code>, <code>umxSummary()</code> work for IP, CP, GxE, SAT, and ACE models.
+</p>
+</li></ul>
+<ul><li> <p><code>umxGxE()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(twinData)
+twinData$age1 = twinData$age2 = twinData$age
+mzData = subset(twinData, zygosity == "MZFF")
+dzData = subset(twinData, zygosity == "DZFF")
+m1= umxGxE(selDVs= "bmi", selDefs= "age", dzData= dzData, mzData= mzData, sep="", tryHard="yes")
+plot(m1)
+# Directly call umxPlotGxE
+umxPlotGxE(m1, xlab = "Age", separateGraphs = TRUE, gg = FALSE)
+umxPlotGxE(m1, moderatorValues=18:67)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

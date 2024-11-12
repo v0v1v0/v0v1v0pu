@@ -1,0 +1,212 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.MxModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create and display a graphical path diagram for a model.</h2>
+
+<h3>Description</h3>
+
+<p><code>plot()</code> produces SEM diagrams in graphviz format, and relies on <code>DiagrammeR()</code> (or a
+graphviz application) to create the image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxModel'
+plot(
+  x = NA,
+  std = FALSE,
+  fixed = TRUE,
+  means = TRUE,
+  digits = 2,
+  file = "name",
+  labels = c("none", "labels", "both"),
+  resid = c("circle", "line", "none"),
+  strip_zero = FALSE,
+  splines = c("TRUE", "FALSE", "compound", "ortho", "polyline"),
+  min = NULL,
+  same = NULL,
+  max = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An <code>mxModel()</code> from which to make a path diagram</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the model (default = FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fixed</code></td>
+<td>
+<p>Whether to show fixed paths (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether to show means or not (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of decimal places to add to the path coefficients</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Whether to show labels on the paths. "none", "labels", or "both" (parameter + label).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resid</code></td>
+<td>
+<p>How to show residuals and variances default is "circle". Options are "line" &amp; "none"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_zero</code></td>
+<td>
+<p>Whether to strip the leading "0" and decimal point from parameter estimates (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>splines</code></td>
+<td>
+<p>Whether to allow lines to curve: defaults to "TRUE" (nb: some models look better with "FALSE")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>optional list of objects to group at the top of the plot. Default (NULL) chooses automatically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>same</code></td>
+<td>
+<p>optional list of objects to group at the same rank in the plot. Default (NULL) chooses automatically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max</code></td>
+<td>
+<p>optional list of objects to group at the bottom of the plot. Default (NULL) chooses automatically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><em>Note:</em> DiagrammeR is supported out of the box.  By default, plots open in your browser. Other options include pdf SVG etc.
+</p>
+<p>If you use <code>umx_set_plot_format("graphviz")</code>, graphs will open in a graphviz helper app (if installed).
+</p>
+<p>The commercial application “OmniGraffle” is great for editing these images.
+On unix and windows, <code>plot()</code> will create a pdf and open it in your default pdf reader.
+</p>
+<p>If you use graphviz, we try and use that app, but YOU HAVE TO INSTALL IT!
+</p>
+<p><em>MacOS note</em>: On Mac, we will try and open an app: you may need to associate the ‘.gv’
+extension with the graphviz app.
+Find the .gv file made by plot, get info (cmd-I), then choose “open with”,
+select graphviz.app (or OmniGraffle professional),
+then set “change all”.
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://en.wikipedia.org/wiki/DOT_(graph_description_language)">https://en.wikipedia.org/wiki/DOT_(graph_description_language)</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_set_plot_format()</code>, <code>plot.MxModel()</code>, <code>umxPlotACE()</code>, <code>umxPlotCP()</code>, <code>umxPlotIP()</code>, <code>umxPlotGxE()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+plot(m1)
+plot(m1, std = TRUE, resid = "line", digits = 3, strip_zero = FALSE)
+
+# ============================================================
+# = With a growth model, demonstrate splines= false to force =
+# = straight lines, and move "rank" of intercept object      =
+# ============================================================
+
+m1 = umxRAM("grow", data = myGrowthMixtureData,
+	umxPath(var = manifests, free = TRUE), 
+	umxPath(means = manifests, fixedAt = 0), 
+	umxPath(v.m. = c("int","slope")),
+	umxPath("int", with = "slope"),
+	umxPath("int", to = manifests, fixedAt = 1), 
+	umxPath("slope", to = manifests, arrows = 1, fixedAt = c(0,1,2,3,4))
+)
+
+plot(m1, means=FALSE, strip=TRUE, splines="FALSE", max="int")
+
+## End(Not run) # end dontrun
+
+</code></pre>
+
+
+</div>

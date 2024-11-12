@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_neighbourhood_boundary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Specific Neighbourhood Boundary</h2>
+
+<h3>Description</h3>
+
+<p>Data on a specific neighbourhood boundary, using lat/lng pairs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_neighbourhood_boundary(force, neighbourhood_id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>force</code></td>
+<td>
+<p>A string containing the name of the police force to return
+neighbourhoods for. Must be specified, and is not case sensitive.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>neighbourhood_id</code></td>
+<td>
+<p>A string containing the ID of a given neighbourhood,
+returned from <code>ukc_neighbourhoods()</code>. If missing, returns all neighbourhoods
+for the specified police force, using <code>ukc_neighbourhoods()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>tibble</code> with the lat/lng boundaries for a specific neighbourhood.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukc_neighbourhoods()</code>
+</p>
+<p><code>ukc_neighbourhood_specific()</code>
+</p>
+<p><code>ukc_neighbourhood_location()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+borders &lt;- ukc_neighbourhood_boundary("dorset", "55.CR3001")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

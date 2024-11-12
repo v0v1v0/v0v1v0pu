@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>centroid_labels</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve centroid labels</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve centroid labels
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">centroid_labels(regions = c("states", "counties"), as_sf = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>regions</code></td>
+<td>
+<p>The region breakdown for the map, can be one of
+(<code>"states"</code>, <code>"counties"</code>, as specified by the internal file names.
+The default is <code>"states"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as_sf</code></td>
+<td>
+<p>Defunct, this parameter no longer has any effect and will be removed in
+the future.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An <code>sf</code> data frame of state or county centroid labels and positions
+relative to the coordinates returned by the <code>us_map</code> function.
+</p>
+
+
+</div>

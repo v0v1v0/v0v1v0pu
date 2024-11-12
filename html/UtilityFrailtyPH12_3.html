@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetPriors</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns prior dose-specific means.</h2>
+
+<h3>Description</h3>
+
+<p>Uses elicited efficacy and toxicity dose-specific parameters along with latent prior variance, dose-specific mean hypervariance and frailty variance to determine dose-specific prior means for efficacy and toxicity and prints the prior effective sample size associated with the specified prior parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetPriors(PROBST, PROBSE, Var, HypVar, tau, B)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>PROBST</code></td>
+<td>
+<p>Elicited prior toxicity probability at each dose.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PROBSE</code></td>
+<td>
+<p>Elicted prior efficacy probability at each dose.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Var</code></td>
+<td>
+<p>Latent parameter variance for normal probability of efficacy and toxicity.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>HypVar</code></td>
+<td>
+<p>Hypervariance on dose specific mean efficacy and toxicity parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>Frailty variance parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>B</code></td>
+<td>
+<p>Number of prior samples to draw for calculating ESS. Suggested values of ten thousand.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list contianing the vector of dose-specific efficacy probability prior mean parameters and the vector of dose-specific toxicity probability prior mean parameters.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(mvtnorm)
+PROBST=c(.05,.10,.15,.20,.30)
+PROBSE=c(.2,.4,.6,.65,.7)
+Var=1
+HypVar=36
+tau=1
+B=100
+Z=GetPriors(PROBST,PROBSE,Var,HypVar,tau,B)
+</code></pre>
+
+
+</div>

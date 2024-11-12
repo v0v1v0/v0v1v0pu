@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>CreData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Creates a CRM dataframe
+</h2>
+
+<h3>Description</h3>
+
+<p>Creates a n-row summary dataframe indicating the number of treated patients and observed DLTs at each of the n dose-levels. This is the dataframe structure that will be needed in the different functions of the UBCRM package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">CreData(ndose = 3, dosenames = paste("dose", 1:ndose, sep = " "))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ndose</code></td>
+<td>
+
+<p>Number of dose levels.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dosenames</code></td>
+<td>
+
+<p>A ndose-length character vector of labels for the dose levels.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ndose * 3 dataframe containing:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>dose</code></td>
+<td>
+<p>Integer value 1..ndose ordering the doses.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>npt</code></td>
+<td>
+<p>Integer count of the treated patients at dose i.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndlt</code></td>
+<td>
+<p>Integer count of the observed DLT at dose i.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Benjamin Esterni, Baboukar Mane. Unite de Biostatistique et de Methodologie, Institut Paoli-Calmettes, Marseille, France.
+</p>
+
+
+<h3>References</h3>
+
+<p>O'Quigley J., Pepe M., Fisher L. (1990). Continual Reassessment Method: a practical design for Phase I clinical trials in cancer. Biometrics 46, 33-48. &lt;https://doi.org/10.2307/2531628&gt;
+</p>
+<p>O'Quigley J., Shen LZ. (1996). Continual Reassessment Method: a likelihood approach. Biometrics 52, 673-684. &lt;https://doi.org/10.2307/2532905&gt;
+</p>
+<p>Paoletti X., Kramar A. (2009). A comparison of model choices for the Continual Reassessment Method in phase I cancer trials. Statistics in Medecine 28, 3012-3028. &lt;https://doi.org/10.1002/sim.3682&gt;
+</p>
+<p>Chamorey Emmanuel. (2009). Methodologie des essais de phase precoce en cancerologie: evolution des schemas et apport de la pharmacologie. These.
+</p>
+<p>Garret-Mayer Elizabeth. (2006). The Continual Reassessment Method for dose-finding studies: a tutorial. Clinical Trials: 57-71. &lt;https://doi.org/10.1191/1740774506cn134oa&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>updata</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data&lt;- CreData(5,c("5 mg/m2","7 mg/m2","10 mg/m2","15 mg/m2","20 mg/m2"))
+data
+</code></pre>
+
+
+</div>

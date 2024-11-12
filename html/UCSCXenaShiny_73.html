@@ -1,0 +1,146 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_identifier_multi_cor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize Correlation for Multiple Identifiers</h2>
+
+<h3>Description</h3>
+
+<p>NOTE: the dataset must be dense matrix in UCSC Xena data hubs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_identifier_multi_cor(
+  dataset,
+  ids,
+  samples = NULL,
+  matrix.type = c("full", "upper", "lower"),
+  type = c("parametric", "nonparametric", "robust", "bayes"),
+  partial = FALSE,
+  sig.level = 0.05,
+  p.adjust.method = c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr",
+    "none"),
+  color_low = "#E69F00",
+  color_high = "#009E73",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dataset</code></td>
+<td>
+<p>the dataset to obtain identifiers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ids</code></td>
+<td>
+<p>the molecule identifiers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>default is <code>NULL</code>, can be common sample names for two datasets.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>matrix.type</code></td>
+<td>
+<p>Character, <code>"upper"</code> (default), <code>"lower"</code>, or <code>"full"</code>,
+display full matrix, lower triangular or upper triangular matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>A character specifying the type of statistical approach:
+</p>
+
+<ul>
+<li> <p><code>"parametric"</code>
+</p>
+</li>
+<li> <p><code>"nonparametric"</code>
+</p>
+</li>
+<li> <p><code>"robust"</code>
+</p>
+</li>
+<li> <p><code>"bayes"</code>
+</p>
+</li>
+</ul>
+<p>You can specify just the initial letter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>partial</code></td>
+<td>
+<p>Can be <code>TRUE</code> for partial correlations. For Bayesian partial
+correlations, "full" instead of pseudo-Bayesian partial correlations (i.e.,
+Bayesian correlation based on frequentist partialization) are returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig.level</code></td>
+<td>
+<p>Significance level (Default: <code>0.05</code>). If the <em>p</em>-value in
+<em>p</em>-value matrix is bigger than <code>sig.level</code>, then the corresponding
+correlation coefficient is regarded as insignificant and flagged as such in
+the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.adjust.method</code></td>
+<td>
+<p>Adjustment method for <em>p</em>-values for multiple
+comparisons. Possible methods are: <code>"holm"</code> (default), <code>"hochberg"</code>,
+<code>"hommel"</code>, <code>"bonferroni"</code>, <code>"BH"</code>, <code>"BY"</code>, <code>"fdr"</code>, <code>"none"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color_low</code></td>
+<td>
+<p>the color code for lower value mapping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color_high</code></td>
+<td>
+<p>the color code for higher value mapping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other parameters passing to ggstatsplot::ggcorrmat.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a (gg)plot object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+dataset &lt;- "TcgaTargetGtex_rsem_isoform_tpm"
+ids &lt;- c("TP53", "KRAS", "PTEN")
+vis_identifier_multi_cor(dataset, ids)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

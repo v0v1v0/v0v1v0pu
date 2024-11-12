@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxExpCov</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the expected vcov matrix</h2>
+
+<h3>Description</h3>
+
+<p>Extract the expected covariance matrix from an <code>mxModel()</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxExpCov(object, latents = FALSE, manifests = TRUE, digits = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an <code>mxModel()</code> to get the covariance matrix from</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>latents</code></td>
+<td>
+<p>Whether to select the latent variables (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>manifests</code></td>
+<td>
+<p>Whether to select the manifest variables (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>precision of reporting. NULL (Default) = no rounding.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra parameters (to match <code>vcov()</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> expected covariance matrix
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://openmx.ssri.psu.edu/thread/2598">https://openmx.ssri.psu.edu/thread/2598</a>
+Original written by <a href="https://openmx.ssri.psu.edu/users/bwiernik">https://openmx.ssri.psu.edu/users/bwiernik</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxRun()</code>, <code>umxCI_boot()</code>
+</p>
+</li></ul>
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxConfint()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)#'
+vcov(m1) # supplied by OpenMx
+umxExpCov(m1, digits = 3)
+
+
+## End(Not run)
+</code></pre>
+
+
+</div>

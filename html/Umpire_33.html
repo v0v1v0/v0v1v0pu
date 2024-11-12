@@ -1,0 +1,259 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MVN-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "MVN" Class</h2>
+
+<h3>Description</h3>
+
+<p>The <code>MVN</code> class is a tool used to generate gene expressions that
+follow multivariate normal distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">MVN(mu, Sigma, tol = 1e-06)
+covar(object)
+correl(object)
+## S4 method for signature 'MVN'
+alterMean(object, TRANSFORM, ...)
+## S4 method for signature 'MVN'
+alterSD(object, TRANSFORM, ...)
+## S4 method for signature 'MVN'
+nrow(x)
+## S4 method for signature 'MVN'
+rand(object, n, ...)
+## S4 method for signature 'MVN'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>numeric vector representing <var>k</var>-dimensional means</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Sigma</code></td>
+<td>
+<p>numeric <var>k</var>-by-<var>k</var> covariance matrix containing the
+measurement of the linear coupling between every pair of random vectors</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>numeric scalar roundoff error that will be tolerated when
+assessing the singularity of the covariance matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object, x</code></td>
+<td>
+<p>object of class <code>MVN</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TRANSFORM</code></td>
+<td>
+<p>function that takes a vector of mean expression or
+standard deviation and returns a transformed vector that can be used
+to alter the appropriate slot of the object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric scalar representing number of samples to be simulated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments for generic or plotting routines</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The implementation of <code>MVN</code> class is designed for efficiency when
+generating new samples, since we expect to do this several times.
+Basically, this class separates the <code>mvrnorm</code> function from the
+<span class="pkg">MASS</span> package into several steps. The computationally expensive step
+(when the dimension is large) is the eigenvector decomposition of the
+covariance matrix. This step is performed at construction and the
+pieces are stored in the object. The <code>rand</code> method for <code>MVN</code>
+objects contains the second half of the <code>mvrnorm</code> function.
+</p>
+<p>Note that we typically work on expression values after taking the
+logarithm to some appropriate base. That is, the multivariate normal
+should be used on the logarithmic scale in order to contruct an engine.
+</p>
+<p>The <code>alterMean</code> method for an <code>MVN</code> simply replaces the appropriate slot by
+the transformed vector. The <code>alterSD</code> method for an <code>MVN</code> is trickier,
+because of the way the data is stored. In order to have some hope of getting
+this correct, we work in the space of the covariance matrix, <var>Sigma</var>.
+If we let <var>R</var> denote the correlation matrix and let <var>Delta</var> be the
+diagonal matrix whose entries are the individual standard deviations, then
+<code class="reqn">Sigma = Delta \%*\% R \%*\% Delta</code>.
+So, we can change the standard deviations by replacing <var>Delta</var> in this
+product. We then construct a new <code>MVN</code> object with the old mean vector
+and the new covariance matrix.
+</p>
+<p>The <code>covar</code> and <code>correl</code> functions, respectively, calculate
+the covariance matrix and correlation matrix that underly the
+covariance matrix for the objects of class <code>MVN</code>. We have four
+assertions as shown below, which are tested in the examples section:
+</p>
+
+<ol>
+<li> <p><code>covar</code> should return the same matrix that was used
+in the function call to construct the <code>MVN</code> object.
+</p>
+</li>
+<li>
+<p> After applying an <code>alterMean</code> method, the
+covariance matrix is unchanged.
+</p>
+</li>
+<li>
+<p> The diagonal of the correlation matrix consists of all ones.
+</p>
+</li>
+<li>
+<p> After applying an <code>alterMean</code> or an <code>alterSD</code> method, the
+correlation matrix is unchanged.
+</p>
+</li>
+</ol>
+<h3>Objects from the Class</h3>
+
+<p>Although objects of the class can be created by a direct call to
+new, the preferred method is to use the
+<code>MVN</code> generator function.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>mu</code>:</dt>
+<dd>
+<p>numeric vector containing the k-dimensional means</p>
+</dd>
+<dt>
+<code>lambda</code>:</dt>
+<dd>
+<p>numeric vector containing the square roots of
+the eigenvalues of the covariance matrix</p>
+</dd>
+<dt>
+<code>half</code>:</dt>
+<dd>
+<p>numeric matrix with <code class="reqn">k*k</code> dimensions whose
+columns contain the eigenvectors of the covariance matrix</p>
+</dd>
+</dl>
+<h3>Methods</h3>
+
+
+<dl>
+<dt>alterMean(object, TRANSFORM, ...)</dt>
+<dd>
+<p>Takes an object of class
+<code>MVN</code>, loops over the <code>mu</code> slot, alters the mean as defined
+by TRANSFORM function, and returns an object of class <code>MVN</code> with
+altered <code>mu</code>.</p>
+</dd>
+<dt>alterSD(object, TRANSFORM, ...)</dt>
+<dd>
+<p>Takes an object of class
+<code>MVN</code>, works on the diagonal matrix of the covariance matrix, alters
+the standard deviation as defined by TRANSFORM function, and reconstructs
+an object of class <code>MVN</code> with the old <code>mu</code> and
+reconstructed covariance matrix.</p>
+</dd>
+<dt>nrow(x)</dt>
+<dd>
+<p>Returns the number of genes (i.e, the length of the
+<code>mu</code> vector).</p>
+</dd>
+<dt>rand(object, n, ...)</dt>
+<dd>
+<p>Generates <code class="reqn">nrow(MVN)*n</code> matrix
+representing gene expressions of <code>n</code> samples following the
+multivariate normal distribution captured in the object of <code>MVN</code>.</p>
+</dd>
+<dt>summary(object, ...)</dt>
+<dd>
+<p>Prints out the number of
+multivariate normal random variables in the object of <code>MVN</code>.</p>
+</dd>
+<dt>covar(object)</dt>
+<dd>
+<p>Returns the covariance matrix of the object of
+class <code>MVN</code>.</p>
+</dd>
+<dt>correl(object)</dt>
+<dd>
+<p>Returns the correlation matrix of the object of
+class <code>MVN</code>.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Jiexin Zhang <a href="mailto:jiexinzhang@mdanderson.org">jiexinzhang@mdanderson.org</a>,
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Engine</code>,
+<code>IndependentNormal</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("MVN")
+  ## Not run: 
+tolerance &lt;- 1e-10
+## Create a random orthogonal 2x2 matrix
+a &lt;- runif(1)
+b &lt;- sqrt(1-a^2)
+X &lt;- matrix(c(a, b, -b, a), 2, 2)
+## Now choose random positive squared-eigenvalues
+Lambda2 &lt;- diag(rev(sort(rexp(2))), 2)
+## Construct a covariance matrix
+Y &lt;- t(X) 
+## Use the MVN constructor
+marvin &lt;- MVN(c(0,0), Y)
+## Check the four assertions
+print(paste('Tolerance for assertion checking:', tolerance))
+print(paste('Covar  assertion 1:',
+            all(abs(covar(marvin) - Y) &lt; tolerance)))
+mar2 &lt;- alterMean(marvin, normalOffset, delta=3)
+print(paste('Covar  assertion 2:',
+            all(abs(covar(marvin) - covar(mar2)) &lt; tolerance)))
+print(paste('Correl assertion 1:',
+            all(abs(diag(correl(marvin)) - 1) &lt; tolerance)))
+mar3 &lt;- alterSD(marvin, function(x) 2*x)
+print(paste('Correl assertion 1:',
+            all(abs(correl(marvin) - correl(mar2)) &lt; tolerance)))
+rm(a, b, X, Lambda2, Y, marvin, mar2, mar3)
+  
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursaCRS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Coordinate Reference System (CRS) for raster images.
+</h2>
+
+<h3>Description</h3>
+
+<p>Class <code>ursaCRS</code> is a part of class <code>ursaGrid</code>. It defines map projection.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaCRS'
+print(x, ...)
+## S3 method for class 'ursaCRS'
+str(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>ursaCRS</code> object in function <code>print</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+
+<p><code>ursaCRS</code> object in function <code>str</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Further arguments passed to generic functions <code>print</code>, and <code>str</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Functions print information about CRS and return invisible <code>NULL</code> value. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy()
+crs &lt;- ursa_crs(a)
+print(c('Is proj4string used?'=p4 &lt;- isTRUE(getOption("ursaProj4Legacy"))))
+print(crs)
+str(crs)
+op &lt;- options(ursaProj4Legacy=!p4)
+print(c('Is proj4string used?'=p4 &lt;- isTRUE(getOption("ursaProj4Legacy"))))
+session_grid(NULL)
+a &lt;- ursa_dummy()
+crs &lt;- ursa_crs(a)
+print(crs)
+str(crs)
+options(op)
+</code></pre>
+
+
+</div>

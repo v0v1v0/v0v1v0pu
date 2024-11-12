@@ -1,0 +1,44 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>SweaveUtils</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sweave Driver Utilities</h2>
+
+<h3>Description</h3>
+
+<p>These functions are handy for writing Sweave drivers and are
+considered internal and hence not documented.  Look at the source code
+of the Sweave LaTeX driver (in this
+package) or the HTML driver (in the <span class="pkg">R2HTML</span> package from CRAN) to see
+how they can be used.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">RtangleWritedoc(object, chunk)
+RweaveChunkPrefix(options)
+RweaveEvalWithOpt(expr, options)
+RweaveLatexFinish(object, error = FALSE)
+RtangleFinish(object, error = FALSE)
+RweaveLatexOptions(options)
+RweaveLatexWritedoc(object, chunk)
+RweaveTryStop(err, options)
+SweaveHooks(options, run = FALSE, envir = .GlobalEnv)
+makeRweaveLatexCodeRunner(evalFunc = RweaveEvalWithOpt)
+RtangleRuncode(object, chunk, options)
+.RtangleCodeLabel(chunk)
+</code></pre>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch, with contributions by Seth Falcon</p>
+
+
+<h3>See Also</h3>
+
+<p>The <code>Sweave</code>, <code>RweaveLatex</code> help pages.
+</p>
+
+</main></div>

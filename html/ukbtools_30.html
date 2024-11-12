@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_icd_code_meaning</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieves description for a ICD code.</h2>
+
+<h3>Description</h3>
+
+<p>Retrieves description for a ICD code.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_icd_code_meaning(icd.code, icd.version = 10)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>icd.code</code></td>
+<td>
+<p>The ICD diagnosis code to be looked up.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>icd.version</code></td>
+<td>
+<p>The ICD version (or revision) number, 9 or 10.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>ukb_icd_diagnosis</code>, <code>ukb_icd_keyword</code>, <code>ukb_icd_prevalence</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ukb_icd_code_meaning(icd.code = "I74", icd.version = 10)
+
+</code></pre>
+
+
+</div>

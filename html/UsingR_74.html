@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>heartrate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulated data of age vs. max heart rate </h2>
+
+<h3>Description</h3>
+
+<p>Simulated data of age vs. max heart rate
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(heartrate)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>age</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>maxrate</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Does this fit the workout room value of 220 - age?
+</p>
+
+
+<h3>Source</h3>
+
+<p>Simulated based on “Age-predicted maximal heart
+rate revisited” Hirofumi Tanaka, Kevin D. Monahan, Douglas R.
+Seals <em>Journal of the American College of Cardiology</em>,
+37:1:153-156.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(heartrate)
+plot(heartrate)
+abline(lm(maxrate ~ age,data=heartrate))
+</code></pre>
+
+
+</div>

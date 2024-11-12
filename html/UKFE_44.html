@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GoFComparePool</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Goodness of fit comparison (for a pooling group)</h2>
+
+<h3>Description</h3>
+
+<p>compares the RMSE of four distribution fits for a pooling group.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GoFComparePool(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric vector (your AMAX sample)</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function calculates an RMSE fit score for four distributions (GEV, GenLog, Gumbel, &amp; Kappa3). The lowest RMSE is the best fit.
+It works for pooling groups created using the Pool or PoolSmall function. It uses the same method as GoFCompare (see the associated details of that function).
+It first standardises the pooled AMAX samples (by dividing them by median) and then treats them as a single large sample.
+Note that this is not a hypothesis test. It is only for comparing the fit across the distributions.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list. The first element is a dataframe with four columns and one row of results. Each column has
+the standardised RMSE associated with one of the four distributions (GEV, GenLog, Gumbel, Kappa3).
+The second element is a character string stating the distribution with the best fit.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Get a pooling group then compare the fit..
+Pool60009 &lt;- Pool(GetCDs(60009))
+GoFComparePool(Pool60009)
+</code></pre>
+
+
+</div>

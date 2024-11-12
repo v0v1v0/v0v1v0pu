@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>equiknots</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Determine the knot sequence.
+
+</h2>
+
+<h3>Description</h3>
+
+<p>Determines <em>g+2k+2</em> knots for the spline basis of degree <em>k</em> on the interval <code class="reqn">[a,b]</code>. The <em>g</em> inner knots lie equidistant in <code class="reqn">[a,b]</code>. If <code>coinc=TRUE</code>, the outer knots (<em>k</em> on each side of the interval) are placed coincident with <em>a</em> and <em>b</em>, otherwise the outer knots are also equidistant beyond <code class="reqn">[a,b]</code>. 
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">equiknots(a, b, g, k, coinc)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>Left numeric boundary of the spline interval.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>Right numeric boundary of the spline interval.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>g</code></td>
+<td>
+<p>A non-negative integer giving the number of inner knots.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>A non-negative integer specifying the degree of the spline basis.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coinc</code></td>
+<td>
+<p>Logical indicating, if the outer knots should be coincident with the boundary knots or not. If <code>coinc=TRUE</code>, there are <em>k</em> coincident outer knots at <em>a</em> as well as at <em>b</em>.
+
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A numeric vector of length <em>g+2k+2</em> with knot locations.
+
+
+
+
+
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Claudia Koellmann
+
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>unimat</code>, <code>unireg</code>
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">equiknots(0,5,3,3,TRUE)
+equiknots(0,5,3,3,FALSE)
+</code></pre>
+
+
+</div>

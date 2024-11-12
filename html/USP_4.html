@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>FourierKernel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kernel matrix for Fourier basis</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the kernel matrix, described in (Berrett et al. 2021) for
+univariate continuous data when using the Fourier basis.
+This function is used in USPFourier.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">FourierKernel(x, M)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector in <code class="reqn">[0,1]^n</code> for some <code class="reqn">n</code>, containing the observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+<p>The maximum frequency of Fourier basis functions to compute.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The kernel matrix <code class="reqn">K</code>, to be used in independence testing.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">n=10; x=runif(n)
+FourierKernel(x,5)
+</code></pre>
+
+
+</div>

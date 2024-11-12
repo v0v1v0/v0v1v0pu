@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>superbarplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> super segmented barplot </h2>
+
+<h3>Description</h3>
+
+<p>Plot a barplot, with bars nested and ranging from a max to a minimum
+value. A similar graphic is used on the weather page of the <em>New
+York Times</em>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">superbarplot(x, names = 1:dim(x)[2], names_height = NULL,
+  col = gray(seq(0.8, 0.5, length = dim(x)[1]/2)), ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A matrix with each pair of rows representing a min and max
+for the bar.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names</code></td>
+<td>
+<p> Place a name in each bar. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names_height</code></td>
+<td>
+<p> Where the names should go </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p> What colors to use for the bars. There should be half as
+many specified as rows of <code>x</code> </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>passed to <code>plot.window</code>. </p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A similar graphic on the weather page of the <em>New York Times</em>
+shows bars for record highs and lows, normal highs and lows and actual
+(or predicted) highs or lows for 10 days of weather. This graphic
+succintly and elegantly displays a wealth of information. Intended as
+an illustration of the <code>polygon</code> function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a plot, but no other values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> John Verzani </p>
+
+
+<h3>References</h3>
+
+<p> The  weather page of the <em>New York Times</em> </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>squareplot</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">record.high=c(95,95,93,96,98,96,97,96,95,97)
+record.low= c(49,47,48,51,49,48,52,51,49,52)
+normal.high=c(78,78,78,79,79,79,79,80,80,80)
+normal.low= c(62,62,62,63,63,63,64,64,64,64)
+actual.high=c(80,78,80,68,83,83,73,75,77,81)
+actual.low =c(62,65,66,58,69,63,59,58,59,60)
+x=rbind(record.low,record.high,normal.low,normal.high,actual.low,actual.high)
+the.names=c("S","M","T","W","T","F","S")[c(3:7,1:5)]
+superbarplot(x,names=the.names)
+
+</code></pre>
+
+
+</div>

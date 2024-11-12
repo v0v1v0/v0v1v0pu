@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>extractVarName</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract variable names</h2>
+
+<h3>Description</h3>
+
+<p>Functions often get passed variables from within dataframes or other lists.
+However, printing these names with all their dollar signs isn't very
+userfriendly. This function simply uses a regular expression to extract the
+actual name.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">extractVarName(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A character vector of one or more variable names.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The actual variables name, with all containing objectes stripped
+off.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+extractVarName('mtcars$mpg');
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uptimerobot.monitor.responses</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get response times for one or more monitors</h2>
+
+<h3>Description</h3>
+
+<p><code>uptimerobot.monitor.responses</code> returns a dataset with all the response times
+for the given monitors IDs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uptimerobot.monitor.responses(api.key, monitors, limit = 50, offset = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>api.key</code></td>
+<td>
+<p>A valid key for connecting to UptimeRobors public API.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>monitors</code></td>
+<td>
+<p>vector or comma-delimited string with the IDs of the monitors to get.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>An integer value used for pagination. Defines the max number of records to return in each page. Default and max. is 50.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>An integer value to set the index of the first monitor to get (used for pagination).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The API uses pagination and returns no more than 50 monitors on each page. Use <code>limit</code> and <code>offset</code> to set a different number of
+monitors to get on each page and to move between pages. Leave default values to get all the data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataset with the response times for the given monitors.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gabriele Baldassarre
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uptimerobot.monitors</code>, <code>uptimerobot.monitor.logs</code>, <code>uptimerobot.monitor.contacts</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Let's assume the api.key is available into the environment variable KEY
+api.key &lt;- Sys.getenv("KEY", "")
+
+# Returns all the monitors IDs. Since the function always return a data.frame
+# (even if you ask only for a column), you have to reference the column to get a character vector.
+monitors.id &lt;- uptimerobot.monitors(api.key, fields="id")$id
+
+# Returns all the ping events for the given monitors
+logs.df &lt;- uptimerobot.monitor.responses(api.key, monitors=monitors.id)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

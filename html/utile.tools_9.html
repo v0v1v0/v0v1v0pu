@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>paste</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Concatenate strings</h2>
+
+<h3>Description</h3>
+
+<p>An augmented version of <code>base::paste()</code> with options
+to manage 'NA' values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">paste(..., sep = " ", collapse = NULL, na.rm = FALSE)
+
+paste0(..., collapse = NULL, na.rm = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>R objects to be converted to character vectors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>A character. A string to separate the terms.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>collapse</code></td>
+<td>
+<p>A character. An string to separate the results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>A logical. Whether to remove NA values from 'x'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Character vector of concatenated values.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>paste</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Base paste() NA handling behavior
+paste(
+  'The', c('red', NA_character_, 'orange'), 'fox jumped', NA_character_, 'over the fence.',
+  collapse = ' '
+)
+
+# Removal of NA values
+paste(
+  'The', c('red', NA_character_, 'orange'), 'fox jumped', NA_character_, 'over the fence.',
+  collapse = ' ',
+  na.rm = TRUE
+)
+</code></pre>
+
+
+</div>

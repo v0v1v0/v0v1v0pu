@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as_phrasemachine</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert Parts of Speech tags to one-letter tags which can be used to identify phrases based on regular expressions</h2>
+
+<h3>Description</h3>
+
+<p>Noun phrases are of common interest when doing natural language processing. Extracting noun phrases
+from text can be done easily by defining a sequence of Parts of Speech tags. For example this sequence of POS tags
+can be seen as a noun phrase: Adjective, Noun, Preposition, Noun.<br>
+This function recodes Universal POS tags to one of the following 1-letter tags, in order to simplify writing regular expressions
+to find Parts of Speech sequences:
+</p>
+
+<ul>
+<li>
+<p> A: adjective
+</p>
+</li>
+<li>
+<p> C: coordinating conjuction
+</p>
+</li>
+<li>
+<p> D: determiner
+</p>
+</li>
+<li>
+<p> M: modifier of verb
+</p>
+</li>
+<li>
+<p> N: noun or proper noun
+</p>
+</li>
+<li>
+<p> P: preposition
+</p>
+</li>
+<li>
+<p> O: other elements
+</p>
+</li>
+</ul>
+<p>After which identifying a simple noun phrase can be just expressed by using the following 
+regular expression (A|N)*N(P+D*(A|N)*N)* which basically says
+start with adjective or noun, another noun, a preposition, determiner adjective or noun and next a noun again.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as_phrasemachine(x, type = c("upos", "penn-treebank"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector of POS tags for example by using <code>udpipe_annotate</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>either 'upos' or 'penn-treebank' indicating to recode Universal Parts of Speech tags to the counterparts
+as described in the description, or to recode Parts of Speech tags as known in the Penn Treebank to the counterparts
+as described in the description</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For more information on extracting phrases see <a href="http://brenocon.com/handler2016phrases.pdf">http://brenocon.com/handler2016phrases.pdf</a>
+</p>
+
+
+<h3>Value</h3>
+
+<p>the character vector <code>x</code> where the respective POS tags are replaced with one-letter tags
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>phrases</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("PROPN", "SCONJ", "ADJ", "NOUN", "VERB", "INTJ", "DET", "VERB", 
+       "PROPN", "AUX", "NUM", "NUM", "X", "SCONJ", "PRON", "PUNCT", "ADP", 
+       "X", "PUNCT", "AUX", "PROPN", "ADP", "X", "PROPN", "ADP", "DET", 
+       "CCONJ", "INTJ", "NOUN", "PROPN")
+as_phrasemachine(x)
+</code></pre>
+
+
+</div>

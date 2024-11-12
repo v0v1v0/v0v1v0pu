@@ -1,0 +1,181 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>envi_files</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+ENVI File Manipulation 
+</h2>
+
+<h3>Description</h3>
+
+<p>Management of ENVI files similar to functions of OS file manager.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">envi_exists(pattern = ".+", path = ".", all.files = FALSE, full.names = TRUE,
+           recursive = FALSE, ignore.case = TRUE, exact = FALSE)
+envi_list(pattern = ".+", path = ".", all.files = FALSE, full.names = recursive,
+          recursive = FALSE, ignore.case = TRUE, exact = FALSE)
+envi_remove(pattern = ".+", path = ".", all.files = FALSE, full.names = recursive,
+            recursive = FALSE, ignore.case = TRUE, verbose = FALSE)
+envi_copy(src, dst, overwrite = TRUE)
+envi_rename(src, dst, overwrite = TRUE)
+
+ursa_exists(fname)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+
+<p>Either filename (like <code>basename</code> function) or mask in format of regular expressions or full path name.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+
+<p>Either path name (like <code>dirname</code> function) or ignored if <code>pattern</code> describes full path.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all.files</code></td>
+<td>
+
+<p>A logical value. If FALSE, only the names of visible files are returned. If TRUE, all file names will be returned. Similar to <code>all.files</code> argument in <code>list.files</code> function
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>full.names</code></td>
+<td>
+
+<p>A logical value. If TRUE, the directory path is prepended to the file names to give a relative file path. If FALSE, the file names (rather than paths) are returned. Similar to <code>full.names</code> argument in <code>list.files</code> function
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>recursive</code></td>
+<td>
+
+<p>Logical. Should the listing recurse into directories? Similar to <code>recursive</code> argument in <code>list.files</code> function
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore.case</code></td>
+<td>
+
+<p>Logical. Should pattern-matching be case-insensitive? Similar to <code>ignore.case</code> argument in <code>list.files</code> function
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exact</code></td>
+<td>
+
+<p>Logical. Attempt to cancel regular expressions.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+
+<p>Logical. <code>TRUE</code> provides some additional information on console.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>src</code></td>
+<td>
+
+<p>Strings of length 1 or more. Name or directory name or path of source ENVI files.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dst</code></td>
+<td>
+
+<p>Strings of length 1 or more. Name or directory name path of destination ENVI files. Length is assuming to be equal to length of <code>src</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+
+<p>Logical. <code>TRUE</code> overwrites destinations ENVI files. <code>FALSE</code> does nothing if destinaton ENVI file exists.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fname</code></td>
+<td>
+
+<p>Character. Full file name or file pattern with file path.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Functions do not view content of any files. The major identifier of ENVI files in file system is ENVI header (*.hdr) file. Binary file is searching along 1) original *.envi, *.bin, *.img, *.dat extensions, 2) externally packing *.gz. *.bz2, *.xz extensions, or 3) packed by this package *.envigz, *.bingz extensions. Functions <code>envi_copy()</code> and <code>envi_rename()</code> keeps original extension of ENVI binary file; use <code>file.rename</code> to rename ENVI binary file.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>envi_exists()</code> returns integer number of found ENVI files.
+</p>
+<p><code>envi_list()</code> returns character vector of found ENVI files.
+</p>
+<p><code>envi_remove()</code> returns character vector of deleted ENVI files.
+</p>
+<p><code>envi_copy()</code> returns 0L.
+</p>
+<p><code>envi_rename()</code> returns value of <code>file.rename</code>, which is applied to objects in file system.
+</p>
+<p><code>ursa_exists()</code> returs <code>TRUE</code> if any *.tif, *.tiff, *.bin, *.hfa file is found.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+wd &lt;- setwd(tempdir())
+a1 &lt;- create_envi("tmp1.envi")
+a2 &lt;- create_envi("tmp2.")
+close(a1,a2)
+envi_list()
+envi_copy("tmp1","tmp3")
+envi_copy("tmp2","tmp4")
+envi_list()
+envi_rename("tmp3","tmp5")
+envi_list()
+envi_exists("nofilewithsuchname")
+envi_exists("tmp[34]")
+envi_remove(".+")
+envi_list()
+setwd(wd)
+</code></pre>
+
+
+</div>

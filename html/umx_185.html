@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_check</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_check</h2>
+
+<h3>Description</h3>
+
+<p>Check that a test evaluates to TRUE. If not, stop, warn, or message the user
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_check(
+  boolean.test,
+  action = c("stop", "warning", "message"),
+  message = "check failed",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>boolean.test</code></td>
+<td>
+<p>test evaluating to TRUE or FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>action</code></td>
+<td>
+<p>One of "stop" (the default), "warning", or "message".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>message</code></td>
+<td>
+<p>what to tell the user when boolean.test is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra text will be pasted after the messages.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- boolean
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">umx_check(length(1:3)==3, "message", "item must have length == 3", "another comment", "and another")
+umx_check(1==2, "message", "one must be 2", ". Another comment", "and another")
+</code></pre>
+
+
+</div>

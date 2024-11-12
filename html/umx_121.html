@@ -1,0 +1,153 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxPlot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Quickly plot y ~ x with a regression line and R^2, and nice labels.</h2>
+
+<h3>Description</h3>
+
+<p>Want a figure for your paper or presentation but not the work of combining <code>ggplot2::ggplot()</code>,
+<code>ggplot2::geom_smooth()</code> and <code>method</code> options, plus <code>ggplot2::geom_point()</code>. Organizing <code>ggplot2::labs()</code> and its
+<code>x</code>, <code>y</code>, and <code>title</code> components. Adding your preferred theme like <code>ggplot2::theme_gray()</code>, plus recalling
+for <code>cowplot::draw_label()</code>, and/or <code>ggplot2::annotate()</code> to draw math-enabled labels on the plot, as well
+as the required <code>bquote()</code>, and extracting the relevant fit statistics from <code>lm()</code> and the subsidiary tasks
+of <code>reformulate()</code> programmatic variables?
+</p>
+<p><code>umxPlot</code> just takes <code>y ~ x</code> (or "x" and "y" as strings), and gives you a nicely labelled plot, with a fitted line, the
+<em>R</em><sup>2</sup> so readers can see how well this fitted. It knows how to put Greek symbols like <code class="reqn">beta</code> into axes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxPlot(
+  x,
+  y = NULL,
+  data,
+  xlab = x,
+  ylab = y,
+  title = paste0(y, " as a function of ", x),
+  fitx = NA,
+  fity = NA,
+  geom_point = TRUE,
+  method = c("lm", "auto", "loess", "glm", "gam"),
+  family = c("gaussian", "binomial", "Gamma", "inverse", "poisson", "quasi",
+    "quasibinomial", "quasipoisson")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>formula or (alternatively) x as string</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>variable as string.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The data for the graph.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>X-axis label (default y).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Y-axis label (default y).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Graph title. Default =  paste0(y, " as a function of ", x)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fitx</code></td>
+<td>
+<p>x location for the fit summary (default 1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fity</code></td>
+<td>
+<p>y location for the fit summary (default 2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>geom_point</code></td>
+<td>
+<p>show points? (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Method for fitting curve (default = lm)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>for glm default = "gaussian"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> plot you can edit.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>ggplot2::qplot()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(mtcars)
+umxPlot(mpg ~ wt, data = mtcars, fitx = 2, fity = 10)
+umxPlot(x = "wt", y = "mpg", mtcars, fitx = 2, fity = 10)
+</code></pre>
+
+
+</div>

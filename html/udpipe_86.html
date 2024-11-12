@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>udpipe_annotation_params</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>List with training options set by the UDPipe community when building models based on the Universal Dependencies data</h2>
+
+<h3>Description</h3>
+
+<p>In order to show the settings which were used by the UDPipe community when building 
+the models made available when using <code>udpipe_download_model</code>, 
+the tokenizer settings used for the different treebanks are shown below, 
+so that you can easily use this to retrain your model directly on the corresponding 
+UD treebank which you can download at <code>http://universaldependencies.org/#ud-treebanks</code>. <br></p>
+<p>More information on how the models provided by the UDPipe community have been built are available
+at <a href="https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2364">https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2364</a>
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2364">https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2364</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(udpipe_annotation_params)
+str(udpipe_annotation_params)
+
+## settings of the tokenizer
+head(udpipe_annotation_params$tokenizer)
+
+## settings of the tagger
+subset(udpipe_annotation_params$tagger, language_treebank == "nl")
+
+## settings of the parser
+udpipe_annotation_params$parser
+</code></pre>
+
+
+</div>

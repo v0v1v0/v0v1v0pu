@@ -1,0 +1,237 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>theme_unhcr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UNHCR ggplot2 theme</h2>
+
+<h3>Description</h3>
+
+<p><code>theme_unhcr</code> provides a basic <b>UNHCR</b> theme
+to use in <b>ggplot2</b> commands.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">theme_unhcr(
+  font_family = if (lato_installed()) "Lato" else "sans",
+  font_size = 12,
+  plot_title_size = rel(1.35),
+  plot_title_margin = font_size,
+  subtitle_size = font_size,
+  subtitle_margin = font_size * 1.5,
+  strip_text_size = rel(0.9),
+  strip_text_face = "bold",
+  strip_text_just = 0,
+  caption_size = rel(0.7),
+  caption_margin = font_size,
+  axis_text = TRUE,
+  axis_text_size = rel(0.9),
+  axis_title = TRUE,
+  axis_title_size = rel(0.9),
+  axis = FALSE,
+  axis_ticks = FALSE,
+  grid = "XY",
+  legend = TRUE,
+  legend_text_size = rel(0.9),
+  legend_title = FALSE,
+  legend_title_size = rel(0.9),
+  plot_margin = margin(font_size, font_size, font_size, font_size),
+  plot_background = "#ffffff",
+  void = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>font_family</code></td>
+<td>
+<p>Base font family "Lato".
+You need to have "Lato" font installed on your device in order to use it.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>font_size</code></td>
+<td>
+<p>Base font size in pt. Default to 12 pts.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_title_size</code></td>
+<td>
+<p>Plot title font size. Default to <code>font_size</code> * 1.35.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_title_margin</code></td>
+<td>
+<p>Plot title bottom margin. Default to <code>font_size</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subtitle_size</code></td>
+<td>
+<p>Plot subtitle font size. Default to <code>font_size</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subtitle_margin</code></td>
+<td>
+<p>Plot subtitle bottom margin. Default to <code>font_size</code> * 1.5.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_text_size</code></td>
+<td>
+<p>Facet label font size. Default to <code>font_size</code> * 0.9.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_text_face</code></td>
+<td>
+<p>Facet label font face. Default to "bold".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_text_just</code></td>
+<td>
+<p>Facet label justification. Default to 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption_size</code></td>
+<td>
+<p>Caption font size. Default to <code>font_size</code> * 0.7.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption_margin</code></td>
+<td>
+<p>Caption top margin. Default to <code>font_size</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis_text</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code> or <code>xy</code>. Turn on and off axis label.
+Use <code>x</code> or <code>y</code> to have only the correspondent active. Default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis_text_size</code></td>
+<td>
+<p>Axis label font size. Default to <code>font_size</code> * 0.9.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis_title</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code> or <code>xy</code>. Turn on and off axis title.
+Use <code>x</code> or <code>y</code> to have only the correspondent active. Default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis_title_size</code></td>
+<td>
+<p>Axis title font size. Default to <code>font_size</code> * 0.9.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code> or <code>xy</code>. Turn on and off axis.
+Use <code>x</code> or <code>y</code> to have only the correspondent axis active. Don't forget to review
+the <code>expand</code> argument of the <code style="white-space: pre;">⁠scale_x_*⁠</code>/<code style="white-space: pre;">⁠scale_y_*⁠</code> to avoid spacing between
+the axis and the baseline of the plot. Default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis_ticks</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code> or <code>xy</code>. Turn on and off axis ticks.
+Use <code>x</code> or <code>y</code> to have only the correspondent axis ticks active. Default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grid</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code> or a combination of <code>X</code> or <code>x</code> and <code>Y</code> or y<code style="white-space: pre;">⁠. Turn on and off panel grids. Use ⁠</code>X<code>or</code>Y<code style="white-space: pre;">⁠for major grids, and⁠</code>x<code>or</code>y<code style="white-space: pre;">⁠for minor grid.  Default to⁠</code>XY'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code>. Turn on and off the legend.
+Default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend_text_size</code></td>
+<td>
+<p>Legend key font size. Default to <code>font_size</code> * 0.9.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend_title</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code>. Turn on and off the legend title.
+Default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend_title_size</code></td>
+<td>
+<p>Legend title font size. Default to <code>font_size</code> * 0.9.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_margin</code></td>
+<td>
+<p>Plot margin (specify with <code>ggplot2::margin()</code>).
+Default to <code>ggplot2::margin(font_size, font_size, font_size, font_size)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_background</code></td>
+<td>
+<p>Plot background.
+Put "transparent" for no background color. Default to "white".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>void</code></td>
+<td>
+<p>Logical <code>TRUE</code>/<code>FALSE</code>. If <code>TRUE</code>, all grid lines, ticks
+and axes are removed. Default to <code>FALSE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot2 theme object, the theme style.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+library(ggplot2)
+
+data(mpg, package = "ggplot2")
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  theme_unhcr()
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

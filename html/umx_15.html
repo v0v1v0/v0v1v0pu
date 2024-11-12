@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>geometric_mean</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Geometric Mean</h2>
+
+<h3>Description</h3>
+
+<p>The Geometric mean is the nth-root of the product of <code>n</code> input values.
+Common uses include computing economic utility.  That is to say, the utility of
+<code>c(1, 2, 10)</code> is </p>
+<p style="text-align: center;"><code class="reqn">(1 * 2 * 10)/3</code>
+</p>
+<p> = 6.6 not 6.3 (the arithmetic mean).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">geometric_mean(x, na.rm = c(TRUE, FALSE))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector of values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>remove NAs by default.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Geometric mean of x
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://en.wikipedia.org/wiki/Geometric_mean">https://en.wikipedia.org/wiki/Geometric_mean</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">geometric_mean(c(50, 100))
+
+# For a given sum, geometric mean is maximised with equality
+geometric_mean(c(75,75))
+
+v = c(1, 149); c(sum(v), geometric_mean(v), mean(v), median(v))
+# 150.00000  12.20656  75.00000  75.00000
+
+# Underlying logic
+sqrt(50 * 100)
+
+# Alternate form using logs
+exp(mean(log(c(50 *100))))
+
+# Reciprocal duality
+1/geometric_mean(c(100, 50))
+geometric_mean(c(1/100, 1/50))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,136 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxRotate.MxModelCP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Rotate a CP solution</h2>
+
+<h3>Description</h3>
+
+<p>Rotate a CP solution.
+Should work with rotations provided in <code>library("GPArotation")</code> and <code>library("psych")</code>, e.g
+</p>
+<p><strong>Orthogonal</strong>: "varimax", "quartimax", "bentlerT", "equamax", "varimin", "geominT" and "bifactor"
+</p>
+<p><strong>Oblique</strong>: "Promax", "promax", "oblimin", "simplimax", "bentlerQ", "geominQ", "biquartimin" and "cluster"
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxModelCP'
+umxRotate(
+  model,
+  rotation = c("varimax", "promax"),
+  tryHard = "yes",
+  freeLoadingsAfter = TRUE,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>a <code>umxCP()</code> model to rotate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rotation</code></td>
+<td>
+<p>name of the rotation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Default ("yes") is to tryHard.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freeLoadingsAfter</code></td>
+<td>
+<p>return the model with factor loadings free (default) or fixed in the new locations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>print detail about the rotation</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This works by taking the common-pathways loadings matrix from a solved <code>umxCP()</code> model, rotating these, placing
+them back into the loadings matrix, re-estimating the model with the parameters fixed at this rotation, then return the new model.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Rotated solution.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxCP()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Rotate a CP solution(param)
+# Common pathway model rotation
+library(umx)
+# Fit 3 factor CPM
+data(GFF)
+selDVs = c("gff", "fc", "qol", "hap", "sat", "AD") 
+m1 = umxCP(selDVs = selDVs, nFac = 2, data = data, tryHard = "yes")
+m2 = umxRotate(m1, rotation = "varimax",  tryHard = "yes")
+
+
+## End(Not run)
+</code></pre>
+
+
+</div>

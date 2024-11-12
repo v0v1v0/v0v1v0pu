@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>write_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Write out a ggplot2 graphic with minimal configuration</h2>
+
+<h3>Description</h3>
+
+<p>Takes a <code>ggplot2</code> object and writes it to disk via <code>ggplot2::ggsave</code> using the
+variable name as the filename.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">write_plot(variable, format = "png", output_dir = dir_plots(), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>variable</code></td>
+<td>
+<p>A tibble or dataframe object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>The desired format for the plot, be it 'png', 'pdf', etc. Accepts formats
+you'd pass to <code>ggplot2::ggsave</code>'s 'device' parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_dir</code></td>
+<td>
+<p>The directory to save the plot out to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other settings to pass to ggsave, such as format, width, height or dpi.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, called for side effects
+</p>
+
+
+</div>

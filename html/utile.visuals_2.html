@@ -1,0 +1,105 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>geom_stepconfint</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Step function confidence intervals for ggplot2</h2>
+
+<h3>Description</h3>
+
+<p>Produces a step function confidence interval for survival curves.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">geom_stepconfint(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  na.rm = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mapping</code></td>
+<td>
+<p>Aesthetic mappings with aes() function. Like geom_ribbon(), you must provide
+columns for x, ymin (lower limit), ymax (upper limit).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The data to be displayed in this layer. Can inherit from ggplot parent.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stat</code></td>
+<td>
+<p>The statistical transformation to use on the data for this layer, as a string.
+Defaults to 'identity'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of a call to a
+position adjustment function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>If FALSE, the default, missing values are removed with a warning. If TRUE,
+missing values are silently removed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional. Any other ggplot geom_ribbon() arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>Adapted from the survminer package &lt;https://github.com/kassambara/survminer&gt;.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(survival)
+library(broom)
+library(ggplot2)
+
+fit &lt;- survfit(Surv(time, status) ~ trt, data = diabetic)
+fit &lt;- survfit0(fit) # connect origin
+
+ggplot(
+  data = tidy(fit),
+  mapping = aes(x = time, y = estimate)
+) +
+  geom_step(aes(color = strata)) +
+  geom_stepconfint(aes(ymin = conf.low, ymax = conf.high, fill = strata), alpha = 0.3) +
+  coord_cartesian(c(0, 50)) +
+  scale_x_continuous(expand = c(0.02,0)) +
+  labs(x = 'Time', y = 'Freedom From Event') +
+  scale_color_manual(
+    values = c('#d83641', '#1A45A7'),
+    name = 'Treatment',
+    labels = c('None', 'Laser'),
+    aesthetics = c('colour', 'fill')) +
+  theme_basic()
+</code></pre>
+
+
+</div>

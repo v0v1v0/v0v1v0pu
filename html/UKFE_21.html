@@ -1,0 +1,126 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EVPlotAdd</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add lines and/or points to an extreme value plot</h2>
+
+<h3>Description</h3>
+
+<p>Functionality to add extra lines or points to an extreme value plot (derived from the EVPlot function).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">EVPlotAdd(
+  Pars,
+  dist = "GenLog",
+  Name = "Adjusted",
+  MED = NULL,
+  xyleg = NULL,
+  col = "red",
+  lty = 1,
+  pts = NULL,
+  ptSym = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Pars</code></td>
+<td>
+<p>a numeric vector of length two. The first is the Lcv (linear coefficient of variation) and the second is the Lskew (linear skewness).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>distribution name with a choice of "GenLog", "GEV", "GenPareto", "Kappa3", and "Gumbel"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Name</code></td>
+<td>
+<p>character string. User chosen name for points or line added (for the legend)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MED</code></td>
+<td>
+<p>The two year return level. Necessary In the case where the EV plot is not scaled</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xyleg</code></td>
+<td>
+<p>a numeric vector of length two. They are the x and y position of the symbol and text to be added to the legend.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>The colour of the points of line that have been added</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lty</code></td>
+<td>
+<p>An integer. The type of line added</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pts</code></td>
+<td>
+<p>A numeric vector. An annual maximum sample, for example. This is for points to be added</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ptSym</code></td>
+<td>
+<p>An integer. The symbol of the points to be added</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A line can be added using the Lcv and Lskew based on one of four distributions (Generalised extreme value, Generalised logistic, Gumbel, Generalised Pareto). Points can be added as a numeric vector. If a single point is required, the base points() function can be used and the x axis will need to be log(RP-1).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Additional, user specified line or points to an extreme value plot derived from the EVPlot function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get an AMAX sample and plot the growth curve with the GEV distribution
+AM.203018 &lt;- GetAM(203018)
+EVPlot(AM.203018$Flow, dist = "GEV")
+#Now add a line (dotted &amp; red) for the generalised logistic distribution
+#first get the Lcv and Lskew using the Lmoms function
+pars &lt;- as.numeric(Lmoms(AM.203018[,2])[c(5,6)])
+EVPlotAdd(Pars = pars, dist = "GenLog", Name = "GenLog", xyleg = c(-5.2,2.65), lty = 3)
+#Now add a line for the gumbel distribution which is darkgreen and dashed.
+EVPlotAdd(Pars = pars[1], dist = "Gumbel", Name = "Gumbel",
+xyleg = c(-5.19,2.5), lty = 3, col = "darkgreen")
+#now plot afresh and get another AMAX and add the points
+EVPlot(AM.203018$Flow, dist = "GEV")
+AM.27090 &lt;- GetAM(27090)
+EVPlotAdd(xyleg = c(-4.9,2.65), pts = AM.27090[,2], Name = "27090")
+</code></pre>
+
+
+</div>

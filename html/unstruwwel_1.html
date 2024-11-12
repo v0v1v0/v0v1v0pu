@@ -1,0 +1,136 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Century</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set a Century and Get its Time Interval</h2>
+
+<h3>Description</h3>
+
+<p>Set a Century and Get its Time Interval
+</p>
+<p>Set a Century and Get its Time Interval
+</p>
+
+
+<h3>Details</h3>
+
+<p>An Object of <code>R6Class</code> with methods to set
+common time periods and specifications for centuries.
+</p>
+
+
+<h3>Super class</h3>
+
+<p><code>unstruwwel::Periods</code> -&gt; <code>Century</code>
+</p>
+
+
+<h3>Methods</h3>
+
+
+
+<h4>Public methods</h4>
+
+
+<ul>
+<li> <p><a href="#method-Century-new"><code>Century$new()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-Century-clone"><code>Century$clone()</code></a>
+</p>
+</li>
+</ul>
+<details open><summary>Inherited methods</summary><ul>
+<li><span class="pkg-link" data-pkg="unstruwwel" data-topic="Periods" data-id="set_additions"><a href="../../unstruwwel/html/Periods.html#method-Periods-set_additions"><code>unstruwwel::Periods$set_additions()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="unstruwwel" data-topic="Periods" data-id="take"><a href="../../unstruwwel/html/Periods.html#method-Periods-take"><code>unstruwwel::Periods$take()</code></a></span></li>
+</ul></details><hr>
+<a id="method-Century-new"></a>
+
+
+
+<h4>Method <code>new()</code>
+</h4>
+
+<p>Helper function to specify the beginning of a century.
+</p>
+<p>Helper function to specify the middle of a century.
+</p>
+<p>Helper function to specify the end of a century.
+</p>
+<p>Create a century.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>Century$new(value)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>value</code></dt>
+<dd>
+<p>A numerical scalar.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>Object of <code>R6Class</code> with methods to set
+common time periods and specifications for centuries.
+</p>
+
+
+<hr>
+<a id="method-Century-clone"></a>
+
+
+
+<h4>Method <code>clone()</code>
+</h4>
+
+<p>The objects of this class are cloneable with this method.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>Century$clone(deep = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>deep</code></dt>
+<dd>
+<p>Whether to make a deep clone.</p>
+</dd>
+</dl>
+</div>
+
+
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">if (interactive()) {
+x &lt;- Century$new(15)
+x$take(2, type = "third")
+}
+
+</code></pre>
+
+
+</div>

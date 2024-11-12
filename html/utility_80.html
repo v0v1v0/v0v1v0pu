@@ -1,0 +1,162 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.endnode.cond.create</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct a conditional end node</h2>
+
+<h3>Description</h3>
+
+<p>Function to construct a node that makes a choice between given end 
+nodes based on the levels of discrete attributes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.endnode.cond.create(name.node, 
+                            attrib.levels, 
+                            nodes, 
+                            utility      = TRUE, 
+                            required     = FALSE, 
+                            col          = "black", 
+                            shift.levels = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name.node</code></td>
+<td>
+
+<p>name of the node to be constructed as a character string.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attrib.levels</code></td>
+<td>
+
+<p>data frame with attribute names as column names and all discrete attribute level combinations in the rows.
+This may be a dependence on any number of attributes.
+As combinatorics can lead to a very large number of possible combinations, the node should not depend on a too large number of attributes, in particular if each attribute has many different levels expressed by numbers or character strings.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nodes</code></td>
+<td>
+
+<p>list of the length of the number of columns of the data frame specifed as argument <code>attrib.levels</code> above containing the nodes to be associated with the attribute level combinations specified in the rows of <code>attrib.levels</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>utility</code></td>
+<td>
+
+<p>(optional) logical variable indicating if a value function (<code>FALSE</code>) or a utility function (<code>TRUE</code>) is created.
+Default value is <code>TRUE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>required</code></td>
+<td>
+
+<p>(optional) logical variable indicating if the value of this node is required for aggregation at the next higher level.
+If this variable is <code>TRUE</code>, aggregation at the next higher level is not possible if this node returns NA.
+Default value is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+
+<p>(optional) color used for plotting the bounding box of the node in the objective hierarchy.
+Default value is <code>"black"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shift.levels</code></td>
+<td>
+
+<p>(optional) number of hierarchical levels by which the node in the objective hierarchy is shifted to make a branch fit better to other branches.
+Default value is <code>0</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns the created object of type <code>utility.endnode.cond</code> with the properties specified in the arguments of the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Print, evaluate and plot the node with <br><br><code>print.utility.endnode.cond</code>, <br><code>summary.utility.endnode.cond</code>, <br><code>evaluate.utility.endnode.cond</code> and <br><code>plot.utility.endnode.cond</code>. <br><br>
+Create other end nodes with  <br><br><code>utility.endnode.discrete.create</code>, <br><code>utility.endnode.parfun1d.create</code>, <br><code>utility.endnode.intpol2d.create</code>, <br><code>utility.endnode.parfun1d.create</code>, or <br><code>utility.endnode.firstavail.create</code>. <br><br>
+Create other types of nodes with <br><br><code>utility.aggregation.create</code>, <br><code>utility.conversion.intpol.create</code>, or <br><code>utility.conversion.parfun.create</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  bedmod_riprap &lt;-
+    utility.endnode.intpol1d.create(
+      name.node   = "bed modification riprap",
+      name.attrib = "bedmodfract_percent",
+      range       = c(0,100),
+      x           = c(0,10,30,100),
+      u           = c(1,0.775,0.5625,0.24),
+      required    = FALSE,
+      utility     = FALSE)
+  
+  bedmod_other &lt;-
+    utility.endnode.intpol1d.create(
+      name.node   = "bed modification other",
+      name.attrib = "bedmodfract_percent",
+      range       = c(0,100),
+      x           = c(0,10,30,100),
+      u           = c(1,0.775,0.5625,0),
+      required    = FALSE,
+      utility     = FALSE)
+  
+  bedmod &lt;-
+    utility.endnode.cond.create(
+      name.node     = "bed modification",
+      attrib.levels = data.frame(bedmodtype_class=
+                                 c("riprap","other")),
+      nodes         = list(bedmod_riprap,bedmod_other),
+      required      = FALSE,
+      utility       = FALSE)
+
+  print(bedmod)
+  plot(bedmod)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,138 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>QCplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate QC plots</h2>
+
+<h3>Description</h3>
+
+<p>Visualize the UMI count for each selected assay and sample for a given
+consensus depth. This is useful to detect differences in coverage,
+especially for multiplexed assays.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">QCplot(
+  object,
+  group.by = "sample",
+  plotDepth = 3,
+  assays = NULL,
+  samples = NULL,
+  theme = "classic",
+  option = "viridis",
+  direction = "default",
+  toggle_mean = TRUE,
+  center = "mean",
+  line_col = "blue",
+  angle = 0,
+  plotly = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Requires a UMI sample or UMI experiment object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group.by</code></td>
+<td>
+<p>String. Which variable should be used as a factor on the x-axis. Default is sample</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plotDepth</code></td>
+<td>
+<p>Which consensus depth to plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>assays</code></td>
+<td>
+<p>(Optional) user-supplied list of assays to plot. Default is all.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>(Optional) user-supplied list of samples to plot. Default is all.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>ggplot theme to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>option</code></td>
+<td>
+<p>Color palette to use, either ggplot default or viridis colors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>If viridis colors are used, choose orientation of color scale.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>toggle_mean</code></td>
+<td>
+<p>Show mean or median</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>center</code></td>
+<td>
+<p>Choose mean or median</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>line_col</code></td>
+<td>
+<p>Choose color for mean/median line</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>angle</code></td>
+<td>
+<p>Angle of labels on x-axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plotly</code></td>
+<td>
+<p>Should plotly be used for rendering?</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main = system.file('extdata', package = 'umiAnalyzer')
+samples &lt;- list.dirs(path = main, full.names = FALSE, recursive = FALSE)
+simsen &lt;- createUmiExperiment(experimentName = 'example',mainDir = main,sampleNames = samples)
+
+depth_plot &lt;- QCplot(simsen)
+
+</code></pre>
+
+
+</div>

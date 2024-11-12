@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>paradise</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Annual snowfall at Paradise Ranger Station, Mount Ranier</h2>
+
+<h3>Description</h3>
+
+<p>Annual snowfall (from July 1 to June 30th) measured at
+Paradise ranger station at Mount Ranier Washington. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(paradise)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The data is stored as a zoo class object. The time index
+refers to the year the snowfall begins.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Due to its rapid elevation gain, and proximity to the warm
+moist air of the Pacific Northwest record amounts of snow can
+fall on Mount Ranier. This data set shows the
+fluctuations. 
+</p>
+
+
+<h3>Source</h3>
+
+<p>Original data from http://www.nps.gov/mora/current/weather.htm
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(zoo)
+data(paradise)
+range(paradise, na.rm=TRUE)
+plot(paradise)
+</code></pre>
+
+
+</div>

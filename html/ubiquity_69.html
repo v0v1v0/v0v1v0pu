@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_rpt_estimation</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate a Report from Parameter Estimation</h2>
+
+<h3>Description</h3>
+
+<p>This will take the output generated during a parameter estimation and append those results to a specified report.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_rpt_estimation(cfg, rptname = "default", analysis_name = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rptname</code></td>
+<td>
+<p>report name (<code>"default"</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the estimation analysis and used as a prefix to store the results</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>ubiquity system object with estimation report appended
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>system_rpt_read_template</code>, the reporting vignette (<code>vignette("Reporting", package = "ubiquity")</code>)
+and the estimation vignette (<code>vignette("Estimation", package = "ubiquity")</code>)
+</p>
+
+
+</div>

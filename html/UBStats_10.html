@@ -1,0 +1,237 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>distr.table.xy</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Analysis of a bivariate distribution using cross-tables</h2>
+
+<h3>Description</h3>
+
+<p><code>distr.table.xy()</code> displays tables of joint or conditional
+distributions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">distr.table.xy(
+  x,
+  y,
+  freq = "counts",
+  freq.type = "joint",
+  total = TRUE,
+  breaks.x,
+  breaks.y,
+  adj.breaks = TRUE,
+  interval.x = FALSE,
+  interval.y = FALSE,
+  f.digits = 2,
+  p.digits = 0,
+  force.digits = FALSE,
+  data,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, y</code></td>
+<td>
+<p>Unquoted strings identifying the variables whose joint
+distribution has to be analysed. <code>x</code> and <code>y</code> can be the
+name of a vector or a factor in the workspace or the name of one of
+the columns in the data frame specified in the <code>data</code> argument.
+Note that in the table <code>x</code> is displayed on the <em>rows</em> and
+<code>y</code> on the <em>columns</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freq</code></td>
+<td>
+<p>A character vector specifying the set of frequencies
+to be displayed (more options are allowed). Allowed options
+(possibly abbreviated) are <code>"counts"</code>,
+<code>"percentages"</code> and <code>"proportions"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freq.type</code></td>
+<td>
+<p>A character vector specifying the types of
+frequencies to be displayed (more types are allowed).
+Allowed options are <code>joint</code> (default)
+for joint frequencies, <code>x|y</code> (or <code>column</code>) for the distributions
+of <code>x</code> conditioned to <code>y</code>, and <code>y|x</code> (or <code>row</code>) for
+the distributions of <code>y</code> conditioned to <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>total</code></td>
+<td>
+<p>Logical value indicating whether the sum of the requested
+frequencies should be added to the table; default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>breaks.x, breaks.y</code></td>
+<td>
+<p>Allow to classify the variables <code>x</code>
+and/or <code>y</code>, if <em>numerical</em>, into intervals.
+They can be integers indicating the number of intervals of
+equal width used to classify <code>x</code> and/or <code>y</code>, or
+vectors of increasing numeric values defining the endpoints of
+the intervals (closed on the left and open
+on the right; the last interval is closed on the right too).
+To cover the entire range of values taken by one variable,
+the maximum and the minimum values should be included between
+the first and the last break.
+It is possible to specify a set of breaks covering only a portion
+of the variable's range.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adj.breaks</code></td>
+<td>
+<p>Logical value indicating whether the endpoints of
+intervals of a numerical variable (<code>x</code> or <code>y</code>)
+when classified into intervals should be displayed avoiding
+scientific notation; default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval.x, interval.y</code></td>
+<td>
+<p>Logical values indicating whether
+<code>x</code> and/or <code>y</code> are variables measured in classes
+(<code>TRUE</code>). If the detected intervals are not
+consistent (e.g. overlapping intervals, or intervals with
+upper endpoint higher than the lower one), the variable is
+tabulated as it is, even if results are not necessarily
+consistent; default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>f.digits, p.digits</code></td>
+<td>
+<p>Integer values specifying the number of
+decimals used to round respectively proportions
+(default: <code>f.digits=2</code>) and percentages (default: <code>p.digits=0</code>).
+If the chosen rounding
+formats some non-zero values as zero, the number of decimals is increased
+so that all values have at least one significant digit, unless the argument
+<code>force.digits</code> is set to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.digits</code></td>
+<td>
+<p>Logical value indicating whether proportions and
+percentages should be forcedly rounded to the number of decimals specified in
+<code>f.digits</code> and <code>p.digits</code> even if non-zero values are
+rounded to zero (default to <code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>An optional data frame containing <code>x</code> and/or <code>y</code>.
+If not found in <code>data</code>, the variables are taken from the environment
+from which <code>distr.table.xy()</code> is called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to low level functions.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list whose elements are the requested tables
+(converted  to dataframes) listing the values taken
+by the two variables arranged in standard
+order (logical, alphabetical or numerical order for vectors,
+order of levels for factors, ordered intervals for classified
+variables or for variables measured in classes)
+and the specified joint or conditional types of frequencies.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raffaella Piccarreta <a href="mailto:raffaella.piccarreta@unibocconi.it">raffaella.piccarreta@unibocconi.it</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>distr.plot.xy()</code> for plotting a bivariate
+distribution.
+</p>
+<p><code>distr.table.x()</code> for tabulating a univariate
+distribution.
+</p>
+<p><code>distr.plot.x()</code> for plotting a univariate
+distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(MktDATA, package = "UBStats")
+
+# Character vectors, factors, and discrete numeric vectors
+# - Default: joint counts
+distr.table.xy(LikeMost, Children, data = MktDATA) 
+
+# - Joint and conditional distribution of x|y
+#   counts and proportions, no totals
+distr.table.xy(LikeMost, Education, freq = c("counts","Prop"), 
+               freq.type = c("joint","x|y"), total = FALSE,
+               data = MktDATA)
+# - Joint and conditional row and column distributions (%) 
+distr.table.xy(CustClass, Children, freq = "Percentages", 
+               freq.type = c("joint","row","column"),
+               data = MktDATA)
+
+# Numerical variables classified or measured in classes
+# - A numerical variable classified into intervals 
+#   and a factor
+distr.table.xy(CustClass, TotPurch, 
+               breaks.y = c(0,5,10,15,20,35),
+               freq = c("Counts","Prop"), freq.type = "y|x", 
+               data = MktDATA)
+
+# - Two numerical variables, one measured in classes
+#   and the other classified into intervals 
+distr.table.xy(Income.S, TotPurch, interval.x = TRUE,
+               breaks.y = c(0,5,10,15,20,35),
+               freq = c("Counts","Prop"), 
+               freq.type = c("row","col"), data = MktDATA)
+
+# Argument force.digits
+# - Default: manages possible excess of rounding
+distr.table.xy(CustClass, Children, freq = "Percentages", 
+               freq.type = c("x|y"),data = MktDATA)
+# - Force to the required rounding
+distr.table.xy(CustClass, Children, freq = "Percentages", 
+               freq.type = c("x|y"), 
+               force.digits = TRUE, data = MktDATA)
+
+# Output the list with the requested tables
+tables.xy&lt;-distr.table.xy(Income.S, TotPurch, 
+                          interval.x = TRUE,
+                          breaks.y = c(0,5,10,15,20,35),
+                          freq = c("Counts","Prop"), 
+                          freq.type = c("joint","row","col"), 
+                          data = MktDATA)
+
+</code></pre>
+
+
+</div>

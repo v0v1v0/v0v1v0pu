@@ -1,0 +1,128 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.array</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Export raster object to multidimensional array
+</h2>
+
+<h3>Description</h3>
+
+<p>In the <code>ursaRaster</code> object the 3-dimensional image data are presented in 2-dimensional matrix. <code>as.array</code> transforms internal 2-dimensional data to the usual 3-dimansional data. <code>as.matrix</code> just extracts image data in internal 2-dimensional format.
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+as.array(x, ...)
+
+## non-public
+.as.array(x, drop = FALSE, flip = FALSE, permute = FALSE, dim = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Arguments, which are passed to <code>.as.array</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>ursaRaster</code> object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop</code></td>
+<td>
+
+<p>Logical. If <code>drop=TRUE</code> then single-band images are presented without third dimension.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>permute</code></td>
+<td>
+
+<p>Logical. If <code>permute=FALSE</code> then returned array has dimension <em>(samples, lines, bands)</em>. If <code>permute=TRUE</code> then returned array has dimension <em>(lines, samples, bands)</em>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flip</code></td>
+<td>
+
+<p>Logical. If <code>flip=TRUE</code> then vertical flip (reverse coordinates for dimension #2) is applied for output image. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dim</code></td>
+<td>
+
+<p>Logical. If <code>dim=TRUE</code> then array's dimension is returned.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Use <code>permute=TRUE</code> to create an object of class <code>raster</code>: <code>as.raster(as.array(...))</code>
+</p>
+<p>The spatial reference system is lost.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>dim=FALSE</code> then <code>as.array</code> returns object of class <code>array</code>.<br>
+If <code>dim=TRUE</code> then <code>as.array</code> returns dimension of array.
+<br><code>as.matrix</code> returns object of class <code>matrix</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>as.raster</code> is a function to direct export to the object of class <code>raster</code>.
+<br><code>as.matrix</code> with argument/value <code>coords=TRUE</code> and <code>as.data.frame</code> for object of class <code>ursaRaster</code> keep spatial reference system.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- pixelsize()
+a &lt;- (a-global_min(a))/(global_max(a)-global_min(a))
+b &lt;- c(entire=a,half=a/2,double=a*2)
+str(m &lt;- as.matrix(b))
+str(d1 &lt;- as.array(b))
+str(d2 &lt;- as.array(b[1],drop=FALSE))
+str(d3 &lt;- as.array(b[1],drop=TRUE))
+contour(d3)
+filled.contour(d3)
+d4 &lt;- as.array(b,perm=TRUE)/global_max(b)
+d4[is.na(d4)] &lt;- 0
+str(d4 &lt;- as.raster(d4))
+plot(d4)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>corner</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>corner</h2>
+
+<h3>Description</h3>
+
+<p>Display a corner section of a rectangular data set
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">corner(x, ...)
+
+## S3 method for class 'data.frame'
+corner(x, r = 5L, c = 5L, corner = "topleft",
+  ...)
+
+## S3 method for class 'matrix'
+corner(x, r = 5L, c = 5L, corner = "topleft", ...)
+
+## S3 method for class 'table'
+corner(x, r = 5L, c = 5L, corner = "topleft", ...)
+
+## Default S3 method:
+corner(x, r = 5L, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments passed on to other functions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>Number of rows to display</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c</code></td>
+<td>
+<p>Number of columns to show</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>corner</code></td>
+<td>
+<p>Which corner to grab.  Possible values are c("topleft", "bottomleft", "topright", "bottomright")</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Grabs a corner of a data set
+</p>
+<p>Display a corner section of a rectangular data set
+</p>
+<p>Displays a
+corner of a rectangular data set such as a data.frame, matrix or table.  If showing
+the right side or bottom, the order of the data is preserved.
+</p>
+<p>The default method reverts to simply calling <code>head</code>
+</p>
+<p>corner of a rectangular data set such as a data.frame, matrix or table.  If showing the right side or bottom, the order of the data is preserved.
+</p>
+
+
+<h3>Value</h3>
+
+<p>... The part of the data set that was requested.  The size depends on r and c and the position depends on corner.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>head</code> <code>tail</code> <code>topleft</code> <code>topright</code> <code>bottomleft</code> <code>bottomright</code> <code>left</code> <code>right</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(diamonds)
+head(diamonds)      # displays all columns
+corner(diamonds)    # displays first 5 rows and only the first 5 columns
+corner(diamonds, corner="bottomleft")       # displays the last 5 rows and the first 5 columns
+corner(diamonds, corner="topright")       # displays the first 5 rows and the last 5 columns
+
+</code></pre>
+
+
+</div>

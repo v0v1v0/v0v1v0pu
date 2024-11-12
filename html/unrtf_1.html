@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unrtf</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert rtf Documents</h2>
+
+<h3>Description</h3>
+
+<p>Converts an rtf document to html, text or latex. Output in html is recommended
+because <code>unrtf</code> has limited support for converting between character encodings
+which is problematic for non-ascii text.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unrtf(file = NULL, format = c("html", "text", "latex"), verbose = FALSE,
+  conf_dir = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>path or url to the 'rtf' file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>output format, must be "text", "html" or "latex"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>print some output to stderr</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf_dir</code></td>
+<td>
+<p>use a custom dir with <code>.conf</code> files which serve as output templates.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Output can be customized via a set of <code>.conf</code> files which serve as templates for
+the various formats. The default conf files are located in <code>system.file("share", package = "unrtf")</code>
+To modify the output, copy these files to a custom location and set pass the
+directory as the <code>conf_dir</code> argument in <code>unrtf</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(unrtf)
+text &lt;- unrtf("https://jeroen.github.io/files/sample.rtf", format = "text")
+html &lt;- unrtf("https://jeroen.github.io/files/sample.rtf", format = "html")
+cat(text)
+</code></pre>
+
+
+</div>

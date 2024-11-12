@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>analyse_randomKde2d_AutoCalibrated</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perform analysis of random 2d distributions (auto calibrated)</h2>
+
+<h3>Description</h3>
+
+<p>The experimental code <code>analyse_randomKde2d_AutoCalibrated</code> 
+computes statistics from uniformly randomly created 2D fields based on kernel density 
+estimations (using <code>create_randomKde2d</code>). It runs for as many 
+interations as necessary for the statistical measuremnt stabilize (but it will abort
+after <code>maxIter</code> iterations is reached).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">analyse_randomKde2d_AutoCalibrated(nstars, maxX, maxY, nKde=50, maxIter=40, 
+                                          showStats=FALSE, returnStats=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nstars</code></td>
+<td>
+<p>an integer with the number of stars to consider</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxX</code></td>
+<td>
+<p>the length of the field in X</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxY</code></td>
+<td>
+<p>the length of the field in Y</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nKde</code></td>
+<td>
+<p>the number of samplings of the kernel in each direction</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxIter</code></td>
+<td>
+<p>an integer with the maximum number of iterations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showStats</code></td>
+<td>
+<p>a boolean indicating if the user wants to see statistics</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStats</code></td>
+<td>
+<p>a boolean indicating if the user wants statistics to be returned</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with the <code>mean</code> and <code>sd</code> fields containing the results 
+of the random field analysis.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Runs the analysis on random fields
+toyRes &lt;- analyse_randomKde2d_AutoCalibrated(100, 100, 100, 100, showStats=TRUE)
+
+# Clean the environment
+rm(toyRes)
+ 
+</code></pre>
+
+
+</div>

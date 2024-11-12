@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pwr.confIntR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Determine required sample size for a given confidence interval width for
+Pearson's r</h2>
+
+<h3>Description</h3>
+
+<p>This function computes how many participants you need if you want to achieve
+a confidence interval of a given width. This is useful when you do a study
+and you are interested in how strongly two variables are associated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pwr.confIntR(r, w = 0.1, conf.level = 0.95)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The correlation you expect to find (confidence intervals for a
+given level of confidence get narrower as the correlation coefficient
+increases).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>w</code></td>
+<td>
+<p>The required half-width (or margin of error) of the confidence
+interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The level of confidence.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The required sample size, or a vector or matrix of sample sizes if
+multiple correlation coefficients or required (half-)widths were supplied.
+The row and column names specify the <code>r</code> and <code>w</code> values to which
+the sample size in each cell corresponds. The confidence level is set as
+attribute to the resulting vector or matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Douglas Bonett (UC Santa Cruz, United States), with minor edits by
+Murray Moinester (Tel Aviv University, Israel) and Gjalt-Jorn Peters (Open
+University of the Netherlands, the Netherlands).
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Bonett, D. G., Wright, T. A. (2000). Sample size requirements
+for estimating Pearson, Kendall and Spearman correlations.
+<em>Psychometrika, 65</em>, 23-28.
+</p>
+<p>Bonett, D. G. (2014). CIcorr.R and sizeCIcorr.R
+http://people.ucsc.edu/~dgbonett/psyc181.html
+</p>
+<p>Moinester, M., &amp; Gottfried, R. (2014). Sample size estimation for
+correlations with pre-specified confidence interval. <em>The Quantitative
+Methods of Psychology, 10</em>(2), 124-130.
+http://www.tqmp.org/RegularArticles/vol10-2/p124/p124.pdf
+</p>
+<p>Peters, G. J. Y. &amp; Crutzen, R. (forthcoming) An easy and foolproof method
+for establishing how effective an intervention or behavior change method is:
+required sample size for accurate parameter estimation in health psychology.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pwr.confIntR</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+pwr.confIntR(c(.4, .6, .8), w=c(.1, .2));
+
+</code></pre>
+
+
+</div>

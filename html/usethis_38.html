@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>git_protocol</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>See or set the default Git protocol</h2>
+
+<h3>Description</h3>
+
+<p>Git operations that address a remote use a so-called "transport protocol".
+usethis supports HTTPS and SSH. The protocol dictates the Git URL format used
+when usethis needs to configure the first GitHub remote for a repo:
+</p>
+
+<ul>
+<li> <p><code>protocol = "https"</code> implies <code style="white-space: pre;">⁠https://github.com/&lt;OWNER&gt;/&lt;REPO&gt;.git⁠</code>
+</p>
+</li>
+<li> <p><code>protocol = "ssh"</code> implies <code style="white-space: pre;">⁠git@github.com:&lt;OWNER&gt;/&lt;REPO&gt;.git⁠</code>
+</p>
+</li>
+</ul>
+<p>Two helper functions are available:
+</p>
+
+<ul>
+<li> <p><code>git_protocol()</code> reveals the protocol "in force". As of usethis v2.0.0,
+this defaults to "https". You can change this for the duration of the
+R session with <code>use_git_protocol()</code>. Change the default for all R
+sessions with code like this in your <code>.Rprofile</code> (easily editable via
+<code>edit_r_profile()</code>):
+</p>
+<div class="sourceCode"><pre>options(usethis.protocol = "ssh")
+</pre></div>
+</li>
+<li> <p><code>use_git_protocol()</code> sets the Git protocol for the current R session
+</p>
+</li>
+</ul>
+<p>This protocol only affects the Git URL for newly configured remotes. All
+existing Git remote URLs are always respected, whether HTTPS or SSH.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">git_protocol()
+
+use_git_protocol(protocol)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>protocol</code></td>
+<td>
+<p>One of "https" or "ssh"</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The protocol, either "https" or "ssh"
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+git_protocol()
+
+use_git_protocol("ssh")
+git_protocol()
+
+use_git_protocol("https")
+git_protocol()
+
+## End(Not run)
+</code></pre>
+
+
+</div>

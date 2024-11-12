@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>arpv.plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Abstract Randomized P-value</h2>
+
+<h3>Description</h3>
+
+<p>Plot ether the distribution function or the probability density function
+of an abstract randomized P-value
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">arpv.plot(alpha, phi, df = TRUE, verticals = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>significance levels at which the density is discontinuous
+("knots").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phi</code></td>
+<td>
+<p>values of the distribution function at these knots.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>if <code>TRUE</code> plot the distribution function, otherwise the
+density.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verticals</code></td>
+<td>
+<p>if <code>TRUE</code> plot vertical lines at the jumps of the
+density.  Ignored if <code>df == TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>none.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">out &lt;- arpv.binom(10, 10, 0.7)
+arpv.plot(out$alpha, out$phi)
+arpv.plot(out$alpha, out$phi, df = FALSE)
+</code></pre>
+
+
+</div>

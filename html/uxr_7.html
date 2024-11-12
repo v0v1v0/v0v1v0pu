@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compare_means_within_groups</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compare Means Within Groups</h2>
+
+<h3>Description</h3>
+
+<p>Compare Means Within Groups
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compare_means_within_groups(
+  data,
+  var1,
+  var2,
+  input = "wide",
+  output = "console"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var1</code></td>
+<td>
+<p>variable 1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var2</code></td>
+<td>
+<p>variable 2</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Default: "long" - long form of data, "values" to pass values directly. If using this option, must specify mean, sd, and n.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>Default: "console" - prints output in console and returns tibble invisibly.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>results
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data &lt;- data.frame(id = c(1:7),
+  task1 = c(4, 1, 2, 3, 8, 4, 4),
+  task2 = c(7, 13, 9, 7, 18, 8, 10))
+compare_means_within_groups(data, task1, task2)
+</code></pre>
+
+
+</div>

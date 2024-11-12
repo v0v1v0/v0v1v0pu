@@ -1,0 +1,41 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_latest_dependencies</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Use "latest" versions of all dependencies</h2>
+
+<h3>Description</h3>
+
+<p>Pins minimum versions of all <code>Imports</code> and <code>Depends</code> dependencies to latest
+ones (as determined by <code>source</code>). Useful for the tidyverse package, but
+should otherwise be used with extreme care.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_latest_dependencies(overwrite = TRUE, source = c("CRAN", "local"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+<p>By default (<code>TRUE</code>), all dependencies will be modified.
+Set to <code>FALSE</code> to only modify dependencies without version
+specifications.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>source</code></td>
+<td>
+<p>Use "CRAN" or "local" package versions.</p>
+</td>
+</tr>
+</table>
+</div>

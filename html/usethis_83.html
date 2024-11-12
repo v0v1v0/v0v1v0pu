@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ui_silence</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Suppress usethis's messaging</h2>
+
+<h3>Description</h3>
+
+<p>Execute a bit of code without usethis's normal messaging.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ui_silence(code)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>code</code></td>
+<td>
+<p>Code to execute with usual UI output silenced.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Whatever <code>code</code> returns.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># compare the messaging you see from this:
+browse_github("usethis")
+# vs. this:
+ui_silence(
+  browse_github("usethis")
+)
+</code></pre>
+
+
+</div>

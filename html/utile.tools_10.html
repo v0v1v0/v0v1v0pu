@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>paste_efs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Paste event-free survival</h2>
+
+<h3>Description</h3>
+
+<p>Creates a formatted event-free-survival from a survfit object
+and a specified time point.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">paste_efs(x, times, percent.sign = TRUE, digits = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A <code>survfit</code> object. The survival model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>times</code></td>
+<td>
+<p>A numeric. Indicates time-points of interest. Units are whatever
+was used to create the survival fit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>percent.sign</code></td>
+<td>
+<p>A logical. Indicates percent sign should be printed
+for frequencies.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Integer. Number of digits to round to.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A named character vector of event-free survival(s).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(survival)
+
+fit &lt;- survfit(Surv(time, status) ~ 1, data = diabetic)
+paste_efs(fit, c(1, 3, 5))
+</code></pre>
+
+
+</div>

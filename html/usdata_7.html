@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fatal_police_shootings</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fatal Police Shootings data.</h2>
+
+<h3>Description</h3>
+
+<p>A subset of the Washington Post database. Contains records of every fatal police shooting by an on-duty officer since January 1, 2015.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fatal_police_shootings
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 6421 rows and 12 variables.
+</p>
+
+<dl>
+<dt>date</dt>
+<dd>
+<p>date of fatal shooting.</p>
+</dd>
+<dt>manner_of_death</dt>
+<dd>
+<p>shot or shot and Tasered.</p>
+</dd>
+<dt>armed</dt>
+<dd>
+<p>Indicates if the victim was armed with some sort of implement
+that a police officer believed could inflict harm.</p>
+</dd>
+<dt>age</dt>
+<dd>
+<p>the age of the victim.</p>
+</dd>
+<dt>gender</dt>
+<dd>
+<p>The gender of the victim. The Post identifies victims by
+the gender they identify with if reports indicate that it
+differs from their biological sex.</p>
+</dd>
+<dt>race</dt>
+<dd>
+<p>W White non-Hispanic; B Black non-Hispanic; A Asian;
+N Native American; H Hispanic; O Other None unknown.</p>
+</dd>
+<dt>city</dt>
+<dd>
+<p>The municipality where the fatal shooting took place.
+Note that in some cases this field may contain a county name
+if a more specific municipality is unavailable or unknown.</p>
+</dd>
+<dt>state</dt>
+<dd>
+<p>two-letter postal code abbreviation.</p>
+</dd>
+<dt>signs_of_mental_illness</dt>
+<dd>
+<p>If news reports have indicated the victim
+had a history of mental health issues, expressed suicidal intentions
+or was experiencing mental distress at the time of the shooting.</p>
+</dd>
+<dt>threat_level</dt>
+<dd>
+<p>The general criteria for the attack label was that
+there was the most direct and immediate threat to life that would
+include incidents where officers or others were shot at, threatened
+with a gun, attacked with other weapons or physical force, etc. ;
+the attack category is meant to flag the highest level of threat;
+the other and undetermined categories represent all remaining cases;
+other includes many incidents where officers or others faced significant
+threats.</p>
+</dd>
+<dt>flee</dt>
+<dd>
+<p>If news reports have indicated the victim was moving away from
+officers by Foot, by Car, or Not fleeing.</p>
+</dd>
+<dt>body_camera</dt>
+<dd>
+<p>If news reports have indicated an officer was wearing a
+body camera and it may have recorded some portion of the incident.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://github.com/washingtonpost/data-police-shootings">Washington Post</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+
+# List race frequency and percentage
+fatal_police_shootings |&gt;
+  group_by(race) |&gt;
+  summarize(n = n()) |&gt;
+  mutate(freq = n / sum(n) * 100)
+# List different weapons that victims were armed with
+fatal_police_shootings |&gt;
+  distinct(armed)
+</code></pre>
+
+
+</div>

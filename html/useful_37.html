@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multiple</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>multiple</h2>
+
+<h3>Description</h3>
+
+<p>Order of Magnitude Formatter
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multiple(x, multiple = c("K", "M", "B", "T", "H", "k", "m", "b", "t",
+  "h"), big.mark = ",", extra, digits = 0, prefix = "",
+  scientific = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector of numbers to be formatted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multiple</code></td>
+<td>
+<p>The multiple to display numbers in.  This symbol will be added to the end of the numbers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>big.mark</code></td>
+<td>
+<p>Character specifying the thousands separator</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extra</code></td>
+<td>
+<p>DEPRECATED, use <code>big.mark</code> and <code>prefix</code> instead: Function for perform any further formatting.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Number of decimal places for rounding.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>Symbol to put in front of the numbers such as a dollar sign.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scientific</code></td>
+<td>
+<p>Logical (default: <code>FALSE</code>) indicating if the numbers should be returned in scientific notation.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This divides the number by the appropriate amount and adds on the corresponding symbol at the end of the number.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Character vector of formatted numbers.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+require(scales)
+vect &lt;- c(1000, 1500, 23450, 21784, 875003780)
+multiple(vect)
+multiple(vect, extra=dollar)
+multiple(vect, extra=identity)
+
+require(ggplot2)
+data(diamonds)
+ggplot(diamonds, aes(x=x, y=y, color=price*100)) + geom_point() + 
+scale_color_gradient2(labels=multiple)
+
+</code></pre>
+
+
+</div>

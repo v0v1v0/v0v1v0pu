@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_means</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_means</h2>
+
+<h3>Description</h3>
+
+<p>Helper to get means from a df that might contain ordered or string data.
+Factor means are set to "ordVar"
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_means(df, ordVar = 0, na.rm = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>a dataframe of raw data from which to get variances.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ordVar</code></td>
+<td>
+<p>value to return for the means of factor data = 0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>passed to mean - defaults to "na.rm"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- frame of means
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tmp = mtcars[,1:4]
+tmp$cyl = ordered(mtcars$cyl) # ordered factor
+tmp$hp  = ordered(mtcars$hp)  # binary factor
+umx_means(tmp, ordVar = 0, na.rm = TRUE)
+</code></pre>
+
+
+</div>

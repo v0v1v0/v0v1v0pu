@@ -1,0 +1,143 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uclust</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>U-statistic based significance clustering</h2>
+
+<h3>Description</h3>
+
+<p>Partitions the sample into the two significant subgroups with the largest Bn statistic. If no significant
+partition exists, the test will return "homogeneous".
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uclust(md = NULL, data = NULL, alpha = 0.05, rep = 15)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>md</code></td>
+<td>
+<p>Matrix of distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data matrix. Each row represents an observation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Significance level.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rep</code></td>
+<td>
+<p>Number of times to repeat optimization procedures. Important for problems with
+multiple optima.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is the significance clustering procedure of Valk and Cybis (2018).
+The method first performs a homogeneity test to verify whether the data can be significantly
+partitioned. If the hypothesis of homogeneity is rejected, then the method will search, among all
+the significant partitions, for the partition that better separates the data, as measured by larger
+<code>bn</code> statistic. This function should be used in high dimension small sample size settings.
+</p>
+<p>Either <code>data</code> or <code>md</code> should be provided.
+If data are entered directly, Bn will be computed considering the squared Euclidean distance.
+</p>
+<p>Variance of <code>bn</code> is estimated through resampling, and thus, p-values may vary a bit in different runs.
+</p>
+<p>For more detail see Cybis, Gabriela B., Marcio Valk, and Sílvia RC Lopes. "Clustering and classification problems in genetics through U-statistics."
+Journal of Statistical Computation and Simulation 88.10 (2018)
+and Valk, Marcio, and Gabriela Bettella Cybis. "U-statistical inference for hierarchical clustering." Journal of Computational and Graphical Statistics 30(1) (2021).
+See also <code>is_homo</code>, <code>uhclust</code>, <code>Utest_class</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with the following elements:</p>
+
+<dl>
+<dt>cluster1</dt>
+<dd>
+<p>Elements in group 1 in the final partition. This is the significant partition with
+maximal Bn, if sample is heterogeneous.</p>
+</dd>
+<dt>cluster2</dt>
+<dd>
+<p>Elements in group 2 in the final partition.</p>
+</dd>
+<dt>p.value</dt>
+<dd>
+<p>P-value for the test that renders the final partition, if heterogeneous.
+Homogeneity test p-value, if homogeneous.</p>
+</dd>
+<dt>alpha_corrected</dt>
+<dd>
+<p>Bonferroni corrected significance level for the test that renders the final
+partition, if heterogeneous. Homogeneity test significance level, if homogeneous.</p>
+</dd>
+<dt>n1</dt>
+<dd>
+<p>Size of the smallest cluster</p>
+</dd>
+<dt>ishomo</dt>
+<dd>
+<p>Logical, returns <code>TRUE</code> when the sample is homogeneous.</p>
+</dd>
+<dt>Bn</dt>
+<dd>
+<p>Value of Bn statistic for the final partition, if heterogeneous.
+Value of Bn statistic for the maximal homogeneity test partition, if homogeneous.</p>
+</dd>
+<dt>varBn</dt>
+<dd>
+<p>Variance estimate for final partition, if heterogeneous.
+Variance estimate for the maximal homogeneity test partition, if homogeneous.</p>
+</dd>
+<dt>ishomoResult</dt>
+<dd>
+<p>Result of homogeneity test (see <code>is_homo</code>).</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(17161)
+x = matrix(rnorm(100000),nrow=50)  #creating homogeneous Gaussian dataset
+res = uclust(data=x)
+
+x[1:30,] = x[1:30,]+0.25   #Heterogeneous dataset (first 30 samples have different mean)
+res = uclust(data=x)
+
+md = as.matrix(dist(x)^2)   #squared Euclidean distances for the same data
+res = uclust(md)
+
+# Multidimensional scaling plot of distance matrix
+fit &lt;- cmdscale(md, eig = TRUE, k = 2)
+x &lt;- fit$points[, 1]
+y &lt;- fit$points[, 2]
+col=rep(3,dim(md)[1])
+col[res$cluster2]=2
+plot(x,y, main=paste("Multidimensional scaling plot of data:
+                    homogeneity p-value =",res$ishomoResult$p.MaxTest),col=col)
+
+
+</code></pre>
+
+
+</div>

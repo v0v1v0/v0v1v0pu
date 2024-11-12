@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_gen_related_with_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Subset of the UKB relatedness dataframe with data</h2>
+
+<h3>Description</h3>
+
+<p>Subset of the UKB relatedness dataframe with data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_gen_related_with_data(data, ukb_with_data, cutoff = 0.0884)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The UKB relatedness data as a dataframe (header: ID1, ID2, HetHet, IBS0, Kinship)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ukb_with_data</code></td>
+<td>
+<p>A character vector of ukb eids with data on the phenotype of interest</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff</code></td>
+<td>
+<p>KING kingship coefficient cutoff (default 0.0884 includes pairs with greater than 3rd-degree relatedness)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A dataframe (header: ID1, ID2, HetHet, IBS0, Kinship) for the subset of individuals with data.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukb_gen_rel_count</code>, <code>ukb_gen_samples_to_remove</code>
+</p>
+
+
+</div>

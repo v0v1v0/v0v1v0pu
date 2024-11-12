@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>filter_snp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Filter SNPs based on the output of <code>multidog()</code>.</h2>
+
+<h3>Description</h3>
+
+<p>Filter based on provided logical predicates in terms of the variable
+names in <code>x$snpdf</code>. This function filters both <code>x$snpdf</code>
+and <code>x$inddf</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">filter_snp(x, expr)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The output of <code>multidog</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expr</code></td>
+<td>
+<p>Logical predicate expression defined in terms of the variables
+in <code>x$snpdf</code>. Only SNPs where the condition evaluates to
+<code>TRUE</code> are kept.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>See Also</h3>
+
+
+<dl>
+<dt>
+<code>multidog()</code>:</dt>
+<dd>
+<p>For the variables in <code>x$snpdf</code>
+which you can filter by.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data("uitdewilligen")
+mout &lt;- multidog(refmat = t(uitdewilligen$refmat),
+                 sizemat = t(uitdewilligen$sizemat),
+                 ploidy = uitdewilligen$ploidy,
+                 nc = 2)
+
+## The following filters are for educational purposes only and should
+## not be taken as a default filter:
+mout2 &lt;- filter_snp(mout, bias &lt; 0.8 &amp; od &lt; 0.003)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

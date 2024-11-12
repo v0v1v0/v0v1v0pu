@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_select_set</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Selecting Parameter Sets</h2>
+
+<h3>Description</h3>
+
+<p>The system file can contain multiple parameterizations using
+the <code>&lt;PSET:?:?&gt;?</code> notation. This function provides the means for
+switching between these parameterizations, and (optionally) specifying a
+subset of parameters estimated when performing parameter estimation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_select_set(cfg, set_name = "default", parameter_names = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set_name</code></td>
+<td>
+<p>string containing the name of the parameter set</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parameter_names</code></td>
+<td>
+<p>list of parameter names to be estimated</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Ubiquity system object with the specified parameter set active
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+# Selecting the default parameter set
+cfg = system_select_set(cfg, "default")
+
+</code></pre>
+
+
+</div>

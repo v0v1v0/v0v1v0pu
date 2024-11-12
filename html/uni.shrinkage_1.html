@@ -1,0 +1,126 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uni.pt</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Shrinkage Estimation for the Univariate Normal Mean based on a Preliminary Test Estimator
+</h2>
+
+<h3>Description</h3>
+
+<p>This function computes a preliminary test (pretest) estimate for the univariate normal mean.
+This function also computes the confidence interval based on a pretest estimator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uni.pt(y,s,alpha=0.05,gamma=0.05,gamma1=NA,gamma2=NA,conf.int=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+
+<p>A vector of normal distributed data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+<p>Standard deviation of <code>y</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Significance level for the preliminary hypothesis test. This parameter satisfies 0&lt; <code>alpha</code> &lt;1. The default is <code>alpha</code>=0.05.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gamma</code></td>
+<td>
+<p>A constant that 1-<code>gamma</code> is the confidence level. This constant satisfies 0&lt; <code>gamma</code> &lt;1. The default is <code>gamma</code>=0.05.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gamma1</code></td>
+<td>
+<p>A constant for the 1-<code>gamma</code> confidence level that satisfies <code>gamma1</code>+<code>gamma2</code>=<code>gamma</code>. This argument is optional.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gamma2</code></td>
+<td>
+<p>A constant for the 1-<code>gamma</code> confidence level that satisfies <code>gamma1</code>+<code>gamma2</code>=<code>gamma</code>. This argument is optional.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.int</code></td>
+<td>
+<p>An indicator whether confidence interval is in the output or not. The default is <code>conf.int</code>=TRUE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Sample_mean</code></td>
+<td>
+<p>Sample mean of y</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PT</code></td>
+<td>
+<p>Pretest estimator for the normal mean based on <code>y</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lower.pivotCI</code></td>
+<td>
+<p>Lower limit of the confidence interval</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Upper.pivotCI</code></td>
+<td>
+<p>Upper limit of the confidence interval</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nanami Taketomi, Takeshi Emura
+</p>
+
+
+<h3>References</h3>
+
+<p>Taketomi N, Shih JH, Emura T.(2024-). Confidence interval for the univariate normal mean based on a pretest estimator.(under review)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">mu=0
+s=10
+y=rnorm(20,mu,s)
+uni.pt(y,s)
+
+mu=1.5
+s=10
+y=rnorm(20,mu,s)
+uni.pt(y,s,alpha=0.10)
+
+</code></pre>
+
+
+</div>

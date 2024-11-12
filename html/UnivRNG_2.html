@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>draw.beta.alphabeta.less.than.one</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates variates from Beta distribution with max<code class="reqn">(\alpha,\beta)&lt;1</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements pseudo-random number generation for a Beta distribution for <code class="reqn">\max(\alpha,\beta)&lt;1</code> with pdf
+</p>
+<p style="text-align: center;"><code class="reqn">f(x|\alpha,\beta)=\frac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}</code>
+</p>
+
+<p>for <code class="reqn">0 \leq x \leq 1</code>, <code class="reqn">0 &lt; \alpha &lt; 1</code>, and <code class="reqn">0 &lt; \beta &lt; 1</code> where <code class="reqn">\alpha</code> and <code class="reqn">\beta</code> are the shape parameters and <code class="reqn">B(\alpha,\beta)</code> is the complete beta function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">draw.beta.alphabeta.less.than.one(nrep,alpha,beta)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrep</code></td>
+<td>
+<p>Number of data points to generate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>First shape parameter. Must be less than 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Second shape parameter. Must be less than 1.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of length five containing generated data, the theoretical mean, the empirical mean, the theoretical variance, and the empirical variance with names y, theo.mean, emp.mean, theo.var, and emp.var, respectively.</p>
+
+
+<h3>References</h3>
+
+<p>Jhonk, M. D. (1964). Erzeugung von betaverteilter und gammaverteilter zufallszahlen. <em>Metrika</em>, <b>8</b>, 5-15.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">draw.beta.alphabeta.less.than.one(nrep=100000,alpha=0.7,beta=0.4)
+</code></pre>
+
+
+</div>

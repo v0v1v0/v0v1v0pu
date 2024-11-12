@@ -1,0 +1,169 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UCestim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UCestim</h2>
+
+<h3>Description</h3>
+
+<p>Estimates and forecasts UC models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UCestim(sys)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>sys</code></td>
+<td>
+<p>an object of type <code>UComp</code> created with <code>UC</code></p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p><code>UCestim</code> estimates and forecasts a time series using an
+UC model.
+The optimization method is a BFGS quasi-Newton algorithm with a 
+backtracking line search using Armijo conditions.
+Parameter names in output table are the following:
+</p>
+
+<ul>
+<li>
+<p> Damping:   Damping factor for DT trend.
+</p>
+</li>
+<li>
+<p> Level:     Variance of level disturbance.
+</p>
+</li>
+<li>
+<p> Slope:     Variance of slope disturbance.
+</p>
+</li>
+<li>
+<p> Rho(#):    Damping factor of cycle #.
+</p>
+</li>
+<li>
+<p> Period(#): Estimated period of cycle #.
+</p>
+</li>
+<li>
+<p> Var(#):    Variance of cycle #.
+</p>
+</li>
+<li>
+<p> Seas(#):   Seasonal harmonic with period #.
+</p>
+</li>
+<li>
+<p> Irregular: Variance of irregular component.
+</p>
+</li>
+<li>
+<p> AR(#):     AR parameter of lag #.
+</p>
+</li>
+<li>
+<p> MA(#):     MA parameter of lag #.
+</p>
+</li>
+<li>
+<p> AO#:       Additive outlier in observation #.
+</p>
+</li>
+<li>
+<p> LS#:       Level shift outlier in observation #.
+</p>
+</li>
+<li>
+<p> SC#:       Slope change outlier in observation #.
+</p>
+</li>
+<li>
+<p> Beta(#):   Beta parameter of input #.
+</p>
+</li>
+<li>
+<p> Cnst:      Constant.
+</p>
+</li>
+</ul>
+<p>Standard methods applicable to UComp objects are print, summary, plot,
+fitted, residuals, logLik, AIC, BIC, coef, predict, tsdiag.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The same input object with the appropriate fields 
+filled in, in particular:
+</p>
+
+<ul>
+<li>
+<p> p:        Estimated transformed parameters
+</p>
+</li>
+<li>
+<p> v:        Estimated innovations (white noise in correctly specified models)
+</p>
+</li>
+<li>
+<p> yFor:     Forecast values of output
+</p>
+</li>
+<li>
+<p> yForV:    Forecasted values variance
+</p>
+</li>
+<li>
+<p> criteria: Value of criteria for estimated model
+</p>
+</li>
+<li>
+<p> covp:     Covariance matrix of estimated transformed parameters
+</p>
+</li>
+<li>
+<p> grad:     Gradient of log-likelihood at the optimum
+</p>
+</li>
+<li>
+<p> iter:     Estimation iterations
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UC</code>, <code>UCmodel</code>, <code>UCvalidate</code>, <code>UCfilter</code>, 
+<code>UCsmooth</code>, <code>UCdisturb</code>, <code>UCcomponents</code>,
+<code>UChp</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+m1 &lt;- UCsetup(log(AirPassengers))
+m1 &lt;- UCestim(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

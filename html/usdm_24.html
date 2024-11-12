@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.RasterVariogram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot variogram or variogram cloud or boxplot based on variogram cloud</h2>
+
+<h3>Description</h3>
+
+<p>Plot the variogram computed for raster data by <code>Variogram</code> function </p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+## S4 method for signature 'RasterVariogram'
+plot(x, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> an object of class <code>RasterVariogram</code>, which is the output of <code>Variogram</code> function. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> additional argument (see details)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function plot the empirical variogram, or variogram cloud if <code>cloud</code> set to <code>TRUE</code> or a boxplot of variogram cloud data if <code>box</code> set to <code>TRUE</code>,
+</p>
+<p>Below are additional arguments:
+</p>
+<p><code>cloud</code> logical. If <code>TRUE</code>, the function plots variogram cloud. 
+<code>box</code> logical. If <code>TRUE</code>, the function plots boxplot of variogram cloud.
+<code>...</code> <code>xlab</code>, <code>ylab</code> and <code>main</code> and other arguments are same as the base <code>plot</code> function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>plots the variogram.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Babak Naimi <a href="mailto:naimi.b@gmail.com">naimi.b@gmail.com</a>
+</p>
+<p><a href="https://r-gis.net/">https://r-gis.net/</a>
+<a href="https://www.biogeoinformatics.org/">https://www.biogeoinformatics.org/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code>Variogram</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">file &lt;- system.file("external/spain.tif", package="usdm")
+
+r &lt;- rast(file) # reading a RasterBrick including 5 rasters (predictor variables)
+
+r 
+
+plot(r[[1]]) # visualize the raster layers
+
+v1 &lt;- Variogram(r[[1]]) # compute variogram for the first raster
+
+
+plot(v1)
+
+plot(v1,cloud=TRUE)
+
+plot(v1,box=TRUE)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>POTt</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Peaks over threshold (POT) data extraction (quick)</h2>
+
+<h3>Description</h3>
+
+<p>Extracts independent peaks over a threshold from a sample, using time as the independence criteria.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">POTt(
+  x,
+  threshold = 0.975,
+  div,
+  Plot = TRUE,
+  PlotType = "l",
+  main = "Peaks over threhsold",
+  ylab = "Magnitude",
+  xlab = "Time"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>either a numeric vector or dataframe with date (or POSIXct) in the first column and hydrological variable in the second</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold</code></td>
+<td>
+<p>user chosen threshold. Default is 0.975</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>div</code></td>
+<td>
+<p>number of time steps between peaks to ensure independence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Plot</code></td>
+<td>
+<p>logical argument with a default of TRUE. When TRUE, the full hydrograph with the peaks over the threshold highlighted is plotted</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PlotType</code></td>
+<td>
+<p>Type of plot with a default of "l" for line graph. For rainfall type "h" for bars could be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p>Title for the plot. Default is "Peaks over threshold"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Label (character) for the plot y axis. Default is "Magnitude"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>Label (character) for the plot x axis. Default is "Time".</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This provides a quicker option than the POTextract function - useful for very long time series'. It only has the option of time division to ensure independence between peaks.
+If the x argument is a numeric vector, the peaks will be extracted with no time information.
+x can instead be a data.frame with dates in the first column and the numeric vector in the second.
+In this latter case, the peaks will be time-stamped and a hydrograph, including POT, will be plotted by default.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with columns; Date and peak, with the option of a plot. Or a numeric vector of peaks is returned if only a numeric vector of the variable is input as x.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Extract POT data from Thames catchment daily rainfall 2000-10-01 to 2015-09-30 with
+#div = 14 (14 days) and threshold = 0.975. Then display the first six rows
+ThamesPPOT &lt;- POTt(ThamesPQ[, c(1,2)], div = 14)
+head(ThamesPPOT)
+#Extract Thames rainfall POT from only the numeric vector of rainfall, with threshold
+#set to 0.95 and div set to 14. Then display the first six rows
+ThamesPPOT &lt;- POTt(ThamesPQ[, 2], threshold = 0.95, div = 14)
+head(ThamesPPOT)
+</code></pre>
+
+
+</div>

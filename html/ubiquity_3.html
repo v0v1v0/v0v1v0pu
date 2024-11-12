@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AUC_Bailers_method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate AUC for Sparse Data</h2>
+
+<h3>Description</h3>
+
+<p>This is an implementation of Bailors method for calculating AUCs with
+sparse sampling. It is taken from the following publication:
+</p>
+<p>Nedelman, J. R., Gibiansky, E., &amp; Lau, D. T. (1995). Applying Bailer's
+method for AUC confidence intervals to sparse sampling Pharmaceutical
+Research, 12(1), 124-128.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">AUC_Bailers_method(
+  conc_data = NULL,
+  dsmap = list(NTIME = "NTIME", CONC = "CONC", ID = "ID")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>conc_data</code></td>
+<td>
+<p>data frame containing the sparse data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dsmap</code></td>
+<td>
+<p>list with names specifying the columns:
+</p>
+
+<ul>
+<li> <p><code>NTIME</code>       Nominal time since last dose;  <code>"NTIME"</code> (default)
+</p>
+</li>
+<li> <p><code>CONC</code>        Concentration data;  <code>"CONC"</code> (default)
+</p>
+</li>
+<li> <p><code>ID</code>          Subject ID;  (<code>"ID"</code> (default)
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list with the following elements
+</p>
+
+<ul>
+<li> <p><code>isgood</code>   Boolean value indicating the result of the function call
+</p>
+</li>
+<li> <p><code>AUC</code>      Mean AUC
+</p>
+</li>
+<li> <p><code>var_AUC</code>  Variance of the AUC
+</p>
+</li>
+<li> <p><code>msgs</code>     Sequence of strings contianing a description of any problems 
+</p>
+</li>
+<li> <p><code>obss</code>     Internal of observations
+</p>
+</li>
+<li> <p><code>times</code>    Sequence of time corresponding to the rows of <code>obs</code>
+</p>
+</li>
+<li> <p><code>r</code>        number of observations at each time point (rows correspond to rows of <code>obs</code>)
+</p>
+</li>
+</ul>
+</div>

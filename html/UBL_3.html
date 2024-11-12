@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BaggingRegress</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Standard Bagging ensemble for regression problems.
+</h2>
+
+<h3>Description</h3>
+
+<p>This function handles regression problems through ensemble learning. A given number of weak learners selected by the user are trained on bootstrap samples of the training data provided.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">BaggingRegress(form, train, nmodels, learner, learner.pars,
+               aggregation = "Average", quiet=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>train</code></td>
+<td>
+
+<p>A data frame containing the training (imbalanced) data set.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nmodels</code></td>
+<td>
+
+<p>A numeric indicating the number of models to train. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>learner</code></td>
+<td>
+
+<p>The learning algorithm to be used as weak learner.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>learner.pars</code></td>
+<td>
+
+<p>A named list with the parameters selected for the learner.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>aggregation</code></td>
+<td>
+<p>charater specifying the method used for aggregating the results
+obtained by the individual learners.
+For now, the only method available is by averaging the models predictions.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>logical specifying if development should be shown or not.Defaults to TRUE
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns an object of class BagModel. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+</div>

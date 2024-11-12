@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.UNCOVER</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prediction method for UNCOVER</h2>
+
+<h3>Description</h3>
+
+<p>Predicts the response of new observations and their cluster
+assignment using an object of class <code>"UNCOVER"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UNCOVER'
+predict(object, newX = NULL, type = "prob", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Object of class <code>"UNCOVER"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newX</code></td>
+<td>
+<p>Data frame containing new observations to predict. If not
+specified the fitted values will be returned instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Either <code>"prob"</code> for a probabilistic response prediction or
+<code>"response"</code> for a hard output of the predicted response</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments affecting the predictions produced</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that this is a Bayesian prediction method and so samples of
+the posterior, defined by <code>"UNCOVER"</code> object provided, will be obtained
+through SMC methods for prediction. See <code>IBIS.logreg()</code> for
+more details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Either a data frame of response probabilities with cluster
+assignment for each observation or a data frame of predicted responses with
+cluster assignment for each observation.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UNCOVER()</code>, <code>IBIS.logreg()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+# First we generate a co-variate matrix and binary response vector
+CM &lt;- data.frame(X1 = rnorm(100),X2 = rnorm(100))
+rv &lt;- sample(0:1,100,replace=TRUE)
+
+# We can then run UNCOVER with no deforestation criteria
+UN.none &lt;- UNCOVER(X = CM,y = rv, deforest_criterion = "None", verbose = FALSE)
+
+# The fitted values of UN.none can then be obtained
+predict(UN.none)
+predict(UN.none,type = "response")
+
+# We can also predict the response for new data
+CM.2 &lt;- data.frame(X1 = rnorm(10),X2 = rnorm(10))
+cbind(CM.2,predict(UN.none,newX = CM.2))
+
+
+</code></pre>
+
+
+</div>

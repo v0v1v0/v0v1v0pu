@@ -1,0 +1,146 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ugumbel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The unit-Gumbel distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function and random number generation function
+for the unit-Gumbel distribution reparametrized in terms of the <code class="reqn">\tau</code>-th quantile, <code class="reqn">\tau \in (0, 1)</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dugumbel(x, mu, theta, tau = 0.5, log = FALSE)
+
+pugumbel(q, mu, theta, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+qugumbel(p, mu, theta, tau = 0.5, lower.tail = TRUE, log.p = FALSE)
+
+rugumbel(n, mu, theta, tau = 0.5)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>vector of positive quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>location parameter indicating the <code class="reqn">\tau</code>-th quantile, <code class="reqn">\tau \in (0, 1)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>nonnegative shape parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>the parameter to specify which quantile use in the parametrization.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>logical; If TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; If TRUE, (default), <code class="reqn">P(X \leq x)</code> are returned, otherwise <code class="reqn">P(X &gt; x)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is taken to be the number required.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Probability density function
+</p>
+<p style="text-align: center;"><code class="reqn">f(y\mid \alpha ,\theta )=\frac{\theta }{y(1-y)}\exp \left\{ -\alpha -\theta \log \left( \frac{y}{1-y}\right) -\exp \left[ -\alpha -\theta \log \left( \frac{y}{1-y}\right) \right] \right\}</code>
+</p>
+
+<p>Cumulative distribution function
+</p>
+<p style="text-align: center;"><code class="reqn">F(y\mid\alpha,\theta)={\exp }\left[ -{{\exp }}\left( -\alpha \right)\left( \frac{1-y}{y}\right) ^{\theta } \right] </code>
+</p>
+
+<p>Quantile function
+</p>
+<p style="text-align: center;"><code class="reqn">Q(\tau \mid \alpha, \theta)= \frac{\left [-\frac{1}{\log(\tau)  }\right ]^{\frac{1}{\theta}}}{\exp\left ( \frac{\alpha}{\theta} \right )+\left [-\frac{1}{\log(\tau)  }\right ]^{\frac{1}{\theta}}}</code>
+</p>
+
+<p>Reparameterization
+</p>
+<p style="text-align: center;"><code class="reqn">\alpha =  g^{-1}(\mu ) =\theta \log \left( {\frac{1-\mu }{\mu }}\right) +\log \left( -\frac{1}{\log \left( \tau \right) }\right)</code>
+</p>
+
+<p>where <code class="reqn">0&lt;y&lt;1</code> and <code class="reqn">\theta &gt;0</code> is the shape parameter.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dugumbel</code> gives the density, <code>pugumbel</code> gives the distribution function,
+<code>qugumbel</code> gives the quantile function and <code>rugumbel</code> generates random deviates.
+</p>
+<p>Invalid arguments will return an error message.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Josmar Mazucheli
+</p>
+<p>Andre F. B. Menezes
+</p>
+
+
+<h3>References</h3>
+
+<p>Mazucheli, J. and Alves, B., (2021). The unit-Gumbel Quantile Regression Model for Proportion Data. <em>Under Review</em>.
+</p>
+<p>Gumbel, E. J., (1941). The return period of flood flows. <em>The Annals of Mathematical Statistics</em>, <b>12</b>(2), 163–190.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(6969)
+x &lt;- rugumbel(n = 1000, mu = 0.5, theta = 1.5, tau = 0.5)
+R &lt;- range(x)
+S &lt;- seq(from = R[1], to = R[2], by = 0.01)
+hist(x, prob = TRUE, main = 'unit-Gumbel')
+lines(S, dugumbel(x = S, mu = 0.5, theta = 1.5, tau = 0.5), col = 2)
+plot(ecdf(x))
+lines(S, pugumbel(q = S, mu = 0.5, theta = 1.5, tau = 0.5), col = 2)
+plot(quantile(x, probs = S), type = "l")
+lines(qugumbel(p = S, mu = 0.5, theta = 1.5, tau = 0.5), col = 2)
+</code></pre>
+
+
+</div>

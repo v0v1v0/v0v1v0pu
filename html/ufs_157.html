@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multiVarFreq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate a table collapsing frequencies of multiple variables</h2>
+
+<h3>Description</h3>
+
+<p>This function can be used to efficiently combine the frequencies of
+variables with the same possible values. The frequencies are collapsed into
+a table with the variable names as row names and the possible values as
+column (variable) names.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multiVarFreq(data, items = NULL, labels = NULL, sortByMean = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataframe containing the variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>The variable names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Labels can be provided which will be set as row names when
+provided.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortByMean</code></td>
+<td>
+<p>Whether to sort the rows by mean value for each variable
+(only sensible if the possible values are numeric).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The resulting dataframe, but with class 'multiVarFreq' prepended to
+allow pretty printing.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>table()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+multiVarFreq(mtcars, c('gear', 'carb'));
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_tfidf</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Term Frequency - Inverse Document Frequency calculation</h2>
+
+<h3>Description</h3>
+
+<p>Term Frequency - Inverse Document Frequency calculation.
+Averaged by each term.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_tfidf(dtm)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>an object returned by <code>document_term_matrix</code></p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a vector with tfidf values, one for each term in the <code>dtm</code> matrix
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(brussels_reviews_anno)
+x &lt;- subset(brussels_reviews_anno, xpos == "NN")
+x &lt;- x[, c("doc_id", "lemma")]
+x &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(x)
+
+## Calculate tfidf
+tfidf &lt;- dtm_tfidf(dtm)
+hist(tfidf, breaks = "scott")
+head(sort(tfidf, decreasing = TRUE))
+head(sort(tfidf, decreasing = FALSE))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_fetch_nca_columns</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Columns in NCA Analysis</h2>
+
+<h3>Description</h3>
+
+<p>Show the columns available in a given NCA analysis
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_fetch_nca_columns(cfg, analysis_name = "analysis")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the NCA analysis (default <code>'analysis'</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list with the following elements:
+</p>
+
+<ul>
+<li> <p><code>isgood</code> Boolean variable to identify if the function
+executed properly (<code>TRUE</code>) or if there were any errors
+(<code>FALSE</code>)
+</p>
+</li>
+<li> <p><code>NCA_col_summary</code> dataframe with the columns from the
+analysis in <code>analysis_name</code> (<code>col_name</code> - NCA short name,
+<code>from</code> - where the parameter was derived from, <code>label</code> - verbose
+text label for the column, and <code>description</code>, verbose text description
+of the parameter.
+</p>
+</li>
+<li> <p><code>len_NCA_col</code>     maximum length of the <code>col_name</code> column
+</p>
+</li>
+<li> <p><code>len_from</code>        maximum length of the <code>from</code> column
+</p>
+</li>
+<li> <p><code>len_label</code>       maximum length of the <code>label</code> column
+</p>
+</li>
+<li> <p><code>len_description</code> maximum length of the <code>description</code> column
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Vignette on NCA (<code>system_nca_parameters_meta</code>)
+</p>
+
+
+</div>

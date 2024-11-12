@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mlged</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generalized Error distribution maximum likelihood estimation</h2>
+
+<h3>Description</h3>
+
+<p>Joint maximum likelihood estimation as implemented by fGarch::gedFit.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mlged(x, na.rm = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a (non-empty) numeric vector of data values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values be removed?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>currently affects nothing.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For the density function of the Student t-distribution see
+ged.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>mlged</code> returns an object of class <code>univariateML</code>.
+This is a named numeric vector with maximum likelihood estimates for the
+parameters <code>mean</code>, <code>sd</code>, <code>nu</code> and the following attributes:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The name of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density</code></td>
+<td>
+<p>The density associated with the estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logLik</code></td>
+<td>
+<p>The loglikelihood at the maximum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>support</code></td>
+<td>
+<p>The support of the density.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The call as captured my <code>match.call</code></p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Nelson D.B. (1991); Conditional Heteroscedasticity in Asset
+Returns: A New Approach, Econometrica, 59, 347–370.
+</p>
+<p>Fernandez C., Steel M.F.J. (2000); On Bayesian Modelling of Fat Tails and
+Skewness, Preprint.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>ged for the Student t-density.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">mlged(precip)
+</code></pre>
+
+
+</div>

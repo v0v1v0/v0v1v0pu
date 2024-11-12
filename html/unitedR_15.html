@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unitedSim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulating a formation</h2>
+
+<h3>Description</h3>
+
+<p>Simulates a formation against another formations (several formations of away are possible).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unitedSim(
+  home,
+  ...,
+  r,
+  penaltyProb = 0.1,
+  preventGoalGK = 1/14,
+  preventGoalSW = 1/15,
+  hardnessMatrix,
+  L,
+  overtime = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>home</code></td>
+<td>
+<p>home team (an object of the <code>S4</code>class <code>formation</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>several objects of the class <code>formation</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>number of replications for the simulation of hardness and penalties, can 
+be <code>missing</code> (exact results will be computed)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>penaltyProb</code></td>
+<td>
+<p>occurrence probability of a penalty</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preventGoalGK</code></td>
+<td>
+<p>factor multiplicied with the strength of the GK for computing the 
+probability of preventing a goal by the goalkeeper</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preventGoalSW</code></td>
+<td>
+<p>factor multiplicied with the strength of the SW for computing the 
+probability of preventing a goal by the sweeper</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hardnessMatrix</code></td>
+<td>
+<p><code>matrix</code> matrix with eleven columns which contain the probability 
+for yellow cards dependent on the used hardness</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>L</code></td>
+<td>
+<p><code>list</code> with elements of class <code>formation</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overtime</code></td>
+<td>
+<p><code>logical</code>, if True overtime win probabilites are calculated. Only
+available if total hardness is zero or one.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Creates an object of the <code>unitedSim</code> class.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>unitedSimOne</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">home &lt;- formation(10, NA, c(7,5,3), c(8,8), c(10,10,8))
+away &lt;- formation(5, 8, c(8,8), c(10,10), c(10,10,10),
+ hardness = c(0,0,0,0,1))
+set.seed(123)
+unitedSim(home, away)
+# can also be simualated
+unitedSim(home, away, r = 100)
+# several away lineups
+unitedSim(home, away, away)
+# several away lineups simulated
+unitedSim(home, away, away, r = 100)
+# used hardness matrix (default)
+# shows the probability of receiving a specifed number of yellow cards
+# dependent on the used points of hardness
+dimNams &lt;-  list(paste(0:7, "cards"), paste(0:10, "hardness points"))
+(hardnessMatrix &lt;- matrix(c(90,10,0,0,0,0,0,0,
+70,30,0,0,0,0,0,0,50,40,10,
+0,0,0,0,0,30,50,20,0,0,0,0,0,20,40,30,10,0,0,
+0,0,10,30,40,20,0,0,0,0,0,20,40,30,10,0,0,0,0,
+10,30,40,20,0,0,0,0,0,20,40,30,10,0,0,0,0,10,20,
+40,20,10,0,0,0,0,10,40,20,20,10), nrow = 8,
+dimnames = dimNams))
+
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,218 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.MxModelTwinMaker</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create and display a graphical path diagram for a path-based twin model.</h2>
+
+<h3>Description</h3>
+
+<p>Assumes the model has a group called "MZ" inside.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxModelTwinMaker'
+plot(
+  x = NA,
+  std = FALSE,
+  fixed = TRUE,
+  means = TRUE,
+  oneTwin = TRUE,
+  sep = "_T",
+  digits = 2,
+  file = "name",
+  labels = c("none", "labels", "both"),
+  resid = c("circle", "line", "none"),
+  strip_zero = FALSE,
+  splines = TRUE,
+  min = NULL,
+  same = NULL,
+  max = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A <code>umxTwinMaker()</code> model from which to make a path diagram</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fixed</code></td>
+<td>
+<p>Whether to show fixed paths (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether to show means or not (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>oneTwin</code></td>
+<td>
+<p>(whether to plot a pair of twins, or just one (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The separator for twin variables ("_T")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of decimal places to add to the path coefficients</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Whether to show labels on the paths. "none", "labels", or "both" (parameter + label).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resid</code></td>
+<td>
+<p>How to show residuals and variances default is "circle". Options are "line" &amp; "none"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_zero</code></td>
+<td>
+<p>Whether to strip the leading "0" and decimal point from parameter estimates (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>splines</code></td>
+<td>
+<p>Whether to allow lines to curve: defaults to TRUE (nb: some models look better with FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>optional list of objects to group at the top of the plot. Default (NULL) chooses automatically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>same</code></td>
+<td>
+<p>optional list of objects to group at the same rank in the plot. Default (NULL) chooses automatically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max</code></td>
+<td>
+<p>optional list of objects to group at the bottom of the plot. Default (NULL) chooses automatically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If you use umx_set_plot_format("graphviz"), they will open in a graphviz helper app (if installed).
+The commercial application “OmniGraffle” is great for editing these images.
+On unix and windows, <code>plot()</code> will create a pdf and open it in your default pdf reader.
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_set_plot_format()</code>, <code>plot.MxModel()</code>, <code>umxPlotACE()</code>, <code>umxPlotCP()</code>, <code>umxPlotIP()</code>, <code>umxPlotGxE()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+# 
+# =====================
+# = Make an ACE model =
+# =====================
+# 1. Clean data: Add separator and scale
+data(twinData)
+tmp = umx_make_twin_data_nice(data=twinData, sep="", zygosity="zygosity", numbering=1:2)
+tmp = umx_scale_wide_twin_data(varsToScale= c("wt", "ht"), sep= "_T", data= tmp)
+mzData = subset(tmp, zygosity %in%  c("MZFF", "MZMM"))
+dzData = subset(tmp, zygosity %in%  c("DZFF", "DZMM"))
+
+# 2. Define paths: You only need the paths for one person:
+paths = c(
+umxPath(v1m0 = c("a1", 'c1', "e1")),
+umxPath(means = c("wt")),
+umxPath(c("a1", 'c1', "e1"), to = "wt", values=.2)
+)
+m1 = umxTwinMaker("test", paths, mzData = mzData, dzData= dzData)
+plot(m1, std= TRUE, means= FALSE)
+plot(m1, means=FALSE, std=TRUE, strip=TRUE, splines="FALSE", max="intercept")
+
+## End(Not run) # end dontrun
+
+# =================
+# = An ACEv model =
+# =================
+# Not complete
+
+paths = c(
+umxPath(v1m0 = c("A1", 'C1', "E1")),
+umxPath(v1m0 = c("A2", 'C2', "E2")),
+umxPath(v.m0 = c("l1", 'l2')),
+umxPath(v.m. = c("wt", "ht")),
+umxPath(c("A1", 'C1', "E1"), to = "l1", values= .2),
+umxPath(c("A2", 'C2', "E2"), to = "l2", values= .2),
+umxPath(c("l1", 'l2'), to = c("wt", "ht"), values= .2)
+)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build.x</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>build.x</h2>
+
+<h3>Description</h3>
+
+<p>Build the x matrix for a glmnet model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build.x(formula, data, contrasts = TRUE, sparse = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>A formula</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>contrasts</code></td>
+<td>
+<p>Logical indicating whether a factor's base level is removed.  Can be either one single value applied to every factor or a value for each factor.  Values will be recycled if necessary.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sparse</code></td>
+<td>
+<p>Logical indicating if result should be sparse.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Given a formula and a data.frame build the predictor matrix
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix of the predictor variables specified in the formula
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(ggplot2)
+head(mpg)
+head(build.x(hwy ~ class + cyl + year, data=mpg))
+
+testFrame &lt;- data.frame(First=sample(1:10, 20, replace=TRUE), 
+Second=sample(1:20, 20, replace=TRUE), 
+Third=sample(1:10, 20, replace=TRUE), 
+Fourth=factor(rep(c("Alice","Bob","Charlie","David"), 5)), 
+Fifth=ordered(rep(c("Edward","Frank","Georgia","Hank","Isaac"), 4)), 
+Sixth=factor(rep(c("a", "b"), 10)), stringsAsFactors=F)
+head(build.x(First ~ Second + Fourth + Sixth, testFrame, 
+contrasts=c("Fourth"=TRUE, "Fifth"=FALSE, "Sixth"=TRUE)))
+head(build.x(First ~ Second + Fourth + Fifth + Sixth, testFrame, 
+contrasts=c(Fourth=TRUE, Fifth=FALSE, Sixth=TRUE)))
+head(build.x(First ~ Second + Fourth + Fifth + Sixth, testFrame, contrasts=TRUE))
+head(build.x(First ~ Second + Fourth + Fifth + Sixth, testFrame, 
+contrasts=FALSE))
+head(build.x(First ~ Second + Fourth + Fifth + Sixth - 1, testFrame, 
+contrasts=TRUE))
+build.x(First ~ Second + Fourth + Fifth + Sixth - 1, testFrame, 
+contrasts=TRUE, sparse=TRUE)
+head(build.x(First ~ Second + Fourth + Fifth + Fourth*Sixth, testFrame, contrasts=TRUE))
+head(build.x(First ~ Second + Fourth + Fifth + Third*Sixth, testFrame, contrasts=TRUE))
+#' head(build.x(First ~ Second + Fourth + Fifth + Fourth*Sixth, testFrame, contrasts=FALSE))
+head(build.x(First ~ Second + Fourth + Fifth + Third*Sixth, testFrame, contrasts=FALSE))
+build.x(First ~ Second + Fourth + Fifth + Third*Sixth, testFrame, contrasts=FALSE, sparse=TRUE)
+
+## if contrasts is a list then you can specify just certain factors
+</code></pre>
+
+
+</div>

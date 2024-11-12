@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>param_set</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set the value associated with a parameter in a URL's query.</h2>
+
+<h3>Description</h3>
+
+<p>URLs often have queries associated with them, particularly URLs for
+APIs, that look like <code>?key=value&amp;key=value&amp;key=value</code>. <code>param_set</code>
+allows you to modify key/value pairs within query strings, or even add new ones
+if they don't exist within the URL.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">param_set(urls, key, value)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>urls</code></td>
+<td>
+<p>a vector of URLs. These should be decoded (with <code>url_decode</code>)
+but do not have to have been otherwise manipulated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>key</code></td>
+<td>
+<p>a string representing the key to modify the value of (or insert wholesale
+if it doesn't exist within the URL).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>a value to associate with the key. This can be a single string,
+or a vector the same length as <code>urls</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the original vector of URLs, but with modified/inserted key-value pairs. If the
+URL is <code>NA</code>, the returned value will be - if the key or value are, no insertion
+will be made.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>param_get</code> to retrieve the values associated with multiple keys in
+a vector of URLs, and <code>param_remove</code> to strip key/value pairs from a URL entirely.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Set a URL parameter where there's already a key for that
+param_set("https://en.wikipedia.org/api.php?action=query", "action", "pageinfo")
+
+# Set a URL parameter where there isn't.
+param_set("https://en.wikipedia.org/api.php?list=props", "action", "pageinfo")
+
+</code></pre>
+
+
+</div>

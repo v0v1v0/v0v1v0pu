@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>chartLayout</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>specify the chart layout</h2>
+
+<h3>Description</h3>
+
+<p>specify the chart layout
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">chartLayout(
+  upsetjs,
+  height.ratios = NULL,
+  width.ratios = NULL,
+  padding = NULL,
+  bar.padding = NULL,
+  dot.padding = NULL,
+  numerical.scale = NULL,
+  band.scale = NULL,
+  set.label.alignment = NULL,
+  set.max.scale = NULL,
+  combination.max.scale = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height.ratios</code></td>
+<td>
+<p>a vector of length 2 for the ratios between the combination and set plot, e.g. c(0.6, 0.4)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width.ratios</code></td>
+<td>
+<p>a vector of length 3 for the ratios between set, label, and combination plot, e.g. c(0.3,0.2,0.5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>padding</code></td>
+<td>
+<p>padding around the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bar.padding</code></td>
+<td>
+<p>padding ratio (default 0.1) for the bar charts</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dot.padding</code></td>
+<td>
+<p>padding factor (default 0.7) for the dots</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numerical.scale</code></td>
+<td>
+<p>numerical scale: linear (default) or log</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>band.scale</code></td>
+<td>
+<p>band scale: band (default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set.label.alignment</code></td>
+<td>
+<p>set label alignment: left, center (default), right</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set.max.scale</code></td>
+<td>
+<p>maximum value for the set scale</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combination.max.scale</code></td>
+<td>
+<p>maximum value for the combination scale</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  chartLayout(width.ratios = c(0.4, 0.2, 0.4))
+</code></pre>
+
+
+</div>

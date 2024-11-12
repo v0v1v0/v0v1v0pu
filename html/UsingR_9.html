@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>babyboom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Babyboom: data for 44 babies born in one 24-hour period.</h2>
+
+<h3>Description</h3>
+
+<p>The <code>babyboom</code> dataset contains the time of birth, sex, and birth
+weight for 44 babies born in one 24-hour period at a hospital in
+Brisbane, Australia.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(babyboom)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 44 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>clock.time</dt>
+<dd>
+<p>Time on clock</p>
+</dd>
+<dt>gender</dt>
+<dd>
+<p>a factor with levels <code>girl</code> <code>boy</code></p>
+</dd>
+<dt>wt</dt>
+<dd>
+<p>weight in grams of child</p>
+</dd>
+<dt>running.time</dt>
+<dd>
+<p>minutes after midnight of birth</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>This data set was submitted to the <em>Journal of Statistical
+Education</em>,
+https://www.amstat.org/publications/jse/secure/v7n3/datasets.dunn.cfm (now off-line),
+by Peter K. Dunn.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(babyboom)
+hist(babyboom$wt)
+hist(diff(babyboom$running.time))
+</code></pre>
+
+
+</div>

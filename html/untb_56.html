@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>phi</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Hubbell's phi</h2>
+
+<h3>Description</h3>
+
+<p>Hubbell's phi: counts of species abundances 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">phi(x,addnames=TRUE)
+unphi(freq, string="spp")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Ecosystem vector; is coerced to class <code>count</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>addnames</code></td>
+<td>
+<p>Boolean with default
+<code>TRUE</code> meaning to set the name of the <code class="reqn">i</code>th element
+to the species with abundance <code class="reqn">i</code> if unique.  Set to
+<code>FALSE</code> to suppress this, which is useful if the species names
+are long</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freq</code></td>
+<td>
+<p>Frequency data (eg as returned by <code>phi()</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>string</code></td>
+<td>
+<p>Character; species name to prepend (using <code>NULL</code>
+can be confusing)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function <code>phi()</code> coerces its argument to a <code>count</code> object and
+by default returns a named vector whose <code class="reqn">i</code>th element is the
+number of species with <code class="reqn">i</code> individuals.  The name of the
+<code class="reqn">i</code>th element is the species with abundance <code class="reqn">i</code> if unique
+and empty otherwise.  Function <code>phi()</code> is used by
+<code>theta.prob()</code>.
+</p>
+<p>Function <code>unphi()</code> does the reverse: given the output of
+<code>phi()</code>, it returns a corresponding <code>count</code> object.  Note that
+species names are lost.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The code for setting the names is a dog's breakfast</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>S. P. Hubbell 2001.  “The Unified Neutral Theory of Biodiversity”.
+Princeton University Press.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>preston</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+jj &lt;- c(rep("oak",5) ,rep("ash",2),rep("elm",3),"pine","tea","yew")
+a &lt;- as.count(jj)
+
+phi(a)
+unphi(phi(a))   #should match 'a' except for species names (which are lost)
+
+data(butterflies)
+phi(butterflies,add=FALSE)
+
+summary(unphi(phi(butterflies)))  #should match 'summary(butterflies)'
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ensure</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>(internal) Make Sure a Dataframe Exists</h2>
+
+<h3>Description</h3>
+
+<p>ensure() returns the dataframe (or tibble), reading it in if necessary
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ensure(name)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Name of the dataframe
+</p>
+<p>Stops in the case of an error</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>takes the name of the data and the suffix of the backing store for
+the dataframe and makes sure it is in our private environment.
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns the (possibly retrieved) dataframe.
+</p>
+
+
+</div>

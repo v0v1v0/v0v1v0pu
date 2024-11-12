@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cart2pol</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>cart2pol</h2>
+
+<h3>Description</h3>
+
+<p>Converts polar coordinates to cartesian coordinates
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cart2pol(x, y, degrees = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The x-coordinate of the point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>The y-coordinate of the point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>degrees</code></td>
+<td>
+<p>Logical indicating if theta should be returned in degrees</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Converts polar coordinates to cartesian coordinates using a simple conversion.  The angle, <code>theta</code> must be in radians.
+</p>
+<p>Somewhat inspired by http://www.r-bloggers.com/convert-polar-coordinates-to-cartesian/ and https://www.mathsisfun.com/polar-cartesian-coordinates.html
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame holding the polar coordinates and the original (x,y) coordinates
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(dplyr)
+x1 &lt;- c(1, sqrt(3)/2, sqrt(2)/2, 1/2, 0)
+y1 &lt;- c(0, 1/2, sqrt(2)/2, sqrt(3)/2, 1)
+d1 &lt;- data_frame(x=x1, y=y1, Q='I')
+
+x2 &lt;- c(0, -1/2, -sqrt(2)/2, -sqrt(3)/2, -1)
+y2 &lt;- c(1, sqrt(3)/2, sqrt(2)/2, 1/2, 0)
+d2 &lt;- data_frame(x=x2, y=y2, Q='II')
+
+x3 &lt;- c(-1, -sqrt(3)/2, -sqrt(2)/2, -1/2, 0)
+y3 &lt;- c(0, -1/2, -sqrt(2)/2, -sqrt(3)/2, -1)
+d3 &lt;- data_frame(x=x3, y=y3, Q='III')
+
+x4 &lt;- c(0, 1/2, sqrt(2)/2, sqrt(3)/2, 1)
+y4 &lt;- c(-1, -sqrt(3)/2, -sqrt(2)/2, -1/2, 0)
+d4 &lt;- data_frame(x=x4, y=y4, Q='IV')
+
+dAll &lt;- bind_rows(d1, d2, d3, d4)
+
+cart2pol(dAll$x, dAll$y)
+cart2pol(dAll$x, dAll$y, degrees=TRUE)
+
+</code></pre>
+
+
+</div>

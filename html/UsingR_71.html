@@ -1,0 +1,175 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>hall.fame</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data frame containing baseball statistics including Hall of Fame
+membership</h2>
+
+<h3>Description</h3>
+
+<p>A data frame containing baseball statistics for several players.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(hall.fame)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 1340 observations on the following 28 variables.
+</p>
+
+<dl>
+<dt>first</dt>
+<dd>
+<p>first name</p>
+</dd>
+<dt>last</dt>
+<dd>
+<p>last name</p>
+</dd>
+<dt>seasons</dt>
+<dd>
+<p>Seasons played</p>
+</dd>
+<dt>games</dt>
+<dd>
+<p>Games played</p>
+</dd>
+<dt>AB</dt>
+<dd>
+<p>Official At Bats</p>
+</dd>
+<dt>runs</dt>
+<dd>
+<p>Runs scored</p>
+</dd>
+<dt>hits</dt>
+<dd>
+<p>hits</p>
+</dd>
+<dt>doubles</dt>
+<dd>
+<p>doubles</p>
+</dd>
+<dt>triples</dt>
+<dd>
+<p>triples numeric vector</p>
+</dd>
+<dt>HR</dt>
+<dd>
+<p>Home runs</p>
+</dd>
+<dt>RBI</dt>
+<dd>
+<p>Runs batted in</p>
+</dd>
+<dt>BB</dt>
+<dd>
+<p>Base on balls</p>
+</dd>
+<dt>SO</dt>
+<dd>
+<p>Strike outs</p>
+</dd>
+<dt>BA</dt>
+<dd>
+<p>Batting Average</p>
+</dd>
+<dt>OBP</dt>
+<dd>
+<p>On Base percentage</p>
+</dd>
+<dt>SP</dt>
+<dd>
+<p>Slugging Percentage</p>
+</dd>
+<dt>AP</dt>
+<dd>
+<p>Adjusted productions</p>
+</dd>
+<dt>BR</dt>
+<dd>
+<p>batting runs</p>
+</dd>
+<dt>ABRuns</dt>
+<dd>
+<p>adjusted batting runs</p>
+</dd>
+<dt>Runs.Created</dt>
+<dd>
+<p>Runs created</p>
+</dd>
+<dt>SB</dt>
+<dd>
+<p>Stolen Bases</p>
+</dd>
+<dt>CS</dt>
+<dd>
+<p>Caught stealing</p>
+</dd>
+<dt>Stolen.Base.Runs</dt>
+<dd>
+<p>Runs scored by stealing</p>
+</dd>
+<dt>Fielding.Average</dt>
+<dd>
+<p>Fielding average</p>
+</dd>
+<dt>Fielding.Runs</dt>
+<dd>
+<p>Fielding runs</p>
+</dd>
+<dt>Primary.Position.Played</dt>
+<dd>
+<p>    C = Catcher,
+1 = First Base,
+2 = Second Base,
+3 = Third Base,
+S = Shortstop,
+O = Outfield, and
+D = Designated hitter</p>
+</dd>
+<dt>Total.Player.Rating</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Hall.Fame.Membership</dt>
+<dd>
+<p>    Not a member,
+Elected by the BBWAA, or
+Chosen by the Old Timers Committee or Veterans Committee</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The sport of baseball lends itself to the collection of data. This
+data set contains many variables used to assess a players
+career. The Hall of Fame is reserved for outstanding players as judged
+initially by the Baseball Writers Association and subsequently by the
+Veterans Committee.
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data set was submitted to the <em>Journal of Statistical
+Education</em>,
+https://www.amstat.org/publications/jse/secure/v8n2/datasets.cochran.new.cfm (now off-line),
+by James J. Cochran.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(hall.fame)
+hist(hall.fame$OBP)
+with(hall.fame,last[Hall.Fame.Membership != "not a member"])
+</code></pre>
+
+
+</div>

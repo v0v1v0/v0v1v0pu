@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_ts_to_simtime</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert Time in Timescale to Simulation Time</h2>
+
+<h3>Description</h3>
+
+<p>converts a time specified in a defined timescale (say weeks) to the
+timescale of the simulation (say hours if the rates are in 1/hr units)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_ts_to_simtime(cfg, tstime, ts)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tstime</code></td>
+<td>
+<p>numeric time of the timescale</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ts</code></td>
+<td>
+<p>string containing the timescale</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>tstime</code> in the system timescale units
+</p>
+
+
+</div>

@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uniset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dynamic Settings File</h2>
+
+<h3>Description</h3>
+
+<p>Any package (subsequently called 'target package') is enabled
+to provide its users an easily accessible, user-friendly and human readable
+text file where key=value pairs (used by functions defined in the target
+package) can be saved. This settings file lives in a location defined by the
+user of the target package, and its user-defined values remain unchanged even
+when the author of the target package is introducing or deleting keys, or
+when the target package is updated or re-installed. In order to enable the
+target package to make use of the functionality offered by package 'uniset',
+three files have to be exported by 'uniset' and placed into the target package.
+</p>
+
+
+<h3>Details</h3>
+
+<p>There are two ways to generate the files required for the target
+package to make use of 'uniset':
+</p>
+
+<dl>
+<dt>-) Export and move manually</dt>
+<dd>
+<p>Use <code>uniset_getFiles</code>, then move
+the 'xxx_settings.R' file ('xxx' for the name of the target package) into the
+'inst' folder (create one if not already done) of the target package.
+Move the files 'uniset_globals.R' and 'uniset_functions.R' into the
+'R' folder of the target package.</p>
+</dd>
+<dt>-) Write directly to target package</dt>
+<dd>
+<p>(Recommended) Use
+<code>uniset_copyFilesToPackage</code> to copy the required files directly into
+the target package.</p>
+</dd>
+</dl>
+<p>Every variable defined in the xxx_settings.R file is accessible in the code of
+the target package. <br>
+The target package has to list 'uniset' as an 'import', and then
+<code>uniset_updateSettings</code> or <code>uniset_autoUpS</code> can be used
+to manually or automatically update the settings,i.e. to read in the key=value
+pairs stored in the xxx_settings.R file.
+For an introduction and more detailed information please see
+<a href="https://bpollner.github.io/uniset/">https://bpollner.github.io/uniset/</a>.
+</p>
+
+
+<h3>Advantage</h3>
+
+<p>The most imminent advantage of the 'uniset' settings-file
+system over using any static file for permanently storing settings for any
+package is the fact that the key=value pairs in the xxx_settings.R
+file get updated (added / deleted) dynamically. <br>
+So the developer of a package can delete keys or introduce new ones, and
+the new key=value pairs will be automatically added to or deleted from
+the local xxx_settings.R file. <strong>Values changed by the user of the
+target package will be preserved</strong>. <br>
+So the author of the target package can add or delete keys from the
+xxx_settings.R file without worrying that this will cause any effort or
+troubles for the user of the target package.
+</p>
+
+
+<h3>Links</h3>
+
+<p>Please see <a href="https://bpollner.github.io/uniset/">https://bpollner.github.io/uniset/</a> for a
+practical example; bug reports can be made at
+<a href="https://github.com/bpollner/uniset/issues">https://github.com/bpollner/uniset/issues</a>.
+</p>
+
+
+<h3>Maintainer</h3>
+
+<p>Bernhard Pollner <a href="mailto:bernhard.pollner@mac.com">bernhard.pollner@mac.com</a>
+</p>
+
+
+<h3>Functions for preparing the target package</h3>
+
+<p><code>uniset_copyFilesToPackage</code>, <code>uniset_getFiles</code>
+</p>
+
+
+<h3>Functions to be called from within the target package</h3>
+
+<p><code>uniset_autoUpS</code>, <code>uniset_updateSettings</code>,
+<code>uniset_test</code>,  <code>uniset_getstn</code>,
+and only once: <code>uniset_setup</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<p>As the functions to update the settings file and to
+(automatically) source this settings are intended to be called from
+<strong>within</strong> the (installed) target package, please go to
+<a href="https://bpollner.github.io/uniset/">https://bpollner.github.io/uniset/</a> for a walk-through and for
+a real-life demonstration and examples how to use these functions
+in the code of the target package.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pollner, Zoltan Kovacs
+</p>
+
+
+</div>

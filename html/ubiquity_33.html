@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>solution_statistics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate Solution Statistics</h2>
+
+<h3>Description</h3>
+
+<p>Attempts to determine the variance/covariance matrix,
+confidence intervals and CV percent for a list of parameter estimates 
+<code>parameters</code>. This method was taken from the ADAPT 5 User's Guide
+chapter 3.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">solution_statistics(parameters, cfg)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>list of parameter estimates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The returned list has the following format:
+</p>
+
+<ul>
+<li> <p><code>objective</code> - objective function value
+</p>
+</li>
+<li> <p><code>num_observations</code> - number of observations
+</p>
+</li>
+<li> <p><code>degrees_of_freedom</code> - degrees of freedom 
+</p>
+</li>
+<li> <p><code>aic</code> - Akaike information criterion 
+</p>
+</li>
+<li> <p><code>bic</code> - Bayesian (Schwarz) information criterion 
+</p>
+</li>
+<li> <p><code>covariance</code> - variance covariance matrix
+</p>
+</li>
+<li> <p><code>wls</code> - defined for weighted least squares objective with the following elements:
+</p>
+
+<ul>
+<li> <p><code>jacobian</code>  - Jacobian matrix
+</p>
+</li>
+<li> <p><code>weights</code>  - diagonal matrix of weights
+</p>
+</li>
+<li> <p><code>error_variance</code>  - diagonal matrix of variances
+</p>
+</li>
+</ul>
+</li>
+<li> <p><code>ml</code> - defined for maximum likelihood objective with the following elements:
+</p>
+
+<ul><li> <p><code>M</code> - Jacobian matrix with block for variance parameters
+</p>
+</li></ul>
+</li>
+<li> <p><code>coefficient_of_variation$pname</code> - CV percent for parameter <code>pname</code>
+</p>
+</li>
+<li> <p><code>confidence_interval$lower_bound$pname</code> - Lower bound of the confidence interval for <code>pname</code>
+</p>
+</li>
+<li> <p><code>confidence_interval$upper_bound$pname</code> - Upper bound of the confidence interval for <code>pname</code>
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>list containing information about the provided estimates
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Vignette on estimation (<code>vignette("Estimation", package = "ubiquity")</code>)
+</p>
+
+
+</div>

@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>var_MateiTille</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Approximate Variance Estimators by Matei and Tillé (2005)</h2>
+
+<h3>Description</h3>
+
+<p>Computes an approximate variance estimate according to
+one of the estimators proposed by Matei and Tillé (2005)
+Estimators of class 3, they require only first-order inclusion probabilities but
+for all population units.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">var_MateiTille(y, pik, method, sample, maxIter = 1000, eps = 1e-05)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>numeric vector of sample observations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pik</code></td>
+<td>
+<p>numeric vector of first-order inclusion probabilities for all population units</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>string indicating the desired approximate variance estimator.
+One of "Deville1", "Deville2", "Deville3", "Hajek", "Rosen", "FixedPoint",
+"Brewer1", "HartleyRao", "Berger", "Tille", "MateiTille1", "MateiTille2",
+"MateiTille3", "MateiTille4", "MateiTille5", "Brewer2", "Brewer3", "Brewer4".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample</code></td>
+<td>
+<p>Either a numeric vector of length equal to the sample size with
+the indices of sample units, or a boolean vector of the same length of <code>pik</code>, indicating which
+units belong to the sample (<code>TRUE</code> if the unit is in the sample,
+<code>FALSE</code> otherwise.
+Only used with estimators of the third class (see Details for more information).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxIter</code></td>
+<td>
+<p>a scalar indicating the maximum number of iterations for the
+fixed-point procedure</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eps</code></td>
+<td>
+<p>tolerance value for the convergence of the fixed-point procedure</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a scalar, the estimated variance
+</p>
+
+
+</div>

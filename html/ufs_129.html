@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>heading</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print a heading</h2>
+
+<h3>Description</h3>
+
+<p>This is just a convenience function to print a markdown or HTML heading at
+a given 'depth'.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">heading(
+  ...,
+  headingLevel = ufs::opts$get("defaultHeadingLevel"),
+  output = "markdown",
+  cat = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>The heading text: pasted together with no separator.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headingLevel</code></td>
+<td>
+<p>The level of the heading; the default can be set
+with e.g. <code>ufs::opts$set(defaultHeadingLevel=1)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>Whether to output to HTML ("<code>html</code>") or markdown (anything
+else).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cat</code></td>
+<td>
+<p>Whether to cat (print) the heading or just invisibly return it.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The heading, invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">heading("Hello ", "World", headingLevel=5);
+### This produces: "\n\n##### Hello World\n\n"
+</code></pre>
+
+
+</div>

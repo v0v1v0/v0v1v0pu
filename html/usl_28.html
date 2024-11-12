@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>USL-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Class "<code>USL</code>" for Universal Scalability Law models</h2>
+
+<h3>Description</h3>
+
+<p>This class encapsulates the Universal Scalability Law. Use the function
+<code>usl</code> to create new objects from this class.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt><code>frame</code></dt>
+<dd>
+<p>The model frame.</p>
+</dd>
+<dt><code>call</code></dt>
+<dd>
+<p>The call used to create the model.</p>
+</dd>
+<dt><code>regr</code></dt>
+<dd>
+<p>The name of the regressor variable.</p>
+</dd>
+<dt><code>resp</code></dt>
+<dd>
+<p>The name of the response variable.</p>
+</dd>
+<dt><code>coefficients</code></dt>
+<dd>
+<p>The coefficients alpha, beta and gamma of the model.</p>
+</dd>
+<dt><code>coef.std.err</code></dt>
+<dd>
+<p>The standard errors for the coefficients alpha and beta.</p>
+</dd>
+<dt><code>coef.names</code></dt>
+<dd>
+<p>A vector with the names of the coefficients.</p>
+</dd>
+<dt><code>fitted</code></dt>
+<dd>
+<p>The fitted values of the model. This is a vector.</p>
+</dd>
+<dt><code>residuals</code></dt>
+<dd>
+<p>The residuals of the model. This is a vector.</p>
+</dd>
+<dt><code>df.residual</code></dt>
+<dd>
+<p>The degrees of freedom of the model.</p>
+</dd>
+<dt><code>sigma</code></dt>
+<dd>
+<p>The residual standard deviation of the model.</p>
+</dd>
+<dt><code>limit</code></dt>
+<dd>
+<p>The scalability limit as per Amdahl.</p>
+</dd>
+<dt><code>peak</code></dt>
+<dd>
+<p>A vector with the predictor and response values of the peak.</p>
+</dd>
+<dt><code>optimal</code></dt>
+<dd>
+<p>A vector with the optimal predictor and response values.</p>
+</dd>
+<dt><code>efficiency</code></dt>
+<dd>
+<p>The efficiency, e.g. speedup per processor.</p>
+</dd>
+<dt><code>na.action</code></dt>
+<dd>
+<p>The <code>na.action</code> used by the model.</p>
+</dd>
+</dl>
+<h3>See Also</h3>
+
+<p><code>usl</code>
+</p>
+
+
+</div>

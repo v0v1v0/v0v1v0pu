@@ -1,0 +1,207 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cajo.test-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class cajo.test</h2>
+
+<h3>Description</h3>
+
+<p>This class contains the relevant information by estimating and testing
+a VAR under linear restrictions on <code class="reqn">\bold{\alpha}</code> and
+<code class="reqn">\bold{\beta}</code>.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>Z0</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of the
+differenced series.</p>
+</dd>
+<dt>
+<code>Z1</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The regressor
+matrix, except for the lagged variables in levels.</p>
+</dd>
+<dt>
+<code>ZK</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of the
+lagged variables in levels.</p>
+</dd>
+<dt>
+<code>ecdet</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: Specifies
+the deterministic term to be included in the cointegration
+relation. This can be either "none", "const", or "trend".</p>
+</dd>
+<dt>
+<code>H</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The matrix
+containing the restrictions placed upon <code class="reqn">\bold{\beta}</code>.</p>
+</dd>
+<dt>
+<code>A</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The matrix
+containing the restrictions placed upon <code class="reqn">\bold{\alpha}</code>.</p>
+</dd>
+<dt>
+<code>B</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The matrix
+orthogonal to matrix <code class="reqn">\bold{A}</code>.</p>
+</dd>
+<dt>
+<code>type</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The test type.</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>: The value
+of the test statistic.</p>
+</dd>
+<dt>
+<code>pval</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The p-value and
+the degrees of freedom.</p>
+</dd>
+<dt>
+<code>lambda</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The
+eigenvalues of the restricted model.</p>
+</dd>
+<dt>
+<code>Vorg</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of
+eigenvectors, such that <code class="reqn">\hat V_{\dots}'(H'S_{\dots}H)\hat
+	V_{\dots} = I</code>.</p>
+</dd>
+<dt>
+<code>V</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of the
+restricted eigenvectors, normalised with respect to the first variable.</p>
+</dd>
+<dt>
+<code>W</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The matrix of the
+corresponding loading weights.</p>
+</dd>
+<dt>
+<code>PI</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The coefficient
+matrix of the lagged variables in levels.</p>
+</dd>
+<dt>
+<code>DELTA</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The
+variance/covarinace matrix of <code class="reqn">\bold{V}</code>.</p>
+</dd>
+<dt>
+<code>DELTA.bb</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The
+variance/covarinace matrix of the marginal factor
+<code class="reqn">\bold{B}'\bold{R}_{0t}</code>.</p>
+</dd>
+<dt>
+<code>DELTA.ab</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The
+variance/covarinace matrix of the conditional distribution of
+<code class="reqn">\bold{A}'\bold{R}_{0t}</code> and <code class="reqn">\bold{R}_{kt}</code>.</p>
+</dd>
+<dt>
+<code>DELTA.aa.b</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The
+variance/covarinace matrix of the restricted loading matrix.</p>
+</dd>
+<dt>
+<code>GAMMA</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The
+coefficient matrix of <code class="reqn">\bold{Z1}</code>.</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+name of the test, <em>i.e.</em> ‘Johansen-Procedure’.</p>
+</dd>
+</dl>
+<h3>Extends</h3>
+
+<p>Class <code>urca</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Type <code>showMethods(classes="cajo.test")</code> at the R prompt for a
+complete list of methods which are available for this class.
+</p>
+<p>Useful methods include
+</p>
+
+<dl>
+<dt>
+<code>show</code>:</dt>
+<dd>
+<p>test-statistic.</p>
+</dd>
+<dt>
+<code>summary</code>:</dt>
+<dd>
+<p>like show, but p-value of test statistic,
+restricted eigenvectors, loading matrix and restriction matrices
+<code class="reqn">\bold{H}</code> and <code class="reqn">\bold{A}</code>, where applicable, added.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1988), Statistical Analysis of Cointegration Vectors,
+<em>Journal of Economic Dynamics and Control</em>, <b>12</b>, 231–254.
+</p>
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ablrtest</code>, <code>alrtest</code>, <code>blrtest</code>,
+<code>ca.jo</code>, <code>ca.jo-class</code> and <code>urca-class</code>.
+</p>
+
+
+</div>

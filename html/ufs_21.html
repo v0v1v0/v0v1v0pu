@@ -1,0 +1,144 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>carelessReport</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A report to help diagnosing careless responders</h2>
+
+<h3>Description</h3>
+
+<p>This function wraps functions from the <code>careless</code> package
+to help inspect and diagnose careless participants. It is
+optimized for using in R Markdown files.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">carelessReport(
+  data,
+  items = names(data),
+  nFlags = 1,
+  flagUnivar = 0.99,
+  flagMultivar = 0.95,
+  irvSplit = 4,
+  headingLevel = 3,
+  datasetName = NULL,
+  responseTime = NULL,
+  headingSuffix = " {.tabset}",
+  digits = 2,
+  missingSymbol = "Missing"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataframe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>The items to look at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nFlags</code></td>
+<td>
+<p>How many indicators need to be flagged for
+a participant to be considered suspect.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flagUnivar</code></td>
+<td>
+<p>How extreme a score has to be for it
+to be flagged as suspicous univariately.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flagMultivar</code></td>
+<td>
+<p>This has not been implemented yet.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>irvSplit</code></td>
+<td>
+<p>Whether to split for the IRV, and if so,
+in how many parts.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headingLevel</code></td>
+<td>
+<p>The level of the heading in Markdown (the
+number of <code style="white-space: pre;">⁠#⁠</code>s to include before the heading).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>datasetName</code></td>
+<td>
+<p>The name of the dataset to display (to override,
+if desired).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>responseTime</code></td>
+<td>
+<p>If not <code>NULL</code>, the name of a column
+containing the participants' response times.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headingSuffix</code></td>
+<td>
+<p>The suffix to include; by default, set
+such that the individual participants IRP plots are placed
+in separate tabs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits to round to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>missingSymbol</code></td>
+<td>
+<p>How to represent missing values.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>NULL, invisibly; and prints the report.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### Get the BFI data taken from the `psych` package
+dat &lt;- ufs::bfi;
+
+### Get the variable names for the regular items
+bfiVars &lt;-
+  setdiff(names(dat),
+          c("gender", "education", "age"));
+
+### Inspect suspect participants, very conservatively to
+### limit the output (these are 2800 participants).
+carelessReport(data = dat,
+               items = bfiVars,
+               nFlags = 5);
+</code></pre>
+
+
+</div>

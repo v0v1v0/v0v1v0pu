@@ -1,0 +1,131 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>us_skinfold_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Anthropometric data on twins</h2>
+
+<h3>Description</h3>
+
+<p>A dataset containing height, weight, BMI, and skin-fold fat measures in several
+hundred US twin families participating in the MCV Cardiovascular Twin Study (PI Schieken).
+Biceps and Triceps are folds above and below the upper arm (holding arm palm upward),
+Calf (fold on the calf muscle), Subscapular (fold over the shoulder blade),
+Suprailiacal (fold between the hip and ribs).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(us_skinfold_data)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 53940 twin families (1 per row) each twin measured on 10 variables.
+</p>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li> <p><em>fan</em> FamilyID (t1=male,t2=female)
+</p>
+</li>
+<li> <p><em>zyg</em> Zygosity  1:mzm, 2:mzf, 3:dzm, 4:dzf, 5:dzo
+</p>
+</li>
+<li> <p><em>ht_T1</em>  Height of twin 1 (cm)
+</p>
+</li>
+<li> <p><em>wt_T1</em>  Weight of twin 1 (kg)
+</p>
+</li>
+<li> <p><em>bmi_T1</em> BMI of twin 1
+</p>
+</li>
+<li> <p><em>bml_T1</em> log BMI of twin 1
+</p>
+</li>
+<li> <p><em>bic_T1</em> Biceps Skinfold of twin 1
+</p>
+</li>
+<li> <p><em>caf_T1</em> Calf Skinfold of twin 1
+</p>
+</li>
+<li> <p><em>ssc_T1</em> Subscapular Skinfold of twin 1
+</p>
+</li>
+<li> <p><em>sil_T1</em> Suprailiacal Skinfold of twin 1
+</p>
+</li>
+<li> <p><em>tri_T1</em> Triceps Skinfold of twin 1
+</p>
+</li>
+<li> <p><em>ht_T2</em>  Height of twin 2
+</p>
+</li>
+<li> <p><em>wt_T2</em>  Weight of twin 2
+</p>
+</li>
+<li> <p><em>bmi_T2</em> BMI of twin 2
+</p>
+</li>
+<li> <p><em>bml_T2</em> log BMI of twin 2
+</p>
+</li>
+<li> <p><em>bic_T2</em> Biceps Skinfold of twin 2
+</p>
+</li>
+<li> <p><em>caf_T2</em> Calf Skinfold of twin 2
+</p>
+</li>
+<li> <p><em>ssc_T2</em> Subscapular Skinfold of twin 2
+</p>
+</li>
+<li> <p><em>sil_T2</em> Suprailiacal Skinfold of twin 2
+</p>
+</li>
+<li> <p><em>tri_T2</em> Triceps Skinfold of twin 2
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Moskowitz, W. B., Schwartz, P. F., &amp; Schieken, R. M. (1999).
+Childhood passive smoking, race, and coronary artery disease risk:
+the MCV Twin Study. Medical College of Virginia.
+<em>Archives of Pediatrics and Adolescent Medicine</em>, <strong>153</strong>, 446-453.
+<a href="https://pubmed.ncbi.nlm.nih.gov/10323623/">https://pubmed.ncbi.nlm.nih.gov/10323623/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other datasets: 
+<code>Fischbein_wt</code>,
+<code>GFF</code>,
+<code>docData</code>,
+<code>iqdat</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data(us_skinfold_data)
+str(us_skinfold_data)
+par(mfrow = c(1, 2))  # 1 rows and 3 columns
+plot(ht_T1 ~ht_T2, ylim = c(130, 165), data = subset(us_skinfold_data, zyg == 1))
+plot(ht_T1 ~ht_T2, ylim = c(130, 165), data = subset(us_skinfold_data, zyg == 3))
+par(mfrow = c(1, 1))  # back to as it was
+
+## End(Not run)
+</code></pre>
+
+
+</div>

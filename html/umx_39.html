@@ -1,0 +1,165 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxPlotSexLim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Draw and display a graphical figure of a Sex limitation model</h2>
+
+<h3>Description</h3>
+
+<p>Will plot a graphical figure for a sex limitation model.
+Options include <code>digits</code> (rounding), showing <code>means</code> or not, and which output <code>format</code> is desired.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxPlotSexLim(
+  x = NA,
+  file = "name",
+  digits = 2,
+  means = FALSE,
+  std = TRUE,
+  format = c("current", "graphviz", "DiagrammeR"),
+  SEstyle = FALSE,
+  strip_zero = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>mxModel()</code> to display graphically</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>How many decimals to include in path loadings (defaults to 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether to show means paths (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the model (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>= c("current", "graphviz", "DiagrammeR")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SEstyle</code></td>
+<td>
+<p>report "b (se)" instead of "b [lower, upper]" (Default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strip_zero</code></td>
+<td>
+<p>Whether to strip the leading "0" and decimal point from parameter estimates (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Optionally return the dot code
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxSexLim()</code>, <code>umxSummarySexLim()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+umx_set_optimizer("SLSQP")
+data("us_skinfold_data")
+# Rescale vars
+us_skinfold_data[, c('bic_T1', 'bic_T2')] = us_skinfold_data[, c('bic_T1', 'bic_T2')]/3.4
+us_skinfold_data[, c('tri_T1', 'tri_T2')] = us_skinfold_data[, c('tri_T1', 'tri_T2')]/3
+us_skinfold_data[, c('caf_T1', 'caf_T2')] = us_skinfold_data[, c('caf_T1', 'caf_T2')]/3
+us_skinfold_data[, c('ssc_T1', 'ssc_T2')] = us_skinfold_data[, c('ssc_T1', 'ssc_T2')]/5
+us_skinfold_data[, c('sil_T1', 'sil_T2')] = us_skinfold_data[, c('sil_T1', 'sil_T2')]/5
+
+# Data for each of the 5 twin-type groups
+mzmData = subset(us_skinfold_data, zyg == 1)
+mzfData = subset(us_skinfold_data, zyg == 2)
+dzmData = subset(us_skinfold_data, zyg == 3)
+dzfData = subset(us_skinfold_data, zyg == 4)
+dzoData = subset(us_skinfold_data, zyg == 5)
+
+# ==========================
+# = Run univariate example =
+# ==========================
+m1 = umxSexLim(selDVs = "bic", sep = "_T", A_or_C = "A", autoRun= FALSE,
+	mzmData = mzmData, dzmData = dzmData, 
+	mzfData = mzfData, dzfData = dzfData, 
+	dzoData = dzoData
+)
+m1 = mxTryHard(m1)
+umxPlotSexLim(m1)
+plot(m1) # no need to remember a special name: plot works fine!
+
+## End(Not run)
+</code></pre>
+
+
+</div>

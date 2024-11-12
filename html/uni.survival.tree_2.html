@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>KM.split</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kaplan-Meier estimator of binary splitting</h2>
+
+<h3>Description</h3>
+
+<p>Given a cut-off-point and selected covariate, return the survival curve for binary classification and the P-value of two sample log-rank test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">KM.split(t.vec, d.vec, X.mat, x.name, cutoff)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>t.vec</code></td>
+<td>
+<p>:Vector of survival times (time to either death or censoring)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d.vec</code></td>
+<td>
+<p>:Vector of censoring indicators (1=death, 0=censoring)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X.mat</code></td>
+<td>
+<p>:n by p matrix of covariates, where n is the sample size and p is the number of covariates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x.name</code></td>
+<td>
+<p>:the name of covariate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff</code></td>
+<td>
+<p>:cut-off-point</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>P-value of two sample logrank test and a plot of two KM estimates
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Lung,package="compound.Cox")
+train_Lung=Lung[which(Lung[,"train"]==TRUE),] #select training data
+t.vec=train_Lung[,1]
+d.vec=train_Lung[,2]
+x.mat=train_Lung[,-c(1,2,3)]
+KM.split(t.vec,d.vec,x.mat,x.name="ANXA5",cutoff=1)
+</code></pre>
+
+
+</div>

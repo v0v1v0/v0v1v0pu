@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bn</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes Bn Statistic.</h2>
+
+<h3>Description</h3>
+
+<p>Returns the value for the Bn statistic that measures the degree of separation between two groups.
+The statistic is computed through the difference of average within group distances to average between
+group distances. Large values of Bn indicate large group separation. Under overall sample homogeneity
+we have E(Bn)=0.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bn(group_id, md = NULL, data = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group_id</code></td>
+<td>
+<p>A vector of 0s and 1s indicating to which group the samples belong. Must be in the same order as data or md.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>md</code></td>
+<td>
+<p>Matrix of distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data matrix. Each row represents an observation.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Either <code>data</code> OR <code>md</code> should be provided.
+If data are entered directly, Bn will be computed considering the squared Euclidean distance, which is compatible with
+<code>is_homo</code>, <code>uclust</code> and <code>uhclust</code>.
+</p>
+<p>For more detail see Cybis, Gabriela B., Marcio Valk, and Sílvia RC Lopes. "Clustering and classification problems in genetics through U-statistics."
+Journal of Statistical Computation and Simulation 88.10 (2018)
+and Valk, Marcio, and Gabriela Bettella Cybis. "U-statistical inference for hierarchical clustering." Journal of Computational and Graphical Statistics 30(1) (2021).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Value of the Bn statistic.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">n=5
+x=matrix(rnorm(n*10),ncol=10)
+bn(c(1,0,0,0,0),data=x)     # option (a) entering the data matrix directly
+md=as.matrix(dist(x))^2
+bn(c(0,1,1,1,1),md)         # option (b) entering the distance matrix
+
+</code></pre>
+
+
+</div>

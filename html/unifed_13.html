@@ -1,0 +1,144 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unifed.kappa</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Cumulant generator of the unifed distribution</h2>
+
+<h3>Description</h3>
+
+<p>Cumulant generator of the unifed distribution
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unifed.kappa(theta)
+
+unifed.kappa.prime(theta)
+
+unifed.kappa.double.prime(theta)
+
+unifed.kappa.prime.inverse(mu, ...)
+
+unifed.kappa.prime.inverse.one(mu, tol = 1e-07, maxit = 1e+07)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>A numeric vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>A vector of numbers between 0 and 1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters of <code>unifed.kappa.prime.inverse.one</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>Tolerance level. The algorithm stops if the proportional
+difference between the new and old value of an iteration is
+less or equal than this number.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxit</code></td>
+<td>
+<p>Maximum number of iterations of the algorithm to look
+for convergence.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The cumulant generator of the unifed distribution is
+defined as
+</p>
+<p style="text-align: center;"><code class="reqn">
+\kappa(\theta)=\left\{
+  \begin{array}{ll}
+    \log\left(\frac{e^\theta-1}{\theta}\right)&amp; if \theta \neq
+                                                0\\
+    0 &amp; \mbox{if }\theta=0
+  \end{array}
+  \right..</code>
+</p>
+
+<p><code>unifed.kappa.prime.inverse.one</code> uses the
+Newthon-Raphson method for finding the inverse of
+<code>unifed.kappa.prime</code> for a single value.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>unifed.kappa</code> returns a vector that contains the
+cumulant generator of the unifed distribution applied to each
+element of theta.
+</p>
+<p><code>unifed.kappa.prime</code> returns a vector that contains
+the derivative of the cumulant generator of the unifed
+distribution for each element of theta.
+</p>
+<p><code>unifed.kappa.double.prime</code> returns a vector that
+contains the second derivative of the cumulant generator of the
+unifed distribution for each element of theta.
+</p>
+<p><code>unifed.kappa.prime.inverse</code> returns a vector with
+<code>unifed.kappa.prime.inverse.one</code> evaluated at every entry
+of <code>mu</code>.
+</p>
+<p><code>unifed.kappa.prime.inverse.one</code> if the tolerance
+level is reached within <code>maxit</code> iterations, the function
+returns the value of the last iteration. Otherwise it returns
+<code>NA</code>.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Quijano Xacur, O.A. The unifed distribution. J Stat Distrib App 6, 13 (2019).
+doi:10.1186/s40488-019-0102-6.
+</p>
+<p>Jørgensen, Bent (1997). The  Theory  of  Dispersion  Models.
+Chapman  &amp;  Hall, London.
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+unifed.kappa(1)
+unifed.kappa(-5:5)
+
+
+unifed.kappa.prime(4.5)
+
+
+unifed.kappa.double.prime(0)
+
+
+unifed.kappa.prime.inverse(0.5)
+unifed.kappa.prime.inverse(c(0.1,0.7,0.9))
+
+
+</code></pre>
+
+
+</div>

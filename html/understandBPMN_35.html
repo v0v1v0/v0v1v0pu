@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>task_names</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Task names</h2>
+
+<h3>Description</h3>
+
+<p>A function which returns the task names together with the task ids
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">task_names(xml_internal_doc, filter_non_connector_activities = FALSE,
+  signavio = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>xml_internal_doc</code></td>
+<td>
+<p>document object created using the create_internal_document function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter_non_connector_activities</code></td>
+<td>
+<p>attribute indicating whether non connector activities should be filtered. The default value is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signavio</code></td>
+<td>
+<p>boolean which indicates whether the file stems from signavio</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an object containing a table with the IDs and tasknames
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+task_names(create_internal_doc(file_path))
+</code></pre>
+
+
+</div>

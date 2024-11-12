@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DiagPlots</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Diagnostic plots for pooling groups</h2>
+
+<h3>Description</h3>
+
+<p>Provides 10 plots to compare the sites in the pooling group
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DiagPlots(x, gauged = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>pooling group derived from the Pool() function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gauged</code></td>
+<td>
+<p>logical argument with a default of FALSE. TRUE adds the top site in the pooling group to the plots in a different colour</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>ten diagnostic plots for pooling groups
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Form a gauged pooling group and plot the diagnostics with gauged = TRUE
+Pool.28015 &lt;- Pool(GetCDs(28015))
+DiagPlots(Pool.28015, gauged = TRUE)
+#Form an ugauged pooling group and plot the diagnostics
+Pool.28015 &lt;- Pool(GetCDs(28015), exclude = 28015)
+DiagPlots(Pool.28015)
+</code></pre>
+
+
+</div>

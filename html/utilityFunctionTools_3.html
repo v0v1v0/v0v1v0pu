@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compute_function_aux</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes a continuous and smooth function according to the given utility points</h2>
+
+<h3>Description</h3>
+
+<p>Computes a continuous and smooth function according to the given utility points
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compute_function_aux(
+  x,
+  y,
+  ids,
+  mode = 1,
+  penalty_order = 4,
+  lambda_max = 10000,
+  current_lambda = 1,
+  n_penalty_dimensions = 1,
+  ndx = 20,
+  deg = 6,
+  verbose = 0
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a matrix or dataframe containing the certainty equivalents (x-values of utility points) for a given participant in each use case.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>can be a vector or a matrix representing the corresponding utility values (y-values of utility points).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ids</code></td>
+<td>
+<p>a list containing the IDs of the participants. If not given, a list with IDs from 1 to n_observations will be created.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mode</code></td>
+<td>
+<p>an integer between 0, 1, 2 representing the three possible modes: multiple imputation, optimal classification or 'weak' classification. Default is optimal classification (1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>penalty_order</code></td>
+<td>
+<p>highest dimension (i.e., derivative) to penalize. Must be lower than deg.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda_max</code></td>
+<td>
+<p>maximum lambda used for computing the optimal lambda. It is used only in multiple imputation (mode = 0) and optimal (mode = 1). The default value is 10000.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>current_lambda</code></td>
+<td>
+<p>lambda considered in the current iteration. Only used in multiple imputation (mode = 0) to create the combinations and as actual lambda value in 'weak' classification mode (mode = 2). The default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_penalty_dimensions</code></td>
+<td>
+<p>number of dimensions to penalise. Possible values are 1 or 2. The default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndx</code></td>
+<td>
+<p>number of intervals to partition the distance between the lowest and highest x-values of the utility points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>degree of the B-spline basis. Determines the degree of the function to be estimated. If deg = 2, the estimated utility function will consist of quadratic functions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>shows some information while the program is running.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A smooth and continuous utility function.
+</p>
+
+
+</div>

@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>InfKern</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kernel for infinite-dimensional example</h2>
+
+<h3>Description</h3>
+
+<p>Function to produce the kernel matrices in the infinite dimensional example described
+in Section 7.4 of (Berrett et al. 2021). Here, a random function is converted to a sequence
+of coefficients and we use the Fourier basis on these coefficients. This function is
+an essential part of USPFunctional.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">InfKern(X, Ntrunc, M)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Matrix giving one of the samples to be tested. Each row corresponds to a
+discretised function, with each column giving the values of the functions at the
+corresponding grid point.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ntrunc</code></td>
+<td>
+<p>The total number of coefficients to look at in the basis expansion
+of the functional data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+<p>The maximum frequency to look at in the Fourier basis.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The kernel matrix for the sample <code class="reqn">X</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">n=10  #number of observations
+Ndisc=1000; t=1/Ndisc #functions represented at grid points 1/Ndisc, 2/Ndisc,...,1
+X=matrix(rep(0,Ndisc*n),nrow=n)
+for(i in 1:n){
+ x=rnorm(Ndisc,mean=0,sd=1)
+ X[i,]=cumsum(x*sqrt(t))
+}
+InfKern(X,2,2)
+</code></pre>
+
+
+</div>

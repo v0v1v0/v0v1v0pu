@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>arpv.binom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Abstract Randomized P-value for the Binomial Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the abstract randomized P-value for the UMPU two-tailed test
+for the binomial distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">arpv.binom(x, n, p, plot = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>binomial observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>the success probability under the null hypothesis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>if <code>TRUE</code> make a plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed to <code>arpv.plot</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The first three arguments must be scalar.
+Evaluates the distribution function of the abstract randomized P-value
+for the UMPU two-tailed test for the binomial distribution, which
+is a continuous, piecewise linear function.  Gives the knots.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a list containing two components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>significance level values at the knots.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phi</code></td>
+<td>
+<p>distribution function values at the knots.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ump)
+print(arpv.binom(10, 10, 0.7, plot = FALSE))
+arpv.binom(10, 10, 0.7)
+arpv.binom(10, 10, 0.7, df = FALSE)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_time</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_time</h2>
+
+<h3>Description</h3>
+
+<p>A function to compactly report how long a model took to execute. Comes with some preset styles
+User can set the format with C-style string formatting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_time(
+  x = NA,
+  formatStr = c("simple", "std", "custom %H %M %OS3"),
+  tz = "GMT",
+  autoRun = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A <code>mxModel()</code> or list of models for which to display elapsed time, or 'start' or 'stop'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>formatStr</code></td>
+<td>
+<p>A format string, defining how to show the time (defaults to human readable)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tz</code></td>
+<td>
+<p>time zone in which the model was executed (defaults to "GMT")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoRun</code></td>
+<td>
+<p>If TRUE (default), run the model if it appears not to have been.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The default time format is "simple", which gives only the biggest unit used. i.e., "x seconds" for times under 1 minute.
+"std" shows time in the format adopted in OpenMx 2.0 e.g. "Wall clock time (HH:MM:SS.hh): 00:00:01.16"
+</p>
+<p>If a list of models is provided, time deltas will also be reported.
+</p>
+<p>If instead of a model the key word "start" is given in x, a start time will be recorded. "stop" gives the
+time since "start" was called (and clears the timer)
+</p>
+<p>If a model has not been run, umx_time will run it for you.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> invisible time string
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Reporting Functions: 
+<code>umxAPA()</code>,
+<code>umxFactorScores()</code>,
+<code>umxGetLatents()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxGetParameters()</code>,
+<code>umxParameters()</code>,
+<code>umx_aggregate()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+umx_time('stop') # alert user stop called when not yet started... 
+umx_time('stop')
+umx_time('start')
+data(demoOneFactor)
+latents  = c("G")
+manifests = names(demoOneFactor)
+myData = mxData(cov(demoOneFactor), type = "cov", numObs=500)
+m1 = umxRAM("umx_time_example", data = myData,
+	umxPath(from = latents, to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = latents, fixedAt = 1)
+)
+umx_time(m1) # report time from mxModel
+m2 = umxRun(m1)
+umx_time(c(m1, m2)) # print comparison table
+umx_time('stop') # report the time since timer last started, and restart
+umx_time('stop') # report the time since timer was restarted.
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

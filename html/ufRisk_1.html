@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ufRisk</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ufRisk: A package for user friendly and practical usage of various
+backtesting methods.</h2>
+
+<h3>Description</h3>
+
+<p>The goal of the <code>ufRisk</code> package (univariate financial risk) is to
+enable the user to compute one-step ahead forecasts of Value at Risk (VaR)
+and Expected Shortfall (ES) by means of various parametric and semiparametric
+GARCH-type models. For the latter the estimation of the nonparametric scale
+function is carried out by means of a data-driven smoothing approach.
+Currently the GARCH, the exponential GARCH (EGARCH), the Log-GARCH, the
+asymmetric power ARCH (APARCH), the FIGARCH and FI-Log-GARCH can be employed
+within the scope of <code>ufRisk</code>. Model quality, in terms of forecasting VaR
+and ES, can be assessed by means of various backtesting methods.
+</p>
+
+
+<h3>Functions</h3>
+
+<p><code>varcast</code> is a function to calculate rolling one-step ahead forecasts
+of VaR and ES for a selection of parametric and semiparametric GARCH-type models (see also
+<code>varcast</code>).
+</p>
+<p><code>trafftest</code> is a function for backtesting VaR and ES. ES is backtested
+via a newly developed traffic light approach. (see also
+<code>trafftest</code>).
+</p>
+<p><code>covtest</code> is a function for conducting the conditional and the
+unconditional coverage tests introduced by Kupiec (1995) and Christoffersen
+(1998). (see also <code>covtest</code>).
+</p>
+
+
+<h3>Author(s)</h3>
+
+
+<ul>
+<li>
+<p> Yuanhua Feng (Department of Economics, Paderborn University), <br>
+Author of the Algorithms <br>
+Website: <a href="https://wiwi.uni-paderborn.de/en/dep4/feng/">https://wiwi.uni-paderborn.de/en/dep4/feng/</a>
+</p>
+</li>
+<li>
+<p> Xuehai Zhang (Former research associate at Paderborn University),<br>
+Author <br></p>
+</li>
+<li>
+<p> Shujie Li (Scientific Employee) (Department of Economics,
+Paderborn University), <br>
+Author <br></p>
+</li>
+<li>
+<p> Christian Peitz (Department of Economics, Paderborn University), <br>
+Author <br></p>
+</li>
+<li>
+<p> Dominik Schulz (Scientific Employee) (Department of Economics,
+Paderborn University), <br>
+Author <br></p>
+</li>
+<li>
+<p> Sebastian Letmathe (Scientific Employee) (Department of Economics,
+Paderborn University), <br>
+Package Creator and Maintainer
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Basel Committee on Banking Supervision (1996). Supervisory Framework For The
+Use of Back-Testing in Conjunction With The Internal Models Approach to
+Market Risk Capital Requirements.
+Available online: <a href="https://www.bis.org/publ/bcbs22.htm">https://www.bis.org/publ/bcbs22.htm</a> (accessed on 23 June
+2020).
+</p>
+<p>Beran, J., and Feng, Y. (2002). Local polynomial fitting with long-memory,
+short-memory and antipersistent errors. Annals of the Institute of
+Statistical Mathematics, 54(2), pp. 291-311.
+</p>
+<p>Constanzino, N., and Curran, M. (2018). A Simple Traffic Light Approach to
+Backtesting Expected Shortfall. In: Risks 6.1.2.
+</p>
+<p>Feng, Y. (2004). Simultaneously modeling conditional heteroskedasticity and
+scale change. In: Econometric Theory, pp. 563-596.
+</p>
+<p>Feng, Y., Beran, J., Letmathe, S., &amp; Ghosh, S. (2020). Fractionally
+integrated Log-GARCH with application to value at risk and expected
+shortfall (No. 137). Paderborn University, CIE Center for
+International Economics.
+</p>
+<p>Letmathe, S., Feng, Y., &amp; Uhde, A. (2021). Semiparametric GARCH models with
+long memory applied to Value at Risk and Expected Shortfall (No. 141).
+Paderborn University, CIE Center for International Economics.
+</p>
+<p>McNeil, A.J., Frey, R., and Embrechts, P. (2015). Quantitative risk
+management: concepts, techniques and tools - revised edition. Princeton
+University Press.
+</p>
+
+
+</div>

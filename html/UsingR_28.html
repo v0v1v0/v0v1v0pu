@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cfb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Bootstrap sample from the Survey of Consumer Finances</h2>
+
+<h3>Description</h3>
+
+<p>A bootstrap sample from the “Survey of Consumer Finances”.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(cfb)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 1000 observations on the following 14
+variables.
+</p>
+
+<dl>
+<dt>WGT</dt>
+<dd>
+<p>Weights to comensate for undersampling. Not applicable</p>
+</dd>
+<dt>AGE</dt>
+<dd>
+<p>Age of participants</p>
+</dd>
+<dt>EDUC</dt>
+<dd>
+<p>Education level (number of years) of participant</p>
+</dd>
+<dt>INCOME</dt>
+<dd>
+<p>Income in year 2001 of participant</p>
+</dd>
+<dt>CHECKING</dt>
+<dd>
+<p>Amount in checking account for participant</p>
+</dd>
+<dt>SAVING</dt>
+<dd>
+<p>Amount in savings accounts</p>
+</dd>
+<dt>NMMF</dt>
+<dd>
+<p>Total directly-held mutual funds</p>
+</dd>
+<dt>STOCKS</dt>
+<dd>
+<p>Amount held in stocks</p>
+</dd>
+<dt>FIN</dt>
+<dd>
+<p>Total financial assets</p>
+</dd>
+<dt>VEHIC</dt>
+<dd>
+<p>Value of all vehicles (includes autos, motor homes, RVs, airplanes,
+boats)</p>
+</dd>
+<dt>HOMEEQ</dt>
+<dd>
+<p>Total home equity</p>
+</dd>
+<dt>OTHNFIN</dt>
+<dd>
+<p>Other financial assets</p>
+</dd>
+<dt>DEBT</dt>
+<dd>
+<p>Total debt</p>
+</dd>
+<dt>NETWORTH</dt>
+<dd>
+<p>Total net worth</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The SCF dataset is a comprehensive survey of consumer finances
+sponsored by the United States Federal Reserve,
+<a href="https://www.federalreserve.gov/pubs/oss/oss2/2001/scf2001home.html">https://www.federalreserve.gov/pubs/oss/oss2/2001/scf2001home.html</a>.
+</p>
+<p>The data is oversampled to compensate for low response in the upper
+brackets. To compensate, weights are assigned. By bootstrapping the
+data with the weights, we get a “better” version of a random sample
+from the population.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://www.federalreserve.gov/pubs/oss/oss2/2001/scf2001home.html">https://www.federalreserve.gov/pubs/oss/oss2/2001/scf2001home.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(cfb)
+attach(cfb)
+mean(INCOME)
+</code></pre>
+
+
+</div>

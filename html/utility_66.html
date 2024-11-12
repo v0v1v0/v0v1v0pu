@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.aggregate.min</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Minimum aggregation of values or utilities</h2>
+
+<h3>Description</h3>
+
+<p>Function to perform a minimum aggregation of values or utilities.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.aggregate.min(u, par = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+
+<p>numeric vector of values or utilities to be aggregated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>unused argument used for compatibility with other aggregation techniques
+that require parameters.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The aggregation function is defined by
+</p>
+<p style="text-align: center;"><code class="reqn">u = \min_{i=1}^n u_i</code>
+</p>
+
+<p>The following figure shows the behaviour of this aggregation function for the two-dimensional case:<br><img src="../help/figures/aggregationmin.png" width="40%" alt="aggregationmin.png"></p>
+
+
+<h3>Value</h3>
+
+<p>minimum of the components of <code>u</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Description of aggregation techniques: <br><br>
+Langhans, S.D., Reichert, P. and Schuwirth, N.,
+The method matters: A guide for indicator aggregation in ecological assessments. 
+Ecological Indicators 45, 494-507, 2014. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Constructor of aggregation node: <br><br><code>utility.aggregation.create</code> <br><br>
+Aggregation techniques provided by uncsim: <br><br><code>utility.aggregate.add</code> for additive aggregation (weighted arithmetic mean), <br><code>utility.aggregate.min</code> for minimum aggregation, <br><code>utility.aggregate.max</code> for maximum aggregation, <br><code>utility.aggregate.geo</code> or <code>utility.aggregate.cobbdouglas</code> for geometric or Cobb-Douglas aggregation (weighted geometric mean), <br><code>utility.aggregate.geooff</code> for geometric aggregation with offset, <br><code>utility.aggregate.revgeo</code> for reverse geometric aggregation, <br><code>utility.aggregate.revgeooff</code> for reverse geometric aggregation with offset, <br><code>utility.aggregate.harmo</code> for harmonic aggregation (weighted harmonic mean), <br><code>utility.aggregate.harmooff</code> for harmonic aggregation with offset, <br><code>utility.aggregate.revharmo</code> for reverse harmonic aggregation, <br><code>utility.aggregate.revharmooff</code> for reverse harmonic aggregation with offset, <br><code>utility.aggregate.mult</code> for multiplicative aggregation, <br><code>utility.aggregate.mix</code> for a mixture of additive, minimum, and geometric aggregation, <br><code>utility.aggregate.addmin</code> for a mixture of additive and minimum aggregation. <br><code>utility.aggregate.addpower</code> for additive power aggregation (weighted power mean), <br><code>utility.aggregate.revaddpower</code> for reverse additive power aggregation, <br><code>utility.aggregate.addsplitpower</code> for splitted additive power aggregation, <br><code>utility.aggregate.revaddsplitpower</code> for reverse splitted additive power aggregation, <br><code>utility.aggregate.bonusmalus</code> for an aggregation technique that considers some of the values or utilities of sub-objectives only as bonus or malus. <br></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utility.aggregate.min(c(0.2,0.8))
+</code></pre>
+
+
+</div>

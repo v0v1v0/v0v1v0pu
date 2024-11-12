@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>massConvertToNumeric</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converting many dataframe columns to numeric</h2>
+
+<h3>Description</h3>
+
+<p>This function makes it easy to convert many dataframe
+columns to numeric.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">massConvertToNumeric(
+  dat,
+  byFactorLabel = FALSE,
+  ignoreCharacter = TRUE,
+  stringsAsFactors = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>The dataframe with the columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>byFactorLabel</code></td>
+<td>
+<p>When converting factors, whether to do this
+by their label value (<code>TRUE</code>) or their level value (<code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignoreCharacter</code></td>
+<td>
+<p>Whether to convert (<code>FALSE</code>) or
+ignore (<code>TRUE</code>) character vectors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stringsAsFactors</code></td>
+<td>
+<p>In the returned dataframe, whether
+to return string (character) vectors as factors or not.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data.frame.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### Create a dataset
+a &lt;- data.frame(var1 = factor(1:4),
+                var2 = as.character(5:6),
+                stringsAsFactors=FALSE);
+
+### Ignores var2
+b &lt;- ufs::massConvertToNumeric(a);
+
+### Converts var2
+c &lt;- ufs::massConvertToNumeric(a,
+                               ignoreCharacter = FALSE);
+</code></pre>
+
+
+</div>

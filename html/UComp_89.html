@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UChp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UChp</h2>
+
+<h3>Description</h3>
+
+<p>Hodrick-Prescott filter estimation
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UChp(y, lambda = 1600)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>A time series object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Smoothing constant (default: 1600)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The cycle estimation
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UC</code>, <code>UCmodel</code>, <code>UCvalidate</code>, <code>UCfilter</code>, 
+<code>UCsmooth</code>, <code>UCcomponents</code>, <code>UCdisturb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+cycle &lt;- UChp(USgdp)
+plot(cycle)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

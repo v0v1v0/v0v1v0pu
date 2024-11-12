@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>healthy</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Healthy or not?</h2>
+
+<h3>Description</h3>
+
+<p>Data on whether a patient is healthy with two covariates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(healthy)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 32 observations on the following 3 variables.
+</p>
+
+<dl>
+<dt>p</dt>
+<dd>
+<p>One covariate</p>
+</dd>
+<dt>g</dt>
+<dd>
+<p>Another covariate</p>
+</dd>
+<dt>healthy</dt>
+<dd>
+<p>0 is healthy, 1 is not</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Data on health with information from two unspecified covariates.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(healthy)
+library(MASS)
+stepAIC(glm(healthy ~ p + g, healthy, family=binomial))
+</code></pre>
+
+
+</div>

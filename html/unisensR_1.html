@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getUnisensSignalSampleCount</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Unisens Signal Sample Count</h2>
+
+<h3>Description</h3>
+
+<p>Get Unisens Signal Sample Count
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getUnisensSignalSampleCount(unisensFolder, id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>unisensFolder</code></td>
+<td>
+<p>Unisens Folder</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>ID of the signal entry</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Long
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">unisensPath &lt;- system.file('extdata/unisensExample', package = 'unisensR', mustWork = TRUE)
+getUnisensSignalSampleCount(unisensPath, 'ecg.bin')
+</code></pre>
+
+
+</div>

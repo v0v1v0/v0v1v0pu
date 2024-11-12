@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>apply_sub_file_COV</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extracts Covariates for a Subject from a Subject Data File</h2>
+
+<h3>Description</h3>
+
+<p>This function is used when stochastic simulations are being performed using
+a data file for the subject level information. If the data file contains
+covariate information, this function will update the system for each subjects
+covariates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">apply_sub_file_COV(
+  tmpcfg,
+  cov_found,
+  sub_dataset,
+  sub_ID_col,
+  sub_TIME_col,
+  file_ID
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>tmpcfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cov_found</code></td>
+<td>
+<p>list of covariates found in dataset</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sub_dataset</code></td>
+<td>
+<p>name of dataset with subject parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sub_ID_col</code></td>
+<td>
+<p>name of column in dataset with subject IDs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sub_TIME_col</code></td>
+<td>
+<p>name of column in dataset with simulation time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file_ID</code></td>
+<td>
+<p>subject ID to extract covariates for</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>ubiquity system object with the covariates set to those for the current subject
+</p>
+
+
+</div>

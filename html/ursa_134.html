@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>is.na</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+‘No data’ values for raster images.
+</h2>
+
+<h3>Description</h3>
+
+<p>The "Extract" function <code>is.na</code> creates mask for each band. In this mask value <code>1L</code> corresponds to <code>NA</code> value in the source image, and value <code>NA</code> corresponds non-missing values in the source image. The "Replacement" function <code>is.na&lt;-</code> assigns numerical value for cells with ‘no data’ value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+is.na(x)
+
+## S3 method for class 'ursaRaster'
+is.infinite(x)
+
+## S3 method for class 'ursaRaster'
+is.nan(x)
+
+## S3 replacement method for class 'ursaRaster'
+is.na(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+
+<p>Numeric.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>These functions are corresponded to <em><strong>local</strong></em> operators of map algebra.
+</p>
+
+
+<h3>Value</h3>
+
+<p>"Extract" functions <code>is.na</code>, <code>is.infinite</code>, <code>is.nan</code> return object of class <code>ursaRaster</code>.
+</p>
+<p>"Replacement" function <code>is.na&lt;-</code> modifies object of class <code>ursaRaster</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+session_grid(regrid(mul=1/4))
+a &lt;- ursa_dummy(nband=2,min=0,max=100)
+print(a)
+print(is.na(a))
+a2 &lt;- ursa_new(nband=2)
+print(a2)
+print(is.na(a2))
+a3 &lt;- a
+a3[a3&lt;30 | a3&gt;70] &lt;- NA
+print(a3)
+print(is.na(a3))
+is.na(a3) &lt;- 200
+print(a3)
+</code></pre>
+
+
+</div>

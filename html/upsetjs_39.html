@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>setSets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>set the vector of sets</h2>
+
+<h3>Description</h3>
+
+<p>set the vector of sets
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">setSets(upsetjs, value)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>the vector of sets</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  setCombinations(list(asSet("a", c(1, 2, 3)))) %&gt;%
+  getSets()
+</code></pre>
+
+
+</div>

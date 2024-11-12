@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fortify.ts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>fortify.ts</h2>
+
+<h3>Description</h3>
+
+<p>Fortify a ts object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ts'
+fortify(model, data = NULL, name = as.character(m[[2]]),
+  ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A <code>ts</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A vector of the same length of <code>x</code> that specifies the time component of each element of <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Character specifying the name of x if it is to be different than the variable being inputed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Prepares a ts object for plotting with ggplot.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>data.frame</code> for plotting with ggplot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+fortify(sunspot.year)
+
+</code></pre>
+
+
+</div>

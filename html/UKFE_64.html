@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>NGRDist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>British national grid reference (NGR) distances</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the euclidean distance between two british national grid reference points using the pythagorean method
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">NGRDist(i, j)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>i</code></td>
+<td>
+<p>a numeric vector of length two. The first being the easting and the second being the northing of the first site</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>j</code></td>
+<td>
+<p>a numeric vector of length two. The first being the easting and the second being the northing of the second site</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note, that the result is converted to km when six digits are used for easting and northing, when six digits would usually provide a result in metres.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A distance in kilometres (if six digits for easting and northing are used)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Calculate the distance between the catchment centroid for the
+#Kingston upon Thames river gauge and the catchment centroid for the
+#gauge at Ardlethen on the River Ythan. First view the eastings and northings
+GetCDs(10001)
+GetCDs(39001)
+NGRDist(i = c(381355, 839183), j = c(462899, 187850))
+</code></pre>
+
+
+</div>

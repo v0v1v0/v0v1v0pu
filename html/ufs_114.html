@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>formatR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pretty formatting of correlation coefficients</h2>
+
+<h3>Description</h3>
+
+<p>Pretty formatting of correlation coefficients
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">formatR(r, digits = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The Pearson correlation to format.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits to round to.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The formatted correlation.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>noZero()</code>, <code>formatCI()</code>, <code>formatPvalue()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">formatR(cor(mtcars$mpg, mtcars$disp));
+</code></pre>
+
+
+</div>

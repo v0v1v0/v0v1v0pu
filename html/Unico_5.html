@@ -1,0 +1,285 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Unico</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fitting the Unico model</h2>
+
+<h3>Description</h3>
+
+<p>Fits the Unico model for an input matrix of features by observations that are coming from a mixture of <code>k</code> sources, under the assumption that each observation is a mixture of unique (unobserved) source-specific values (in each feature in the data). Specifically, for each feature, it standardizes the data and learns the source-specific mean and full <code>k</code> by <code>k</code> variance-covariance matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Unico(
+  X,
+  W,
+  C1,
+  C2,
+  fit_tau = FALSE,
+  mean_penalty = 0,
+  var_penalty = 0.01,
+  covar_penalty = 0.01,
+  mean_max_iterations = 2,
+  var_max_iterations = 3,
+  nloptr_opts_algorithm = "NLOPT_LN_COBYLA",
+  max_stds = 2,
+  init_weight = "default",
+  max_u = 1,
+  max_v = 1,
+  parallel = TRUE,
+  num_cores = NULL,
+  log_file = "Unico.log",
+  verbose = FALSE,
+  debug = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>An <code>m</code> by <code>n</code> matrix of measurements of <code>m</code> features for <code>n</code> observations. Each column in <code>X</code> is assumed to be a mixture of <code>k</code> sources. Note that <code>X</code> must include row names and column names and that NA values are currently not supported. <code>X</code> should not include features that are constant across all observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+<p>An <code>n</code> by <code>k</code> matrix of weights - the weights of <code>k</code> sources for each of the <code>n</code> mixtures (observations). All the weights must be positive and each row - corresponding to the weights of a single observation - must sum up to 1. Note that <code>W</code> must include row names and column names and that NA values are currently not supported.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C1</code></td>
+<td>
+<p>An <code>n</code> by <code>p1</code> design matrix of covariates that may affect the hidden source-specific values (possibly a different effect size in each source). Note that <code>C1</code> must include row names and column names and should not include an intercept term. NA values are currently not supported. Note that each covariate in <code>C1</code> results in <code>k</code> additional parameters in the model of each feature, therefore, in order to alleviate the possibility of model overfitting, it is advised to be mindful of the balance between the size of <code>C1</code> and the sample size in <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C2</code></td>
+<td>
+<p>An <code>n</code> by <code>p2</code> design matrix of covariates that may affect the mixture (i.e. rather than directly the sources of the mixture; for example, variables that capture biases in the collection of the measurements). Note that <code>C2</code> must include row names and column names and should not include an intercept term. NA values are currently not supported.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fit_tau</code></td>
+<td>
+<p>A logical value indicating whether to fit the standard deviation of the measurement noise (i.e. the i.i.d. component of variation in the model denoted as <code class="reqn">\tau</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mean_penalty</code></td>
+<td>
+<p>A non-negative numeric value indicating the regularization strength on the source-specific mean estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var_penalty</code></td>
+<td>
+<p>A non-negative numeric value indicating the regularization strength on the diagonal entries of the full <code>k</code> by <code>k</code> variance-covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>covar_penalty</code></td>
+<td>
+<p>A non-negative numeric value indicating the regularization strength on the off diagonal entries of the full <code>k</code> by <code>k</code> variance-covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mean_max_iterations</code></td>
+<td>
+<p>A non-negative numeric value indicating the number of iterative updates performed on the mean estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var_max_iterations</code></td>
+<td>
+<p>A non-negative numeric value indicating the number of iterative updates performed on the variance-covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nloptr_opts_algorithm</code></td>
+<td>
+<p>A string indicating the optimization algorithm to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_stds</code></td>
+<td>
+<p>A non-negative numeric value indicating, for each feature, the portions of data that are considered as outliers. Only samples within <code>max_stds</code> standard deviations from the mean will be used for the moments estimation of a given feature.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_weight</code></td>
+<td>
+<p>A string indicating the initial weights on the samples to start the iterative optimization.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_u</code></td>
+<td>
+<p>A non-negative numeric value indicating the maximum weights/influence a sample can have on mean estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_v</code></td>
+<td>
+<p>A non-negative numeric value indicating the maximum weights/influence a sample can have on variance-covariance estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>A logical value indicating whether to use parallel computing (possible when using a multi-core machine).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>num_cores</code></td>
+<td>
+<p>A numeric value indicating the number of cores to use (activated only if <code>parallel == TRUE</code>). If <code>num_cores == NULL</code> then all available cores except for one will be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log_file</code></td>
+<td>
+<p>A path to an output log file. Note that if the file <code>log_file</code> already exists then logs will be appended to the end of the file. Set <code>log_file</code> to <code>NULL</code> to prevent output from being saved into a file; note that if <code>verbose == FALSE</code> then no output file will be generated regardless of the value of <code>log_file</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>A logical value indicating whether to print logs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>debug</code></td>
+<td>
+<p>A logical value indicating whether to set the logger to a more detailed debug level; set <code>debug</code> to <code>TRUE</code> before reporting issues.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Unico assumes the following model: </p>
+<p style="text-align: center;"><code class="reqn">X_{ij} =  w_{i}^T Z_{ij} +(c_i^{(2)})^T \beta_j+ e_{ij}</code>
+</p>
+
+<p>The mixture value at sample <code class="reqn">i</code> feature <code class="reqn">j</code>: <code class="reqn">X_{ij}</code> is modeled as a weighted linear combination, specified by weights <code class="reqn">w_i = (w_{i1},...,w_{ik})</code>, of a total of <code class="reqn">k</code> source-specific levels, specified by <code class="reqn">Z_{ij}=(Z_{ij1},...,Z_{ijk})</code>.
+In addition, we also consider global-level covariates <code class="reqn">c_i^{(2)}</code> that systematically affect the observed mixture values and their effect sizes <code class="reqn">\beta_j</code>. <code class="reqn">e_{ij}</code> denotes the i.i.d measurement noise with variance <code class="reqn">\tau</code> across all samples.
+Weights have be to non-negative and sum up to <code class="reqn">1</code> across all sources for each sample. In practice, we assume that the weights are fixed and estimated by external methods.
+</p>
+<p>Source specific profiles are further modeled as: </p>
+<p style="text-align: center;"><code class="reqn">Z_{ijh} = \mu_{jh} + (c_i^{(1)})^T \gamma_{jh} + \epsilon_{ijh}</code>
+</p>
+
+<p><code class="reqn">\mu_{jh}</code> denotes the population level mean of feature <code class="reqn">j</code> at source <code class="reqn">h</code>.
+We also consider covariates <code class="reqn">c_i^{(1)}</code> that systematically affect the source-specific values and their effect sizes <code class="reqn">\gamma_{jh}</code> on each source.
+Finally, we actively model the <code class="reqn">k</code> by <code class="reqn">k</code> covariance structure of a given feature <code class="reqn">j</code> across all <code class="reqn">k</code> sources <code class="reqn">Var[\vec{\epsilon_{ij}}] = \Sigma_{j} \in \mathbf{R}^{k \times k}</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with the estimated parameters of the model. This list can be then used as the input to other functions such as tensor.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+<p>An <code>n</code> by <code>k</code> matrix of weights. This is the same as <code>W</code> from input.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C1</code></td>
+<td>
+<p>An <code>n</code> by <code>p1</code> design matrix of source-specific covariates. This is the same as <code>C1</code> from input.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C2</code></td>
+<td>
+<p>An <code>n</code> by <code>p2</code> design matrix of not source-specific covariates. This is the same as <code>C2</code> from input.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mus_hat</code></td>
+<td>
+<p>An <code>m</code> by <code>k</code> matrix of estimates for the mean of each source in each feature.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gammas_hat</code></td>
+<td>
+<p>An <code>m</code> by <code>k*p1</code> matrix of the estimated effects of the <code>p1</code> covariates in <code>C1</code> on each of the <code>m</code> features in <code>X</code>, where the first <code>p1</code> columns are the source-specific effects of the <code>p1</code> covariates on the first source, the following <code>p1</code> columns are the source-specific effects on the second source and so on.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betas_hat</code></td>
+<td>
+<p>An <code>m</code> by <code>p2</code> matrix of the estimated effects of the <code>p2</code> covariates in <code>C2</code> on the mixture values of each of the <code>m</code> features in <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigmas_hat</code></td>
+<td>
+<p>An <code>m</code> by <code>k</code> by <code>k</code> tensor of estimates for the cross source <code>k</code> by <code>k</code> variance-covariance matrix in each feature.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taus_hat</code></td>
+<td>
+<p>An <code>m</code> by <code>1</code> matrix of estimates for the variance of the measurement noise.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale.factor</code></td>
+<td>
+<p>An <code>m</code> by <code>1</code> matrix of scaling factors for standardizing each feature.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>config</code></td>
+<td>
+<p>A list with hyper-parameters used for fitting the model and configurations for in the optimization algorithm.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Us_hat_list</code></td>
+<td>
+<p>A list tracking, for each feature, the sample weights used for each iteration of the mean optimization  (activated only if <code>debug == TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Vs_hat_list</code></td>
+<td>
+<p>A list tracking, for each feature, the sample weights used for each iteration of the variance-covariance optimization  (activated only if <code>debug == TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ls_hat_list</code></td>
+<td>
+<p>A list tracking, for each feature, the computed estimates of the upper triangular cholesky decomposition of variance-covariance matrix at each iteration of the variance-covariance optimization (activated only if <code>debug == TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigmas_hat_list</code></td>
+<td>
+<p>A list tracking, for each feature, the computed estimates of the variance-covariance matrix at each iteration of the variance-covariance optimization (activated only if <code>debug == TRUE</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">data = simulate_data(n=100, m=2, k=3, p1=1, p2=1, taus_std=0, log_file=NULL)
+res = list()
+res$params.hat = Unico(data$X, data$W, data$C1, data$C2, parallel=FALSE, log_file=NULL)
+
+</code></pre>
+
+
+</div>

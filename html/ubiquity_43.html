@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_fetch_nca</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fetch NCA Results</h2>
+
+<h3>Description</h3>
+
+<p>Fetches the NCA summary from the ubiquity system object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_fetch_nca(cfg, analysis_name = "analysis")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the NCA analysis (default <code>'analysis'</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List with a data frame of the NCA results (<code>NCA_summary</code>), the raw
+output from PKNCA (<code>PKNCA_results</code>), and also a list element indicating the
+overall success of the function call (<code>isgood</code>)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Vignette on NCA (<code>vignette("NCA", package = "ubiquity")</code>)
+</p>
+
+
+</div>

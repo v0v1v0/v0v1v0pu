@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uni.logrank</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Univariate binary splits by the logrank test</h2>
+
+<h3>Description</h3>
+
+<p>The output is the summary of significance tests for binary splits, where the cut-off values are optimized for each covariate.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uni.logrank(t.vec, d.vec, X.mat)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>t.vec</code></td>
+<td>
+<p>:Vector of survival times (time to either death or censoring)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d.vec</code></td>
+<td>
+<p>:Vector of censoring indicators (1=death, 0=censoring)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X.mat</code></td>
+<td>
+<p>:n by p matrix of covariates, where n is the sample size and p is the number of covariates</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The output can be used to construct a logrank tree.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe containing:
+</p>
+<p>Pvalue: the P-value of the two-sample logrank test, where the cut-off value is optimized
+</p>
+<p>cut_off_point: the optimal cutt-off values of the binary splits given a feature
+</p>
+<p>left.sample.size: the sample size of a left child node
+</p>
+<p>right.sample.size: the sample size of a right child node
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Lung,package="compound.Cox")
+train_Lung=Lung[which(Lung[,"train"]==TRUE),] #select training data
+t.vec=train_Lung[,1]
+d.vec=train_Lung[,2]
+x.mat=train_Lung[,-c(1,2,3)]
+uni.logrank(t.vec,d.vec,x.mat)
+</code></pre>
+
+
+</div>

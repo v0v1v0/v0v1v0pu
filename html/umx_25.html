@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>noNAs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Succinctly select complete rows from a dataframe</h2>
+
+<h3>Description</h3>
+
+<p>Succinctly select complete rows from a dataframe.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">noNAs(df, rows = NULL, cols = NULL, drop = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>an <code>data.frame()</code> to select on</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows</code></td>
+<td>
+<p>Rows to keep (optional, incomplete rows still discarded)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>Cols to keep</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop</code></td>
+<td>
+<p>Whether to return a vector when only 1 column is selected (default TRUE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Complete rows and (optionally) selected columns
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Data Functions: 
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tmp = mtcars
+tmp[2,1] = NA
+noNAs(tmp, cols="mpg")
+noNAs(tmp, cols="mpg", drop = FALSE)
+noNAs(tmp) # no Mazda RX4 Wag
+
+</code></pre>
+
+
+</div>

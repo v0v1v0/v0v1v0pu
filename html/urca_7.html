@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>blrtest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Likelihood ratio test for restrictions on beta</h2>
+
+<h3>Description</h3>
+
+<p>This function estimates a restricted VAR, where the restrictions are
+base upon <code class="reqn">\bold{\beta}</code>, <em>i.e.</em> the cointegration vectors. The test
+statistic is distributed as <code class="reqn">\chi^2</code> with <code class="reqn">r(p-s)</code> degrees of
+freedom, with <code class="reqn">s</code> equal to the columns of the restricting matrix
+<code class="reqn">\bold{H}</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">blrtest(z, H, r)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class <code>ca.jo</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>H</code></td>
+<td>
+<p>The <code class="reqn">(p \times s)</code> matrix containing the restrictions on
+<code class="reqn">\bold{\beta}</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>The count of cointegrating relationships; <br>
+inferred from <code>summary(ca.jo-object)</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Please note, that in the case of nested hypothesis, the reported
+p-value should be adjusted to <code class="reqn">r(s1-s2)</code> (see Johansen, S. and
+K. Juselius (1990)).
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>cajo.test</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1988), Statistical Analysis of Cointegration Vectors,
+<em>Journal of Economic Dynamics and Control</em>, <b>12</b>, 231–254.
+</p>
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code>, <code>alrtest</code>, <code>ablrtest</code>,
+<code>bh5lrtest</code>, <code>bh6lrtest</code>, <code>cajo.test-class</code>,
+<code>ca.jo-class</code> and <code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.vecm &lt;- ca.jo(sjd, ecdet="const", type="eigen", K=2, spec="longrun",
+season=4)
+HD0 &lt;- matrix(c(-1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1), c(5,4))
+summary(blrtest(sjd.vecm, H=HD0, r=1))
+</code></pre>
+
+
+</div>

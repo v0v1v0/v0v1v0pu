@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pal_unikn_pref</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>uni.kn color palette of preferred colors (9 colors)</h2>
+
+<h3>Description</h3>
+
+<p><code>pal_unikn_pref</code> provides an additional uni.kn color palette  
+that collects the preferred color of each palette 
+as a data frame containing 9 (or 8 + 1) colors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pal_unikn_pref
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>data.frame</code> with 1 rows and 9 columns.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The colors are arranged in a sequence that provides 
+high contrasts between adjacent colors. 
+</p>
+<p>Note that the (alert) color <code>Signal</code> is 
+not a preferred color according to the official color 
+definition.
+</p>
+<p>See <a href="https://www.uni-konstanz.de/en/university/news-and-media/create-online-and-print-media/corporate-design/">https://www.uni-konstanz.de/en/university/news-and-media/create-online-and-print-media/corporate-design/</a> for details.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pal_unikn</code> for the default uni.kn color palette; 
+<code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes.
+</p>
+<p>Other color palettes: 
+<code>pal_bordeaux</code>,
+<code>pal_grau</code>,
+<code>pal_karpfenblau</code>,
+<code>pal_peach</code>,
+<code>pal_petrol</code>,
+<code>pal_pinky</code>,
+<code>pal_seeblau</code>,
+<code>pal_seegruen</code>,
+<code>pal_signal</code>,
+<code>pal_unikn</code>,
+<code>pal_unikn_dark</code>,
+<code>pal_unikn_light</code>,
+<code>pal_unikn_pair</code>,
+<code>pal_unikn_ppt</code>,
+<code>pal_unikn_web</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">pal_unikn_pref
+dim(pal_unikn_pref)  # 1 9
+
+# Access by position:
+pal_unikn_pref[1]    # color Seeblau (as df)
+pal_unikn_pref[[1]]  # color value "#59C7EB" 
+
+# Access by name: 
+pal_unikn_pref["Seeblau"]   # color "seeblau3" (as df) 
+pal_unikn_pref[["Seeblau"]] # color value "#59C7EB" 
+
+# Viewing/using color palette:
+seecol(pal_unikn_pref)
+demopal(pal_unikn_pref, type = "mosaic", main = "Preferred colors of Konstanz University")
+
+</code></pre>
+
+
+</div>

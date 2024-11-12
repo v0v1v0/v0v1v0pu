@@ -1,0 +1,161 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxDiffMZ</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>MZ differences method for testing evidence for causality.</h2>
+
+<h3>Description</h3>
+
+<p><code>umxDiffMZ</code> implements the simple twin1-twin2 based correlation method, e.g. De Moor (2008), in which MZ differences
+on a variable <code>x</code> asserted to be causal of an outcome variable <code>y</code> are tested for association with differences on y.
+The logic of the design is shown below:
+</p>
+<p><img src="../help/figures/DiffMZRainMud.png" width="50%" alt="Figure: MZ differences model"></p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxDiffMZ(
+  x,
+  y,
+  data,
+  sep = "_T",
+  mzZygs = c("MZFF", "MZMM"),
+  zyg = "zygosity",
+  labxy = c(-1.2, 1.8),
+  xylim = c(NA, NA),
+  digits = 2
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Presumed causal variable, e.g. "effort"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Presumed caused outcome, e.g. "score"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Dataframe containing the twin data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The separator "_T" used to make twin var names from x and y.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mzZygs</code></td>
+<td>
+<p>The MZ zygosity codes c("MZFF", "MZMM")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zyg</code></td>
+<td>
+<p>The column containing "zygosity" data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labxy</code></td>
+<td>
+<p>Where to locate the R2 label (default = c(x=-2,y=3))</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xylim</code></td>
+<td>
+<p>= clip x any axes to range, e.g c(-3,-3)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Rounding for beta (def2)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Example output is shown below, with the fitted line and fit inscribed. The plot is just a ggplot graph that is returned and can be edited and formatted.
+</p>
+<p><img src="../help/figures/DiffMZexample.png" width="50%" alt="Figure: MZ differences model"></p>
+<p>For a more sophisticated linear mixed model approach, see <code>umxDiscTwin()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Graph for decorating
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> De Moor, M. H., Boomsma, D. I., Stubbe, J. H., Willemsen, G., &amp; de Geus, E. J. (2008). Testing causality in the association between regular exercise and symptoms of anxiety and depression. Archives of General Psychiatry, 65(8), 897-905. <a href="https://doi.org/10.1001/archpsyc.65.8.897">doi:10.1001/archpsyc.65.8.897</a>.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxDoC()</code>, <code>umxDiscTwin()</code>, <code>umxMR()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(twinData)
+umxDiffMZ(x="ht", y="wt", labxy = c(-.5, 3), data = twinData, sep = "")
+umxDiffMZ(x="ht", y="wt", xylim = c( -2, 2), data = twinData, sep = "")
+</code></pre>
+
+
+</div>

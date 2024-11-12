@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_grepl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Look up a multiple patterns and indicate their presence in text</h2>
+
+<h3>Description</h3>
+
+<p>A variant of <code>grepl</code> which allows to specify multiple regular expressions
+and allows to combine the result of these into one logical vector.<br> 
+You can specify how to combine the results of the regular expressions by specifying
+an aggregate function like <code>all</code>, <code>any</code>, <code>sum</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_grepl(
+  x,
+  pattern,
+  FUN = all,
+  ignore.case = FALSE,
+  perl = FALSE,
+  fixed = FALSE,
+  useBytes = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>a character vector containing one or several regular expressions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FUN</code></td>
+<td>
+<p>a function to apply to combine the results ot the different regular expressions for each element of <code>x</code>. 
+Defaults to <code>all</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore.case</code></td>
+<td>
+<p>passed on to <code>grepl</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>perl</code></td>
+<td>
+<p>passed on to <code>grepl</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fixed</code></td>
+<td>
+<p>passed on to <code>grepl</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>useBytes</code></td>
+<td>
+<p>passed on to <code>grepl</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed on to <code>FUN</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a logical vector with the same length as <code>x</code> with the result of the call to <code>FUN</code> applied elementwise to each result of grepl for each pattern
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>grepl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("--A--", "--B--", "--ABC--", "--AC--", "Z")
+txt_grepl(x, pattern = c("A", "C"), FUN = all)
+txt_grepl(x, pattern = c("A", "C"), FUN = any)
+txt_grepl(x, pattern = c("A", "C"), FUN = sum)
+data.frame(x = x, 
+           A_and_C = txt_grepl(x, pattern = c("A", "C"), FUN = all),
+           A_or_C  = txt_grepl(x, pattern = c("A", "C"), FUN = any),
+           A_C_n   = txt_grepl(x, pattern = c("A", "C"), FUN = sum))
+txt_grepl(x, pattern = "A|C")
+</code></pre>
+
+
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_context</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Based on a vector with a word sequence, get n-grams (looking forward + backward)</h2>
+
+<h3>Description</h3>
+
+<p>If you have annotated your text using <code>udpipe_annotate</code>,
+your text is tokenised in a sequence of words. Based on this vector of words in sequence
+getting n-grams comes down to looking at the previous/next word and the subsequent previous/next word andsoforth.
+These words can be <code>pasted</code> together to form an n-gram.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_context(x, n = c(-1, 0, 1), sep = " ", na.rm = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector where each element is just 1 term or word</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>an integer vector indicating how many terms to look back and ahead</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>a character element indicating how to <code>paste</code> the subsequent words together</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical, if set to <code>TRUE</code>, will keep all text even if it can not look back/ahead the amount specified by <code>n</code>. 
+If set to <code>FALSE</code>, will have a resulting value of <code>NA</code>
+if at least one element is <code>NA</code> or it can not look back/ahead the amount specified by <code>n</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector of the same length of <code>x</code> with the n-grams
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>txt_paste</code>, <code>txt_next</code>, <code>txt_previous</code>, <code>shift</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("We", "walked", "anxiously", "to", "the", "doctor", "!")
+
+## Look 1 word before + word itself
+y &lt;- txt_context(x, n = c(-1, 0), na.rm = FALSE)
+data.frame(x, y)
+## Look 1 word before + word itself + 1 word after
+y &lt;- txt_context(x, n = c(-1, 0, 1), na.rm = FALSE)
+data.frame(x, y)
+y &lt;- txt_context(x, n = c(-1, 0, 1), na.rm = TRUE)
+data.frame(x, y)
+
+## Look 2 words before + word itself + 1 word after 
+## even if not all words are there
+y &lt;- txt_context(x, n = c(-2, -1, 0, 1), na.rm = TRUE, sep = "_")
+data.frame(x, y)
+y &lt;- txt_context(x, n = c(-2, -1, 1, 2), na.rm = FALSE, sep = "_")
+data.frame(x, y)
+
+x &lt;- c("We", NA, NA, "to", "the", "doctor", "!")
+y &lt;- txt_context(x, n = c(-1, 0), na.rm = FALSE)
+data.frame(x, y)
+y &lt;- txt_context(x, n = c(-1, 0), na.rm = TRUE)
+data.frame(x, y)
+
+library(data.table)
+data(brussels_reviews_anno, package = "udpipe")
+x      &lt;- as.data.table(brussels_reviews_anno)
+x      &lt;- subset(x, doc_id %in% txt_sample(unique(x$doc_id), n = 10))
+x      &lt;- x[, context := txt_context(lemma), by = list(doc_id, sentence_id)]
+head(x, 20)
+x$term &lt;- sprintf("%s/%s", x$lemma, x$upos)
+x      &lt;- x[, context := txt_context(term), by = list(doc_id, sentence_id)]
+head(x, 20)
+</code></pre>
+
+
+</div>

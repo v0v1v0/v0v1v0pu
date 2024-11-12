@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>USP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Permutation test of independence.</h2>
+
+<h3>Description</h3>
+
+<p>Carry out an independence test of the independence of two samples, give
+two kernel matrices <code class="reqn">J</code> and <code class="reqn">K</code>, as described in Section 7.1 of (Berrett et al. 2021).
+We calculate the test statistic and null statistics using the function KernStat,
+before comparing them to produce a p-value. For the featured
+examples considered these matrices can be calculated using FourierKernel or
+InfKern. Alternatively, if a different basis is to be used, then the kernels
+can be entered separately.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">USP(J, K, B = 999, ties.method = "standard", nullstats = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>J</code></td>
+<td>
+<p><code class="reqn">n \times n </code> kernel matrix corresponding to first sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p><code class="reqn">n \times n </code> kernel matrix corresponding to second sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>B</code></td>
+<td>
+<p>The number of permutation used to calibrate the test.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ties.method</code></td>
+<td>
+<p>If "standard" then calculate the p-value as in (5) of (Berrett et al. 2021),
+which is slightly conservative. If "random" then break ties randomly. This preserves Type I error
+control.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nullstats</code></td>
+<td>
+<p>If TRUE, returns a vector of the null statistic values.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns the p-value for this independence test and the value of the test statistic, <code class="reqn">D_n</code>,
+as defined in (Berrett et al. 2021). If nullstats=TRUE is used, then the function also
+returns a vector of the null statistics.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x=runif(100); y=runif(100); M=3
+J=FourierKernel(x,M); K=FourierKernel(y,M)
+USP(J,K,999)
+
+n=50; r=0.6; Ndisc=1000; t=1/Ndisc
+X=matrix(rep(0,Ndisc*n),nrow=n); Y=matrix(rep(0,Ndisc*n),nrow=n)
+for(i in 1:n){
+ x = rnorm(Ndisc, mean=0, sd= 1)
+ se = sqrt(1 - r^2) #standard deviation of error
+ e = rnorm(Ndisc, mean=0, sd=se)
+ y = r*x + e
+ X[i,] = cumsum(x*sqrt(t))
+ Y[i,] = cumsum(y*sqrt(t))
+}
+J=InfKern(X,2,1); K=InfKern(Y,2,1)
+USP(J,K,999)
+</code></pre>
+
+
+</div>

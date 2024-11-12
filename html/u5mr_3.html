@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>coale_demeny_ltm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Coale-Demeny Model Life Tables</h2>
+
+<h3>Description</h3>
+
+<p>The Coale-Demeny life tables consist of four sets of models, each representing
+a distinct mortality pattern. Each model is arranged in terms of 25 mortality
+levels, associated with different expectations of life at birth for females in
+such a way that <code>e0</code> of 20 years corresponds to level 1 and <code>e0</code> of 80 years
+corresponds to level 25.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(coale_demeny_ltm)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>"list"</code>; consist of four <code>data.frame</code> for
+<code>male</code>, <code>female</code> and <code style="white-space: pre;">⁠both sexes⁠</code>.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The four underlying mortality patterns of the Coale-Demeny models are called
+"North", "South", "East" and "West". They were identified through statistical
+and graphical analysis of a large number of life tables of acceptable quality,
+mainly for European countries.
+</p>
+<p>Reference: United Nations (1990) "Step-by-step guide to the estimation of the child mortality"
+<a href="https://www.un.org/en/development/desa/population/publications/pdf/mortality/stepguide_childmort.pdf">https://www.un.org/en/development/desa/population/publications/pdf/mortality/stepguide_childmort.pdf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>United Nations Population Studies (1990) Step-by-Step Guide
+to the Estimation of Child Mortality No.107:1-83
+(<a href="https://www.un.org/en/development/desa/population/publications/pdf/mortality/stepguide_childmort.pdf">United Nations</a>)
+</p>
+
+
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dowdata</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Dow Jones average from Jan 1999 to October 2000</h2>
+
+<h3>Description</h3>
+
+<p>The <code>dowdata</code> data frame has 443 rows and 5 columns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(dowdata)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:	
+</p>
+
+<dl>
+<dt>Open</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>High</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Date</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Low</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Close</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>this data comes from the site <a href="http://www.forecasts.org/">http://www.forecasts.org/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(dowdata)
+the.close &lt;- dowdata$Close
+n &lt;- length(the.close)
+plot(log(the.close[2:n]/the.close[1:(n-1)]))
+</code></pre>
+
+
+</div>

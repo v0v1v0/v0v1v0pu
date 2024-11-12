@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.multidog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot the output of <code>multidog</code>.</h2>
+
+<h3>Description</h3>
+
+<p>Produce genotype plots from the output of <code>multidog</code>. You may
+select which SNPs to plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'multidog'
+plot(x, indices = seq(1, min(5, nrow(x$snpdf))), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The output of <code>multidog</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indices</code></td>
+<td>
+<p>A vector of integers. The indices of the SNPs to plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>On a genotype plot, the x-axis contains the counts of the non-reference allele and the y-axis
+contains the counts of the reference allele. The dashed lines are the expected counts (both reference and alternative)
+given the sequencing error rate and the allele-bias. The plots are color-coded by the maximum-a-posterior genotypes.
+Transparency is proportional to the maximum posterior probability for an
+individual's genotype. Thus, we are less certain of the genotype of more transparent individuals. These
+types of plots are used in Gerard et. al. (2018) and Gerard and Ferrão (2020).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p>Gerard, D., Ferrão, L. F. V., Garcia, A. A. F., &amp; Stephens, M. (2018). Genotyping Polyploids from Messy Sequencing Data. <em>Genetics</em>, 210(3), 789-807. <a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a>.
+</p>
+</li>
+<li>
+<p>Gerard, David, and Luís Felipe Ventorim Ferrão. "Priors for genotyping polyploids." Bioinformatics 36, no. 6 (2020): 1795-1800. <a href="https://doi.org/10.1093/bioinformatics/btz852">doi:10.1093/bioinformatics/btz852</a>.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>plot_geno</code>.
+</p>
+
+
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>puny_encode</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Encode or Decode Internationalised Domains</h2>
+
+<h3>Description</h3>
+
+<p><code>puny_encode</code> and <code>puny_decode</code> implement
+the encoding standard for internationalised (non-ASCII) domains and
+subdomains. You can use them to encode UTF-8 domain names, or decode
+encoded names (which start "xn–"), or both.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">puny_encode(x)
+
+puny_decode(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector of URLs. These should be URL decoded using <code>url_decode</code>.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a CharacterVector containing encoded or decoded versions of the entries in <code>x</code>.
+Invalid URLs (ones that are <code>NA</code>, or ones that do not successfully map to an actual
+decoded or encoded version) will be returned as <code>NA</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>url_decode</code> and <code>url_encode</code> for percent-encoding.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Encode a URL
+puny_encode("https://www.bücher.com/foo")
+
+# Decode the result, back to the original
+puny_decode("https://www.xn--bcher-kva.com/foo")
+
+</code></pre>
+
+
+</div>

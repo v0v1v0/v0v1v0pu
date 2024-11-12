@@ -1,0 +1,126 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>knitFig</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Easily knit a custom figure fragment</h2>
+
+<h3>Description</h3>
+
+<p>THis function was written to make it easy to knit figures with different, or
+dynamically generated, widths and heights (and captions) in the same chunk
+when working with R Markdown.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">knitFig(
+  plotToDraw,
+  template = getOption("ufs.knitFig.template", NULL),
+  figWidth = ufs::opts$get("ggSaveFigWidth"),
+  figHeight = ufs::opts$get("ggSaveFigHeight"),
+  figCaption = "A plot.",
+  chunkName = NULL,
+  returnRaw = FALSE,
+  catPlot = ufs::opts$get("knitFig.catPlot"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>plotToDraw</code></td>
+<td>
+<p>The plot to draw, e.g. a <code>ggplot</code> plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template</code></td>
+<td>
+<p>A character value with the <code>knit_expand</code>
+template to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>figWidth</code></td>
+<td>
+<p>The width to set for the figure (in inches).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>figHeight</code></td>
+<td>
+<p>The height to set for the figure (in inches).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>figCaption</code></td>
+<td>
+<p>The caption to set for the figure.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chunkName</code></td>
+<td>
+<p>Optionally, the name for the chunk. To avoid problems
+because multiple chunks have the name "<code>unnamed-chunk-1</code>", if no chunk
+name is provided, <code>digest::digest()</code> is used to generate an MD5-hash from
+<code>Sys.time</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnRaw</code></td>
+<td>
+<p>Whether to <code>cat()</code> the result (<code>TRUE</code>) or whether
+to return it as <code>knitr::asis_output()</code> object (<code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>catPlot</code></td>
+<td>
+<p>Whether to use the <code>base::cat()</code> function to print the
+code for the plot, and return the result invisibly. If not, the result is
+returned visible, and so probably printed anyway.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Any additional arguments are passed on to
+<code>knit_expand</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>This function returns nothing, but uses <code>knit_expand</code>
+and <code>knit</code> to <code>cat</code> the result.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>knit_expand</code> and <code>knit</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: knitFig(ggBoxplot(mtcars, 'mpg'))
+</code></pre>
+
+
+</div>

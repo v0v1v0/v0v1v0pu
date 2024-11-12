@@ -1,0 +1,158 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursaProgressBar</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Progress bar
+</h2>
+
+<h3>Description</h3>
+
+<p>Informative progress bars with dispaying elapsed and remained time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ursaProgressBar(kind = c("tk", "txt"),title = .argv0(),
+                label = "", min = 0, max = 1, initial = min, width = NA,
+                style = 1, tail = FALSE, silent = FALSE)
+
+setUrsaProgressBar(pb, value, title = NULL, label = NULL)
+
+## S3 method for class 'ursaProgressBar'
+close(con, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>kind</code></td>
+<td>
+
+<p>Character. Type or progress bar. Valid values are <code>"tk"</code> to display progress bar in tcl/tk window and <code>"txt"</code> to display progress bar in terminal mode. Default is <code>"tk"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>style</code></td>
+<td>
+
+<p>See description for the same argument in <code>txtProgressBar</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width</code></td>
+<td>
+
+<p>See description for the same argument in <code>tkProgressBar</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title, label, min, max, initial, value, pb</code></td>
+<td>
+
+<p>See description for the same arguments in <code>tkProgressBar</code> and <code>txtProgressBar</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>con, ...</code></td>
+<td>
+
+<p>See description for the same arguments in <code>close</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tail</code></td>
+<td>
+
+<p>Logical. Behaviour of progress bar appearing. If <code>TRUE</code> then progress bar will be used after progress step (e.g., at the end of routine). Default is <code>FALSE</code> (before progress step).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+
+<p>Logical. If <code>TRUE</code> then progress bar will not appeared; it can be useful for conditional scripting. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Wrapper to one of
+<code>txtProgressBar</code>,
+
+<code>tkProgressBar</code>
+. 
+</p>
+
+<p>Visualization of progress bar is updates each 0.5 seconds, it is effective for multiple short-term iterations.
+</p>
+<p>Progress bars should be closed by calling of appropriate method of generic function <code>close</code> depending of class of reference progress bar.
+</p>
+
+
+
+<h3>Value</h3>
+
+
+
+
+
+<p><code>ursaProgressBar</code> returns object of reference progress bar.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Function name in style <em>camelCase</em> for consistence with other progress bar functions in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>txtProgressBar</code>
+
+<code>tkProgressBar</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+n1 &lt;- 3
+n2 &lt;- 83
+p &lt;- 0.0011
+#require(tcltk)
+pb &lt;- ursaProgressBar(min=0,max=n1,title="first",tail=TRUE)
+for (i in seq(n1)) {
+   pb2 &lt;- ursaProgressBar(min=0,max=n2,title="second")
+   for (i in seq(n2)) {
+      setUrsaProgressBar(pb2)
+      Sys.sleep(p)
+   }
+   close(pb2)
+   setUrsaProgressBar(pb)
+}
+close(pb)
+</code></pre>
+
+
+</div>

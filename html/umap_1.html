@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.umap</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>project data points onto an existing umap embedding</h2>
+
+<h3>Description</h3>
+
+<p>project data points onto an existing umap embedding
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'umap'
+predict(object, data, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>trained object of class umap</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>matrix with data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments (not used)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>new matrix
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># embedd iris dataset using default settings
+iris.umap = umap(iris[,1:4])
+
+# create a dataset with structure like iris, but with perturbation
+iris.perturbed = iris[,1:4] + matrix(rnorm(nrow(iris)*4, 0, 0.1), ncol=4)
+
+# project perturbed dataset
+perturbed.embedding = predict(iris.umap, iris.perturbed)
+
+# output is a matrix with embedding coordinates
+head(perturbed.embedding)
+
+</code></pre>
+
+
+</div>

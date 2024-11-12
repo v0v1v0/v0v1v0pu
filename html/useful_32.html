@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MapToInterval</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Map numbers to interval</h2>
+
+<h3>Description</h3>
+
+<p>Maps a range of numbers to a given interval
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">MapToInterval(nums, start = 1, stop = 10)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nums</code></td>
+<td>
+<p>The vector of numbers to be mapped</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>The start of the interval</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stop</code></td>
+<td>
+<p>The end of the interval</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>formula: a + (x - min(x)) * (b - a) / (max(x) - min(x))
+</p>
+
+
+<h3>Value</h3>
+
+<p>The original numbers mapped to the given interval
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+www.jaredlander.com
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>mapping</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+MapToInterval(1:10, start=0, stop=1)
+mapping(1:10, start=0, stop=1)
+
+</code></pre>
+
+
+</div>

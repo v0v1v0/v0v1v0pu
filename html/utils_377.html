@@ -1,0 +1,88 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>zip</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create Zip Archives</h2>
+
+<h3>Description</h3>
+
+<p>A wrapper for an external <code>zip</code> command to create zip archives.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zip(zipfile, files, flags = "-r9X", extras = "",
+    zip = Sys.getenv("R_ZIPCMD", "zip"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr>
+<td><code id="zipfile">zipfile</code></td>
+<td>
+<p>The pathname of the zip file: tilde expansion (see
+<code>path.expand</code>) will be performed.</p>
+</td>
+</tr>
+<tr>
+<td><code id="files">files</code></td>
+<td>
+<p>A character vector of recorded filepaths to be included.</p>
+</td>
+</tr>
+<tr>
+<td><code id="flags">flags</code></td>
+<td>
+<p>A character string of flags to be passed to the command:
+see ‘Details’.</p>
+</td>
+</tr>
+<tr>
+<td><code id="extras">extras</code></td>
+<td>
+<p>An optional character vector: see ‘Details’.</p>
+</td>
+</tr>
+<tr>
+<td><code id="zip">zip</code></td>
+<td>
+<p>A character string specifying the external command to be used.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>On a Unix-alike, the default for <code>zip</code> will use the
+value of <span class="env">R_ZIPCMD</span>, whose default is set in ‘<span class="file">etc/Renviron</span>’
+to the <code>zip</code> command found during configuration.  On Windows, the
+default relies on a <code>zip</code> program (for example that from
+Rtools) being in the path.
+</p>
+<p>The default for <code>flags</code> is that appropriate for zipping up a
+directory tree in a portable way: see the system-specific help for the
+<code>zip</code> command for other possibilities.
+</p>
+<p>Argument <code>extras</code> can be used to specify <code>-x</code> or <code>-i</code>
+followed by a list of filepaths to exclude or include. Since
+<code>extras</code> will be treated as if passed to <code>system</code>, if
+the filepaths contain spaces they must be quoted e.g. by
+<code>shQuote</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The status value returned by the external command, invisibly.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>unzip</code>, <code>unz</code>; further, <code>tar</code> and
+<code>untar</code> for (un)packing tar archives.
+</p>
+
+</main></div>

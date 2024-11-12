@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_round</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_round</h2>
+
+<h3>Description</h3>
+
+<p>A version of round() which works on dataframes that contain non-numeric data (or data that cannot be coerced to numeric)
+Helpful for dealing with table output that mixes numeric and string types.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_round(df, digits = getOption("digits"), coerce = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>a dataframe to round in</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>how many digits to round to (defaults to getOption("digits"))</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coerce</code></td>
+<td>
+<p>whether to make the column numeric if it is not (default = FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">head(umx_round(mtcars, coerce = FALSE))
+head(umx_round(mtcars, coerce = TRUE))
+
+</code></pre>
+
+
+</div>

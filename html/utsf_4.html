@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>differences</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Specifying the order of differences</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to specify that the time series will be preprocessed
+using first differences.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">differences(n = -1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>An integer specifying the order of differences to be applied.
+If the default (-1) is used, the order of differences needed by the
+time series will be computed by the <code>forecast::ndiffs()</code> function.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>An integer with the order of differences to be applied.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">differences(1)
+</code></pre>
+
+
+</div>

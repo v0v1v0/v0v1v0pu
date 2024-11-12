@@ -1,0 +1,129 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>slide</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>slide</h2>
+
+<h3>Description</h3>
+
+<p>Rolling forecasting of a matrix of time series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">slide(
+  y,
+  orig,
+  forecFun,
+  ...,
+  h = 12,
+  step = 1,
+  output = TRUE,
+  window = NA,
+  parallel = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a vector or matrix of time series</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>orig</code></td>
+<td>
+<p>starting forecasting origin</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forecFun</code></td>
+<td>
+<p>user function that implements forecasting methods</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>rest of inputs to forecFun function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>h</code></td>
+<td>
+<p>forecasting horizon</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>step</code></td>
+<td>
+<p>observations ahead to move the forecasting origin</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>output TRUE/FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>window</code></td>
+<td>
+<p>fixed window width in number of observations (NA for non fixed)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>run forecasts in parallel</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Takes a time series and run forecasting methods implemented in function
+forecFun h steps ahead along the time series y, starting at forecasting
+origin orig, and moving step observations ahead. Forecasts may be run in parallel
+by setting parallel to TRUE. A fixed window width may be
+specified with input window. The output is of dimensions (h, nOrigs, nModels, nSeries)
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector with all the dimensions
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>colMedians</code>, <code>rowMedians</code>, <code>tests</code>,
+<code>sumStats</code>, <code>gaussTest</code>, <code>ident</code>,
+<code>cusum</code>, <code>varTest</code>, <code>conv</code>,
+<code>armaFilter</code>, <code>dif</code>, <code>roots</code>,
+<code>zplane</code>, <code>acft</code>,
+<code>plotSlide</code>, <code>Accuracy</code>, <code>tsDisplay</code>,
+<code>size</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: slide(AirPassengers, 100, forecFun)
+</code></pre>
+
+
+</div>

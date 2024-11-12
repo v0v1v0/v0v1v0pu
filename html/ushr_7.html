@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fit_model_triphasic</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit model and obtain parameter estimates</h2>
+
+<h3>Description</h3>
+
+<p>This function fits the triphasic model to the processed data and extracts the best-fit parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fit_model_triphasic(data, id_vector, param_names, initial_params,
+  free_param_index, n_min_triphasic, forward_param_transform_fn,
+  inv_param_transform_fn, searchmethod)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe with columns for each subject's identifier ('id'), viral load measurements ('vl'), and timing of sampling ('time')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id_vector</code></td>
+<td>
+<p>vector of identifiers corresponding to the subjects to be fitted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param_names</code></td>
+<td>
+<p>names of parameter vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initial_params</code></td>
+<td>
+<p>named vector of the initial parameter guess.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free_param_index</code></td>
+<td>
+<p>logical vector indicating whether the parameters A, delta, A_b, delta_b, B, gamma are to be recovered. This should be c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE) for the triphasic model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_min_triphasic</code></td>
+<td>
+<p>the minimum number of data points required to fit the triphasic model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forward_param_transform_fn</code></td>
+<td>
+<p>list of transformation functions to be used when fitting the model in optim. Defaults to log transformations for all parameters (to allow unconstrained optimization).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inv_param_transform_fn</code></td>
+<td>
+<p>list of transformation functions to be used when back-transforming the transformed parameters. Should be the inverse of the forward transformation functions. Defaults to exponential.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>searchmethod</code></td>
+<td>
+<p>optimization algorithm to be used in optim. Defaults to Nelder-Mead.</p>
+</td>
+</tr>
+</table>
+</div>

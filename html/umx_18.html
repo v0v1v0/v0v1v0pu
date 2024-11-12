@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>harmonic_mean</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Harmonic Mean</h2>
+
+<h3>Description</h3>
+
+<p>The harmonic mean is the reciprocal of the arithmetic mean of the reciprocals of the input values.
+Common uses include computing the mean of ratios, for instance the average P/E ratio in a portfolio.
+Also it is the correct mean for averaging speeds weighted for distance.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">harmonic_mean(x, weights = NULL, na.rm = c(TRUE, FALSE))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector of values to take the harmonic mean for</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p>Optional vector of weights.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>remove NAs (default = TRUE).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Harmonic mean of x
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://en.wikipedia.org/wiki/Harmonic_mean">https://en.wikipedia.org/wiki/Harmonic_mean</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Harmonic means are suitable for ratios
+tmp = c(33/1, 23/1)
+harmonic_mean(tmp)
+
+geometric_mean(tmp)
+mean(tmp)
+
+# Example with weights
+harmonic_mean(c(33/1, 23/1), weights= c(.2, .8))
+# If Jack travels outbound at 1 mph, and returns at 10 miles an hour, what is his average speed?
+harmonic_mean(c(1,10)) # 1.81 mph
+
+</code></pre>
+
+
+</div>

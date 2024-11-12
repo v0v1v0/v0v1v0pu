@@ -1,0 +1,246 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ch.test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Canova and Hansen Test for Seasonal Stability</h2>
+
+<h3>Description</h3>
+
+<p>Canova and Hansen (CH) test statistic for the null hypothesis 
+of a stable seasonal pattern.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ch.test(x, type = c("dummy", "trigonometric"), lag1 = FALSE, NW.order = NULL, 
+  sid = NULL, xreg = NULL, pvalue = c("RS", "raw"), rs.nobsreg = 13)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a univariate seasonal time series.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>a character string specifying the formulation of the test,
+<code>"dummy"</code> for seasonal dummies or <code>"trigonometric"</code> for seasonal cycles.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>lag1</code></td>
+<td>
+<p>logical, if <code>TRUE</code> a first order lag of the time series <code>x</code> is included 
+in the regression model. The default is <code>FALSE</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>NW.order</code></td>
+<td>
+<p>an integer, the lag truncation parameter to be used in 
+the Newey and West covariance matrix.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>sid</code></td>
+<td>
+<p>an optional numeric vector, the target seasonal dummies or cycles to be tested. 
+By default all the individual and joint test statistics are returned.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>xreg</code></td>
+<td>
+<p>an optional vector or matrix of external regressors with the same length or number of 
+rows as the length of the input time series <code>x</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>pvalue</code></td>
+<td>
+<p>a character specifying the method employed to compute p-values: 
+<code>"RS"</code>, the default, interpolation based on response surface regressions;
+<code>"raw"</code>, interpolation in the tabulated values provided in the reference paper 
+for the Von Mises distribution.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>rs.nobsreg</code></td>
+<td>
+<p>an integer indicating the number of points employed in the response surface 
+regression (only for <code>pvalue = "RS"</code>).</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The seasons or seasonal cycles to be tested can be chosen through 
+an indicator variable defined in the argument <code>sid</code>. 
+By default, all the <code class="reqn">t</code>-statistics
+related to each individual dummy or cycle and the joint <code class="reqn">F</code>-statistic 
+
+are returned.
+
+If <code>type = "dummy"</code>, the index of the target seasons can be specified in <code>sid</code>. 
+For example, in a quarterly series:
+<code>sid=c(2)</code> returns the test statistic to the stability of the second quarter;
+<code>sid=c(1,3)</code> returns the joint test statistic for the first and third quarters;
+<code>sid=c(1,2,3,4)</code> returns the joint test statistic for the null of seasonal 
+stability at all seasons.
+
+If <code>type = "trigonometric"</code>, the indicator vector <code>sid</code> must be of length
+<code>floor(frequency(x)/2)</code> and will consist of ones and zeros. Each element in 
+<code>sid</code> is related to each seasonal cycle according to the same order in which 
+the seasonal frequencies, <code class="reqn">w_j</code>, are defined: <code class="reqn">w_j=2\pi j/S</code>, <code class="reqn">j=1,...,Sh</code>, 
+where <code class="reqn">S</code> is the periodicity and <code class="reqn">Sh</code> is <code>floor(frequency(x)/2)</code>.
+For example, in a monthly series:
+<code>sid=c(0,0,0,0,0,1)</code> returns the test statistic to the stability of the cycle with 
+frequency <code class="reqn">w_6=\pi</code>;
+<code>sid=c(1,0,0,0,0,1)</code> returns the joint test statistic for cycles related 
+to frequencies <code class="reqn">w_1=\pi/6</code> and <code class="reqn">w_6=\pi</code>;
+<code>sid=c(1,1,1,1,1,1)</code> returns the joint test statistic for the stability of 
+all seasonal cycles.
+The following keywords are also admitted:
+<code>sid="all"</code>, computes all the test statistic related to each individual season 
+or cycle as well as the joint test statistic for all seasons or cycles;
+<code>sid="joint"</code> computes the joint test statistic for all seasons or cycles.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list of class <code>"CHtest"</code> with components:
+</p>
+<table><tr style="vertical-align: top;">
+<td><code>statistics</code></td>
+<td>
+<p>the value of the test statistics.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>pvalues</code></td>
+<td>
+<p>the p-values for each test statistics.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string describing the type of test.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>data.name</code></td>
+<td>
+<p>a character string giving the name of the data.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>the value of the input argument <code>type</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>fitted.model</code></td>
+<td>
+<p>the fitted regression model.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>NW.order</code></td>
+<td>
+<p>the value of the input argument <code>NW.order</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>isNullxreg</code></td>
+<td>
+<p>logical, auxiliary element for <code>print</code> method. Were external 
+regressors defined in the argument <code>xreg</code>?</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>type.pvalue</code></td>
+<td>
+<p>character, the value of the input argument <code>pvalue</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>pvlabels</code></td>
+<td>
+<p>a vector of characters containing a label related to each p-values. 
+Auxiliary element for <code>print</code> method.</p>
+</td>
+</tr></table>
+<p>The method <code>print</code> displays the test statistics and p-values;
+<code>summary</code> shows the same output and includes the fitted regression model.
+</p>
+
+
+<h3>Note</h3>
+
+<p>When <code>type = "dummy"</code>, the p-value for the joint test statistic 
+based on response surface regressions is not available. If <code>pvalue = "RS"</code>, 
+the p-value reported for the joint test statistic in the trigonometric version is based 
+on the tables given in the reference paper, Canova and Hansen (1995).
+</p>
+<p>When <code>sid</code> is a numeric (selected combination of dummies or cycles), 
+the reported p-values are based on interpolation in tables;
+if <code>pvalue = "RS"</code>, it is changed to <code>"raw"</code> and a warning is given.
+</p>
+
+
+<h3>References</h3>
+
+<p>Canova, F. and Hansen, Bruce E. (1995)
+"Are seasonal patterns constant over time? A test for seasonal stability".
+<em>Journal of Business &amp; Economic Statistics</em>, <b>13</b>(3), pp. 237-252.
+DOI: <a href="https://doi.org/10.1080/07350015.1995.10524598">doi:10.1080/07350015.1995.10524598</a>.
+</p>
+<p>Díaz-Emparanza, I. and Moral, M. P. (2013).
+<em>Seasonal stability tests in gretl. An application to international tourism data</em>.
+Working paper: Biltoki D.T. 2013.03. 
+URL: <a href="https://addi.ehu.es/handle/10810/10577">https://addi.ehu.es/handle/10810/10577</a>.
+Gretl code: https://www.ehu.eus/ignacio.diaz-emparanza/packages/Canova_Hansen.gfn
+(seems unavailable, so not linked)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ch.rs.pvalue</code> <code>seasonal.cycles</code>, 
+<code>seasonal.dummies</code>, <code>uroot.raw.pvalue</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(uroot)
+# example for the series "hours" with the same options 
+# employed in Canova and Hansen (1995)
+data("ch-data")
+hours &lt;- diff(log(ch.data$hours))
+res1 &lt;- ch.test(x = hours, type = "dummy", lag1 = TRUE, NW.order = 4)
+res1
+# the auxiliary regression is stored in the element "fitted.model"
+summary(res1$fit)
+
+## Not run: 
+# this requires tables not included in the current version of the package 
+# see note in main documentation file, uroot-package
+res2 &lt;- ch.test(x = hours, type = "trigonometric", lag1 = TRUE, NW.order = 4)
+res2
+summary(res2$fit)
+## End(Not run)
+</code></pre>
+
+
+</div>

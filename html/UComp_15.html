@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>box.cox</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>box.cox</h2>
+
+<h3>Description</h3>
+
+<p>Runs Box-Cox transform of a time series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">box.cox(x, lambda)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Time series object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Lambda parameter for Box-Cox transform.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>inv.box.cox</code>, <code>UC</code>, <code>UCmodel</code>, <code>UCvalidate</code>, <code>UCfilter</code>, <code>UCsmooth</code>, 
+<code>UCdisturb</code>, <code>UCcomponents</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+y &lt;- box.cox(AirPassengers, 0.5)
+plot(y)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

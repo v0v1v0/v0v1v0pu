@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LSkewUrb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Urban adjustment for the linear skewness (LSkew)</h2>
+
+<h3>Description</h3>
+
+<p>Urbanises or de-urbanises the LSkew using the methods outlined in the guidance by Wallingford HydroSolutions: 'WINFAP 4 Urban Adjustment Procedures'
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">LSkewUrb(lskew, URBEXT2000, DeUrb = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lskew</code></td>
+<td>
+<p>the LSkew (numeric)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>URBEXT2000</code></td>
+<td>
+<p>quantiication of urban and suburbanisation for the subject site</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DeUrb</code></td>
+<td>
+<p>logical argument with a default of FALSE. If set to TRUE, de-urbanisation adjustment is performed, if FALSE, urbanisation adjustment is performed</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The method for de-urbanisation isn't explicitly provided in 'WINFAP 4 Urban Adjustment Procedures', but the procedure is a re-arrangment of the urbanisation equation, solving for LSkew rather than LSkew-urban.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The urban adjust Lcv or the de-urbanised Lcv
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Choose an urban site (site 53006) from the NRFA data then apply a de-urban
+#adjustment using the Lcv and URBEXT2000 displayed
+NRFAData[which(rownames(NRFAData) == 53006),]
+LSkewUrb(0.124, 0.1138, DeUrb = TRUE)
+#Get the pooled Lmoment ratios results for catchment 53006 and apply the urban
+#Get the CDS &amp; adjustment using the pooled LSkew, and the URBEXT2000 for site 53006.
+CDs.53006 &lt;- GetCDs(53006)
+QuickResults(CDs.53006)[[2]]
+LSkewUrb(0.194, 0.1138)
+</code></pre>
+
+
+</div>

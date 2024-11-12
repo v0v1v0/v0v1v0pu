@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_git_config</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Configure Git</h2>
+
+<h3>Description</h3>
+
+<p>Sets Git options, for either the user or the project ("global" or "local", in
+Git terminology). Wraps <code>gert::git_config_set()</code> and
+<code>gert::git_config_global_set()</code>. To inspect Git config, see
+<code>gert::git_config()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_git_config(scope = c("user", "project"), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>scope</code></td>
+<td>
+<p>Edit globally for the current <strong>user</strong>, or locally for the
+current <strong>project</strong></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Name-value pairs, processed as
+&lt;<code>dynamic-dots</code>&gt;.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Invisibly, the previous values of the modified components, as a named
+list.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other git helpers: 
+<code>use_git()</code>,
+<code>use_git_hook()</code>,
+<code>use_git_ignore()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# set the user's global user.name and user.email
+use_git_config(user.name = "Jane", user.email = "jane@example.org")
+
+# set the user.name and user.email locally, i.e. for current repo/project
+use_git_config(
+  scope = "project",
+  user.name = "Jane",
+  user.email = "jane@example.org"
+)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

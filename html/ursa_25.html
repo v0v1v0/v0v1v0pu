@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.integer</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Transform values to type integer 
+</h2>
+
+<h3>Description</h3>
+
+<p><code>as.integer</code> for object of class <code>ursaRaster</code> truncates decimal part of image values and then converts to type <code>integer</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+as.integer(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>ursaRaster</code> object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Other arguments which passed to function <code>as.integer</code> of package <span class="pkg">base</span>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code> where <code>storage.mode</code> of values is <code>integer</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- pixelsize()
+a &lt;- a-min(a)+0.5
+str(ursa_value(a))
+print(storage.mode(a$value))
+b &lt;- as.integer(a)
+str(ursa_value(b))
+print(storage.mode(b$value))
+</code></pre>
+
+
+</div>

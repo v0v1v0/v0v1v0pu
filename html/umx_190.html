@@ -1,0 +1,267 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_check_parallel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check if OpenMx is using OpenMP, test cores, and get timings</h2>
+
+<h3>Description</h3>
+
+<p>Shows how many cores you are using, and runs a test script so user can check CPU usage.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_check_parallel(
+  nCores = c(1, omxDetectCores()),
+  testScript = NULL,
+  rowwiseParallel = TRUE,
+  nSubjects = 1000
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nCores</code></td>
+<td>
+<p>How many cores to run (defaults to c(1, max). -1 = all available.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>testScript</code></td>
+<td>
+<p>A user-provided script to run (NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rowwiseParallel</code></td>
+<td>
+<p>Whether to parallel-ize rows (default) or gradient computation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nSubjects</code></td>
+<td>
+<p>Number of rows to model (Default = 1000) Reduce for quicker runs.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Some historical (starting 2017-09-06) speeds on my late 2015 iMac, 3.3 GHz
+Quad-core i7 desktop and then a quad i7 2018 MacBook Pro
+</p>
+
+<table>
+<tr>
+<td style="text-align: right;">
+Date       </td>
+<td style="text-align: left;"> Version         </td>
+<td style="text-align: left;"> Cores </td>
+<td style="text-align: left;"> Time              </td>
+<td style="text-align: left;">     Notes               </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2021-07-28 </td>
+<td style="text-align: left;"> 2.19.6.19 (git) </td>
+<td style="text-align: left;"> 8     </td>
+<td style="text-align: left;"> 00 min 42.98 sec  </td>
+<td style="text-align: left;"> <code class="reqn">\Delta</code>:-80 (SLSQP laptop (55 sec under NPSOL))  </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2021-07-28 </td>
+<td style="text-align: left;"> 2.19.6.19 (git) </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 02 min 03 sec     </td>
+<td style="text-align: left;"> (SLSQP on laptop)       </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2020-08-09 </td>
+<td style="text-align: left;"> 2.17.3  (git)   </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min 52 sec     </td>
+<td style="text-align: left;"> (CSOLNP on laptop)      </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2020-08-09 </td>
+<td style="text-align: left;"> 2.17.3  (git)   </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min 40.18 sec  </td>
+<td style="text-align: left;"> (CSOLNP on laptop)      </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2019-06-13 </td>
+<td style="text-align: left;"> v2.13.2 (git)   </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min, 11 sec    </td>
+<td style="text-align: left;"> (NPSOL)                 </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2019-06-13 </td>
+<td style="text-align: left;"> v2.13.2 (git)   </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min, 22 sec    </td>
+<td style="text-align: left;"> (NPSOL)                 </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2019-06-13 </td>
+<td style="text-align: left;"> v2.13.2 (git)   </td>
+<td style="text-align: left;"> 6     </td>
+<td style="text-align: left;"> 00 min, 21 sec    </td>
+<td style="text-align: left;"> (NPSOL)                 </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2018-10-14 </td>
+<td style="text-align: left;"> v2.11.5 (CRAN)  </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min, 36 sec    </td>
+<td style="text-align: left;"> <code class="reqn">\Delta</code>:-39.598)   </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2018-09-17 </td>
+<td style="text-align: left;"> v2.11.3         </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min, 31 sec    </td>
+<td style="text-align: left;">                         </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2018-09-17 </td>
+<td style="text-align: left;"> v2.11.3         </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min, 30.6 sec  </td>
+<td style="text-align: left;"> <code class="reqn">\Delta</code>: -61.49)   </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-10-16 </td>
+<td style="text-align: left;"> v2.7.18-9       </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min, 07.30 sec </td>
+<td style="text-align: left;">                         </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-10-16 </td>
+<td style="text-align: left;"> v2.7.18-9       </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min, 22.63 sec </td>
+<td style="text-align: left;"> <code class="reqn">\Delta</code>: -44.68)   </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-10-16 </td>
+<td style="text-align: left;"> Clang OpenMP    </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min, 08.38 sec </td>
+<td style="text-align: left;">                         </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-10-16 </td>
+<td style="text-align: left;"> Clang OpenMP    </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min, 24.89 sec </td>
+<td style="text-align: left;"> <code class="reqn">\Delta</code>: -43.49)   </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-09-07 </td>
+<td style="text-align: left;"> Clang OpenMP    </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min, 12.90 sec </td>
+<td style="text-align: left;">                         </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-09-07 </td>
+<td style="text-align: left;"> Clang OpenMP    </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min, 32.20 sec </td>
+<td style="text-align: left;"> <code class="reqn">\Delta</code>: -40.70    </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-09-07 </td>
+<td style="text-align: left;"> Clang notOpenMP </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min, 09.90 sec </td>
+<td style="text-align: left;">                         </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-09-07 </td>
+<td style="text-align: left;"> TRAVIS          </td>
+<td style="text-align: left;"> 1     </td>
+<td style="text-align: left;"> 01 min, 06.20 sec </td>
+<td style="text-align: left;">                         </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+2017-09-07 </td>
+<td style="text-align: left;"> TRAVIS          </td>
+<td style="text-align: left;"> 4     </td>
+<td style="text-align: left;"> 00 min, 21.10 sec </td>
+<td style="text-align: left;"> <code class="reqn">\Delta</code>: -45.00    </td>
+</tr>
+<tr>
+<td style="text-align: right;">
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# On a fast machine, takes a minute with 1 core
+umx_check_parallel()
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pad_string</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pad String with Spaces</h2>
+
+<h3>Description</h3>
+
+<p>Adds spaces to the beginning or end of strings until it reaches the maxlength. Used for aligning text.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pad_string(str, maxlength = 1, location = "beginning")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>str</code></td>
+<td>
+<p>string</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxlength</code></td>
+<td>
+<p>length to pad to</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>either <code>"beginning"</code> to pad the left or <code>"end"</code> to pad the right</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Padded string
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">pad_string("bob", maxlength=10)
+pad_string("bob", maxlength=10, location="end")
+</code></pre>
+
+
+</div>

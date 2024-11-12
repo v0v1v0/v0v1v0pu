@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_cor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Report correlations and their p-values</h2>
+
+<h3>Description</h3>
+
+<p>For reporting correlations and their p-values in a compact table. Handles rounding, and skipping non-numeric columns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_cor(
+  X,
+  df = nrow(X) - 2,
+  use = c("pairwise.complete.obs", "complete.obs", "everything", "all.obs",
+    "na.or.complete"),
+  digits = 2,
+  type = c("r and p-value", "smart")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>a matrix or dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>the degrees of freedom for the test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use</code></td>
+<td>
+<p>how to handle missing data (defaults to pairwise complete)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>rounding of answers</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Unused argument for future directions</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>To compute heterochoric correlations, see <code>umxHetCor()</code>.
+</p>
+<p><em>note</em>: The Hmisc package has a more robust function called <code>rcorr</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Matrix of correlations and p-values
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>umxHetCor
+</p>
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tmp = myFADataRaw[1:8,1:8]
+umx_cor(tmp)
+tmp$x1 = letters[1:8] # make one column non-numeric
+umx_cor(tmp)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,144 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>barplot_hp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualization of HP Using Column Diagram</h2>
+
+<h3>Description</h3>
+
+<p>Visualization of individual effects in hierarchical partitioning (HP) using column diagram.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">barplot_hp(
+  x,
+  order.var = TRUE,
+  decreasing.var = TRUE,
+  cutoff = -1,
+  col.fill = "valid",
+  col.color = NULL,
+  col.width = 0.6,
+  show.effect = TRUE,
+  effect.cex = 2.7,
+  title.cex = 10,
+  axis.cex = 8
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A <code>rdacca.hp</code> object, which contains the output of HP from canonical analysis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.var</code></td>
+<td>
+<p>The predictors in the matrix layout should be ordered by. Default is <code>TRUE</code>, which orders the predictors by their effect values. IF <code>FALSE</code>, sort by the order of predictors in input data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decreasing.var</code></td>
+<td>
+<p>If <code>order.var=TRUE</code>, how the predictors should be ordered. Default is <code>TRUE</code>, from greatest to least.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff</code></td>
+<td>
+<p>Effect values below <code>cutoff</code> will not be displayed, default is <code>-1</code>. Note: Negative values due to adjustment of R-squared mean negligible contributions, but they are included in the computation of the total contribution of each predictor category.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.fill</code></td>
+<td>
+<p>How the bars should be colored. Options include <code>"valid"</code> (according to the validity of effects) or <code>"vars"</code> (color by predictors), default is <code>"valid"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.color</code></td>
+<td>
+<p>Color of bars.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.width</code></td>
+<td>
+<p>Width of bars, default is <code>0.6</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show.effect</code></td>
+<td>
+<p>Show the effect values above bars, default is <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>effect.cex</code></td>
+<td>
+<p>Font size of the effect values, default is <code>2.7</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title.cex</code></td>
+<td>
+<p>Font size of axis titles, default is <code>10</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis.cex</code></td>
+<td>
+<p>Font size of axis labels, default is <code>8</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is used to visualize the object of <code>rdacca.hp</code> (Lai et al. 2022), which calculates the individual effects of predictor variables or groups of predictor variables in canonical analysis based on HP.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a ggplot2.
+</p>
+
+
+<h3>References</h3>
+
+<p>Lai J, Zou Y, Zhang J, et al. Generalizing hierarchical and variation partitioning in multiple regression and canonical analyses using the rdacca.hp R package. Methods in Ecology and Evolution, 2022.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(rdacca.hp)
+
+## A simple example of partial dbRDA
+data(baima.fun)
+data(baima.env)
+
+# Bray-Curtis index was used to calculate community composition dissimilarity
+baima.fun.bray &lt;- vegdist(baima.fun, method = "bray")
+
+# Quantify the individual effects of soil properties on EcM fungal community composition
+soil &lt;- baima.env[c("pH", "TP", "TK", "AN", "AP", "AK")]
+baima.soil.vp &lt;- rdacca.hp(baima.fun.bray, soil, method = "dbRDA", type = "adjR2")
+
+# Plot individual effects
+barplot_hp(baima.soil.vp, col.fill = "var", 
+ col.color = c("#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69"))
+
+</code></pre>
+
+
+</div>

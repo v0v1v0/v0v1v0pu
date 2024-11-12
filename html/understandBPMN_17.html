@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cyclomatic_metric</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Cyclomatic metric of McCabe</h2>
+
+<h3>Description</h3>
+
+<p>Cyclomatic metric takes into account the behavioral complexity of a process model. It is calculated by taking the number of activities minus
+the number of events, gateways and connector activities plus the number of strongly connected components.
+The number of strongly connected components is calculated by taking the number of exclusive gateways at depth level zero, when the depth is calculated only including exclusive gateways
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cyclomatic_metric(file_path, signavio = FALSE,
+  path_log_already_created = FALSE, generate_new_path_log = FALSE,
+  time_to_generate_path_log = 1500)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file_path</code></td>
+<td>
+<p>document object created using the create_internal_document function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signavio</code></td>
+<td>
+<p>boolean which indicates whether the file stems from signavio</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path_log_already_created</code></td>
+<td>
+<p>boolean which indicates whether the path log has already been created before or not. When you are not sure, it is best to use the standard which is false</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>generate_new_path_log</code></td>
+<td>
+<p>used when it is not possible to save the path log such as with the Rapid miner or in unit tests and examples</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_to_generate_path_log</code></td>
+<td>
+<p>time which is the maximum time to generate a new path log in seconds. The standard setting is 1500 seconds.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an integer indicating the coefficient of network connectivity
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+cyclomatic_metric(file_path, generate_new_path_log = TRUE)
+</code></pre>
+
+
+</div>

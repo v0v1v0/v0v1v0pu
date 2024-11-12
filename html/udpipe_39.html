@@ -1,0 +1,127 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_conform</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make sure a document term matrix has exactly the specified rows and columns</h2>
+
+<h3>Description</h3>
+
+<p>Makes sure the document term matrix has exactly the rows and columns which you specify. If missing rows or columns
+are occurring, the function fills these up either with empty cells or with the value that you provide. See the examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_conform(dtm, rows, columns, fill)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>a document term matrix: an object returned by <code>document_term_matrix</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows</code></td>
+<td>
+<p>a character vector of row names which <code>dtm</code> should have</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>columns</code></td>
+<td>
+<p>a character vector of column names which <code>dtm</code> should have</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fill</code></td>
+<td>
+<p>a value to use to fill up missing rows / columns. Defaults to using an empty cell.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the sparse matrix <code>dtm</code> with exactly the specified rows and columns
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>document_term_matrix</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- data.frame(doc_id = c("doc_1", "doc_1", "doc_1", "doc_2"), 
+                text = c("a", "a", "b", "c"), 
+                stringsAsFactors = FALSE)
+dtm &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(dtm)
+dtm
+dtm_conform(dtm, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(dtm, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"), 
+            fill = 1)
+dtm_conform(dtm, rows = c("doc_1", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(dtm, columns = c("a", "b", "Z"))
+dtm_conform(dtm, rows = c("doc_1"))
+dtm_conform(dtm, rows = character())
+dtm_conform(dtm, columns = character())
+dtm_conform(dtm, rows = character(), columns = character())
+
+##
+## Some examples on border line cases
+##
+special1 &lt;- dtm[, character()]
+special2 &lt;- dtm[character(), character()]
+special3 &lt;- dtm[character(), ]
+
+dtm_conform(special1, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(special1, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"), 
+            fill = 1)
+dtm_conform(special1, rows = c("doc_1", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(special1, columns = c("a", "b", "Z"))
+dtm_conform(special1, rows = c("doc_1"))
+dtm_conform(special1, rows = character())
+dtm_conform(special1, columns = character())
+dtm_conform(special1, rows = character(), columns = character())
+
+dtm_conform(special2, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(special2, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"), 
+            fill = 1)
+dtm_conform(special2, rows = c("doc_1", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(special2, columns = c("a", "b", "Z"))
+dtm_conform(special2, rows = c("doc_1"))
+dtm_conform(special2, rows = character())
+dtm_conform(special2, columns = character())
+dtm_conform(special2, rows = character(), columns = character())
+
+dtm_conform(special3, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(special3, 
+            rows = c("doc_1", "doc_2", "doc_3"), columns = c("a", "b", "c", "Z", "Y"), 
+            fill = 1)
+dtm_conform(special3, rows = c("doc_1", "doc_3"), columns = c("a", "b", "c", "Z", "Y"))
+dtm_conform(special3, columns = c("a", "b", "Z"))
+dtm_conform(special3, rows = c("doc_1"))
+dtm_conform(special3, rows = character())
+dtm_conform(special3, columns = character())
+dtm_conform(special3, rows = character(), columns = character())
+</code></pre>
+
+
+</div>

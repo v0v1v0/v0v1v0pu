@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>feature.selected</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The names of features that are selected in a tree</h2>
+
+<h3>Description</h3>
+
+<p>The function returns the names of features (covariates) that are selected as the internal nodes of a tree.
+Only the names of the covariates are shown by excluding the cutt-off values.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">feature.selected(tree)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>tree</code></td>
+<td>
+<p>:an object made from the "uni.tree" function</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The outputs show important features for predicting survival outcomes. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>An array of characters that are the names from those covariates selected in the tree
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Lung,package="compound.Cox")
+train_Lung=Lung[which(Lung[,"train"]==TRUE),] #select training data
+t.vec=train_Lung[,1]
+d.vec=train_Lung[,2]
+x.mat=train_Lung[,-c(1,2,3)]
+res=uni.tree(t.vec,d.vec,x.mat,P.value=0.01,d0=0.01,S.plot=FALSE,score=TRUE)
+feature.selected(res)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>meanConfInt</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A confidence interval for the mean</h2>
+
+<h3>Description</h3>
+
+<p>A confidence interval for the mean
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">meanConfInt(
+  vector = NULL,
+  mean = NULL,
+  sd = NULL,
+  n = NULL,
+  se = NULL,
+  conf.level = 0.95
+)
+
+## S3 method for class 'meanConfInt'
+print(x, digits = 2, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vector</code></td>
+<td>
+<p>A vector with raw data points - either specify this
+or a mean and then either an sd and n or an se.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mean</code></td>
+<td>
+<p>A mean.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd, n</code></td>
+<td>
+<p>A standard deviation and sample size; can be specified
+to compute the standard error.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se</code></td>
+<td>
+<p>The standard error (cna be specified instead of <code>sd</code> and <code>n</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The confidence level of the interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x, digits, ...</code></td>
+<td>
+<p>Respectively the object to print, the number of digits to
+round to, and any additonal arguments to pass on to the <code>print</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>And object with elements <code>input</code>, <code>intermediate</code>, and <code>output</code>,
+where <code>output</code> holds the result in list <code>ci</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">meanConfInt(mean=5, sd=2, n=20);
+</code></pre>
+
+
+</div>

@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fromList</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>generates the sets from a lists object</h2>
+
+<h3>Description</h3>
+
+<p>generates the sets from a lists object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fromList(
+  upsetjs,
+  value,
+  order.by = "cardinality",
+  limit = NULL,
+  shared = NULL,
+  shared.mode = "click",
+  colors = NULL,
+  c_type = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>the list input value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.by</code></td>
+<td>
+<p>order intersections by cardinality or name</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>limit the ordered sets to the given limit</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shared</code></td>
+<td>
+<p>a crosstalk shared data frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shared.mode</code></td>
+<td>
+<p>whether on 'hover' or 'click' (default) is synced</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>the optional list with set name to color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c_type</code></td>
+<td>
+<p>the combination type to use or "none" for disabling initial generation</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;% fromList(list(a = c(1, 2, 3), b = c(2, 3)))
+</code></pre>
+
+
+</div>

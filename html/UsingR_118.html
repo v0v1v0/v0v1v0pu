@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>scatter.with.hist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Scatterplot with histograms </h2>
+
+<h3>Description</h3>
+
+<p>Draws a scatterplot of the data, and histogram in the margins. A
+trend line can be added, if desired.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">scatter.with.hist(x, y,
+  hist.col = gray(0.95),
+  trend.line = "lm",
+   ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> numeric predictor </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p> numeric response variables </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hist.col</code></td>
+<td>
+<p> color for histogram </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trend.line</code></td>
+<td>
+<p> Draw a trend line using <code>lm</code>,
+<code>supsmu</code> or <code>lowess</code>. Use <code>NULL</code> for
+none.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> Passed to <code>plot</code> command for scatterplot</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Draws the graphic. No return value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> John Verzani </p>
+
+
+<h3>References</h3>
+
+<p> This example comes from the help page for <code>layout</code>. </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>layout</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(emissions)
+attach(emissions)
+scatter.with.hist(perCapita,CO2)
+</code></pre>
+
+
+</div>

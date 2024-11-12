@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>datasources</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Data Sources Table</h2>
+
+<h3>Description</h3>
+
+<p>This function pulls and returns a table called 'DATASOURCE' from the database.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">datasources(ordered = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>ordered</code></td>
+<td>
+<p>logical. <code>TRUE</code> orders the result in the order data was entered into the database, while <code>FALSE</code> returns the result in a random order, to the benefit of faster query execution.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The 'DATASOURCE' table gives information about the various sources / providers of data in this database, including the source website, the number of datasets available from the source, a description of the source and the way data is accessed from the source.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.table</code> with information about the sources of data in the database.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>datasets</code>, <code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+datasources()
+
+</code></pre>
+
+
+</div>

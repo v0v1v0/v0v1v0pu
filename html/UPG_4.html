@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>coef.UPG.Probit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract coefficients from UPG.Probit objects</h2>
+
+<h3>Description</h3>
+
+<p><code>coef</code> can be used to extract posterior means and credible intervals based on posterior quantiles from <code>UPG.Probit</code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UPG.Probit'
+coef(object, ..., q = c(0.025, 0.975))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class <code>UPG.Probit</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other coef parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>a numerical vector of length two providing the posterior quantiles to be extracted. Default are 0.025 and 0.975 quantiles.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a matrix containing posterior means and the desired credible interval.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gregor Zens
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary.UPG.Probit</code> to summarize a <code>UPG.Probit</code> object and create tables.
+<code>predict.UPG.Probit</code> to predict probabilities using a <code>UPG.Probit</code> object.
+<code>plot.UPG.Probit</code> to plot a <code>UPG.Probit</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# estimate a probit model using example data
+library(UPG)
+data(lfp)
+y = lfp[,1]
+X = lfp[,-1]
+results.probit = UPG(y = y, X = X, model = "probit")
+
+# extract posterior means and credible interval based on 0.025 and 0.975 quantiles
+coef(results.probit, q = c(0.025, 0.975))
+
+</code></pre>
+
+
+</div>

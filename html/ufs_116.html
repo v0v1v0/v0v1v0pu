@@ -1,0 +1,151 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Use a dialog to load data from an SPSS file</h2>
+
+<h3>Description</h3>
+
+<p><code>getData()</code> and <code>getDat()</code> provide an easy way to load SPSS datafiles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getData(
+  filename = NULL,
+  file = NULL,
+  errorMessage = "[defaultErrorMessage]",
+  applyRioLabels = TRUE,
+  use.value.labels = FALSE,
+  to.data.frame = TRUE,
+  stringsAsFactors = FALSE,
+  silent = FALSE,
+  ...
+)
+
+getDat(..., dfName = "dat", backup = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>filename, file</code></td>
+<td>
+<p>It is possible to specify a path and filename to load
+here. If not specified, the default R file selection dialogue is shown.
+<code>file</code> is still available for backward compatibility but will
+eventually be phased out.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>errorMessage</code></td>
+<td>
+<p>The error message that is shown if the file does not
+exist or does not have the right extension; <code style="white-space: pre;">⁠[defaultErrorMessage]⁠</code> is
+replaced with a default error message (and can be included in longer
+messages).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>applyRioLabels</code></td>
+<td>
+<p>Whether to apply the labels supplied by Rio. This will
+make variables that has value labels into factors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.value.labels</code></td>
+<td>
+<p>Only useful when reading from SPSS files: whether to
+read variables with value labels as factors (TRUE) or numeric vectors
+(FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to.data.frame</code></td>
+<td>
+<p>Only useful when reading from SPSS files: whether to
+return a dataframe or not.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stringsAsFactors</code></td>
+<td>
+<p>Whether to read strings as strings (FALSE) or
+factors (TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Whether to suppress potentially useful information.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional options, passed on to the function used to import the
+data (which depends on the extension of the file).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dfName</code></td>
+<td>
+<p>The name of the dataframe to create in the parent environment.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>backup</code></td>
+<td>
+<p>Whether to backup an object with name <code>dfName</code>, if one
+already exists in the parent environment.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>getData returns the imported dataframe, with the filename from which it was
+read stored in the 'filename' attribute.
+</p>
+<p>getDat is a simple wrapper for <code>getData()</code> which creates a dataframe in
+the parent environment, by default with the name 'dat'. Therefore, calling
+<code>getDat()</code> in the console will allow the user to select a file, and the
+data from the file will then be read and be available as 'dat'. If an object
+with <code>dfName</code> (i.e. 'dat' by default) already exists, it will be backed
+up with a warning. <code>getDat()</code> also invisibly returns the data.frame.
+</p>
+
+
+<h3>Note</h3>
+
+<p>getData() currently can't read from LibreOffice or OpenOffice files.
+There doesn't seem to be a platform-independent package that allows this.
+Non-CRAN package ROpenOffice from OmegaHat should be able to do the trick,
+but fails to install (manual download and installation using
+https://www.omegahat.org produces "ERROR: dependency 'Rcompression' is not
+available for package 'ROpenOffice'" - and manual download and installation
+of RCompression produces "Please define LIB_ZLIB; ERROR: configuration
+failed for package 'Rcompression'"). If you have any suggestions, please let
+me know!
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+## Not run: 
+### Open a dialogue to read an SPSS file
+getData();
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

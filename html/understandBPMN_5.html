@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>calculate_metrics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A calculation function for all metrics</h2>
+
+<h3>Description</h3>
+
+<p>Creation object containing all metrics, which are :
+the number of empty sequence flows, the number of duplicate tasks, the number of data objects, the number of pools, the number of swimlanes,
+the number of message flows, the density, the coefficient of network connectivity, the average connector degree,
+the maximum connector degree, the sequentiality, the cyclicity, the diameter, the depth, the token_split,
+the control flow complexity, the connector mismatch, the connector heterogeneity and the crs
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">calculate_metrics(file_path, cross_connectivity_metric = TRUE,
+  signavio = FALSE, generate_new_path_log = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file_path</code></td>
+<td>
+<p>file path of the BPMN file and</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cross_connectivity_metric</code></td>
+<td>
+<p>a param indicating whether cross_connectivity shall be calculated as well</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signavio</code></td>
+<td>
+<p>boolean which indicates whether the file stems from signavio</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>generate_new_path_log</code></td>
+<td>
+<p>used when it is not possible to save the path log such as with the Rapid miner or in unit tests and examples</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a tibble with one row and for each metric a column
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+calculate_metrics(file_path, generate_new_path_log = TRUE)
+</code></pre>
+
+
+</div>

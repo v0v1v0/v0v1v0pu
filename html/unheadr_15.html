@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unbreak_rows</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Merge rows up</h2>
+
+<h3>Description</h3>
+
+<p>Merge rows up
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unbreak_rows(df, regex, ogcol, sep = " ")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>A data frame with at least two contiguous rows to be merged.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>A regular expression to identify sets of rows to be merged,
+meant for the leading of the two contiguous rows.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ogcol</code></td>
+<td>
+<p>Variable with the text strings to match.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>Character string to separate the unified values (default is
+space).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function recodes empty strings ("") to <code>NA</code> for smoother pattern matching.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A tibble or data frame with merged rows. Values of the
+lagging rows are pasted onto the values in the leading row, whitespace is
+squished, and the lagging row is dropped.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">bball &lt;-
+  data.frame(
+    stringsAsFactors = FALSE,
+    v1 = c(
+      "Player", NA, "Sleve McDichael", "Dean Wesrey",
+      "Karl Dandleton"
+    ),
+    v2 = c("Most points", "in a game", "55", "43", "41"),
+    v3 = c("Season", "(year ending)", "2001", "2000", "2010")
+  )
+unbreak_rows(bball, "Most", v2)
+</code></pre>
+
+
+</div>

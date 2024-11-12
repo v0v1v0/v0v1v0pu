@@ -1,0 +1,137 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tmx_show</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Show matrices of models in a easy-to-learn-from format.</h2>
+
+<h3>Description</h3>
+
+<p>Show matrices of models in a easy-to-learn-from format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tmx_show(
+  x,
+  what = c("values", "free", "labels", "nonzero_or_free"),
+  show = c("free", "fixed", "all"),
+  matrices = c("S", "A", "M"),
+  digits = 2,
+  report = c("html", "markdown"),
+  na.print = "",
+  zero.print = ".",
+  html_font = NULL,
+  style = c("paper", "material_dark", "classic", "classic_2", "minimal", "material"),
+  bootstrap_options = c("hover", "bordered", "condensed", "responsive"),
+  lightable_options = "striped"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object e.g. <code>umxRAM()</code> <code>umxMatrix()</code> from which to show parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what</code></td>
+<td>
+<p>legal options are "values" (default), "free", or "labels").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show</code></td>
+<td>
+<p>filter on what to show c("all", "free", "fixed").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>matrices</code></td>
+<td>
+<p>to show  (default is c("S", "A")). "thresholds" in beta.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>precision to report. Default = round to 2 decimal places.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>How to report the results. "html" = open in browser.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.print</code></td>
+<td>
+<p>How to display NAs (default = "")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero.print</code></td>
+<td>
+<p>How to display 0 values (default = ".")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>html_font</code></td>
+<td>
+<p>Default is null. Set (e.g. "Optima") to override the style's default font.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>style</code></td>
+<td>
+<p>The style for the table (Defaults to "paper". Other options are "material_dark", "classic", "classic_2", "minimal", "material")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrap_options</code></td>
+<td>
+<p>border etc. Defaults to c("hover", "bordered", "condensed", "responsive")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lightable_options</code></td>
+<td>
+<p>Default is "striped"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxConfint()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+</div>

@@ -1,0 +1,146 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_cont_2_quantiles</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_cont_2_quantiles</h2>
+
+<h3>Description</h3>
+
+<p>Recode a continuous variable into n-quantiles (default = deciles (10 levels)).
+It returns an <code>mxFactor()</code>, with the levels labeled with the max value
+in each quantile (i.e., open on the left-side). quantiles are labeled "quantile1"
+"quantile2" etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_cont_2_quantiles(
+  x,
+  nlevels = NULL,
+  type = c("mxFactor", "ordered", "unordered"),
+  verbose = FALSE,
+  returnCutpoints = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a variable to recode as ordinal (email maintainer("umx") if you'd like this upgraded to handle df input)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nlevels</code></td>
+<td>
+<p>How many bins or levels (at most) to use (i.e., 10 = deciles)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>what to return (Default is "mxFactor") options: "ordered" and "unordered")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>report the min, max, and decile cuts used (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnCutpoints</code></td>
+<td>
+<p>just return the cutpoints, for use directly</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><strong>Note</strong>: Redundant quantiles are merged. i.e., if the same score identifies
+all deciles up to the fourth, then these will be merged into one bin, labeled "quantile4".
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> recoded variable as an <code>mxFactor()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = umx_cont_2_quantiles(rnorm(1000), nlevels = 10, verbose = TRUE)
+x = data.frame(x)
+str(x); levels(x)
+table(x)
+## Not run: 
+ggplot2::qplot(x$x)
+y = mxDataWLS(x, type = "WLS")
+
+## End(Not run)
+
+# ===========================
+# = Use with twin variables =
+# ===========================
+
+data(twinData)
+x = twinData
+cuts  = umx_cont_2_quantiles(rbind(x$wt1, x$wt2) , nlevels = 10, returnCutpoints = TRUE)
+x$wt1 = umx_cont_2_quantiles(x$wt1, nlevels = cuts) # use same for both...
+x$wt2 = umx_cont_2_quantiles(x$wt2, nlevels = cuts) # use same for both...
+str(x[, c("wt1", "wt2")])
+
+# More examples
+
+x = umx_cont_2_quantiles(mtcars[, "mpg"], nlevels = 5) # quintiles
+x = umx2ord(mtcars[, "mpg"], nlevels = 5) # using shorter alias
+x = umx_cont_2_quantiles(mtcars[, "cyl"], nlevels = 10) # more levels than integers exist
+x = umx_cont_2_quantiles(rbinom(10000, 1, .5), nlevels = 2)
+</code></pre>
+
+
+</div>

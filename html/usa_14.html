@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>state_convert</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert state identifiers</h2>
+
+<h3>Description</h3>
+
+<p>Take a vector of state identifiers and convert to a common format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">state_convert(x, to = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A character vector of: state names, abbreviations, or FIPS codes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>The format returned: "abb", "name" or "fips".</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector of single format state identifiers.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">state_convert(c("AL", "Vermont", "06"))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>random_regime</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create random regime parameters</h2>
+
+<h3>Description</h3>
+
+<p><code>random_regime</code> generates random regime parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">random_regime(
+  p,
+  mu_scale,
+  sigma_scale,
+  restricted = FALSE,
+  constraints = NULL,
+  m,
+  forcestat = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a positive integer specifying the autoregressive order of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu_scale</code></td>
+<td>
+<p>a real valued vector of length two specifying the mean (the first element) and standard deviation (the second element)
+of the normal distribution from which the <code class="reqn">\mu_{m}</code> mean-parameters are generated in random mutations in the genetic algorithm.
+Default is <code>c(mean(data), sd(data))</code>.
+Note that the genetic algorithm optimizes with mean-parametrization even when <code>parametrization=="intercept"</code>, but
+input (in <code>initpop</code>) and output (return value) parameter vectors may be intercept-parametrized.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma_scale</code></td>
+<td>
+<p>a positive real number specifying the standard deviation of the (zero mean, positive only by taking absolute value)
+normal distribution from which the component variance parameters are generated in the random mutations in the genetic algorithm.
+Default is <code>var(stats::ar(data, order.max=10)$resid, na.rm=TRUE)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>restricted</code></td>
+<td>
+<p>a logical argument stating whether the AR coefficients <code class="reqn">\phi_{m,1},...,\phi_{m,p}</code> are restricted
+to be the same for all regimes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>constraints</code></td>
+<td>
+<p>specifies linear constraints imposed to each regime's autoregressive parameters separately.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>a list of size <code class="reqn">(pxq_{m})</code> constraint matrices <strong><code class="reqn">C_{m}</code></strong> of full column rank
+satisfying <strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> for all <code class="reqn">m=1,...,M</code>, where
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p})</code> and <strong><code class="reqn">\psi_{m}</code></strong><code class="reqn">=(\psi_{m,1},...,\psi_{m,q_{m}})</code>.</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>a size <code class="reqn">(pxq)</code> constraint matrix <strong><code class="reqn">C</code></strong> of full column rank satisfying
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong>, where <strong><code class="reqn">\phi</code></strong><code class="reqn">=(\phi_{1},...,\phi_{p})</code> and
+<strong><code class="reqn">\psi</code></strong><code class="reqn">=\psi_{1},...,\psi_{q}</code>.</p>
+</dd>
+</dl>
+<p>The symbol <code class="reqn">\phi</code> denotes an AR coefficient. Note that regardless of any constraints, the autoregressive order
+is always <code>p</code> for all regimes.
+Ignore or set to <code>NULL</code> if applying linear constraints is not desired.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>which regime? This is required for models with constraints for which a list of possibly differing
+constraint matrices is provided.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forcestat</code></td>
+<td>
+<p>use the algorithm by Monahan (1984) to force stationarity on the AR parameters (slower)?
+Not supported for constrained models.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>forcestat==TRUE</code>, then the AR coefficients are relatively large, otherwise they are usually relatively small.
+</p>
+
+
+<h3>Value</h3>
+
+
+<dl>
+<dt>Regular models:</dt>
+<dd>
+<p><strong><code class="reqn">\upsilon_{m}</code></strong><code class="reqn">=(\phi_{m,0},</code><strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">,\sigma_{m}^2)</code>
+where <strong><code class="reqn">\phi_{m}</code></strong>=<code class="reqn">(\phi_{m,1},...,\phi_{m,p})</code>.</p>
+</dd>
+<dt>Restricted models:</dt>
+<dd>
+<p>Not supported!</p>
+</dd>
+<dt>Constrained models:</dt>
+<dd>
+<p>Replace the vectors <strong><code class="reqn">\phi_{m}</code></strong> with vectors <strong><code class="reqn">\psi_{m}</code></strong>.</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Monahan J.F. 1984. A Note on Enforcing Stationarity in Autoregressive-Moving Average Models.
+<em>Biometrica</em> <strong>71</strong>, 403-404.
+</p>
+</li></ul>
+</div>

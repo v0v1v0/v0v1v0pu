@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_has_CIs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_has_CIs</h2>
+
+<h3>Description</h3>
+
+<p>A utility function to return a binary answer to the question "does this <code>mxModel()</code> have confidence intervals?"
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_has_CIs(model, check = c("both", "intervals", "output"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The <code>mxModel()</code> to check for presence of CIs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check</code></td>
+<td>
+<p>What to check for: "intervals" requested, "output" present, or "both". Defaults to "both"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> TRUE or FALSE
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_check()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("_has_CI_ex", data = demoOneFactor, type = "cov",
+	umxPath("g", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "g", fixedAt = 1.0)
+)
+
+umx_has_CIs(m1) # FALSE: no CIs and no output
+m1 = mxModel(m1, mxCI("g_to_x1"))
+umx_has_CIs(m1, check = "intervals") # TRUE intervals set
+umx_has_CIs(m1, check = "output")  # FALSE not yet run
+m1 = mxRun(m1)
+umx_has_CIs(m1, check = "output")  # Still FALSE: Set and Run
+m1 = mxRun(m1, intervals = TRUE)
+umx_has_CIs(m1, check = "output")  # TRUE: Set, and Run with intervals = T
+umxSummary(m1)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_oc_gBOIN_continuous</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Generate operating characteristics for finding the maximum tolerated dose (MTD) using gBOIN design
+</h2>
+
+<h3>Description</h3>
+
+<p>Obtain the operating characteristics of the general Bayesian optimal interval (gBOIN) design (Mu et al. 2017) for maximum tolerated dose (MTD)-based dosing-finding trials under the continuous measure
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_oc_gBOIN_continuous(target, c_true, ncohort, cohortsize,
+                        n.earlystop = 100, ntrial,
+                        mu_1 = 0.6 * target,
+                        mu_2 = 1.4 * target,
+                        startdose = 1, seed = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the continuous target score
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c_true</code></td>
+<td>
+
+<p>the true mean value of the continuous measure
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncohort</code></td>
+<td>
+
+<p>the number of cohorts
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohortsize</code></td>
+<td>
+
+<p>the cohort size
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.earlystop</code></td>
+<td>
+
+<p>the early stopping parameter. The default value is n.earlystop = 100
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ntrial</code></td>
+<td>
+
+<p>the number of simulated trials
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu_1</code></td>
+<td>
+
+<p>the lower bound. The default value is mu_1 = 0.6 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu_2</code></td>
+<td>
+
+<p>the upper bound. The default value is mu_2 = 1.4 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>startdose</code></td>
+<td>
+
+<p>the starting dose level. The default value is startdose = 1
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+
+<p>the seed. The default value is seed = 100
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>get_oc_gBOIN_continuous()</code> returns the operating characteristics of generalized Bayesian optimal interval design (gBOIN) as a list object, including: (1) selection percentage of each dose, (2) the average number of patients treated at each dose
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>Mu, Rongji, Ying Yuan, Jin Xu, Sumithra J. Mandrekar, and Jun Yin. "gBOIN: a unified model-assisted phase I trial design accounting for toxicity grades, and binary or continuous end points." Journal of the Royal Statistical Society. Series C: Applied Statistics 68, no. 2 (2019): 289-308.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">target &lt;- 1.47
+c_true &lt;- c(0.11, 0.25, 0.94, 1.47, 2.38, 2.40)
+ncohort &lt;- 10
+cohortsize &lt;- 3
+ntrial &lt;- 4000
+get_oc_gBOIN_continuous(target = target, c_true = c_true,
+                        ncohort = ncohort, cohortsize = cohortsize,
+                        ntrial = ntrial)
+</code></pre>
+
+
+</div>

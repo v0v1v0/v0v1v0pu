@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AMplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot of the annual maximum sample</h2>
+
+<h3>Description</h3>
+
+<p>Provides two plots. First, a histogram of the sample, second, a barplot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">AMplot(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame with at least two columns. The first a date column and the second the annual maximum (AM) sequence. A third column with the station id is necessary for inclusion of the id in the plot title. An AM object derived from the GetAM or ImportAM functions.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>When used with a GetAM object or any data.frame with dates in the first column, the barplot is daily. Therefore, although it's an annual maximum (AM) sequence, some bars will be closer together depending on the number of days between them.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a histogram of the AMAX sample and a barplot
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get an AMAX sample and plot
+AMplot(GetAM(58002))
+</code></pre>
+
+
+</div>

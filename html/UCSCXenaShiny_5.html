@@ -1,0 +1,105 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>analyze_gene_drug_response_diff</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Analyze Difference of Drug Response (IC50 Value (uM)) between Gene (Signature) High and Low Expression with CCLE Data</h2>
+
+<h3>Description</h3>
+
+<p>Analyze Difference of Drug Response (IC50 Value (uM)) between Gene (Signature) High and Low Expression with CCLE Data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">analyze_gene_drug_response_diff(
+  gene_list,
+  drug = "ALL",
+  tissue = "ALL",
+  combine = FALSE,
+  cutpoint = c(50, 50)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>gene_list</code></td>
+<td>
+<p>a gene symbol list.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drug</code></td>
+<td>
+<p>a drug name. Check examples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tissue</code></td>
+<td>
+<p>a tissue name. Check examples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combine</code></td>
+<td>
+<p>if <code>TRUE</code>, combine the expression of gene list as
+a gene signature.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutpoint</code></td>
+<td>
+<p>cut point (in percent) for High and Low group, default is <code>c(50, 50)</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tissue_list &lt;- c(
+  "prostate", "central_nervous_system", "urinary_tract", "haematopoietic_and_lymphoid_tissue",
+  "kidney", "thyroid", "soft_tissue", "skin", "salivary_gland",
+  "ovary", "lung", "bone", "endometrium", "pancreas", "breast",
+  "large_intestine", "upper_aerodigestive_tract", "autonomic_ganglia",
+  "stomach", "liver", "biliary_tract", "pleura", "oesophagus"
+)
+
+drug_list &lt;- c(
+  "AEW541", "Nilotinib", "17-AAG", "PHA-665752", "Lapatinib",
+  "Nutlin-3", "AZD0530", "PF2341066", "L-685458", "ZD-6474", "Panobinostat",
+  "Sorafenib", "Irinotecan", "Topotecan", "LBW242", "PD-0325901",
+  "PD-0332991", "Paclitaxel", "AZD6244", "PLX4720", "RAF265", "TAE684",
+  "TKI258", "Erlotinib"
+)
+
+target_list &lt;- c(
+  "IGF1R", "ABL", "HSP90", "c-MET", "EGFR", "MDM2", "GS", "HDAC",
+  "RTK", "TOP1", "XIAP", "MEK", "CDK4", "TUBB1", "RAF", "ALK", "FGFR"
+)
+## Not run: 
+analyze_gene_drug_response_diff("TP53")
+analyze_gene_drug_response_diff(c("TP53", "KRAS"), drug = "AEW541")
+analyze_gene_drug_response_diff(c("TP53", "KRAS"),
+  tissue = "kidney",
+  combine = TRUE
+)
+
+# Visualization
+vis_gene_drug_response_diff("TP53")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

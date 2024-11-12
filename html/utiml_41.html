@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mcut_threshold</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Maximum Cut Thresholding (MCut)</h2>
+
+<h3>Description</h3>
+
+<p>The Maximum Cut (MCut) automatically determines a threshold for each instance
+that selects a subset of labels with higher scores than others. This leads to
+the selection of the middle of the interval defined by these two scores as
+the threshold.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mcut_threshold(prediction, probability = FALSE)
+
+## Default S3 method:
+mcut_threshold(prediction, probability = FALSE)
+
+## S3 method for class 'mlresult'
+mcut_threshold(prediction, probability = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>prediction</code></td>
+<td>
+<p>A matrix or mlresult.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>A logical value. If <code>TRUE</code> the predicted values are
+the score between 0 and 1, otherwise the values are bipartition 0 or 1.
+(Default: <code>FALSE</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A mlresult object.
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>default</code>: Maximum Cut Thresholding (MCut) method for matrix
+</p>
+</li>
+<li> <p><code>mlresult</code>: Maximum Cut Thresholding (MCut) for mlresult
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Largeron, C., Moulin, C., &amp; Gery, M. (2012). MCut: A Thresholding Strategy
+for Multi-label Classification. In 11th International Symposium, IDA 2012
+(pp. 172-183).
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other threshold: 
+<code>fixed_threshold()</code>,
+<code>lcard_threshold()</code>,
+<code>pcut_threshold()</code>,
+<code>rcut_threshold()</code>,
+<code>scut_threshold()</code>,
+<code>subset_correction()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">prediction &lt;- matrix(runif(16), ncol = 4)
+mcut_threshold(prediction)
+</code></pre>
+
+
+</div>

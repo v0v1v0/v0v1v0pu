@@ -1,0 +1,162 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>load_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Load Dataset Provided by This Package</h2>
+
+<h3>Description</h3>
+
+<p>Load data from builtin or Zenodo.
+Option <code>xena.zenodoDir</code> can be used to set default path for storing
+extra data from Zenodo, e.g., <code>options(xena.zenodoDir = "/home/xxx/dataset")</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">load_data(name)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>a dataset name. Could be one of
+</p>
+<p><strong>Builtin datasets</strong>:
+</p>
+
+<ul>
+<li> <p><code>ccle_absolute</code>: CCLE ABSOLUTE result.
+</p>
+</li>
+<li> <p><code>ccle_info</code>: CCLE information.
+</p>
+</li>
+<li> <p><code>ccle_info_fine</code>: cleaned CCLE information for TPC analysis.
+</p>
+</li>
+<li> <p><code>pcawg_info</code>: PCAWG information.
+</p>
+</li>
+<li> <p><code>pcawg_info_fine</code>: cleaned PCAWG information for TPC analysis.
+</p>
+</li>
+<li> <p><code>pcawg_purity</code>: PCAWG tumor purity, ploidy and WGD data.
+</p>
+</li>
+<li> <p><code>tcga_clinical</code>: TCGA clinical data.
+</p>
+</li>
+<li> <p><code>tcga_clinical_fine</code>: cleaned TCGA information for TPC analysis.
+</p>
+</li>
+<li> <p><code>tcga_genome_instability</code>: TCGA genome instability data.
+</p>
+</li>
+<li> <p><code>tcga_gtex</code>: TCGA and GTEX sample info.
+</p>
+</li>
+<li> <p><code>tcga_purity</code>: TCGA tumor purity data.
+</p>
+</li>
+<li> <p><code>tcga_subtypes</code>: TCGA subtypes data.
+</p>
+</li>
+<li> <p><code>tcga_surv</code>: TCGA survival data.
+</p>
+</li>
+<li> <p><code>TCGA.organ</code>: TCGA organ data.
+</p>
+</li>
+<li> <p><code>toil_info</code>: Toil hub information.
+</p>
+</li>
+</ul>
+<p><strong>Remote datasets stored in <a href="https://zenodo.org/record/10977637/">Zenodo</a></strong>:
+</p>
+
+<ul>
+<li> <p><code>pcawg_promoter_id</code>: PCAWG promoter identifiers.
+</p>
+</li>
+<li> <p><code>transcript_identifier</code>: Common transcript identifiers.
+</p>
+</li>
+<li> <p><code>ccle_expr_and_drug_response</code>: CCLE expression and drug response data.
+</p>
+</li>
+<li> <p><code>ccle_drug_response_extend</code>: CCLE drug response extended data.
+</p>
+</li>
+<li> <p><code>pancan_MSI</code>: Pan-cancer MSI data.
+</p>
+</li>
+<li> <p><code>tcga_chr_alteration</code>: TCGA chromosome alteration data.
+</p>
+</li>
+<li> <p><code>tcga_MSI</code>: TCGA MSI data.
+</p>
+</li>
+<li> <p><code>tcga_pan_immune_signature</code>: TCGA pan-cancer immune signature.
+</p>
+</li>
+<li> <p><code>tcga_stemness</code>: TCGA tumor stemness data.
+</p>
+</li>
+<li> <p><code>tcga_TIL</code>: TCGA TIL data.
+</p>
+</li>
+<li> <p><code>tcga_PW</code>: ssGSEA scores of HALLMARK, KEGG, IOBR terms for TCGA samples.
+</p>
+</li>
+<li> <p><code>tcga_PW_meta</code>: metadata annotation for HALLMARK, KEGG, IOBR terms.
+</p>
+</li>
+<li> <p><code>tcga_tmb</code>: TCGA TMB data.
+</p>
+</li>
+<li> <p><code>tcga_armcalls</code>: TCGA arm alteration calls and Aneuploidy data.
+</p>
+</li>
+<li> <p><code>tcga_dna_repair</code>: TCGA DNA repair data.
+</p>
+</li>
+<li> <p><code>pancancer_conserved_immune_subtype</code>: Pan-cancer conserved immune subtypes.
+</p>
+</li>
+<li> <p><code>pcawg_TIL</code>: PCAWG TIL data.
+</p>
+</li>
+<li> <p><code>pcawg_PW</code>: ssGSEA scores of HALLMARK, KEGG, IOBR terms for PCAWG samples.
+</p>
+</li>
+<li>
+<p> ...
+</p>
+</li>
+</ul>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a dataset, typically a <code>data.frame</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data1 &lt;- load_data("tcga_surv")
+data1
+
+data2 &lt;- load_data("tcga_armcalls")
+data2
+
+</code></pre>
+
+
+</div>

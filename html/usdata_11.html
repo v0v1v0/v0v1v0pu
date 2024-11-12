@@ -1,0 +1,148 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pierce_county_house_sales</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pierce County House Sales Data for 2020</h2>
+
+<h3>Description</h3>
+
+<p>Real estate sales for Pierce County, WA in 2020.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pierce_county_house_sales
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 16814 rows and 19 variables.
+</p>
+
+<dl>
+<dt>sale_date</dt>
+<dd>
+<p>Date the legal document (deed) was executed.</p>
+</dd>
+<dt>sale_price</dt>
+<dd>
+<p>Dollar amount recorded for the sale.</p>
+</dd>
+<dt>house_square_feet</dt>
+<dd>
+<p>Sum of the square feet for the building.</p>
+</dd>
+<dt>attic_finished_square_feet</dt>
+<dd>
+<p>Finished living area in the attic.</p>
+</dd>
+<dt>basement_square_feet</dt>
+<dd>
+<p>Total square footage of the basement..</p>
+</dd>
+<dt>attached_garage_square_feet</dt>
+<dd>
+<p>Total square footage of the
+attached or built in garage(s).</p>
+</dd>
+<dt>detached_garage_square_feet</dt>
+<dd>
+<p>Total detached garage(s) square
+footage.</p>
+</dd>
+<dt>fireplaces</dt>
+<dd>
+<p>Total count of single, double or PreFab stoves.</p>
+</dd>
+<dt>hvac_description</dt>
+<dd>
+<p>Text description associated with the
+predominant heating source for the built-as structure
+i.e. Forced Air, Electric Baseboard, Steam, etc. .</p>
+</dd>
+<dt>exterior</dt>
+<dd>
+<p>Predominant type of construction materials used for
+the exterior siding on Residential Buildings.</p>
+</dd>
+<dt>interior</dt>
+<dd>
+<p>Predominant type of materials used on the interior
+walls. i.e. Sheetrock or Paneling.</p>
+</dd>
+<dt>stories</dt>
+<dd>
+<p>Number of floors/building levels above grade. Stories
+do not include attic or basement areas.</p>
+</dd>
+<dt>roof_cover</dt>
+<dd>
+<p>Material used for the roof. I.e. Composition Shingles,
+Wood Shake, Concrete Tile, etc.</p>
+</dd>
+<dt>year_built</dt>
+<dd>
+<p>Year the building was built, as stated by the building
+permit or a historical record.</p>
+</dd>
+<dt>bedrooms</dt>
+<dd>
+<p>Number of bedrooms listed for a residential property.</p>
+</dd>
+<dt>bathrooms</dt>
+<dd>
+<p>Number of baths listed for a residential property. The
+number is listed as a decimal, i.e. 2.75 = two full and one
+three-quarter baths. A tub/sink/toilet combination (plus any additional
+fixtures) is considered 1.0 bath. A shower/sink/toilet combination
+(plus any additional fixtures) is 0.75 bath. A sink/toilet combination
+is .5 bath.</p>
+</dd>
+<dt>waterfront_type</dt>
+<dd>
+<p>Describes the type of waterfront the property
+adjoins or has legal access to.</p>
+</dd>
+<dt>view_quality</dt>
+<dd>
+<p>Assigned to reflect the market appeal of the
+overall view available from the dwelling or property.</p>
+</dd>
+<dt>utility_sewer</dt>
+<dd>
+<p>Identifies if sewer/septic is installed,
+available or not available or if the property does not support
+an on site sewage disposal system.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://www.piercecountywa.gov/736/Data-Downloads">Pierce County, Washington</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+library(lubridate)
+
+# List house sales frequency and average price grouped by month
+pierce_county_house_sales |&gt;
+  mutate(month_sale = month(sale_date)) |&gt;
+  group_by(month_sale) |&gt;
+  summarize(freq = n(), mean_price = mean(sale_price)) |&gt;
+  arrange(desc(freq))
+
+# List house sales frequency and average price group by waterfront type
+pierce_county_house_sales |&gt;
+  group_by(waterfront_type) |&gt;
+  summarize(freq = n(), mean_price = mean(sale_price)) |&gt;
+  arrange(desc(mean_price))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>url_unikn</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+<code>url_unikn</code> formats an URL the uni.kn way</h2>
+
+<h3>Description</h3>
+
+<p><code>url_unikn</code> removes various patterns (e.g., 
+<code>"http", "https", "://", "www."</code>) from the 
+front of a given URL and returns the remaining character string 
+with an n-dash (Unicode <code>\u2013</code>) prefix, 
+rather than the former figure dash (<code>\u2012</code>) prefix 
+(as the latter created issues on Fedora Linux systems).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">url_unikn(url = "https://www.uni-konstanz.de/")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>The url to be written (as copied from a web browser).</p>
+</td>
+</tr></table>
+<h3>See Also</h3>
+
+<p><code>xbox</code> to create a new xbox (without text).
+</p>
+<p>Other text functions: 
+<code>mark()</code>,
+<code>post()</code>,
+<code>uline()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">url_unikn("https://www.uni-konstanz.de/")
+
+</code></pre>
+
+
+</div>

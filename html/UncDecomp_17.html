@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>apply_sweep</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Slight modifications of apply() and sweep()</h2>
+
+<h3>Description</h3>
+
+<p>Slightly modified version of apply() and sweep(). apply0() and sweep0() are modification of apply() and sweep() so that they can be used when the length(MARGIN) is zero. 
+msweep() is a modification of sweep() so that it can be used when function receives multiple summary statistic.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">apply0(X, MARGIN, FUN, ...)
+
+sweep0(X, MARGIN, STATS, FUN, ...)
+
+msweep(X, MARGIN, STATS, FUN, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>an array.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MARGIN</code></td>
+<td>
+<p>apply0() : a vector giving the subscripts which the function will be applied over. sweep0(), msweep() : a vector of indices giving the extent(s) of x which correspond to STATS.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FUN</code></td>
+<td>
+<p>the function to be applied. For msweep(), a function that receives the elements of X and list in order</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>STATS</code></td>
+<td>
+<p>the summary statistic array which is to be swept out. For msweep(), list of summary statistic array.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If each call to FUN returns a vector of length n, then apply() returns an array of dimension c(n, dim(X)[MARGIN]) if n &gt; 1. If n equals 1, apply() returns a scalar if MARGIN has length 0, a vector if MARGIN has length 1 and an array of dimension dim(X)[MARGIN] otherwise.
+sweep0() and msweep() return an array with the same shape as x, but with the summary statistics swept out.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(0)
+A &lt;- array(rnorm(24), dim = 4:2)
+meanA0 &lt;- apply0(A, numeric(0), mean)
+meanA12 &lt;- apply0(A, 1:2, mean)
+sdA12 &lt;- apply0(A, 1:2, sd)
+ctrArray &lt;- function(a,mu) return(a-mu)
+sweep0(A, numeric(0), meanA0, ctrArray)
+sweep0(A, 1:2, meanA12, ctrArray)
+statsA12 &lt;- list(meanA12, sdA12)
+stdArray &lt;- function(a,mu,sigma) return((a-mu)/sigma)
+msweep(A, 1:2, statsA12, stdArray)
+</code></pre>
+
+
+</div>

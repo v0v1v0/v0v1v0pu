@@ -1,0 +1,149 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BAC_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Bland-Altman Change plot</h2>
+
+<h3>Description</h3>
+
+<p>Bland-Altman Change plot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">BAC_plot(
+  data,
+  cols = names(data),
+  reliability = NULL,
+  pointSize = 2,
+  deterioratedColor = "#482576E6",
+  unchangedColor = "#25848E80",
+  improvedColor = "#7AD151E6",
+  zeroLineColor = "black",
+  zeroLineType = "dashed",
+  ciLineColor = "red",
+  ciLineType = "solid",
+  conf.level = 0.95,
+  theme = ggplot2::theme_minimal(),
+  ignoreBias = FALSE,
+  iccFromPsych = FALSE,
+  iccFromPsychArgs = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The data frame; if it only has two columns, the first of
+which is the pre-change column, <code>cols</code> can be left empty.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>The names of the columns with the data; the first is the
+column with the pre-change data, the second the column after the change.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reliability</code></td>
+<td>
+<p>The reliability estimate, for example as obtained with
+the <code>ICC()</code> function in the <code>psych()</code> package; can be omitted, in which
+case the intraclass correlation is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pointSize</code></td>
+<td>
+<p>The size of the points in the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deterioratedColor, unchangedColor, improvedColor</code></td>
+<td>
+<p>The colors to use for
+cases who deteriorate, stay the same, and improve, respectively.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeroLineColor, ciLineColor</code></td>
+<td>
+<p>The colors for the line at 0 (no change)
+and at the confidence interval bounds (i.e. the point at which a difference
+becomes indicative of change given the reliability), respectively.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeroLineType, ciLineType</code></td>
+<td>
+<p>The line types for the line at 0 (no change)
+and at the confidence interval bounds (i.e. the point at which a difference
+becomes indicative of change given the reliability), respectively.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The confidence level of the confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>The ggplot2 theme to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignoreBias</code></td>
+<td>
+<p>Whether to ignore bias (i.e. allow the measurements at
+the second time to shift upwards or downwards). If <code>FALSE</code>, the variance
+associated with such a shift is considered error variance (i.e.
+'unreliability').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iccFromPsych</code></td>
+<td>
+<p>Whether to compute ICC using the <code>psych::ICC()</code> function
+or not.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iccFromPsychArgs</code></td>
+<td>
+<p>If using the <code>psych::ICC()</code> function, the arguments
+to pass.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot2 plot.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### Create smaller dataset for example
+dat &lt;-
+  ufs::testRetestSimData[
+    1:25,
+    c('t0_item1', 't1_item1')
+  ];
+
+ufs::BAC_plot(dat, reliability = .5);
+ufs::BAC_plot(dat, reliability = .8);
+ufs::BAC_plot(dat, reliability = .9);
+</code></pre>
+
+
+</div>

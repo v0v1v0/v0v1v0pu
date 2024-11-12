@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_oc_Ivanova_binary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Generate operating characteristics for finding the maximum tolerated dose (MTD) of binary endpoint using design by Ivanova et al (2009)
+</h2>
+
+<h3>Description</h3>
+
+<p>Obtain the operating characteristics of the dose-finding design of binary endpoint by Ivanova et al (2009)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_oc_Ivanova_binary(target, eps = 1, truetox, ncohort, cohortsize,
+                      n.earlystop = 100, ntrial, startdose = 1,
+                      seed = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the target toxicity rate
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eps</code></td>
+<td>
+
+<p>the decision criterion. The default value is eps = 1
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>truetox</code></td>
+<td>
+
+<p>a vector containing the true toxicity probabilities of the investigational dose levels
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncohort</code></td>
+<td>
+
+<p>the number of cohorts
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohortsize</code></td>
+<td>
+
+<p>the cohort size
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.earlystop</code></td>
+<td>
+
+<p>the early stopping parameter. The default value is n.earlystop = 100
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ntrial</code></td>
+<td>
+
+<p>the number of trials
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>startdose</code></td>
+<td>
+
+<p>the starting dose level. The default value is startdose = 1
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+
+<p>the seed. The default value is seed = 100
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>get_oc_Ivanova_binary()</code> returns the operating characteristics of Ivanova design as a list object, including: (1) selection percentage at each dose level (2) patients treated at each dose level
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>Ivanova, Anastasia, and Se Hee Kim. "Dose finding for continuous and ordinal outcomes with a monotone objective function: a unified approach." Biometrics 65, no. 1 (2009): 307-315.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">target &lt;- 0.3
+truetox &lt;- c(0.30, 0.45, 0.50, 0.55, 0.60, 0.65)
+ncohort &lt;- 10
+cohortsize &lt;- 3
+ntrial &lt;- 4000
+get_oc_Ivanova_binary(target = target, truetox = truetox, ncohort = ncohort,
+                      cohortsize = cohortsize, ntrial = ntrial)
+
+</code></pre>
+
+
+</div>

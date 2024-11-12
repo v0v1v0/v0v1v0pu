@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dgroup</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Draws UpAndDown plots for different grouping variables
+</h2>
+
+<h3>Description</h3>
+
+<p>This function draws plots to compare the effects of different grouping variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dgroup(data, byvars, weight=1, v1, v2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+
+<p>the dataset to be analysed
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>byvars</code></td>
+<td>
+
+<p>the grouping variables to be used
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weight</code></td>
+<td>
+
+<p>a variable for weighting the individual items, the default is for every item to be weighted equally
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>v1</code></td>
+<td>
+
+<p>the variable specifying the start value in the comparison
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>v2</code></td>
+<td>
+
+<p>the variable specifying the end value in the comparison
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function prepares UpAndDown plots showing percentage and absolute changes for different grouping variables.
+All unlabelled plots have the same vertical scale to ease comparisons.  Scales of labelled plots are affected by label lengths.
+</p>
+<p>To draw an unlabelled or labelled set of plots, apply grid.arrange to the appropriate output of dgroup.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>uad</code></td>
+<td>
+
+<p>unlabelled horizontal UpAndDown plots
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uadl</code></td>
+<td>
+
+<p>vertical UpAndDown plots with labelling
+</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Antony Unwin unwin@math.uni-augsburg.de
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(gridExtra)
+zs &lt;- dgroup(NIpop, byvars=c("age", "gender", "LGD2014_name", "area_name"), v1="y2011", v2="y2017")
+grid.arrange(zs$uadg)
+grid.arrange(zs$uadgl)
+</code></pre>
+
+
+</div>

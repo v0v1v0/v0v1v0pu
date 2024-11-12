@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unglue_regex</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converts unglue pattern to regular regex pattern</h2>
+
+<h3>Description</h3>
+
+<p>Transforms a vector of patterns given in the unglue
+format to a vector of proper regex (PCRE) patterns (so they can for instance
+be used with functions from other packages).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unglue_regex(
+  patterns,
+  open = "{",
+  close = "}",
+  use_multiple = FALSE,
+  named_capture = FALSE,
+  attributes = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>patterns</code></td>
+<td>
+<p>a character vector or a list of character vectors, if a list,
+items will be pasted using an empty separator (<code>""</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>open</code></td>
+<td>
+<p>The opening delimiter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>close</code></td>
+<td>
+<p>The closing delimiter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use_multiple</code></td>
+<td>
+<p>whether we should consider that duplicate labels can match
+different substrings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>named_capture</code></td>
+<td>
+<p>whether to incorporate the names of the groups in the
+output regex</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attributes</code></td>
+<td>
+<p>whether to give group attributes to the output</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">patterns &lt;- c("{number=\\d+} is [{what}]", "{word=\\D+} is [{what}]")
+unglue_regex(patterns)
+</code></pre>
+
+
+</div>

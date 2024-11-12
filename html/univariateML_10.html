@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mlbeta</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Beta distribution maximum likelihood estimation</h2>
+
+<h3>Description</h3>
+
+<p>Uses <code>stat::nlm</code> to estimate the parameters of the Beta distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mlbeta(x, na.rm = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a (non-empty) numeric vector of data values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values be removed?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p><code>start</code> contains optional starting parameter values for the
+minimization, passed to the <code>stats::nlm</code> function. <code>type</code> specifies whether
+a dedicated <code>"gradient"</code>, <code>"hessian"</code>, or <code>"none"</code> should be passed to
+<code>stats::nlm</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For the density function of the Beta distribution see Beta.
+</p>
+<p>For <code>type</code>, the option <code>none</code> is fastest.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>mlbeta</code> returns an object of class
+<code>univariateML</code>. This is a named numeric vector with maximum
+likelihood estimates for <code>shape1</code> and <code>shape2</code> and the
+following attributes:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The name of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density</code></td>
+<td>
+<p>The density associated with the estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logLik</code></td>
+<td>
+<p>The loglikelihood at the maximum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>support</code></td>
+<td>
+<p>The support of the density.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The call as captured my <code>match.call</code></p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Johnson, N. L., Kotz, S. and Balakrishnan, N. (1995)
+Continuous Univariate Distributions, Volume 2, Chapter 25. Wiley, New York.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Beta for the Beta density, nlm for the
+optimizer this function uses.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">AIC(mlbeta(USArrests$Rape / 100))
+</code></pre>
+
+
+</div>

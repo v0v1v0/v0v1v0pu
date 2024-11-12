@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_q_array</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return the probabilities of an offspring's genotype given its
+parental genotypes for all possible combinations of parental and
+offspring genotypes. This is for species with polysomal inheritance
+and bivalent, non-preferential pairing.</h2>
+
+<h3>Description</h3>
+
+<p>Return the probabilities of an offspring's genotype given its
+parental genotypes for all possible combinations of parental and
+offspring genotypes. This is for species with polysomal inheritance
+and bivalent, non-preferential pairing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_q_array(ploidy)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>ploidy</code></td>
+<td>
+<p>A positive integer. The ploidy of the species.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>An three-way array of proportions. The (i, j, k)th element
+is the probability of an offspring having k - 1 reference
+alleles given that parent 1 has i - 1 reference alleles and
+parent 2 has j - 1 reference alleles. Each dimension of the
+array is <code>ploidy + 1</code>. In the dimension names, "A" stands
+for the reference allele and "a" stands for the
+alternative allele.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">qarray &lt;- get_q_array(6)
+apply(qarray, c(1, 2), sum) ## should all be 1's.
+
+</code></pre>
+
+
+</div>

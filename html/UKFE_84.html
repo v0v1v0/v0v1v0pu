@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>SimData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data simulator</h2>
+
+<h3>Description</h3>
+
+<p>Simulation of a random sample from the generalised extreme value, generalised logistic, Gumbel, Kappa3, or generalised Pareto distributions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">SimData(n, pars = NULL, dist = "GenLog", GF = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>sample size to be simulated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pars</code></td>
+<td>
+<p>vector of parameters in the order of location, scale, shape (only location and shape for Gumbel)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>choice of distribution. Either "GEV", "GenLog", "Gumbel", "Kappa3", or "GenPareto"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>GF</code></td>
+<td>
+<p>vector of GF inputs in the order of Lcv, LSkew, QMED (only Lcv and QMED if dist = "Gumbel")</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The simulated sample can be generated using distribution parameters, or the growth factor (GF) inputs; linear coefficient of variationn (Lcv), linear skewness (LSkew) &amp; the median annual maximum (QMED).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A random sample of size n for the chosen distribution.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Simulate a sample of size 30 using parameters GenLog and parameters 299, 51, -0.042
+SimData(30, pars = c(299, 51, -0.042), dist = "GenLog")
+#Now simulate using the Lcv, Lskew, and median (0.17, 0.04, 310)
+SimData(30, GF = c(0.17, 0.04, 310), dist = "GenLog")
+</code></pre>
+
+
+</div>

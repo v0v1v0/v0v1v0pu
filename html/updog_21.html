@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>oracle_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct an oracle plot from the output of <code>oracle_joint</code>.</h2>
+
+<h3>Description</h3>
+
+<p>After obtaining the joint distribution of the true genotype with the estimated genotype from
+the oracle estimator using <code>oracle_joint</code>, you can use <code>oracle_plot</code> to
+visualize this joint distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">oracle_plot(jd)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>jd</code></td>
+<td>
+<p>A matrix containing the joint distribution of the true genotype and
+the oracle estimator. Usually, this is obtained by a call from <code>oracle_joint</code>.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A <code>ggplot</code> object containing the oracle plot. The x-axis indexes
+the possible values of the estimated genotype. The y-axis indexes the possible values of
+the true genotype. The number in cell (i, j) is the probability that an individual will have
+true genotype i but is estimated to have genotype j. This is when using an oracle estimator.
+The cells are also color-coded by the size of the probability in each cell. At the top are
+listed the oracle misclassification error rate and the correlation of the true genotype
+with the estimated genotype. Both of these quantities may be derived from the joint distribution.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li>
+<p>Gerard, D., Ferrão, L. F. V., Garcia, A. A. F., &amp; Stephens, M. (2018). Genotyping Polyploids from Messy Sequencing Data. <em>Genetics</em>, 210(3), 789-807. <a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a>.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>oracle_joint</code> for obtaining <code>jd</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ploidy &lt;- 6
+dist &lt;- stats::dbinom(0:ploidy, ploidy, 0.75)
+jd &lt;- oracle_joint(n = 100, ploidy = ploidy, seq = 0.001,
+                   bias = 0.7, od = 0.01, dist = dist)
+pl &lt;- oracle_plot(jd = jd)
+print(pl)
+
+</code></pre>
+
+
+</div>

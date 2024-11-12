@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ggAddR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add a fit statistic to a ggplot</h2>
+
+<h3>Description</h3>
+
+<p>Add a fit statistic to a ggplot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ggAddR(model, effect = NA, xloc = 8, yloc = 10)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>a statistical model which contains a fit measure.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>effect</code></td>
+<td>
+<p>optional hard coded fit/effect.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xloc</code></td>
+<td>
+<p>x location of R.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yloc</code></td>
+<td>
+<p>y location of R.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> plot
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxPlot()</code>, <code>umxPlotFun()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+m1 = lm(mpg ~ wt, data = mtcars)
+p = ggplot2::ggplot(data = mtcars, aes(x = wt, y = mpg))+ geom_point() +geom_smooth()+
+ggAddR(m1, effect = NA, xloc=2, yloc= 10); p
+
+## End(Not run)
+</code></pre>
+
+
+</div>

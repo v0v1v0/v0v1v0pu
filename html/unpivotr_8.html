@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>isolate_sentinels</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Move sentinel values into a separate column leaving NA behind</h2>
+
+<h3>Description</h3>
+
+<p>A sentinel value, takes the place of a value that isn't
+available for some reason.  <code>isolate_sentinels()</code> removes these values from a
+column of data into a separate column, and optionally converts the data left
+behind into an appropriate data type.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">isolate_sentinels(.data, col, sentinels, into = "sentinel")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.data</code></td>
+<td>
+<p>A data frame.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>The name of the column of data containing sentinel values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sentinels</code></td>
+<td>
+<p>A vector of sentinel values to be removed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>into</code></td>
+<td>
+<p>A name to give the new column of sentinel values.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- data.frame(name = c("Matilda", "Nicholas", "Olivia", "Paul"),
+                score = c(10, "confidential", "N/A", 12),
+                stringsAsFactors = FALSE)
+x
+isolate_sentinels(x, score, c("confidential", "N/A"))
+isolate_sentinels(x, score, c("confidential", "N/A"), "flag")
+</code></pre>
+
+
+</div>

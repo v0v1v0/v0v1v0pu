@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>extract_biomarkers</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract NMR metabolomic biomarkers from a data.frame of UK Biobank fields</h2>
+
+<h3>Description</h3>
+
+<p>Given an input <code>data.frame</code> loaded from a dataset extracted by
+<a href="https://biobank.ctsu.ox.ac.uk/crystal/exinfo.cgi?src=accessing_data_guide">ukbconv</a>
+extracts the <a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=220">UK Biobank fields</a>
+corresponding to the
+<a href="https://research.nightingalehealth.com/biomarkers/">NMR metabolomics biomarkers</a>
+giving them short variable names as listed in the <code>nmr_info</code> information data sheet
+available in this package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">extract_biomarkers(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>data.frame</code> with column names "eid" followed by extracted
+fields e.g. "23474-0.0", "23474-1.0", ..., "23467-1.0".</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Data sets extracted by
+<a href="https://biobank.ctsu.ox.ac.uk/crystal/exinfo.cgi?src=accessing_data_guide">ukbconv</a>
+have one row per UKB biobank participant whose project specific sample
+identifier is given in the first column named "eid". Columns following this
+have the format "&lt;field_id&gt;-&lt;visit_index&gt;.&lt;repeat_index&gt;", where here &lt;field_id&gt;
+corresponds to a biomarker of interest, e.g. 23474 for 3-Hydroxybutyrate,
+&lt;visit_index&gt; corresponds to the assessment time point, e.g. 0 for baseline
+assessment, 1 for first repeat visit. For the UKB NMR data, the &lt;repeat_index&gt;
+column is reserved for cases where biomarker measurements have more than
+one QC Flag (see <code>extract_biomarker_qc_flags()</code>).
+</p>
+<p>In the returned <code>data.frame</code> there is single column for each biomarker,
+with an additional column for the visit index. Rows are uniquely identifiable
+by the combination of entries in columns "eid" and "visit_index". There are
+currently no repeat measure data for the NMR biomarker data in UKB,
+so no repeat_index column is returned.
+</p>
+<p>This function will also work with data extracted by the <code>ukbtools</code> R
+package.
+</p>
+<p>If your UK Biobank project only has access to a subset of biomarkers, then
+this function will only return the subset of ratios that can be computed from
+the biomarker data provided.
+</p>
+<p>A <code>data.table</code> will be returned instead of a <code>data.frame</code> if the
+the user has loaded the package into their R session.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> or <code>data.table</code> with column names "eid",
+and "visit_index", followed by columns for each biomarker
+e.g. "bOHbutyrate", ..., "Valine".
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ukb_data &lt;- ukbnmr::test_data # Toy example dataset for testing package
+nmr &lt;- extract_biomarkers(ukb_data)
+
+</code></pre>
+
+
+</div>

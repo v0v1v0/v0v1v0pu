@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>annotate_mf_all</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Annotate meaningful formatting for all cells</h2>
+
+<h3>Description</h3>
+
+<p>Turns cell formatting into annotations for all values across all variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">annotate_mf_all(xlfilepath)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>xlfilepath</code></td>
+<td>
+<p>Path to a single-sheet spreadsheet file (xls or xlsx).</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Seven popular approaches for meaningful formatting (bold, colored
+text, italic, strikethrough, underline, double underline, and cell
+highlighting) are supported in this function. <code>sheets</code>, <code>skip</code>, and <code>range</code>
+arguments for spreadsheet input are not supported. The hex8 code of the
+fill color used for text color and cell highlighting is also appended in
+the output. Ensure the data in the spreadsheet are rectangular before
+running; this includes blank but formatted cells beyond the data rectangle.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A tibble with meaningful formatting embedded as text for all rows and
+columns.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">example_spreadsheet &lt;- system.file("extdata/boutiques.xlsx", package = "unheadr")
+annotate_mf_all(example_spreadsheet)
+</code></pre>
+
+
+</div>

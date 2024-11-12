@@ -1,0 +1,123 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>speciesLisa</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>LISA in predictors at species occurrence locations</h2>
+
+<h3>Description</h3>
+
+<p>Given a level of positional uncertainty (defined as a distance), this function calculates different statistics of local indicator of spatial association (LISA) in predictors (explanatory variables, defined as a raster object) at each species occurrence location (defined as a SpatialPoints object). According to Naimi et al. 2012, this can be used to understand whether positional uncertainty at which species locations are likely to affect predictive performance of species distribution models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">speciesLisa(x, y, uncertainty, statistic="K1",weights) 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> explanatory variables (predictors), defined as a raster object (<code>RasterLayer</code> or <code>RasterStack</code> or <code>RasterBrick</code>) </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p> species occurrence points, defined as a <code>SpatialPoints</code> or <code>SpatialPointsDataFrame</code> object   </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uncertainty</code></td>
+<td>
+<p> level of positional uncertainty, defined as a number (distance)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>statistic</code></td>
+<td>
+<p> a character string specifying the LISA statistic that should be calculated. This can be one of "I", "c", "G", "G*", and "K1". Default is "K1" </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p> a numeric vector specifying the relative importance of explanatory variables in species distribution models (the first value in the <code>weights</code>, is the importance of the first variable in <code>x</code>, and ...). These values will be used as weights to aggregate the LISAs in predictors at each location and calculate a single measure. The length of weights should be equal to the number of raster layers in <code>x</code></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function calculates a LISA statistic for each explanatory variable at each species point. Although several statistics including local Moran's I ("I"), local Geary's c ("c"), local G and G* ("G" and "G*"), and local K1 statistics, can be calculated, according to Naimi et al. (2012), "K1" statistic (default) is recommended.  This function returns a <code>speciesLISA</code> object, which includes species occurrence data, LISA statistic for each predictor at species locations, and an aggregated LISA statistic (a single LISA) at each species location, given the variable impotances. If weights in not specified, the equal weights (i.e. equal importance for explanatory variables) will be considered.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>speciesLISA</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Babak Naimi <a href="mailto:naimi.b@gmail.com">naimi.b@gmail.com</a>
+</p>
+<p><a href="https://r-gis.net/">https://r-gis.net/</a>
+</p>
+<p><a href="https://www.biogeoinformatics.org/">https://www.biogeoinformatics.org/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>IF you used this method, please cite the following article for which this package is developed:
+</p>
+<p>Naimi, B., Hamm, N.A.S., Groen, T.A., Skidmore, A.K., and Toxopeus, A.G. 
+2014. Where is positional uncertainty a problem for species distribution modelling?, Ecography 37 (2): 191-203.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code>lisa</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+file &lt;- system.file("external/predictors.tif", package="usdm")
+
+r &lt;- rast(file) # reading a RasterBrick object including 4 rasters in the Netherlands
+
+r 
+
+plot(r) # visualize the raster layers
+
+sp.file &lt;- system.file("external/species_nl.shp", package="usdm")
+sp &lt;- vect(sp.file)
+
+
+splisa &lt;- speciesLisa(x=r,y=sp,uncertainty=15000,weights=c(0.22,0.2,0.38,0.2))
+
+splisa
+
+plot(splisa)
+
+bnd.file &lt;- system.file("external/boundary.shp", package="usdm")
+bnd &lt;- vect(bnd.file) # reading the boundary map
+
+plot(splisa,bnd)
+
+## End(Not run)
+
+
+</code></pre>
+
+
+</div>

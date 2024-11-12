@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_CItable</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make parameter summary table</h2>
+
+<h3>Description</h3>
+
+<p>This function collate confidence intervals and parameter estimates from all subjects (fitted with the same model) into a nice table.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_CItable(CIlist, param_names, free_param_index, fitted)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>CIlist</code></td>
+<td>
+<p>a list of confidence intervals and parameter estimates obtained from fitting either the single or biphasic model to each eligible subject.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param_names</code></td>
+<td>
+<p>character vector of the parameter names. This should be c("A", "delta", "B", "gamma") for the biphasic model or c("B", "gamma") for the single phase model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free_param_index</code></td>
+<td>
+<p>logical vector indicating whether the parameters A, delta, B, gamma are to be included. This should be c(TRUE, TRUE, TRUE, TRUE) for the biphasic model and c(FALSE, FALSE, TRUE, TRUE) for the single phase model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fitted</code></td>
+<td>
+<p>data frame with an 'id' column of the unique identifiers for each subject represented in CIlist. Identifiers should be ordered according to their appearance in CIlist.</p>
+</td>
+</tr>
+</table>
+</div>

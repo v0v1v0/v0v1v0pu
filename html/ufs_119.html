@@ -1,0 +1,123 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ggBoxplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Box plot using ggplot</h2>
+
+<h3>Description</h3>
+
+<p>This function provides a simple interface to create a <code>ggplot</code>
+box plot, organising different boxplots by levels of a factor is desired,
+and showing row numbers of outliers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ggBoxplot(
+  dat,
+  y = NULL,
+  x = NULL,
+  labelOutliers = TRUE,
+  outlierColor = "red",
+  theme = ggplot2::theme_bw(),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>Either a vector of values (to display in the box plot) or a
+dataframe containing variables to display in the box plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>If <code>dat</code> is a dataframe, this is the name of the variable to
+make the box plot of.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>If <code>dat</code> is a dataframe, this is the name of the variable
+(normally a factor) to place on the X axis. Separate box plots will be
+generate for each level of this variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labelOutliers</code></td>
+<td>
+<p>Whether or not to label outliers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outlierColor</code></td>
+<td>
+<p>If labeling outliers, this is the color to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>The theme to use for the box plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Any additional arguments will be passed to
+<code>geom_boxplot</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is based on JasonAizkalns' answer to a question on Stack
+Exchange (Cross Validated; see
+<a href="https://stackoverflow.com/questions/33524669/labeling-outliers-of-boxplots-in-r">https://stackoverflow.com/questions/33524669/labeling-outliers-of-boxplots-in-r</a>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>ggplot</code> plot is returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jason Aizkalns; implemented in this package (and tweaked a bit) by
+Gjalt-Jorn Peters.
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>geom_boxplot</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### A box plot for miles per gallon in the mtcars dataset:
+ggBoxplot(mtcars$mpg);
+
+### And separate for each level of 'cyl' (number of cylinder):
+ggBoxplot(mtcars, y='mpg', x='cyl');
+
+</code></pre>
+
+
+</div>

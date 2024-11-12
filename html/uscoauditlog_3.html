@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>clean_format_all</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Main Function</h2>
+
+<h3>Description</h3>
+
+<p>Takes in a .xlsx file and returns the formatted data into a new .xlsx and .txt file according to the format of the U.S. Copyright Office SR Audit Data online database.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">clean_format_all(excelfile)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>excelfile</code></td>
+<td>
+<p>Input the original raw SR Audit Data spreadsheet</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Returns an excel sheet and text file that includes the cleaned and formatted data that are congruent to the format of the U.S. Copyright Office SR Audit Data online database.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#This is the main function. Users should be only using this function for data cleaning.
+## Not run: 
+filename = "data.xlsx"
+clean_format_all(excelfile)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

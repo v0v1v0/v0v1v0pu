@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ignorevalue</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Extract and assign ‘nodata’ value of raster images.
+</h2>
+
+<h3>Description</h3>
+
+<p>Ignored values (<em>aka</em> 'nodata') are implemented via <code>NA</code> values, and are optional for raster images in memory. However, to avoid ambiguity for data storage, it is desirable to specify ignored value. “ENVI .hdr Labelled Raster” supports ‘nodata’ by means of “data ignore value” field in the header file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ignorevalue(obj)
+ursa_nodata(obj)
+
+ignorevalue(obj) &lt;- value
+ursa_nodata(obj) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p><code>ursaRaster</code> object.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+
+<p>Integer of numeric of length one. Ignored (‘nodata’) value.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>ursa_nodata</code> is synonym to <code>ignorevalue</code> for both <em>Extract</em> and <em>Replace</em> methods.
+</p>
+<p>The ‘nodata’ value of raster image <code>obj</code> is specified in the item <code>obj$con$nodata</code>.
+</p>
+<p>If values of raster image are in memory then <em>replace</em> function <code>ignorevalue&lt;-</code> also changes ‘nodata’ values to <code>NA</code> values.
+</p>
+
+
+<h3>Value</h3>
+
+<p><em>Extract</em> function <code>ignorevalue</code> returns value of <code>$con$nodata</code> item of <code>ursaRaster</code> object.
+</p>
+<p><em>Replace</em> function <code>ignorevalue&lt;-</code> returns <code>ursaRaster</code> with modified <code>$con$nodata</code> item.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- round(ursa_dummy(nband=1,min=0.500001,max=4.499999))
+print(a)
+print(as.table(a))
+print(ignorevalue(a))
+ignorevalue(a) &lt;- NA
+print(as.table(a))
+print(ignorevalue(a))
+ignorevalue(a) &lt;- 4
+print(as.table(a))
+print(ignorevalue(a))
+print(a)
+</code></pre>
+
+
+</div>

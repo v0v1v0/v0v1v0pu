@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DDF</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>DDF results from a DDFImport object</h2>
+
+<h3>Description</h3>
+
+<p>Extracts results from a data frame imported using the DDFImport function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DDF(x, duration, RP = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data frame of DDF13 or DDF22 results imported using the DDFImport function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>duration</code></td>
+<td>
+<p>the duration (hrs) for which a rainfall depth estimate is required</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>the return period (years) for which a rainfall depth estimate is required</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The .xml files only provide a set number of durations and return periods for DDF13 and DDF22.
+This function optimises the GEV distribution on the results in order to interpolate
+across return periods. A linear interpolation is used between durations.
+The interpolation method may provide results that differ from the FEH webserver in the region of 0.1mm.
+The result is then rounded to an integer.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A DDF13 or DDF22 estimate of rainfall depth (mm)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get DDF13 results from a the DDF
+## Not run: DDF13.4003 &lt;- DDFImport("C:/Data/NRFAPeakFlow_v9/Suitable for QMED/04003.xml")
+#Estimate the 20-year, 5 hour depth
+## Not run: DDF(DDF13.4003, duration = 5, RP = 20)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,131 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spatial_write</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Wrapper functions for writing spatial objects.
+</h2>
+
+<h3>Description</h3>
+
+<p>Write spatial object to disk. If spatial object is Simple Features, then appropriate functions from package <span class="pkg">sf</span> are used.
+If spatial objest are abstract of class Spatial (package <span class="pkg">sp</span>) then preliminarly transformation to Simple Features is performed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">spatial_write(obj, fname, layer, driver = NA, compress = "", verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Spatial object:
+Either
+Simple Features (<span class="pkg">sf</span>)
+or Spatial Abstract (<span class="pkg">sp</span>).
+List of spatial objects can be used.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fname</code></td>
+<td>
+
+<p>Character. File name with or without extension. If extension is missed, then argument <code>driver</code> must be specified.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>layer</code></td>
+<td>
+
+<p>Character. Layer name. If missed, then basename of <code>fname</code> is used.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>driver</code></td>
+<td>
+
+<p>Character. Driver for specification of output file format. Default is <code>NA</code>; value is determined from extension of <code>fname</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>compress</code></td>
+<td>
+
+<p>Character or logical. Will output file or list of files be packed after writing and what archive format will be used. Available character values are <code>""</code> (default; no compression), <code>"gz"</code>, <code>"gzip"</code>, <code>"bz2"</code>, <code>"bzip2"</code>, <code>"zip"</code>, <code>"xz"</code>. If logical and <code>TRUE</code>, then "zip" is used for <code>driver</code> "ESRI Shapefile" and "gzip" otherwise. If logical and <code>FALSE</code>, then no compression.
+</p>
+</td>
+</tr>
+</table>
+<table><tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+
+<p>Logical. Value <code>TRUE</code> provides information on console. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Based on <code>sf::st_write</code>
+
+function with additonal options: compressing of output file(s), coordinates trasforming (to longitudes and latitudes for <code>driver="GeoJSON"</code>), creating multi-layer destination (for <code>driver="SQLite"</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>invisible <code>NULL</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>write_sf</code>
+
+</p>
+
+<p><code>spatial_read</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+n &lt;- 1e2
+x &lt;- runif(n,min=25,max=65)
+y &lt;- runif(n,min=55,max=65)
+z &lt;- runif(n,min=1,max=10)
+da &lt;- data.frame(x=x,y=y,z=z)
+if (requireNamespace("sf",quietly=TRUE)) {
+   obj1 &lt;- sf::st_as_sf(da,coords=c("x","y"),crs=4326)
+   print(series(obj1))
+   fname1 &lt;- file.path(tempdir(),"res1.shp")
+   print(fname1)
+   spatial_write(obj1,fname1)
+   res1 &lt;- spatial_read(fname1,engine="sf")
+   print(series(res1))
+}
+print(spatial_dir(tempdir()))
+</code></pre>
+
+
+</div>

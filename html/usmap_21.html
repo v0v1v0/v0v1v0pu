@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fips_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve states or counties using FIPS codes</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve states or counties using FIPS codes
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fips_info(fips, sortAndRemoveDuplicates = FALSE)
+
+## S3 method for class 'numeric'
+fips_info(fips, sortAndRemoveDuplicates = FALSE)
+
+## S3 method for class 'character'
+fips_info(fips, sortAndRemoveDuplicates = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fips</code></td>
+<td>
+<p>A one to five digit, either <code>numeric</code>
+or <code>character</code>, vector of FIPS codes for which to look up states or counties.
+States have a two digit FIPS code and counties have a five digit FIPS
+code (where the first 2 numbers pertain to the state).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortAndRemoveDuplicates</code></td>
+<td>
+<p>Whether or not to sort the output and remove
+duplicates. By default, the output will be returned in the order of
+the values provided to the <code>fips</code> parameter. Set this parameter to <code>TRUE</code>
+to return the output sorted by FIPS with a single instance of each FIPS.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with the states or counties and the associated
+FIPS codes.
+</p>
+<p>If <code>fips</code> is omitted, the data frame containing all available states is
+returned.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>fips()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">fips_info(2)
+fips_info("2")
+fips_info(c("02", "03", "04"))
+
+fips_info(2016)
+fips_info(c("02016", "02017"), sortAndRemoveDuplicates = TRUE)
+
+</code></pre>
+
+
+</div>

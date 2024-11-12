@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>arma.muv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimate the model uncertainty variance of time series model selection method.</h2>
+
+<h3>Description</h3>
+
+<p>By calculating the MUV, we can judge the uncertainty of a model selection method and compare the uncertainty of different model selection methods. The lower the degree of uncertainty in the model selection method, the smaller its MUV.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">arma.muv(data,
+max.p = 5,
+max.q = 5,
+method = "aic",
+stepwise = TRUE,
+blength = 15,
+btype = "mbb",
+bsamples = 100,
+seed = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A time series sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.p</code></td>
+<td>
+<p>The max order of AR part.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.q</code></td>
+<td>
+<p>The max order of MA part.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Information criterion to be used in model selection.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stepwise</code></td>
+<td>
+<p>If TRUE, will do stepwise selection (faster). Otherwise, it searches over all models. Non-stepwise selection can be very slow, especially for seasonal models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>blength</code></td>
+<td>
+<p>If btype is "mbb" then blength is the fixed block length used in generating the replicate time series. If btype is "sb" then blength is the mean of the geometric distribution used to generate the block lengths. blength should be a positive integer less than the length of data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>btype</code></td>
+<td>
+<p>The type of simulation required to generate the replicate time series. The possible input values are "mbb" (block resampling with fixed block lengths of blength), "sb" (block resampling with block lengths having a geometric distribution with mean blength)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bsamples</code></td>
+<td>
+<p>A positive integer giving the number of bootstrap replicates required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>Seed.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The arma.muv method returns an object of class “double”, which is the model uncertainty variance of the model selection method.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(uotm)
+ts &lt;- arma.sim(ars = c(-0.9, -1.4, -0.7, -0.6), mas = c(0.5, -0.4), nobs = 100)
+tmuv &lt;- arma.muv(ts, max.p = 4, max.q = 4,
+stepwise = TRUE, bsamples = 50, blength = 12)
+# the model uncertainty variance of time series model selection method
+print(tmuv)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dist_make</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make a distance matrix using a custom distance function</h2>
+
+<h3>Description</h3>
+
+<p>Make a distance matrix using a custom distance function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dist_make(x, distance_fcn, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A matrix of observations, one per row</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance_fcn</code></td>
+<td>
+<p>A function used to compute the distance between two
+rows of the data matrix.  The two rows will be passed as the first and
+second arguments to <code>distance_fcn</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code>distance_fcn</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>We do not set the <code>call</code> or <code>method</code> attributes of the
+<code>dist</code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>dist</code> object containing the distances between rows of the
+data matrix.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- matrix(sin(1:30), nrow=5)
+rownames(x) &lt;- LETTERS[1:5]
+manhattan_distance &lt;- function (v1, v2) sum(abs(v1 - v2))
+dist_make(x, manhattan_distance)
+</code></pre>
+
+
+</div>

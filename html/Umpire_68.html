@@ -1,0 +1,171 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>IndependentLogNormal-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "IndependentLogNormal" Class</h2>
+
+<h3>Description</h3>
+
+<p>The <code>IndependentLogNormal</code> class is a tool used to generate gene
+expressions that follow log normal distribution, because the true expression
+value follows log normal in our model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">IndependentLogNormal(logmu,logsigma)
+## S4 method for signature 'IndependentLogNormal'
+alterMean(object, TRANSFORM, ...)
+## S4 method for signature 'IndependentLogNormal'
+alterSD(object, TRANSFORM, ...)
+## S4 method for signature 'IndependentLogNormal'
+nrow(x)
+## S4 method for signature 'IndependentLogNormal'
+rand(object, n, ...)
+## S4 method for signature 'IndependentLogNormal'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>logmu</code></td>
+<td>
+<p>numeric vector specifying the mean expression values on the
+logarithmic scale.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logsigma</code></td>
+<td>
+<p>numeric vector specifying the standard deviation of the
+gene expression values on the logarithmic scale</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object, x</code></td>
+<td>
+<p>object of class <code>IndependentLogNormal</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TRANSFORM</code></td>
+<td>
+<p>function that takes a vector of mean expression or
+standard deviation and returns a transformed vector that can be used
+to alter the appropriate slot of the object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric scalar specifying number of samples to be simulated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments for generic or plotting routines</p>
+</td>
+</tr>
+</table>
+<h3>Objects from the Class</h3>
+
+<p>Although objects of the class can be created by a direct call to
+new, the preferred method is to use the
+<code>IndependentLogNormal</code> generator function.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>logmu</code>:</dt>
+<dd>
+<p>numeric vector containing the mean expression
+values on the logarithmic scale</p>
+</dd>
+<dt>
+<code>logsigma</code>:</dt>
+<dd>
+<p>numeric vector containing the standard deviation
+of the gene expression values on the logarithmic scale</p>
+</dd>
+</dl>
+<h3>Methods</h3>
+
+
+<dl>
+<dt>nrow(x)</dt>
+<dd>
+<p>Returns the number of genes (i.e, the length of the
+<code>logmu</code> vector).</p>
+</dd>
+<dt>rand(object, n, ...)</dt>
+<dd>
+<p>Generates nrow(IndependentLogNormal)*n matrix
+representing gene expressions of n samples following log normal
+distribution captured in the object of <code>IndependentLogNormal</code>.</p>
+</dd>
+<dt>summary(object, ...)</dt>
+<dd>
+<p>Prints out the number of independent log
+normal random variables in the object of <code>IndependentLogNormal</code>.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Jiexin Zhang <a href="mailto:jiexinzhang@mdanderson.org">jiexinzhang@mdanderson.org</a>,
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Engine</code>,
+<code>IndependentNormal</code>,
+<code>MVN</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("IndependentLogNormal")
+nGenes &lt;- 20
+logmu &lt;- rnorm(nGenes, 6, 1)
+logsigma &lt;- 1/rgamma(nGenes, rate=14, shape=6)
+ln &lt;- IndependentLogNormal(logmu, logsigma)
+nrow(ln)
+summary(ln)
+if (any(logmu - ln@logmu)) {
+  print('means do not match')
+} else {
+  print('means verified')
+}
+if (any(logsigma - ln@logsigma)) {
+  print('standard deviations do not match')
+} else {
+  print('sd verified')
+}
+x &lt;- rand(ln, 1000)
+print(dim(x))
+ 
+print(paste("'ln' should be valid:", validObject(ln)))
+ln@logsigma &lt;- 1:3 # now we break it
+print(paste("'ln' should not be valid:", validObject(ln, test=TRUE)))
+tmp.sd &lt;- sqrt(apply(log(x), 1, var))
+plot(tmp.sd, logsigma)
+tmp.mu &lt;- apply(log(x), 1, mean)
+plot(tmp.mu, logmu)
+rm(nGenes, logmu, logsigma, ln, x, tmp.mu, tmp.sd)
+</code></pre>
+
+
+</div>

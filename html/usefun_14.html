@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>is_between</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Is value between two others?</h2>
+
+<h3>Description</h3>
+
+<p>This function checks if a given value is inside an interval specified by
+two boundary values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">is_between(value, low.thres, high.thres, include.high.value = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>numeric</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>low.thres</code></td>
+<td>
+<p>numeric. Lower boundary of the interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>high.thres</code></td>
+<td>
+<p>numeric. Upper boundary of the interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include.high.value</code></td>
+<td>
+<p>logical. Whether the upper bound is included in the
+interval or not. Default value: FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a logical specifying if the <code>value</code> is inside the interval
+<code>[low.thres,high.thres)</code> (default behaviour) or inside the interval
+<code>[low.thres,high.thres]</code> if <code>include.high.value</code> is TRUE.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">is_between(3,2,4)
+is_between(4,2,4)
+is_between(4,2,4,include.high.value=TRUE)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>clean_from_taxsim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Clean final TAXSIM data set.</h2>
+
+<h3>Description</h3>
+
+<p>Clean the data set received from TAXSIM by renaming columns and removing columns not needed in
+the final output.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">clean_from_taxsim(from_taxsim)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>from_taxsim</code></td>
+<td>
+<p>The data set received from TAXSIM.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Data frame containing the row's <code>taxsimid</code> and tax calculations. This data frame can be
+merged with the original input data frame by <code>taxsimid</code>.
+</p>
+
+
+</div>

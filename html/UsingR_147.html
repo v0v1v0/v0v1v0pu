@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>squareplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Create a squareplot alternative to a segmented barplot </h2>
+
+<h3>Description</h3>
+
+<p>Create a squareplot as an alternative to a segmented barplot. Useful
+when the viewer is interested in exact counts in the categories. A
+squareplot is often used  by the <em>New York Times</em>. A grid of squares
+is presented with each color representing a different category. The
+colors appear contiguously reading top to bottom, left to right. The
+colors segment the graph as a segmented bargraph, but the squares
+allow an interested reader to easily tally the counts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">squareplot(x, col = gray(seq(0.5, 1, length = length(x))),
+border =NULL, nrows = ceiling(sqrt(sum(x))), ncols =
+ceiling(sum(x)/nrows),
+...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> a vector of counts</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p> a vector of colors </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>border</code></td>
+<td>
+<p>border color passed to <code>polygon</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nrows</code></td>
+<td>
+<p>number of rows</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncols</code></td>
+<td>
+<p>number of columns </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> passed to <code>title</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Creates the graph, but has no return  value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> John Verzani </p>
+
+
+<h3>References</h3>
+
+<p> The <em>New York Times</em>, <a href="https://www.nytimes.com">https://www.nytimes.com</a>. In particular,
+Sports page 6, June 15, 2003. </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## A Roger Clemens Cy Young year -- roids?
+squareplot(c(21,7,6),col=c("blue","green","white"))
+</code></pre>
+
+
+</div>

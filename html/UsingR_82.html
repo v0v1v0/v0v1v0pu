@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>kid.weights</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Weight and height measurement for a sample of U.S. children</h2>
+
+<h3>Description</h3>
+
+<p>A sample from the data presented in the NHANES III survey
+(<a href="https://www.cdc.gov/nchs/nhanes.htm">https://www.cdc.gov/nchs/nhanes.htm</a>). This survey is used to
+form the CDC Growth Charts (<a href="https://www.cdc.gov/growthcharts/">https://www.cdc.gov/growthcharts/</a>) for
+children.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(kid.weights)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 250 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>age</dt>
+<dd>
+<p>Age in months</p>
+</dd>
+<dt>weight</dt>
+<dd>
+<p>weight in pounds</p>
+</dd>
+<dt>height</dt>
+<dd>
+<p>height in inches</p>
+</dd>
+<dt>gender</dt>
+<dd>
+<p>Male of Female</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>This data is extracted from  the NHANES III survey:
+<a href="https://www.cdc.gov/nchs/nhanes.htm">https://www.cdc.gov/nchs/nhanes.htm</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(kid.weights)
+attach(kid.weights)
+plot(weight,height,pch=as.character(gender))
+## find the BMI -- body mass index
+m.ht = height*2.54/100        # 2.54 cm per inch
+m.wt = weight / 2.2046        # 2.2046 lbs. per kg
+bmi = m.wt/m.ht^2
+hist(bmi)
+</code></pre>
+
+
+</div>

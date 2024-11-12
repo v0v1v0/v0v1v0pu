@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>US_elec</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The US Hourly Demand and Supply for Electricity</h2>
+
+<h3>Description</h3>
+
+<p>The total hourly demand and supply (generation) for electricity in the US since July 2015
+</p>
+<p>Units: megawatthours
+</p>
+<p>Time zone: UTC
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">US_elec
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A tsibble object with hourly intervals</p>
+
+
+<h3>Details</h3>
+
+<p>The dataset contains the hourly demand and supply (generation) for electricity in the US (megawatthours).
+The 'type' column describes the type of the series (demand or generation)
+</p>
+
+
+<h3>Source</h3>
+
+<p>US Energy Information Administration (Dec 2019) <a href="https://www.eia.gov/">website</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(US_elec)
+
+library(plotly)
+
+plot_ly(data = US_elec,
+        x = ~ date_time,
+        y = ~ series,
+        color = ~ type,
+        type = "scatter",
+        mode = "lines")
+
+</code></pre>
+
+
+</div>

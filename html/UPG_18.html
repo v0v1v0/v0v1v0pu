@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.UPG.Binomial</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print information for UPG.Binomial objects</h2>
+
+<h3>Description</h3>
+
+<p><code>print</code> provides some basic information about a <code>UPG.Binomial</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UPG.Binomial'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object of class <code>UPG.Binomial</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other print parameters.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Gregor Zens
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary.UPG.Binomial</code> to summarize a <code>UPG.Binomial</code> object and create tables.
+<code>predict.UPG.Binomial</code> to predict probabilities using a <code>UPG.Binomial</code> object.
+<code>plot.UPG.Binomial</code> to plot a <code>UPG.Binomial</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# estimate a binomial logit model using example data
+library(UPG)
+data(titanic)
+y  = titanic[,1]
+Ni = titanic[,2]
+X  = titanic[,-c(1,2)]
+results.binomial = UPG(y = y, X = X, Ni = Ni, model = "binomial")
+print(results.binomial)
+
+</code></pre>
+
+
+</div>

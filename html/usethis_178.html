@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_rmarkdown_template</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add an RMarkdown Template</h2>
+
+<h3>Description</h3>
+
+<p>Adds files and directories necessary to add a custom rmarkdown template to
+RStudio. It creates:
+</p>
+
+<ul>
+<li> <p><code>inst/rmarkdown/templates/{{template_dir}}</code>. Main directory.
+</p>
+</li>
+<li> <p><code>skeleton/skeleton.Rmd</code>. Your template Rmd file.
+</p>
+</li>
+<li> <p><code>template.yml</code> with basic information filled in.
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_rmarkdown_template(
+  template_name = "Template Name",
+  template_dir = NULL,
+  template_description = "A description of the template",
+  template_create_dir = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>template_name</code></td>
+<td>
+<p>The name as printed in the template menu.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template_dir</code></td>
+<td>
+<p>Name of the directory the template will live in within
+<code>inst/rmarkdown/templates</code>. If none is provided by the user, it will be
+created from <code>template_name</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template_description</code></td>
+<td>
+<p>Sets the value of <code>description</code> in
+<code>template.yml</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template_create_dir</code></td>
+<td>
+<p>Sets the value of <code>create_dir</code> in <code>template.yml</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+use_rmarkdown_template()
+
+## End(Not run)
+</code></pre>
+
+
+</div>

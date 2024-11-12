@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ImbR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Synthetic Regression Data Set
+</h2>
+
+<h3>Description</h3>
+
+<p>Simulated data set for imbalanced domain on regression. The rare cases corresponden to the higher extreme values and are described by a circle with white noise. The normal cases have a normal distribution with the same center of the circunference with elliptical contours.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(ImbR)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The data set has 2 continuous features (<code>X1</code> and <code>X2</code>) and a continuous target variable (denoted as <code>Tgt</code>). The rare examples, i.e, cases with higher values of the target variable  occur in 5% of the data. Data set ImbR has 1000 examples.
+</p>
+<p>ImbR data has been simulated as follows:
+</p>
+
+<dl>
+<dt>-</dt>
+<dd>
+<p>lower <code>Tgt</code> values: <code>(X1, X2)</code><code class="reqn">\sim \mathbf{N}_{2} \left(\mathbf{10}_{2}, \mathbf{2.5}_{2}\right)</code></p>
+</dd>
+</dl>
+<p>  and <code>Tgt</code><code class="reqn">\sim \mathbf{\Gamma} \left( 0.5, 1 \right) +10</code>
+</p>
+<dl>
+<dt>-</dt>
+<dd>
+<p>higher <code>Tgt</code> values: <code>(X1, X2)</code><code class="reqn">\sim \left(\rho * cos(\theta) + 10, \rho * sin(\theta) + 10 \right)</code>, where <code class="reqn">\rho \sim \mathbf{9}_{2}+\mathbf{N}_{2} \left(\mathbf{0}_{2}, \mathbf{I}_{2} \right)</code> and <code class="reqn">\theta \sim \mathbf{U}_{2} \left( \mathbf{0}_{2}, 2\pi \mathbf{I}_{2} \right)</code> <code>Tgt</code><code class="reqn">\sim \mathbf{\Gamma} \left( 1,1 \right) + 20</code> </p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(ImbR)
+summary(ImbR)
+
+boxplot(ImbR$Tgt)
+</code></pre>
+
+
+</div>

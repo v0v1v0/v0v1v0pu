@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>prepare_tidy_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prepare data in tidy format</h2>
+
+<h3>Description</h3>
+
+<p>Function to transforms common abundance table formats into a "long" format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">prepare_tidy_data(data, sample_names, samples_in = "cols", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data.frame in "wide" format, with samples in either columns or rows. This data.frame should not include any data besides abundance values per sample, per taxonomic unit. Additional data (e.g. taxonomy details) should be added afterwards.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample_names</code></td>
+<td>
+<p>a vector with the name of all samples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples_in</code></td>
+<td>
+<p>a vector specifying the location of the samples. It can either be "cols" (default) if samples are in columns, or "rows" if samples are in rows.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function guarantees that the abundance table includes one column with sample ID's and
+one column with abundance.
+</p>
+<p><strong>Common species table formats</strong>
+</p>
+<p>There are two common formats for abundance tables:
+</p>
+
+<ul>
+<li>
+<p> samples as rows and phylogenetic units as columns;
+</p>
+</li>
+<li>
+<p> phylogenetic units as rows and samples as columns.
+</p>
+</li>
+</ul>
+<p>However, both formats are not tidy, because they include several columns with the same variable. They
+are in a "wide format" instead of a "long format".
+</p>
+<p>This function re-organizes samples and phylogenetic units so that there is a single column with the samples ID's and
+another with the abundance scores; Extra columns are allowed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An abundance table in long format, compatible with dplyr pipes and <strong>ulrb</strong> package functions.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>define_rb()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+#
+sample_names &lt;- c("ERR2044662", "ERR2044663", "ERR2044664",
+                   "ERR2044665", "ERR2044666", "ERR2044667",
+                   "ERR2044668", "ERR2044669", "ERR2044670")
+
+# Example for samples in cols and with additional data available
+prepare_tidy_data(nice, sample_names = sample_names, samples_in = "cols")
+
+# Example for samples in rows
+# Select columns with samples from nice
+nice_rows &lt;- nice %&gt;% select(all_of(sample_names))
+
+# Change columns to rows
+nice_rows &lt;- nice_rows %&gt;% t() %&gt;% as.data.frame()
+
+# Turn colnames into phylogenetic units ID
+colnames(nice_rows) &lt;- paste0("OTU_", seq_along(colnames(nice_rows)))
+
+prepare_tidy_data(nice_rows, sample_names = sample_names, samples_in = "rows")
+
+</code></pre>
+
+
+</div>

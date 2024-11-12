@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multilabel_prediction</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a mlresult object</h2>
+
+<h3>Description</h3>
+
+<p>Create a mlresult object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multilabel_prediction(
+  bipartitions,
+  probabilities,
+  probability = getOption("utiml.use.probs", TRUE),
+  empty.prediction = getOption("utiml.empty.prediction", FALSE)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>bipartitions</code></td>
+<td>
+<p>The matrix of predictions (bipartition values),
+only 0 and 1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probabilities</code></td>
+<td>
+<p>The matrix of probability/confidence of a prediction,
+between 0..1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>A logical value. If <code>TRUE</code> the predicted values are
+the score between 0 and 1, otherwise the values are bipartition 0 or 1.
+(Default: <code>getOption("utiml.use.probs", TRUE)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>empty.prediction</code></td>
+<td>
+<p>A logical value. If <code>TRUE</code> the predicted values
+may contains empty values, otherwise at least one label will be positive for
+each instance.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of type mlresult
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">probs &lt;- matrix(
+ runif(90), ncol=3, dimnames = list(1:30, c("y1", "y2", "y3"))
+)
+preds &lt;- matrix(
+ as.numeric(probs &gt; 0.5), ncol=3, dimnames = list(1:30, c("y1", "y2", "y3"))
+)
+multilabel_prediction(probs, preds)
+</code></pre>
+
+
+</div>

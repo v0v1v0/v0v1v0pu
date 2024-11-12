@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zotero_construct_export_call</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct the URL for a Zotero export call</h2>
+
+<h3>Description</h3>
+
+<p>This function is just a convenience function to create a simple
+URL to download references from a public Zotero group. See
+https://www.zotero.org/support/dev/web_api/v3/start
+for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zotero_construct_export_call(
+  group,
+  sort = "dateAdded",
+  direction = "asc",
+  format = "bibtex",
+  start = 0,
+  limit = 100
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group</code></td>
+<td>
+<p>The group ID</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sort</code></td>
+<td>
+<p>On which field to sort</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>The direction to sort in</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>The format to export</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>The index of the first record to return</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>The number of records to return</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The URL in a character vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zotero_construct_export_call(2425237);
+</code></pre>
+
+
+</div>

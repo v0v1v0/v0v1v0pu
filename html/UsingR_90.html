@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>maydow</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Dow Jones industrial average and May maximum temperature</h2>
+
+<h3>Description</h3>
+
+<p>A data set of both the Dow Jones industrial average and the maximum
+daily temperature in New York City for May 2003.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(maydow)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 21 observations on the following 3 variables.
+</p>
+
+<dl>
+<dt>Day</dt>
+<dd>
+<p>Day of the month</p>
+</dd>
+<dt>DJA</dt>
+<dd>
+<p>The daily close of the DJIQ</p>
+</dd>
+<dt>max.temp</dt>
+<dd>
+<p>Daily maximum temperature in Central Park</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Are stock traders influenced by the weather? This dataset looks
+briefly at this question by comparing the daily close of the Dow Jones
+industrial average with the maximum daily temperature for the month of
+May 2003. This month was rainy and unseasonably cool weather wise, yet
+the DJIA did well.
+</p>
+
+
+<h3>Source</h3>
+
+<p>The DJIA data was taken from https://finance.yahoo.com the temperature data from
+<a href="https://www.noaa.gov">https://www.noaa.gov</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(maydow)
+attach(maydow)
+plot(max.temp,DJA)
+plot(max.temp[-1],diff(DJA))
+</code></pre>
+
+
+</div>

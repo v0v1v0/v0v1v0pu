@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_make_MR_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate Mendelian Randomization data</h2>
+
+<h3>Description</h3>
+
+<p>umx_make_MR_data returns a dataset containing 4 variables: A variable of interest (Y), a putative cause (X),
+a qtl (quantitative trait locus) influencing X, and a confounding variable (U) affecting both X and Y.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_make_MR_data(
+  nSubjects = 1000,
+  Vqtl = 0.02,
+  bXY = 0.1,
+  bUX = 0.5,
+  bUY = 0.5,
+  pQTL = 0.5,
+  seed = 123
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nSubjects</code></td>
+<td>
+<p>Number of subjects in sample</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Vqtl</code></td>
+<td>
+<p>Variance of QTL affecting causal variable X (Default 0.02)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bXY</code></td>
+<td>
+<p>Causal effect of X on Y (Default 0.1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bUX</code></td>
+<td>
+<p>Confounding effect of confounder 'U' on X (Default 0.5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bUY</code></td>
+<td>
+<p>Confounding effect of confounder 'U' on Y (Default 0.5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pQTL</code></td>
+<td>
+<p>Decreaser allele frequency (Default 0.5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>value for the random number generator (Default 123)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The code to make these Data. Modified from Dave Evans 2016 Boulder workshop talk.
+</p>
+
+
+<h3>Value</h3>
+
+<p>- data.frame
+</p>
+
+
+<h3>See Also</h3>
+
+<p>umx_make_TwinData
+</p>
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">df = umx_make_MR_data(10000)
+str(df)
+## Not run: 
+m1 = umxTwoStage(Y ~ X, ~qtl, data = df)
+plot(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

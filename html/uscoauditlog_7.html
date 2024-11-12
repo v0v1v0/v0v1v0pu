@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>support_function</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper Function</h2>
+
+<h3>Description</h3>
+
+<p>Takes in the dictionary outputted either from the format_from_dataframe or format_from_excel function and returns the data as a formatted data frame according to the original U.S. Copyright Office SR Audit Data online database.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">support_function(data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Input the dictionary variable from the format_from_dataframe or format_from_excel function</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Returns a formatted data frame according to the original U.S. Copyright Office SR Audit Data online database.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+filename = "data.xlsx"
+dataframedata = clean_data_to_dataframe(filename)
+data = format_from_dataframe(dataframedata)
+support_function(data)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

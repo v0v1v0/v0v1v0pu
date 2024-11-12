@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ac</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Adjust color transparency</h2>
+
+<h3>Description</h3>
+
+<p><code>ac</code> adjusts the transparency of a color or color palette <code>col</code> 
+to an opacity level <code>alpha</code> (in <code>[0, 1]</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ac(col, alpha = 0.5, use_names = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>A (required) color or color palette (as a vector).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>A factor modifying the opacity alpha 
+(as <code>alpha.f</code> in <code>adjustcolor</code>) to a value in <code>[0, 1]</code>. 
+Default: <code>alpha = .50</code> (i.e., medium opacity).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use_names</code></td>
+<td>
+<p>A logical value indicating whether color names should be adjusted 
+to include the values of <code>alpha</code>. 
+Default: <code>use_names = TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>ac</code> is mostly a wrapper for <code>adjustcolor</code> 
+of the <strong>grDevices</strong> package, but allows for more flexible 
+combinations of (multiple) <code>col</code> and <code>alpha</code> values. 
+</p>
+<p>The name <code>ac</code> is an abbreviation of "adjust color", 
+but is also a mnemonic aid for providing "air conditioning".
+</p>
+
+
+<h3>Value</h3>
+
+<p>A color vector of the same length as <code>col</code>, 
+transformed by <code>adjustcolor</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for plotting/seeing color palettes; 
+<code>usecol</code> for using color palettes;
+<code>simcol</code> for finding similar colors;  
+<code>newpal</code> for defining new color palettes; 
+<code>grepal</code> for finding named colors.
+</p>
+<p>Other color functions: 
+<code>demopal()</code>,
+<code>grepal()</code>,
+<code>newpal()</code>,
+<code>seecol()</code>,
+<code>shades_of()</code>,
+<code>simcol()</code>,
+<code>usecol()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ac("black")  # using alpha = .5 by default
+
+# multiple colors:
+cols &lt;- ac(c("black", "gold", "deepskyblue"), alpha = .50)
+seecol(cols, main = "Transparent colors")
+
+# multiple alphas:
+blacks &lt;- ac("black", alpha = 5:0/5)
+seecol(blacks, main = "One col several alpha values")
+
+bgc &lt;- ac(c("black", "gold"), alpha = 1:6/6)
+seecol(bgc, main = "More alpha values than cols")
+
+# Using a color palette:
+seecol(ac(pal_unikn_pref, 2/3), main = "Adding color transparency by ac()")
+
+# Color names:
+seecol(ac(col = pal_unikn_pref, alpha = c(1/5, 4/5), use_names = TRUE))
+seecol(ac(col = pal_unikn_pref, alpha = c(1/5, 4/5), use_names = FALSE))
+
+</code></pre>
+
+
+</div>

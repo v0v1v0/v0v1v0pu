@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>arma.sim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate Random Time Series Sequence.</h2>
+
+<h3>Description</h3>
+
+<p>This function is to generate a time series sequence.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">arma.sim(ars, mas, nobs, c = 0, sigma = 1, seed = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ars</code></td>
+<td>
+<p>AR part.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mas</code></td>
+<td>
+<p>MA part.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nobs</code></td>
+<td>
+<p>Length of time series sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c</code></td>
+<td>
+<p>Constant.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>The standrad error.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>Set seed.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The arma.sim method returns an object of class “Time Series”.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ts &lt;- arma.sim(ars = c(-0.9, -1.4, -0.7, -0.6), mas = c(0.5, -0.4), nobs = 100)
+</code></pre>
+
+
+</div>

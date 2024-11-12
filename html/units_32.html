@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>seq.units</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>seq method for units objects</h2>
+
+<h3>Description</h3>
+
+<p>seq method for units objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'units'
+seq(from, to, by = ((to - from)/(length.out - 1)),
+  length.out = NULL, along.with = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+<p>see seq</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>see seq</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by</code></td>
+<td>
+<p>see seq</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>length.out</code></td>
+<td>
+<p>see seq</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>along.with</code></td>
+<td>
+<p>see seq</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>see seq</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>arguments with units are converted to have units of the first argument (which is either <code>from</code> or <code>to</code>)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">seq(to = set_units(10, m), by = set_units(1, m), length.out = 5)
+seq(set_units(10, m), by = set_units(1, m), length.out = 5)
+seq(set_units(10, m), set_units(19, m))
+seq(set_units(10, m), set_units(.1, km), set_units(10000, mm))
+</code></pre>
+
+
+</div>

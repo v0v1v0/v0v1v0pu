@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>RasterVariogram-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> RasterVariogram class</h2>
+
+<h3>Description</h3>
+
+<p>An object of the <code>RasterVariogram</code> class contains information about the empirical variogram of a raster data. The object can be created with the function:  <code>Variogram</code>.
+</p>
+
+
+<h3>Slots</h3>
+
+<p>Slots for speciesLISA object:
+</p>
+
+<dl>
+<dt>
+<code>lag</code>:</dt>
+<dd>
+<p>a number specifying lag distance</p>
+</dd> 
+<dt>
+<code>nlags</code>:</dt>
+<dd>
+<p>a number specifying number of lags based on cutoff parameter</p>
+</dd>
+<dt>
+<code>variogramCloud</code>:</dt>
+<dd>
+<p><code>matrix</code>, including semivariance for all pairs</p>
+</dd>
+<dt>
+<code>variogram</code>:</dt>
+<dd>
+<p><code>data.frame</code>, including binned semivariance within each lag </p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Babak Naimi <a href="mailto:naimi@r-gis.net">naimi@r-gis.net</a>
+</p>
+<p><a href="https://r-gis.net/">https://r-gis.net/</a>
+</p>
+<p><a href="https://www.biogeoinformatics.org/">https://www.biogeoinformatics.org/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("speciesLISA")
+</code></pre>
+
+
+</div>

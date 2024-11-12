@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>usmap_transform</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert spatial data to usmap projection</h2>
+
+<h3>Description</h3>
+
+<p>Converting a spatial object of map coordinates will
+allow those points to line up with the regular usmap plot by applying
+the same US National Atlas Equal Area projection (including Alaska and
+Hawaii of course) to those points as well.
+</p>
+<p>The input <code>data</code> is assumed to contain longitude and latitude coordinates
+by default. If this is not the case, provide an sf::st_crs object
+to the <code>crs</code> parameter with the appropriate coordinate reference system.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">usmap_transform(data, ...)
+
+## S3 method for class 'sf'
+usmap_transform(data, ...)
+
+## S3 method for class 'data.frame'
+usmap_transform(data, ..., input_names = c("lon", "lat"), output_names = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A data frame containing coordinates in a two column format
+where the first column represents longitude and the second data frame
+represents latitude. The names of the data frame column do not matter,
+just that the order of the columns is kept intact.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional parameters passed onto sf::st_as_sf.
+By default, <code>crs = sf::st_crs(4326)</code> is used, implying longitude and latitude
+coordinates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input_names</code></td>
+<td>
+<p>A character vector of length two which specifies the
+longitude and latitude columns of the input data (the ones that should be
+transformed), respectively. Only required if the input data is
+a <code>data.frame</code> object. Defaults to <code>c("lon", "lat")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_names</code></td>
+<td>
+<p>Defunct, this parameter is no longer used. The output
+of this function will have a column named <code>"geometry"</code> with the transformed
+coordinates. This parameter may be removed in a future version.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An <code>sf</code> object containing the transformed coordinates from the
+input data frame with the US National Atlas Equal Area projection applied.
+The transformed columns will be appended to the data frame so that all
+original columns should remain intact.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data &lt;- data.frame(
+  lon = c(-74.01, -95.36, -118.24, -87.65, -134.42, -157.86),
+  lat = c(40.71, 29.76, 34.05, 41.85, 58.30, 21.31),
+  pop = c(8398748, 2325502, 3990456, 2705994, 32113, 347397)
+)
+
+# Transform data
+transformed_data &lt;- usmap_transform(data)
+
+# Plot transformed data on map
+library(ggplot2)
+
+plot_usmap() + geom_sf(
+  data = transformed_data,
+  aes(size = pop),
+  color = "red", alpha = 0.5
+)
+
+</code></pre>
+
+
+</div>

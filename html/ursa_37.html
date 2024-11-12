@@ -1,0 +1,268 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.ursa</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Create raster image from R objects or GDAL raster files.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>as.ursa</code> converts <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> <span class="pkg">base</span> objects <code>matrix</code>, <code>array</code>, <code>numeric</code>, <code>data.frame</code> <code>list</code>, <span class="pkg">sp</span> objects <code>SpatialGridDataFrame</code>, <code>SpatialPixelsDataFrame</code> and <code>SpatialPointsDataFrame</code>, <span class="pkg">raster</span> objects <code>raster</code>, <code>stack</code> and <code>brick</code>, and GDAL raster files (using functions from <span class="pkg">rgdal</span> package) to <code>ursaRaster</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as.ursa(obj, ...)
+as_ursa(obj, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object for coercion
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Depending on class of <code>obj</code>, arguments are passed to repsective functions.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>as_ursa</code> is a synonym to <code>as.ursa</code>.
+</p>
+<p>This is a high-level function to create <code>ursaRaster</code> objects. The follwed classes of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects are implemented:
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+   ‘Data Class’ </td>
+<td style="text-align: left;"> ‘Appropriate method’</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>array</code> </td>
+<td style="text-align: left;"> <code>ursa_new</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>matrix</code> </td>
+<td style="text-align: left;"> <code>ursa_new</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>numeric</code> </td>
+<td style="text-align: left;"> <code>ursa_new</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>data.frame</code> </td>
+<td style="text-align: left;"> <code>allocate</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>SpatialPointsDataFrame</code> (<span class="pkg">sp</span>)</td>
+<td style="text-align: left;"> <code>allocate</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>SpatialPixelsDataFrame</code> (<span class="pkg">sp</span>)</td>
+<td style="text-align: left;"> <code>allocate</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>SpatialGridDataFrame</code> (<span class="pkg">sp</span>)</td>
+<td style="text-align: left;"> <code>ursa_new</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>list</code> of <code>ursaRaster</code> objects </td>
+<td style="text-align: left;"> <code>unlist</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>list</code> returned by <code>sf::gdal_read</code> </td>
+<td style="text-align: left;"> <code>ursa_new</code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>list</code> <em>(general)</em> </td>
+<td style="text-align: left;"> Items <code>$x</code> and <code>$y</code> are required, If lengths of <code>$x</code> and <code>$y</code> are equal to dim of data, then <code>allocate</code>, else: 1) raster grid is defined from <code>$x</code> and <code>$y</code>, 2) <code>ursa_new</code> is called.</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>ggmap</code> (<span class="pkg">ggmap</span>) </td>
+<td style="text-align: left;"> <code>ursa_new</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>raster</code> (<span class="pkg">raster</span>)</td>
+<td style="text-align: left;"> <code>ursa_new</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>brick</code> (<span class="pkg">raster</span>)</td>
+<td style="text-align: left;"> <code>ursa_new</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>stack</code> (<span class="pkg">raster</span>)</td>
+<td style="text-align: left;"> <code>ursa_new</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>bitmap</code> (<span class="pkg">magick</span>)</td>
+<td style="text-align: left;"> <code>ursa_new</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   <code>character</code> (GDAL supported file name) </td>
+<td style="text-align: left;"> <code>read_gdal</code>.
+</td>
+</tr>
+</table>
+<p>Generally, <code>allocate</code> is used for objects with non-regular grid, and <code>ursa_new</code> is used for regular grids. The raster grid is defined from object properties or from sessional grid.
+</p>
+<p>Color tables are supported for GDAL file names and <span class="pkg">raster</span> objects (raster, brick, stack).
+</p>
+<p>For ENVI *.hdr Labelled Raster Files there are alternatives:
+</p>
+
+<ol>
+<li>
+<p> Read object with GDAL (<code>read_gdal</code>);
+</p>
+</li>
+<li>
+<p> Read object without GDAL (<code>read_envi</code>).
+</p>
+</li>
+</ol>
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a1 &lt;- as.ursa(volcano)
+print(a1)
+display(a1)
+
+session_grid(NULL)
+b &lt;- ursa_dummy(mul=1/16,bandname=format(Sys.Date()+seq(3)-1,"%A"))
+print(b)
+
+c1 &lt;- b[[1]] ## equal to 'c1 &lt;- as.matrix(b[1],coords=TRUE)'
+str(c1)
+b1a &lt;- as.ursa(c1)
+print(c(original=b[1],imported=b1a))
+print(c(projection.b1a=ursa_proj(b1a)))
+session_grid(NULL)
+b1b &lt;- as.ursa(c1$z)
+print(b1b)
+print(c(projection.b1b=ursa_proj(b1b)))
+
+c2 &lt;- as.data.frame(b)
+str(c2)
+session_grid(NULL)
+b2a &lt;- as.ursa(c2)
+print(b2a)
+
+session_grid(NULL)
+attr(c2,"crs") &lt;- NULL
+b2b &lt;- as.ursa(c2)
+print(b2b)
+print(ursa_grid(b2b))
+
+c3 &lt;- unclass(as.matrix(b,coords=TRUE))
+str(c3)
+session_grid(b)
+b3a &lt;- as.ursa(c3)
+print(b3a)
+print(ursa_grid(b3a))
+session_grid(NULL)
+b3b &lt;- as.ursa(c3)
+print(b3b)
+print(ursa_grid(b3b))
+
+c4 &lt;- as.array(b)
+str(c4)
+session_grid(b)
+b4a &lt;- as.ursa(c4)
+print(b4a)
+print(ursa_grid(b4a))
+session_grid(NULL)
+b4b &lt;- as.ursa(c4)
+print(b4b)
+print(ursa_grid(b4b))
+
+n &lt;- 20
+c5 &lt;- data.frame(y=runif(n,min=1000000,max=5000000)
+                ,x=runif(n,min=-3000000,max=1000000)
+                ,value=runif(n,min=0,max=10))
+print(head(c5))
+session_grid(b)
+b5a &lt;- as.ursa(c5)
+print(b5a)
+ ## to avoid over-timing during tests -- begin
+   display(b5a)
+ ## to avoid over-timing during tests -- end
+session_grid(NULL)
+b5b &lt;- as.ursa(c5)
+print(b5b)
+ ## to avoid over-timing during tests -- begin
+   display(b5b)
+ ## to avoid over-timing during tests -- end
+
+# b6 &lt;- as.ursa(system.file("pictures/erdas_spnad83.tif",package="rgdal"))
+b6 &lt;- as.ursa(system.file("tif/geomatrix.tif",package="sf"))
+print(b6)
+display(b6,pal=c("black","white"),coast=FALSE,col="orange")
+
+ ## package 'raster' is required -- begin
+if (requireNamespace("raster")) {
+   r &lt;- raster::brick(system.file("external/rlogo.gri",package="raster"))
+   print(r)
+   b7 &lt;- as.ursa(r)
+   ursa_proj(b7) &lt;- ""
+   print(b7)
+   display_rgb(b7)
+}
+ ## package 'raster' is required -- end
+</code></pre>
+
+
+</div>

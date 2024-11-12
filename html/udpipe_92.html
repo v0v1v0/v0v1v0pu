@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unlist_tokens</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a data.frame from a list of tokens</h2>
+
+<h3>Description</h3>
+
+<p>Create a data.frame from a list of tokens.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unlist_tokens(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a list where the list elements are character vectors of tokens</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>the data of <code>x</code> converted to a data.frame.
+This data.frame has columns doc_id and token where the doc_id is taken from the list names of x
+and token contains the data of <code>x</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- setNames(c("some text here", "hi  there understand this?"), c("a", "b"))
+x &lt;- strsplit(x, split = " ")
+x
+unlist_tokens(x)
+</code></pre>
+
+
+</div>

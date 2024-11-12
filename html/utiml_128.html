@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utiml</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>utiml: Utilities for Multi-Label Learning</h2>
+
+<h3>Description</h3>
+
+<p>The utiml package is a framework for the application of classification
+algorithms to multi-label data. Like the well known MULAN used with Weka, it
+provides a set of multi-label procedures such as sampling methods,
+transformation strategies, threshold functions, pre-processing techniques and
+evaluation metrics. The package was designed to allow users to easily
+perform complete multi-label classification experiments in the R environment.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Currently, the main methods supported are:
+</p>
+
+<ol>
+<li>
+<p><strong>Classification methods</strong>:
+<code>ML Baselines</code>,
+<code>Binary Relevance (BR)</code>,
+<code>BR+</code>,
+<code>Classifier Chains</code>,
+<code>Calibrated Label Ranking (CLR)</code>,
+<code>Dependent Binary Relevance (DBR)</code>,
+<code>Ensemble of Binary Relevance (EBR)</code>,
+<code>Ensemble of Classifier Chains (ECC)</code>,
+<code>Ensemble of Pruned Set (EPS)</code>,
+<code>Hierarchy Of Multilabel classifiER (HOMER)</code>,
+<code>Label specIfic FeaTures (LIFT)</code>,
+<code>Label Powerset (LP)</code>,
+<code>Meta-Binary Relevance (MBR or 2BR)</code>,
+<code>Multi-label KNN (ML-KNN)</code>,
+<code>Nested Stacking (NS)</code>,
+<code>Pruned Problem Transformation (PPT)</code>,
+<code>Pruned and Confident Stacking Approach (Prudent)</code>,
+<code>Pruned Set (PS)</code>,
+<code>Random k-labelsets (RAkEL)</code>,
+<code>Recursive Dependent Binary Relevance (RDBR)</code>,
+<code>Ranking by Pairwise Comparison (RPC)</code>
+
+</p>
+</li>
+<li>
+<p><strong>Evaluation methods</strong>:
+<code>Performing a cross-validation procedure</code>,
+<code>Confusion Matrix</code>,
+<code>Evaluate</code>,
+<code>Supported measures</code>
+
+</p>
+</li>
+<li>
+<p><strong>Pre-process utilities</strong>:
+<code>Fill sparse data</code>,
+<code>Normalize data</code>,
+<code>Remove attributes</code>,
+<code>Remove labels</code>,
+<code>Remove skewness labels</code>,
+<code>Remove unique attributes</code>,
+<code>Remove unlabeled instances</code>,
+<code>Replace nominal attributes</code>
+
+</p>
+</li>
+<li>
+<p><strong>Sampling methods</strong>:
+<code>Create holdout partitions</code>,
+<code>Create k-fold partitions</code>,
+<code>Create random subset</code>,
+<code>Create subset</code>,
+<code>Partition fold</code>
+
+</p>
+</li>
+<li>
+<p><strong>Threshold methods</strong>:
+<code>Fixed threshold</code>,
+<code>Cardinality threshold</code>,
+<code>MCUT</code>,
+<code>PCUT</code>,
+<code>RCUT</code>,
+<code>SCUT</code>,
+<code>Subset correction</code>
+
+</p>
+</li>
+</ol>
+<p>However, there are other utilities methods not previously cited as
+<code>as.bipartition</code>, <code>as.mlresult</code>,
+<code>as.ranking</code>, <code>multilabel_prediction</code>, etc. More
+details and examples are available on
+<a href="https://github.com/rivolli/utiml">utiml repository</a>.
+</p>
+
+
+<h3>Notes</h3>
+
+<p>We use the <code>mldr</code> package, to manipulate multi-label data.
+See its documentation to more information about handle multi-label dataset.
+</p>
+
+
+<h3>Cite as</h3>
+
+<pre>
+  @article{RJ-2018-041,
+     author = {Adriano Rivolli and Andre C. P. L. F. de Carvalho},
+     title = {{The utiml Package: Multi-label Classification in R}},
+     year = {2018},
+     journal = {{The R Journal}},
+     doi = {10.32614/RJ-2018-041},
+     url = {https://doi.org/10.32614/RJ-2018-041},
+     pages = {24--37},
+     volume = {10},
+     number = {2}
+ }</pre>
+
+
+<h3>Author(s)</h3>
+
+
+<ul><li>
+<p> Adriano Rivolli &lt;rivolli@utfpr.edu.br&gt;
+</p>
+</li></ul>
+<p>This package is a result of my PhD at Institute of Mathematics and Computer
+Sciences (ICMC) at the University of Sao Paulo, Brazil.
+</p>
+<p>PhD advisor: Andre C. P. L. F. de Carvalho
+</p>
+
+
+</div>

@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compose_legend</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plot colorbars or marginal texts.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>compose_legend</code> recognizes color tables and characters among arguments and passes them to suitable functions for plotting on margins outside of panel area.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compose_legend(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>If first argument is a list, then either <code>ursaColorTable</code> or <code>character</code> objects are detected in this list. <code>ursaColorTable</code> can be extracted from <code>ursaRaster</code> (if presents). Other objects are coerced to character.
+</p>
+<p>If first argument is <code>ursaColorTable</code> or <code>ursaRaster</code> with color tables, then other arguments are interpreted as color tables. If coercion to color table is impossible, the coersion is to <code>character</code>.
+</p>
+<p><code>legend_colorbar</code> is called for objects of class <code>ursaColorTable</code>.
+<code>legend_mtext</code> is called for objects of class <code>ursaColorTable</code>. If first argument is a list, then other arguments are passed to respective function calls.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Named list in the first argument is allowed or named vectors are allowed if first argument is not a list. For <code>legend_colorbar</code> name of object can be used as an argument <code>units</code>.
+</p>
+<p>This function is designed to make plot on moderate level of usage with the followed construction:</p>
+<pre>
+compose_open(...)
+compose_panel(...)
+compose_legend(...)
+compose_close(...)
+</pre>
+<p>Function <code>compose_panel</code> returns list of color tables of plotted rasters, and followed sequence is available:</p>
+<pre>
+ct &lt;- compose_panel(a)
+compose_legend(ct) # or, if 'a' has color tables, then 'compose_legend(a)'
+</pre>
+
+
+<h3>Value</h3>
+
+<p><code>NULL</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>legend_colorbar</code>
+</p>
+<p><code>legend_mtext</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+b &lt;- lapply(as.list(ursa_dummy(2)),colorize)
+cd &lt;- compose_design(layout=c(1,2),legend=list(list(1,"left"),list(1,"right")
+                                              ,list("top","full"),list("bottom",1)))
+for (i in 1:4) {
+   compose_open(cd,dev=i==1)
+   ct &lt;- compose_panel(b,decor=FALSE)
+   if (i==2)
+      compose_legend(ct)
+   else if (i==3)
+      compose_legend(ct[[1]],'Tomorrow'=b[[2]]
+                    ,top="This is example of legend composition"
+                    ,format(Sys.Date(),"(c) %Y"))
+   else if (i==4)
+      compose_legend(c(ct,"top","bottom"),units=c("left","right"))
+   compose_close()
+}
+</code></pre>
+
+
+</div>

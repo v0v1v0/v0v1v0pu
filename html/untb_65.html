@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rand.neutral</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Random neutral ecosystem</h2>
+
+<h3>Description</h3>
+
+<p>Given the size of the metacommunity <code class="reqn">J</code>, and the fundamental
+biodiversity number <code class="reqn">\theta</code>, generate an object of class
+<code>count</code> using a stochastic mechanism consistent with the
+neutral theory.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">rand.neutral(J, theta=NULL, prob.of.mutate=NULL, string = NULL, pad = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>J</code></td>
+<td>
+<p>Size of metacommunity</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>Fundamental biodiversity number <code class="reqn">\theta</code>.
+User must supply exactly one of <code>theta</code> and
+<code>prob.of.mutate</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prob.of.mutate</code></td>
+<td>
+<p>Probability of mutation <code class="reqn">\nu</code>:
+<code class="reqn">\theta=2J\nu</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>string</code></td>
+<td>
+<p>String to add to species names.  By default (ie
+<code>string</code> being <code>NULL</code>), species are named “1”,
+“2”,<code class="reqn">\ldots</code>.   Argument <code>string</code> supplies a
+prefix for these species names; a good one to use is
+“<code>spp.</code>”.  This argument is useful because printing a
+<code>count</code> object can be confusing if the species names are
+all integers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pad</code></td>
+<td>
+<p>Boolean, with default <code>FALSE</code> meaning to return a
+<code>count</code> object having only extant species, and <code>TRUE</code>
+meaning to pad the count with extinct species to <code>J</code> species.
+Use this when a vector of length <code>J</code> is required consistently
+(see examples section).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Uses the simulation method on page 289 of Hubbell (2001).
+</p>
+
+
+<h3>Note</h3>
+
+<p>If <code>pad</code> is <code>TRUE</code>, and you set <code>string</code> to
+“<code>extinct</code>”, things will break.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>S. P. Hubbell 2001.  “The Unified Neutral Theory of Biodiversity”.
+Princeton University Press.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>untb</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">rand.neutral(1000, 9)
+rand.neutral(1000, 9, string="spp.")
+
+data(butterflies)
+rand.neutral(no.of.ind(butterflies), optimal.theta(butterflies),string="spp.")
+
+
+# what is the distribution of abundance of the second ranked species if
+# J=10, theta=0.7?
+plot(table(replicate(100,rand.neutral(10,theta=0.7,pad=TRUE)[2])))
+
+</code></pre>
+
+
+</div>

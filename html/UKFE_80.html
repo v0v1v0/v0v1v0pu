@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>QuickResults</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Quick pooled results</h2>
+
+<h3>Description</h3>
+
+<p>Provides pooled gauged, ungauged, or fake ungauged results, directly from the catchment descriptors
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">QuickResults(
+  CDs,
+  gauged = FALSE,
+  dons = 2,
+  Qmed = NULL,
+  FUngauged = FALSE,
+  plot = TRUE,
+  dist = "GenLog"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>CDs</code></td>
+<td>
+<p>catchment descriptors derived from either GetCDs or CDsXML</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gauged</code></td>
+<td>
+<p>logical argument with a default of FALSE. TRUE for gauged results and FALSE for ungauged</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dons</code></td>
+<td>
+<p>number of donors required with a choice of 0, 1, or 2</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Qmed</code></td>
+<td>
+<p>user supplied QMED which overrides the default QMED estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FUngauged</code></td>
+<td>
+<p>logical argument with a default of FALSE. TRUE provides an ungauged estimate whilst excluding the gauged site (the site with the most similar CDs)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>logical argument with a default of TRUE. TRUE provides an extreme value plot. FALSE prevents the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>a choice of distribution for the estimates. The choices are "GenLog", "GEV", "Kappa3", or "Gumbel; the generalised logistic, generalised extreme value, Kappa3,and Gumbel distributions, respectively. The default is "GenLog"</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The quick results function provides results with a default pooling group. If gauged = FALSE the median annual maximum flood (QMED) is estimated from catchment descriptors using the QMED equation and then adjusted with two of the closest un-urban gauged sites (can be changed to 0 or 1 donors). If the site is urban, an urban adjustment is made to the QMED and to the pooled growth curve. If gauged = TRUE QMED is the median of the gauged annual maxima and the growth curve is formed with the gauged weighting procedure (often known as enhanced single site). If the gauged catchment is urban, it's included in the pooling group and deurbanised before an urban adjustment is made to the final growth curve. If FUngauged = TRUE, the top site in the pooling group is excluded and the estimate is performed henceforth in the manner of gauged = FALSE. If the CDs are from a gauged site that is not in the list of sites that are considered suitable for pooling, it won't be included in the pooling group. In which case, if gauged = TRUE, the result will be erroneous.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list of length two. Element one is a data frame with columns; return period (RP), peak flow estimates (Q) and growth factor estimates (GF). Two additional columns quantify the uncertainty. The second element is the estimated Lcv and Lskew (linear coefficient of variation and skewness). By default an extreme value plot is also returned
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get some catchment descriptors
+CDs.73005 &lt;- GetCDs(73005)
+#Get default ungauged results
+QuickResults(CDs.73005)
+#Get gauged results with a GEV distribution
+QuickResults(CDs.73005, gauged = TRUE, dist = "GEV")
+#Get fake ungauged results with one donor
+QuickResults(CDs.73005, FUngauged = TRUE, dons = 1)
+
+
+</code></pre>
+
+
+</div>

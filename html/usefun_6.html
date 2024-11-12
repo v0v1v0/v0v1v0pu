@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dec_to_bin</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert decimal number to its binary representation</h2>
+
+<h3>Description</h3>
+
+<p>Get the binary representation of any decimal number from 0 to (2^31) - 1.
+Doesn't work for larger numbers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dec_to_bin(decimal_num, bits = 32)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>decimal_num</code></td>
+<td>
+<p>decimal number between 0 and (2^31) - 1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bits</code></td>
+<td>
+<p>number of bits to keep in the result counting from the right.
+<strong>Default value is 32</strong>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a binary string representation of the given decimal number.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# representing 0
+dec_to_bin(0,1)
+dec_to_bin(0,10)
+dec_to_bin(0,32)
+dec_to_bin(0)
+
+# representing 24
+dec_to_bin(24,6)
+dec_to_bin(24,21)
+dec_to_bin(24)
+dec_to_bin(24,3) # note that this will cut the returned result so be careful!
+
+</code></pre>
+
+
+</div>

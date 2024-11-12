@@ -1,0 +1,200 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ARIMAmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ARIMAmodel</h2>
+
+<h3>Description</h3>
+
+<p>Estimates and forecasts ARIMA general univariate models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ARIMAmodel(
+  y,
+  u = NULL,
+  model = NULL,
+  cnst = NULL,
+  s = frequency(y),
+  criterion = "bic",
+  h = 2 * s,
+  verbose = FALSE,
+  lambda = 1,
+  maxOrders = c(3, 2, 3, 2, 1, 2),
+  bootstrap = FALSE,
+  nSimul = 5000,
+  fast = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a time series to forecast (it may be either a numerical vector or
+a time series object). This is the only input required. If a vector, the additional
+input <code>s</code> should be supplied compulsorily (see below).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+<p>a matrix of input time series. If 
+the output wanted to be forecast, matrix <code>u</code> should contain future values for inputs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>the model to estimate. A vector c(p,d,q,P,D,Q) containing the model orders
+of an ARIMA(p,d,q)x(P,D,Q)_s model. A constant may be estimated with the
+cnst input.
+Use a NULL to automatically identify the ARIMA model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cnst</code></td>
+<td>
+<p>flag to include a constant in the model (TRUE/FALSE/NULL). Use NULL to estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+<p>seasonal period of time series (1 for annual, 4 for quarterly, ...)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion</code></td>
+<td>
+<p>information criterion for identification stage ("aic", "bic", "aicc")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>h</code></td>
+<td>
+<p>forecast horizon. If the model includes inputs h is not used, the lenght of u is used instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>intermediate estimation output (TRUE / FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Box-Cox lambda parameter (NULL: estimate)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxOrders</code></td>
+<td>
+<p>a vector c(p,d,q,P,D,Q) containing the maximum orders of model orders 
+to search for in the automatic identification</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrap</code></td>
+<td>
+<p>use bootstrap simulation for predictive distributions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nSimul</code></td>
+<td>
+<p>number of simulation runs for bootstrap simulation of predictive distributions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fast</code></td>
+<td>
+<p>fast identification (avoids post-identification checks)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>ARIMAmodel</code> is a function for modelling and forecasting univariate
+time series with Autoregressive Integrated Moving Average (ARIMA) time series models. 
+It sets up the model with a number of control variables that
+govern the way the rest of functions in the package will work. It also estimates 
+the model parameters by Maximum Likelihood and forecasts the data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ARIMA</code>. It is a list with fields including all the inputs and
+the fields listed below as outputs. All the functions in this package fill in
+part of the fields of any <code>ARIMA</code> object as specified in what follows (function 
+<code>ARIMA</code> fills in all of them at once):
+</p>
+<p>After running <code>ARIMAmodel</code> or <code>ARIMA</code>:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Estimated parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yFor</code></td>
+<td>
+<p>Forecasted values of output</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yForV</code></td>
+<td>
+<p>Variance of forecasted values of output</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ySimul</code></td>
+<td>
+<p>Bootstrap simulations for forecasting distribution evaluation</p>
+</td>
+</tr>
+</table>
+<p>After running <code>ARIMAvalidate</code>:
+</p>
+<table><tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>Estimation and validation table</p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ARIMA</code>, <code>ARIMAvalidate</code>,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+y &lt;- log(AirPAssengers)
+m1 &lt;- ARIMAmodel(y)
+m1 &lt;- ARIMAmodel(y, lambda = NULL)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

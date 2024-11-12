@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.ARIMA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>print.ARIMA</h2>
+
+<h3>Description</h3>
+
+<p>Prints an ARIMA object
+</p>
+<p>Prints an ETS object
+</p>
+<p>Prints a PTS object
+</p>
+<p>Prints a TOBIT TETS object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ARIMA'
+print(x, ...)
+
+## S3 method for class 'ETS'
+print(x, ...)
+
+## S3 method for class 'PTS'
+print(x, ...)
+
+## S3 method for class 'TETS'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object of class “TETS”.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional inputs to handle the way to print output.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See help of <code>ARIMA</code>.
+</p>
+<p>See help of <code>ETS</code>.
+</p>
+<p>See help of <code>PTS</code>.
+</p>
+<p>See help of <code>TETS</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ARIMA</code>, <code>ARIMAmodel</code>, <code>ARIMAvalidate</code>,
+</p>
+<p><code>ETS</code>, <code>ETSmodel</code>, <code>ETSvalidate</code>,
+<code>ETScomponents</code>, <code>ETSestim</code>
+</p>
+<p><code>PTS</code>, <code>PTSmodel</code>, <code>PTSvalidate</code>,
+<code>PTScomponents</code>, <code>PTSestim</code>
+</p>
+<p><code>TETS</code>, <code>TETSmodel</code>, <code>TETSvalidate</code>,
+<code>TETScomponents</code>, <code>TETSestim</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+m1 &lt;- ARIMAmodel(log(gdp))
+print(m1)
+
+## End(Not run)
+## Not run: 
+m1 &lt;- ETSmodel(log(gdp))
+print(m1)
+
+## End(Not run)
+## Not run: 
+m1 &lt;- PTSmodel(log(AirPassengers))
+print(m1)
+
+## End(Not run)
+## Not run: 
+m1 &lt;- TETSmodel(log(gdp))
+print(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

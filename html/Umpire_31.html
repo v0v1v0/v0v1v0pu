@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ClinicalNoiseModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+A Noise Model for Clinical Data
+</h2>
+
+<h3>Description</h3>
+
+<p>A <code>ClinicalNoiseModel</code> represents the additional human and measurement 
+noise that is layered on top of any biological variabilty when measuring 
+clinical variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ClinicalNoiseModel(nFeatures, shape = 1.02, scale = 0.05/shape)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nFeatures</code></td>
+<td>
+<p>An integer; the number of additive scale parameters
+to sample from the gamma distribution.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape</code></td>
+<td>
+
+<p>The <code>shape</code> gamma hyperparameter describing the standard 
+deviation of additive noise.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale</code></td>
+<td>
+
+<p>The <code>scale</code> gamma hyperparameter describing the standard 
+deviation of additive noise.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>We model both additive and multiplicative noise, so that the observed
+expression of clinical variable <var>c</var> in sample <var>i</var> is given by:
+<code class="reqn">Y_ci = S_ci + E_ci</code>, where <var>Y_ci</var> = observed expression,
+<var>S_ci</var> = true biological signal.
+In the ClinicalNoiseModel (as opposed to the <code>NoiseModel</code>), 
+we model the additive noise as <code class="reqn">E_ci ~ N(0,tau)</code>, 
+without multiplicative noise or an additive bias/offset in the clinical model. 
+The standard deviation hyperparameters of the additive noise <var>tau</var> 
+is modeled by the gamma distribution <code class="reqn">tau ~ Gamma(shape, scale)</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>NoiseModel</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+Caitlin E. Coombes <a href="mailto:caitlin.coombes@osumc.edu">caitlin.coombes@osumc.edu</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>NoiseModel-class</code>,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("NoiseModel")
+
+## generate a ClinicalEngine with 20 features and 4 clusters
+ce &lt;- ClinicalEngine(20, 4, TRUE)
+## generate 300 simulated patients
+set.seed(194718)
+dset &lt;- rand(ce, 300)
+
+cnm &lt;- ClinicalNoiseModel(nrow(ce@localenv$eng), shape=2, scale=0.1)
+cnm
+
+noisy &lt;- blur(cnm, dset$data)
+hist(noisy)
+</code></pre>
+
+
+</div>

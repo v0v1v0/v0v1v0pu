@@ -1,0 +1,383 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>xmu_make_TwinSuperModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper to make a basic top, MZ, and DZ model.</h2>
+
+<h3>Description</h3>
+
+<p><code>xmu_make_TwinSuperModel</code> makes basic twin model containing <code>top</code>, <code>MZ</code>, and <code>DZ</code> models. It intelligently handles thresholds for
+ordinal data, and means model for covariates matrices in the twin models if needed.
+</p>
+<p>It's the replacement for <code>xmu_assemble_twin_supermodel</code> approach.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">xmu_make_TwinSuperModel(
+  name = "twin_super",
+  mzData,
+  dzData,
+  selDVs,
+  selCovs = NULL,
+  sep = NULL,
+  type = c("Auto", "FIML", "cov", "cor", "WLS", "DWLS", "ULS"),
+  allContinuousMethod = c("cumulants", "marginals"),
+  numObsMZ = NULL,
+  numObsDZ = NULL,
+  nSib = 2,
+  equateMeans = TRUE,
+  weightVar = NULL,
+  bVector = FALSE,
+  dropMissingDef = TRUE,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>for the supermodel</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mzData</code></td>
+<td>
+<p>Dataframe containing the MZ data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dzData</code></td>
+<td>
+<p>Dataframe containing the DZ data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>selDVs</code></td>
+<td>
+<p>List of manifest base names (e.g. BMI, NOT 'BMI_T1') (OR, you don't set "sep", the full variable names)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>selCovs</code></td>
+<td>
+<p>List of covariate base names (e.g. age, NOT 'age_T1') (OR, you don't set "sep", the full variable names)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>string used to expand selDVs into selVars, i.e., "_T" to expand BMI into BMI_T1 and BMI_T2 (optional but STRONGLY encouraged)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>One of 'Auto','FIML','cov', 'cor', 'WLS','DWLS', or 'ULS'. Auto tries to react to the incoming mxData type (raw/cov).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>allContinuousMethod</code></td>
+<td>
+<p>"cumulants" or "marginals". Used in all-continuous WLS data to determine if a means model needed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numObsMZ</code></td>
+<td>
+<p>Number of MZ observations contributing (for summary data only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numObsDZ</code></td>
+<td>
+<p>Number of DZ observations contributing (for summary data only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nSib</code></td>
+<td>
+<p>Number of members per family (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>equateMeans</code></td>
+<td>
+<p>Whether to equate T1 and T2 means (default = TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weightVar</code></td>
+<td>
+<p>If provided, a vector objective will be used to weight the data. (default = NULL).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bVector</code></td>
+<td>
+<p>Whether to compute row-wise likelihoods (defaults to FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dropMissingDef</code></td>
+<td>
+<p>Whether to automatically drop missing def var rows for the user (default = TRUE). You get a polite note.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>(default = FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>xmu_make_TwinSuperModel</code> is used in twin models (e.g.<code>umxCP()</code>, <code>umxACE()</code> and <code>umxACEv()</code> and will be added to the other models: <code>umxGxE()</code>, <code>umxIP()</code>,
+simplifying code maintenance.
+</p>
+<p>It takes <code>mzData</code> and <code>dzData</code>, a list of the <code>selDVs</code> to analyse and optional <code>selCovs</code> (as well as <code>sep</code> and <code>nSib</code>), along with other
+relevant information such as whether the user wants to <code>equateMeans</code>.
+It can also handle a <code>weightVar</code>.
+</p>
+<p>If covariates are passed in these are included in the means model (via a call to <code>xmuTwinUpgradeMeansToCovariateModel</code>.
+</p>
+<p><strong>Modeling</strong>
+</p>
+<p><strong>Matrices created</strong>
+</p>
+<p><em>top model</em>
+</p>
+<p>For raw and WLS data, <code>top</code> contains a <code>expMeans</code> matrix (if needed). For summary data, the top model contains only a name.
+</p>
+<p>For ordinal data, <code>top</code> gains <code>top.threshMat</code> (from a call to <code>umxThresholdMatrix()</code>).
+</p>
+<p>For covariates, top stores the <code>intercepts</code> matrix and a <code>betaDef</code> matrix. These are then used to make expMeans in <code>MZ</code> and <code>DZ</code>.
+</p>
+<p><em>MZ and DZ models</em>
+</p>
+<p><code>MZ</code> and <code>DZ</code> contain the data, and an expectation referencing <code>top.expCovMZ</code> and <code>top.expMean</code>, and, <code>vector = bVector</code>.
+For continuous raw data, MZ and DZ contain <code>OpenMx::mxExpectationNormal()</code> and <code>OpenMx::mxFitFunctionML()</code>.
+For WLS these the fit function is switched to <code>OpenMx::mxFitFunctionWLS()</code> with appropriate <code>type</code> and <code>allContinuousMethod</code>.
+</p>
+<p>For binary, a constraint and algebras are included to constrain <code>Vtot</code> (A+C+E) to 1.
+</p>
+<p>If a <code>weightVar</code> is detected, these columns are used to create a row-weighted MZ and DZ models.
+</p>
+<p>If <code>equateMeans</code> is <code>TRUE</code>, then the Twin-2 vars in the mean matrix are equated by label with Twin-1.
+</p>
+<p>Decent starts are guessed from the data.
+<code>varStarts</code> is computed as <code>sqrt(variance)/3</code> of the DVs and <code>meanStarts</code> as the variable means.
+For raw data, a check is made for ordered variables. For Binary variables, means are fixed at 0 and
+total variance (A+C+E) is fixed at 1. For ordinal variables, the first 2 thresholds are fixed.
+</p>
+<p>Where needed, e.g. continuous raw data, top adds a means matrix "expMean".
+For ordinal data, top adds a <code>umxThresholdMatrix()</code>.
+</p>
+<p>If binary variables are present, matrices and a constraint to hold <code>A+C+E == 1</code> are added to top.
+</p>
+<p>If a weight variable is offered up, an <code>mzWeightMatrix</code> will be added.
+</p>
+<p><strong>Data handling</strong>
+</p>
+<p>In terms of data handling, <code>xmu_make_TwinSuperModel</code> was primarily designed to take
+data.frames and process these into mxData.
+It can also, however, handle cov and mxData input.
+</p>
+<p>It can process data into all the types supported by <code>mxData</code>.
+</p>
+<p>Raw data input with a target of <code>cov</code> or <code>cor</code> type requires the <code>numObsMZ</code> and <code>numObsDZ</code> to be set.
+</p>
+<p>Type "WLS", "DWLS", or "ULS", data remain raw, but are handled as WLS in the <code>OpenMx::mxFitFunctionWLS()</code>.
+</p>
+<p>Unused columns are dropped.
+</p>
+<p>If you pass in raw data, you can't request type cov/cor yet. Will work on this if desired.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>s for top, MZ and DZ.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other xmu internal not for end user: 
+<code>umxModel()</code>,
+<code>umxRenameMatrix()</code>,
+<code>umx_APA_pval()</code>,
+<code>umx_fun_mean_sd()</code>,
+<code>umx_get_bracket_addresses()</code>,
+<code>umx_make()</code>,
+<code>umx_standardize()</code>,
+<code>umx_string_to_algebra()</code>,
+<code>xmuHasSquareBrackets()</code>,
+<code>xmuLabel_MATRIX_Model()</code>,
+<code>xmuLabel_Matrix()</code>,
+<code>xmuLabel_RAM_Model()</code>,
+<code>xmuMI()</code>,
+<code>xmuMakeDeviationThresholdsMatrices()</code>,
+<code>xmuMakeOneHeadedPathsFromPathList()</code>,
+<code>xmuMakeTwoHeadedPathsFromPathList()</code>,
+<code>xmuMaxLevels()</code>,
+<code>xmuMinLevels()</code>,
+<code>xmuPropagateLabels()</code>,
+<code>xmuRAM2Ordinal()</code>,
+<code>xmuTwinSuper_Continuous()</code>,
+<code>xmuTwinSuper_NoBinary()</code>,
+<code>xmuTwinUpgradeMeansToCovariateModel()</code>,
+<code>xmu_CI_merge()</code>,
+<code>xmu_CI_stash()</code>,
+<code>xmu_DF_to_mxData_TypeCov()</code>,
+<code>xmu_PadAndPruneForDefVars()</code>,
+<code>xmu_bracket_address2rclabel()</code>,
+<code>xmu_cell_is_on()</code>,
+<code>xmu_check_levels_identical()</code>,
+<code>xmu_check_needs_means()</code>,
+<code>xmu_check_variance()</code>,
+<code>xmu_clean_label()</code>,
+<code>xmu_data_missing()</code>,
+<code>xmu_data_swap_a_block()</code>,
+<code>xmu_describe_data_WLS()</code>,
+<code>xmu_dot_make_paths()</code>,
+<code>xmu_dot_make_residuals()</code>,
+<code>xmu_dot_maker()</code>,
+<code>xmu_dot_move_ranks()</code>,
+<code>xmu_dot_rank_str()</code>,
+<code>xmu_extract_column()</code>,
+<code>xmu_get_CI()</code>,
+<code>xmu_lavaan_process_group()</code>,
+<code>xmu_make_bin_cont_pair_data()</code>,
+<code>xmu_make_mxData()</code>,
+<code>xmu_match.arg()</code>,
+<code>xmu_name_from_lavaan_str()</code>,
+<code>xmu_path2twin()</code>,
+<code>xmu_path_regex()</code>,
+<code>xmu_print_algebras()</code>,
+<code>xmu_rclabel_2_bracket_address()</code>,
+<code>xmu_safe_run_summary()</code>,
+<code>xmu_set_sep_from_suffix()</code>,
+<code>xmu_show_fit_or_comparison()</code>,
+<code>xmu_simplex_corner()</code>,
+<code>xmu_standardize_ACEcov()</code>,
+<code>xmu_standardize_ACEv()</code>,
+<code>xmu_standardize_ACE()</code>,
+<code>xmu_standardize_CP()</code>,
+<code>xmu_standardize_IP()</code>,
+<code>xmu_standardize_RAM()</code>,
+<code>xmu_standardize_SexLim()</code>,
+<code>xmu_standardize_Simplex()</code>,
+<code>xmu_start_value_list()</code>,
+<code>xmu_starts()</code>,
+<code>xmu_summary_RAM_group_parameters()</code>,
+<code>xmu_twin_add_WeightMatrices()</code>,
+<code>xmu_twin_check()</code>,
+<code>xmu_twin_get_var_names()</code>,
+<code>xmu_twin_make_def_means_mats_and_alg()</code>,
+<code>xmu_twin_upgrade_selDvs2SelVars()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># ==============
+# = Continuous =
+# ==============
+library(umx)
+data(twinData)
+twinData = umx_scale(twinData, varsToScale= c('ht1','ht2'))
+mzData = twinData[twinData$zygosity %in%  "MZFF",] 
+dzData = twinData[twinData$zygosity %in%  "DZFF",]
+m1= xmu_make_TwinSuperModel(mzData=mzData, dzData=dzData, selDVs=c("wt","ht"), sep="", nSib=2)
+names(m1) # "top" "MZ"  "DZ"
+class(m1$MZ$fitfunction)[[1]] == "MxFitFunctionML"
+
+# ====================
+# = With a covariate =
+# ====================
+
+m1= xmu_make_TwinSuperModel(mzData=mzData, dzData=dzData, 
+		selDVs= "wt", selCovs= "age", sep="", nSib=2)
+m1$top$intercept$labels
+m1$MZ$expMean
+
+# ===============
+# = WLS example =
+# ===============
+m1=xmu_make_TwinSuperModel(mzData=mzData, dzData=dzData,selDVs=c("wt","ht"),sep="",type="WLS")
+class(m1$MZ$fitfunction)[[1]] == "MxFitFunctionWLS"
+m1$MZ$fitfunction$type =="WLS"
+# Check default all-continuous method
+m1$MZ$fitfunction$continuousType == "cumulants"
+
+# Choose non-default type (DWLS)
+m1= xmu_make_TwinSuperModel(mzData= mzData, dzData= dzData,
+	selDVs= c("wt","ht"), sep="", type="DWLS")
+m1$MZ$fitfunction$type =="DWLS"
+class(m1$MZ$fitfunction)[[1]] == "MxFitFunctionWLS"
+
+# Switch WLS method
+m1 = xmu_make_TwinSuperModel(mzData= mzData, dzData= dzData, selDVs= c("wt","ht"), sep= "",
+  type = "WLS", allContinuousMethod = "marginals")
+m1$MZ$fitfunction$continuousType == "marginals"
+class(m1$MZ$fitfunction)[[1]] == "MxFitFunctionWLS"
+
+
+# ============================================
+# = Bivariate continuous and ordinal example =
+# ============================================
+data(twinData)
+selDVs = c("wt", "obese")
+# Cut BMI column to form ordinal obesity variables
+ordDVs          = c("obese1", "obese2")
+obesityLevels   = c('normal', 'overweight', 'obese')
+cutPoints       = quantile(twinData[, "bmi1"], probs = c(.5, .2), na.rm = TRUE)
+twinData$obese1 = cut(twinData$bmi1, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+twinData$obese2 = cut(twinData$bmi2, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+# Make the ordinal variables into mxFactors (ensure ordered is TRUE, and require levels)
+twinData[, ordDVs] = umxFactor(twinData[, ordDVs])
+mzData = twinData[twinData$zygosity %in%  "MZFF",] 
+dzData = twinData[twinData$zygosity %in%  "DZFF",]
+m1 = xmu_make_TwinSuperModel(mzData= mzData, dzData= dzData, selDVs= selDVs, sep="", nSib= 2)
+names(m1) # "top" "MZ"  "DZ" 
+
+# ==============
+# = One binary =
+# ==============
+data(twinData)
+cutPoints       = quantile(twinData[, "bmi1"], probs = .2, na.rm = TRUE)
+obesityLevels   = c('normal', 'obese')
+twinData$obese1 = cut(twinData$bmi1, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+twinData$obese2 = cut(twinData$bmi2, breaks = c(-Inf, cutPoints, Inf), labels = obesityLevels) 
+ordDVs = c("obese1", "obese2")
+twinData[, ordDVs] = umxFactor(twinData[, ordDVs])
+selDVs = c("wt", "obese")
+mzData = twinData[twinData$zygosity %in% "MZFF",]
+dzData = twinData[twinData$zygosity %in% "DZFF",]
+m1 = xmu_make_TwinSuperModel(mzData= mzData, dzData= dzData, selDVs= selDVs, sep= "", nSib= 2)
+
+# ========================================
+# = Cov data (calls xmuTwinSuper_CovCor) =
+# ========================================
+
+data(twinData)
+mzData =cov(twinData[twinData$zygosity %in% "MZFF", tvars(c("wt","ht"), sep="")], use="complete")
+dzData =cov(twinData[twinData$zygosity %in% "DZFF", tvars(c("wt","ht"), sep="")], use="complete")
+m1 = xmu_make_TwinSuperModel(mzData= mzData, dzData= dzData, selDVs= "wt", sep= "", 
+	nSib= 2, numObsMZ = 100, numObsDZ = 100, verbose=TRUE)
+class(m1$MZ$fitfunction)[[1]] =="MxFitFunctionML"
+dimnames(m1$MZ$data$observed)[[1]]==c("wt1", "wt2")
+
+</code></pre>
+
+
+</div>

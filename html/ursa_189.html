@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pixelsize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+The actual size of each grid cell with considerable distortion in area of map projection.
+</h2>
+
+<h3>Description</h3>
+
+<p>This function helps to calculate size of pixels in the unit of area (squared km) for zonal statistics with taking into account distortion in area for classes of projections.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pixelsize(obj, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Either <code>ursaRaster</code> object or <code>ursaGrid</code> object or <code>NULL</code> or <code>missing</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+
+<p>Logical. Value <code>TRUE</code> may provide some additional information on console. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>pixelsize()</code> is applied to coordinate reference system (grid) of <code>ursaRaster</code> object or to raster grid directly. If argument <code>obj</code> is missed, then session grid is used.
+</p>
+<p>Currently, only <em>Stereographic</em> (<code>"+stere"</code> in PROJ.4 notation), <em>Mercator</em> (<code>"+merc"</code>), and <em>Lambert Azimuthal Equal Area</em> (<code>"+laea"</code>) classes of map projections are implemented, though the last one (LAEA) has no distortion in area.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>, single-band. If size of cell is more than <code>10e5</code> square meters, then the unit is squared kilometers (band name is "Pixel Size (sq.km)") else squared meters (band name is "Pixel Size (sq.m)").
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+pixelsize()
+
+ ## internet connection is required; access was tested on 2018-06-04
+invisible({
+   dpath &lt;- file.path("ftp://sidads.colorado.edu/pub/DATASETS"
+                     ,"nsidc0081_nrt_nasateam_seaice/north")
+   dst &lt;- tempfile(fileext=".bin")
+   isOK &lt;- FALSE
+   d3 &lt;- Sys.Date()
+   for (i in seq(5)) {
+      src &lt;- file.path(dpath,format(d3,"nt_%Y%m%d_f18_nrt_n.bin"))
+      a &lt;- try(download.file(src,dst,mode="wb"))
+      if ((is.integer(a))&amp;&amp;(a==0)) {
+         isOK &lt;- TRUE
+         break
+      }
+      d3 &lt;- d3-1
+   }
+   if (isOK) {
+      g1 &lt;- regrid(bbox=c(-385,-535,375,585)*1e4,res=25*1e3
+                  ,crs=paste("+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45"
+                            ,"+k=1 +x_0=0 +y_0=0 +a=6378273 +b=6356889.449"
+                            ,"+units=m +no_defs"))
+      session_grid(g1)
+      b &lt;- readBin(dst,integer(),size=1L,n=136492L,signed=FALSE)
+      ice &lt;- ursa_new(value=tail(b,-300))
+      ice[ice&gt;251] &lt;- NA ## keep Pole
+      ice[ice==251] &lt;- 250 ## consider 100% ice at Pole
+      ice &lt;- ice/2.5 ## uncategorize
+      ice[ice&lt;15] &lt;- 0 ## not ice, if less 15%
+      ice[ice&gt;0] &lt;- 100
+      extent1 &lt;- band_sum(ice*1e-2*ursa(ice,"cell")^2*1e-6)*1e-6
+      extent2 &lt;- band_sum(ice*1e-2*pixelsize(ice))*1e-6
+      message(paste("Near real-time Arctic sea ice extent (NASA Team algorithm, NSIDC)"))
+      message(sprintf("   Direct area calculation:         %5.2f*1e6 km^2.",extent1))
+      message(sprintf("   Distortion in area is corrected: %5.2f*1e6 km^2.",extent2))
+   }
+   else
+      message("It is failed to get sea ice concentration data.")
+})
+
+</code></pre>
+
+
+</div>

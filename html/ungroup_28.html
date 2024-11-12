@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.pclm2D</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generic Plot for pclm2D Class</h2>
+
+<h3>Description</h3>
+
+<p>The generic plot for a <code>pclm2D</code> object is constructed using 
+<code>persp</code> method.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'pclm2D'
+plot(
+  x,
+  type = c("fitted", "observed"),
+  colors = c("#b6e3db", "#e5d9c2", "#b5ba61", "#725428"),
+  nbcol = 25,
+  xlab = "x",
+  ylab = "y",
+  zlab = "values",
+  phi = 30,
+  theta = 210,
+  border = "grey50",
+  ticktype = "simple",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object of class <code>pclm2D</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>chart type. Defines which data are plotted, <code>"fitted"</code> 
+values or <code>"observed"</code> input data. Default: <code>"fitted"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>colors to interpolate; must be a valid argument to
+<code>col2rgb()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nbcol</code></td>
+<td>
+<p>dimension of the color palette. Number of colors. Default: 25.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab, ylab, zlab</code></td>
+<td>
+<p>titles for the axes.  N.B. These must be
+character strings; expressions are not accepted.  Numbers will be
+coerced to character strings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta, phi</code></td>
+<td>
+<p>angles defining the viewing direction.
+<code>theta</code> gives the azimuthal direction and <code>phi</code>
+the colatitude.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>border</code></td>
+<td>
+<p>the color of the line drawn around the surface facets.
+The default, <code>NULL</code>, corresponds to <code>par("fg")</code>.
+A value of <code>NA</code> will disable the drawing of borders: this is
+sometimes useful when the surface is shaded.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ticktype</code></td>
+<td>
+<p>character: <code>"simple"</code> draws just an arrow
+parallel to the axis to indicate direction of increase;
+<code>"detailed"</code> draws normal ticks as per 2D plots.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>any other argument to be passed to 
+<code>persp</code>.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>pclm2D</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># See complete examples in pclm2D help page
+</code></pre>
+
+
+</div>

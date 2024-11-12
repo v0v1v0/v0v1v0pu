@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_has_been_run</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_has_been_run</h2>
+
+<h3>Description</h3>
+
+<p>check if an mxModel has been run or not
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_has_been_run(model, stop = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The <code>mxModel()</code> you want to check has been run</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stop</code></td>
+<td>
+<p>Whether to stop if the model has not been run (defaults to FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> boolean
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_check()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("has_been_run_example", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+umx_has_been_run(m1)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

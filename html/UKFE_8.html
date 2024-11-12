@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BFI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Baseflow index (BFI)</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the baseflow index from a daily mean flow series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">BFI(Q, x.lim = NULL, y.lim = NULL, PlotTitle = "Baseflow plot", Plot = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Q</code></td>
+<td>
+<p>the daily mean flow series. Numeric vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x.lim</code></td>
+<td>
+<p>the x axis limits of the plot. Numeric vector of length two Default is the extents of the data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y.lim</code></td>
+<td>
+<p>the y axis limits of the plot. Numeric vector of length two. Default is the extents of the data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PlotTitle</code></td>
+<td>
+<p>the title of the plot. The default is "Baseflow plot"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Plot</code></td>
+<td>
+<p>a logical argument with a default of TRUE. If TRUE the daily flow is plotted with the baseflow highlighted.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The baseflow index is calculated using the method outlined in Gustard, A. Bullock, A. Dixon, J. M.. (1992). Low flow estimation in the United Kingdom. Wallingford, Institute of Hydrology, 88pp. (IH Report No.108)
+</p>
+
+
+<h3>Value</h3>
+
+<p>the baseflow index and if Plot equals TRUE, a plot showing the flow time series (black) and the associated baseflow (red)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Calculate the BFI from daily discharge at Kingston upon Thames;
+# which is in column three of the ThamesPQ data
+BFI(ThamesPQ[,3])
+</code></pre>
+
+
+</div>

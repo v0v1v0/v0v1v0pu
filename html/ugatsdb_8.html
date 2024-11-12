@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>long2wide</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reshape Long API Data to Column-Based Format</h2>
+
+<h3>Description</h3>
+
+<p>This function automatically reshapes long (stacked) raw data from the API (<code>get_data(..., wide = FALSE)</code>) to a wide format where each variable has its own column.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">long2wide(
+  data,
+  id_cols = intersect(.Tvars, names(data)),
+  names_from = "Series",
+  values_from = "Value",
+  labels_from = if (any(names(data) == "Label")) "Label" else NULL,
+  expand.date = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>raw data from the API: A long format data frame where all values are stacked in a value column.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id_cols</code></td>
+<td>
+<p>character. Temporal identifiers of the data. By default all variables in <code>.Tvars</code> are selected.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names_from</code></td>
+<td>
+<p>character. The column containing the series codes. These will become the names of the new columns in the wider data format.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values_from</code></td>
+<td>
+<p>character. The column containing the data values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels_from</code></td>
+<td>
+<p>character. The column containing the labels describing the series.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expand.date</code></td>
+<td>
+<p>logical. <code>TRUE</code> will call <code>expand_date</code> on the data after reshaping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to <code>dcast</code> or <code>expand_date</code>, no conflicts between these two.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>data.table</code> with the reshaped data.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>wide2long</code>, <code>wide2excel</code>, <code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Return monthly macroeconomic indicators from the year 2000 onwards
+long2wide(get_data("BOU_MMI", from = 2000, wide = FALSE))
+
+</code></pre>
+
+
+</div>

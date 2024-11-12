@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>subSpecials</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sub special characters out of character vectors.</h2>
+
+<h3>Description</h3>
+
+<p>Converts each of the special characters to their escaped equivalents in each element of each vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">subSpecials(..., specialChars = c("!", "(", ")", "-", "=", "*", "."))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Character vectors that will be altered by subbing the special characters with their escaped equivalents</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>specialChars</code></td>
+<td>
+<p>The characters to be subbed out</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Each element in the specialChar vector is subbed for its escaped equivalent in each of the elements of each vector passed in
+</p>
+
+
+<h3>Value</h3>
+
+<p>The provided vectors are returned with any of the defined specialChars subbed out for their escaped equivalents.  Each vector is returned as an element of a list.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+www.jaredlander.com
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>sub</code> <code>subOut</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+subSpecials(c("Hello", "(parens)", "Excited! Mark"))
+subSpecials(c("Hello", "(parens)", "Excited! Mark"), specialChars=c("!", "("))
+subSpecials(c("Hello", "(parens)", "Excited! Mark"), 
+ c("This is a period. And this is an asterisk *"), specialChars=c("!", "("))
+subSpecials(c("Hello", "(parens)", "Excited! Mark"), 
+ c("This is a period. And this is an asterisk *"), specialChars=c("!", "(", "*"))
+
+</code></pre>
+
+
+</div>

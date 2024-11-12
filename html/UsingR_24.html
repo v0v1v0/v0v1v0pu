@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>carsafety</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fatality information in U.S. for several popular cars</h2>
+
+<h3>Description</h3>
+
+<p>Safety statistics appearing in a January 12th, 2004 issue of the <em>New
+Yorker</em>  showing fatality rates per million vehicles both for
+drivers of a car, and drivers of other cars that are hit.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(carsafety)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 33 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>Make.model</dt>
+<dd>
+<p>The make and model of the car</p>
+</dd>
+<dt>type</dt>
+<dd>
+<p>Type of car</p>
+</dd>
+<dt>Driver.deaths</dt>
+<dd>
+<p>Number of drivers deaths per year if 1,000,000 cars
+were on the road</p>
+</dd>
+<dt>Other.deaths</dt>
+<dd>
+<p>Number of deaths in other vehicle caused by
+accidents involving
+these cars per year if 1,000,000 cars were on the road</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The article this data came from wishes to make the case that SUVs are
+not safer despite a perception among the U.S. public that they are.
+</p>
+
+
+<h3>Source</h3>
+
+<p>From "Big and Bad" by Malcolm Gladwell. <em>New Yorker</em>, Jan. 12 2004
+pp28-33. Data attributed to Tom Wenzel and Marc Ross who have written
+<a href="https://www2.lbl.gov/Science-Articles/Archive/assets/images/2002/Aug-26-2002/SUV-report.pdf">https://www2.lbl.gov/Science-Articles/Archive/assets/images/2002/Aug-26-2002/SUV-report.pdf</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(carsafety)
+plot(Driver.deaths + Other.deaths ~ type, data = carsafety)
+plot(Driver.deaths + Other.deaths ~ type, data = carsafety)
+</code></pre>
+
+
+</div>

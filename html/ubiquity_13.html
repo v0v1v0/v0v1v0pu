@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fetch_full_parameters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create Full Parameter Vector from Estimation Subset</h2>
+
+<h3>Description</h3>
+
+<p>Can be used to take a subset of parameters (those being
+estimated and returned from ' <code>system_estimate_parameters</code>)
+into a full list of system parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fetch_full_parameters(pest, cfg)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pest</code></td>
+<td>
+<p>list containing subset of parameters being estimated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is used to build a full parameter set from a subset, and is
+normally used during parameter estimation in the observation details
+function when the entire parameter vector is needed to simulate the system.
+</p>
+<p>The function select_set pulls out a parameter set and can optionally select
+only a subset for estimation:
+</p>
+<pre>pnames = c('Vp', 'CL')
+cfg = system_select_set(cfg, "default", pnames)</pre>
+<p>The default values of this subset can be accessed in the following way:
+</p>
+<pre>pest = system_fetch_guess(cfg)</pre>
+<p>The estimation routines will work with this reduced parameter set, but to
+run simulations the full set is needed. The full values can be retrieved 
+using the following: 
+</p>
+<pre>parameters = fetch_full_parameters(pest, cfg) </pre>
+
+
+<h3>Value</h3>
+
+<p>Full list of parameters with default values for the currently selected parameter set and the values in pest  merged
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>system_fetch_guess</code>, <code>system_select_set</code>
+</p>
+
+
+</div>

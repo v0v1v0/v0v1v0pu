@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ca.po</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Phillips and Ouliaris Cointegration Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs the Phillips and Ouliaris <code>"Pu"</code> and <code>"Pz"</code>
+cointegration test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ca.po(z, demean = c("none", "constant", "trend"),
+      lag = c("short", "long"), type = c("Pu", "Pz"), tol = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>Data matrix to be investigated for cointegration.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>demean</code></td>
+<td>
+<p>The method for detrending the series, either
+<code>"none"</code>, <code>"constant"</code> or <code>"trend"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lag</code></td>
+<td>
+<p>Either a short or long lag number used for
+variance/covariance correction.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>The test type, either <code>"Pu"</code> or <code>"Pz"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>Numeric, this argument is passed to <code>solve()</code> in
+<code>ca.po()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The test <code>"Pz"</code>, compared to the test <code>"Pu"</code>, has the
+advantage that it is invariant to the normalization of the
+cointegration vector, <em>i.e.</em> it does not matter which variable
+is on the left hand side of the equation. In case convergence
+problems are encountered by matrix inversion, one can pass a higher
+tolerance level <em>via</em> <code>"tol=..."</code> to the <code>solve()</code>-function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ca.po</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Phillips, P.C.B. and Ouliaris, S. (1990), Asymptotic Properties of
+Residual Based Tests for Cointegration, <em>Econometrica</em>,
+<b>Vol. 58, No. 1</b>, 165–193.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.po-class</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(ecb)
+m3.real &lt;- ecb[,"m3"]/ecb[,"gdp.defl"]
+gdp.real &lt;- ecb[,"gdp.nom"]/ecb[,"gdp.defl"]
+rl &lt;- ecb[,"rl"]
+ecb.data &lt;- cbind(m3.real, gdp.real, rl)
+m3d.po &lt;- ca.po(ecb.data, type="Pz")
+summary(m3d.po)
+</code></pre>
+
+
+</div>

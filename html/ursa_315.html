@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursa_crs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Extract and assign projection of raster images.
+
+</h2>
+
+<h3>Description</h3>
+
+<p>Functions manipulate with <code>$crs</code> item of the <code>ursaGrid</code> object, which is embedded in the <code>ursaRaster</code> object (<code>obj$grid$crs</code>). Projection is specified in PROJ.4 notation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ursa_crs(obj)
+ursa_crs(obj, keepGrid = FALSE) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p><code>ursaRaster</code> object. It is allowed <code>ursaGrid</code> object for <code>ursa_proj</code> <em>(Extract)</em> function.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keepGrid</code></td>
+<td>
+
+<p>Logical. Should sessional grid be changed after assignment. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+
+<p>Character sting in PROJ.4 format.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Boath <em>Extract</em> and <em>Replace</em> functions <code>ursa_proj()</code> and <code>ursa_proj4()</code> are synonyms for <code>ursa_crs</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><em>Extract</em> function <code>ursa_crs</code> returns character value of <code>$grid$crs</code> item of <code>ursaRaster</code> object.
+</p>
+<p><em>Replace</em> function <code>ursa_crs&lt;-</code> returns <code>ursaRaster</code> with modified <code>$grid$crs</code> item.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(nband=1)
+print(ursa_crs(a))
+p4s &lt;- "+init=epsg:3576"
+ursa_crs(a) &lt;- p4s
+print(ursa_crs(a))
+fname &lt;- tempfile()
+write_envi(a,fname)
+a2 &lt;- read_envi(fname,resetGrid=TRUE)
+print(ursa_crs(a2))
+# try(print(rgdal::CRSargs(sp::CRS(p4s)))) ## 'rgdal' is retired
+envi_remove(fname)
+</code></pre>
+
+
+</div>

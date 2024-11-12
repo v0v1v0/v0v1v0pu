@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>draw.left.truncated.gamma</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates variates from left truncated Gamma distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function implements pseudo-random number generation for a left-truncated gamma distribution with pdf
+</p>
+<p style="text-align: center;"><code class="reqn">f(x|\alpha, \beta) = \frac{1}{(\Gamma(\alpha)-\Gamma_{\tau/\beta}(\alpha))\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}</code>
+</p>
+
+<p>for <code class="reqn">0&lt;\tau\leq x</code>, and min(<code class="reqn">\tau</code>, <code class="reqn">\beta</code>)&gt;0 where <code class="reqn">\alpha</code> and <code class="reqn">\beta</code> are the shape and scale parameters, respectively, <code class="reqn">\tau</code> is the cutoff point at which truncation occurs, and <code class="reqn">\Gamma_{\tau/\beta}</code> is the incomplete gamma function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">draw.left.truncated.gamma(nrep,alpha,beta,tau)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrep</code></td>
+<td>
+<p>Number of data points to generate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Shape parameter for the desired gamma distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Scale parameter fot the desired gamma distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>Point of left truncation.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of length five containing generated data, the theoretical mean, the empirical mean, the theoretical variance, and the empirical variance with names y, theo.mean, emp.mean, theo.var, and emp.var, respectively.</p>
+
+
+<h3>References</h3>
+
+<p>Dagpunar, J. S. (1978). Sampling of variates from a truncated gamma distribution. <em>Journal of Statistical Computation and Simulation</em>, <b>8</b>, 59-64.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">draw.left.truncated.gamma(nrep=100000,alpha=5,beta=1,tau=0.5)
+
+draw.left.truncated.gamma(nrep=100000,alpha=2,beta=2,tau=0.1)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AggDayHour</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Aggregate a time series</h2>
+
+<h3>Description</h3>
+
+<p>Aggregates time series data, creating hourly data from 15 minute data for example.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">AggDayHour(x, func, Freq = "Day", hour = 9)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame with POSIXct in the first column and numeric vector in the second.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>func</code></td>
+<td>
+<p>the function used for aggregation; mean, max, or sum, for example.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Freq</code></td>
+<td>
+<p>Choices are "Day", or "Hour".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hour</code></td>
+<td>
+<p>An integer between 0 and 23. This is used if "Day" is chosen in the Freq argument to determine when the day starts.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function can be used with a data.frame with POSIXct in the first column and a variable in the second. You can choose the level of aggregation in hours, or you can choose daily. In the daily case you can choose which hour of the day to start the aggregation. For example, you might want mean flows from 09:00 rather than midnight. You can also choose the function used to aggregate the data. For example, you might want "sum" for rainfall, and "mean" for flow. When aggregating hourly the aggregation starts at whatever hour is in the first row of x and the associated time stamps will reflect this.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with POSIXct in the first column (unless daily is chosen, then it's Date class), and the aggregated variable in the second column
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Create a data.frame with a normally distributed variable at
+#a 15 minute sampling rate.
+TS &lt;- seq(as.POSIXct("2000-01-01 00:00:00",
+tz = "Europe/London"), as.POSIXct("2001-01-01 00:00:00", tz = "Europe/London"), by = 60*15)
+TS &lt;- data.frame(DateTime = TS, Var = rnorm(length(TS), 10, 2))
+#use the function to aggregate to an hourly sampling rate, taking the maximum of each hour
+Hourly &lt;- AggDayHour(TS, func = max, Freq = "Hour")
+#now aggregate with the mean at a daily scale
+Daily &lt;- AggDayHour(TS, func = mean, Freq = "Day")
+</code></pre>
+
+
+</div>

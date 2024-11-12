@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ezcor_partial_cor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Run partial correlation</h2>
+
+<h3>Description</h3>
+
+<p>Run partial correlation
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ezcor_partial_cor(
+  data = NULL,
+  split = FALSE,
+  split_var = NULL,
+  var1 = NULL,
+  var2 = NULL,
+  var3 = NULL,
+  cor_method = "pearson",
+  sig_label = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a <code>data.frame</code> containing variables</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>split</code></td>
+<td>
+<p>whether perform correlation grouped by a variable, default is 'FALSE'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>split_var</code></td>
+<td>
+<p>a <code>character</code>, the group variable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var1</code></td>
+<td>
+<p>a <code>character</code>, the first variable in correlation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var2</code></td>
+<td>
+<p>a <code>character</code>, the second variable in correlation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var3</code></td>
+<td>
+<p>a <code>character</code> or <code style="white-space: pre;">⁠character vector⁠</code>, the third variable in correlation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cor_method</code></td>
+<td>
+<p>method="pearson" is the default value. The alternatives to be passed to cor are "spearman" and "kendall"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig_label</code></td>
+<td>
+<p>whether add symbal of significance. P &lt; 0.001,"<em><strong>"; P &lt; 0.01,"</strong>"; P &lt; 0.05,"</em>"; P &gt;=0.05,""</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments passed to methods</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yi Xiong
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ppcor::pcor.test()</code> which this function wraps.
+</p>
+
+
+</div>

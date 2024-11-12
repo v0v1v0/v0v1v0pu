@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>yahoo.get.hist.quote</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Download stock data from Yahoo!</h2>
+
+<h3>Description</h3>
+
+<p>Downloads stock data from Yahoo!
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">yahoo.get.hist.quote(instrument = "^gspc", 
+destfile = paste(instrument, ".csv", sep = ""), 
+start, end, quote = c("Open", "High", "Low", "Close"), 
+adjusted = TRUE, download = TRUE, 
+origin = "1970-01-01", compression = "d")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>instrument</code></td>
+<td>
+<p>Ticker symbol as character string. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>destfile</code></td>
+<td>
+<p>Temporary file for storage </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>Date to start. Specified as "2005-12-31"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>end</code></td>
+<td>
+<p> Date to end </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quote</code></td>
+<td>
+<p>Any/All of "Open", "High", "Low", "Close"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adjusted</code></td>
+<td>
+<p> Adjust for stock splits, dividends. Defaults to TRUE </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>download</code></td>
+<td>
+<p> Download the data </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>origin</code></td>
+<td>
+<p>Dates are recorded in the number of days since the
+origin. A value of "1970-01-01" is the default. This was changed from "1899-12-30".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>compression</code></td>
+<td>
+<p>Passed to yahoo</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Goes to chart.yahoo.com and downloads the stock data. By default
+returns a multiple time series of class mts with missing days padded
+by NAs.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A multiple time series with time measureing the number of days since
+the value specified to origin.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Daniel Herlemont &lt;dherlemont@yats.com&gt; </p>
+
+
+<h3>References</h3>
+
+<p>This function was found on the mailling list for R-SIG finance</p>
+
+
+<h3>See Also</h3>
+
+<p>yahoo.get.hist.quote in the tseries package</p>
+
+
+</div>

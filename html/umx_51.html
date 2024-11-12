@@ -1,0 +1,162 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>prolific_read_demog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Read and optionally merge demographics file from prolific academic</h2>
+
+<h3>Description</h3>
+
+<p>prolific academic provides a demographics file. This reads it and merges with your data
+using PID and participant_id
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">prolific_read_demog(
+  file,
+  base = "",
+  df = NULL,
+  by.df = "PROLIFIC_PID",
+  by.demog = "Participant.id",
+  age = "age",
+  sex = "Gender",
+  vars = NULL,
+  all.df = TRUE,
+  all.demog = FALSE,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>Path to demographics file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>Optional path to folder, in which case 'file' is just filename.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>Existing datafile to merge demographics into (optional)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by.df</code></td>
+<td>
+<p>The ID name in existing df (default = "PROLIFIC_PID")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by.demog</code></td>
+<td>
+<p>The ID name in the prolific demographics file (default = "Participant id" was <code>by.demog</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>age</code></td>
+<td>
+<p>Name of age var in demographics file ("age")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sex</code></td>
+<td>
+<p>Name of sex var in demographics file ("Sex")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vars</code></td>
+<td>
+<p>Additional vars to keep from demographics file (WAS age &amp; Sex)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all.df</code></td>
+<td>
+<p>Whether to keep all lines of df (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all.demog</code></td>
+<td>
+<p>Whether to keep all lines (people) in the demographics file (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Print variable names found in the file.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> [data.frame]
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>prolific_check_ID()</code>, <code>prolific_anonymize()</code>, <code>umx_merge_randomized_columns()</code>
+</p>
+</li></ul>
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+fp = "~/Desktop/prolific_export_5f20c3e662e3b6407dcd37a5.csv"
+df = prolific_read_demog(fp, sex = "Gender", age = "Age", df = df)
+tmp = prolific_read_demog(fp, by.df = "PROLIFIC_PID", vars=c("Ethnicity.simplified"))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

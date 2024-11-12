@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UEI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uniform Error Index</h2>
+
+<h3>Description</h3>
+
+<p>Uniform Error Index
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UEI(actual, predicted)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>actual</code></td>
+<td>
+<p>Univariate Data Series</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>predicted</code></td>
+<td>
+<p>Predicted Data Series from Models</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul>
+<li>
+<p> ErrorSeries: Uniform Error Index Series
+</p>
+</li>
+<li>
+<p> ErrorMetrics: Values of Different Error Measures i.e.,Relative Absolute Error (RAE),Mean Absolute Error(MAE),Median Absolute Error (MDAE),Mean Absolute Percent Error (MAPE),Root Mean Squared Error (RMSE),Mean Squared Error (MSE),Symmetric Mean Absolute Percentage Error(SMAPE), Sum of Squared Errors (SSE),Mean Uniform Error Index (MUEI).
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Yeasin, M. and Paul, R.K., 2024. OptiSembleForecasting: optimization-based ensemble forecasting using MCS algorithm and PCA-based error index. The Journal of Supercomputing, 80(2), pp.1568-1597.
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">library("UEI")
+actual&lt;- as.ts(rnorm(50,100,50))
+predicted&lt;- as.ts(rnorm(50,110,60))
+Result &lt;- UEI(actual, predicted)
+</code></pre>
+
+
+</div>

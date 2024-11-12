@@ -1,0 +1,45 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>regime_distance</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate "distance" between two regimes</h2>
+
+<h3>Description</h3>
+
+<p><code>regime_distance</code> scales each regime parameter to the same magnitude
+and then calculates distance between scaled <code>regime_pars1</code> and <code>regime_pars2</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">regime_distance(regime_pars1, regime_pars2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>regime_pars1</code></td>
+<td>
+<p>a numeric vector representing a regime.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regime_pars2</code></td>
+<td>
+<p>a numeric vector representing another regime, same length as <code>regime_pars1</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns "distance" between <code>regime_pars1</code> and <code>regime_pars2</code>. Values are scaled
+to the same magnitude before calculating the "distance". Read the source code for details.
+</p>
+
+
+</div>

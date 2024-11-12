@@ -1,0 +1,218 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>panel_contour</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Add colored contour to the image panel
+</h2>
+
+<h3>Description</h3>
+
+<p>An instrument to overlay multiple rasters on the same image panel. Contour is derived from one band of raster image. The colors (and respective colorbar in legend) is an alternative to contour labeling.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">panel_contour(obj, type = "", ...)
+
+
+
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>Object of class <code>ursaRaster</code> or <code>NULL</code>. Raster band for contouring. If <code>NULL</code> then contour is not displayed. Default is <code>NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Character. Keyword list to descibe characteristics of contour, which is interpreted using regular expressions.<br><code>"label"</code> specifies displaying labels on contour lines. <br><code>"line"</code> specifies displaying contour lines.<br><code>"colo(u)*r"</code> specifies displaying colored contour lines. <br><code>"fill"</code> specifies displaying filled contour lines.<br> Keywords can be combined in a single character, e.g., <code>"fill label"</code> specifies displaying filled contours with labels.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are recognized via their names (using regular expressions) and classes:
+</p>
+
+<dl>
+<dt><code>bg</code></dt>
+<dd>
+<p>Character. Color name or code for contour border. Used for contrast increasing. Semi-transparency and transparency (<code>"transparent"</code>) are allowed. Default is <code>"black"</code>.</p>
+</dd>
+<dt><code>lwd(\\.fg)*</code></dt>
+<dd>
+<p>Positive numeric. Width of contour line. Default is <code>1</code>.</p>
+</dd>
+<dt><code>lwd\\.bg</code></dt>
+<dd>
+<p>Poistive numeric. Width of the back of contour line. For  bordering shoould exceed foreground width (argument <code>lwd</code>). Default is <code>lwd*1.5</code>.</p>
+</dd>
+<dt><code>lty</code></dt>
+<dd>
+<p>Numeric of character. Line type for contour. Default is <code>1</code>.</p>
+</dd>
+<dt><code>(lab)*cex</code></dt>
+<dd>
+<p>Numeric. Character expansion factor for labels. Default is <code>0.85</code>.</p>
+</dd>
+<dt><code>method</code></dt>
+<dd>
+<p>Character. Argument, which is passed to <code>contour</code>. Default is <code>"flattest"</code>.</p>
+</dd>
+</dl>
+<dl>
+<dt><code>expand</code></dt>
+<dd>
+<p>Numeric. Scale factor (<code>&gt;=1</code>) to artificial increasing contour details by means of smoothing of increased image size. Not applicable for images with color tables. Default is <code>NA</code>; smoothing is determined intuitively.</p>
+</dd>
+<dt><code>before</code></dt>
+<dd>
+<p>Logical. Should image reclassification be done before smoothing? Default is <code>FALSE</code> for categorical images and <code>TRUE</code> for numerical images.</p>
+</dd>
+<dt><code>cover</code></dt>
+<dd>
+<p>Numeric. Argument, which is passed to <code>regrid</code> to control <code>NA</code> values during smoothing. Default is <code>NA</code>; connected to default value of argument <code>cover</code> in function <code>regrid</code>.</p>
+</dd>
+<dt><code>short</code></dt>
+<dd>
+<p>Positive integer. Minimal number of points in segments for displaying. Prevents displaying very short segments in the case of high-detailed image. Default is <code>0</code>: all segments are displayed.</p>
+</dd>
+<dt><code>verb(ose)*</code></dt>
+<dd>
+<p>Logical. Value <code>TRUE</code> may provide some additional information on console. Default is <code>FALSE</code>.</p>
+</dd>
+</dl>
+<p>Other arguments are used in the functuion <code>colorize</code> to produce color tables.
+
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Function <code>contourLines</code> is used for contouring.
+</p>
+<p>The color table of input raster image is kept. The output panel have one element left, because contours are borders between areas of the same color. It is recommended to use only gradient palettes.
+</p>
+<p>The color table is forced not to be ramp (argument <code>ramp=FALSE</code> in the function <code>colorize</code>) to prevent extra density of contour lines.
+</p>
+<p>The color table is forced to be interval (argument <code>interval=1L</code> in the function <code>colorize</code>) to prevent lost of elements in the palette.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>ursaColorTable</code>, which then should be used as an input argument for the colorbar legend (function <code>legend_colorbar</code>). If there is no argument of class <code>ursaRaster</code> then function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>contourLines</code>
+</p>
+<p><code>contour</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- pixelsize()
+refval &lt;- seq(450,650,by=25)
+val &lt;- refval[seq(refval) %% 2 == 1]
+ref &lt;- colorize(a,breakvalue=refval,pal.rich=45,pal.rotate=0)
+p1 &lt;- colorize(a,breakvalue=val,pal.rich=135,pal.rotate=0)
+p2 &lt;- colorize(a,value=val,pal.rich=-15,pal.rotate=0)
+p3 &lt;- colorize(a,value=refval)
+
+if (exam1 &lt;- TRUE) {
+   compose_open(legend=list(list(1,"left"),list(1,"right")),scale=2)
+   panel_new()
+  # ct1 &lt;- panel_raster(ref)
+  # ct2 &lt;- panel_contour(p2,"colored line",palname="Greens",lwd=15,lwd.bg=0)
+   ct2 &lt;- panel_contour(p2,"colored line",pal.rich=240,pal.rotate=0,lwd.fg=15,lwd.bg=0)
+  # panel_contour(ref,lwd=0)
+  # mysource("contour.R")
+  # mycontour(.panel_contour(a),lwd=0)
+   if (exists("ct1"))
+      compose_legend(ct1,units="raster")
+   if (exists("ct2"))
+      compose_legend(ct2,units="contour")
+   compose_close(bpp=8)
+}
+
+if (exam2 &lt;- TRUE) {
+   compose_open(layout=c(2,2),byrow=FALSE
+               ,legend=list(list(1,"left"),list("bottom",1)
+                           ,list(1,"right"),list("top",2)
+                           ,list(2,"right"),list("bottom",2)))
+   panel_new()
+   panel_raster(ref)
+   panel_contour(a)
+   panel_new()
+   ct0 &lt;- panel_contour(a,"color",value=val,pal.rich=240,pal.rotate=0,lwd=11,lwd.bg=12)
+   panel_contour(a)
+   panel_annotation(text="no colortable")
+   panel_new()
+   panel_raster(p1)
+   ct1 &lt;- panel_contour(p1,"color",lwd=11,lwd.bg=2)
+   panel_contour(a)
+   panel_annotation(text="colortable:category")
+   panel_new()
+   panel_raster(p2)
+   ct2 &lt;- panel_contour(p2,"color",lwd=11,lwd.bg=2)
+   panel_contour(a)#,cex=0.5)
+   panel_annotation(text="colortable:interval")
+   compose_legend(ref,units="reference")
+   compose_legend(ct0,units="contour")
+   compose_legend(p1,units="raster")
+   compose_legend(ct1,units="contour")
+   compose_legend(p2,units="raster")
+   compose_legend(ct2,units="contour")
+   compose_close()
+}
+
+if (exam3 &lt;- TRUE) {
+   s &lt;- 29
+   session_grid(NULL)
+   a &lt;- as.ursa(volcano)
+   if (FALSE) {
+      display(a)
+      a2 &lt;- regrid(a,mul=s,cascade=TRUE,verbose=TRUE)
+      display(a2)
+      session_grid(a)
+   }
+   compose_open() ## device="windows")
+   panel_new()
+   ct1 &lt;- panel_raster(a,ramp=FALSE,interval=TRUE)
+   ct2 &lt;- panel_contour(a,"label")
+   rm(ct2)
+   panel_decor()
+   if (exists("ct2"))
+      legend_colorbar(ct2)
+   else if (exists("ct1"))
+      legend_colorbar(ct1)
+   compose_close()
+}
+
+</code></pre>
+
+
+</div>

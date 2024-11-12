@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>remove_preposicao_nomes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove de da e dos of names .</h2>
+
+<h3>Description</h3>
+
+<p><code>remove_preposicao_nomes</code> return names without de, da e dos.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">remove_preposicao_nomes(base, ..., suffixo = "_semD")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>A data table, data frame or character vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>columns for apply the function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffixo</code></td>
+<td>
+<p>Suffix name for the new column.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the base parameter with a new column.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">   base &lt;- data.frame(nome = c("João das Neves", "Pedro dos Anjos", "Maria das Gracas"))
+   base &lt;- remove_preposicao_nomes(base, "nome")
+</code></pre>
+
+
+</div>

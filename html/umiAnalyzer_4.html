@@ -1,0 +1,203 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AmpliconPlot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate Amplicon plots</h2>
+
+<h3>Description</h3>
+
+<p>Plots variant allele frequencies or alternate allele counts for chosen
+samples and assays.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">AmpliconPlot(
+  object,
+  filter.name = "default",
+  cut.off = 5,
+  min.count = 0,
+  min.vaf = 0,
+  amplicons = NULL,
+  samples = NULL,
+  abs.count = FALSE,
+  y_min = 0,
+  y_max = NULL,
+  theme = "classic",
+  option = "default",
+  direction = "default",
+  plot.text = FALSE,
+  plot.ref = TRUE,
+  stack.plot = FALSE,
+  classic.plot = FALSE,
+  fdr = 0.05,
+  font.size = 6,
+  angle = 45,
+  use.caller = FALSE,
+  use.plotly = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Requires a UMI sample or UMI experiment object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter.name</code></td>
+<td>
+<p>Name of the filter to be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cut.off</code></td>
+<td>
+<p>How many variant reads are necessary to consider a variant above background? Default is 5 reads.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min.count</code></td>
+<td>
+<p>Minimum variants counts to plot, default is 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min.vaf</code></td>
+<td>
+<p>Minimum variants allele frequency to plot, default is 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>amplicons</code></td>
+<td>
+<p>(Optional) character vector of amplicons to be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>(Optional) character vector of samples to be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>abs.count</code></td>
+<td>
+<p>Should absolute counts be plotted instead of frequencies? Default is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y_min</code></td>
+<td>
+<p>Minimum y-axis value, default is 0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y_max</code></td>
+<td>
+<p>Maximum y-axis value, default is NULL (autoscale)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>Plotting theme to use, default is classic.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>option</code></td>
+<td>
+<p>Color palette to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>Orientation of the color palette.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.text</code></td>
+<td>
+<p>Should non-references bases be indicated above the bar?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.ref</code></td>
+<td>
+<p>If true show reference base instead of position on x-axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stack.plot</code></td>
+<td>
+<p>Show all variant alleles in a stacked bar plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>classic.plot</code></td>
+<td>
+<p>Show classical debarcer amplicon plot with raw error.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fdr</code></td>
+<td>
+<p>False-discovery-rate cut-off for variants.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>font.size</code></td>
+<td>
+<p>Font size</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>angle</code></td>
+<td>
+<p>Font angle</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.caller</code></td>
+<td>
+<p>Should data from variant caller be used? Default is FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.plotly</code></td>
+<td>
+<p>Should plotly be used instead of the regular ggplot device? Default is TRUE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A UMIexperiment object containing a ggplot object with the
+amplicon plot.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main = system.file('extdata', package = 'umiAnalyzer')
+samples &lt;- list.dirs(path = main, full.names = FALSE, recursive = FALSE)
+simsen &lt;- createUmiExperiment(experimentName = 'example',mainDir = main,sampleNames = samples)
+simsen &lt;- filterUmiObject(simsen)
+
+amplicon_plot &lt;- AmpliconPlot(simsen)
+
+
+</code></pre>
+
+
+</div>

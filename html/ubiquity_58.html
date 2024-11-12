@@ -1,0 +1,187 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_nca_run</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Automatic NCA</h2>
+
+<h3>Description</h3>
+
+<p>Performs NCA in an automated fashion
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_nca_run(
+  cfg,
+  dsname = "PKDS",
+  dscale = 1,
+  NCA_options = NULL,
+  NCA_min = 4,
+  analysis_name = "analysis",
+  dsfilter = NULL,
+  extrap_C0 = TRUE,
+  extrap_N = 2,
+  sparse = FALSE,
+  dsmap = list(TIME = "TIME", NTIME = "NTIME", CONC = "CONC", DOSE = "DOSE", ID = "ID",
+    ROUTE = "ROUTE", DOSENUM = NULL, BACKEXTRAP = NULL, SPARSEGROUP = NULL),
+  dsinc = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dsname</code></td>
+<td>
+<p>name of dataset loaded with (<code>system_load_data</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dscale</code></td>
+<td>
+<p>factor to multiply the dose to get it into the same units as concentration (default <code>1</code>):
+if you are dosing in mg/kg and your concentrations is in ng/ml, then <code>dscale = 1e6</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NCA_options</code></td>
+<td>
+<p>specify a list of options for PKNCA to overwrite the
+defaults (default <code>NULL</code> will use defaults). For example if you want to
+set the maximum extrapolation of AUCinf to 10
+half-life half-life of 0.8 you would use: <code>list(max.aucinf.pext=10, min.hl.r.squared=.9)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NCA_min</code></td>
+<td>
+<p>minimum number of points required to perform NCA for a given subset (default <code>4</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the analysis (default 'analysis') to archive to files and reference results later</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dsfilter</code></td>
+<td>
+<p>list of names corresponding to the column names in the dataset and values are a sequence indicating values to keep (default <code>NULL</code>. Multiple names are and-ed together. For example the following would keep all of the records where dose is 1, 2, or 5 and the dose_number is 1
+</p>
+<pre>
+ dsfilter = list(dose=c(1,2,5), dose_number = c(1))
+</pre>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extrap_C0</code></td>
+<td>
+<p>Boolean variable to enable automatic determination of initial drug concentration if no value is specified; the rules used by WinNonlin will be used: 
+</p>
+
+<ul>
+<li>
+<p> If the route is <code>"iv infusion"</code> or <code>"extra-vascular"</code> and the data is single dose data, then a concentration of zero will be used. If repeat dosing is used, the minimum value from the previous dosing interval will be used.
+</p>
+</li>
+<li>
+<p> If the route is <code>"iv bolus"</code> then log-linear regression of the number of observations specified by <code>extrap_N</code> will be used. If the slope of these points is positive the first positive observation will be used as an estimate of C0
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extrap_N</code></td>
+<td>
+<p>number of points to use for back extrapolation (default <code>2</code>); this number can be overwritten for each subject using the <code>BACKEXTRAP</code> column in the dataset</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sparse</code></td>
+<td>
+<p>Boolean variable used to indicate data used sparse sampling and the analysis should use the average at each time point (the <code>SPARSEGROUP</code> column must be specified in the <code>dsmap</code> below)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dsmap</code></td>
+<td>
+<p>list with names specifying the columns in the dataset (* required): 
+</p>
+
+<ul>
+<li> <p><code>TIME</code>*       Time since the first dose; <code>"TIME"</code> (default)
+</p>
+</li>
+<li> <p><code>NTIME</code>*      Nominal time since last dose;  <code>"NTIME"</code> (default)
+</p>
+</li>
+<li> <p><code>CONC</code>*       Concentration data;  <code>"CONC"</code> (default)
+</p>
+</li>
+<li> <p><code>DOSE</code>*       Dose given;  (<code>"DOSE"</code> (default)
+</p>
+</li>
+<li> <p><code>ID</code>*         Subject ID;  (<code>"ID"</code> (default)
+</p>
+</li>
+<li> <p><code>ROUTE</code>*      Route of administration;  <code>"ROUTE"</code> (default), can be either <code>"iv bolus"</code>, <code>"iv infusion"</code> or <code>"extra-vascular"</code>. Variants such as <code>"IV_bolus"</code> and <code>"extravascular"</code> should work as well.
+</p>
+</li>
+<li> <p><code>DOSENUM</code>     Numeric dose (starting at 1) used for grouping multiple dose data; optional, <code>NULL</code> (default) for single dose data)
+</p>
+</li>
+<li> <p><code>BACKEXTRAP</code>  Specifying the number of points to use to extrapolate the initial concentration for "iv bolus" dosing; optoinal f <code>NULL</code> (default) will use the value defined in <code>extrap_N</code> (note this value must be &lt;= NCA_min)
+</p>
+</li>
+<li> <p><code>SPARSEGROUP</code> Column containing a unique value grouping cohorts for pooling data. Needed when <code>sparse</code> is set to <code>TRUE</code>; optional, <code>NULL</code> (default)
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dsinc</code></td>
+<td>
+<p>(NOT CURRENTLY IMPLEMENTED) optional character vector of columns from the dataset to include in the output summary (default <code>NULL</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>cfg ubiquity system object with the NCA results and if the analysis name is specified:
+</p>
+
+<ul>
+<li>
+<p>output/analysis_name-nca_summary-pknca.csv NCA summary 
+</p>
+</li>
+<li>
+<p>output/analysis_name-pknca_summary.csv Raw output from PKNCA with subject and dose number columns appended 
+</p>
+</li>
+<li>
+<p>output/analysis_name-nca_data.RData objects containing the NCA summary and a list with the ggplot grobs
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Vignette on NCA (<code>vignette("NCA", package = "ubiquity")</code>)
+</p>
+
+
+</div>

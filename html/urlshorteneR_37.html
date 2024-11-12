@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_retrieve_org_plan_limits</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Plan Limits</h2>
+
+<h3>Description</h3>
+
+<p>Returns all plan limits and counts available for an organization.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_retrieve_org_plan_limits(organization_id = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>organization_id</code></td>
+<td>
+<p>- a required string | A GUID for a Bitly organization.
+You may also simply pass "" (double quotes), but this should be avoided at all costs.</p>
+</td>
+</tr></table>
+<h3>Organizations</h3>
+
+<p>Organizations are part of our hierarchy. This is the top level where a group and user will belong.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference/#getPlanLimits">https://dev.bitly.com/api-reference/#getPlanLimits</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+all_orgs &lt;- bitly_retrieve_orgs()
+plan &lt;- bitly_retrieve_org_plan_limits(organization_id = all_orgs$guid)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

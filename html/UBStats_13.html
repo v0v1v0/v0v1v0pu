@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MktDATA.Orig</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Data: MktDATA.Orig</h2>
+
+<h3>Description</h3>
+
+<p>This dataset contains the variables from a survey on a set of customers
+of a company operating in the retail food sector. The company sells
+products from 3 major categories (referred to as A, B, C) The customers can
+order and acquire products in the company physical stores, or through the
+company's website (in this case, they can order on the website and pick up the
+order in one store). Information is collected on customers' activity in the
+last two years (observation period), as well as some information retrieved
+through questionnaires or fidelity cards. During such period different
+marketing strategies were adopted to improve customers' fidelization, and 5
+marketing campaigns were launched; a last campaign was launched at the end of
+the observation period.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(MktDATA.Orig)
+</code></pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 2224 observations and the following 19
+variables (levels of the variables listed in alphabetical order):
+</p>
+
+<ul>
+<li> <p><strong><code>CustId</code></strong> (<code>num</code>): customer's identification label
+</p>
+</li>
+<li> <p><strong><code>Gender</code></strong> (<code>chr</code>): customer's gender (<code>F</code>, <code>M</code>)
+</p>
+</li>
+<li> <p><strong><code>Age</code></strong> (<code>num</code>): customer's age (in years)
+</p>
+</li>
+<li> <p><strong><code>Education</code></strong> (<code>chr</code>): customer's level of education(<code>College</code>, <code>Graduate</code>,
+<code>HighSchool</code>, <code>Post-Grad</code>)
+</p>
+</li>
+<li> <p><strong><code>Marital_Status</code></strong> (<code>chr</code>): customer's marital status
+(<code>Divorced</code>, <code>Married</code>, <code>Single</code>, <code>Together</code>, <code>Widow</code>)
+</p>
+</li>
+<li> <p><strong><code>Children</code></strong> (<code>num</code>): number of children in the household
+</p>
+</li>
+<li> <p><strong><code>Kids</code></strong> (<code>num</code>): number of kids aged less than 12 in the
+household
+</p>
+</li>
+<li> <p><strong><code>Income</code></strong> (<code>chr</code>): customer's income (measured in classes)
+</p>
+</li>
+<li> <p><strong><code>Baseline</code></strong> (<code>num</code>): index (from 0 to 1) assigned by the marketing dept
+indicating how promising the customer was judged at the beginning of
+the observation period
+</p>
+</li>
+<li> <p><strong><code>LikeMost</code></strong> (<code>chr</code>): Most frequently bought category in the last two
+years (<code>P.A</code>, <code>P.B</code>, <code>P.C</code>)
+</p>
+</li>
+<li> <p><strong><code>TotVal</code></strong> (<code>num</code>): amount spent in the last 2 years
+</p>
+</li>
+<li> <p><strong><code>NPickUp_Purch</code></strong> (<code>num</code>): number of purchases made through company's
+website and picked up in physical store
+</p>
+</li>
+<li> <p><strong><code>NWeb_Purch</code></strong> (<code>num</code>): number of purchases made through company's website
+and delivered at home
+</p>
+</li>
+<li> <p><strong><code>NStore_Purch</code></strong> (<code>num</code>): number of purchases made in a physical store
+</p>
+</li>
+<li> <p><strong><code>NDeals</code></strong> (<code>num</code>): number of products purchases with discount
+</p>
+</li>
+<li> <p><strong><code>CustClass</code></strong> (<code>chr</code>): customer's classification (assigned by the marketing
+dept) based on past profitability (<code>Bronze</code>, <code>Gold</code>, <code>Platinum</code>,
+<code>Silver</code>)
+</p>
+</li>
+<li> <p><strong><code>PastCampaigns</code></strong> (<code>num</code>): number of offers accepted by the customer in the
+last 2 years' marketing campaigns
+</p>
+</li>
+<li> <p><strong><code>LastCampaign</code></strong> (<code>num</code>): binary variable (0/1) indicating whether (1) or
+not (0) the customer accepted the offer in the campaign launched at
+the end of the observation period
+</p>
+</li>
+<li> <p><strong><code>WouldSuggest</code></strong> (<code>chr</code>): variable signalling whether (<code>Yes</code>) or not
+(<code>No</code>) the customer declared they would suggest the company's products
+to friends and family
+</p>
+</li>
+</ul>
+<h3>Source</h3>
+
+<p>The data set has been adapted from <a href="https://www.kaggle.com/code/dmitryuarov/customers-clustering-eda">https://www.kaggle.com/code/dmitryuarov/customers-clustering-eda</a>.
+</p>
+
+
+</div>

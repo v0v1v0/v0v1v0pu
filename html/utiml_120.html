@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>replace_nominal_attributes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Replace nominal attributes
+Replace the nominal attributes by binary attributes.</h2>
+
+<h3>Description</h3>
+
+<p>Replace nominal attributes
+Replace the nominal attributes by binary attributes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">replace_nominal_attributes(mdata, ordinal.attributes = list())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>The mldr dataset to remove.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ordinal.attributes</code></td>
+<td>
+<p>Not yet, but it will be used to specify which
+attributes need to be replaced.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a new mldr object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other pre process: 
+<code>fill_sparse_mldata()</code>,
+<code>normalize_mldata()</code>,
+<code>remove_attributes()</code>,
+<code>remove_labels()</code>,
+<code>remove_skewness_labels()</code>,
+<code>remove_unique_attributes()</code>,
+<code>remove_unlabeled_instances()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">new.toy &lt;- toyml
+new.column &lt;- as.factor(sample(c("a","b","c"), 100, replace = TRUE))
+new.toy$dataset$ratt10 &lt;- new.column
+head(replace_nominal_attributes(new.toy))
+</code></pre>
+
+
+</div>

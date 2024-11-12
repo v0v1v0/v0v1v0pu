@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>upsetjsEulerDiagram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>upsetjs - factory for UpSet.js Euler Diagram HTMLWidget</h2>
+
+<h3>Description</h3>
+
+<p>upsetjs - factory for UpSet.js Euler Diagram HTMLWidget
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">upsetjsEulerDiagram(
+  width = "100%",
+  height = NULL,
+  elementId = NULL,
+  sizingPolicy = upsetjsSizingPolicy()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>width</code></td>
+<td>
+<p>width of the element</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height</code></td>
+<td>
+<p>height of the element</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>elementId</code></td>
+<td>
+<p>unique element id</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sizingPolicy</code></td>
+<td>
+<p>htmlwidgets sizing policy object. Defaults to <code>upsetjsSizingPolicy()</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of class <code>upsetjs_venn</code> and <code>htmlwidget</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;% fromList(list(a = c(1, 2, 3), b = c(2, 3)))
+</code></pre>
+
+
+</div>

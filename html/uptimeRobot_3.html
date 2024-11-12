@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uptimerobot.contact.new</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add a new alert contact</h2>
+
+<h3>Description</h3>
+
+<p><code>uptimerobot.contact.new</code> creates a new alert contact with the given properties.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uptimerobot.contact.new(api.key, type, value, friendly.name)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>api.key</code></td>
+<td>
+<p>string with a valid key for connecting to Uptimerobot API.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>string or numeric with the type of the contact. You can use both the value (string) or the index (numeric) here.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>string with the value of the contact (ie. the email address).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>friendly.name</code></td>
+<td>
+<p>string the friendly (screen) name of the contact.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The alert contacts are whom to be notified when the monitor goes up/down.
+</p>
+<p>The index lookup keys and values are available on the Uptimerobot API page on <a href="https://uptimerobot.com/api">https://uptimerobot.com/api</a>
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns the ID of the newly created contact in case success. An error is thrown otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gabriele Baldassarre
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uptimerobot.contacts</code>, <code>uptimerobot.contact.delete</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ # Let's assume the api.key is available into the environment variable KEY
+ api.key &lt;- Sys.getenv("KEY", "")
+ # Create a new contact and get the ID
+ contact.new &lt;- uptimerobot.contact.new(api.key, type = "email", value = "foo@bar.com", "John Doe")
+
+ # Get informations about this new contact
+ contact.detail &lt;- uptimerobot.contacts(api.key, contacts = contact.new)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

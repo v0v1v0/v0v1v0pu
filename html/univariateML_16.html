@@ -1,0 +1,120 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mlgumbel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Gumbel distribution maximum likelihood estimation</h2>
+
+<h3>Description</h3>
+
+<p>Uses Newton-Raphson to estimate the parameters of the Gumbel distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mlgumbel(x, na.rm = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a (non-empty) numeric vector of data values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values be removed?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p><code>sigma0</code> is an optional starting value defaulting to <code>1</code>.
+<code>rel.tol</code> is the relative accuracy requested, defaults to
+<code>.Machine$double.eps^0.25</code>. <code>iterlim</code> is a positive integer
+specifying the maximum number of iterations to be performed before the
+program is terminated (defaults to <code>100</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For the density function of the Gumbel distribution see
+Gumbel.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>mlgumbel</code> returns an object of class <code>univariateML</code>.
+This is a named numeric vector with maximum likelihood estimates for <code>mu</code>
+and <code>s</code> and the following attributes:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The name of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density</code></td>
+<td>
+<p>The density associated with the estimates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logLik</code></td>
+<td>
+<p>The loglikelihood at the maximum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>support</code></td>
+<td>
+<p>The support of the density.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The call as captured my <code>match.call</code></p>
+</td>
+</tr>
+</table>
+<p><code>shape</code> and <code>sigma</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Johnson, N. L., Kotz, S. and Balakrishnan, N. (1995) Continuous Univariate Distributions, Volume 2, Chapter 22. Wiley, New York.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Gumbel for the Gumbel density.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">mlgumbel(precip)
+</code></pre>
+
+
+</div>

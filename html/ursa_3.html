@@ -1,0 +1,234 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.data.frame</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Convert raster image to a data frame
+</h2>
+
+<h3>Description</h3>
+
+<p><code>as.data.frame</code> reorganizes <code>ursaRaster</code> object into data frame, where first two columns (<code>x</code> and <code>y</code>) are coordinates of cells, and the rest columns are cell values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+as.data.frame(x, ...)
+
+
+# non-public
+.as.data.frame(obj, band = FALSE, id = FALSE, na.rm = TRUE, all.na = FALSE,
+               col.names = NULL)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are recognized via their names (using regular expressions) and classes. Passed to non-public <code>.as.data.frame</code>.
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+         <strong>Pattern</strong> (<code>as.data.frame</code>) </td>
+<td style="text-align: left;"> <strong>Argument</strong> (<code>.as.data.frame</code>) </td>
+<td style="text-align: left;"> <strong>Description</strong>
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>band</code> </td>
+<td style="text-align: left;"> <code>band</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>id</code> </td>
+<td style="text-align: left;"> <code>id</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>na\\.rm</code> </td>
+<td style="text-align: left;"> <code>na.rm</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>all\\.na</code> </td>
+<td style="text-align: left;"> <code>all.na</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+         </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>col(\\.)*name(s)*</code> </td>
+<td style="text-align: left;"> <code>col.names</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+</table>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>band</code></td>
+<td>
+
+<p>Logical. If <code>band=FALSE</code> then each band is presented by separate column in the data frame. If <code>band=TRUE</code> then band name is presented as a <code>factor</code> in the column <code>$band</code>, and values are written in the column <code>$z</code>. If <code>band=TRUE</code> then number of rows is 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+
+<p>Logical. If <code>band=FALSE</code> then is ignored. If <code>id=TRUE</code> then addiditional columns <code>$id</code> will contain unique cell number in the source raster.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+
+<p>Logical. If <code>na.rm=FALSE</code> then number of rows for data frame is equal to number of cells of spatial grid of raster. If <code>na.rm=TRUE</code> then cells with 'no data' values for all (<code>all.na=FALSE</code>) or any (<code>all.na=TRUE</code>) bands are omitted.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all.na</code></td>
+<td>
+
+<p>Logical. If <code>na.rm=FALSE</code> then ignored. If number of rows for data frame is equal to number of cells of spatial grid of raster. If <code>na.rm=TRUE</code> then cells with 'no data' values for all bands are omitted.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.names</code></td>
+<td>
+
+<p>Character vector or <code>NULL</code>. Names for columns of data frame. If <code>NULL</code>, then column names are generated from band names. Default is <code>NULL</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The structure of voxel is kept. The number of rows for <code>band=TRUE</code> is equal to the number of rows for <code>band=FALSE</code> multiplied to number of bands. To extract all numeric data with destroying of voxel, you may use followed code:<br><code>subset(as.data.frame(obj,band=TRUE),!is.na(z))</code>.
+</p>
+
+
+
+<h3>Value</h3>
+
+<p>Data frame.
+</p>
+<p>If <code>band=TRUE</code> then
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Horizontal coordinate of cell's midpoint</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vertical coordinate of cell's midpoint</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>Value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>band</code></td>
+<td>
+<p>Band as a <code>factor</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p><em>Optional</em>. Unique number for <code>(x,y)</code> coordinate.</p>
+</td>
+</tr>
+</table>
+<p>If <code>band=FALSE</code> then
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Horizontal coordinate of cell's midpoint</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vertical coordinate of cell's midpoint</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional columns. Names of columns are names of bands. Values of columns are values of corresponded bands.</p>
+</td>
+</tr>
+</table>
+<p>If <code>ursaRaster</code> is projected, then data frame has additional attribute <code>attr(...,"proj")</code> with value of PROJ.4 string.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+session_grid(regrid(res=50000,lim=c(-1200100,-1400800,1600900,1800200)))
+a0 &lt;- ursa_dummy(nband=3,min=0,max=100)
+a0[a0&lt;30 | a0&gt;70] &lt;- NA
+names(a0) &lt;- c("x","y","z")
+print(a0)
+b0 &lt;- as.data.frame(a0)
+session_grid(NULL)
+a1 &lt;- as.ursa(b0)
+print(a1-a0)
+session_grid(NULL)
+session_grid(regrid(res=5800000))
+set.seed(352)
+a2 &lt;- as.integer(ursa_dummy(nband=2,min=0,max=100))
+a2[a2&gt;50] &lt;- NA
+print(a2)
+print(b1 &lt;- as.data.frame(a2,na.rm=FALSE))
+print(b2 &lt;- as.data.frame(a2,na.rm=TRUE))
+print(b3 &lt;- as.data.frame(a2,all.na=TRUE))
+print(b4 &lt;- as.data.frame(a2,band=TRUE,na.rm=FALSE))
+print(b5 &lt;- as.data.frame(a2,band=TRUE,all.na=FALSE))
+print(b6 &lt;- as.data.frame(a2,band=TRUE,all.na=TRUE))
+print(b7 &lt;- as.data.frame(a2,band=TRUE,all.na=TRUE,id=TRUE))
+</code></pre>
+
+
+</div>

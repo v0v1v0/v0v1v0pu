@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>keep_units</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Apply a function keeping units</h2>
+
+<h3>Description</h3>
+
+<p>Helper function to apply a function to a <code>units</code> object and then restore
+the original units.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">keep_units(FUN, x, ..., unit = units(x))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>FUN</code></td>
+<td>
+<p>the function to be applied.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>first argument of <code>FUN</code>, of class <code>units</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>optional arguments to <code>FUN</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unit</code></td>
+<td>
+<p>symbolic unit to restore after <code>FUN</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Provided for incompatible functions that do not preserve units. The user is
+responsible for ensuring the correctness of the output.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>units</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- set_units(1:5, m)
+keep_units(drop_units, x)
+
+</code></pre>
+
+
+</div>

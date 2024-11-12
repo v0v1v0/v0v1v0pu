@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>write_envi</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Write raster image to ENVI .hdr Labelled Raster file.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>write_envi</code> writes in-memory object of class <code>ursaRaster</code> to disk in the ENVI .hdr Labelled Raster file format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">write_envi(obj, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Arguments, which are passed to <code>create_envi</code>. Usually, only file name (character) is required. If missing, then occasional name is assigned.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>write_envi</code> implements writing the whole <code>ursaRaster</code> object to disk. For multiple access to disk (by chunks), use followed construction: </p>
+<pre>
+a &lt;- create_envi(fname)
+a[condition_1] &lt;- value1
+a[condition_2] &lt;- value2
+...
+close(a)
+</pre>
+
+
+<h3>Value</h3>
+
+<p>Integer code of ENVI data type. See values of the “data type” field in description of the <a href="https://envi.geoscene.cn/help/Subsystems/envi/Content/ExploreImagery/ENVIHeaderFiles.htm">ENVI Header Format</a>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>create_envi</code>, <em>Replace</em> method <code>[&lt;-</code> for <code>ursaRaster</code> object, <code>close_envi</code> (<code>close</code> for <code>ursaRaster</code> object).
+</p>
+<p><code>write_gdal(...,driver="ENVI")</code> uses GDAL (<span class="pkg">rgdal</span>) for writing <code>ursaRaster</code> object to the ENVI .hdr Labelled Raster file.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+dir.create(tmpWD &lt;- file.path(tempdir(),"certain"))
+wd &lt;- setwd(tmpWD)
+print(c('temp dir'=session_tempdir(),'working dir'=getwd()))
+list1a &lt;- envi_list(session_tempdir())
+list1b &lt;- envi_list()
+fname &lt;- tempfile(tmpdir=".")
+a &lt;- ursa_dummy()
+bandname(a) &lt;- c("first","second","third")
+write_envi(a)
+write_envi(a,fname)
+list2a &lt;- envi_list(session_tempdir())
+list2b &lt;- envi_list()
+fname1 &lt;- list2a[!(list2a %in% list1a)]
+fname2 &lt;- list2b[!(list2b %in% list1b)]
+print(c('in temp dir'=fname1,'in working dir'=fname2))
+a2 &lt;- open_envi(fname1)
+print(a2)
+close(a2)
+envi_remove(c(fname1,fname2))
+setwd(wd)
+</code></pre>
+
+
+</div>

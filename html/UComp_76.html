@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tests</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>tests</h2>
+
+<h3>Description</h3>
+
+<p>Tests on a time series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tests(
+  y,
+  parts = 1/3,
+  nCoef = min(25, length(x)/4),
+  nPar = 0,
+  s = frequency(y),
+  avoid = 16
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a vector, ts or tsibble object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parts</code></td>
+<td>
+<p>proportion of sample to include in ratio of variances test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nCoef</code></td>
+<td>
+<p>number of autocorrelation coefficients to estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nPar</code></td>
+<td>
+<p>number of parameters in a model if y is a residual</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+<p>seasonal period, number of observations per year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>avoid</code></td>
+<td>
+<p>number of observations to avoid at beginning of sample to
+eliminate initial effects</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Multiple tests on a time series, including summary statistics,
+autocorrelation, Gaussianity and heteroskedasticity,
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>colMedians</code>, <code>rowMedians</code>,
+<code>sumStats</code>, <code>gaussTest</code>, <code>ident</code>,
+<code>cusum</code>, <code>varTest</code>, <code>conv</code>,
+<code>armaFilter</code>, <code>dif</code>, <code>roots</code>,
+<code>zplane</code>, <code>acft</code>, <code>slide</code>,
+<code>plotSlide</code>, <code>Accuracy</code>, <code>tsDisplay</code>,
+<code>size</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tests(AirPassengers)
+</code></pre>
+
+
+</div>

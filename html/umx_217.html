@@ -1,0 +1,177 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_long2wide</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Take a long twin-data file and make it wide (one family per row)</h2>
+
+<h3>Description</h3>
+
+<p><code>umx_long2wide</code> merges on <code>famID</code>. Family members are ordered by <code>twinID</code>.
+</p>
+<p>twinID is equivalent to birth order. Up to 10 twinIDs are allowed (family order).
+</p>
+<p><em>Note</em>: Not all data sets have an order column, but it is essential to rank subjects correctly.
+</p>
+<p>You might start off with a TWID which is a concatenation of a familyID and a 2 digit twinID
+</p>
+<p><strong>Generating famID and twinID as used by this function</strong>
+</p>
+<p>You can capture the last 2 digits with the <code>mod</code> function: <code>twinID = df$TWID %% 100</code>
+</p>
+<p>You can <em>drop</em> the last 2 digits with integer div: <code>famID = df$TWID %/% 100</code>
+</p>
+<p><em>Note</em>: The functions assumes that if zygosity or any passalong variables are NA in the first
+family member, they are NA everywhere. i.e., it does not hunt for values that
+are present elsewhere to try and self-heal missing data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_long2wide(
+  data,
+  famID = NA,
+  twinID = NA,
+  zygosity = NA,
+  vars2keep = NA,
+  passalong = NA,
+  twinIDs2keep = NA
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The original (long-format) data file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>famID</code></td>
+<td>
+<p>The unique identifier for members of a family</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>twinID</code></td>
+<td>
+<p>The twinID. Typically 1, 2, 50 51, etc...</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zygosity</code></td>
+<td>
+<p>Typically MZFF, DZFF MZMM, DZMM DZOS</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vars2keep</code></td>
+<td>
+<p>= The variables you wish to analyse (these will be renamed with paste0("_T", twinID)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>passalong</code></td>
+<td>
+<p>= Variables you wish to pass-through (keep, even though not twin vars)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>twinIDs2keep</code></td>
+<td>
+<p>= If NA (the default) all twinIDs are kept, else only those listed here. Useful to drop sibs.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> dataframe in wide format
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>merge()</code>
+</p>
+</li></ul>
+<p>Other Twin Data functions: 
+<code>umx_make_TwinData()</code>,
+<code>umx_make_twin_data_nice()</code>,
+<code>umx_residualize()</code>,
+<code>umx_scale_wide_twin_data()</code>,
+<code>umx_wide2long()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# ==============================================
+# = First make a long format file for the demo =
+# ==============================================
+data(twinData)
+tmp = twinData[, -2]
+tmp$twinID1 = 1; tmp$twinID2 = 2
+long = umx_wide2long(data = tmp, sep = "")
+str(long)
+# 'data.frame':	7616 obs. of  11 variables:
+#  $ fam     : int  1 2 3 4 5 6 7 8 9 10 ...
+#  $ zyg     : int  1 1 1 1 1 1 1 1 1 1 ...
+#  $ part    : int  2 2 2 2 2 2 2 2 2 2 ...
+#  $ cohort  : chr  "younger" "younger" "younger" "younger" ...
+#  $ zygosity: Factor w/ 5 levels "MZFF","MZMM",..: 1 1 1 1 1 1 1 1 1 1 ...
+#  $ wt      : int  58 54 55 66 50 60 65 40 60 76 ...
+#  $ ht      : num  1.7 1.63 1.65 1.57 1.61 ...
+#  $ htwt    : num  20.1 20.3 20.2 26.8 19.3 ...
+#  $ bmi     : num  21 21.1 21 23 20.7 ...
+#  $ age     : int  21 24 21 21 19 26 23 29 24 28 ...
+#  $ twinID  : num  1 1 1 1 1 1 1 1 1 1 ...
+
+# OK. Now to demo long2wide...
+
+# Keeping all columns
+wide = umx_long2wide(data= long, famID= "fam", twinID= "twinID", zygosity= "zygosity")
+namez(wide) # some vars, like part, should have been passed along instead of made into "part_T1"
+
+# ======================================
+# = Demo requesting specific vars2keep =
+# ======================================
+
+# Just keep bmi and wt
+wide = umx_long2wide(data= long, famID= "fam", twinID= "twinID", 
+    zygosity = "zygosity", vars2keep = c("bmi", "wt")
+)
+
+namez(wide)
+# "fam" "twinID" "zygosity" "bmi_T1" "wt_T1" "bmi_T2" "wt_T2"
+
+# ==================
+# = Demo passalong =
+# ==================
+# Keep bmi and wt, and pass through 'cohort'
+wide = umx_long2wide(data= long, famID= "fam", twinID= "twinID", zygosity= "zygosity", 
+	vars2keep = c("bmi", "wt"), passalong = "cohort"
+)
+namez(wide)
+
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,126 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>summary.UPG.Binomial</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimation results and tables for UPG.Binomial objects</h2>
+
+<h3>Description</h3>
+
+<p><code>summary</code> generates a summary of estimation results for <code>UPG.Binomial</code> objects. Point estimates, estimated standard deviation as well as credible intervals for each variable are tabulated. In addition, an indicator quickly shows whether the credible interval includes zero or not. Moreover, LaTeX, HTML and pandoc tables can be quickly generated via <code>knitr</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UPG.Binomial'
+summary(
+  object = NULL,
+  ...,
+  q = c(0.025, 0.975),
+  names = NULL,
+  digits = 2,
+  include = NULL,
+  table = NULL,
+  cap = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class <code>UPG.Binomial</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other summary parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>a numerical vector of length two providing the posterior quantiles to be extracted. Default are 0.025 and 0.975 quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names</code></td>
+<td>
+<p>a character vector indicating names for the variables used in the output.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>number of digits to be included in output. Last digit will be rounded using <code>round</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include</code></td>
+<td>
+<p>can be used to summarize and tabulate only a subset of variables. Specify the columns of X that should be kept in the plot. See examples for further information.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>can be used to return a LaTeX table (<code>'latex'</code>), a Word table (<code>'pandoc'</code>) and HTML tables (<code>'html'</code>) via <code>knitr</code>. Include package "booktabs" in LaTeX preamble for LaTeX tables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cap</code></td>
+<td>
+<p>character vector that can be used to specify the table caption.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a <code>knitr_kable</code> object containing the summary table.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gregor Zens
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>plot.UPG.Binomial</code> to plot a <code>UPG.Binomial</code> object.
+<code>predict.UPG.Binomial</code> to predict probabilities using a <code>UPG.Binomial</code> object.
+<code>coef.UPG.Binomial</code> to extract coefficients from a <code>UPG.Binomial</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# estimate a binomial logit model using example data
+library(UPG)
+data(titanic)
+y  = titanic[,1]
+Ni = titanic[,2]
+X  = titanic[,-c(1,2)]
+results.binomial = UPG(y = y, X = X, Ni = Ni, model = "binomial")
+
+# basic summary of regression results
+summary(results.binomial)
+
+# generate a LaTeX table with subset of variables and custom names
+summary(results.binomial,
+        include=c(1,3),
+        names=c("V. kept 1", "V. kept 3"),
+        table="latex")
+
+</code></pre>
+
+
+</div>

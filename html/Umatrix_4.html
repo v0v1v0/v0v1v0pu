@@ -1,0 +1,184 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>esomTrain</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Train an ESOM (emergent self organizing map) and project data</h2>
+
+<h3>Description</h3>
+
+<p>The ESOM (emergent self organizing map) algorithm as defined by [Ultsch 1999]. A set of weigths(neurons) on a two-dimensional grid get trained to adapt the given datastructure. The weights will be used to project data on a two-dimensional space, by seeking the BestMatches for every datapoint.</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Data</code></td>
+<td>
+<p>Data that will be used for training and projection</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lines</code></td>
+<td>
+<p>Height of grid</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Columns</code></td>
+<td>
+<p>Width of grid</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Epochs</code></td>
+<td>
+<p>Number of Epochs the ESOM will run</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>If TRUE, the grid will be toroid</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NeighbourhoodFunction</code></td>
+<td>
+<p>Type of Neighbourhood; Possible values are: "cone", "mexicanhat" and "gauss"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>StartLearningRate</code></td>
+<td>
+<p>Initial value for LearningRate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>EndLearningRate</code></td>
+<td>
+<p>Final value for LearningRate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>StartRadius</code></td>
+<td>
+<p>Start value for the Radius in which will be searched for neighbours</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>EndRadius</code></td>
+<td>
+<p>End value for the Radius in which will be searched for neighbours</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NeighbourhoodCooling</code></td>
+<td>
+<p>Cooling method for radius; "linear" is the only available option at the moment</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>LearningRateCooling</code></td>
+<td>
+<p>Cooling method for LearningRate; "linear" is the only available option at the moment</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shinyProgress</code></td>
+<td>
+<p>Generate progress output for shiny if Progress Object is given</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ShiftToHighestDensity</code></td>
+<td>
+<p>If True, the Umatrix will be shifted so that the point with highest density will be at the center</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>InitMethod</code></td>
+<td>
+<p>name of the method that will be used to choose initializations
+Valid Inputs: "uni_min_max": uniform distribution with minimum and maximum from sampleData
+"norm_mean_std": normal distribuation based on mean and standard deviation of sampleData</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Key</code></td>
+<td>
+<p>Vector of numeric keys matching the datapoints. Will be added to Bestmatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>UmatrixForEsom</code></td>
+<td>
+<p>If TRUE, Umatrix based on resulting ESOM is calculated and returned</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>On a toroid grid, opposing borders are connected.</p>
+
+
+<h3>Value</h3>
+
+<p>List with
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>BestMatches</code></td>
+<td>
+<p>BestMatches of datapoints</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Weights</code></td>
+<td>
+<p>Trained weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lines</code></td>
+<td>
+<p>Height of grid</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Columns</code></td>
+<td>
+<p>Width of grid</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>TRUE if grid is a toroid</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>JumpingDataPointsHist</code></td>
+<td>
+<p>Nr of DataPoints that jumped to a different BestMatch in every epoch</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Kohonen, T., Self-organized formation of topologically correct feature maps. Biological cybernetics, 1982. 43(1): p. 59-69.
+</p>
+<p>Ultsch, A., Data mining and knowledge discovery with emergent self-organizing feature maps for multivariate time series. Kohonen maps, 1999. 46: p. 33-46.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data('Hepta')
+res=esomTrain(Hepta$Data, Key = 1:nrow(Hepta$Data))
+</code></pre>
+
+
+</div>

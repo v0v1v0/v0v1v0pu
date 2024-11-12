@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MonthlyStats</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Monthly Statistics</h2>
+
+<h3>Description</h3>
+
+<p>Derives monthly statistics from a data.frame with Dates or POSIXct in the first column and variable of interest in the second
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">MonthlyStats(
+  x,
+  stat,
+  AggStat = NULL,
+  Plot = FALSE,
+  ylab = "Magnitude",
+  main = "Monthly Statistics",
+  col = "grey"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame with Dates or POSIXct in the first column and numeric vector in the second.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stat</code></td>
+<td>
+<p>the function of interest. mean or sum for example.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>AggStat</code></td>
+<td>
+<p>the aggregating statistic. The default is mean. See details</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Plot</code></td>
+<td>
+<p>logical argument with a default of TRUE. If TRUE the monthly statistics are plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>A label for the y axis of the plot. The default is "Magnitude"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p>A title for the plot. The default is "Monthly Statistics"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>A choice of colour for the bar plot. A single colour or a vector (a colour for each bar).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The statistic of interest for each month is calculated for each calendar year in the data.frame. An aggregated result is also calculated for each month using an aggregating statistic (the mean by default). The data.frame is first truncated at the first occurrence of January 1st and last occurrence of December 31st.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with two elements. The first element is a data.frame with year in the first column and months in the next 12 (i.e. each row has the monthly stats for the year). The second element is a dataframe with month in the first column and the associated aggregated statistic in the second. i.e. the aggregated statistic (default is the mean) for each month is provided.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Get the mean flows for each month for the Thames at Kingston
+QMonThames &lt;- MonthlyStats(ThamesPQ[,c(1,3)], stat = mean,
+ylab = "Discharge (m3/s)", main = "Thames at Kingston monthly mean flow")
+# Get the monthly sums of rainfall for the Thames at Kingston
+PMonThames &lt;- MonthlyStats(ThamesPQ[,c(1,2)], stat = sum,
+ylab = "Rainfall (mm)", main = "Thames as Kingston monthly rainfall")
+</code></pre>
+
+
+</div>

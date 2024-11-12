@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DensityPlot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Plots densities of data </h2>
+
+<h3>Description</h3>
+
+<p>Allows one to compare empirical densities of different distributions
+in a simple manner. The density is used as graphs with multiple
+histograms are too crowded. The usage is similar to side-by-side boxplots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DensityPlot(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>x may be a sequence of data vectors (eg. x,y,z), a data frame 
+with numeric column vectors or a model formula</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>You can pass in a bandwidth argument such as bw="SJ". See 
+density for details. A legend will be placed for you automatically. To 
+overide the positioning set do.legend="manual". To skip the legend,
+set do.legend=FALSE. </p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Makes a plot
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> John Verzani</p>
+
+
+<h3>References</h3>
+
+<p> Basically a modified boxplot function. As well it should be 
+as it serves the same utility: comparing distributions.</p>
+
+
+<h3>See Also</h3>
+
+ <p><code>boxplot</code>,<code>violinplot</code>,<code>density</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## taken from boxplot
+## using a formula
+data(InsectSprays)
+DensityPlot(count ~ spray, data = InsectSprays)
+## on a matrix (data frame)
+mat &lt;- cbind(Uni05 = (1:100)/21, Norm = rnorm(100),
+             T5 = rt(100, df = 5), Gam2 = rgamma(100, shape = 2))
+DensityPlot(data.frame(mat))
+
+
+</code></pre>
+
+
+</div>

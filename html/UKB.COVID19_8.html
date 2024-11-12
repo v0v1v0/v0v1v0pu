@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>risk_factor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate covariate file</h2>
+
+<h3>Description</h3>
+
+<p>This function formats and outputs a covariate table, used for input for other functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">risk_factor(
+  ukb.data,
+  ABO.data = NULL,
+  hesin.file,
+  res.eng,
+  res.wal = NULL,
+  res.sco = NULL,
+  fields = NULL,
+  field.names = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ukb.data</code></td>
+<td>
+<p>tab delimited UK Biobank phenotype file. The file should include fields of gender, year of birth, BMI, ethnic background, SES, and smoking.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ABO.data</code></td>
+<td>
+<p>Latest yyyymmdd_covid19_misc.txt file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hesin.file</code></td>
+<td>
+<p>Latest yyyymmdd_hesin.txt file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>res.eng</code></td>
+<td>
+<p>Latest covid result file/files for England.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>res.wal</code></td>
+<td>
+<p>Latest covid result file/files for Wales. Only available for downloads after April 2021.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>res.sco</code></td>
+<td>
+<p>Latest covid result file/files for Scotland. Only available for downloads after April 2021.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fields</code></td>
+<td>
+<p>User specified field codes from ukb.data file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>field.names</code></td>
+<td>
+<p>User specified field names.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Outputs a covariate table, used for input for other functions. Automatically returns sex, age at birthday in 2020, SES, self-reported ethnicity, most recently reported BMI, most recently reported pack-years, whether they reside in aged care (based on hospital admissions data, and covid test data) and blood type. Function also allows user to specify fields of interest (field codes, provided by UK Biobank), and allows the users to specify more intuitive names, for selected fields.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+covars &lt;- risk_factor(ukb.data=covid_example("sim_ukb.tab.gz"),
+ABO.data=covid_example("sim_covid19_misc.txt.gz"),
+hesin.file=covid_example("sim_hesin.txt.gz"),
+res.eng=covid_example("sim_result_england.txt.gz"))
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

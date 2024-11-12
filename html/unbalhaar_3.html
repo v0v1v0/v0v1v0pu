@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>best.unbal.haar.bu</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Best bottom-up Unbalanced Haar decomposition</h2>
+
+<h3>Description</h3>
+
+<p>The function finds the “best” bottom-up Unbalanced Haar (UH) decomposition of the input vector
+<code>x</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">best.unbal.haar.bu(x, stretch = length(x))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>            a vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stretch</code></td>
+<td>
+<p>    at each iteration, only the first <code>1:stretch</code> elements of the current input vector (whose length
+decreases by one with each iteration) get scanned in the search for the worst-fitting fine-scale Unbalanced Haar wavelet</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>detail</code></td>
+<td>
+<p>      A matrix of size 3 x <code>n-1</code>, where <code>n</code> is the length of <code>x</code>, containing the detail 
+coefficients of <code>x</code> in the order they were chosen. Each column corresponds to a single coefficient and contains, from top 
+to bottom: location of the coefficient, the associated weight, and the value of the coefficient. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smooth</code></td>
+<td>
+<p>    the “smooth” component of <code>x</code>, equal to <code>sum(x) / sqrt(n)</code>, where <code>n</code> is the length of <code>x</code>  </p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Piotr Fryzlewicz</p>
+
+
+<h3>See Also</h3>
+
+<p><code>best.unbal.haar</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">best.unbal.haar.bu(rnorm(100))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cyclooctanol</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A simulated tempering dataset of interaction parameters and binding energies</h2>
+
+<h3>Description</h3>
+
+<p>Time series of interaction parameters and corresponding
+binding energies from a Hamiltonian hopping simulation of molecular binding.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(cyclooctanol)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame containing 2 columns and 35000 rows.</p>
+
+
+<h3>Details</h3>
+
+ 
+<p>The dataset contains ligand-receptor interaction
+parameters (lambda) and binding energies for the equivalent of an
+Hamiltonian hopping simulation of cyclooctanol binding to
+beta-cyclodextrin. (Hamiltonian hopping is the same as simulated
+tempering except that potential parameters are varied rather than
+temperature.) This illustrative dataset was constructed
+by concatenating the output of some of the replicas of a 
+Hamiltonian replica exchange simulation of the same complex (Wickstrom
+et al. 2013). Harmless discontinuities may be observed at the joining points.
+</p>
+<p>The dataset contains 2 columns and 3500 rows. Rows correspond to
+consecutive time points. The first column <code>cyclooctanol$V1</code>
+contains lambda values (24 discrete values between 0 and 1) and the second column
+<code>cyclooctanol$V2</code> records binding energy values in kcal/mol.
+</p>
+
+
+<h3>References</h3>
+
+<p>Wickstrom, L., Gallicchio, E., He, P., and Levy, R.M. (2013)
+"Large scale affinity calculations of cyclodextrin host-guest complexes:
+Understanding the role of reorganization in the molecular recognition
+process," <em>Journal of Chemical Theory and Computation</em>, submitted for publication.
+</p>
+
+
+</div>

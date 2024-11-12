@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_rpt_nca</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Report NCA</h2>
+
+<h3>Description</h3>
+
+<p>Appends the results of NCA to a report
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_rpt_nca(
+  cfg,
+  rptname = "default",
+  analysis_name = "analysis",
+  rows_max = 10,
+  table_headers = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rptname</code></td>
+<td>
+<p>report name (either PowerPoint or Word)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>analysis_name</code></td>
+<td>
+<p>string containing the name of the NCA analysis (default <code>'analysis'</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows_max</code></td>
+<td>
+<p>maximum number of rows per slide when generating tabular data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table_headers</code></td>
+<td>
+<p>Boolean variable to add descriptive headers to output tables (default <code>TRUE</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>cfg ubiquity system object with the NCA results appended to the specified report and if the analysis name is specified:
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Vignette on NCA (<code>vignette("NCA", package = "ubiquity")</code>)
+</p>
+
+
+</div>

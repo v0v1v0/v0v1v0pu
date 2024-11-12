@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.za</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zivot and Andrews Unit Root Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs the Zivot and Andrews unit root test, which allows a
+break at an unknown point in either the intercept, the linear
+trend or in both.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ur.za(y, model = c("intercept", "trend", "both"), lag=NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vector to be tested for a unit root.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>Specification if the potential break occured in either the intercept, the linear trend or in both.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lag</code></td>
+<td>
+<p>The highest number of lagged endogenous differenced variables to be included in the test regression</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This test is based upon the recursive estimation of a test
+regression. The test statistic is defined as the minimum t-statistic
+of the coeffcient of the lagged endogenous variable. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ur.za</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Zivot, E. and Andrews, Donald W.K. (1992), Further Evidence on the
+Great Crash, the Oil-Price Shock, and the Unit-Root Hypothesis,
+<em>Journal of Business and Economic Statistics</em>, <b>10(3)</b>,
+251–270.
+</p>
+<p>Download possible at: <a href="https://cowles.yale.edu/">https://cowles.yale.edu/</a>, see rubric
+'Discussion Papers (CFDPs)'.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.za-class</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nporg)
+gnp &lt;- na.omit(nporg[, "gnp.r"])
+za.gnp &lt;- ur.za(gnp, model="both", lag=2)
+summary(za.gnp)
+</code></pre>
+
+
+</div>

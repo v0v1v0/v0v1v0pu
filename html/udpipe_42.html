@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_remove_lowfreq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove terms occurring with low frequency from a Document-Term-Matrix and documents with no terms</h2>
+
+<h3>Description</h3>
+
+<p>Remove terms occurring with low frequency from a Document-Term-Matrix and documents with no terms
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_remove_lowfreq(dtm, minfreq = 5, maxterms, remove_emptydocs = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>an object returned by <code>document_term_matrix</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minfreq</code></td>
+<td>
+<p>integer with the minimum number of times the term should occur in order to keep the term</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxterms</code></td>
+<td>
+<p>integer indicating the maximum number of terms which should be kept in the <code>dtm</code>. The argument is optional.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_emptydocs</code></td>
+<td>
+<p>logical indicating to remove documents containing no more terms after the term removal is executed. Defaults to <code>TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a sparse Matrix as returned by <code>sparseMatrix</code> 
+where terms with low occurrence are removed and documents without any terms are also removed
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(brussels_reviews_anno)
+x &lt;- subset(brussels_reviews_anno, xpos == "NN")
+x &lt;- x[, c("doc_id", "lemma")]
+x &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(x)
+
+
+## Remove terms with low frequencies and documents with no terms
+x &lt;- dtm_remove_lowfreq(dtm, minfreq = 10)
+dim(x)
+x &lt;- dtm_remove_lowfreq(dtm, minfreq = 10, maxterms = 25)
+dim(x)
+x &lt;- dtm_remove_lowfreq(dtm, minfreq = 10, maxterms = 25, remove_emptydocs = FALSE)
+dim(x)
+</code></pre>
+
+
+</div>

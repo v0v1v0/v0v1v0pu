@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>quietRemotesInstall</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Quietly update a package from a remote repository</h2>
+
+<h3>Description</h3>
+
+<p>Simple wrapper for <code>remotes</code> functions that fail gracefully (well, don't
+fail at all, just don't do what they're supposed to do) when there's no
+internet connection).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">quietRemotesInstall(
+  x,
+  func,
+  unloadNamespace = TRUE,
+  dependencies = FALSE,
+  upgrade = FALSE,
+  quiet = TRUE,
+  errorInvisible = TRUE,
+  ...
+)
+
+quietGitLabUpdate(
+  x,
+  unloadNamespace = TRUE,
+  dependencies = FALSE,
+  upgrade = FALSE,
+  quiet = TRUE,
+  errorInvisible = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The repository name (e.g. "<code>r-packages/ufs</code>")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>func</code></td>
+<td>
+<p>The <code>remotes</code> function to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unloadNamespace</code></td>
+<td>
+<p>Whether to first unload the relevant namespace</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dependencies, upgrade</code></td>
+<td>
+<p>Whether to install dependencies or upgrade</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>Whether to suppress messages and warnings</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>errorInvisible</code></td>
+<td>
+<p>Whether to suppress errors</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments are passed on to the <code>remotes</code> function</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The result of the call to the <code>remotes</code> function
+</p>
+
+
+</div>

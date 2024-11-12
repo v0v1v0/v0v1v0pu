@@ -1,0 +1,129 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxMI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Report modifications which would improve fit.</h2>
+
+<h3>Description</h3>
+
+<p>This function uses the mechanical modification-indices approach to detect single paths which, if added
+or dropped, would improve fit.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxMI(
+  model = NA,
+  matrices = NA,
+  full = TRUE,
+  numInd = NA,
+  typeToShow = "both",
+  decreasing = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>An <code>mxModel()</code> for which to report modification indices</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>matrices</code></td>
+<td>
+<p>which matrices to test. The default (NA) will test A &amp; S for RAM models</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>full</code></td>
+<td>
+<p>Change in fit allowing all parameters to move. If FALSE only the parameter under test can move.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numInd</code></td>
+<td>
+<p>How many modifications to report. Use -1 for all. Default (NA) will report all over 6.63 (p = .01)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>typeToShow</code></td>
+<td>
+<p>Whether to shown additions or deletions (default = "both")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decreasing</code></td>
+<td>
+<p>How to sort (default = TRUE, decreasing)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Notes:
+</p>
+
+<ol>
+<li>
+<p> Runs much faster with full = FALSE (but this does not allow the model to re-fit around the newly-
+freed parameter).
+</p>
+</li>
+<li>
+<p> Compared to mxMI, this function returns top changes, and also suppresses the run message.
+</p>
+</li>
+<li>
+<p> Finally, of course: see the requirements for (legitimate) post-hoc modeling in <code>mxMI()</code>
+You are almost certainly doing better science when testing competing models rather than modifying a model to fit.
+</p>
+</li>
+</ol>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>mxMI()</code>
+</p>
+</li></ul>
+<p>Other Model Summary and Comparison: 
+<code>umxCompare()</code>,
+<code>umxEquate()</code>,
+<code>umxReduce()</code>,
+<code>umxSetParameters()</code>,
+<code>umxSummary()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+umxMI(m1, full = FALSE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

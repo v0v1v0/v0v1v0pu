@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_IC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate AIC, HQIC and BIC</h2>
+
+<h3>Description</h3>
+
+<p><code>get_IC</code> calculates AIC, HQIC and BIC
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_IC(loglik, npars, obs)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>loglik</code></td>
+<td>
+<p>log-likelihood value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>npars</code></td>
+<td>
+<p>the number of (freely estimated) parameters in the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>obs</code></td>
+<td>
+<p>the number of observations with initial values excluded for conditional models.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a data frame containing the information criteria values.
+</p>
+
+
+</div>

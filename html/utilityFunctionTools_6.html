@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compute_measures_aux</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Given a set of smooth and continuous functions, computes predefined and user-defined measures.</h2>
+
+<h3>Description</h3>
+
+<p>Given a set of smooth and continuous functions, computes predefined and user-defined measures.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compute_measures_aux(
+  x_grids,
+  coeffs,
+  ids,
+  ndx = 20,
+  deg = 6,
+  measures = c("risk-arrow-pratt", "crainich-eeckhoudt", "denuit-eeckhoudt"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x_grids</code></td>
+<td>
+<p>a dataframe of vectors of x-values for a smooth and continuous function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coeffs</code></td>
+<td>
+<p>a dataframe of coefficients for a smooth and continuous function for each participant.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ids</code></td>
+<td>
+<p>a list containing the IDs of the participants. If not given, a list with IDs from 1 to n_observations will be created.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndx</code></td>
+<td>
+<p>number of intervals to partition the distance between the lowest and highest x-values of the utility points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>degree of the B-spline basis. Determines the degree of the function to be estimated. If deg = 2, the estimated utility function will consist of quadratic functions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>measures</code></td>
+<td>
+<p>a vector of measures to be computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional parameters for user-defined measures.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A set of measurements.
+</p>
+
+
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>RMSEA.summary.mxmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>RMSEA function for MxModel summary</h2>
+
+<h3>Description</h3>
+
+<p>Extract the RMSEA and confidence interval from a model summary and returns it as an RMSEA object.
+To report just the RMSEA, you can use <code>RMSEA(model)$RMSEA</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'summary.mxmodel'
+RMSEA(x, ci.lower = 0.025, ci.upper = 0.975, digits = 3)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an <code>mxModel()</code> summary from which to get RMSEA</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci.lower</code></td>
+<td>
+<p>the lower CI to compute (only 95% CI (.025) is implemented)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci.upper</code></td>
+<td>
+<p>the upper CI to compute (only 95% CI (.975) is implemented)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits to round data (defaults to 3)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> object containing the RMSEA and lower and upper bounds
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/simsem/semTools/wiki/Functions">https://github.com/simsem/semTools/wiki/Functions</a>, <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxConfint()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+
+m1 = umxRAM("One Factor", data = demoOneFactor[1:100,], type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1.0)
+)
+tmp = summary(m1)
+RMSEA(tmp)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

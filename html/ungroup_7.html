@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_C_matrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build Composition Matrices</h2>
+
+<h3>Description</h3>
+
+<p>Build Composition Matrices
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_C_matrix(x, y, nlast, offset, out.step, type)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector containing the starting values of the input intervals/bins.
+For example: if we have 3 bins <code>[0,5), [5,10) and [10, 15)</code>,
+<code>x</code> will be defined by the vector: <code>c(0, 5, 10)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vector with counts to be ungrouped. It must have the same dimension 
+as <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nlast</code></td>
+<td>
+<p>Length of the last interval. In the example above <code>nlast</code> 
+would be 5.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>Optional offset term to calculate smooth mortality rates. 
+A vector of the same length as x and y. See 
+Rizzi et al. (2015) for further details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out.step</code></td>
+<td>
+<p>Length of estimated intervals in output. 
+Values between 0.1 and 1 are accepted. Default: 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of PCLM model. Options: <code>"1D", "2D"</code> for 
+univariate and two-dimensional model respectively.</p>
+</td>
+</tr>
+</table>
+</div>

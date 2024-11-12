@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>format_from_excel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper Function</h2>
+
+<h3>Description</h3>
+
+<p>Reads in the outputted excel file from the clean_data_to_excel function and formats and returns the data as a dictionary that uses FIELD types as keys and NON-FIELD types as the values of those keys
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">format_from_excel(filename)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>filename</code></td>
+<td>
+<p>Input the cleaned .xlsx sheet outputted from the function clean_data_to_excel</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Returns a vector dictionary that contains the formatted version of the cleaned data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+filename = "data.xlsx"
+filename = clean_data_to_excel(filename)
+format_from_excel(filename)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

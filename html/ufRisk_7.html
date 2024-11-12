@@ -1,0 +1,203 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>trafftest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Backtesting of Value-at-Risk and Expected Shortfall via Traffic Light Tests</h2>
+
+<h3>Description</h3>
+
+<p>Backtesting methods, most importantly traffic light tests, are applied to
+previously calculated Value-at-Risk and Expected Shortfall series.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">trafftest(obj)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>A list returned by the <code>varcast</code> function, that contains
+different estimated Value-at-Risk and Expected Shortfall series; any
+other list that follows the name conventions of the <code>varcast</code> function
+can be used as well.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The Traffic Light Test for backtesting the Value-at-Risk (VaR) was proposed
+by the Basel Committee on Banking Supervision (1996). A formal mathematical
+description was given by Constanzino and Curran (2018). Following
+Constanzino and Curran (2018), define the Value-at-Risk breach indicator by
+</p>
+<p style="text-align: center;"><code class="reqn">X_{VaR}^{(i)}(\alpha) = 1_{ \{L_i \geq VaR_i(\alpha)\} },</code>
+</p>
+
+<p>where <code class="reqn">i</code> defines the corresponding trading day, <code class="reqn">L_i</code> is the loss
+(denoted as a positive value) on day <code class="reqn">i</code> and <code class="reqn">\alpha</code> is the confidence
+level of the VaR (e.g. if <code class="reqn">\alpha = 0.95</code>, the 95%-VaR is considered). The
+total number of breaches over all trading days <code class="reqn">i = 1, 2, ..., N</code> is then
+given by
+</p>
+<p style="text-align: center;"><code class="reqn">X_{VaR}^{N}(\alpha) = \sum_{i=1}^{N} 1_{\{L_i \geq VaR_i(\alpha)\}}.</code>
+</p>
+
+<p>Following a Binomial Distribution, the cumulative probabilities of observing
+a specific number of breaches or less can be computed. Under the hypothesis
+that the selected volatility model is true, the cumulative probability of
+observing <code class="reqn">X_{VaR}^N (\alpha)</code> breaches is therefore easily obtainable. The
+Basel Committee on Banking Supervision (1996) defined three zones. Depending
+on the zone the calculated cumulative probability can be sorted into, the
+suitability of the selected model can be assessed. Models with calculated
+cumulative probabilities &lt; 95% belong to the green zone and are considered
+appropriate. Furthermore, if the probabilities are greater or equal to 95%
+but smaller than 99.99%, the corresponding models are categorized into the
+yellow zone. The red zone is for models with cumulative probabilities greater
+or equal to 99.99%. If the test results in a yellow zone classification, the
+respective VaR values require additional monitoring. Moreover, the Basel
+Committee recommended to consider additional capital requirements of a bank,
+if its model used is in the yellow zone. Models in the red zone are
+considered to be heavily flawed.
+</p>
+<p>Based on the same three-zone approach with the same zone boundaries,
+Constanzino and Curran (2018) proposed a traffic light test for the Expected
+Shortfall (ES). The total severity of breaches is given by
+</p>
+<p style="text-align: center;"><code class="reqn">X_{ES}^N(\alpha) = \sum_{i=1}^N(1 - (1 - F(L_i))/(1 - \alpha))
+ * 1_{\{L_i \geq VaR_i(\alpha)\}},</code>
+</p>
+
+<p>with <code class="reqn">F(L_i)</code> being the cumulative distribution of the loss at day <code class="reqn">i</code>. As stated
+by Constanzino and Curran (2018), <code class="reqn">X_{ES}^N(\alpha)</code> is approximately normally
+distributed <code class="reqn">\mathcal{N}(\mu_{ES}</code>, <code class="reqn">N \sigma_{ES}^2)</code> for large samples, where
+<code class="reqn">\mu_{ES} = 0.5(1 - \alpha)N</code> and
+<code class="reqn">\sigma_{ES}^2 = (1 - \alpha)(4 - 3(1 - \alpha)) / 12</code>, from which cumulative
+probabilities for the observed breaches <code class="reqn">X_{ES}^N</code> can be easily obtained.
+</p>
+<p>For semiparametric models, the backtesting of the VaR is analogous to the
+described approach. Backtesting the ES, however, requires minor adjustments.
+Given that the model's underlying innovations follow a standardized
+t-distribution with degrees of freedom <code class="reqn">\nu</code>, define by <code class="reqn">r_t</code> the demeaned
+returns and by <code class="reqn">\hat{s}_t</code> the estimated total volatility.
+</p>
+<p style="text-align: center;"><code class="reqn">\hat{\epsilon}_t^* = -r_t / \hat{s}_t \sqrt{\nu / (\nu - 2)}</code>
+</p>
+
+<p>are now suitable to calculate the total severity of breaches under the
+assumption that <code class="reqn">\epsilon_t^*</code> are identically and independently
+distributed t-distributed random variables.
+</p>
+<p>This function uses an object returned by the <code>varcast</code> function
+of the <code>ufRisk</code> package as an input for the
+function argument <code>obj</code>. A list with different elements, such as
+the cumulative probabilities for the VaR and ES series within <code>obj</code>,
+is returned. Instead of the list, only the traffic light backtesting results
+are printed to the R console.
+</p>
+<p>NOTE:
+</p>
+<p>More information on VaR and ES can be found in the documentation of the
+<code>varcast</code> function of the <code>ufRisk</code> package
+<code>varcast</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list of class <code>ufRisk</code> is returned with the following elements.
+</p>
+
+<dl>
+<dt>model</dt>
+<dd>
+<p>selected model for estimation</p>
+</dd>
+<dt>p_VaR.e</dt>
+<dd>
+<p>cumulative probability of observing the number of
+breaches or fewer for (1 - <code>a.e</code>)100%-VaR</p>
+</dd>
+<dt>p_VaR.v</dt>
+<dd>
+<p>cumulative probability of observing the number of
+breaches or fewer for (1 - <code>a.v</code>)100%-VaR</p>
+</dd>
+<dt>p_ES</dt>
+<dd>
+<p>cumulative probability of observing the number of
+breaches or fewer for (1 - <code>a.e</code>)100%-ES</p>
+</dd>
+<dt>pot_VaR.e</dt>
+<dd>
+<p>number of exceedances for (1 - <code>a.e</code>)100%-VaR</p>
+</dd>
+<dt>pot_VaR.v</dt>
+<dd>
+<p>number of exceedances for (1 - <code>a.v</code>)100%-VaR</p>
+</dd>
+<dt>potES</dt>
+<dd>
+<p>number of exceedances for (1 - <code>a.e</code>)100%-ES</p>
+</dd>
+<dt>br.sum</dt>
+<dd>
+<p>sum of breaches for (1 - <code>a.e</code>)100%-ES</p>
+</dd>
+<dt>WAD</dt>
+<dd>
+<p>weighted absolute deviations - a model selection criterion</p>
+</dd>
+<dt>a.v</dt>
+<dd>
+<p>coverage level for the (1-<code>a.v</code>)100% VaR</p>
+</dd>
+<dt>a.e</dt>
+<dd>
+<p>coverage level for (1-<code>a.e</code>)100% VaR</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+
+<ul>
+<li>
+<p> Sebastian Letmathe (Scientific Employee) (Department of Economics,
+Paderborn University), <br></p>
+</li>
+<li>
+<p> Dominik Schulz (Scientific Employee) (Department of Economics,
+Paderborn University), <br></p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Basel Committee on Banking Supervision (1996). Supervisory Framework For The
+Use of Back-Testing in Conjunction With The Internal Models Approach to
+Market Risk Capital Requirements.
+Available online: <a href="https://www.bis.org/publ/bcbs22.htm">https://www.bis.org/publ/bcbs22.htm</a> (accessed on 23 June
+2020).
+</p>
+<p>Constanzino, N., and Curran, M. (2018). A Simple Traffic Light Approach to
+Backtesting Expected Shortfall. In: Risks 6.1.2.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Example for Walmart Inc. (WMT)
+prices = WMT$price.close
+output = varcast(prices)
+trafftest(output)
+
+</code></pre>
+
+
+</div>

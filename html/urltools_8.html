@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>host_extract</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract hosts</h2>
+
+<h3>Description</h3>
+
+<p><code>host_extract</code> extracts the host from
+a vector of domain names. A host isn't the same as a domain - it could be
+the subdomain, if there are one or more subdomains. The host of <code>en.wikipedia.org</code>
+is <code>en</code>, while the host of <code>wikipedia.org</code> is <code>wikipedia</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">host_extract(domains)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>domains</code></td>
+<td>
+<p>a vector of domains, retrieved through <code>url_parse</code> or
+<code>domain</code>.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a data.frame of two columns: <code>domain</code>, with the original domain names,
+and <code>host</code>, the identified host from the domain.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># With subdomains
+has_subdomain &lt;- domain("https://en.wikipedia.org/wiki/Main_Page")
+host_extract(has_subdomain)
+
+# Without
+no_subdomain &lt;- domain("https://ironholds.org/projects/r_shiny/")
+host_extract(no_subdomain)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,64 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>packageName</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Find Package Associated with an Environment</h2>
+
+<h3>Description</h3>
+
+<p>Many environments are associated with a package; this function
+attempts to determine that package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">packageName(env = parent.frame())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr>
+<td><code id="env">env</code></td>
+<td>
+
+<p>The environment whose name we seek.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Environment <code>env</code> would be associated with a package if
+<code>topenv(env)</code> is the namespace environment for that
+package.  Thus when <code>env</code> is the environment associated with
+functions inside a package, or local functions defined within them,
+<code>packageName</code> will normally return the package name.
+</p>
+<p>Not all environments are associated with a package:  for example, 
+the global environment, or the evaluation frames of functions defined
+there.  <code>packageName</code> will return <code>NULL</code> in these cases.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A length one character vector containing the name of the package,
+or <code>NULL</code> if there is no name.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>getPackageName</code> is a more elaborate function
+that can construct a name if none is found.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">packageName()
+packageName(environment(mean))
+</code></pre>
+
+</main></div>

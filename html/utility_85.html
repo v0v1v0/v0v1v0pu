@@ -1,0 +1,171 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.endnode.parfun1d.create</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct a single-attribute parametric function end node</h2>
+
+<h3>Description</h3>
+
+<p>Function to construct a single-attribute parametric function end node.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.endnode.parfun1d.create(name.node, 
+                                name.attrib, 
+                                range, 
+                                name.fun, 
+                                par, 
+                                names.par    = rep(NA, length(par)), 
+                                utility      = TRUE, 
+                                required     = FALSE, 
+                                col          = "black", 
+                                shift.levels = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name.node</code></td>
+<td>
+
+<p>name of the node to be constructed as a character string.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name.attrib</code></td>
+<td>
+
+<p>name of the attribute on which the value or utility function depends as a character string.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range</code></td>
+<td>
+
+<p>numeric vector with two components specifying the minimum and the maximum of the attribute range.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name.fun</code></td>
+<td>
+
+<p>name of the parametric function to be evaluated as a character string.
+The parametric function must have the arguments <code>attrib</code> and <code>par</code> 
+which pass a vector of attribute levels and a vector of parameters
+to the function, respectively.
+The function has to return a vector of corresponding values or utilities.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>numeric vector of parameter values to be passed to the function specified unter <code>name.fun</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names.par</code></td>
+<td>
+
+<p>(optional) vector of parameter names corresponging to the vector of values specified under <code>par</code>.
+Only required to provide access to the values through a named parameter vector.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>utility</code></td>
+<td>
+
+<p>(optional) logical variable indicating if a value function (<code>FALSE</code>) or a utility function (<code>TRUE</code>) is created.
+Default value is <code>TRUE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>required</code></td>
+<td>
+
+<p>(optional) logical variable indicating if the value of this node is required for aggregation at the next higher level.
+If this variable is <code>TRUE</code>, aggregation at the next higher level is not possible if this node returns NA.
+Default value is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+
+<p>(optional) color used for plotting the bounding box of the node in the objective hierarchy.
+Default value is <code>"black"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shift.levels</code></td>
+<td>
+
+<p>(optional) number of hierarchical levels by which the node in the objective hierarchy is shifted to make a branch fit better to other branches.
+Default value is <code>0</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns the created object of type <code>utility.endnode.parfun1d</code> with the properties specified in the arguments of the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Print, evaluate and plot the node with <br><br><code>print.utility.endnode.parfun1d</code>, <br><code>summary.utility.endnode.parfun1d</code>, <br><code>evaluate.utility.endnode.parfun1d</code> and <br><code>plot.utility.endnode.parfun1d</code>. <br><br>
+Create other end nodes with <br><br><code>utility.endnode.discrete.create</code>, <br><code>utility.endnode.intpol1d.create</code>, <br><code>utility.endnode.intpol2d.create</code>, <br><code>utility.endnode.cond.create</code>, or <br><code>utility.endnode.firstavail.create</code>. <br><br>
+Create other types of nodes with <br><br><code>utility.aggregation.create</code>, <br><code>utility.conversion.intpol.create</code>, or <br><code>utility.conversion.parfun.create</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  bedmod_other &lt;-
+    utility.endnode.parfun1d.create(
+      name.node   = "bed modification other",
+      name.attrib = "bedmodfract_percent",
+      range       = c(0,100),
+      name.fun    = "utility.fun.exp",
+      par         = c(-1,100,0),
+      required    = FALSE,
+      utility     = FALSE)
+      
+  print(bedmod_other)
+  plot(bedmod_other)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>H2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Heterogeneity measure (H2) for pooling groups.</h2>
+
+<h3>Description</h3>
+
+<p>Quantifies the heterogeneity of a pooled group
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">H2(x, H1 = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>pooling group derived from the Pool() function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>H1</code></td>
+<td>
+<p>logical with a default of FALSE. If TRUE, the function applies the 'H1' version of the test (see Hosking &amp; Wallis 1997 reference). If FALSE, the default H2 version is applied.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The H2 measure was developed by Hosking &amp; Wallis and can be found in their book 'Regional Frequency Analysis: an approach based on LMoments (1997). It was also adopted for use by the Flood Estimation Handbook (1999) and is described in volume 3.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of two characters; the first representing the H2 score and the second stating a qualitative measure of heterogeneity.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get CDs, form a pooling group and calculate H2
+CDs.203018 &lt;- GetCDs(203018)
+Pool.203018 &lt;- Pool(CDs.203018)
+H2(Pool.203018)
+</code></pre>
+
+
+</div>

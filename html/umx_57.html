@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>RMSEA.MxModel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>RMSEA function for MxModels</h2>
+
+<h3>Description</h3>
+
+<p>Return RMSEA and its confidence interval on a model.
+RMSEA(tmp, silent=TRUE)$RMSEA
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'MxModel'
+RMSEA(x, ci.lower = 0.025, ci.upper = 0.975, digits = 3)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an <code>mxModel()</code> from which to get RMSEA</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci.lower</code></td>
+<td>
+<p>the lower CI to compute (only 95%, i.e., .025 supported)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci.upper</code></td>
+<td>
+<p>the upper CI to compute (only 95%, i.e., .975 supported)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>digits to show (default = 3)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> object containing the RMSEA, lower and upper bounds, and p-close
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Reporting functions: 
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxConfint()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+RMSEA(m1)
+
+x = RMSEA(m1)
+x$RMSEA # 0.0309761
+
+# Raw: needs to be run by umx to get RMSEA
+m2 = umxRAM("One Factor", data = demoOneFactor,
+	umxPath("G", to = manifests),
+	umxPath(v.m. = manifests),
+	umxPath(v1m0 = "G")
+)
+RMSEA(m2)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,147 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxHetCor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a matrix of correlations for variables of diverse types (binary, ordinal, continuous)</h2>
+
+<h3>Description</h3>
+
+<p><code>umxHetCor</code> is a helper to:
+</p>
+
+<ol>
+<li>
+<p> return just the correlations from John Fox's polycor::hetcor function
+</p>
+</li>
+<li>
+<p> If you give it a covariance matrix, return the nearest positive-definite correlation matrix.
+</p>
+</li>
+</ol>
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxHetCor(
+  data,
+  ML = FALSE,
+  use = c("pairwise.complete.obs", "complete.obs"),
+  treatAllAsFactor = FALSE,
+  verbose = FALSE,
+  return = c("correlations", "hetcor object"),
+  std.err = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A <code>data.frame()</code> of columns for which to compute heterochoric correlations. OR an existing covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ML</code></td>
+<td>
+<p>Whether to use Maximum likelihood computation of correlations (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use</code></td>
+<td>
+<p>How to handle missing data: Default= "pairwise.complete.obs". Alternative ="complete.obs".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>treatAllAsFactor</code></td>
+<td>
+<p>Whether to treat all columns as factors, whether they are or not (Default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>How much to tell the user about what was done.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return</code></td>
+<td>
+<p>Return just the correlations (default) or the hetcor object (contains, method, SEs etc.)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std.err</code></td>
+<td>
+<p>Compute the SEs? (default = FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> A matrix of correlations
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">umxHetCor(mtcars[,c("mpg", "am")])
+umxHetCor(mtcars[,c("mpg", "am")], treatAllAsFactor = TRUE, verbose = TRUE)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,132 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.utility.endnode.classcounts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Node Definition</h2>
+
+<h3>Description</h3>
+
+<p>Plot node definition.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'utility.endnode.classcounts'
+plot(x, 
+     par       = NA, 
+     col       = utility.calc.colors(), 
+     gridlines = c(0.2, 0.4, 0.6, 0.8), 
+     main      = "", 
+     cex.main  = 1, 
+     ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>node to be plotted.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+
+<p>(optional) labelled numeric parameter vector providing parameters to
+modify the value or utility function before plotting the node.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+
+<p>(optional) character vector of colors to be used to color the interval
+between zero and unity in equidistant sections (use repetitions of the
+same color if you want to have a non-equidistant color-coding).
+This attribute is only used for value nodes.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gridlines</code></td>
+<td>
+
+<p>(optional) numeric vector of levels at which gridlines are plotted
+in the node definition.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+
+<p>(optional) title of the plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex.main</code></td>
+<td>
+
+<p>(optional) scaling factor for title of the plot.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>additional arguments passed to the R plotting routine.
+</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>Note that the plotting routines for the other end nodes <br><code>plot.utility.endnode.discrete</code> <br><code>plot.utility.endnode.intpol1d</code> <br><code>plot.utility.endnode.parfun1d</code> <br><code>plot.utility.endnode.intpol2d</code> <br><code>plot.utility.endnode.cond</code> <br><code>plot.utility.endnode.firstavail</code> <br>
+are as far as possible the same so that all end nodes can be plotted with the same commands irrespective of the type of the end node.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code>utility.endnode.classcounts.create</code> for how to construct such a node and <code>evaluate.utility.endnode.classcounts</code> for how to evaluate the node. <br><br>
+See <code>utility.calc.colors</code> for an example of how to construct color schemes and <code>utility.get.colors</code> for how to get colors for specifed value levels.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># see
+help(utility)
+# for examples.
+</code></pre>
+
+
+</div>

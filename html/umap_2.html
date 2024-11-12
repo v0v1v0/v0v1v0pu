@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umap</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes a manifold approximation and projection</h2>
+
+<h3>Description</h3>
+
+<p>Computes a manifold approximation and projection
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umap(
+  d,
+  config = umap.defaults,
+  method = c("naive", "umap-learn"),
+  preserve.seed = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+<p>matrix, input data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>config</code></td>
+<td>
+<p>object of class umap.config</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>character, implementation. Available methods are 'naive'
+(an implementation written in pure R) and 'umap-learn' (requires python
+package 'umap-learn')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preserve.seed</code></td>
+<td>
+<p>logical, leave TRUE to insulate external code from
+randomness within the umap algorithms; set FALSE to allow randomness used
+in umap algorithms to alter the external random-number generator</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>list of settings; values overwrite defaults from config;
+see documentation of umap.default for details about available settings</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>object of class umap, containing at least a component
+with an embedding and a component with configuration settings
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># embedd iris dataset using default settings
+iris.umap = umap(iris[,1:4])
+
+# display object summary
+iris.umap
+
+# display embedding coordinates
+head(iris.umap$layout)
+
+</code></pre>
+
+
+</div>

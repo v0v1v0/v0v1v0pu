@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>suspectParticipants</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Selects suspect participants from a <code>carelessObject</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>This function is a wrapper for the <code>carelessObject()</code>
+function, which wraps a number of functions from
+the <code>careless</code> package. Normally, you'd probably
+call <code>carelessReport</code> which calls this function
+to generate a report of suspect participants.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">suspectParticipants(
+  carelessObject,
+  nFlags = 1,
+  digits = 2,
+  missingSymbol = "Missing"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>carelessObject</code></td>
+<td>
+<p>The result of the call to
+<code>carelessObject()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nFlags</code></td>
+<td>
+<p>The number of flags required to be considered
+suspect.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits to round to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>missingSymbol</code></td>
+<td>
+<p>How to represent missing values.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A logical vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">suspectParticipants(carelessObject(mtcars),
+                    nFlags = 2);
+</code></pre>
+
+
+</div>

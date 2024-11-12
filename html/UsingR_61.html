@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>florida</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> County-by-county results of year 2000 US presidential election
+in Florida </h2>
+
+<h3>Description</h3>
+
+<p>The <code>florida</code> data frame has 67 rows and 13 columns.
+</p>
+<p>Gives a county by county accounting of the US elections in the state of
+Florida.  </p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(florida)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>County</dt>
+<dd>
+<p>Name of county</p>
+</dd>
+<dt>GORE</dt>
+<dd>
+<p>Votes for Gore</p>
+</dd>
+<dt>BUSH</dt>
+<dd>
+<p>Votes for Bush</p>
+</dd>
+<dt>BUCHANAN</dt>
+<dd>
+<p>Votes for Buchanan</p>
+</dd>
+<dt>NADER</dt>
+<dd>
+<p>Votes for Nader</p>
+</dd>
+<dt>BROWN</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>HAGELIN</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>HARRIS</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>MCREYNOLDS</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>MOOREHEAD</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>PHILLIPS</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Total</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Found in the excellent notes <em>Using R for Data Analysis and
+Graphics</em> by John Maindonald. (As of 2003 a book published by
+Cambridge University Press.)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(florida)
+attach(florida)
+result.lm &lt;- lm(BUCHANAN ~ BUSH)
+plot(BUSH,BUCHANAN)
+abline(result.lm) ## can you find Palm Beach and Miami Dade counties?
+</code></pre>
+
+
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_retrieve_sorted_links</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Sorted Bitlinks for Group</h2>
+
+<h3>Description</h3>
+
+<p>This will retrieve a paginated response for Bitlinks that are sorted for the Group.
+This method returns a combined object which end-user (you) have to further process for your needs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_retrieve_sorted_links(
+  group_id = NA,
+  to_sort_by = "clicks",
+  unit = "day",
+  units = -1,
+  unit_reference = NULL,
+  size = 50,
+  showRequestURL = F
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group_id</code></td>
+<td>
+<p>- a required string | A GUID for a Bitly group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to_sort_by</code></td>
+<td>
+<p>- a required string | Enum: "clicks" | The type of sorting that you would like to do</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unit</code></td>
+<td>
+<p>- string | Default: "day", Enum: "minute" "hour" "day" "week" "month" | A unit of time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>- integer | Default: -1 | An integer representing the time units to
+query data for. pass -1 to return all units of time.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unit_reference</code></td>
+<td>
+<p>- string | An ISO-8601 timestamp, indicating the most recent time for
+which to pull metrics. Will default to current time.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>- string |  Default: 50 | The quantity of items to be be returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Group</h3>
+
+<p>Groups are a subdivision within an organization. A user will belong to a group within an organization.
+Most actions on our API will be on behalf of a group. For example, when you
+shorten a link, it will be on behalf of a user and a group.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference#getSortedBitlinks">https://dev.bitly.com/api-reference#getSortedBitlinks</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ui &lt;- bitly_user_info(showRequestURL = TRUE)
+rg &lt;- bitly_retrieve_sorted_links(group_id = ui$default_group_guid[1])
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

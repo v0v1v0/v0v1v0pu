@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_view</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>View Information About the System</h2>
+
+<h3>Description</h3>
+
+<p>Displays information (dosing, simulation options, covariates,
+etc) about the system.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_view(cfg, field = "all", verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>field</code></td>
+<td>
+<p>string indicating the aspect of the system to display</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Boolean variable that when set to true will echo the information to the screen</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>sequence of strings with system in formation (one line per element)
+</p>
+<p>The <code>field</code> 
+</p>
+
+<ul>
+<li> <p><code>"all"</code> will show all information about the system
+</p>
+</li>
+<li> <p><code>"parameters"</code> summary of parameter information
+</p>
+</li>
+<li> <p><code>"bolus"</code> currently set bolus dosing
+</p>
+</li>
+<li> <p><code>"rate"</code> infusion rate dosing 
+</p>
+</li>
+<li> <p><code>"covariate"</code> covariates
+</p>
+</li>
+<li> <p><code>"iiv"</code> variance/covariance information
+</p>
+</li>
+<li> <p><code>"datasets"</code> loaded datasets
+</p>
+</li>
+<li> <p><code>"simulation"</code> simulation options
+</p>
+</li>
+<li> <p><code>"estimation"</code> estimation options
+</p>
+</li>
+<li> <p><code>"nca"</code> non-compartmental analyses that have been performed
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># To log and display the current system information:
+
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+  msgs = system_view(cfg, verbose=TRUE)
+
+</code></pre>
+
+
+</div>

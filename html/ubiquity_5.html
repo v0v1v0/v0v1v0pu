@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>calculate_halflife</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate the halflife of data</h2>
+
+<h3>Description</h3>
+
+<p>Determines the terminal halflife of a sequence of corresponding times and values with optional minimum and maximum times to censor data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">calculate_halflife(times = NULL, values = NULL, tmin = NULL, tmax = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>times</code></td>
+<td>
+<p>- sequence of times</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>- corresponding sequence of values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tmin</code></td>
+<td>
+<p>- minimum time to include (<code>NULL</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tmax</code></td>
+<td>
+<p>- maximum time to include  (<code>NULL</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List with the following names
+</p>
+
+<ul>
+<li>
+<p>thalf Halflife in units of times above
+</p>
+</li>
+<li>
+<p>mod Result of lm used to fit the log transformed data
+</p>
+</li>
+<li>
+<p>df Dataframe with the data and predicted values at the time within tmin and tmax
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">x     = c(0:100)
+y     = exp(-.1*x)
+th    = calculate_halflife(times=x, values=y)
+thalf = th$thalf 
+</code></pre>
+
+
+</div>

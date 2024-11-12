@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>benchmark_score</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compare Score with a Benchmark</h2>
+
+<h3>Description</h3>
+
+<p>Compare Score with a Benchmark
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">benchmark_score(
+  data,
+  column,
+  benchmark,
+  mean,
+  sd,
+  n,
+  tail = "one",
+  remove_missing = TRUE,
+  input = "long",
+  output = "console"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>column</code></td>
+<td>
+<p>a column of scores from the dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>benchmark</code></td>
+<td>
+<p>benchmark</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mean</code></td>
+<td>
+<p>if input = "values", enter mean value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd</code></td>
+<td>
+<p>if input = "values", enter standard deviation value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>if input = "values", enter total number of scores</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tail</code></td>
+<td>
+<p>one-tailed or two-tailed test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_missing</code></td>
+<td>
+<p>TRUE/FALSE (Default is TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Default: "long" - long form of data, "values" to pass values directly. If using this option, must specify mean, sd, and n.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>Default: "console" - prints output in console and returns tibble invisibly.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>dataframe of results when saved to an object. show console output by default
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">scores &lt;- 80 + 23 * scale(rnorm(172)) # 80 = mean, 23 = sd
+data &lt;- data.frame(scores = scores)
+benchmark_score(data, scores, 67)
+data |&gt; benchmark_score(scores, 67)
+benchmark_score(mean = 80, sd = 23, n = 172, benchmark = 67, input = "values")
+</code></pre>
+
+
+</div>

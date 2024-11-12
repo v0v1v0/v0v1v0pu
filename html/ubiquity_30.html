@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>run_simulation_ubiquity</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate Individual Response</h2>
+
+<h3>Description</h3>
+
+<p>Controls the execution of individual simulations with deSolve using either R scripts or loadable C libraries.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">run_simulation_ubiquity(SIMINT_parameters, SIMINT_cfg, SIMINT_dropfirst = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_parameters</code></td>
+<td>
+<p>vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_dropfirst</code></td>
+<td>
+<p>when <code>TRUE</code> it will drop the first sample point (prevents bolus doses from starting at 0)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The simulation output is mapped (<code>som</code>) is a list.
+time-course is stored in the <code>simout</code> element. 
+</p>
+
+<ul>
+<li>
+<p> The first column (<code>time</code>) contains the simulation time in the units of the simulation. 
+</p>
+</li>
+<li>
+<p> Next there is a column for each: State, output and system parameter   
+</p>
+</li>
+<li>
+<p> Models with covariate will contain the initial value  (prefix: <code>SIMINT_CVIC_</code>) as well as the values at each time point
+</p>
+</li>
+<li>
+<p> Each static and dynamic system parameter is also passed through
+</p>
+</li>
+<li>
+<p> A column for each timescale is returned with a "<code>ts.</code>" prefix.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Simulation vignette (<code>vignette("Simulation", package = "ubiquity")</code>)
+</p>
+
+
+</div>

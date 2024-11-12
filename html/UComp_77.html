@@ -1,0 +1,225 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>TETS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>TETS</h2>
+
+<h3>Description</h3>
+
+<p>Runs all relevant functions for TETS modelling
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">TETS(
+  y,
+  u = NULL,
+  model = "???",
+  s = frequency(y),
+  h = 2 * s,
+  criterion = "aicc",
+  forIntervals = FALSE,
+  bootstrap = FALSE,
+  nSimul = 5000,
+  verbose = FALSE,
+  alphaL = c(0, 1),
+  betaL = alphaL,
+  gammaL = alphaL,
+  phiL = c(0.8, 0.98),
+  p0 = -99999,
+  Ymin = -Inf,
+  Ymax = Inf
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a time series to forecast (it may be either a numerical vector or
+a time series object). This is the only input required. If a vector, the additional
+input <code>s</code> should be supplied compulsorily (see below).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+<p>a matrix of input time series. If 
+the output wanted to be forecast, matrix <code>u</code> should contain future values for inputs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>the model to estimate. It is a single string indicating the type of 
+model for each component with one or two letters:
+</p>
+
+<ul>
+<li>
+<p> Error: ? / A
+</p>
+</li>
+<li>
+<p> Trend: ? / N / A / Ad
+</p>
+</li>
+<li>
+<p> Seasonal: ? / N / A
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+<p>seasonal period of time series (1 for annual, 4 for quarterly, ...)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>h</code></td>
+<td>
+<p>forecast horizon. If the model includes inputs h is not used, the lenght of u is used instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion</code></td>
+<td>
+<p>information criterion for identification ("aic", "bic" or "aicc").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forIntervals</code></td>
+<td>
+<p>estimate forecasting intervals (TRUE / FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrap</code></td>
+<td>
+<p>use bootstrap simulation for predictive distributions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nSimul</code></td>
+<td>
+<p>number of simulation runs for bootstrap simulation of predictive distributions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>intermediate estimation output (TRUE / FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alphaL</code></td>
+<td>
+<p>constraints limits for alpha parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betaL</code></td>
+<td>
+<p>constraints limits for beta parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gammaL</code></td>
+<td>
+<p>constraints limits for gamma parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>phiL</code></td>
+<td>
+<p>constraints limits for phi parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p0</code></td>
+<td>
+<p>initial values for parameter search (alpha, beta, phi, gamma, sigma2) with consraints:</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ymin</code></td>
+<td>
+<p>scalar or vector of time varying censoring values from below</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ymax</code></td>
+<td>
+<p>scalar or vector of time varying censoring values from above
+</p>
+ 
+<ul>
+<li>
+<p> 0 &lt; alpha &lt; 1
+</p>
+</li>
+<li>
+<p> 0 &lt; beta &lt; alpha
+</p>
+</li>
+<li>
+<p> 0 &lt; phi &lt; 1
+</p>
+</li>
+<li>
+<p> 0 &lt; gamma &lt; 1 - alpha
+</p>
+</li>
+<li>
+<p> sigma2 &gt; 0
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See help of <code>TETSmodel</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>TETS</code>. See <code>TETSmodel</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>TETSmodel</code>, <code>TETSvalidate</code>,
+<code>TETScomponents</code>, <code>TETSestim</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+y &lt;- log(AirPAssengers)
+m1 &lt;- TETS(y)
+m1 &lt;- TETS(y, model = "MAM")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

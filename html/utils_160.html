@@ -1,0 +1,48 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>isS3stdGeneric</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check if a Function Acts as an S3 Generic</h2>
+
+<h3>Description</h3>
+
+<p>Determines whether <code>f</code> acts as a standard S3-style generic
+function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">isS3stdGeneric(f)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr>
+<td><code id="f">f</code></td>
+<td>
+<p>a function object</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>A closure is considered a standard S3 generic if the first expression
+in its body calls <code>UseMethod</code>. Functions which perform
+operations before calling <code>UseMethod</code> will not be considered
+“standard” S3 generics.
+</p>
+<p>If <code>f</code> is currently being traced, i.e., inheriting from class
+<code>"traceable"</code>, the definition of the original untraced version of
+the function is used instead.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>f</code> is an S3 generic, a logical containing <code>TRUE</code>
+with the name of the S3 generic (the string passed to
+<code>UseMethod</code>). Otherwise, <code>FALSE</code> (unnamed).
+</p>
+
+</main></div>

@@ -1,0 +1,139 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxPlotFun</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Easily plot functions in R</h2>
+
+<h3>Description</h3>
+
+<p>A wrapper for <code>ggplot2::stat_function()</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxPlotFun(
+  fun = c(dnorm, "sin(x) + sqrt(1/x)"),
+  min = -1,
+  max = 5,
+  xlab = NULL,
+  ylab = NULL,
+  title = NULL,
+  logY = c("no", "log", "log10"),
+  p = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fun</code></td>
+<td>
+<p>Function to plot. Also takes strings like "sin(x) + sqrt(1/x)".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>x-range min.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max</code></td>
+<td>
+<p>x-range max.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>= Optional x axis label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>= Optional y axis label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Optional title for the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logY</code></td>
+<td>
+<p>Set to, e.g. "log" to set COORDINATE of y to log.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Optional plot onto which to draw the function.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Easily plot a function - like sin, using ggplot.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> A ggplot graph
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>ggplot2::stat_function()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Uses fonts not available on CRAN
+umxPlotFun(sin, max= 2*pi)
+umxPlotFun("sqrt(1/x)", max= 2*pi)
+umxPlotFun(sin, max= 2*pi, ylab="Output of sin", title="My Big Graph")
+p = umxPlotFun(function(x){x^2}, max= 100, title="Supply and demand")
+umxPlotFun(function(x){100^2-x^2}, p = p)
+
+# Controlling other plot features
+umxPlotFun(c("sin(x)", "x^3")) + ylim(c(-1,5)) 
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

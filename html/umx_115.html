@@ -1,0 +1,223 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxModify</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umxModify: Add, set, or drop model paths by label.</h2>
+
+<h3>Description</h3>
+
+<p>umxModify allows you to modify, re-run and summarize an <code>mxModel()</code>, all in one line of script.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxModify(
+  lastFit,
+  update = NULL,
+  regex = FALSE,
+  free = FALSE,
+  value = 0,
+  newlabels = NULL,
+  freeToStart = NA,
+  name = NULL,
+  comparison = FALSE,
+  autoRun = getOption("umx_auto_run"),
+  tryHard = c("no", "yes", "ordinal", "search"),
+  master = NULL,
+  intervals = FALSE,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lastFit</code></td>
+<td>
+<p>The <code>mxModel()</code> you wish to update and run.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>update</code></td>
+<td>
+<p>What to update before re-running. Can be a list of labels, a regular expression (set regex = TRUE) or an object such as mxCI etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>Whether or not update is a regular expression (default FALSE). If you provide a string, it overrides the contents of update, and sets regex to TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free</code></td>
+<td>
+<p>The state to set "free" to for the parameters whose labels you specify (defaults to free = FALSE, i.e., fixed)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>The value to set the parameters whose labels you specify too (defaults to 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newlabels</code></td>
+<td>
+<p>If not NULL, used as a replacement set of labels (can be regular expression). value and free are ignored!</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freeToStart</code></td>
+<td>
+<p>Whether to update parameters based on their current free-state. free = c(TRUE, FALSE, NA), (defaults to NA - i.e, not checked)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>The name for the new model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>Whether to run umxCompare() on the new and old models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoRun</code></td>
+<td>
+<p>Whether to run the model (default), or just to create it and return without running.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Default ('no') uses normal mxRun. "yes" uses mxTryHard. Other options: "ordinal", "search"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>master</code></td>
+<td>
+<p>If you set master, then the update labels will be equated to these (i.e. replaced by them).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intervals</code></td>
+<td>
+<p>Whether to run confidence intervals (see <code>mxRun()</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>How much feedback to give</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>You can add paths, or other model elements, set path values (default is 0), or replace labels.
+As an example, this one-liner drops a path labelled "Cs", and returns the updated model:
+</p>
+<p><code>fit2 = umxModify(fit1, update = "Cs", name = "newModelName", comparison = TRUE)</code>
+</p>
+<p>Regular expressions are a powerful feature: they let you drop collections of paths by matching patterns
+for instance, this would match labels containing either "Cs" or "Cr":
+</p>
+<div class="sourceCode R"><pre>fit2 = umxModify(fit1, regex = "C\[sr\]", name = "drop_Cs_and_Cr", comparison = TRUE)
+</pre></div>
+<p>You may find it easier to be more explicit. Like this:
+</p>
+<div class="sourceCode R"><pre>fit2 = umxSetParameters(fit1, labels = c("Cs", "Cr"), values = 0, free = FALSE, name = "newName")
+fit2 = mxRun(fit2)
+summary(fit2)
+</pre></div>
+<p><em>Note</em>: A (minor) limitation is that you cannot simultaneously set value to 0
+AND relabel cells (because the default value is 0, so it is ignored when using newlabels).
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Core Model Building Functions: 
+<code>umxMatrix()</code>,
+<code>umxPath()</code>,
+<code>umxRAM()</code>,
+<code>umxSuperModel()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+# First we'll just build a 1-factor model
+umx_set_optimizer("SLSQP")
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+
+m1 = umxRAM("One Factor", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+
+# 1. Drop the path to x1 (also updating the name so it's
+#    self-explanatory, and get a fit comparison
+m2 = umxModify(m1, update = "G_to_x1", name = "drop_X1", comparison = TRUE)
+
+# 2. Add the path back (setting free = TRUE)
+m2 = umxModify(m1, update = "G_to_x1", free= TRUE, name = "addback_X1", comparison = TRUE)
+# 3. Fix a value at a non-zero value
+m3 = umxModify(m1, update = "G_to_x1", value = .35, name = "fix_G_x1_at_35", comp = TRUE)
+# You can add objects to models. For instance this would add a path (overwriting the existing one)
+# (thanks Johannes!)
+m3 = umxModify(m1, umxPath("G", with = "x1"), name= "addedPath")
+
+# Use regular expression to drop multiple paths: e.g. G to x3, x4, x5
+m3 = umxModify(m1, regex = "^G_to_x[3-5]", name = "tried_hard", comp = TRUE, tryHard="yes")
+
+# Same, but don't autoRun
+m2 = umxModify(m1, regex  = "^G_to_x[3-5]", name = "no_G_to_x3_5", autoRun = FALSE) 
+
+# Re-write a label
+newLabel = "A_rose_by_any_other_name"
+newModelName = "model_doth_smell_as_sweet"
+m2 = umxModify(m1, update = "G_to_x1", newlabels= newLabel, name = newModelName, comparison = TRUE)
+# Change labels in 2 places
+labsToUpdate = c("G_to_x1", "G_to_x2")
+newLabel = "G_to_1_or_2"
+m2 = umxModify(m1, update = labsToUpdate, newlabels= newLabel, name = "equated", comparison = TRUE)
+
+# Advanced!
+# Regular expressions let you use pieces of the old names in creating new ones!
+searchString = "G_to_x([0-9])"
+newLabel = "loading_for_path\\1" # use value in regex group 1
+m2 = umxModify(m1, regex = searchString, newlabels= newLabel, name = "grep", comparison = TRUE)
+
+## End(Not run) # end dontrun
+
+</code></pre>
+
+
+</div>

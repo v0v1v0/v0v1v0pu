@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_directory</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Use a directory</h2>
+
+<h3>Description</h3>
+
+<p><code>use_directory()</code> creates a directory (if it does not already exist) in the
+project's top-level directory. This function powers many of the other <code>use_</code>
+functions such as <code>use_data()</code> and <code>use_vignette()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_directory(path, ignore = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>Path of the directory to create, relative to the project.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore</code></td>
+<td>
+<p>Should the newly created file be added to <code>.Rbuildignore</code>?</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+use_directory("inst")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

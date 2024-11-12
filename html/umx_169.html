@@ -1,0 +1,141 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummaryIP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Present the results of an independent-pathway twin model in table and graphical form</h2>
+
+<h3>Description</h3>
+
+<p>Summarize a Independent Pathway model, as returned by <code>umxIP()</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummaryIP(
+  model,
+  digits = 2,
+  file = getOption("umx_auto_plot"),
+  std = TRUE,
+  showRg = FALSE,
+  comparison = NULL,
+  CIs = FALSE,
+  returnStd = FALSE,
+  report = c("markdown", "html"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A fitted <code>umxIP()</code> model to summarize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>= Whether to show the standardized model (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRg</code></td>
+<td>
+<p>= whether to show the genetic correlations (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>Whether to run mxCompare on a comparison model (NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Confidence intervals (F)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStd</code></td>
+<td>
+<p>Whether to return the standardized form of the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>how to display the results ("html" will open in browser as table)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxIP()</code>, <code>plot()</code>, <code>umxSummary()</code> work for IP, CP, GxE, SAT, and ACE models.
+</p>
+</li></ul>
+<p>Other Summary functions: 
+<code>umxSummary.MxModel()</code>,
+<code>umxSummaryACEcov()</code>,
+<code>umxSummaryCP()</code>,
+<code>umxSummaryGxE()</code>,
+<code>umxSummaryMRDoC()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(GFF) # family function and well-being data
+mzData = subset(GFF, zyg_2grp == "MZ")
+dzData = subset(GFF, zyg_2grp == "DZ")
+selDVs = c("hap", "sat", "AD") # These will be expanded into "hap_T1" "hap_T2" etc.
+m1 = umxIP(selDVs = selDVs, sep = "_T", dzData = dzData, mzData = mzData)
+umxSummaryIP(m1)
+plot(m1)
+umxSummaryIP(m1, digits = 2, file = "Figure3", showRg = FALSE, CIs = TRUE);
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u_char_properties</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Character Properties</h2>
+
+<h3>Description</h3>
+
+<p>Get the properties of Unicode characters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">u_char_info(x)
+u_char_properties(x, which)
+u_char_property(x, which)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object which can be coerced to a <code>u_char</code>
+vector of Unicode characters via <code>as.u_char</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which</code></td>
+<td>
+<p>a character vector or string (for
+<code>u_char_property</code>), respectively, with the possibly abbreviated
+names of Unicode properties.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>For <code>u_char_info</code>, a data frame with variables giving the Code
+(<code>Code</code>) and the ‘basic’ Unicode variables Name, General
+Category, Canonical Combining Class, Bidi Class, Decomposition,
+Numeric Value Decimal Digit, Numeric Value Digit, Numeric Value,
+Bidi Mirrored, Unicode 1 Name, ISO Comment, Simple Uppercase Mapping,
+Simple Lowercase Mapping, and Simple Titlecase Mapping, with names
+obtained by replacing white spaces by underscores (e.g.,
+<code>Bidi_Class</code>.)
+</p>
+<p>For <code>u_char_properties</code>, a data frame with the values of the
+specified properties, or, if no arguments were given, a character
+vector with the names of all currently available Unicode character
+properties.
+</p>
+<p>For <code>u_char_property</code>, the values of the specified property.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Currently, only the property values of a subset of all Unicode
+character properties can be obtained.
+</p>
+
+
+<h3>References</h3>
+
+<p>Unicode Character Database (<a href="https://www.unicode.org/ucd/">https://www.unicode.org/ucd/</a>)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## When was the Euro sign added to Unicode?
+x &lt;- u_char_from_name("EURO SIGN")
+u_char_property(x, "Age")
+
+## List the currently available Unicode character properties.
+u_char_properties()
+</code></pre>
+
+
+</div>

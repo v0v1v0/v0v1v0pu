@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>check_steady_state</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Verify System Steady State</h2>
+
+<h3>Description</h3>
+
+<p>Takes the output  <code>run_simulation_ubiquity</code> and verifies that the system is running at steady state by analyzing the timecourse of all of the states in the system
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">check_steady_state(cfg, som)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>som</code></td>
+<td>
+<p>output of <code>run_simulation_ubiquity</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list with name <code>steady_state</code> (boolean indicating weather the system was at steady state) and <code>states</code> a vector of states that have steady state offset.
+</p>
+
+
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fips_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve state and county FIPS codes</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve state and county FIPS codes
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fips_data(regions = c("states", "state", "counties", "county"), as_sf = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>regions</code></td>
+<td>
+<p>The region breakdown for the map, can be one of
+(<code>"states"</code>, <code>"state"</code>, <code>"counties"</code>, <code>"county"</code>).
+The default is <code>"states"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as_sf</code></td>
+<td>
+<p>Defunct, this parameter no longer has any effect and will be removed in
+the future.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An data frame of FIPS codes of the desired <code>regions</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">str(fips_data())
+
+state_fips &lt;- fips_data()
+county_fips &lt;- fips_data(regions = "counties")
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>oracle_mis_vec_from_joint</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the oracle misclassification error rates (conditional on
+true genotype) directly from the
+joint distribution of the genotype and the oracle estimator.</h2>
+
+<h3>Description</h3>
+
+<p>Get the oracle misclassification error rates (conditional on
+true genotype) directly from the
+joint distribution of the genotype and the oracle estimator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">oracle_mis_vec_from_joint(jd)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>jd</code></td>
+<td>
+<p>A matrix of numerics. Element (i, j) is the probability
+of genotype i - 1 and estimated genotype j - 1. This is usually
+obtained from <code>oracle_joint</code>.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A vector of numerics. Element i is the oracle misclassification
+error rate when genotyping an individual with actual
+genotype i + 1.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li>
+<p>Gerard, D., Ferrão, L. F. V., Garcia, A. A. F., &amp; Stephens, M. (2018). Genotyping Polyploids from Messy Sequencing Data. <em>Genetics</em>, 210(3), 789-807. <a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a>.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>oracle_joint</code> for getting <code>jd</code>.
+<code>oracle_mis_vec</code> for not having to first calculate
+<code>jd</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Hardy-Weinberg population with allele-frequency of 0.75.
+## Moderate bias and moderate overdispersion.
+ploidy &lt;- 6
+dist &lt;- stats::dbinom(0:ploidy, ploidy, 0.75)
+jd &lt;- oracle_joint(n = 100, ploidy = ploidy, seq = 0.001,
+                   bias = 0.7, od = 0.01, dist = dist)
+oracle_mis_vec_from_joint(jd = jd)
+
+## Compare to oracle_cor
+oracle_mis_vec(n = 100, ploidy = ploidy, seq = 0.001,
+               bias = 0.7, od = 0.01, dist = dist)
+
+</code></pre>
+
+
+</div>

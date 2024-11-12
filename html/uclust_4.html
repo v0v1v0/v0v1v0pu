@@ -1,0 +1,145 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>is_homo3</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>U-statistic based homogeneity test for 3 groups</h2>
+
+<h3>Description</h3>
+
+<p>Homogeneity test based on the statistic bn3. The test assesses whether there exists a data
+partition for which three group separation is statistically significant according to utest3.
+The null hypothesis is overall sample homogeneity, and a sample is considered homogeneous if
+it cannot be divided into three groups with at least one significantly different from the others.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">is_homo3(md = NULL, data = NULL, rep = 20, test_max = TRUE, alpha = 0.05)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>md</code></td>
+<td>
+<p>Matrix of distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data matrix. Each row represents an observation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rep</code></td>
+<td>
+<p>Number of times to repeat optimization procedure. Important for problems with
+multiple optima.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test_max</code></td>
+<td>
+<p>Logical indicating whether to employ the max test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Significance level</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is the homogeneity test of Bello et al. (2021).
+The test is performed through two steps: an optimization procedure that finds the data partition that
+maximizes the standardized Bn and a test for the resulting maximal partition.
+Should be used in high dimension small sample size settings.
+</p>
+<p>Either <code>data</code> or <code>md</code> should be provided.
+If data are entered directly, Bn will be computed considering the squared Euclidean distance.
+</p>
+<p>Variance of <code>bn</code> is estimated through resampling, and thus, p-values may vary a bit in different runs.
+</p>
+<p>For more detail see
+Bello, Debora Zava,  Marcio Valk and Gabriela Bettella Cybis.
+"Clustering inference in multiple groups." arXiv preprint arXiv:2106.09115 (2021).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with the following elements:</p>
+
+<dl>
+<dt>stdBn</dt>
+<dd>
+<p>Test statistic. Maximum standardized Bn.</p>
+</dd>
+<dt>group1</dt>
+<dd>
+<p>Elements in group 1 in the maximal partition. (obs: this is not the best
+partition for the data, see <code>uclust3</code>)</p>
+</dd>
+<dt>group2</dt>
+<dd>
+<p>Elements in group 2 in the maximal partition.</p>
+</dd>
+<dt>group3</dt>
+<dd>
+<p>Elements in group 3 in the maximal partition.</p>
+</dd>
+<dt>pvalue.Bonferroni</dt>
+<dd>
+<p>P-value for the homogeneity test.</p>
+</dd>
+<dt>alpha_Bonferroni</dt>
+<dd>
+<p>Alpha after Bonferroni correction</p>
+</dd>
+<dt>bootB</dt>
+<dd>
+<p>Resampling variance estimate for partitions with central group sizes.</p>
+</dd>
+<dt>bootB1</dt>
+<dd>
+<p>Resampling variance estimate for partitions with one group of size 1.</p>
+</dd>
+<dt>varBn</dt>
+<dd>
+<p>Estimated variance of Bn for maximal standardized Bn configuration.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(123)
+x = matrix(rnorm(70000),nrow=7)  #creating homogeneous Gaussian dataset
+res = is_homo3(data=x)
+res
+
+#uncomment to run
+# x = matrix(rnorm(18000),nrow=18)
+# x[1:5,] = x[1:5,]+0.5 #Heterogeneous dataset (first 5 samples have different mean)
+# x[6:9,] = x[6:9,]+1.5
+# res = is_homo3(data=x)
+#  res
+# md = as.matrix(dist(x)^2) #squared Euclidean distances for the same data
+# res = is_homo3(md)       # uncomment to run
+
+# Multidimensional sacling plot of distance matrix
+#fit &lt;- cmdscale(md, eig = TRUE, k = 2)
+#x &lt;- fit$points[, 1]
+#y &lt;- fit$points[, 2]
+#plot(x,y, main=paste("Homogeneity test: p-value =",res$p.MaxTest))
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tokenizers</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Alphabetic Tokenizer</h2>
+
+<h3>Description</h3>
+
+<p>A simple Unicode alphabetic tokenizer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Unicode_alphabetic_tokenizer(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Tokenization first replaces the elements of <code>x</code> by their Unicode
+character sequences.  Then, the non-alphabetic characters (i.e., the
+ones which do not have the Alphabetic property) are replaced by
+blanks, and the corresponding strings are split according to the
+blanks.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A character vector with the tokenized strings.
+</p>
+
+
+</div>

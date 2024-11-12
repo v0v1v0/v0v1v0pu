@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getFilteredData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Method for retrieving filtered data</h2>
+
+<h3>Description</h3>
+
+<p>Method for retrieving filtered data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getFilteredData(
+  object,
+  name = "default",
+  save = FALSE,
+  outDir = getwd(),
+  fileName = NULL,
+  delim = ";"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>Requires a UMI sample or UMI experiment object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>String. Name of the filter. Default is "default".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>save</code></td>
+<td>
+<p>Logical, should data be saved as csv file? Default is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outDir</code></td>
+<td>
+<p>Output directory</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fileName</code></td>
+<td>
+<p>Filename to be used, default is the same as 'name'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delim</code></td>
+<td>
+<p>Character string denoting delimiter to be used, default is ';'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A filtered consensus table, as a tibble.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main = system.file('extdata', package = 'umiAnalyzer')
+
+samples &lt;- list.dirs(path = main, full.names = FALSE, recursive = FALSE)
+
+simsen &lt;- createUmiExperiment(experimentName = 'simsen',mainDir = main,sampleNames = samples)
+simsen &lt;- filterUmiObject(simsen)
+
+myfilter &lt;- getFilteredData(simsen)
+myfilter
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>report</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Output report from results</h2>
+
+<h3>Description</h3>
+
+<p>This method can be used to format results in a way that can directly be
+included in a report or manuscript.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">report(x, headingLevel = 3, quiet = TRUE, ...)
+
+## Default S3 method:
+report(x, headingLevel = 3, quiet = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object to show.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>headingLevel</code></td>
+<td>
+<p>The level of the Markdown heading to provide; basically
+the number of hashes ('<code style="white-space: pre;">⁠#⁠</code>') to prepend to the headings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>Passed on to <code>knitr::knit()</code> whether it should b
+chatty (<code>FALSE</code>) or quiet (<code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Passed to the specific method; for the default method, this is
+passed to the print method.</p>
+</td>
+</tr>
+</table>
+</div>

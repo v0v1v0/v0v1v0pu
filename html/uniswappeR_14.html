@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>liquidity_range_all_v3</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Forecast Price for liquidity range for a pair's tokens UniswapV3</h2>
+
+<h3>Description</h3>
+
+<p>Forecast Price for liquidity range for a pair's tokens UniswapV3
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">liquidity_range_all_v3(
+  pair_address = "0x1d42064fc4beb5f8aaf85f4617ae8b3b5b8bd801",
+  days = 30,
+  cap = 10,
+  sims = 1000
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pair_address</code></td>
+<td>
+<p>Pair's Address</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>days</code></td>
+<td>
+<p>How long in future to forecast</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cap</code></td>
+<td>
+<p>Max Percentage Increase that can occur in a day, default capped to 10%</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sims</code></td>
+<td>
+<p>Number of simultations</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Data frame representing Forecast Price for a pair's tokens UniswapV3
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">liquidity_range_all_v3(pair_address = "0x1d42064fc4beb5f8aaf85f4617ae8b3b5b8bd801",
+                       days = 30, cap = 10, sims = 1000)
+</code></pre>
+
+
+</div>

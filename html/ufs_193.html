@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pwr.bootES</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimate required sample size for accuracy in parameter estimation using bootES</h2>
+
+<h3>Description</h3>
+
+<p>This function uses <code>bootES::bootES()</code> to compute
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pwr.bootES(data = data, ci.type = "bca", ..., w = 0.1, silent = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataset, as you would normally supply to <code>bootES::bootES()</code>;
+you will probably have to simulate this.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci.type</code></td>
+<td>
+<p>The estimation method; by default, the default of
+<code>bootES::bootES()</code> is used ('bca'), but this is changed to 'basic' if it
+encounters problems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other options for <code>bootES::bootES()</code> (see that help page).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>w</code></td>
+<td>
+<p>The desired 'halfwidth' of the confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Whether to provide a lot of information about progress
+('FALSE') or not ('TRUE').</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A single numeric value (the sample size).
+</p>
+
+
+<h3>References</h3>
+
+<p>Kirby, K. N., &amp; Gerlanc, D. (2013). BootES: An R package for bootstrap confidence
+intervals on effect sizes. <em>Behavior Research Methods, 45</em>, 905–927. <a href="https://doi.org/10.3758/s13428-013-0330-5">doi:10.3758/s13428-013-0330-5</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### This requires the bootES package
+  if (requireNamespace("bootES", quietly = TRUE)) {
+
+  ### To estimate a mean
+  x &lt;- rnorm(500, mean=8, sd=3);
+  pwr.bootES(data.frame(x=x),
+             R=500,
+             w=.5);
+
+  ### To estimate a correlation (the 'effect.type' parameter is
+  ### redundant here; with two columns in the data frame, computing
+  ### the confidence interval for the Pearson correlation is the default
+  ### ehavior of bootES)
+  y &lt;- x+rnorm(500, mean=0, sd=5);
+  cor(x, y);
+  requiredN &lt;-
+    pwr.bootES(data.frame(x=x,
+                          y=y),
+               effect.type='r',
+               R=500,
+               w=.2);
+  print(requiredN);
+  ### Compare to parametric confidence interval
+  ### based on the computed required sample size
+  confIntR(r = cor(x, y),
+           N = requiredN);
+  ### Width of obtained confidence interval
+  print(round(diff(as.numeric(confIntR(r = cor(x, y),
+                              N = requiredN))), 2));
+}
+</code></pre>
+
+
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ustfd_url</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate URL To Access US Treasury Fiscal Data API</h2>
+
+<h3>Description</h3>
+
+<p><code>ustfd_url()</code> will generate a URL suitable for querying the Fiscal Data API.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ustfd_url(query)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>query</code></td>
+<td>
+<p>required list</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a httr url object
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other ustfd_low_level: 
+<code>ustfd_json_response()</code>,
+<code>ustfd_request()</code>,
+<code>ustfd_response_meta_object()</code>,
+<code>ustfd_response_payload()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(ustfd)
+ustfd_url(ustfd_query('/v1/accounting/dts/dts_table_4'))
+
+
+</code></pre>
+
+
+</div>

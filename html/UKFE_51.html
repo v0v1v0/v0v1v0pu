@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>HydroPlot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Hydrological plot of concurrent discharge and precipitation</h2>
+
+<h3>Description</h3>
+
+<p>Plots concurrent precipitation and discharge with precipitation along the top and discharge along the bottom
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">HydroPlot(
+  x,
+  Title = "Concurrent Rainfall &amp; Discharge",
+  from = NULL,
+  to = NULL,
+  adj.y = 1.5,
+  plw = 1,
+  qlw = 1.8,
+  Return = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame with three columns in the order of date (or POSIXct), precipitation, and discharge</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Title</code></td>
+<td>
+<p>a character string. The user chosen plot title. The default is "Concurrent Rainfall &amp; Discharge"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+<p>a starting time for the plot. In the form of a date or POSIXct object. The default is the first row of x</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>an end time for the plot. In the form of a date or POSIXct object. The default is the last row of x</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adj.y</code></td>
+<td>
+<p>a numeric value to adjust the closeness of the preciptation and discharge in the plot. Default is 1.5. A lower value brings them closer and a larger value further apart</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plw</code></td>
+<td>
+<p>a numeric value to adjust the width of the precipitation lines. Default is one. A larger value thickens them and vice versa</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>qlw</code></td>
+<td>
+<p>a numeric value to adjust the width of the discharge line. Default is 1.8. A larger value thickens them and vice versa</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Return</code></td>
+<td>
+<p>a logical argument with a default of FALSE. If TRUE the data-frame of time, precipitation, and flow is returned</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The input of x is a dataframe with the first column being time. If the data is sub daily this should be class POSIXct with time as well as date.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A plot of concurrent precipitation and discharge. With the former at the top and the latter at the bottom. If the Return argument equals true the associated data-frame is also returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Plot the Thames precipitation and discharge for the 2013 hydrological year,
+#adjusting the y axis to 1.8.
+HydroPlot(ThamesPQ, from = "2013-10-01", to = "2014-09-30", adj.y = 1.8)
+</code></pre>
+
+
+</div>

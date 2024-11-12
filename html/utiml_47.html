@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mltrain</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build transformation models</h2>
+
+<h3>Description</h3>
+
+<p>Base classifiers are used to build models to solve the the transformation
+problems. To create a new base classifier, two steps are necessary:
+</p>
+
+<ol>
+<li>
+<p> Create a train method
+</p>
+</li>
+<li>
+<p> Create a prediction method
+</p>
+</li>
+</ol>
+<p>This section is about how to create the first step: a train method.
+To create a new predict model see <code>mlpredict</code> documentation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mltrain(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A <code>mltransformation</code> object. This is used as a list and
+contains at least five values:
+</p>
+
+<dl>
+<dt>object$data</dt>
+<dd>
+<p>A data.frame with the train data, where the columns are
+the attributes and the rows are the examples.</p>
+</dd>
+<dt>object$labelname</dt>
+<dd>
+<p>The name of the class column.</p>
+</dd>
+<dt>object$labelindex</dt>
+<dd>
+<p>The column index of the class.</p>
+</dd>
+<dt>object$mldataset</dt>
+<dd>
+<p>The name of multi-label dataset.</p>
+</dd>
+<dt>object$mlmethod</dt>
+<dd>
+<p>The name of the multi-label method.</p>
+</dd>
+</dl>
+<p>Others values may be specified by the multi-label method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base method.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A model object. The class of this model can be of any type, however,
+this object will be passed to the respective mlpredict method.
+</p>
+
+
+<h3>How to create a new train base method</h3>
+
+<p>First, is necessary to define a name of your classifier, because this name
+determines the method name. The base method name must start with
+<code>mltrain.base</code> followed by the designed name, e.g. a <code>'FOO'</code>
+classify must be defined as <code>mltrain.baseFOO</code> (we suggest always use
+upper case names).
+</p>
+<p>Next, your method must receive at least two parameters (<code>object, ...</code>).
+Use <code>object$data[, object$labelindex]</code> or
+<code>object$data[, object$labelname]</code> to access the labels values and use
+<code>object$data[, -object$labelindex]</code> to access the predictive attributes.
+If you need to know which are the multi-label dataset and method, use
+<code>object$mldataset</code> and <code>object$mlmethod</code>, respectively.
+</p>
+<p>Finally, your method should return a model that will be used by the mlpredict
+method. Remember, that your method may be used to build binary and
+multi-class models.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create a empty model of type FOO
+mltrain.baseFOO &lt;- function (object, ...) {
+   mymodel &lt;- list(
+     classes = as.character(unique(object$data[, object$labelindex]))
+   )
+   class(mymodel) &lt;- 'fooModel'
+   mymodel
+}
+
+# Using this base method with Binary Relevance
+brmodel &lt;- br(toyml, 'FOO')
+
+
+
+# Create a SVM method using the e1071 package
+library(e1071)
+mltrain.baseSVM &lt;- function (object, ...) {
+   traindata &lt;- object$data[, -object$labelindex]
+   labeldata &lt;- object$data[, object$labelindex]
+   model &lt;- svm(traindata, labeldata, probability = TRUE, ...)
+   model
+}
+
+</code></pre>
+
+
+</div>

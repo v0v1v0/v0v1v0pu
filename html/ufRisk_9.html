@@ -1,0 +1,368 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>varcast</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculation of one-step ahead forecasts of Value at Risk and Expected Shortfall (parametric and
+semiparametric)</h2>
+
+<h3>Description</h3>
+
+<p>One-step ahead forecasts of Value at Risk and Expected Shortfall for a selection of short-memory
+and long-memory parametric as well as semiparametric GARCH-type models are
+computed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">varcast(
+  x,
+  a.v = 0.99,
+  a.e = 0.975,
+  model = c("sGARCH", "lGARCH", "eGARCH", "apARCH", "fiGARCH", "filGARCH"),
+  garchOrder = c(1, 1),
+  distr = c("norm", "std"),
+  n.out = 250,
+  smooth = c("none", "lpr"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector containing the price series.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a.v</code></td>
+<td>
+<p>confidence level for calculating VaR; is set to <code>0.99</code> by default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a.e</code></td>
+<td>
+<p>confidence level for calculating ES; is set to <code>0.975</code> by default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>model to be estimated. Options are 'sGARCH', 'eGARCH', 'apARCH',
+'lGARCH', 'fiGARCH' and 'filGARCH'; is set to <code>'sGARCH'</code> by default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>garchOrder</code></td>
+<td>
+<p>orders to be estimated; c(1, 1), i.e. p = q = 1, is the
+default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distr</code></td>
+<td>
+<p>distribution to use for the innovations of the respective GARCH model;
+is set to <code>'std'</code> by default</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.out</code></td>
+<td>
+<p>size of out-sample; is set to <code>250</code> by default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smooth</code></td>
+<td>
+<p>a character object; defines the data-driven smoothing approach
+for the estimation of the nonparametric scale function; for
+<code>smooth = 'lpr'</code>, the scale function is obtained from the logarithm
+of the squared centralized returns by means of the <code>msmooth()</code> function or
+<code>tsmoothlm()</code> function if <code>model</code> is set to <code>'sGARCH'</code>, <code>'eGARCH'</code>,
+<code>'apARCH'</code> and <code>lGARCH'} or \code{'fiGARCH</code> and <code>'filGARCH'</code>,
+respectively; is set to <code>smooth = 'none'</code> by default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>depending on the choice of <code>model</code>, further arguments can be
+passed to either <code>smoots::msmooth()</code> or to <code>tsmoothlm()</code>;
+if no other arguments are given, the default settings
+are used for both functions with the exception of <code>p = 3</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Let <code class="reqn">Y_t</code> be a (demeaned) return series. The semiparametric extension of
+the GARCH(p,q) model (Bollerslev, 1986) is called a Semi-GARCH model
+(Feng, 2004) and is defined by
+</p>
+<p style="text-align: center;"><code class="reqn">Y_t = s(x_t)\sigma_t \eta_t,</code>
+</p>
+
+<p>with <code class="reqn">\eta_t \sim IID(0,1)</code> and
+</p>
+<p style="text-align: center;"><code class="reqn">\sigma^2_t = \alpha_0 + \sum_{i=1}^p \alpha_i Y^2_{t-i}
++ \sum_{j=1}^q \beta_j \sigma^2_{t-j},</code>
+</p>
+
+<p>where <code class="reqn">\sigma_t &gt; 0</code> are the conditional standard deviations, <code class="reqn">s(x_t) &gt; 0</code> is
+a nonparametric scale function with <code class="reqn">x_t</code> being the rescaled observation
+time points on the interval [0,1] and <code class="reqn">\alpha_i</code>
+and <code class="reqn">\beta_j</code> are non-negative real valued coefficients, except for
+<code class="reqn">\alpha_0</code>, which must satisfy <code class="reqn">\alpha_0 &gt; 0</code>. Furthermore, it is assumed that
+Var<code class="reqn">(\sigma_t \eta_t) = 1</code>. In this functions, different
+short-memory and long-memory GARCH-type models are selectable for the parametric part of the
+model. More specifically, the standard GARCH (Bollerslev, 1986), the
+Log-GARCH (Pantula, 1986; Geweke, 1986; Milhoj, 1988), the eGARCH
+(Nelson, 1991), the APARCH (Ding et al., 1993), the FIGARCH (Baillie et al., 1996)
+and the FI-Log-GARCH (Feng et al., 2020) model are implemented. For more
+information on the representations of the last three models mentioned, we
+refer the reader to the corresponding references listed in the references
+section.
+</p>
+<p>While the innovations <code class="reqn">\eta_t</code> must be i.i.d. (independent and identically
+distributed) with zero-mean and unit-variance and while any
+distribution that satisfies these conditions is suitable, the standardized
+t-distribution is selected for the estimation of the models and computation
+of the Value at Risk (VaR) as well as the Expected Shortfall (ES) within
+this function.
+</p>
+<p>For a given level <code class="reqn">\alpha \in (0, 1)</code>,
+</p>
+<p style="text-align: center;"><code class="reqn">VaR(\alpha) = inf \{z \in R: F_L(z) \geq \alpha\}</code>
+</p>
+
+<p>defines the VaR at level alpha. In this definition, <code class="reqn">L</code> is the
+loss variable (making a loss is denoted as a positive value, whereas gains
+are negative values) and <code class="reqn">F_L</code> is its cumulative distribution function.
+Explained differently, <code class="reqn">VaR(\alpha)</code> is the <code class="reqn">\alpha</code>-quantile of the loss
+distribution.
+</p>
+<p>The ES for a level <code class="reqn">\alpha</code>, however, is given by
+</p>
+<p style="text-align: center;"><code class="reqn">ES(\alpha) = (1 / (1 - \alpha)) \int_{\alpha}^1 VaR(u)du,</code>
+</p>
+
+<p>i.e. it is the expected loss in case <code class="reqn">VaR(\alpha)</code> is exceeded. More
+information on these risk measures can be found on pp. 64-72 in McNeil et
+al. (2015).
+</p>
+<p>To apply the function, a numeric vector that contains the price series that
+is to be analyzed ordered from past to present must be passed to the
+argument <code>x</code>. Furthermore, the user can set different levels of alpha
+for the VaR and the ES via the arguments <code>a.v</code> and <code>a.e</code>,
+respectively. A parametric short-memory or long-memory GARCH-type model can be
+selected by means of <code>model</code>, which only accepts a single-element character vector
+as input. At the time of the release of package version 1.0.0, a standard
+GARCH ('sGARCH'), a Log-GARCH ('lGARCH'), an eGARCH ('eGARCH'), an APARCH
+('apARCH'), a FIGARCH ('fiGARCH') and a FI-Log-GARCH ('filGARCH') model can be selected,
+each with conditional t-distribution. By default, a standard GARCH model is applied.
+The orders of the GARCH-type models can be defined with <code>garchOrder</code>,
+which is a numeric vector with two elements. Its first element is the
+ARCH order p, whereas the GARCH order q can be adjusted via the second
+element. If no adjustments are made, the orders p = q = 1 are selected. The
+number of out-sample observations is set via the argument <code>n.out</code>. If n
+is the total number of observations of the
+whole price series, the model is estimated for the first n - n.out
+observations (in-sample), while the VaR and the ES are obtained for the last
+n.out observations (out-sample) based on the estimated model for the
+in-sample. Moreover, the data-driven estimation method of the underlying
+scale function can be adjusted via the argument <code>smooth</code>. If
+<code>smooth = 'lpr'</code> is selected, the scale function is obtained by
+applying an iterative plug-in algorithm logarithm of the squared
+centralized returns. Depending on the setting of <code>model</code> an algorithm
+proposed by Feng, Gries and Fritz (2020) or by Letmathe, Feng and Uhde
+(2021) is employed. In the former case, the function <code>msmooth()</code> of the
+<code>smoots</code> package is applied and for the latter the <code>tsmoothlm()</code>
+function of the <code>esemifar</code> package is used. An ellipsis <code>...</code> is
+implemented to allow for additional arguments for <code>msmooth()</code> and
+<code>tsmoothlm()</code>.
+</p>
+<p>NOTE:
+</p>
+<p>This function makes use of the <code>arima()</code> function of the stats package,
+of the <code>fracdiff()</code> function of the <code>fracdiff</code> package, of the
+<code>ugarchspec()</code> and <code>ugarchfit()</code> functions of the <code>rugarch</code>
+package, of the <code>msmooth()</code> function of the <code>smoots</code> package
+and of the <code>esemifar()</code> function of the <code>esemifar</code> for estimation.
+Moreover, Log-GARCH and FI-Log-GARCH models in the parametric part of the
+complete models are estimated via their ARMA and FARIMA representations,
+respectively, and must therefore satisfy <code class="reqn">p \geq q</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>This function returns a list with the following elements.
+</p>
+
+<dl>
+<dt>model</dt>
+<dd>
+<p>selected model for estimation</p>
+</dd>
+<dt>mean</dt>
+<dd>
+<p>the estimated mean of the in-sample returns</p>
+</dd>
+<dt>model.fit</dt>
+<dd>
+<p>estimated model parameters for the parametric part of the
+in-sample</p>
+</dd>
+<dt>np.est</dt>
+<dd>
+<p>the estimation results for the nonparametric part of the
+in-sample model</p>
+</dd>
+<dt>ret.in</dt>
+<dd>
+<p>in-sample return series</p>
+</dd>
+<dt>ret.out</dt>
+<dd>
+<p>out-sample return series</p>
+</dd>
+<dt>sig.in</dt>
+<dd>
+<p>estimated in-sample total volatility</p>
+</dd>
+<dt>sig.fc</dt>
+<dd>
+<p>out-sample forecasts of the total volatility</p>
+</dd>
+<dt>scale</dt>
+<dd>
+<p>the estimated nonparametric scale function values for the
+in-sample</p>
+</dd>
+<dt>scale.fc</dt>
+<dd>
+<p>the scale function forecast for the out-sample</p>
+</dd>
+<dt>VaR.e</dt>
+<dd>
+<p>out-sample forecasts of the (1-<code>a.e</code>)100% VaR</p>
+</dd>
+<dt>VaR.v</dt>
+<dd>
+<p>out-sample forecasts of the (1-<code>a.v</code>)100% VaR</p>
+</dd>
+<dt>ES</dt>
+<dd>
+<p>out-sample forecasts of the (1-<code>a.e</code>)100% ES</p>
+</dd>
+<dt>dfree</dt>
+<dd>
+<p>estimated degrees of freedom for the standardized returns</p>
+</dd>
+<dt>a.v</dt>
+<dd>
+<p>coverage level for the 99 % VaR</p>
+</dd>
+<dt>a.e</dt>
+<dd>
+<p>coverage level for 97.5 % VaR</p>
+</dd>
+<dt>garchOrder</dt>
+<dd>
+<p>the orders p and q of the implemented GARCH-type model</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+
+<ul>
+<li>
+<p> Sebastian Letmathe (Scientific Employee) (Department of Economics,
+Paderborn University) <br></p>
+</li>
+<li>
+<p> Dominik Schulz (Scientific Employee) (Department of Economics,
+Paderborn University), <br></p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Baillie, R. T., Bollerslev, T., &amp; Mikkelsen, H. O. (1996). Fractionally
+integrated generalized autoregressive conditional heteroskedasticity.
+In: Journal of Econometrics, 74.1, pp. 3-30.
+</p>
+<p>Bollerslev, T. (1986) Generalized autoregressive conditional
+heteroskedasticity. In: Journal of Econometrics 31.3, pp. 307-327.
+</p>
+<p>Ding, Z., Granger, C.W., and Engle, R.F. (1993). A long memory property
+of stock market returns and a new model. In: Journal of Empirical Finance
+1.1, pp. 83-106.
+</p>
+<p>Feng, Y. (2004). Simultaneously modeling conditional heteroskedasticity and
+scale change. In: Econometric Theory 20.3, pp. 563-596.
+</p>
+<p>Feng, Y., Beran, J., Letmathe, S., &amp; Ghosh, S. (2020). Fractionally
+integrated Log-GARCH with application to value at risk and expected
+shortfall (No. 137). Paderborn University, CIE Center for
+International Economics.
+</p>
+<p>Pantula, S.G. (1986). Modeling the persistence of conditional variances:
+a comment. In: Econometric Reviews 5, pp. 79-97.
+</p>
+<p>Geweke, J. (1986). Comment on: Modelling the persistence of conditional
+variances. In: Econometric Reviews 5, pp. 57-61.
+</p>
+<p>Letmathe, S., Feng, Y., &amp; Uhde, A. (2021). Semiparametric GARCH models with
+long memory applied to Value at Risk and Expected Shortfall (No. 141).
+Paderborn University, CIE Center for International Economics.
+</p>
+<p>McNeil, A.J., Frey, R., and Embrechts, P. (2015). Quantitative risk
+management: concepts, techniques and tools - revised edition. Princeton
+University Press.
+</p>
+<p>Milhoj, A. (1988). A Multiplicative parametrization of ARCH models.
+Universitetets Statistiske Institut.
+</p>
+<p>Nelson, D. B. (1991). Conditional heteroskedasticity in asset returns: A
+new approach. In: Econometrica: Journal of the Econometric Society, 347-370.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Example for Walmart Inc. (WMT)
+prices = WMT$price.close
+
+# forecasting VaR and ES
+results = varcast(prices, model = 'sGARCH', n.out = 250)
+ret.out = results$ret.out
+n.out = length(ret.out)
+VaR97.5 = results$VaR.e
+VaR99 = results$VaR.v
+ES = results$ES
+
+# plotting VaR at 99% coverage
+matplot(1:n.out, cbind(-ret.out, VaR99),
+  type = 'hl',
+  xlab = 'number of out-of-sample obs.', ylab = 'losses, VaR and ES',
+  main = '99% VaR (red) for the WMT return series')
+
+# plotting VaR at 97.5% coverage and corresponding ES
+matplot(1:n.out, cbind(-ret.out, ES, VaR97.5),
+  type = 'hll',
+  xlab = 'number of out-of-sample obs.', ylab = 'losses, VaR and ES',
+  main = '97.5% VaR (green) and ES (red) for the WMT return series')
+
+</code></pre>
+
+
+</div>

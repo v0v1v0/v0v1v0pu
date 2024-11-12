@@ -1,0 +1,344 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GAfit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Genetic algorithm for preliminary estimation of GMAR, StMAR, or G-StMAR model</h2>
+
+<h3>Description</h3>
+
+<p><code>GAfit</code> estimates specified GMAR, StMAR, or G-StMAR model using a genetic algorithm.
+The employed genetic algorithm is designed to find starting values for gradient based methods.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GAfit(
+  data,
+  p,
+  M,
+  model = c("GMAR", "StMAR", "G-StMAR"),
+  restricted = FALSE,
+  constraints = NULL,
+  parametrization = c("intercept", "mean"),
+  conditional = TRUE,
+  ngen = 200,
+  popsize,
+  smart_mu = min(100, ceiling(0.5 * ngen)),
+  mu_scale,
+  sigma_scale,
+  initpop = NULL,
+  regime_force_scale = 1,
+  red_criteria = c(0.05, 0.01),
+  to_return = c("alt_ind", "best_ind"),
+  minval,
+  seed = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a numeric vector or class <code>'ts'</code> object containing the data. <code>NA</code> values are not supported.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a positive integer specifying the autoregressive order of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+
+<dl>
+<dt>For <strong>GMAR</strong> and <strong>StMAR</strong> models:</dt>
+<dd>
+<p>a positive integer specifying the number of mixture components.</p>
+</dd>
+<dt>For <strong>G-StMAR</strong> models:</dt>
+<dd>
+<p>a size (2x1) integer vector specifying the number of <em>GMAR type</em> components <code>M1</code> in the
+first element and <em>StMAR type</em> components <code>M2</code> in the second element. The total number of mixture components is <code>M=M1+M2</code>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>is "GMAR", "StMAR", or "G-StMAR" model considered? In the G-StMAR model, the first <code>M1</code> components
+are <em>GMAR type</em> and the rest <code>M2</code> components are <em>StMAR type</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>restricted</code></td>
+<td>
+<p>a logical argument stating whether the AR coefficients <code class="reqn">\phi_{m,1},...,\phi_{m,p}</code> are restricted
+to be the same for all regimes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>constraints</code></td>
+<td>
+<p>specifies linear constraints imposed to each regime's autoregressive parameters separately.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>a list of size <code class="reqn">(pxq_{m})</code> constraint matrices <strong><code class="reqn">C_{m}</code></strong> of full column rank
+satisfying <strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> for all <code class="reqn">m=1,...,M</code>, where
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p})</code> and <strong><code class="reqn">\psi_{m}</code></strong><code class="reqn">=(\psi_{m,1},...,\psi_{m,q_{m}})</code>.</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>a size <code class="reqn">(pxq)</code> constraint matrix <strong><code class="reqn">C</code></strong> of full column rank satisfying
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong>, where <strong><code class="reqn">\phi</code></strong><code class="reqn">=(\phi_{1},...,\phi_{p})</code> and
+<strong><code class="reqn">\psi</code></strong><code class="reqn">=\psi_{1},...,\psi_{q}</code>.</p>
+</dd>
+</dl>
+<p>The symbol <code class="reqn">\phi</code> denotes an AR coefficient. Note that regardless of any constraints, the autoregressive order
+is always <code>p</code> for all regimes.
+Ignore or set to <code>NULL</code> if applying linear constraints is not desired.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parametrization</code></td>
+<td>
+<p>is the model parametrized with the "intercepts" <code class="reqn">\phi_{m,0}</code> or
+"means" <code class="reqn">\mu_{m} = \phi_{m,0}/(1-\sum\phi_{i,m})</code>?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conditional</code></td>
+<td>
+<p>a logical argument specifying whether the conditional or exact log-likelihood function should be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ngen</code></td>
+<td>
+<p>a positive integer specifying the number of generations to be ran through in the genetic algorithm.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>popsize</code></td>
+<td>
+<p>a positive even integer specifying the population size in the genetic algorithm.
+Default is <code>10*d</code> where <code>d</code> is the number of parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smart_mu</code></td>
+<td>
+<p>a positive integer specifying the generation after which the random mutations in the genetic algorithm are "smart".
+This means that mutating individuals will mostly mutate fairly close (or partially close) to the best fitting individual so far.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu_scale</code></td>
+<td>
+<p>a real valued vector of length two specifying the mean (the first element) and standard deviation (the second element)
+of the normal distribution from which the <code class="reqn">\mu_{m}</code> mean-parameters are generated in random mutations in the genetic algorithm.
+Default is <code>c(mean(data), sd(data))</code>.
+Note that the genetic algorithm optimizes with mean-parametrization even when <code>parametrization=="intercept"</code>, but
+input (in <code>initpop</code>) and output (return value) parameter vectors may be intercept-parametrized.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma_scale</code></td>
+<td>
+<p>a positive real number specifying the standard deviation of the (zero mean, positive only by taking absolute value)
+normal distribution from which the component variance parameters are generated in the random mutations in the genetic algorithm.
+Default is <code>var(stats::ar(data, order.max=10)$resid, na.rm=TRUE)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initpop</code></td>
+<td>
+<p>a list of parameter vectors from which the initial population of the genetic algorithm will be generated from.
+The parameter vectors should be of form...
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>Size <code class="reqn">(M(p+3)+M-M1-1x1)</code> vector <strong><code class="reqn">\theta</code></strong><code class="reqn">=</code>(<strong><code class="reqn">\upsilon_{1}</code></strong><code class="reqn">,...,</code><strong><code class="reqn">\upsilon_{M}</code></strong>,
+<code class="reqn">\alpha_{1},...,\alpha_{M-1},</code><strong><code class="reqn">\nu</code></strong>) where
+</p>
+
+<ul>
+<li> <p><strong><code class="reqn">\upsilon_{m}</code></strong><code class="reqn">=(\phi_{m,0},</code><strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">,</code><code class="reqn">\sigma_{m}^2)</code>
+</p>
+</li>
+<li> <p><strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p}), m=1,...,M</code>
+</p>
+</li>
+<li> <p><strong><code class="reqn">\nu</code></strong><code class="reqn">=(\nu_{M1+1},...,\nu_{M})</code>
+</p>
+</li>
+<li> <p><code class="reqn">M1</code> is the number of GMAR type regimes.
+</p>
+</li>
+</ul>
+<p>In the <strong>GMAR</strong> model, <code class="reqn">M1=M</code> and the parameter <strong><code class="reqn">\nu</code></strong> dropped. In the <strong>StMAR</strong> model, <code class="reqn">M1=0</code>.
+</p>
+<p>If the model imposes <strong>linear constraints</strong> on the autoregressive parameters:
+Replace the vectors <strong><code class="reqn">\phi_{m}</code></strong> with the vectors <strong><code class="reqn">\psi_{m}</code></strong> that satisfy
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> (see the argument <code>constraints</code>).
+</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>Size <code class="reqn">(3M+M-M1+p-1x1)</code> vector <strong><code class="reqn">\theta</code></strong><code class="reqn">=(\phi_{1,0},...,\phi_{M,0},</code><strong><code class="reqn">\phi</code></strong><code class="reqn">,</code>
+<code class="reqn">\sigma_{1}^2,...,\sigma_{M}^2,</code><code class="reqn">\alpha_{1},...,\alpha_{M-1},</code><strong><code class="reqn">\nu</code></strong>), where <strong><code class="reqn">\phi</code></strong>=<code class="reqn">(\phi_{1},...,\phi_{p})</code>
+contains the AR coefficients, which are common for all regimes.
+</p>
+<p>If the model imposes <strong>linear constraints</strong> on the autoregressive parameters:
+Replace the vector <strong><code class="reqn">\phi</code></strong> with the vector <strong><code class="reqn">\psi</code></strong> that satisfies
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong> (see the argument <code>constraints</code>).
+</p>
+</dd>
+</dl>
+<p>Symbol <code class="reqn">\phi</code> denotes an AR coefficient, <code class="reqn">\sigma^2</code> a variance, <code class="reqn">\alpha</code> a mixing weight, and <code class="reqn">\nu</code> a degrees of
+freedom parameter. If <code>parametrization=="mean"</code>, just replace each intercept term <code class="reqn">\phi_{m,0}</code> with the regimewise mean
+<code class="reqn">\mu_m = \phi_{m,0}/(1-\sum\phi_{i,m})</code>. In the <strong>G-StMAR</strong> model, the first <code>M1</code> components are <em>GMAR type</em>
+and the rest <code>M2</code> components are <em>StMAR type</em>.
+Note that in the case <strong>M=1</strong>, the mixing weight parameters <code class="reqn">\alpha</code> are dropped, and in the case of <strong>StMAR</strong> or <strong>G-StMAR</strong> model,
+the degrees of freedom parameters <code class="reqn">\nu</code> have to be larger than <code class="reqn">2</code>.
+If not specified (or <code>NULL</code> as is default), the initial population will be drawn randomly.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regime_force_scale</code></td>
+<td>
+<p>a non-negative real number specifying how much should natural selection favor individuals
+with less regimes that have almost all mixing weights (practically) at zero (see <code>red_criteria</code>), i.e., with
+less "redundant regimes".
+Set to zero for no favoring or large number for heavy favoring. Without any favoring the genetic algorithm gets more often stuck
+in an area of the parameter space where some regimes are wasted, but with too much favoring the best genes might never mix into the
+population and the algorithm might converge poorly. Default is <code>1</code> and it gives <code class="reqn">2x</code> larger surviving probability weights for
+individuals with no wasted regimes compared to individuals with one wasted regime. Number <code>2</code> would give <code class="reqn">3x</code> larger probabilities etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>red_criteria</code></td>
+<td>
+<p>a length 2 numeric vector specifying the criteria that is used to determine whether a regime is redundant or not.
+Any regime <code>m</code> which satisfies <code>sum(mixing_weights[,m] &gt; red_criteria[1]) &lt; red_criteria[2]*n_obs</code> will be considered "redundant".
+One should be careful when adjusting this argument (set <code>c(0, 0)</code> to fully disable the 'redundant regime' features from the algorithm).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to_return</code></td>
+<td>
+<p>should the genetic algorithm return the best fitting individual which has the least "redundant" regimes (<code>"alt_ind"</code>)
+or the individual which has the highest log-likelihood in general (<code>"best_ind"</code>) but might have more wasted regimes?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minval</code></td>
+<td>
+<p>a real number defining the minimum value of the log-likelihood function that will be considered.
+Values smaller than this will be treated as they were <code>minval</code> and the corresponding individuals will never survive.
+The default is <code>-(10^(ceiling(log10(length(data))) + 1) - 1)</code>, and one should be very careful if adjusting this.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>a single value, interpreted as an integer, or NULL, that sets seed for the random number generator in the beginning of
+the function call. If calling <code>GAfit</code> from <code>fitGSMAR</code>, use the argument <code>seeds</code> instead of passing the argument <code>seed</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>We currently use this to catch deprecated arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The core of the genetic algorithm is mostly based on the description by <em>Dorsey and Mayer (1995)</em>.
+It utilizes a slightly modified version of the individually adaptive crossover and mutation rates described
+by <em>Patnaik and Srinivas (1994)</em> and employs (50%) fitness inheritance discussed by <em>Smith, Dike and Stegmann (1995)</em>.
+Large (in absolute value) but stationary AR parameter values are generated with the algorithm proposed by Monahan (1984).
+</p>
+<p>By "redundant" or "wasted" regimes we mean regimes that have the time varying mixing weights basically at zero for all t.
+The model with redundant regimes would have approximately the same log-likelihood value without the redundant regimes
+and there is no purpose to have redundant regimes in the model.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns estimated parameter vector with the form described in <code>initpop</code>.
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li>
+<p> Dorsey R. E. and Mayer W. J. 1995. Genetic algorithms for estimation problems with multiple optima,
+nondifferentiability, and other irregular features. <em>Journal of Business &amp; Economic Statistics</em>,
+<strong>13</strong>, 53-66.
+</p>
+
+<ul>
+<li>
+<p> Kalliovirta L., Meitz M. and Saikkonen P. 2015. Gaussian Mixture Autoregressive model for univariate time series.
+<em>Journal of Time Series Analysis</em>, <strong>36</strong>(2), 247-266.
+</p>
+</li>
+<li>
+<p> Meitz M., Preve D., Saikkonen P. 2023. A mixture autoregressive model based on Student's t-distribution.
+<em>Communications in Statistics - Theory and Methods</em>, <strong>52</strong>(2), 499-515.
+</p>
+</li>
+<li>
+<p> Monahan J.F. 1984. A Note on Enforcing Stationarity in Autoregressive-Moving Average Models.
+<em>Biometrica</em> <strong>71</strong>, 403-404.
+</p>
+</li>
+<li>
+<p> Patnaik L.M. and Srinivas M. 1994. Adaptive Probabilities of Crossover and Mutation in Genetic Algorithms.
+<em>Transactions on Systems, Man and Cybernetics</em> <strong>24</strong>, 656-667.
+</p>
+</li>
+<li>
+<p> Smith R.E., Dike B.A., Stegmann S.A. 1995. Fitness inheritance in genetic algorithms.
+<em>Proceedings of the 1995 ACM Symposium on Applied Computing</em>, 345-350.
+</p>
+</li>
+<li>
+<p> Virolainen S. 2022. A mixture autoregressive model based on Gaussian and Student's t-distributions.
+Studies in Nonlinear Dynamics &amp; Econometrics, <strong>26</strong>(4) 559-580.
+</p>
+</li>
+</ul>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## These are long running examples
+
+# Preliminary estimation of GMAR p=1, M=2, model with the genetic algorithm
+# using only 100 generations (200 is recommended):
+pars12_ga &lt;- GAfit(data=simudata, p=1, M=2, model="GMAR", ngen=100, seed=1)
+pars12_ga # Returns a parameter vector, not a class 'gsmar' object.
+
+</code></pre>
+
+
+</div>

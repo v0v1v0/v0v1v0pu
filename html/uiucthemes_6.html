@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>html_imetropolis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>"Illinois" (UIUC) Metropolis themed HTML Template for RMarkdown</h2>
+
+<h3>Description</h3>
+
+<p>Generates from an RMarkdown file an HTML presentation with "Illinois" (UIUC)
+colors and identity standards based on the Metropolis theme.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">html_imetropolis(
+  self_contained = FALSE,
+  seal = TRUE,
+  chakra = "https://remarkjs.com/downloads/remark-latest.min.js",
+  nature = list(),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>self_contained</code></td>
+<td>
+<p>Whether to produce a self-contained HTML file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seal</code></td>
+<td>
+<p>Whether to generate a title slide automatically using the YAML
+metadata of the R Markdown document (if <code>FALSE</code>, you should write the
+title slide by yourself).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chakra</code></td>
+<td>
+<p>A path to the remark.js library (can be either local or
+remote). Please note that if you use the default remote latest version of
+remark.js, your slides will not work when you do not have Internet access.
+They might also be broken after a newer version of remark.js is released.
+If these issues concern you, you should download remark.js locally (e.g.,
+via <code>summon_remark()</code>), and use the local version instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nature</code></td>
+<td>
+<p>(Nature transformation) A list of configurations to be passed
+to <code>remark.create()</code>, e.g. <code>list(ratio = '16:9', navigation =
+list(click = TRUE))</code>; see
+<a href="https://github.com/gnab/remark/wiki/Configuration">https://github.com/gnab/remark/wiki/Configuration</a>. Besides the
+options provided by remark.js, you can also set <code>autoplay</code> to a number
+(the number of milliseconds) so the slides will be played every
+<code>autoplay</code> milliseconds. You can also set <code>countdown</code> to a number
+(the number of milliseconds) to include a countdown timer on each slide. If
+using <code>autoplay</code>, you can optionally set <code>countdown</code> to
+<code>TRUE</code> to include a countdown equal to <code>autoplay</code>. To alter the
+set of classes applied to the title slide, you can optionally set
+<code>titleSlideClass</code> to a vector of classes; the default is
+<code>c("center", "middle", "inverse")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>For <code>tsukuyomi()</code>, arguments passed to <code>moon_reader()</code>;
+for <code>moon_reader()</code>, arguments passed to
+<code>rmarkdown::html_document()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A modified <code>xaringan::moon_reader()</code> based on the "Illinois" (UIUC)
+Metropolis themed HTML template.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>James Joseph Balamuta (Light Modifications of Metropolis and R function wrapper)
+See AUTHORS for more specific details behind each of the contributions.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+# Generate slide deck from beamer template
+rmarkdown::draft("slide_deck.Rmd", template = "html_imetropolis", package = "uiucthemes")
+
+# Compile the document
+rmarkdown::render("slide_deck/slide_deck.Rmd")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

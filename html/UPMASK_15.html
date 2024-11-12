@@ -1,0 +1,211 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UPMASKdata</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Run UPMASK in a data frame</h2>
+
+<h3>Description</h3>
+
+<p><code>UPMASKdata</code> executes the UPMASK method on a data frame, and returns 
+another data frame as output, including the membership analysis result as additional 
+columns. 
+</p>
+<p><code>UPMASKdata</code> is a method for performing membership assignment in stellar 
+clusters. The distributed code is prepared to use photometry and spatial positions, 
+but it can take into account other types of data as well. The method is able to take 
+into account arbitrary error models (the used must rewrite the 
+<code>takeErrorsIntoAccount</code> function), and it is unsupervised, data-driven, 
+physical-model-free and relies on as few assumptions as possible. The approach followed
+for membership assessment is based on an iterative process, dimensionality reduction, 
+a clustering algorithm and a kernel density estimation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">UPMASKdata(dataTable, positionDataIndexes=c(1,2),
+photometricDataIndexes=c(3,5,7,9,11,19,21,23,25,27),
+photometricErrorDataIndexes=c(4,6,8,10,12,20,22,24,26,28), threshold=1, 
+classAlgol="kmeans", maxIter=25, starsPerClust_kmeans=25, nstarts_kmeans=50, 
+nRuns=8, runInParallel=FALSE, paralelization="multicore", independent=TRUE, 
+verbose=FALSE, autoCalibrated=FALSE, considerErrors=FALSE, 
+finalXYCut=FALSE, nDimsToKeep=4, dimRed="PCA", scale=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dataTable</code></td>
+<td>
+<p>a data frame with the data to perform the analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>positionDataIndexes</code></td>
+<td>
+<p>an array of integers indicating the columns of the data frame containing the spatial position measurements</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>photometricDataIndexes</code></td>
+<td>
+<p>an array of integers with the column numbers containing photometric measurements (or any other measurement to go into the PCA step)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>photometricErrorDataIndexes</code></td>
+<td>
+<p>an array of integers with the column numbers containing the errors of the photometric measurements</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold</code></td>
+<td>
+<p>a double indicating the thresholding level for the random field analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>classAlgol</code></td>
+<td>
+<p>a string indicating the type of clustering algorithm to consider. Only k-means is implemented at this moment (defaults to kmeans)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxIter</code></td>
+<td>
+<p>an integer the maximum amount of iterations of the outer loop before giving up convergence (usually it is not necessary to modify this)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>starsPerClust_kmeans</code></td>
+<td>
+<p>an integer with the average number of stars per k-means cluster</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstarts_kmeans</code></td>
+<td>
+<p>an integer the amount of random re-initializations of the k-means clustering method (usually it is not necessary to modify this)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nRuns</code></td>
+<td>
+<p>the total number of individual runs to execute the total number of outer loop runs to execute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runInParallel</code></td>
+<td>
+<p>a boolean indicating if the code should run in parallel</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>paralelization</code></td>
+<td>
+<p>a string with the type of paralilization to use. the paralelization can be: "multicore" or "MPIcluster". At this moment only "multicore" is implemented (defaults to multicore).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>independent</code></td>
+<td>
+<p>a boolean indicating if non-parallel runs should be completely independent</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>a boolean indicating if the output to screen should be verbose</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoCalibrated</code></td>
+<td>
+<p>a boolean indicating if the number of random field realizations for the clustering check in the position space should be autocalibrated (experimental code, defaults to FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>considerErrors</code></td>
+<td>
+<p>a boolean indicating if the errors should be taken into account</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>finalXYCut</code></td>
+<td>
+<p>a boolean indicating if a final cut in the XY space should be performed (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nDimsToKeep</code></td>
+<td>
+<p>an integer with the number of dimensions to consider (defaults to 4)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dimRed</code></td>
+<td>
+<p>a string with the dimensionality reduction method to use (defaults to PCA. The only other options are LaplacianEigenmaps or None)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale</code></td>
+<td>
+<p>a boolean indicating if the data should be scaled and centered</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with the original data used to run the method and additional columns indicating the classification at each run, as well as a membership probability in the frequentist sense.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://dx.doi.org/10.1051/0004-6361/201321143">Krone-Martins, A. &amp; Moitinho, A., A&amp;A, v.561, p.A57, 2014</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Analyse a simulated open cluster using spatial and photometric data 
+# Load the data into a data frame
+fileNameI &lt;- "oc_12_500_1000_1.0_p019_0880_1_25km_120nR_withcolors.dat"
+inputFileName &lt;- system.file("extdata", fileNameI, package="UPMASK")
+ocData &lt;- read.table(inputFileName, header=TRUE)
+
+# Example of how to run UPMASK using data from a data frame
+# (serious analysis require at least larger nRuns)
+posIdx &lt;- c(1,2)
+photIdx &lt;- c(3,5,7,9,11,19,21,23,25,27)
+photErrIdx &lt;- c(4,6,8,10,12,20,22,24,26,28)
+
+upmaskRes &lt;- UPMASKdata(ocData, posIdx, photIdx, PhotErrIdx, nRuns=2, 
+                        starsPerClust_kmeans=25, verbose=TRUE)
+
+# Create a simple raw plot to see the results
+pCols &lt;- upmaskRes[,length(upmaskRes)]/max(upmaskRes[,length(upmaskRes)])
+plot(upmaskRes[,1], upmaskRes[,2], col=rgb(0,0,0,pCols), cex=0.5, pch=19)
+
+# Clean the environment
+rm(list=c("inputFileName", "ocData", "posIdx", "photIdx", "photErrIdx", 
+          "upmaskRes", "pCols"))
+
+## End(Not run) 
+ 
+</code></pre>
+
+
+</div>

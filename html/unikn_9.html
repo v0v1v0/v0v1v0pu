@@ -1,0 +1,138 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>demopal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Demonstrate a color palette (in a plot)</h2>
+
+<h3>Description</h3>
+
+<p><code>demopal</code> provides an example plot of some <code>type</code> 
+to illustrate a color palette <code>pal</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">demopal(pal = pal_unikn, type = NA, pal_name = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pal</code></td>
+<td>
+<p>A color palette (to be illustrated).
+Default: <code>pal = pal_unikn</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>The type of plot to be used (as character string or integer value). 
+Permissible types are 
+<code>"bar"</code>, <code>"curve"</code>, <code>"mosaic"</code>, <code>"polygon"</code>, or <code>"scatter"</code> 
+(or an integer value from 1 to 5, respectively).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pal_name</code></td>
+<td>
+<p>A name for the input color palette <code>pal</code> (shown on bottom-right margin). 
+Default: <code>pal_name = NULL</code> (deparsing to input name).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Auxiliary arguments passed to <code>type</code>-specific plots (see details).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>demopal</code> wrapper function passes a range of arguments to more specific functions. 
+Common arguments include:
+</p>
+
+<ul>
+<li> <p><code>col_par</code> Default color for <code>par(col)</code>; 
+</p>
+</li>
+<li> <p><code>alpha</code> Default value for color transparency (in 0:1);  
+</p>
+</li>
+<li> <p><code>n</code> A scaling parameter (for random data generation);  
+</p>
+</li>
+<li> <p><code>main</code> plot title (on top); 
+</p>
+</li>
+<li> <p><code>sub</code> plot subtitle (on right margin);  
+</p>
+</li>
+<li> <p><code>seed</code> A random seed value (for reproducible randomness). 
+</p>
+</li>
+</ul>
+<p>The fit between a color palette <code>pal</code> and plot <code>type</code> 
+depends on the uses of colors in a plot. 
+For instance, overlaps of transparent color areas can be evaluated 
+with plot <code>type = "curve"</code> or plot <code>type = "scatter"</code> 
+(and <code>0 &lt; alpha &lt; 1</code>). 
+</p>
+<p>Some functions additionally accept type-specific arguments 
+(e.g., <code>beside</code>, <code>horiz</code>, and <code>as_prop</code>, for plot <code>type = "bar"</code>, 
+and <code>cex</code> for plot <code>type = "scatter"</code>). 
+</p>
+<p>The type-specific functions usually generate some random data 
+(scaled by a parameter <code>n</code>) that is being plotted. 
+This data is returned (as an invisible R object)  
+to enable a plot's reconstruction.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The random data that was plotted (as an invisible R object).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seepal</code> for plotting color palettes;  
+<code>usecol</code> for using color palettes; 
+<code>shades_of</code> to defining shades of a given color; 
+<code>ac</code> for adjusting color transparency; 
+<code>pal_unikn</code> for the default uni.kn color palette.
+</p>
+<p>Other color functions: 
+<code>ac()</code>,
+<code>grepal()</code>,
+<code>newpal()</code>,
+<code>seecol()</code>,
+<code>shades_of()</code>,
+<code>simcol()</code>,
+<code>usecol()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">demopal(pal = pal_petrol, type = 1)
+
+my_pal &lt;- c(rev(pal_pinky), pal_seeblau) 
+# Selecting plot type:
+demopal(my_pal, type = 2)          # by numeric index
+demopal(my_pal, type = "polygon")  # by name
+
+# Passing type-specific arguments:
+demopal(type = "scatter", col_par = "black", n = 200, cex = c(2, 4, 6), seed = 101)
+
+</code></pre>
+
+
+</div>

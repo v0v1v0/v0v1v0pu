@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>female.inc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Income distribution for females in 2001</h2>
+
+<h3>Description</h3>
+
+<p>A data set containing incomes for 1,000 females along with race
+information. The data is sampled from data provided by the United
+States Census Bureau.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(female.inc)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 1,000 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>income</dt>
+<dd>
+<p>Income for 2001 in dollars</p>
+</dd>
+<dt>race</dt>
+<dd>
+<p>a factor with levels <code>black</code>, <code>hispanic</code> or <code>white</code></p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The United States Census Bureau provides alot of data on income
+distributions. This data comes from the Current Population Survey
+(CPS) for the year 2001. The raw data appears in  table format. This
+data is sampled from the data in that table.
+</p>
+
+
+<h3>Source</h3>
+
+<p>The original table was found at
+http://ferret.bls.census.gov/macro/032002/perinc/new11_002.htm
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(female.inc)
+boxplot(income ~ race, female.inc)
+boxplot(log(income,10) ~ race, female.inc)
+sapply(with(female.inc,split(income,race)),median)
+</code></pre>
+
+
+</div>

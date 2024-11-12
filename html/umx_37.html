@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxPlotGxEbiv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot the results of a GxE univariate test for moderation of ACE components.</h2>
+
+<h3>Description</h3>
+
+<p>Plot GxE results (univariate environmental moderation of ACE components).
+Options include plotting the raw and standardized graphs separately, or in a combined panel.
+You can also set the label for the x axis (xlab), and choose the location of the legend.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxPlotGxEbiv(x, xlab = NA, location = "topleft", separateGraphs = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A fitted <code>umxGxEbiv()</code> model to plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>String to use for the x label (default = NA, which will use the variable name)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>Where to plot the legend (default = "topleft")
+see ?legend for alternatives like bottomright</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>separateGraphs</code></td>
+<td>
+<p>(default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>plot()</code>, <code>umxSummary()</code> work for IP, CP, GxE, SAT, and ACE models.
+</p>
+</li></ul>
+<ul><li> <p><code>umxGxEbiv()</code>
+</p>
+</li></ul>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(umx)
+data(twinData)
+## Not run: 
+selDVs  = "wt"; selDefs = "ht"
+df = umx_scale_wide_twin_data(twinData, varsToScale = c("ht", "wt"), suffix = "")
+mzData  = subset(df, zygosity %in%  c("MZFF", "MZMM"))
+dzData  = subset(df, zygosity %in%  c("DZFF", "DZMM", "DZOS"))
+
+m1 = umxGxEbiv(selDVs = selDVs, selDefs = selDefs, 
+	dzData = dzData, mzData = mzData, sep = "", dropMissingDef = TRUE)
+# Plot Moderation
+plot(m1)
+umxPlotGxEbiv(m1, xlab = "wt", separateGraphs = TRUE, location = "topleft")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

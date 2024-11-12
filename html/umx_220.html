@@ -1,0 +1,200 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_make</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>"make" the umx package using devtools: release to CRAN etc.</h2>
+
+<h3>Description</h3>
+
+<p>Easily  run devtools "install", "release", "win", "examples" etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_make(
+  what = c("load", "quickInst", "install", "spell", "sitrep", "deps_install",
+    "checkCRAN", "testthat", "examples", "win", "rhub", "lastRhub", "release"),
+  pkg = "~/bin/umx",
+  check = TRUE,
+  run = FALSE,
+  start = NULL,
+  spelling = "en_US",
+  which = c("win", "mac", "linux", "solaris"),
+  run_dont_test = FALSE,
+  spell = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>what</code></td>
+<td>
+<p>whether to "install", "release" to CRAN, "test", "check" test on "win" or "rhub", "spell", or "examples")).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pkg</code></td>
+<td>
+<p>the local path to your package. Defaults to my path to umx.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check</code></td>
+<td>
+<p>Whether to run check on the package before release (default = TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>run</code></td>
+<td>
+<p>If what is "examples", whether to also run examples marked don't run. (default FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>If what is "examples", which function to start from (default (NULL) = beginning).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spelling</code></td>
+<td>
+<p>Whether to check spelling before release (default = "en_US": set NULL to not check).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which</code></td>
+<td>
+<p>What rhub platform to use? c("mac", "linux", "win").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>run_dont_test</code></td>
+<td>
+<p>When checking.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spell</code></td>
+<td>
+<p>for rhub, check spelling? TRUE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://devtools.r-lib.org">https://devtools.r-lib.org</a>, <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other xmu internal not for end user: 
+<code>umxModel()</code>,
+<code>umxRenameMatrix()</code>,
+<code>umx_APA_pval()</code>,
+<code>umx_fun_mean_sd()</code>,
+<code>umx_get_bracket_addresses()</code>,
+<code>umx_standardize()</code>,
+<code>umx_string_to_algebra()</code>,
+<code>xmuHasSquareBrackets()</code>,
+<code>xmuLabel_MATRIX_Model()</code>,
+<code>xmuLabel_Matrix()</code>,
+<code>xmuLabel_RAM_Model()</code>,
+<code>xmuMI()</code>,
+<code>xmuMakeDeviationThresholdsMatrices()</code>,
+<code>xmuMakeOneHeadedPathsFromPathList()</code>,
+<code>xmuMakeTwoHeadedPathsFromPathList()</code>,
+<code>xmuMaxLevels()</code>,
+<code>xmuMinLevels()</code>,
+<code>xmuPropagateLabels()</code>,
+<code>xmuRAM2Ordinal()</code>,
+<code>xmuTwinSuper_Continuous()</code>,
+<code>xmuTwinSuper_NoBinary()</code>,
+<code>xmuTwinUpgradeMeansToCovariateModel()</code>,
+<code>xmu_CI_merge()</code>,
+<code>xmu_CI_stash()</code>,
+<code>xmu_DF_to_mxData_TypeCov()</code>,
+<code>xmu_PadAndPruneForDefVars()</code>,
+<code>xmu_bracket_address2rclabel()</code>,
+<code>xmu_cell_is_on()</code>,
+<code>xmu_check_levels_identical()</code>,
+<code>xmu_check_needs_means()</code>,
+<code>xmu_check_variance()</code>,
+<code>xmu_clean_label()</code>,
+<code>xmu_data_missing()</code>,
+<code>xmu_data_swap_a_block()</code>,
+<code>xmu_describe_data_WLS()</code>,
+<code>xmu_dot_make_paths()</code>,
+<code>xmu_dot_make_residuals()</code>,
+<code>xmu_dot_maker()</code>,
+<code>xmu_dot_move_ranks()</code>,
+<code>xmu_dot_rank_str()</code>,
+<code>xmu_extract_column()</code>,
+<code>xmu_get_CI()</code>,
+<code>xmu_lavaan_process_group()</code>,
+<code>xmu_make_TwinSuperModel()</code>,
+<code>xmu_make_bin_cont_pair_data()</code>,
+<code>xmu_make_mxData()</code>,
+<code>xmu_match.arg()</code>,
+<code>xmu_name_from_lavaan_str()</code>,
+<code>xmu_path2twin()</code>,
+<code>xmu_path_regex()</code>,
+<code>xmu_print_algebras()</code>,
+<code>xmu_rclabel_2_bracket_address()</code>,
+<code>xmu_safe_run_summary()</code>,
+<code>xmu_set_sep_from_suffix()</code>,
+<code>xmu_show_fit_or_comparison()</code>,
+<code>xmu_simplex_corner()</code>,
+<code>xmu_standardize_ACEcov()</code>,
+<code>xmu_standardize_ACEv()</code>,
+<code>xmu_standardize_ACE()</code>,
+<code>xmu_standardize_CP()</code>,
+<code>xmu_standardize_IP()</code>,
+<code>xmu_standardize_RAM()</code>,
+<code>xmu_standardize_SexLim()</code>,
+<code>xmu_standardize_Simplex()</code>,
+<code>xmu_start_value_list()</code>,
+<code>xmu_starts()</code>,
+<code>xmu_summary_RAM_group_parameters()</code>,
+<code>xmu_twin_add_WeightMatrices()</code>,
+<code>xmu_twin_check()</code>,
+<code>xmu_twin_get_var_names()</code>,
+<code>xmu_twin_make_def_means_mats_and_alg()</code>,
+<code>xmu_twin_upgrade_selDvs2SelVars()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# umx_make()  # Just load new code (don't rebuild help etc)
+# umx_make(what = "quickInst") # Quick install
+# umx_make(what = "install")   # Full package rebuild and install
+# umx_make(what = "spell")     # Spellcheck Rd documents
+# umx_make(what = "sitrep")    # Are needed packages up to date?
+# umx_make(what = "deps_install") # Update needed packages
+# umx_make(what = "examples")  # Run the examples
+# umx_make(what = "checkCRAN") # Run R CMD check
+# umx_make(what = "rhub")      # Check on rhub
+# umx_make(what = "win")       # Check on win-builder
+# umx_make(what = "release")   # Release to CRAN
+# tmp = umx_make(what = "lastRhub") # View rhub result
+
+## End(Not run)
+</code></pre>
+
+
+</div>

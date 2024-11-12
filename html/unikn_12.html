@@ -1,0 +1,123 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>grepal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get a vector of colors whose names match a regular expression</h2>
+
+<h3>Description</h3>
+
+<p><code>grepal</code> returns a vector of colors whose names match a regular expression (regex).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">grepal(pattern, x = colors(), ignore_case = TRUE, plot = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>A regular expression 
+(specified as a string/character object).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector of R color names or a data frame of named colors
+(i.e., whose names can be searched). 
+Default: <code>x = colors()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore_case</code></td>
+<td>
+<p>Should the case of pattern be ignored 
+(passed to <code>ignore.case</code> of the <code>grep</code> function)?   
+Default: <code>ignore_case = TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Boolean: Plot the output (using <code>seecol</code>)? 
+Default: <code>plot = TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>By default, the <b>base</b> R vector of named colors (i.e., <code>colors()</code>) is searched 
+for names matching a <code>pattern</code> (which can be a simple string or regular expression). 
+</p>
+<p>If <code>x</code> (i.e., the object to be searched) is provided, 
+it is must be a vector of color names or a data frame of named color objects 
+(i.e., a color palette). 
+</p>
+<p>If <code>plot = TRUE</code>, <code>grepal</code> also visualizes the detected colors  
+(by passing its result to <code>seecol</code>, as a side-effect).
+</p>
+<p>This function facilitates searching colors by name and 
+yields (a vector of) colors of similar color hue (provided 
+that the color's hue is expressed in a color's name). 
+Its name <code>grepal</code> is an abbreviation of <code>grep</code> and "pal".
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes; 
+<code>simcol</code> for finding similar colors; 
+<code>newpal</code> for defining new color palettes; 
+<code>shades_of</code> to defining shades of a given color; 
+<code>ac</code> for adjusting color transparency; 
+<code>pal_unikn</code> for the default uni.kn color palette.
+</p>
+<p>Other color functions: 
+<code>ac()</code>,
+<code>demopal()</code>,
+<code>newpal()</code>,
+<code>seecol()</code>,
+<code>shades_of()</code>,
+<code>simcol()</code>,
+<code>usecol()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">grepal("tan")
+
+# With regular expressions:
+some_grey  &lt;- grepal("gr(a|e)y", plot = FALSE)
+start_grey &lt;- grepal("^gr(a|e)y", plot = FALSE)
+only_grey  &lt;- grepal("^gr(a|e)y$", plot = FALSE)
+
+length(some_grey)
+length(only_grey)
+
+# With other color objects (df as x):
+grepal("blau", x = pal_unikn)
+grepal("SEE", x = pal_unikn_pref, ignore_case = FALSE)
+
+# Applications:
+seecol(grepal("white"), col_bg = "lightblue2", main = "See 'white' colors()")
+
+olives  &lt;- grepal("olive", plot = FALSE)
+oranges &lt;- grepal("orange", plot = FALSE)
+seecol(list(olives, oranges), 
+       pal_names = c("olives", "oranges"), 
+       main = "Comparing olives and oranges")
+
+</code></pre>
+
+
+</div>

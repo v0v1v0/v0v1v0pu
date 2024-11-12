@@ -1,0 +1,75 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>chooseBioCmirror</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Select a Bioconductor Mirror</h2>
+
+<h3>Description</h3>
+
+<p>Interact with the user to choose a Bioconductor mirror.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">chooseBioCmirror(graphics = getOption("menu.graphics"), ind = NULL,
+                 local.only = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr>
+<td><code id="graphics">graphics</code></td>
+<td>
+<p>Logical.  If true, use a graphical list: on Windows or
+the macOS GUI use a list box, and on a Unix-alike use a Tk widget if
+package <span class="pkg">tcltk</span> and an X server are available.  Otherwise use a
+text <code>menu</code>.</p>
+</td>
+</tr>
+<tr>
+<td><code id="ind">ind</code></td>
+<td>
+<p>Optional numeric value giving which entry to select.</p>
+</td>
+</tr>
+<tr>
+<td><code id="local.only">local.only</code></td>
+<td>
+<p>Logical, try to get most recent list from the
+Bioconductor master or use file on local disk only.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This sets the option <code>"BioC_mirror"</code>: it is used
+before a call to <code>setRepositories</code>.  The out-of-the-box
+default for that option is <code>NULL</code>, which currently corresponds to
+the mirror <a href="https://bioconductor.org">https://bioconductor.org</a>.
+</p>
+<p>The ‘Bioconductor (World-wide)’ ‘mirror’ is a network of
+mirrors providing reliable world-wide access; other mirrors may
+provide faster access on a geographically local scale.
+</p>
+<p><code>ind</code> chooses a row in
+‘<span class="file"><var>R_HOME</var>/doc/BioC_mirrors.csv</span>’,
+by number.
+</p>
+
+
+<h3>Value</h3>
+
+<p>None: this function is invoked for its
+side effect of updating <code>options("BioC_mirror")</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>setRepositories</code>, <code>chooseCRANmirror</code>.
+</p>
+
+</main></div>

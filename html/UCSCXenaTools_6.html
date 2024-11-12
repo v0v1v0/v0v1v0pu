@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>downloadTCGA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Easily Download TCGA Data by Several Options</h2>
+
+<h3>Description</h3>
+
+<p>TCGA is a very useful database and here we provide this function to
+download TCGA (include TCGA Pancan) datasets in human-friendly way. Users who are not
+familiar with R operation will benefit from this.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">downloadTCGA(
+  project = NULL,
+  data_type = NULL,
+  file_type = NULL,
+  destdir = tempdir(),
+  force = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>project</code></td>
+<td>
+<p>default is <code>NULL</code>. Should be one or more of TCGA project id (character vector) provided by Xena.
+See all available project id, please use <code>availTCGA("ProjectID")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_type</code></td>
+<td>
+<p>default is <code>NULL</code>. Should be a character vector specify data type.
+See all available data types by <code>availTCGA("DataType")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file_type</code></td>
+<td>
+<p>default is <code>NULL</code>. Should be a character vector specify file type.
+See all available file types by <code>availTCGA("FileType")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>destdir</code></td>
+<td>
+<p>specify a location to store download data. Default is system temp directory.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force</code></td>
+<td>
+<p>logical. if <code>TRUE</code>, force to download data no matter whether files exist.
+Default is <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other argument to <code>download.file</code> function</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>All availble information about datasets of TCGA can access vis <code>availTCGA()</code> and
+check with <code>showTCGA()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>same as <code>XenaDownload()</code> function result.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Shixiang Wang <a href="mailto:w_shixiang@163.com">w_shixiang@163.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>XenaQuery()</code>,
+<code>XenaFilter()</code>,
+<code>XenaDownload()</code>,
+<code>XenaPrepare()</code>,
+<code>availTCGA()</code>,
+<code>showTCGA()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# download RNASeq data (use UVM as example)
+downloadTCGA(project = "UVM",
+                 data_type = "Gene Expression RNASeq",
+                 file_type = "IlluminaHiSeq RNASeqV2")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

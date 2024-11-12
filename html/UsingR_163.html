@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>watertemp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Temperature measurement of water at 85m depth</h2>
+
+<h3>Description</h3>
+
+<p>Water temperature measurements at 10 minute intervals at a site off the East coast of the United States in the summer of 1974.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(watertemp)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A zoo class object with index stored as POSIXct elements. The measurements are in Celsius.
+</p>
+
+
+<h3>Source</h3>
+
+<p>NODC Coastal Ocean Time Series Database Search Page which was at http://www.nodc.noaa.gov/dsdt/tsdb/search.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">if(require(zoo)) {
+data(watertemp)	 
+plot(watertemp)
+acf(watertemp)
+acf(diff(watertemp))
+}
+</code></pre>
+
+
+</div>

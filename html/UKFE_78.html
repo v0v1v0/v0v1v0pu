@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>QMEDLink</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>QMED Linking equation</h2>
+
+<h3>Description</h3>
+
+<p>Estimates the median annual maximum flow (QMED) from non-flood flows
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">QMEDLink(Q5dmf, Q10dmf, DPSBAR, BFI)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Q5dmf</code></td>
+<td>
+<p>numeric. The daily mean flow that is exceeded 5 percent of the time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Q10dmf</code></td>
+<td>
+<p>numeric. The daily mean flow that is exceeded 10 percent of the time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DPSBAR</code></td>
+<td>
+<p>a catchment descriptor. The average drainage path slope of the catchment</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BFI</code></td>
+<td>
+<p>the baseflow index of the gauged flow</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The QMED Linking equation estimates QMED as a function of the flow that is exceeded five percent of the time, the flow that is exceeded 10 percent of the time, the baseflow index, and the catchment desciptor; drainage path slope (DPSBAR). All of these can be found for sites on the National River Flow Archive (NRFA) website. The method is provided in the guidance note 'WINFAP 4 QMED Linking equation' (2016) by Wallingford HydroSolutions.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Calculate the QMED for site 1001 (Wick at Tarroul)
+QMEDLink(10.14, 7.352, 29.90, 0.39)
+</code></pre>
+
+
+</div>

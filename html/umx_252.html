@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_set_auto_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_set_auto_plot</h2>
+
+<h3>Description</h3>
+
+<p>Set autoPlot default for models like umxACE umxGxE etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_set_auto_plot(autoPlot = NULL, silent = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>autoPlot</code></td>
+<td>
+<p>If TRUE, sets the umx_auto_plot option. Else returns the current value of umx_auto_plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>If TRUE, no message will be printed.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Current umx_auto_plot setting
+</p>
+</li></ul>
+<ul><li>
+<p> existing value
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Get and set: 
+<code>umx_get_checkpoint()</code>,
+<code>umx_get_options()</code>,
+<code>umx_set_auto_run()</code>,
+<code>umx_set_checkpoint()</code>,
+<code>umx_set_condensed_slots()</code>,
+<code>umx_set_cores()</code>,
+<code>umx_set_data_variance_check()</code>,
+<code>umx_set_dollar_symbol()</code>,
+<code>umx_set_optimization_options()</code>,
+<code>umx_set_optimizer()</code>,
+<code>umx_set_plot_file_suffix()</code>,
+<code>umx_set_plot_format()</code>,
+<code>umx_set_plot_use_hrbrthemes()</code>,
+<code>umx_set_separator()</code>,
+<code>umx_set_silent()</code>,
+<code>umx_set_table_format()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umx)
+umx_set_auto_plot() # print current state
+old = umx_set_auto_plot(silent = TRUE) # store existing value
+old
+umx_set_auto_plot(TRUE)   # set to on (internally stored as "name")
+umx_set_auto_plot(FALSE)  # set to off (internally stored as NA)
+umx_set_auto_plot(old)    # reinstate
+</code></pre>
+
+
+</div>

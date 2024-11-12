@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>optimize_par</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Optimize Smoothing Parameters
+This function optimize searches of <code>lambda, kr</code> and <code>deg</code>. 
+See <code>control.pclm</code> to see what is their meaning. 
+The optimization process works in steps. Simultaneous optimization was 
+tested and found inefficient.</h2>
+
+<h3>Description</h3>
+
+<p>Optimize Smoothing Parameters
+This function optimize searches of <code>lambda, kr</code> and <code>deg</code>. 
+See <code>control.pclm</code> to see what is their meaning. 
+The optimization process works in steps. Simultaneous optimization was 
+tested and found inefficient.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">optimize_par(I, type)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>I</code></td>
+<td>
+<p>Input object from pclm function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of PCLM model. Options: <code>"1D", "2D"</code> for 
+univariate and two-dimensional model respectively.</p>
+</td>
+</tr>
+</table>
+</div>

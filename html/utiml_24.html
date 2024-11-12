@@ -1,0 +1,182 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>eps</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Ensemble of Pruned Set for multi-label Classification</h2>
+
+<h3>Description</h3>
+
+<p>Create an Ensemble of Pruned Set model for multilabel classification.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">eps(
+  mdata,
+  base.algorithm = getOption("utiml.base.algorithm", "SVM"),
+  m = 10,
+  subsample = 0.75,
+  p = 3,
+  strategy = c("A", "B"),
+  b = 2,
+  ...,
+  cores = getOption("utiml.cores", 1),
+  seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset used to train the binary models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base.algorithm</code></td>
+<td>
+<p>A string with the name of the base algorithm. (Default:
+<code>options("utiml.base.algorithm", "SVM")</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>The number of Pruned Set models used in the ensemble.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subsample</code></td>
+<td>
+<p>A value between 0.1 and 1 to determine the percentage of
+training instances that must be used for each classifier. (Default: 0.63)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Number of instances to prune. All labelsets that occurs p times or
+less in the training data is removed. (Default: 3)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strategy</code></td>
+<td>
+<p>The strategy  (A or B) for processing infrequent labelsets.
+(Default: A).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>The number used by the strategy for processing infrequent labelsets.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Others arguments passed to the base algorithm for all subproblems.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the training. Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>An optional integer used to set the seed. (Default:
+<code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Pruned Set (PS) is a multi-class transformation that remove the less common
+classes to predict multi-label data. The ensemble is created with different
+subsets of the original multi-label data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>EPSmodel</code> containing the set of fitted
+models, including:
+</p>
+
+<dl>
+<dt>rounds</dt>
+<dd>
+<p>The number of interactions</p>
+</dd>
+<dt>models</dt>
+<dd>
+<p>A list of PS models.</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+<p>Read, J. (2008). A pruned problem transformation method for multi-label
+classification. In Proceedings of the New Zealand Computer Science Research
+Student Conference (pp. 143-150).
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Transformation methods: 
+<code>brplus()</code>,
+<code>br()</code>,
+<code>cc()</code>,
+<code>clr()</code>,
+<code>dbr()</code>,
+<code>ebr()</code>,
+<code>ecc()</code>,
+<code>esl()</code>,
+<code>homer()</code>,
+<code>lift()</code>,
+<code>lp()</code>,
+<code>mbr()</code>,
+<code>ns()</code>,
+<code>ppt()</code>,
+<code>prudent()</code>,
+<code>ps()</code>,
+<code>rakel()</code>,
+<code>rdbr()</code>,
+<code>rpc()</code>
+</p>
+<p>Other Powerset: 
+<code>lp()</code>,
+<code>ppt()</code>,
+<code>ps()</code>,
+<code>rakel()</code>
+</p>
+<p>Other Ensemble methods: 
+<code>ebr()</code>,
+<code>ecc()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model &lt;- eps(toyml, "RANDOM")
+pred &lt;- predict(model, toyml)
+
+
+##Change default configurations
+model &lt;- eps(toyml, "RF", m=15, subsample=0.4, p=4, strategy="B", b=1)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,120 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetFlowStage_EA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get flow or level data from the Environment Agency's Hydrology Data Explorer</h2>
+
+<h3>Description</h3>
+
+<p>Function to extract flow or level data from the Environment Agency's Hydrology Data Explorer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetFlowStage_EA(
+  Lat = 54,
+  Lon = -2.25,
+  Range = 10,
+  RiverName = NULL,
+  WISKI_ID = NULL,
+  From = "2015-10-01",
+  To = "2016-09-30",
+  Type = "flow",
+  Period = "DailyMean"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Lat</code></td>
+<td>
+<p>Latitude (as a decimal) for the centre of the search for gauges</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lon</code></td>
+<td>
+<p>Longitude (as a decimal) for the centre of the search for gauges</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Range</code></td>
+<td>
+<p>Radius of search when using latitude and longitude inputs (km).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RiverName</code></td>
+<td>
+<p>Name of the river along which you want to search for gauges. Character string.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>WISKI_ID</code></td>
+<td>
+<p>The WISKI ID for the gauge from which you want to obtain data (character string)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>From</code></td>
+<td>
+<p>Date for start of data extraction in the format of "2015-12-02"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>To</code></td>
+<td>
+<p>Date for the end of data extraction in the format of "2015-12-02"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Type</code></td>
+<td>
+<p>The variable to extract, either "flow" or "level"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Period</code></td>
+<td>
+<p>The sampling rate of the data you want. Either "DailyMax", "DailyMean", "Houlry", "15Mins".</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>To find gauges you can input either a river name or a latitude and longitude. The latter will provide all flow and level gauges within a specified range (default of 10km). This provides gauged details including the WISKI ID. You can get data from specific gauges using the WISKI_ID. Note that many level gauges also have level data available.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If searching for gauge details with lat and lon or river name, then a list is returned. The first element is a dataframe with flow gauge details and the second is a dataframe of level gauge details.
+When extracting flow or level data with a WISKI ID then a dataframe with two columns is returned. The first being a Date or POSIXct column/vector and the second is the timeseries of interest.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Find gauges on the river Tame
+## Not run: GetFlowStage_EA(RiverName = "Tame")
+#Find gauges within 10km of a latlon grid reference somewhere near the centre of Dartmoor
+## Not run: GetFlowStage_EA(lat = 50.6, lon = -3.9, Range = 10)
+#Get daily maximum flow data from the Bellever gauge on the
+#East Dart River for the default From - To date range
+## Not run: BelleverMax &lt;- GetFlowStage_EA(WISKI_ID = "SX67F051")
+</code></pre>
+
+
+</div>

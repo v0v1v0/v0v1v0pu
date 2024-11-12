@@ -1,0 +1,347 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fitGSMAR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimate Gaussian or Student's t Mixture Autoregressive model</h2>
+
+<h3>Description</h3>
+
+<p><code>fitGSMAR</code> estimates GMAR, StMAR, or G-StMAR model in two phases. In the first phase, a genetic algorithm is employed
+to find starting values for a gradient based method. In the second phase, the gradient based variable metric algorithm is utilized to
+accurately converge to a local maximum or a saddle point near each starting value. Parallel computing is used to conduct multiple
+rounds of estimations in parallel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fitGSMAR(
+  data,
+  p,
+  M,
+  model = c("GMAR", "StMAR", "G-StMAR"),
+  restricted = FALSE,
+  constraints = NULL,
+  conditional = TRUE,
+  parametrization = c("intercept", "mean"),
+  ncalls = round(10 + 9 * log(sum(M))),
+  ncores = 2,
+  maxit = 500,
+  seeds = NULL,
+  print_res = TRUE,
+  filter_estimates = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a numeric vector or class <code>'ts'</code> object containing the data. <code>NA</code> values are not supported.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a positive integer specifying the autoregressive order of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+
+<dl>
+<dt>For <strong>GMAR</strong> and <strong>StMAR</strong> models:</dt>
+<dd>
+<p>a positive integer specifying the number of mixture components.</p>
+</dd>
+<dt>For <strong>G-StMAR</strong> models:</dt>
+<dd>
+<p>a size (2x1) integer vector specifying the number of <em>GMAR type</em> components <code>M1</code> in the
+first element and <em>StMAR type</em> components <code>M2</code> in the second element. The total number of mixture components is <code>M=M1+M2</code>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>is "GMAR", "StMAR", or "G-StMAR" model considered? In the G-StMAR model, the first <code>M1</code> components
+are <em>GMAR type</em> and the rest <code>M2</code> components are <em>StMAR type</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>restricted</code></td>
+<td>
+<p>a logical argument stating whether the AR coefficients <code class="reqn">\phi_{m,1},...,\phi_{m,p}</code> are restricted
+to be the same for all regimes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>constraints</code></td>
+<td>
+<p>specifies linear constraints imposed to each regime's autoregressive parameters separately.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>a list of size <code class="reqn">(pxq_{m})</code> constraint matrices <strong><code class="reqn">C_{m}</code></strong> of full column rank
+satisfying <strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> for all <code class="reqn">m=1,...,M</code>, where
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p})</code> and <strong><code class="reqn">\psi_{m}</code></strong><code class="reqn">=(\psi_{m,1},...,\psi_{m,q_{m}})</code>.</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>a size <code class="reqn">(pxq)</code> constraint matrix <strong><code class="reqn">C</code></strong> of full column rank satisfying
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong>, where <strong><code class="reqn">\phi</code></strong><code class="reqn">=(\phi_{1},...,\phi_{p})</code> and
+<strong><code class="reqn">\psi</code></strong><code class="reqn">=\psi_{1},...,\psi_{q}</code>.</p>
+</dd>
+</dl>
+<p>The symbol <code class="reqn">\phi</code> denotes an AR coefficient. Note that regardless of any constraints, the autoregressive order
+is always <code>p</code> for all regimes.
+Ignore or set to <code>NULL</code> if applying linear constraints is not desired.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conditional</code></td>
+<td>
+<p>a logical argument specifying whether the conditional or exact log-likelihood function should be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parametrization</code></td>
+<td>
+<p>is the model parametrized with the "intercepts" <code class="reqn">\phi_{m,0}</code> or
+"means" <code class="reqn">\mu_{m} = \phi_{m,0}/(1-\sum\phi_{i,m})</code>?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncalls</code></td>
+<td>
+<p>a positive integer specifying how many rounds of estimation should be conducted.
+The estimation results may vary from round to round because of multimodality of the log-likelihood function
+and the randomness associated with the genetic algorithm.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncores</code></td>
+<td>
+<p>the number of CPU cores to be used in the estimation process.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxit</code></td>
+<td>
+<p>the maximum number of iterations for the variable metric algorithm.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seeds</code></td>
+<td>
+<p>a length <code>ncalls</code> vector containing the random number generator seed for each call to the genetic algorithm,
+or <code>NULL</code> for not initializing the seed. Exists for the purpose of creating reproducible results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>print_res</code></td>
+<td>
+<p>should the estimation results be printed?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter_estimates</code></td>
+<td>
+<p>should likely inappropriate estimates be filtered? See details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional settings passed to the function <code>GAfit</code> employing the genetic algorithm.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Because of complexity and multimodality of the log-likelihood function, it's <strong>not guaranteed</strong> that the estimation
+algorithm will end up in the global maximum point. It's often expected that most of the estimation rounds will end up in
+some local maximum point instead, and therefore a number of estimation rounds is required for reliable results. Because
+of the nature of the models, the estimation may fail particularly in the cases where the number of mixture components is
+chosen too large. Note that the genetic algorithm is designed to avoid solutions with mixing weights of some regimes
+too close to zero at almost all times ("redundant regimes") but the settings can, however, be adjusted (see ?GAfit).
+</p>
+<p>If the iteration limit for the variable metric algorithm (<code>maxit</code>) is reached, one can continue the estimation by
+iterating more with the function <code>iterate_more</code>.
+</p>
+<p>The core of the genetic algorithm is mostly based on the description by <em>Dorsey and Mayer (1995)</em>. It utilizes
+a slightly modified version the individually adaptive crossover and mutation rates described by <em>Patnaik and Srinivas (1994)</em>
+and employs (50%) fitness inheritance discussed by <em>Smith, Dike and Stegmann (1995)</em>. Large (in absolute value) but stationary
+AR parameter values are generated with the algorithm proposed by Monahan (1984).
+</p>
+<p>The variable metric algorithm (or quasi-Newton method, Nash (1990, algorithm 21)) used in the second phase is implemented
+with function the <code>optim</code> from the package <code>stats</code>.
+</p>
+<p><strong>Additional Notes about the estimates:</strong>
+</p>
+<p>Sometimes the found MLE is very close to the boundary of the stationarity region some regime, the related variance parameter
+is very small, and the associated mixing weights are "spiky". This kind of estimates often maximize the log-likelihood function
+for a technical reason that induces by the endogenously determined mixing weights. In such cases, it might be more appropriate
+to consider the next-best local maximum point of the log-likelihood function that is well inside the parameter space. Models based
+local-only maximum points can be built with the function <code>alt_gsmar</code> by adjusting the argument <code>which_largest</code>
+accordingly.
+</p>
+<p>Some mixture components of the StMAR model may sometimes get very large estimates for the degrees of freedom parameters.
+Such parameters are weakly identified and induce various numerical problems. However, mixture components with large degree
+of freedom parameter estimates are similar to the mixture components of the GMAR model. It's hence advisable to further
+estimate a G-StMAR model by allowing the mixture components with large degrees of freedom parameter estimates to be GMAR
+type with the function <code>stmar_to_gstmar</code>.
+</p>
+<p><strong>Filtering inappropriate estimates:</strong> If <code>filter_estimates == TRUE</code>, the function will automatically filter
+out estimates that it deems "inappropriate". That is, estimates that are not likely solutions of interest.
+Specifically, it filters out solutions that incorporate regimes with any modulus of the roots of the AR polynomial less
+than <code class="reqn">1.0015</code>; a variance parameter estimat near zero  (less than <code class="reqn">0.0015</code>);
+mixing weights such that they are close to zero for almost all <code class="reqn">t</code> for at least one regime; or mixing weight parameter
+estimate close to zero (or one). You can also set <code>filter_estimates=FALSE</code> and find the solutions of interest yourself
+by using the function <code>alt_gsmar</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class <code>'gsmar'</code> defining the estimated GMAR, StMAR or G-StMAR model. The returned object contains
+estimated mixing weights, some conditional and unconditional moments, and quantile residuals. Note that the first <code>p</code>
+observations are taken as the initial values, so the mixing weights, conditional moments, and quantile residuals start from
+the <code>p+1</code>:th observation (interpreted as t=1). In addition, the returned object contains the estimates and log-likelihoods
+from all of the estimation rounds. See <code>?GSMAR</code> for the form of the parameter vector, if needed.
+</p>
+
+
+<h3>S3 methods</h3>
+
+<p>The following S3 methods are supported for class <code>'gsmar'</code> objects: <code>print</code>, <code>summary</code>, <code>plot</code>,
+<code>predict</code>, <code>simulate</code>, <code>logLik</code>, <code>residuals</code>.
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Dorsey R. E. and Mayer W. J. 1995. Genetic algorithms for estimation problems with multiple optima,
+nondifferentiability, and other irregular features. <em>Journal of Business &amp; Economic Statistics</em>,
+<strong>13</strong>, 53-66.
+</p>
+</li>
+<li>
+<p> Kalliovirta L., Meitz M. and Saikkonen P. 2015. Gaussian Mixture Autoregressive model for univariate time series.
+<em>Journal of Time Series Analysis</em>, <strong>36</strong>(2), 247-266.
+</p>
+</li>
+<li>
+<p> Meitz M., Preve D., Saikkonen P. 2023. A mixture autoregressive model based on Student's t-distribution.
+<em>Communications in Statistics - Theory and Methods</em>, <strong>52</strong>(2), 499-515.
+</p>
+</li>
+<li>
+<p> Monahan J.F. 1984. A Note on Enforcing Stationarity in Autoregressive-Moving Average Models.
+<em>Biometrica</em> <strong>71</strong>, 403-404.
+</p>
+</li>
+<li>
+<p> Nash J. 1990. Compact Numerical Methods for Computers. Linear algebra and Function Minimization.
+<em>Adam Hilger</em>.
+</p>
+</li>
+<li>
+<p> Patnaik L.M. and Srinivas M. 1994. Adaptive Probabilities of Crossover and Mutation in Genetic Algorithms.
+<em>Transactions on Systems, Man and Cybernetics</em> <strong>24</strong>, 656-667.
+</p>
+</li>
+<li>
+<p> Smith R.E., Dike B.A., Stegmann S.A. 1995. Fitness inheritance in genetic algorithms.
+<em>Proceedings of the 1995 ACM Symposium on Applied Computing</em>, 345-350.
+</p>
+</li>
+<li>
+<p> Virolainen S. 2022. A mixture autoregressive model based on Gaussian and Student's t-distributions.
+Studies in Nonlinear Dynamics &amp; Econometrics, <strong>26</strong>(4) 559-580.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>GSMAR</code>, <code>iterate_more</code>, , <code>stmar_to_gstmar</code>, <code>add_data</code>,
+<code>profile_logliks</code>, <code>swap_parametrization</code>, <code>get_gradient</code>, <code>simulate.gsmar</code>,
+<code>predict.gsmar</code>, <code>diagnostic_plot</code>, <code>quantile_residual_tests</code>, <code>cond_moments</code>,
+<code>uncond_moments</code>, <code>LR_test</code>, <code>Wald_test</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## These are long running examples that use parallel computing.
+## The below examples take approximately 90 seconds to run.
+
+## Note that the number of estimation rounds (ncalls) is relatively small
+## in the below examples to reduce the time required for running the examples.
+## For reliable results, a large number of estimation rounds is recommended!
+
+# GMAR model
+fit12 &lt;- fitGSMAR(data=simudata, p=1, M=2, model="GMAR", ncalls=4, seeds=1:4)
+summary(fit12)
+plot(fit12)
+profile_logliks(fit12)
+diagnostic_plot(fit12)
+
+# StMAR model (large estimate of the degrees of freedom)
+fit42t &lt;- fitGSMAR(data=M10Y1Y, p=4, M=2, model="StMAR", ncalls=2, seeds=c(1, 6))
+summary(fit42t) # Overly large 2nd regime degrees of freedom estimate!
+fit42gs &lt;- stmar_to_gstmar(fit42t) # Switch to G-StMAR model
+summary(fit42gs) # An appropriate G-StMVAR model with one G and one t regime
+plot(fit42gs)
+
+# Restricted StMAR model
+fit42r &lt;- fitGSMAR(M10Y1Y, p=4, M=2, model="StMAR", restricted=TRUE,
+                   ncalls=2, seeds=1:2)
+fit42r
+
+# G-StMAR model with one GMAR type and one StMAR type regime
+fit42gs &lt;- fitGSMAR(M10Y1Y, p=4, M=c(1, 1), model="G-StMAR",
+                    ncalls=1, seeds=4)
+fit42gs
+
+# The following three examples demonstrate how to apply linear constraints
+# to the autoregressive (AR) parameters.
+
+# Two-regime GMAR p=2 model with the second AR coeffiecient of
+# of the second regime contrained to zero.
+C22 &lt;- list(diag(1, ncol=2, nrow=2), as.matrix(c(1, 0)))
+fit22c &lt;- fitGSMAR(M10Y1Y, p=2, M=2, constraints=C22, ncalls=1, seeds=6)
+fit22c
+
+# StMAR(3, 1) model with the second order AR coefficient constrained to zero.
+C31 &lt;- list(matrix(c(1, 0, 0, 0, 0, 1), ncol=2))
+fit31tc &lt;- fitGSMAR(M10Y1Y, p=3, M=1, model="StMAR", constraints=C31,
+                    ncalls=1, seeds=1)
+fit31tc
+
+# Such StMAR(3, 2) model that the AR coefficients are restricted to be
+# the same for both regimes and the second AR coefficients are
+# constrained to zero.
+fit32rc &lt;- fitGSMAR(M10Y1Y, p=3, M=2, model="StMAR", restricted=TRUE,
+                    constraints=matrix(c(1, 0, 0, 0, 0, 1), ncol=2),
+                    ncalls=1, seeds=1)
+fit32rc
+
+</code></pre>
+
+
+</div>

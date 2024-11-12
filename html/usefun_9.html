@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_parent_dir</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve the parent directory</h2>
+
+<h3>Description</h3>
+
+<p>Use this function to retrieve the parent directory from a string representing
+the full path of a file or a directory.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_parent_dir(pathStr)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>pathStr</code></td>
+<td>
+<p>string. The name of the directory, can be a full path filename.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a string representing the parent directory. When a non-file path is
+used as input (or something along those lines :) then it returns the root
+("/") directory.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">get_parent_dir("/home/john")
+get_parent_dir("/home/john/a.txt")
+get_parent_dir("/home")
+
+</code></pre>
+
+
+</div>

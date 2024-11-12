@@ -1,0 +1,150 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>STRPBM.IDX</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Starczewski and Pakhira-Bandyopadhyay-Maulik for crisp clustering indexes
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the STR (A. Starczewski, 2017) and PBM (M. K. Pakhira et al., 2004) indexes for a result either kmeans or hierarchical clustering from user specified <code>kmin</code> to <code>kmax</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">STRPBM.IDX(x, kmax, kmin = 2, method = "kmeans", indexlist = "all", nstart = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kmax</code></td>
+<td>
+<p>a maximum number of clusters to be considered.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kmin</code></td>
+<td>
+<p>a minimum number of clusters to be considered. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which clustering method to be used (<code>"kmeans"</code>, <code>"hclust_complete"</code>, <code>"hclust_average"</code>, <code>"hclust_single"</code>). The default is <code>"kmeans"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indexlist</code></td>
+<td>
+<p>a character string indicating which cluster validity indexes to be computed (<code>"all"</code>, <code>"STR"</code>, <code>"PBM"</code>). More than one indexes can be selected.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for kmeans for <code>method = "kmeans"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>PBM index can be used with both crisp and fuzzy clustering algorithms.<br>
+The largest value of <code class="reqn">STR(k)</code> indicates a valid optimal partition.<br>
+The largest value of <code class="reqn">PBM(k)</code> indicates a valid optimal partition.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>STR</code></td>
+<td>
+<p>the STR index for <code>k</code> from <code>kmin</code> to <code>kmax</code> shown in a data frame where the first and the second columns are <code>k</code> and the STR index, respectively.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PBM</code></td>
+<td>
+<p>the PBM index for <code>k</code> from <code>kmin</code> to <code>kmax</code> shown in a data frame where the first and the second columns are <code>k</code> and the PBM index, respectively.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>M. K. Pakhira, S. Bandyopadhyay and U. Maulik, "Validity index for crisp and fuzzy clusters," <em>Pattern Recogn</em> 37(3):487–501 (2004).
+</p>
+<p>A. Starczewski, "A new validity index for crisp clusters," <em>Pattern Anal Applic</em> 20, 687–700 (2017).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Wvalid, FzzyCVIs, DI.IDX,  R1_data</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# The data is from Wiroonsri (2024).
+x = R1_data[,1:2]
+
+# ---- Kmeans ----
+
+# Compute all the indices by STRPBM.IDX
+K.ALL = STRPBM.IDX(scale(x), kmax = 15, kmin = 2, method = "kmeans",
+  indexlist = "all", nstart = 100)
+print(K.ALL)
+
+# Compute STR index
+K.STR = STRPBM.IDX(scale(x), kmax = 15, kmin = 2, method = "kmeans",
+  indexlist = "STR", nstart = 100)
+print(K.STR)
+
+# ---- Hierarchical ----
+
+# Average linkage
+
+# Compute all the indices by STRPBM.IDX
+H.ALL = STRPBM.IDX(scale(x), kmax = 15, kmin = 2, method = "hclust_average",
+  indexlist = "all")
+print(H.ALL)
+
+# Compute STR index
+H.STR = STRPBM.IDX(scale(x), kmax = 15, kmin = 2, method = "hclust_average",
+  indexlist = "STR")
+print(H.STR)
+
+</code></pre>
+
+
+</div>

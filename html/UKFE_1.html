@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AddGauge</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add an AMAX sample</h2>
+
+<h3>Description</h3>
+
+<p>This function allows the user to add an AMAX sample and associated catchment descriptors for use with the FEH process.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">AddGauge(CDs, AMAX, ID)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>CDs</code></td>
+<td>
+<p>catchment descriptor object imported using the CDsXML function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>AMAX</code></td>
+<td>
+<p>Either a data.frame with date (or POSIXct) in the first column and a numeric vector in the second (the AMAX). Or an AMAX sample (a numeric vector).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ID</code></td>
+<td>
+<p>This is a user supplied identification number for the AMAX.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function provides the necessary AMAX sample statistics and data.frame for adding catchment descriptors to the NRFAData data.frame. The user must then add these outputs using the rbind function (see example). The AMAX could be read in or pasted in by the user or imported using the AMImport function. Once they are added they can be used in the current R session. If a new session is started (rather than a saved workspace) the added AMAX would need to be added again.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list object. The first element is a data.frame which is a
+row of statistics and descriptors to be added to the NRFAData data.frame.
+The second element is the AMAX sample formatted to be added to the AMSP data.frame
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Read in AMAX and catchment descriptors
+## Not run: AMAdd &lt;- AMImport(r"{D:\NRFAPeakFlow_v12_1_0\suitable-for-neither\027003.am}")
+## Not run: CDsAdd &lt;- CDsXML(r"{D:\NRFAPeakFlow_v12_1_0\suitable-for-neither\027003.xml}")
+
+#Apply the function and then add the results to the necessary data.frames.
+
+## Not run: Gauge27003 &lt;- AddGauge(CDsAdd, AMAdd, ID = "27003")
+#Add the descriptors and stats (the first element of the output) to the NRFAData data.frame
+## Not run: NRFAData &lt;- rbind(NRFAData, Gauge27003[[1]])
+#Add the AMAX to the AMSP data.frame.
+## Not run: AMSP &lt;- rbind(AMSP, Gauge27003[[2]])
+</code></pre>
+
+
+</div>

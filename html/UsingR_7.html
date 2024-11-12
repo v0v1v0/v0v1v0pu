@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>arctic.oscillations</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Measurement of sea-level pressure at the arctic</h2>
+
+<h3>Description</h3>
+
+<p>A monthly time series from January 1899 to June 2002 of sea-level
+pressure measurements relative to some baseline. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(arctic.oscillations)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>The format is:
+chr "arctic.oscillations"
+</p>
+
+
+<h3>Details</h3>
+
+<p>See <a href="https://toptotop.org/">https://toptotop.org/</a> for more details on the
+importance of climate studies.
+</p>
+
+
+<h3>Source</h3>
+
+<p>The data came from the file AO\_TREN\_NCEP\_Jan1899Current.ascii found many years ago at
+http://www.atmos.colostate.edu/ao/Data/ao\_index.html.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(arctic.oscillations)
+x = ts(arctic.oscillations, start=c(1899,1), frequency=12)
+plot(x)
+</code></pre>
+
+
+</div>

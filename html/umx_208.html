@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_is_cov</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_is_cov</h2>
+
+<h3>Description</h3>
+
+<p>test if a data frame, matrix or mxData is type cov or cor, or is likely to be raw...
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_is_cov(data = NULL, boolean = FALSE, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe to test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>boolean</code></td>
+<td>
+<p>whether to return the type ("cov") or a boolean (default = string)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>How much feedback to give (default = FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- "raw", "cor", or "cov", (or if boolean, then T | F)
+</p>
+
+
+<h3>References</h3>
+
+<p>- &lt;https://github.com/tbates/umx&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_check()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">df = cov(mtcars)
+umx_is_cov(df)
+df = cor(mtcars)
+umx_is_cov(df)
+umx_is_cov(mxData(df[1:3,1:3], type= "cov", numObs = 200))
+umx_is_cov(df, boolean = TRUE)
+umx_is_cov(mtcars, boolean = TRUE)
+</code></pre>
+
+
+</div>

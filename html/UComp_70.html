@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>slideAux</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>slideAux</h2>
+
+<h3>Description</h3>
+
+<p>Auxiliary function run from slide
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">slideAux(
+  y,
+  orig,
+  forecFun,
+  h = 12,
+  step = 1,
+  output = TRUE,
+  graph = TRUE,
+  window = NA,
+  parallel = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a vector or matrix of time series</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>orig</code></td>
+<td>
+<p>starting forecasting origin</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forecFun</code></td>
+<td>
+<p>user function that implements forecasting methods</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>h</code></td>
+<td>
+<p>forecasting horizon</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>step</code></td>
+<td>
+<p>observations ahead to move the forecasting origin</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>output TRUE/FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>graph</code></td>
+<td>
+<p>fraphical output TRUE/FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>window</code></td>
+<td>
+<p>fixed window width in number of observations (NA for non fixed)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>run forecasts in parallel</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>rest of inputs to forecFun function</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Next time stamp
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+</div>

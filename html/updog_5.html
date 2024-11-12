@@ -1,0 +1,677 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>flexdog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Flexible genotyping for polyploids from next-generation sequencing data.</h2>
+
+<h3>Description</h3>
+
+<p>Genotype polyploid individuals from next generation
+sequencing (NGS) data while assuming the genotype distribution is one of
+several forms. <code>flexdog</code> does this while accounting for allele bias,
+overdispersion, sequencing error. The method is described
+in detail in Gerard et. al. (2018) and Gerard and Ferrão (2020). See
+<code>multidog()</code> for running flexdog on multiple SNPs in parallel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">flexdog(
+  refvec,
+  sizevec,
+  ploidy,
+  model = c("norm", "hw", "bb", "s1", "s1pp", "f1", "f1pp", "flex", "uniform", "custom"),
+  p1ref = NULL,
+  p1size = NULL,
+  p2ref = NULL,
+  p2size = NULL,
+  snpname = NULL,
+  bias_init = exp(c(-1, -0.5, 0, 0.5, 1)),
+  verbose = TRUE,
+  prior_vec = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>refvec</code></td>
+<td>
+<p>A vector of counts of reads of the reference allele.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sizevec</code></td>
+<td>
+<p>A vector of total counts.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ploidy</code></td>
+<td>
+<p>The ploidy of the species. Assumed to be the same for each
+individual.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>What form should the prior (genotype distribution) take?
+See Details for possible values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p1ref</code></td>
+<td>
+<p>The reference counts for the first parent if
+<code>model = "f1"</code> or <code>model = "f1pp"</code>, or for
+the only parent if <code>model = "s1"</code> or <code>model = "s1pp"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p1size</code></td>
+<td>
+<p>The total counts for the first parent if
+<code>model = "f1"</code> or <code>model = "f1pp"</code>,
+or for the only parent if <code>model = "s1"</code> or <code>model = "s1pp"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p2ref</code></td>
+<td>
+<p>The reference counts for the second parent if
+<code>model = "f1"</code> or <code>model = "f1pp"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p2size</code></td>
+<td>
+<p>The total counts for the second parent if
+<code>model = "f1"</code> or <code>model = "f1pp"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>snpname</code></td>
+<td>
+<p>A string. The name of the SNP under consideration.
+This is just returned in the <code>input</code> list for your reference.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bias_init</code></td>
+<td>
+<p>A vector of initial values for the bias parameter
+over the multiple runs of <code>flexdog_full()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Should we output more (<code>TRUE</code>) or less
+(<code>FALSE</code>)?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prior_vec</code></td>
+<td>
+<p>The pre-specified genotype distribution. Only used if
+<code>model = "custom"</code> and must otherwise be <code>NULL</code>. If specified,
+then it should be a vector of length <code>ploidy + 1</code> with
+non-negative elements that sum to 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional parameters to pass to <code>flexdog_full()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Possible values of the genotype distribution (values of <code>model</code>) are:
+</p>
+
+<dl>
+<dt><code>"norm"</code></dt>
+<dd>
+<p>A distribution whose genotype frequencies are proportional
+to the density value of a normal with some mean and some standard deviation.
+Unlike the <code>"bb"</code> and <code>"hw"</code> options, this will allow for
+distributions both more and less dispersed than a binomial.
+This seems to be the most robust to violations in modeling assumptions, and so is the
+default. This prior class was developed in Gerard and Ferrão (2020).</p>
+</dd>
+<dt><code>"hw"</code></dt>
+<dd>
+<p>A binomial distribution that results from assuming that
+the population is in Hardy-Weinberg equilibrium (HWE). This actually does
+pretty well even when there are minor to moderate deviations from HWE.
+Though it does not perform as well as the '"norm"' option when there
+are severe deviations from HWE.</p>
+</dd>
+<dt><code>"bb"</code></dt>
+<dd>
+<p>A beta-binomial distribution. This is an overdispersed
+version of <code>"hw"</code> and can be derived from a special case of the Balding-Nichols model.</p>
+</dd>
+<dt><code>"s1"</code></dt>
+<dd>
+<p>This prior assumes the individuals are
+all full-siblings resulting
+from one generation of selfing. I.e. there is only
+one parent. This model assumes
+a particular type of meiotic behavior: polysomic
+inheritance with
+bivalent, non-preferential pairing.</p>
+</dd>
+<dt><code>"f1"</code></dt>
+<dd>
+<p>This prior assumes the individuals are all
+full-siblings resulting
+from one generation of a bi-parental cross.
+This model assumes
+a particular type of meiotic behavior: polysomic
+inheritance with
+bivalent, non-preferential pairing.</p>
+</dd>
+<dt><code>"f1pp"</code></dt>
+<dd>
+<p>This prior allows for double reduction
+and preferential pairing in an F1 population of tretraploids.</p>
+</dd>
+<dt><code>"s1pp"</code></dt>
+<dd>
+<p>This prior allows for double reduction
+and preferential pairing in an S1 population of tretraploids.</p>
+</dd>
+<dt><code>"flex"</code></dt>
+<dd>
+<p>Generically any categorical distribution. Theoretically,
+this works well if you have a lot of individuals. In practice, it seems to
+be much less robust to violations in modeling assumptions.</p>
+</dd>
+<dt><code>"uniform"</code></dt>
+<dd>
+<p>A discrete uniform distribution. This should never
+be used in practice.</p>
+</dd>
+<dt><code>"custom"</code></dt>
+<dd>
+<p>A pre-specified prior distribution. You specify
+it using the <code>prior_vec</code> argument. You should almost never
+use this option in practice.</p>
+</dd>
+</dl>
+<p>You might think a good default is <code>model = "uniform"</code> because it is
+somehow an "uninformative prior." But it is very informative and tends to
+work horribly in practice. The intuition is that it will estimate
+the allele bias and sequencing error rates so that the estimated genotypes
+are approximately uniform (since we are assuming that they are approximately
+uniform). This will usually result in unintuitive genotyping since most
+populations don't have a uniform genotype distribution.
+I include it as an option only for completeness. Please don't use it.
+</p>
+<p>The value of <code>prop_mis</code> is a very intuitive measure for
+the quality of the SNP. <code>prop_mis</code> is the posterior
+proportion of individuals mis-genotyped. So if you want only SNPS
+that accurately genotype, say, 95% of the individuals, you could
+discard all SNPs with a <code>prop_mis</code> over <code>0.05</code>.
+</p>
+<p>The value of <code>maxpostprob</code> is a very intuitive measure
+for the quality of the genotype estimate of an individual.
+This is the posterior probability of correctly genotyping
+the individual when using <code>geno</code> (the posterior mode)
+as the genotype estimate. So if you want to correctly genotype,
+say, 95% of individuals, you could discard all individuals
+with a <code>maxpostprob</code> of under <code>0.95</code>. However, if you are
+just going to impute missing genotypes later, you might consider
+not discarding any individuals as <code>flexdog</code>'s genotype estimates will
+probably be more accurate than other more naive approaches, such
+as imputing using the grand mean.
+</p>
+<p>In most datasets I've examined, allelic bias is a major issue. However,
+you may fit the model assuming no allelic bias by setting
+<code>update_bias = FALSE</code> and <code>bias_init = 1</code>.
+</p>
+<p>Prior to using <code>flexdog</code>, during the read-mapping step,
+you could try to get rid of allelic bias by
+using WASP (<a href="https://doi.org/10.1101/011221">doi:10.1101/011221</a>). If you are successful
+in removing the allelic bias (because its only source was the read-mapping
+step), then setting <code>update_bias = FALSE</code> and <code>bias_init = 1</code>
+would be reasonable. You can visually inspect SNPs for bias by
+using <code>plot_geno()</code>.
+</p>
+<p><code>flexdog()</code>, like most methods, is invariant to which allele you
+label as the "reference" and which you label as the "alternative".
+That is, if you set <code>refvec</code> with the number of alternative
+read-counts, then the resulting genotype estimates
+will be the estimated allele dosage of the alternative allele.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>flexdog</code>, which consists
+of a list with some or all of the following elements:
+</p>
+
+<dl>
+<dt><code>bias</code></dt>
+<dd>
+<p>The estimated bias parameter.</p>
+</dd>
+<dt><code>seq</code></dt>
+<dd>
+<p>The estimated sequencing error rate.</p>
+</dd>
+<dt><code>od</code></dt>
+<dd>
+<p>The estimated overdispersion parameter.</p>
+</dd>
+<dt><code>num_iter</code></dt>
+<dd>
+<p>The number of EM iterations ran. You should
+be wary if this equals <code>itermax</code>.</p>
+</dd>
+<dt><code>llike</code></dt>
+<dd>
+<p>The maximum marginal log-likelihood.</p>
+</dd>
+<dt><code>postmat</code></dt>
+<dd>
+<p>A matrix of posterior probabilities of each
+genotype for each individual. The rows index the individuals
+and the columns index the allele dosage.</p>
+</dd>
+<dt><code>genologlike</code></dt>
+<dd>
+<p>A matrix of genotype <em>log</em>-likelihoods of each
+genotype for each individual. The rows index the individuals
+and the columns index the allele dosage.</p>
+</dd>
+<dt><code>gene_dist</code></dt>
+<dd>
+<p>The estimated genotype distribution. The
+<code>i</code>th element is the proportion of individuals with
+genotype <code>i-1</code>.</p>
+</dd>
+<dt><code>par</code></dt>
+<dd>
+<p>A list of the final estimates of the parameters
+of the genotype distribution. The elements included in <code>par</code>
+depends on the value of <code>model</code>:
+</p>
+
+<dl>
+<dt>
+<code>model = "norm"</code>:</dt>
+<dd>
+
+<dl>
+<dt>
+<code>mu</code>:</dt>
+<dd>
+<p>The normal mean.</p>
+</dd>
+<dt>
+<code>sigma</code>:</dt>
+<dd>
+<p>The normal standard deviation (not variance).</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<code>model = "hw"</code>:</dt>
+<dd>
+
+<dl>
+<dt>
+<code>alpha</code>:</dt>
+<dd>
+<p>The major allele frequency.</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<code>model = "bb"</code>:</dt>
+<dd>
+
+<dl>
+<dt>
+<code>alpha</code>:</dt>
+<dd>
+<p>The major allele frequency.</p>
+</dd>
+<dt>
+<code>tau</code>:</dt>
+<dd>
+<p>The overdispersion parameter. See the
+description of <code>rho</code> in the Details of
+<code>betabinom()</code>.</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<code>model = "s1"</code>:</dt>
+<dd>
+
+<dl>
+<dt>
+<code>pgeno</code>:</dt>
+<dd>
+<p>The allele dosage of the parent.</p>
+</dd>
+<dt>
+<code>alpha</code>:</dt>
+<dd>
+<p>The mixture proportion of the discrete
+uniform (included and fixed at a small value mostly for
+numerical stability reasons). See the description
+of <code>fs1_alpha</code> in <code>flexdog_full()</code>.</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<code>model = "f1"</code>:</dt>
+<dd>
+
+<dl>
+<dt>
+<code>p1geno</code>:</dt>
+<dd>
+<p>The allele dosage of the first parent.</p>
+</dd>
+<dt>
+<code>p2geno</code>:</dt>
+<dd>
+<p>The allele dosage of the second parent.</p>
+</dd>
+<dt>
+<code>alpha</code>:</dt>
+<dd>
+<p>The mixture proportion of the discrete
+uniform (included and fixed at a small value mostly for
+numerical stability reasons). See the description
+of <code>fs1_alpha</code> in <code>flexdog_full()</code>.</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<code>model = "s1pp"</code>:</dt>
+<dd>
+
+<dl>
+<dt>
+<code>ell1</code>:</dt>
+<dd>
+<p>The estimated dosage of the parent.</p>
+</dd>
+<dt>
+<code>tau1</code>:</dt>
+<dd>
+<p>The estimated double reduction parameter
+of the parent. Available if <code>ell1</code> is <code>1</code>, <code>2</code>,
+or <code>3</code>. Identified if <code>ell1</code> is <code>1</code> or <code>3</code>.</p>
+</dd>
+<dt>
+<code>gamma1</code>:</dt>
+<dd>
+<p>The estimated preferential pairing parameter.
+Available if <code>ell1</code> is <code>2</code>. However, it is not
+returned in an identified form.</p>
+</dd>
+<dt>
+<code>alpha</code>:</dt>
+<dd>
+<p>The mixture proportion of the discrete
+uniform (included and fixed at a small value mostly for
+numerical stability reasons). See the description
+of <code>fs1_alpha</code> in <code>flexdog_full()</code>.</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<code>model = "f1pp"</code>:</dt>
+<dd>
+
+<dl>
+<dt>
+<code>ell1</code>:</dt>
+<dd>
+<p>The estimated dosage of parent 1.</p>
+</dd>
+<dt>
+<code>ell2</code>:</dt>
+<dd>
+<p>The estimated dosage of parent 2.</p>
+</dd>
+<dt>
+<code>tau1</code>:</dt>
+<dd>
+<p>The estimated double reduction parameter
+of parent 1. Available if <code>ell1</code> is <code>1</code>, <code>2</code>,
+or <code>3</code>. Identified if <code>ell1</code> is <code>1</code> or <code>3</code>.</p>
+</dd>
+<dt>
+<code>tau2</code>:</dt>
+<dd>
+<p>The estimated double reduction parameter
+of parent 2. Available if <code>ell2</code> is <code>1</code>, <code>2</code>,
+or <code>3</code>. Identified if <code>ell2</code> is <code>1</code> or <code>3</code>.</p>
+</dd>
+<dt>
+<code>gamma1</code>:</dt>
+<dd>
+<p>The estimated preferential pairing parameter
+of parent 1. Available if <code>ell1</code> is <code>2</code>. However,
+it is not returned in an identified form.</p>
+</dd>
+<dt>
+<code>gamma2</code>:</dt>
+<dd>
+<p>The estimated preferential pairing parameter
+of parent 2. Available if <code>ell2</code> is <code>2</code>. However,
+it is not returned in an identified form.</p>
+</dd>
+<dt>
+<code>alpha</code>:</dt>
+<dd>
+<p>The mixture proportion of the discrete
+uniform (included and fixed at a small value mostly for
+numerical stability reasons). See the description
+of <code>fs1_alpha</code> in <code>flexdog_full()</code>.</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<code>model = "flex"</code>:</dt>
+<dd>
+<p><code>par</code> is an empty list.</p>
+</dd>
+<dt>
+<code>model = "uniform"</code>:</dt>
+<dd>
+<p><code>par</code> is an empty list.</p>
+</dd>
+<dt>
+<code>model = "custom"</code>:</dt>
+<dd>
+<p><code>par</code> is an empty list.</p>
+</dd>
+</dl>
+</dd>
+<dt><code>geno</code></dt>
+<dd>
+<p>The posterior mode genotype. These are your
+genotype estimates.</p>
+</dd>
+<dt><code>maxpostprob</code></dt>
+<dd>
+<p>The maximum posterior probability. This
+is equivalent to the posterior probability of correctly
+genotyping each individual.</p>
+</dd>
+<dt><code>postmean</code></dt>
+<dd>
+<p>The posterior mean genotype. In downstream
+association studies, you might want to consider using these
+estimates.</p>
+</dd>
+<dt><code>input$refvec</code></dt>
+<dd>
+<p>The value of <code>refvec</code> provided by
+the user.</p>
+</dd>
+<dt><code>input$sizevec</code></dt>
+<dd>
+<p>The value of <code>sizevec</code> provided
+by the user.</p>
+</dd>
+<dt><code>input$ploidy</code></dt>
+<dd>
+<p>The value of <code>ploidy</code> provided
+by the user.</p>
+</dd>
+<dt><code>input$model</code></dt>
+<dd>
+<p>The value of <code>model</code> provided by
+the user.</p>
+</dd>
+<dt><code>input$p1ref</code></dt>
+<dd>
+<p>The value of <code>p1ref</code> provided by the user.</p>
+</dd>
+<dt><code>input$p1size</code></dt>
+<dd>
+<p>The value of <code>p1size</code> provided by the user.</p>
+</dd>
+<dt><code>input$p2ref</code></dt>
+<dd>
+<p>The value of <code>p2ref</code> provided by the user.</p>
+</dd>
+<dt><code>input$p2size</code></dt>
+<dd>
+<p>The value of <code>p2size</code> provided by the user.</p>
+</dd>
+<dt><code>input$snpname</code></dt>
+<dd>
+<p>The value of <code>snpname</code> provided by the user.</p>
+</dd>
+<dt><code>prop_mis</code></dt>
+<dd>
+<p>The posterior proportion of individuals
+genotyped incorrectly.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p>Gerard, D., Ferrão, L. F. V., Garcia, A. A. F., &amp; Stephens, M. (2018). Genotyping Polyploids from Messy Sequencing Data. <em>Genetics</em>, 210(3), 789-807. <a href="https://doi.org/10.1534/genetics.118.301468">doi:10.1534/genetics.118.301468</a>.
+</p>
+</li>
+<li>
+<p>Gerard, David, and Luís Felipe Ventorim Ferrão. "Priors for genotyping polyploids." Bioinformatics 36, no. 6 (2020): 1795-1800. <a href="https://doi.org/10.1093/bioinformatics/btz852">doi:10.1093/bioinformatics/btz852</a>.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Run <code>browseVignettes(package = "updog")</code> in R for example usage.
+Other useful functions include:
+</p>
+
+<dl>
+<dt><code>multidog()</code></dt>
+<dd>
+<p>For running <code>flexdog()</code> on multiple
+SNPs in parallel.</p>
+</dd>
+<dt><code>flexdog_full()</code></dt>
+<dd>
+<p>For additional parameter options
+when running <code>flexdog()</code>.</p>
+</dd>
+<dt><code>rgeno()</code></dt>
+<dd>
+<p>For simulating genotypes under the allowable
+prior models in <code>flexdog()</code>.</p>
+</dd>
+<dt><code>rflexdog()</code></dt>
+<dd>
+<p>For simulating read-counts under the
+assumed likelihood model in <code>flexdog()</code>.</p>
+</dd>
+<dt><code>plot.flexdog()</code></dt>
+<dd>
+<p>For plotting the output of
+<code>flexdog()</code>.</p>
+</dd>
+<dt><code>oracle_mis()</code></dt>
+<dd>
+<p>For calculating the oracle genotyping
+error rates. This is useful for read-depth calculations
+<em>before</em> collecting data. After you have data, using
+the value of <code>prop_mis</code> is better.</p>
+</dd>
+<dt><code>oracle_cor()</code></dt>
+<dd>
+<p>For calculating the correlation
+between the true genotypes and an oracle estimator
+(useful for read-depth calculations <em>before</em>
+collecting data).</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+## An S1 population where the first individual
+## is the parent.
+data("snpdat")
+ploidy  &lt;- 6
+refvec  &lt;- snpdat$counts[snpdat$snp == "SNP2"]
+sizevec &lt;- snpdat$size[snpdat$snp == "SNP2"]
+fout    &lt;- flexdog(refvec   = refvec[-1],
+                   sizevec  = sizevec[-1],
+                   ploidy   = ploidy,
+                   model    = "s1",
+                   p1ref    = refvec[1],
+                   p1size   = sizevec[1])
+plot(fout)
+
+
+
+## A natural population. We will assume a
+## normal prior since there are so few
+## individuals.
+data("uitdewilligen")
+ploidy  &lt;- 4
+refvec  &lt;- uitdewilligen$refmat[, 1]
+sizevec &lt;- uitdewilligen$sizemat[, 1]
+fout    &lt;- flexdog(refvec  = refvec,
+                   sizevec = sizevec,
+                   ploidy  = ploidy,
+                   model   = "norm")
+plot(fout)
+
+
+
+</code></pre>
+
+
+</div>

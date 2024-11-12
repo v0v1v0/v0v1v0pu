@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_B_spline_basis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct B-spline basis
+This is an internal function which constructs B-spline basis to be used in 
+pclm estimation</h2>
+
+<h3>Description</h3>
+
+<p>Construct B-spline basis
+This is an internal function which constructs B-spline basis to be used in 
+pclm estimation
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_B_spline_basis(X, Y, kr, deg, diff, type)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>vector with ages</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>vector with years</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kr</code></td>
+<td>
+<p>Knot ratio. Number of internal intervals used for defining 1 knot in 
+B-spline basis construction. See <code>MortSmooth_bbase</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>Degree of the splines needed to create equally-spaced B-splines 
+basis over an abscissa of data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diff</code></td>
+<td>
+<p>An integer indicating the order of differences of the components 
+of PCLM coefficients. Default value: 2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of PCLM model. Options: <code>"1D", "2D"</code> for 
+univariate and two-dimensional model respectively.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>MortSmooth_bbase</code>
+</p>
+
+
+</div>

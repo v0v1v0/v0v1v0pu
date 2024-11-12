@@ -1,0 +1,170 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>logkda</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Etienne's K(D,A)</h2>
+
+<h3>Description</h3>
+
+<p>Calculates Etienne's <code class="reqn">K(D,A)</code> using a variety of different methods
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">logkda.R(a, use.brob=TRUE)
+logkda.a11(a)
+logkda.pari(a, numerical=TRUE, gp_binary = "gp")
+logkda.polyn(a)
+logkda(a, method="pari", ...)
+logkda_pari_unix(a, numerical, pari_string, gp_binary)
+logkda_pari_windows(a, numerical, pari_string)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>Count object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.brob</code></td>
+<td>
+<p>In function <code>logkda.R()</code>, Boolean, with default
+<code>TRUE</code> meaning to use Brobdingnagian numbers for the
+calculation.  This is slower but allows one to analyze larger
+datasets</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>numerical</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to coerce
+to a numerical vector (thereby losing precision), and <code>FALSE</code>
+meaning to return the string produced by <code>pari/gp</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>In function <code>logkda()</code>, a string specifying which
+method to use.  Takes “R”, “a11”, or “pari”</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pari_string,gp_binary</code></td>
+<td>
+<p>configuration variables (not intended to
+be changed by the user)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>In function <code>logkda()</code>, further arguments which are
+passed to the other functions</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The user should use function <code>logkda()</code>, which is a wrapper for
+the other functions.  Note that the default method, <code>pari</code>,
+requires the pari/gp system to be installed.  This is the preferred
+option because it is much faster than the other methods.
+</p>
+<p>Functions <code>logkda.R()</code> and <code>logkda.pari()</code> calculate
+<code class="reqn">K(D,A)</code> using the method appearing in Etienne (2005), supplementary
+online material; they use <code>R</code> and <code>pari/gp</code> respectively.
+Function <code>logkda.a11</code> is a direct implementation of formula A11
+in Etienne (2005).  The formula is
+</p>
+<p style="text-align: center;"><code class="reqn">
+  K(D,A)=
+  \sum_{\left\{a_1,\ldots,a_S|\sum a_i=A\right\}}
+  \prod_{i=1}^S\frac{
+    \overline{s}\left(n_i, a_i\right)
+    \overline{s}\left(a_i,   1\right) }{
+  \overline{s}\left(n_i,1\right)}</code>
+</p>
+
+<p>where <code class="reqn">\overline{s}\left(n_i,a_i\right)</code> are Stirling numbers of
+the first kind (see <code>logS1</code>).
+</p>
+<p>Function <code>logkda.pari()</code> dispatches to either
+<code>logkda_pari_unix()</code> or <code>logkda_pari_windows()</code> but the
+windows function is not guaranteed to work.
+</p>
+
+
+<h3>Note</h3>
+
+<p>If <code>method</code> takes its default value of “<code>pari</code>”, and
+<code>pari/gp</code> is not installed (the test is <code>gp --version</code>),
+then the method is changed to <code>R</code> and a warning given.
+</p>
+<p>Function <code>logkda.a11()</code> is included because the computational
+method is a direct transcription of formula A11; it is very slow.
+</p>
+<p>Function <code>logkda.pari()</code> is a wrapper for
+<code>.logkda.pari.windows()</code> or <code>.logkda.pari.unix()</code>.  It uses
+“<code>if(R.Version()$os == 'windows')</code>” to check for windows
+operating systems.
+</p>
+<p>It would be nice to use <code>gp2c</code> (rather than <code>gp</code>) but I
+can't make the “<code>-g</code>” flag work properly; and I had to
+hack <code>gp2c-run</code> to make it call <code>gp</code> with the <code>-q</code>
+flag
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin; <code>logkda()</code> is an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> transliteration of
+<code>pari/gp</code> code appearing in Etienne 2005 (supplementary online
+material) due to Chave.
+</p>
+<p>Function <code>logkda.polyn()</code> provided by Francois Munoz.
+</p>
+<p>Function <code>.logkda.pari.windows()</code> provided by Andrea Manica and
+Francois Munoz.
+</p>
+
+
+<h3>References</h3>
+
+<p>R. S. Etienne 2005. “A New Sampling Formula for Neutral
+Biodiversity”.  <em>Ecology Letters</em>, volume 8, pp253–260.
+<code>doi: 10.111/j.1461-0248.2004.00717.x</code>
+</p>
+<p>C. Batut and K. Belabas and D. Bernardi and H. Cohen and M. Olivier
+2000.  “User's guide to PARI/GP”.  <a href="http://www.parigp-home.de/">http://www.parigp-home.de/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>etienne</code>,<code>logS1</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">a &lt;- count(c(dogs=7,pigs=3,crabs=1,hogs=1,slugs=1))
+
+## Not run: logkda(a)
+
+logkda.R(a)
+logkda.R(a, use.brob=FALSE)
+logkda.a11(a)
+# All four should be the same up to numerical errors
+
+</code></pre>
+
+
+</div>

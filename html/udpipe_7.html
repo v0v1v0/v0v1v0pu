@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as_fasttext</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Combine labels and text as used in fasttext</h2>
+
+<h3>Description</h3>
+
+<p>Fasttext prepends a label or different labels to text using a special string (__label__).
+This function takes a character vector of text and prepends the labels alongside the special string.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as_fasttext(x, y, label = "__label__")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a character vector of labels or a list of labels. <code>y</code> should be of the same length as <code>x</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>the string to use to prepend to the label. Defaults to __label__</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector of text where <code>x</code> and <code>y</code> are combined
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">as_fasttext(x = c("just a bit of txt", "example2", "more txt please", "more"), 
+            y = c("pos", "neg", "neg", NA))
+as_fasttext(x = c("just a bit of txt", "example2", "more txt please", "more"), 
+            y = list(c("ok", "pos"), c("neg", "topic2"), "", NA))
+</code></pre>
+
+
+</div>

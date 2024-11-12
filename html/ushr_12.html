@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_error</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evaluate error metric between data and model prediction</h2>
+
+<h3>Description</h3>
+
+<p>For a given parameter set, this function computes the predicted viral load curve and evaluates the error metric between the prediction and observed data (to be passed to optim).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_error(params, param_names, free_param_index, data, model_list,
+  inv_param_transform_fn)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>params</code></td>
+<td>
+<p>named vector of the parameters from which the model prediction should be generated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param_names</code></td>
+<td>
+<p>names of parameter vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free_param_index</code></td>
+<td>
+<p>logical TRUE/FALSE vector indicating whether the parameters A, delta, B, gamma are to be recovered. This should be c(TRUE, TRUE, TRUE, TRUE) for the biphasic model and c(FALSE, FALSE, TRUE, TRUE) for the single phase model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe with columns for the subject's viral load measurements ('vl'), and timing of sampling ('time')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model_list</code></td>
+<td>
+<p>character indicating which model is begin fit. Can be either 'four' for the biphasic model, or 'two' for the single phase model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inv_param_transform_fn</code></td>
+<td>
+<p>list of transformation functions to be used when back-transforming the transformed parameters. Should be the inverse of the forward transformation functions. Defaults to exponential.</p>
+</td>
+</tr>
+</table>
+</div>

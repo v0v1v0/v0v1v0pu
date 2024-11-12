@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>document_term_frequencies_statistics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add Term Frequency, Inverse Document Frequency and Okapi BM25 statistics to the output of document_term_frequencies</h2>
+
+<h3>Description</h3>
+
+<p>Term frequency Inverse Document Frequency (tfidf) is calculated as the multiplication of
+</p>
+
+<ul>
+<li>
+<p> Term Frequency (tf): how many times the word occurs in the document / how many words are in the document
+</p>
+</li>
+<li>
+<p> Inverse Document Frequency (idf): log(number of documents / number of documents where the term appears)
+</p>
+</li>
+</ul>
+<p>The Okapi BM25 statistic is calculated as the multiplication of the inverse document frequency
+and the weighted term frequency as defined at <a href="https://en.wikipedia.org/wiki/Okapi_BM25">https://en.wikipedia.org/wiki/Okapi_BM25</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">document_term_frequencies_statistics(x, k = 1.2, b = 0.75)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.table as returned by <code>document_term_frequencies</code> containing the columns doc_id, term and freq.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>parameter k1 of the Okapi BM25 ranking function as defined at <a href="https://en.wikipedia.org/wiki/Okapi_BM25">https://en.wikipedia.org/wiki/Okapi_BM25</a>. Defaults to 1.2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>parameter b of the Okapi BM25 ranking function as defined at <a href="https://en.wikipedia.org/wiki/Okapi_BM25">https://en.wikipedia.org/wiki/Okapi_BM25</a>. Defaults to 0.5.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.table with columns doc_id, term, freq and added to that the computed statistics
+tf, idf, tfidf, tf_bm25 and bm25.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(brussels_reviews_anno)
+
+x &lt;- document_term_frequencies(brussels_reviews_anno[, c("doc_id", "token")])
+x &lt;- document_term_frequencies_statistics(x)
+head(x)
+</code></pre>
+
+
+</div>

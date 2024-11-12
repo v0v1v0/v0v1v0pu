@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dtm_svd_similarity</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Semantic Similarity to a Singular Value Decomposition</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the similarity of a document term matrix to a set of terms based on 
+a Singular Value Decomposition (SVD) embedding matrix.<br>
+This can be used to easily construct a sentiment score based on the latent scale defined by a set of positive or negative terms.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dtm_svd_similarity(
+  dtm,
+  embedding,
+  weights,
+  terminology = rownames(embedding),
+  type = c("cosine", "dot")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dtm</code></td>
+<td>
+<p>a sparse matrix such as a "dgCMatrix" object which is returned by <code>document_term_matrix</code> containing frequencies of terms for each document</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>embedding</code></td>
+<td>
+<p>a matrix containing the <code>v</code> element from an singular value decomposition with the right singular vectors. 
+The rownames of that matrix should contain terms which are available in the <code>colnames(dtm)</code>. See the examples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p>a numeric vector with weights giving your definition of which terms are positive or negative, 
+The names of this vector should be terms available in the rownames of the embedding matrix. See the examples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>terminology</code></td>
+<td>
+<p>a character vector of terms to limit the calculation of the similarity for the <code>dtm</code> to the linear combination of the weights. 
+Defaults to all terms from the <code>embedding</code> matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>either 'cosine' or 'dot' indicating to respectively calculate cosine similarities or inner product similarities between the <code>dtm</code> and the SVD embedding space. Defaults to 'cosine'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an object of class 'svd_similarity' which is a list with elements
+</p>
+
+<ul>
+<li>
+<p> weights: The weights used. These are scaled to sum up to 1 as well on the positive as the negative side
+</p>
+</li>
+<li>
+<p> type: The type of similarity calculated (either 'cosine' or 'dot')
+</p>
+</li>
+<li>
+<p> terminology: A data.frame with columns term, freq and similarity where similarity indicates 
+the similarity between the term and the SVD embedding space of the weights and freq is how frequently the term occurs in the <code>dtm</code>. 
+This dataset is sorted in descending order by similarity.
+</p>
+</li>
+<li>
+<p> similarity: A data.frame with columns doc_id and similarity indicating the similarity between
+the <code>dtm</code> and the SVD embedding space of the weights. The doc_id is the identifier taken from the rownames of <code>dtm</code>.
+</p>
+</li>
+<li>
+<p> scale: A list with elements terminology and weights 
+indicating respectively the similarity in the SVD embedding space
+between the <code>terminology</code> and each of the weights and between the weight terms itself
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data("brussels_reviews_anno", package = "udpipe")
+x &lt;- subset(brussels_reviews_anno, language %in% "nl" &amp; (upos %in% "ADJ" | lemma %in% "niet"))
+dtm &lt;- document_term_frequencies(x, document = "doc_id", term = "lemma")
+dtm &lt;- document_term_matrix(dtm)
+dtm &lt;- dtm_remove_lowfreq(dtm, minfreq = 3)
+
+## Function performing Singular Value Decomposition on sparse/dense data
+dtm_svd &lt;- function(dtm, dim = 5, type = c("RSpectra", "svd"), ...){
+  type &lt;- match.arg(type)
+  if(type == "svd"){
+    SVD &lt;- svd(dtm, nu = 0, nv = dim, ...)
+  }else if(type == "RSpectra"){
+    #Uncomment this if you want to use the faster sparse SVD by RSpectra
+    #SVD &lt;- RSpectra::svds(dtm, nu = 0, k = dim, ...)
+  }
+  rownames(SVD$v) &lt;- colnames(dtm)
+  SVD$v
+}
+#embedding &lt;- dtm_svd(dtm, dim = 5)
+embedding &lt;- dtm_svd(dtm, dim = 5, type = "svd")
+
+## Define positive / negative terms and calculate the similarity to these
+weights &lt;- setNames(c(1, 1, 1, 1, -1, -1, -1, -1),
+                    c("fantastisch", "schoon", "vriendelijk", "net",
+                      "lawaaiig", "lastig", "niet", "slecht"))
+scores &lt;- dtm_svd_similarity(dtm, embedding = embedding, weights = weights)
+scores
+str(scores$similarity)
+hist(scores$similarity$similarity)
+
+plot(scores$terminology$similarity_weight, log(scores$terminology$freq), 
+     type = "n")
+text(scores$terminology$similarity_weight, log(scores$terminology$freq), 
+     labels = scores$terminology$term)
+     
+## Not run: 
+## More elaborate example using word2vec
+## building word2vec model on all Dutch texts, 
+## finding similarity of dtm to adjectives only
+set.seed(123)
+library(word2vec)
+text      &lt;- subset(brussels_reviews_anno, language == "nl")
+text      &lt;- paste.data.frame(text, term = "lemma", group = "doc_id")
+text      &lt;- text$lemma
+model     &lt;- word2vec(text, dim = 10, iter = 20, type = "cbow", min_count = 1)
+predict(model, newdata = names(weights), type = "nearest", top_n = 3)
+embedding &lt;- as.matrix(model)
+
+## End(Not run)
+data(brussels_reviews_w2v_embeddings_lemma_nl)
+embedding &lt;- brussels_reviews_w2v_embeddings_lemma_nl
+adjective &lt;- subset(brussels_reviews_anno, language %in% "nl" &amp; upos %in% "ADJ")
+adjective &lt;- txt_freq(adjective$lemma)
+adjective &lt;- subset(adjective, freq &gt;= 5 &amp; nchar(key) &gt; 1)
+adjective &lt;- adjective$key
+
+scores    &lt;- dtm_svd_similarity(dtm, embedding, weights = weights, type = "dot", 
+                                terminology = adjective)
+scores
+plot(scores$terminology$similarity_weight, log(scores$terminology$freq), 
+     type = "n")
+text(scores$terminology$similarity_weight, log(scores$terminology$freq), 
+     labels = scores$terminology$term, cex = 0.8)
+</code></pre>
+
+
+</div>

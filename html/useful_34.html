@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mixed.case</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>mixed.case</h2>
+
+<h3>Description</h3>
+
+<p>Checks if strings are all lower case
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mixed.case(string)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>string</code></td>
+<td>
+<p>Character vector of strings to check cases</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Checks if strings are a mix of upper and lower case. This is a wrapper for <code>find.case('text', 'mixed')</code>.  If string is all numbers it returns FALSE.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of TRUE AND FALSE
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>See Also</h3>
+
+<p>find.case all.upper
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">toCheck &lt;- c('BIG', 'little', 'Mixed', 'BIG WITH SPACE', 'little with space', 'MIXED with SPACE')
+mixed.case(toCheck)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetRainSEPA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Scottish Environment Protection Agency (SEPA) hourly rainfall data.</h2>
+
+<h3>Description</h3>
+
+<p>Extract hourly rainfall data from SEPA's API.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetRainSEPA(StationName, From = "2022-10-01", To = "ToDate")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>StationName</code></td>
+<td>
+<p>The name of the station for which you want rainfall. If you type something other than one of the available stations, the list of stations will be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>From</code></td>
+<td>
+<p>A start date for the data in the form of "YYYY-MM-DD".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>To</code></td>
+<td>
+<p>An end date for the data in the form of "YYYY-MM-DD". The default is the most recent date available.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If the "From" date used is significantly before (approx. 30 years) the start of the available data, the function will fail with an error message saying the connection cannot be opened.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with POSIXct in the first column, and rainfall in the second column. Unless the StationName provided is not in the available list, then the available list is returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get the list of available stations
+## Not run:  GetRainSEPA("AnythingButAStationName") 
+#Now we'll get rain from the Bannockburn station
+## Not run:  Bannockburn &lt;- GetRainSEPA("Bannockburn", From = "1998-10-01", To = "1998-10-31") 
+#Now we'll have a look at the top of the data and plot it
+## Not run:  head(Bannockburn) 
+## Not run:  plot(Bannockburn, type = "h", ylab = "Rainfall (mm)") 
+</code></pre>
+
+
+</div>

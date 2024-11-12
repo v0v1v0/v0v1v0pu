@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_check_steady_state</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Verify System Steady State</h2>
+
+<h3>Description</h3>
+
+<p>Takes the ubiquity system object and other optional inputs to verify the system is running at steady state. This also provides information that can be helpful in debugging systems not running at steady state.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_check_steady_state(
+  cfg,
+  parameters = NULL,
+  zero_rates = TRUE,
+  zero_bolus = TRUE,
+  output_times = seq(0, 100, 1),
+  offset_tol = .Machine$double.eps * 100,
+  derivative_tol = .Machine$double.eps * 100,
+  derivative_time = 0
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>optional set of parameters (<code>NULL</code>) to check at steady state (if set to <code>NULL</code> then the parameters for the currently selected parameter set will be used)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero_rates</code></td>
+<td>
+<p>Boolean value to control removing all rate inputs (<code>TRUE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero_bolus</code></td>
+<td>
+<p>Boolean value to control removing all bolus inputs (<code>TRUE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_times</code></td>
+<td>
+<p>sequence of output times to simulate for offset determination (<code>seq(0,100,1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset_tol</code></td>
+<td>
+<p>maximum percent offset to be considered zero (<code>.Machine$double.eps*100</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>derivative_tol</code></td>
+<td>
+<p>maximum derivative value to be considered zero (<code>.Machine$double.eps*100</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>derivative_time</code></td>
+<td>
+<p>time to evaluate derivatives to identify deviations (<code>0</code>), set to <code>NULL</code> to skip derivative evaluation</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List with the following names
+</p>
+
+<ul>
+<li> <p><code>steady_state</code> Boolean indicating weather the system was at steady state
+</p>
+</li>
+<li> <p><code>states_derivative</code> Derivatives that had values greater than the <code>derivative_tol</code>
+</p>
+</li>
+<li> <p><code>states_simulation</code> States that had values greater than the <code>offset_tol</code>
+</p>
+</li>
+<li> <p><code>som</code> Simulated output 
+</p>
+</li>
+<li> <p><code>derivatives</code> Derivatives
+</p>
+</li>
+<li> <p><code>states_derivative_NA_NaN</code> States that had derivatives that evaluated as either NA or NaN
+</p>
+</li>
+<li> <p><code>states_simulation_NA_NaN</code> States with simulation values that had either NA or NaN
+</p>
+</li>
+<li> <p><code>derivative_tc</code> Data frame with the timecourse of states where the derivative was found to be greater than tolerance (states_derivative)
+</p>
+</li>
+</ul>
+</div>

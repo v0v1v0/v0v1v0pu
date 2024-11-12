@@ -1,0 +1,140 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bootstrapml</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parametric Bootstrap on Distributions Fitted with Maximum Likelihood</h2>
+
+<h3>Description</h3>
+
+<p>The parametric bootstrap is a resampling technique using random variates
+from a known parametric distribution. In this function the distribution
+of the random variates is completely determined by the <code>unvariateML</code>
+object <code>object</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bootstrapml(
+  object,
+  reps = 1000,
+  map = identity,
+  reducer = stats::quantile,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A <code>univariateML</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reps</code></td>
+<td>
+<p>Positive integer. The number of bootstrap samples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>map</code></td>
+<td>
+<p>A function of the parameters of the <code>univariateML</code> object.
+Defaults to the identity.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reducer</code></td>
+<td>
+<p>A reducer function. Defaults to <code>stats::quantile</code> with
+default argument <code>probs = c(0.025, 0.975)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Passed to <code>reducer</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For each bootstrap iteration a maximum likelihood estimate is calculated
+using the <code style="white-space: pre;">⁠ml***⁠</code> function specified by <code>object</code>. The resulting
+numeric vector is then passed to <code>map</code>. The values returned by
+<code>map</code> is collected in an array and the <code>reducer</code> is called on
+each row of the array.
+</p>
+<p>By default the <code>map</code> function is the identity and the default
+<code>reducer</code> is the quantile function taking the argument <code>probs</code>,
+which defaults to <code>c(0.025, 0.975)</code>. This corresponds to a 95\
+basic percentile confidence interval and is also reported by
+<code>confint()</code>
+</p>
+<p><em>Note:</em> The default confidence intervals are percentile intervals,
+not empirical intervals. These confidence intervals will in some cases
+have poor coverage as they are not studentized, see e.g. Carpenter,
+J., &amp; Bithell, J. (2000).
+</p>
+
+
+<h3>Value</h3>
+
+<p>The transposed map-reduced bootstrap samples.
+</p>
+
+
+<h3>References</h3>
+
+<p>Efron, B., &amp; Tibshirani, R. J. (1994). An introduction to the bootstrap.
+CRC press.
+</p>
+<p>Carpenter, J., &amp; Bithell, J. (2000). Bootstrap confidence intervals:
+when, which, what? A practical guide for medical statisticians.
+Statistics in medicine, 19(9), 1141-1164.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>confint()</code> for an application of <code>bootstrapml</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(1)
+object &lt;- mlgamma(mtcars$qsec)
+
+## Calculate c(0.025, 0.975) confidence interval for the gamma parameters.
+bootstrapml(object)
+
+#            2.5%      97.5%
+# shape 68.624945 160.841557
+# rate   3.896915   9.089194
+
+## The mean of a gamma distribution is shape/rate. Now we calculate a
+## parametric bootstrap confidence interval for the mean with confidence
+## limits c(0.05, 0.95)
+
+bootstrapml(object, map = function(x) x[1] / x[2], probs = c(0.05, 0.95))
+
+#       5%      95%
+# 17.33962 18.31253
+
+## Print a histogram of the bootstrapped estimates from an exponential.
+object &lt;- mlexp(mtcars$qsec)
+hist(bootstrapml(object, reducer = identity))
+
+
+</code></pre>
+
+
+</div>

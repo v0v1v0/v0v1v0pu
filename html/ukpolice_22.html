@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_stop_search_force</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Stop and Searches by Police Force</h2>
+
+<h3>Description</h3>
+
+<p>Returns details of stop and searches carried out by a particular police
+force. Note that the police force must be specified.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_stop_search_force(force, date = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>force</code></td>
+<td>
+<p>A string containing the name of the police force to return data
+for. Must be specified, and is not case sensitive.
+See <code>ukc_forces()</code> for details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>The year and month in "YYYY-MM" form. Also accepts dates in
+formats that can be coerced to <code>Date</code> class with <code>as.Date()</code>. If <code>NULL</code>,
+the latest available month will be returned. Note that not all forces
+will necessarily have reported stop and search data for the latest month;
+check availability with the <code>ukc_available()</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>tibble</code> with details of stop and searches by a given police force.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukc_stop_search_location()</code>
+</p>
+<p><code>ukc_stop_search_no_location()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ss_dorset &lt;- ukc_stop_search_force(force = "dorset")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

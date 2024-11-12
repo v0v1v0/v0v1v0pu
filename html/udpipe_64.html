@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_collapse</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Collapse a character vector while removing missing data.</h2>
+
+<h3>Description</h3>
+
+<p>Collapse a character vector while removing missing data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_collapse(x, collapse = " ")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector or a list of character vectors</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>collapse</code></td>
+<td>
+<p>a character string to be used to collapse the vector. Defaults to a space: ' '.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector of length 1 with the content of x collapsed using paste
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>paste</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">txt_collapse(c(NA, "hello", "world", NA))
+
+x &lt;- list(a = c("h", "i"), b = c("some", "more", "text"), 
+          c = character(), d = NA)
+txt_collapse(x, collapse = " ")
+</code></pre>
+
+
+</div>

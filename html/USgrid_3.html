@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>US_source</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The US Hourly Net Generation by Energy Source</h2>
+
+<h3>Description</h3>
+
+<p>The net generation of electricity in the US by energy source (i.e., natural gas, coal, solar, etc.) since July 2018.
+</p>
+<p>Units: megawatthours
+</p>
+<p>Time zone: UTC
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">US_source
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A tsibble object with hourly intervals</p>
+
+
+<h3>Details</h3>
+
+<p>The dataset contains the hourly net generation of electricity in the US (megawatthours) by energy source
+The 'source' column describes the type of the energy source
+</p>
+
+
+<h3>Source</h3>
+
+<p>US Energy Information Administration (Dec 2019) <a href="https://www.eia.gov/">website</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(US_source)
+
+library(plotly)
+
+plot_ly(data = US_source,
+        x = ~ date_time,
+        y = ~ series,
+        color = ~ source,
+        type = "scatter",
+        mode = "lines")
+
+</code></pre>
+
+
+</div>

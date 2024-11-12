@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>workshop_fetch</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fetch Ubiquity Workshop Sections</h2>
+
+<h3>Description</h3>
+
+<p>With the ubiquity package this function can be used to fetch
+example files for different sections of the workshop.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">workshop_fetch(
+  section = "Simulation",
+  overwrite = FALSE,
+  copy_files = TRUE,
+  output_directory = getwd()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>section</code></td>
+<td>
+<p>Name of the section of workshop to retrieve  ("Simulation")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+<p>if <code>TRUE</code> the new workshop files will overwrite any existing files present (<code>FALSE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>copy_files</code></td>
+<td>
+<p>if <code>TRUE</code> the files will be written to the output_directory, if <code>FALSE</code> only the names and locations of the files will be returned (<code>TRUE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_directory</code></td>
+<td>
+<p>directory where workshop files will be placed (getwd())</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Valid sections are "Simulation", "Estimation", "Titration" "Reporting", and "NCA"
+</p>
+
+
+<h3>Value</h3>
+
+<p>list
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+workshop_fetch("Estimation", output_directory=tempdir(), overwrite=TRUE)
+
+</code></pre>
+
+
+</div>

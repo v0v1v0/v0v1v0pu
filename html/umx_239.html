@@ -1,0 +1,204 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_print</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print tables in a range of formats (markdown default, see <code>umx_set_table_format()</code> for other formats)
+or as a web browser table.</h2>
+
+<h3>Description</h3>
+
+<p>To aid interpretability of printed tables from OpenMx (and elsewhere)
+you can change how NA and zero appear, and suppressing values below a certain cut-off.
+By default, Zeros have the decimals suppressed, and NAs are suppressed altogether.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_print(
+  x,
+  digits = getOption("digits"),
+  caption = NULL,
+  report = c("markdown", "html"),
+  file = c(NA, "tmp.html"),
+  na.print = "",
+  zero.print = "0",
+  justify = "none",
+  quote = FALSE,
+  suppress = NULL,
+  kableExtra = TRUE,
+  append = FALSE,
+  sortableDF = TRUE,
+  html_font = NULL,
+  style = c("paper", "material_dark", "classic", "classic_2", "minimal", "material"),
+  bootstrap_options = c("hover", "bordered", "condensed", "responsive"),
+  lightable_options = "striped",
+  both = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data.frame to print (matrices will be coerced to data.frame)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of decimal places to print (getOption("digits"))</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption</code></td>
+<td>
+<p>Optional caption.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>How to report the results. "html" = open in browser.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>Whether to write to a file (defaults to NA (no file). Use "html" to open table in browser.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.print</code></td>
+<td>
+<p>How to display NAs (default = "")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero.print</code></td>
+<td>
+<p>How to display 0 values (default = "0") for sparse tables, using "." can produce more readable results.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>justify</code></td>
+<td>
+<p>Parameter passed to print (defaults to "none")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quote</code></td>
+<td>
+<p>Whether or not to quote strings (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppress</code></td>
+<td>
+<p>Minimum numeric value to print (NULL = print all values, no matter how small)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kableExtra</code></td>
+<td>
+<p>Whether to print the table using kableExtra (if report="html")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>append</code></td>
+<td>
+<p>If html, is this appended to file? (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortableDF</code></td>
+<td>
+<p>If html, is table sortable? (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>html_font</code></td>
+<td>
+<p>Override default font. e.g. "Times" or '"Arial Narrow", arial, helvetica, sans-s'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>style</code></td>
+<td>
+<p>The style for the table "paper","material_dark" etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrap_options</code></td>
+<td>
+<p>e.g.  border etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lightable_options</code></td>
+<td>
+<p>e.g. striped</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>both</code></td>
+<td>
+<p>If html, is table also printed as markdown? (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional parameters for print</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> A dataframe of text
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>umx_msg()</code>, <code>umx_set_table_format()</code>
+</p>
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(mtcars)
+umx_print(mtcars[1:10,], digits = 2, zero.print = ".", justify = "left")
+umx_print(mtcars[1,1:2], digits = 2, zero.print = "")
+umx_print(mtcars[1,1:2], digits = 2, caption = "Hi: I'm the caption!")
+## Not run: 
+umx_print(mtcars[1:10,], report = "html")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

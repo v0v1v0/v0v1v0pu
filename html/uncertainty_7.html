@@ -1,0 +1,155 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>summary.uncertainty</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Creates an uncertainty summary object
+</h2>
+
+<h3>Description</h3>
+
+<p>Performs an uncertainty contribution estimation for the uncertainty object. 
+The metric used to measure the contribution is percent of variance.
+If correlation is present an additional entry is shown with the whole contribution due to correlated input quantities.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'uncertainty'
+summary(object, ndigits = 3, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+
+<p>an uncerainty object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndigits</code></td>
+<td>
+
+<p>numeric, the number of digits for displaying.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>additional parameters
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>none
+</p>
+
+
+<h3>Value</h3>
+
+<p>An uncertainty summary object: 
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>the call invocation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>measurand.name</code></td>
+<td>
+<p>name of the measurand</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>measurand.label</code></td>
+<td>
+<p>label of the measurand for displaying purposes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>budget</code></td>
+<td>
+<p>a list with the name, mean, label, u(uncertainty), dof and uncertainty contribution for each input quantity plus a correlation entry if any</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>none
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>H. Gasca-Aragon
+</p>
+<p>Maintainer: H. Gasca-Aragon &lt;hugo_gasca_aragon@hotmail.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>JCGM 100:2008. <em>Guide to the expression of uncertainty of measurement</em>
+</p>
+<p>JCGM 100:2005. <em>Supplement 1 Propagation of distributions usign a Monte Carlo method</em>
+</p>
+<p>EURACHEM/CITAC Guide CG 4. <em>Quantifying Uncertainty in Analytical Measurement</em>
+</p>
+<p>Venables, W. N. and Ripley, B. D. (2002) <em>Modern Applied Statistics with S</em>. Fourth edition. Springer.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uncertainty.default</code>, <code>print.summary.uncertainty</code>, <code>summary</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># create an uncertainty budget
+cor.mat&lt;- matrix(c(1,-0.7,-0.7,1),2,2)
+
+u.budget&lt;- uncertaintyBudget(x=list(name=c("x0","x1"), 
+	mean=c(10,20), u=c(1,5), dof=c(10,10),
+	label=c("x[0]", "x[1]"), distribution=c("normal","normal")), 
+	y=cor.mat)
+u.budget
+
+# estimate the measurand uncertainty using an uncertainty budget,
+# a measurand definition and a selected estimating method.
+GFO.res&lt;- uncertainty(x=u.budget, 
+y=list(measurand_name="ratio.GFO", measurand_label="ratio[GFO]", 
+measurand_model="x0/x1", method="GFO", alpha=0.05))
+
+GFO.res
+
+# create an uncertainty summary object
+GFO.sum&lt;- summary(GFO.res)
+
+# implicit call to the print method
+GFO.sum
+
+# same as
+print(GFO.sum)
+
+# uncertainty summary structure
+attributes(GFO.sum)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>generateDistinctIntersections</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>configure the generation of the distinct intersections</h2>
+
+<h3>Description</h3>
+
+<p>configure the generation of the distinct intersections
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">generateDistinctIntersections(
+  upsetjs,
+  min = 0,
+  max = NULL,
+  empty = FALSE,
+  order.by = "cardinality",
+  limit = NULL,
+  colors = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>minimum number of sets in an intersection</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max</code></td>
+<td>
+<p>maximum number of sets in an intersection</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>empty</code></td>
+<td>
+<p>whether to include empty intersections or not</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.by</code></td>
+<td>
+<p>order intersections by cardinality, degree, name or a combination of it</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>limit the number of intersections to the top N</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>the optional list with set name to color</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  generateDistinctIntersections(min = 2)
+</code></pre>
+
+
+</div>

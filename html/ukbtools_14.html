@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_df_full_join</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Recursively join a list of UKB datasets</h2>
+
+<h3>Description</h3>
+
+<p>A thin wrapper around <code>purrr::reduce</code> and <code>dplyr::full_join</code> to merge multiple UKB datasets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_df_full_join(..., by = "eid")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Supply comma separated unquoted names of to-be-merged UKB datasets (created with <code>ukb_df</code>). Arguments are passed to <code>list</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by</code></td>
+<td>
+<p>Variable used to merge multiple dataframes (default = "eid").</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function takes a comma separated list of unquoted datasets. By explicitly setting the join key to "eid" only (Default value of the <code>by</code> parameter), any additional variables common to any two tables will have ".x" and ".y" appended to their names. If you are satisfied the additional variables are identical to the original, the copies can be safely deleted. For example, if <code>setequal(my_ukb_data$var, my_ukb_data$var.x)</code> is <code>TRUE</code>, then my_ukb_data$var.x can be dropped. A <code>dlyr::full_join</code> is like the set operation union in that all observations from all tables are included, i.e., all samples are included even if they are not included in all datasets.
+</p>
+<p>NB. <code>ukb_df_full_join</code> will fail if any variable names are repeated **within** a single UKB dataset. This is unlikely to occur, however, <code>ukb_df</code> creates variable names by combining a snake_case descriptor with the variable's **index** and **array**. If an index_array combination is incorrectly repeated, this will result in a duplicated variable. If the join fails, you can use <code>ukb_df_duplicated_name</code> to find duplicated names. See <code>vignette(topic = "explore-ukb-data", package = "ukbtools")</code> for further details.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukb_df_duplicated_name</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# If you have multiple UKB filesets, tidy then merge them.
+
+ukb1234_data &lt;- ukb_df("ukb1234")
+ukb2345_data &lt;- ukb_df("ukb2345")
+ukb3456_data &lt;- ukb_df("ukb3456")
+
+my_ukb_data &lt;- ukb_df_full_join(ukb1234_data, ukb2345_data, ukb3456_data)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

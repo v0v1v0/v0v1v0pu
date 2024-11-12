@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>usrivers</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>US Major Rivers (2010)</h2>
+
+<h3>Description</h3>
+
+<p>Major rivers in the United States.<br><br>
+The data is can be transformed with <code>usmap_transform()</code>.
+Once the <code>Shape</code> strings are transformed, it can be added to
+<code>plot_usmap()</code> using a <code>ggplot2::geom_sf()</code> layer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(usrivers)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A simple features (sf) data frame with 55 rows and 5 variables.
+</p>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li> <p><code>NAME</code> The name of the river.
+</p>
+</li>
+<li> <p><code>SYSTEM</code> The system the river belongs to.
+</p>
+</li>
+<li> <p><code>MILES</code> The length of the river in miles.
+</p>
+</li>
+<li> <p><code>Shape_Length</code> The length of the river in the coordinate system.
+</p>
+</li>
+<li> <p><code>Shape</code> The MULTILINESTRING features depicting the river, for plotting.
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul>
+<li> <p><a href="https://www.arcgis.com/home/item.html?id=290e4ab8a07f4d2c8392848d011add32#!">https://www.arcgis.com/home/item.html?id=290e4ab8a07f4d2c8392848d011add32#!</a>
+</p>
+</li>
+<li>
+<p> Sources: Esri; Rand McNally; Bartholemew and Times Books;
+Digital Chart of the World (DCW), U.S. National Geospatial-Intelligence Agency (NGA); i-cubed
+</p>
+</li>
+</ul>
+</div>

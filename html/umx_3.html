@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>deg2rad</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert Degrees to Degrees</h2>
+
+<h3>Description</h3>
+
+<p>A helper to convert degrees (360 in  a circle) to Rad (<code class="reqn">2\pi</code>
+in a circle).
+</p>
+<p><em>note</em>: R's trig functions, e.g. <code>sin()</code> use Radians for input!
+</p>
+<p>The formula is radians = <code class="reqn">deg x 180/\pi</code>.
+</p>
+
+<ul>
+<li>
+<p> 180 Degrees is equal to <code class="reqn">\pi</code> radians.
+</p>
+</li>
+<li>
+<p> 1 Rad = <code class="reqn">180/\pi</code> degrees = ~ 57.296 degrees.
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">deg2rad(deg)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>The value in degrees you wish to convert to radians</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> value in radians
+</p>
+</li></ul>
+<h3>References</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Radian">https://en.wikipedia.org/wiki/Radian</a>
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>rad2deg()</code>, <code>sin()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Functions: 
+<code>fin_JustifiedPE()</code>,
+<code>fin_NI()</code>,
+<code>fin_interest()</code>,
+<code>fin_percent()</code>,
+<code>fin_ticker()</code>,
+<code>fin_valuation()</code>,
+<code>rad2deg()</code>,
+<code>umxBrownie()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">deg2rad(180) == pi # TRUE!
+</code></pre>
+
+
+</div>

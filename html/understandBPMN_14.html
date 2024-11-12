@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_path_and_repetition_log</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Path and repetition log</h2>
+
+<h3>Description</h3>
+
+<p>This function returns a list with four or three nested list objects:
+- One for the paths:
+Assumption: if a path contains a loop, the path contains one repetition (so two times) of the execution of this loop
+Assumption: there is no difference made between the type of gateways.
+So the path log is not a path log according to the definition found in the literature, but more a kind of a path log
+Assumption: for each split and join in the log, an extra element is added with the name "split" or "join"
+- One list object for the loops (repetitions) which start with a join and end with a join
+- One list object for the loops (repetitions) which start with a split and end with a split
+( - One list for the paths in which all gateways have a certain type)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_path_and_repetition_log(file_path,
+  add_path_log_for_structuredness = TRUE, signavio = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file_path</code></td>
+<td>
+<p>internal document containing an xml</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add_path_log_for_structuredness</code></td>
+<td>
+<p>a boolean value indicating whether the structured path log should be added. Is standard TRUE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signavio</code></td>
+<td>
+<p>boolean which indicates whether the file stems from signavio</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list containing the path log, a list of repetitions starting with join, a list of repetitions starting with split, (optional: structured path log)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+create_path_and_repetition_log(file_path)
+</code></pre>
+
+
+</div>

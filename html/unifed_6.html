@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dunifed</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The unifed distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution function, quantile function and
+random generation for the unifed distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dunifed(x, theta)
+
+unifed.lcdf(x, theta)
+
+punifed(q, theta)
+
+qunifed(p, theta)
+
+runifed(n, theta)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector of quantiles. They must be numbers between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>The value of the canonical parameter. It must be of length one.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>A vector of quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>A vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>dunifed</code> gives the density function.
+</p>
+<p><code>unifed.lcdf</code> returns the log of the cumulative
+distribution function of the unifed.
+</p>
+<p><code>punifed</code> gives the distribution function.
+</p>
+<p><code>qunifed</code> gives the quantile function.
+</p>
+<p><code>runifed</code> generates random observations.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Quijano Xacur, O.A. The unifed distribution. J Stat Distrib App 6, 13 (2019).
+doi:10.1186/s40488-019-0102-6.
+</p>
+
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+dunifed( c(0.1,0.3,0.7), 10)
+
+
+x &lt;- c(0.3,0.6,0.9)
+unifed.lcdf(x,5)
+
+
+x &lt;- c(0.1,0.4,0.7,1)
+punifed(x,-5)
+
+
+p &lt;- 1:9/10
+qunifed(p,5)
+
+
+runifed(20,-3.3)
+
+</code></pre>
+
+
+</div>

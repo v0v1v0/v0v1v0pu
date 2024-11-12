@@ -1,0 +1,138 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>chartTheme</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>specify theming options</h2>
+
+<h3>Description</h3>
+
+<p>specify theming options
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">chartTheme(
+  upsetjs,
+  theme = NULL,
+  selection.color = NULL,
+  alternating.color = NULL,
+  color = NULL,
+  has.selection.color = NULL,
+  text.color = NULL,
+  hover.hint.color = NULL,
+  not.member.color = NULL,
+  value.text.color = NULL,
+  stroke.color = NULL,
+  has.selection.opacity = NULL,
+  opacity = NULL,
+  filled = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>theme to use 'dark' or 'light'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>selection.color</code></td>
+<td>
+<p>selection color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternating.color</code></td>
+<td>
+<p>alternating background color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color</code></td>
+<td>
+<p>main bar color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>has.selection.color</code></td>
+<td>
+<p>main color used when a selection is present</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>text.color</code></td>
+<td>
+<p>main text color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hover.hint.color</code></td>
+<td>
+<p>color of the hover hint</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>not.member.color</code></td>
+<td>
+<p>color of the dot if not a member</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value.text.color</code></td>
+<td>
+<p>value text color (venn diagram only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stroke.color</code></td>
+<td>
+<p>circle stroke color (venn diagram and karnaugh map only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>has.selection.opacity</code></td>
+<td>
+<p>main opacity used when a selection is present</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opacity</code></td>
+<td>
+<p>main bar opacity</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filled</code></td>
+<td>
+<p>enforce filled circles (venn diagram only)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  chartTheme(theme = "dark")
+</code></pre>
+
+
+</div>

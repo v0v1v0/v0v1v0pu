@@ -1,0 +1,105 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_system</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build the System File</h2>
+
+<h3>Description</h3>
+
+<p>Builds the specified system file creating the targets for R and other languages as well as the templates for performing simulations and estimations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_system(
+  system_file = "system.txt",
+  distribution = "automatic",
+  perlcmd = "perl",
+  output_directory = file.path(".", "output"),
+  temporary_directory = file.path(".", "transient"),
+  verbose = TRUE,
+  ubiquity_app = FALSE,
+  debug = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>system_file</code></td>
+<td>
+<p>name of the file defining the system in the <a href="https://ubiquity.tools">ubiquity</a> format (default = 'system.txt'), if the file does not exist a template will be created and compiled.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distribution</code></td>
+<td>
+<p>indicates weather you are using a <code>'package'</code> or a <code>'stand alone'</code>
+distribution of ubiquity. If set to <code>'automatic'</code> the build script will first 
+look to see if the ubiquity R package is installed. If it is installed it
+will use the package. Otherwise, it will assume a <code>"sand alone"</code> distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>perlcmd</code></td>
+<td>
+<p>system command to run perl ("perl")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output_directory</code></td>
+<td>
+<p>location to store analysis outputs (<code>file.path(".", "output")</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>temporary_directory</code></td>
+<td>
+<p>location to templates and otehr files after building the system (<code>file.path(".", "transient")</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>enable verbose messaging   (<code>TRUE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ubiquity_app</code></td>
+<td>
+<p>set to <code>TRUE</code> when building the system to be used with the ubiquty App (<code>FALSE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>debug</code></td>
+<td>
+<p>Boolean variable indicating if debugging information should be displayed (<code>TRUE</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>initialized ubiquity system object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+</code></pre>
+
+
+</div>

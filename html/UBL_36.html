@@ -1,0 +1,127 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>WERCSRegress</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+WEighted Relevance-based Combination Strategy (WERCS) algorithm for imbalanced regression problems
+</h2>
+
+<h3>Description</h3>
+
+<p>This function handles imbalanced regression problems using the relevance function provided to re-sample the data set. The relevance function is used to introduce replicas of the most important examples and to remove the least important examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">WERCSRegress(form, dat, rel = "auto", thr.rel = NA, 
+               C.perc = "balance", O = 0.5, U = 0.5)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+
+<p>A data frame containing the original (unbalanced) data set
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rel</code></td>
+<td>
+
+<p>The relevance function which can be automatically ("auto") determined (the default) or may be provided by the user through a matrix with interpolating points.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thr.rel</code></td>
+<td>
+
+<p>The default is NA which means that no threshold is used when performing the over/under-sampling. In this case, the over-sampling is performed by assigning a higher probability for selecting an example to the examples with higher relevance. On the other hand, the under-sampling is performed by removing the examples with less relevance. The user may chose a number between 0 and 1 indicating the relevance threshold above which a case is considered as belonging to the rare "class".  
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C.perc</code></td>
+<td>
+
+<p>A list containing the percentage(s) of under- or/and 
+over-sampling to apply to each "class" obtained with the threshold. This parameter is only used when a relevance threshold (thr.rel) is set. Otherwise it is ignored. The <code>C.perc</code> values should be provided in ascending order of target variable values. The over-sampling percentage(s) must be numbers higher than 1 and represent the increase applied to the examples of the bump. The under-sampling percentage(s) should be numbers below 1 and represent the decrease applyed in the corresponding bump. If the value of 1 is provided for a given bump, then the examples in that bump will remain unchanged. Alternatively, this parameter may be set to "balance" (the default) or "extreme", cases where the sampling percentages are automatically estimated. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>O</code></td>
+<td>
+
+<p>A number expressing the importance given to over-sampling when the 
+thr.rel parameter is NA. When O increases the number of examples to
+include during the over-sampling step also increases. Default to 0.5.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>U</code></td>
+<td>
+
+<p>A number expressing the importance given to under-sampling when the 
+thr.rel parameter is NA. When U increases, the number of examples selected
+during the under-sampling step also increases. Defaults to 0.5.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns a data frame with
+the new data set resulting from the application of the importance sampling strategy. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>See Also</h3>
+
+<p><code>RandUnderRegress, RandOverRegress</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  if (requireNamespace("DMwR2", quietly = TRUE)) {
+  data(algae, package ="DMwR2")
+  clean.algae &lt;- data.frame(algae[complete.cases(algae), ])
+  # defining a threshold on the relevance
+  IS.ext &lt;-WERCSRegress(a7~., clean.algae, rel = "auto", 
+                          thr.rel = 0.7, C.perc = "extreme")
+  IS.bal &lt;-WERCSRegress(a7~., clean.algae, rel = "auto", thr.rel = 0.7,
+                          C.perc = "balance")
+  myIS &lt;-WERCSRegress(a7~., clean.algae, rel = "auto", thr.rel = 0.7,
+                        C.perc = list(0.2, 6))
+  # neither threshold nor C.perc defined
+  IS.auto &lt;- WERCSRegress(a7~., clean.algae, rel = "auto")
+  }
+
+</code></pre>
+
+
+</div>

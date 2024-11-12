@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simple.impute</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>simple.impute</h2>
+
+<h3>Description</h3>
+
+<p>Generic function for simple imputation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simple.impute(x, fun = median, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object to be imputed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fun</code></td>
+<td>
+<p>The function with which to fill in missing values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Provides the ability to simply impute data based on a simple measure such as mean or median.  For more robust imputation see the packages Amelia, mice or mi.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object with the missing values imputed.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">theDF &lt;- data.frame(A=1:10, B=1:10, C=1:10)
+theDF[c(1, 4, 6), c(1)] &lt;- NA
+theDF[c(3, 4, 8), c(3)] &lt;- NA
+
+simple.impute(theDF$A)
+simple.impute(theDF$A, mean)
+simple.impute(theDF$A, constant(4))
+simple.impute(theDF)
+simple.impute(theDF, mean)
+simple.impute(theDF, constant(4))
+
+</code></pre>
+
+
+</div>

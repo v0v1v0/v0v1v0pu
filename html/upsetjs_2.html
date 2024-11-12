@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>addCategoricalAttribute</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>adds a new query to the plot</h2>
+
+<h3>Description</h3>
+
+<p>adds a new query to the plot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">addCategoricalAttribute(upsetjs, name, values, categories = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>name of the attribute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>the values as a factor</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>categories</code></td>
+<td>
+<p>optional categories otherweise the levels are used</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  addCategoricalAttribute("attr", as.factor(sample(c("male", "female"), 3, replace = TRUE)))
+</code></pre>
+
+
+</div>

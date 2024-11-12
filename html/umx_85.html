@@ -1,0 +1,180 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxDiscTwin</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Intra-pair association in MZ, DZ  twin models. (ALPHA quality!)</h2>
+
+<h3>Description</h3>
+
+<p>Testing causal claims is often difficult due to an inability to experimentally randomize traits and situations.
+A combination of control data and data from twins discordant for the putative causal trait can falsify causal hypotheses.
+</p>
+<p><code>umxDiscTwin</code> uses <code>nlme::nlme()</code> to compute the beta for x in <code>y ~ x</code> in models either a) Only controlling non-independence,
+and b) MZ and DZ subsample models in which the family level of the predictor y is also controlled.
+</p>
+<p>If <code>x</code> is causal, then the effect size of x on y is expected to be equally large in all three samples.
+If the population association reflects confounded genes or shared environments,
+then the association in MZ twins will reduce to zero/non-significance.
+</p>
+<p><img src="../help/figures/discordantCausalPatterns.png" width="50%" alt="Figure: Types of confounding"></p>
+<p>The function uses the <code>nlme::lme()</code> function to compute the effect of the presumed causal variable on the outcome,
+controlling, for mid-family score and with random means model using familyID. e.g.:
+</p>
+<p><code>mzModel  = lme(fixed = y ~ x + FamMeanX, random = ~ 1+FamMeanX|FAMID, data = umx_scale(MZ), na.action = "na.omit")</code>
+</p>
+<p><strong>Example output from <code>umxDiscTwin</code></strong>
+</p>
+<p><img src="../help/figures/DiscTwinsExample.png" width="50%" alt="Figure: Causation in Discordant twins"></p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxDiscTwin(
+  x,
+  y,
+  data,
+  mzZygs = c("MZFF", "MZMM"),
+  dzZygs = c("DZFF", "DZMM", "DZOS"),
+  FAMID = "FAMID",
+  out = c("table", "plot", "model"),
+  use = "complete.obs",
+  sep = "_T"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Cause</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Effect</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe containing MZ and DZ data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mzZygs</code></td>
+<td>
+<p>MZ zygosities c("MZFF", "MZMM")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dzZygs</code></td>
+<td>
+<p>DZ zygosities c("DZFF", "DZMM", "DZOS")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FAMID</code></td>
+<td>
+<p>The column containing family IDs (default = "FAMID")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out</code></td>
+<td>
+<p>Whether to return the table or the ggplot (if you want to decorate it)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use</code></td>
+<td>
+<p>NA handling in corr.test (default= "complete.obs")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>The separator in twin variable names, default = "_T", e.g. "dep_T1".</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> table of results
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Begg, M. D., &amp; Parides, M. K. (2003). Separation of individual-level and cluster-level covariate effects in regression analysis of correlated data. Stat Med, 22(16), 2591-2602. <a href="https://doi.org/10.1002/sim.1524">doi:10.1002/sim.1524</a>
+</p>
+</li></ul>
+<ul>
+<li>
+<p> Bergen, S. E., Gardner, C. O., Aggen, S. H., &amp; Kendler, K. S. (2008). Socioeconomic status and social support following illicit drug use: causal pathways or common liability? <em>Twin Res Hum Genet</em>, <strong>11</strong>, 266-274. <a href="https://doi.org/10.1375/twin.11.3.266">doi:10.1375/twin.11.3.266</a>
+</p>
+</li>
+<li>
+<p> McGue, M., Osler, M., &amp; Christensen, K. (2010). Causal Inference and Observational Research: The Utility of Twins. <em>Perspectives on Psychological Science</em>, <strong>5</strong>, 546-556. <a href="https://doi.org/10.1177/1745691610383511">doi:10.1177/1745691610383511</a>
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxDoC()</code>, <code>umxDiffMZ()</code>, <code>umxMR()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data(twinData)
+# add to test must set FAMID umxDiscTwin(x = "ht", y = "wt", data = twinData, sep="")
+tmp = umxDiscTwin(x = "ht", y = "wt", data = twinData, sep="", FAMID = "fam")
+print(tmp, digits = 3)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.kpss</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kwiatkowski et al. Unit Root Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs the KPSS unit root test, where the Null hypothesis is
+stationarity. The test types specify as deterministic component either
+a constant <code>"mu"</code> or a constant with linear trend <code>"tau"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ur.kpss(y, type = c("mu", "tau"), lags = c("short", "long", "nil"),
+        use.lag = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vector to be tested for a unit root.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of deterministic part.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lags</code></td>
+<td>
+<p>Maximum number of lags used for error term correction.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.lag</code></td>
+<td>
+<p>User specified number of lags.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>lags="short"</code> sets the number of lags to
+<code class="reqn">\sqrt[4]{4 \times (n/100)}</code>, whereas
+<code>lags="long"</code> sets the number of lags to
+<code class="reqn">\sqrt[4]{12 \times (n/100)}</code>. If <code>lags="nil"</code> is choosen,
+then no error correction is made. Furthermore, one can specify a
+different number of maximum lags by setting <code>use.lag</code>
+accordingly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ur.kpss</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Kwiatkowski, D., Phillips, P.C.B., Schmidt, P. and Shin, Y., (1992),
+Testing the Null Hypothesis of Stationarity Against the Alternative of
+a Unit Root: How Sure Are We That Economic Time Series Have a Unit
+Root?, <em>Journal of Econometrics</em>, <b>54</b>, 159–178.
+</p>
+<p>Download possible at: <a href="https://cowles.yale.edu/">https://cowles.yale.edu/</a>, see rubric
+'Discussion Papers (CFDPs)'.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.kpss-class</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nporg)
+gnp &lt;- na.omit(nporg[, "gnp.r"])
+gnp.l &lt;- log(gnp)
+kpss.gnp &lt;- ur.kpss(gnp.l, type="tau", lags="short")
+summary(kpss.gnp)
+</code></pre>
+
+
+</div>

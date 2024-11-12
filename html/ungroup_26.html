@@ -1,0 +1,261 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pclm2D</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Two-Dimensional Penalized Composite Link Model (PCLM-2D)</h2>
+
+<h3>Description</h3>
+
+<p>Fit two-dimensional penalized composite link model (PCLM-2D), 
+e.g. simultaneous ungrouping of age-at-death distributions grouped in age 
+classes for adjacent years. The PCLM can be extended to a two-dimensional 
+regression problem. This is particularly suitable for mortality analysis 
+when mortality surfaces are to be estimated to capture both age-specific 
+trajectories of coarsely grouped distributions and time trends 
+(Rizzi et al. 2019).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pclm2D(
+  x,
+  y,
+  nlast,
+  offset = NULL,
+  out.step = 1,
+  ci.level = 95,
+  verbose = TRUE,
+  control = list()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector containing the starting values of the input intervals/bins.
+For example: if we have 3 bins <code>[0,5), [5,10) and [10, 15)</code>,
+<code>x</code> will be defined by the vector: <code>c(0, 5, 10)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p><code>data.frame</code> with counts to be ungrouped. The number of rows 
+should be equal with the length of <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nlast</code></td>
+<td>
+<p>Length of the last interval. In the example above <code>nlast</code> 
+would be 5.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>Optional offset term to calculate smooth mortality rates. 
+A vector of the same length as x and y. See 
+Rizzi et al. (2015) for further details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out.step</code></td>
+<td>
+<p>Length of estimated intervals in output. 
+Values between 0.1 and 1 are accepted. Default: 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci.level</code></td>
+<td>
+<p>Level of significance for computing confidence intervals. 
+Default: <code>95</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Logical value. Indicates whether a progress bar should be 
+shown or not. Default: <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>List with additional parameters: </p>
+
+<ul>
+<li>
+<p><code>lambda</code> – Smoothing parameter to be used in pclm estimation.
+If <code>lambda = NA</code> an algorithm will find the optimal values.
+</p>
+</li>
+<li>
+<p>kr – Knot ratio. Number of internal intervals used for defining 
+1 knot in B-spline basis construction. See <code>MortSmooth_bbase</code>.
+</p>
+</li>
+<li>
+<p><code>deg</code> – Degree of the splines needed to create equally-spaced 
+B-splines basis over an abscissa of data.
+</p>
+</li>
+<li>
+<p><code>int.lambda</code> – If <code>lambda</code> is optimized an interval to be 
+searched needs to be specified. Format: vector containing the end-points.
+</p>
+</li>
+<li>
+<p><code>diff</code> – An integer indicating the order of differences of the 
+components of PCLM coefficients.
+</p>
+</li>
+<li>
+<p><code>opt.method</code> – Selection criterion of the model.
+Possible values are <code>"AIC"</code> and <code>"BIC"</code>.
+</p>
+</li>
+<li>
+<p><code>max.iter</code> – Maximal number of iterations used in fitting 
+procedure.
+</p>
+</li>
+<li>
+<p><code>tol</code> – Relative tolerance in PCLM fitting procedure.</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The output is a list with the following components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p> A list with arguments provided in input. Saved for 
+convenience.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fitted</code></td>
+<td>
+<p> The fitted values of the PCLM model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci</code></td>
+<td>
+<p> Confidence intervals around fitted values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>goodness.of.fit</code></td>
+<td>
+<p> A list containing goodness of fit measures: 
+standard errors, AIC and BIC.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smoothPar</code></td>
+<td>
+<p> Estimated smoothing parameters: <code>lambda, kr</code> 
+and <code>deg</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bins.definition</code></td>
+<td>
+<p> Additional values to identify the bins limits and 
+location in input and output objects.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deep</code></td>
+<td>
+<p> A list of objects created in the fitting process. Useful 
+in diagnosis of possible issues.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p> An unevaluated function call, that is, an unevaluated 
+expression which consists of the named function applied to the given 
+arguments.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Rizzi S, Gampe J, Eilers PHC (2015).
+“Efficient Estimation of Smooth Distributions From Coarsely Grouped Data.”
+<em>American Journal of Epidemiology</em>, <b>182</b>(2), 138-147.
+<a href="https://doi.org/10.1093/aje/kwv020">doi:10.1093/aje/kwv020</a>.<br><br> Rizzi S, Halekoh U, Thinggaard M, Engholm G, Christensen N, Johannesen TB, Lindahl-Jacobsen R (2019).
+“How to estimate mortality trends from grouped vital statistics.”
+<em>International Journal of Epidemiology</em>, <b>48</b>(2), 571–582.
+<a href="https://doi.org/10.1093/ije/dyy183">doi:10.1093/ije/dyy183</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>control.pclm2D</code>
+<code>plot.pclm2D</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Input data
+Dx &lt;- ungroup.data$Dx
+Ex &lt;- ungroup.data$Ex
+
+# Aggregate data to be ungrouped in the examples below
+# Select a 10y data frame
+x      &lt;- c(0, 1, seq(5, 85, by = 5))
+nlast  &lt;- 26
+n      &lt;- c(diff(x), nlast)
+group  &lt;- rep(x, n)
+y      &lt;- aggregate(Dx, by = list(group), FUN = "sum")[, 2:10]
+offset &lt;- aggregate(Ex, by = list(group), FUN = "sum")[, 2:10]
+
+# Example 1 ---------------------- 
+# Fit model and ungroup data using PCLM-2D
+P1 &lt;- pclm2D(x, y, nlast)
+summary(P1)
+
+# Plot fitted values
+plot(P1)
+
+# Plot input data
+plot(P1, "observed")
+
+# NOTE: pclm2D does not search for optimal smoothing parameters by default
+# (like pclm does) because it is more time consuming. If optimization is 
+# required set lambda = c(NA, NA):
+
+P1 &lt;- pclm2D(x, y, nlast, control = list(lambda = c(NA, NA)))
+
+# Example 2 ---------------------- 
+# Ungroup and build a mortality surface
+P2 &lt;- pclm2D(x, y, nlast, offset)
+summary(P2)
+
+plot(P2, type = "observed")
+plot(P2, type = "fitted")
+plot(P2, type = "fitted", colors = c("blue", "red"))
+</code></pre>
+
+
+</div>

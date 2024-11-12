@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unc_measures</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>uncertainty measures</h2>
+
+<h3>Description</h3>
+
+<p>Functions beginning with U are uncertainty measure that return a scalar given a vector, such as mean absolute deviation or variance. Functions beginning with flist are lists of functions that summarize vector like mean or median. 
+Functions beginning with u are the uncertainty of each element of the vector, which is calculated from the elements of the vector and summary statistics of the vector, like difference or square of difference between two values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">U_range(x)
+
+u_range(x, a, b, n)
+
+flist_range
+
+U_mad(x)
+
+u_mad(x, m)
+
+flist_mad
+
+U_var(x)
+
+u_var(x, m)
+
+flist_var
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a, b, n</code></td>
+<td>
+<p>summary statistics for u_range(), a and b are minimum and maximum of x. n is length of x</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>summary statistics. median for u_mad() and mean for u_var()</p>
+</td>
+</tr>
+</table>
+<h3>Format</h3>
+
+<p>An object of class <code>list</code> of length 3.</p>
+
+
+</div>

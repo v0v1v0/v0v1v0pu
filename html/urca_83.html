@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.za-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class ur.za</h2>
+
+<h3>Description</h3>
+
+<p>This class contains the relevant information by applying the Zivot and Andrews
+unit root test to a time series.</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>y</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: The time series to
+be tested.</p>
+</dd>
+<dt>
+<code>model</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The model
+to be used, <em>i.e.</em> intercept, trend or both</p>
+</dd>
+<dt>
+<code>lag</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: The highest
+number of lags to include in the test regression.</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>: The t-statistic.</p>
+</dd>
+<dt>
+<code>cval</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code>: Critical values
+at the 1%, 5% and 10% level of significance.</p>
+</dd>
+<dt>
+<code>bpoint</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: The
+potential break point.</p>
+</dd>
+<dt>
+<code>tstats</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code> The
+t-statistics of the rolling regression.</p>
+</dd>
+<dt>
+<code>res</code>:</dt>
+<dd>
+<p>Object of class <code>"vector"</code> The residuals of
+the test regression.</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code> The name
+of the test, <em>i.e.</em> ‘Zivot and Andrews’.</p>
+</dd>
+<dt>
+<code>testreg</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code> The summary
+output of the test regression.</p>
+</dd>
+</dl>
+<h3>Extends</h3>
+
+<p>Class <code>urca</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Type <code>showMethods(classes="ur.za")</code> at the R prompt for a
+complete list of methods which are available for this class.
+</p>
+<p>Useful methods include
+</p>
+
+<dl>
+<dt>
+<code>show</code>:</dt>
+<dd>
+<p>test statistic and critical values.</p>
+</dd>
+<dt>
+<code>summary</code>:</dt>
+<dd>
+<p>like show, but summary of test regression
+added.</p>
+</dd>
+<dt>
+<code>plot</code>:</dt>
+<dd>
+<p>plot of recursive t-statistics.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Zivot, E. and Andrews, Donald W.K. (1992), Further Evidence on the
+Great Crash, the Oil-Price Shock, and the Unit-Root Hypothesis,
+<em>Journal of Business and Economic Statistics</em>, <b>10(3)</b>,
+251–270.
+</p>
+<p>Download possible at: <a href="https://cowles.yale.edu/">https://cowles.yale.edu/</a>, see rubric
+'Discussion Papers (CFDPs)'.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.za</code> and <code>urca-class</code>. 
+</p>
+
+
+</div>

@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxMatrixFree</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sets labeled matrix cells to free</h2>
+
+<h3>Description</h3>
+
+<p>In simulation studies, it is often necessary to rewrite the matrices while testing
+alternative specifications. This can become very tedious with increasing
+number of distinct specifications. This tool injects changes into umxMatrix so
+that this tasks gets more manageable. First, it sets byRow by default. Second,
+it infers the number of rows automatically. The user needs only passing ncol.
+Finally and most importantly this function disables auto-labeling, and whenever
+a label is set, that cell position will be freed. It is required to pass
+a matrix of labels, as well as a label name.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxMatrixFree(
+  name = name,
+  nrow = NULL,
+  ncol = NA,
+  free = FALSE,
+  values = NA,
+  labels = labels,
+  byrow = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>The name of the matrix: Must be set</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nrow</code></td>
+<td>
+<p>Number of rows in the matrix (Optional)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncol</code></td>
+<td>
+<p>Number of columns in the matrix (Required)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free</code></td>
+<td>
+<p>Whether cells are free (Default FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>The values of the matrix (Default NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>The labels of the matrix (Default NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>byrow</code></td>
+<td>
+<p>Default for byrow (TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Accepts all other arguments from <code>umxMatrix()</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxMatrix()</code>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxMatrix()</code>
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+umxMatrixFree('E', type='Symm',  ncol = 3,
+  labels =c("eb2",NA,NA,
+             NA,"es2",NA,
+            NA,NA,NA),
+  values=c(.2,0,0,
+           0,.2,0,
+           0,0,0))
+           
+ # Will return a umxMatrix free at the eb2 and es2 positions.
+
+## End(Not run)
+</code></pre>
+
+
+</div>

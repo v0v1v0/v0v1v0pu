@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>profile.uicausal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot of UI and CI</h2>
+
+<h3>Description</h3>
+
+<p>Plot function for objects returned from <code>ui.causal</code>.
+Plots confidence intervals for different values of rho0=rho1=rho.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'uicausal'
+profile(fitted, DR = TRUE, main = "", xlab = NULL,
+  ylab = "", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fitted</code></td>
+<td>
+<p>An object of class uicausal</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DR</code></td>
+<td>
+<p>If TRUE, plots both DR if FALSE OR.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p>Main title, default is no title.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>Title for x-axis, default is <code>expression(rho)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Title for y-axis, default is the variable names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments, use is discouraged.</p>
+</td>
+</tr>
+</table>
+</div>

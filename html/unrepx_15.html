@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>refplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dot plot of effects with a reference distribution</h2>
+
+<h3>Description</h3>
+
+<p>The <code>refplot</code> function constructs a dot plot of effects along with a rweference distribution (either normal or simulated) to help in visually identifying active effects in a screening experiment.</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">refplot(effects, ref = TRUE, half = TRUE, method = "Zahn", 
+    col = half, guides = FALSE, ID = FALSE, pch = 16, xlab, xlim, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>effects</code></td>
+<td>
+<p>Numeric vector of effects or contrasts to be explored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ref</code></td>
+<td>
+<p>Logical or character value. If <code>TRUE</code>, a reference line or curve is added to the plot determined by <code>method</code>. If <code>FALSE</code>, no reference is added to the plot.
+</p>
+<p>A character value matching <code>"normal"</code> or <code>"simulated"</code> is also permitted.
+<code>"normal"</code> is equivalent to <code>ref = TRUE</code>. With <code>"simulated"</code>, 
+, a kernel density estimate is displayed; it is obtained by scaling the simulated reference distribution for <code>"method"</code> by its observed PSE. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>half</code></td>
+<td>
+<p>Logical value. If <code>TRUE</code>, a dot plot of the absolute effects is constructed. If <code>FALSE</code>, the original signed effects are plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Character value. When <code>ref</code> is not false, the method to use in determining the PSE for scaling the reference curve (and also the method used for simulating the referemnce distribution when <code>ref = "simulated"</code>). This must be the name of a provided pseudo-standard-error method (see <code>PSE</code>), or a compatible user-supplied one.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>Scalar or vector of colors; or a logical value. If logical, a value of <code>TRUE</code> colors the positive effects blue, the negative effects red, and any zeros as black. A logical value of <code>FALSE</code> colors them all black.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>guides</code></td>
+<td>
+<p>Logical value. If <code>TRUE</code>, dotted lines are added that illustrate guide lines that could be used to draw the normal curve by hand.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ID</code></td>
+<td>
+<p>Logical value. If logical and <code>TRUE</code>, then after the plot is contructed, the <code>dot.id</code> invoked so that the user may click on points to be labeled on the plot. If a numeric value is given, it is used as a threshold by which all effects greater than <code>ID[1]</code> in absolute value are labeled.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pch, xlab, xlim, ...</code></td>
+<td>
+<p>Additional graphical parameters (see <code>par</code>) passed to <code>dot.plot</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If the returned environment is saved, then <code>dot.id</code> or <code>dot.mod</code> may be used later as for <code>dot.plot</code> results.</p>
+
+
+<h3>Value</h3>
+
+<p>An environment that can be modified using <code>dot.id</code> or <code>dot.mod</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Russell V. Lenth
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other ways of assessing active effects include a half-normal plot (<code>hnplot</code>), a Pareto plot of effects (see <code>parplot</code>), and a tabular style of presenting effects and <code class="reqn">P</code> values (see <code>eff.test</code>). For more information on PSEs and methods, see <code>PSE</code> and <code>ref.dist</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(unrepx)
+
+refplot(pdEff, ID = ME(pdEff))
+
+## Not run: 
+    # Batman lives!
+    refplot(pdEff, ref = "sim", method = "Lenth", half = FALSE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

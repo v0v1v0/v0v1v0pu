@@ -1,0 +1,297 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxAPA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Creates nicely formatted journal-style summaries of models, p-values, data-frames and much more.</h2>
+
+<h3>Description</h3>
+
+<p><code>umxAPA</code> creates APA-style reports from a range of statistical models, or to summarize data. I wrote it to suit me.
+</p>
+<p>Nice alternatives include <code>jtools::summ</code>.
+</p>
+<p>Example functionality includes:
+</p>
+
+<ol>
+<li>
+<p> Given an <code>stats::lm()</code> model, <code>umxAPA</code> will return a formatted effect, including 95% CI.
+e.g.: <code>umxAPA(lm(mpg~wt, data=mtcars), "wt")</code> yields: <code class="reqn">\beta</code> = -5.34 [-6.48, -4.20], p &lt; 0.001. here "wt"
+restricts the output to just the named effect.
+</p>
+</li>
+<li> <p><code>umxAPA</code> also supports <code>t.test()</code>, <code>stats::glm()</code>, <code>cor.test()</code>, and others as I need them.
+</p>
+</li>
+<li>
+<p> Get a CI from <code>obj=beta</code> and se=se : <code>umxAPA(-0.30, .03)</code> returns <code class="reqn">\beta</code> = -0.3 [-0.36, -0.24]
+</p>
+</li>
+<li>
+<p> Back out an SE from <code class="reqn">\beta</code> and CI: <code>umxAPA(-0.030, c(-0.073, 0.013))</code> returns <code class="reqn">\beta</code> = -0.03, se = 0.02
+</p>
+</li>
+<li>
+<p> Given only a number as obj, will be treated as a p-value, and returned in APA format.
+</p>
+</li>
+<li>
+<p> Given a dataframe, <code>umxAPA</code> will return a table of correlations with means and SDs in the last row. e.g.:
+<code style="white-space: pre;">⁠umxAPA(mtcars[,c("cyl", "wt", "mpg", )]⁠</code> yields:
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: center;"> cyl         </td>
+<td style="text-align: center;">  wt          </td>
+<td style="text-align: center;"> mpg          </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+cyl     </td>
+<td style="text-align: center;"> 1           </td>
+<td style="text-align: center;">  0.78        </td>
+<td style="text-align: center;"> -0.85        </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+wt      </td>
+<td style="text-align: center;"> 0.78        </td>
+<td style="text-align: center;">  1           </td>
+<td style="text-align: center;"> -0.87        </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+mpg     </td>
+<td style="text-align: center;"> -0.85       </td>
+<td style="text-align: center;">  -0.87       </td>
+<td style="text-align: center;"> 1            </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+mean_sd </td>
+<td style="text-align: center;"> 6.19 (1.79) </td>
+<td style="text-align: center;">  3.22 (0.98) </td>
+<td style="text-align: center;"> 20.09 (6.03)
+</td>
+</tr>
+</table>
+</li>
+</ol>
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxAPA(
+  obj = .Last.value,
+  se = NULL,
+  p = NULL,
+  std = FALSE,
+  digits = 2,
+  use = "complete",
+  min = 0.001,
+  addComparison = NA,
+  report = c("markdown", "html", "none", "expression"),
+  lower = TRUE,
+  test = c("Chisq", "LRT", "Rao", "F", "Cp"),
+  SEs = TRUE,
+  means = TRUE,
+  suffix = "",
+  cols = NA
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>A model (e.g. <code>lm()</code>, <code>lme()</code>, <code>glm()</code>, <code>t.test()</code>), beta-value, or data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se</code></td>
+<td>
+<p>If obj is a beta, se treated as standard-error (returning a CI).
+If obj is a model, used to select effect of interest (blank for all effects).
+Finally, set se to the CI c(lower, upper), to back out the SE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>If obj is a beta, use p-value to compute SE (returning a CI).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to report std betas (re-runs model on standardized data).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>How many digits to round output.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use</code></td>
+<td>
+<p>If obj is a data.frame, how to handle NAs (default = "complete")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>For a p-value, the smallest value to report numerically (default .001)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>addComparison</code></td>
+<td>
+<p>For a p-value, whether to add "&lt;/=" default (NA) adds "&lt;" if necessary</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>What to return (default = 'markdown'). Use 'html' to open a web table. none doesn't print. expression can contain <code>plotmath()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower</code></td>
+<td>
+<p>Whether to not show the lower triangle of correlations for a data.frame (Default TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>If obj is a glm, which test to use to generate p-values options = "Chisq", "LRT", "Rao", "F", "Cp"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SEs</code></td>
+<td>
+<p>Whether or not to show correlations with their SE (Default TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>means</code></td>
+<td>
+<p>Whether or not to show means in a correlation table (Default TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffix</code></td>
+<td>
+<p>A string to append to the result. Mostly used with report = "expression"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>Optional, pass in a list of column names when using umxAPA with a dataframe input.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> string
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://stats.oarc.ucla.edu/r/dae/logit-regression/">https://stats.oarc.ucla.edu/r/dae/logit-regression/</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>SE_from_p()</code>
+</p>
+<p>Other Reporting Functions: 
+<code>umxFactorScores()</code>,
+<code>umxGetLatents()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxGetParameters()</code>,
+<code>umxParameters()</code>,
+<code>umx_aggregate()</code>,
+<code>umx_time()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# ========================================
+# = Report lm (regression/anova) results =
+# ========================================
+umxAPA(lm(mpg ~ wt + disp, mtcars)) # Report all parameters
+umxAPA(lm(mpg ~ wt + disp, mtcars), "wt") # Just effect of weight
+umxAPA(lm(mpg ~ wt + disp, mtcars), std = TRUE) # Standardize model!
+
+###############
+# GLM example #
+###############
+
+df = mtcars
+df$mpg_thresh = 0
+df$mpg_thresh[df$mpg &gt; 16] = 1
+m1 = glm(mpg_thresh ~ wt + gear,data = df, family = binomial)
+umxAPA(m1)
+
+###############
+# A t-Test    #
+###############
+
+umxAPA(t.test(x = 1:10, y = c(7:20)))
+umxAPA(t.test(extra ~ group, data = sleep))
+
+# ======================================================
+# = Summarize DATA FRAME: Correlations + Means and SDs =
+# ======================================================
+umxAPA(mtcars[,1:3])
+umxAPA(mtcars[,1:3], digits = 3)
+umxAPA(mtcars[,1:3], lower = FALSE)
+## Not run: 
+umxAPA(mtcars[,1:3], report = "html")
+
+## End(Not run)
+
+# ==========================================
+# = CONFIDENCE INTERVAL from effect and se =
+# ==========================================
+umxAPA(.4, .3) # parameter 2 interpreted as SE
+
+# Input beta and CI, and back out the SE
+umxAPA(-0.030, c(-0.073, 0.013), digits = 3)
+
+# ====================
+# = Format a p-value =
+# ====================
+umxAPA(.0182613)   #   0.02
+umxAPA(.00018261) # &lt; 0.001
+umxAPA(.00018261, addComparison = FALSE) # 0.001
+
+# ========================
+# = Report a correlation =
+# ========================
+data(twinData)
+tmp = subset(twinData, zygosity %in% c("MZFF", "MZMM"))
+m1 = cor.test(~ wt1 + wt2, data = tmp)
+umxAPA(m1)
+
+</code></pre>
+
+
+</div>

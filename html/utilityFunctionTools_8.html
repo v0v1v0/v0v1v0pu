@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>estimate_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimates the model</h2>
+
+<h3>Description</h3>
+
+<p>Estimates the model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">estimate_model(
+  xi,
+  yi,
+  lambda = 1,
+  n_penalty_dimensions = 1,
+  penalty_order = 4,
+  ndx = 20,
+  deg = 6,
+  cross_validation_mode = 0,
+  return_estimate = 0,
+  left_out_xi = c(),
+  left_out_yi = c()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>xi</code></td>
+<td>
+<p>a vector containing the certainty equivalents (x-values of utility points) for a given participant in each use case.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yi</code></td>
+<td>
+<p>can be a vector or a matrix representing the corresponding utility values (y-values of utility points).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>lambda is the penalization weight used to compute the initial estimate. The default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_penalty_dimensions</code></td>
+<td>
+<p>number of dimensions (i.e., derivatives) to penalize. Possible values are 1 or 2. The default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>penalty_order</code></td>
+<td>
+<p>highest dimension (i.e., derivative) to penalize. Must be lower than deg.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ndx</code></td>
+<td>
+<p>number of intervals to partition the distance between the lowest and highest x-values of the utility points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deg</code></td>
+<td>
+<p>degree of the B-spline basis. Determines the degree of the function to be estimated. If deg = 2, the estimated utility function will consist of quadratic functions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cross_validation_mode</code></td>
+<td>
+<p>determines which cross validation mode should be used. If 0, then the cross validation method is leave-one-third-out. If 1, then the cross validation method is a theoretical leave-one-out, i.e., based on a formula. The default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return_estimate</code></td>
+<td>
+<p>parameter that indicates whether or not to return the (initially) estimated coefficients. Default is false.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>left_out_xi</code></td>
+<td>
+<p>needed for cross validation: the x-values of the points that are left out for fitting the model, so that they can be predicted</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>left_out_yi</code></td>
+<td>
+<p>needed for cross validation: the y-values of the points that are left out for fitting the model, so that they can be predicted</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns the sum of residuals of the prediction of the left-out points using cross validation. If specified, additionally returns the estimated coefficients of the utility function (in the B-spline basis).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c(0.0000000, 0.2819824, 0.3007812, 0.4375000, 0.5231934, 0.7784882, 0.8945312, 1.0000000)
+y &lt;- c(0.0000, 0.1250, 0.2500, 0.5000, 0.6250, 0.6875, 0.7500, 1.0000)
+estimate_model(x, y, .5)
+</code></pre>
+
+
+</div>

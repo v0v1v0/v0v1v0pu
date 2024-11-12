@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>convertToNumeric</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Conveniently convert vectors to numeric</h2>
+
+<h3>Description</h3>
+
+<p>Tries to 'smartly' convert factor and character vectors to numeric.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">convertToNumeric(vector, byFactorLabel = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vector</code></td>
+<td>
+<p>The vector to convert.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>byFactorLabel</code></td>
+<td>
+<p>When converting factors, whether to do this
+by their label value (<code>TRUE</code>) or their level value (<code>FALSE</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The converted vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ufs::convertToNumeric(as.character(1:8));
+</code></pre>
+
+
+</div>

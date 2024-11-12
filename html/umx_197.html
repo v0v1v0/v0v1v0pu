@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_find_object</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_find_object</h2>
+
+<h3>Description</h3>
+
+<p>Find objects of a given class, whose name matches a search string.
+The string (pattern) is grep-enabled, so you can match wild-cards
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_find_object(pattern = ".*", requiredClass = "MxModel")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>the pattern that matching objects must contain</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>requiredClass</code></td>
+<td>
+<p>the class of object that will be matched</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- a list of objects matching the class and name
+</p>
+
+
+<h3>References</h3>
+
+<p>-
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+umx_find_object("^m[0-9]") # mxModels beginning "m1" etc.
+umx_find_object("", "MxModel") # all MxModels
+
+## End(Not run)
+</code></pre>
+
+
+</div>

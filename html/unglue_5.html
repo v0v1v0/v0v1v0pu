@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unglue_sub</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>unglue_sub</h2>
+
+<h3>Description</h3>
+
+<p>substitute substrings using strings or replacement functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unglue_sub(x, patterns, repl, open = "{", close = "}")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>character vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>patterns</code></td>
+<td>
+<p>a character vector or a list of character vectors, if a list,
+items will be pasted using an empty separator (<code>""</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>repl</code></td>
+<td>
+<p>function to apply on matched substrings, formula (if package rlang
+is installed), substring, or named list of such.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>open</code></td>
+<td>
+<p>The opening delimiter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>close</code></td>
+<td>
+<p>The closing delimiter.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">unglue_sub(
+  c("a and b", "foo or bar"),
+  c("{x} and {y}", "{x} or {z}"),
+  "XXX")
+
+unglue_sub(
+  c("a and b", "foo or bar"),
+  c("{x} and {y}", "{x} or {z}"),
+  toupper)
+
+unglue_sub(
+  c("a and b", "foo or BAR"),
+  c("{x} and {y}", "{x} or {z}"),
+  list(x= "XXX", y = toupper, z = tolower))
+
+</code></pre>
+
+
+</div>

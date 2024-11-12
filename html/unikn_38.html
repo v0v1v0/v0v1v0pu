@@ -1,0 +1,299 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>seecol</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot color palettes (to see their colors)</h2>
+
+<h3>Description</h3>
+
+<p><code>seecol</code> provides an interface to plotting (or "seeing") 
+the colors of a palette or comparing multiple color palettes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">seecol(
+  pal = "unikn_all",
+  n = "all",
+  alpha = NA,
+  hex = NULL,
+  rgb = NULL,
+  col_bg = NULL,
+  col_brd = NULL,
+  lwd_brd = NULL,
+  grid = TRUE,
+  scale_x = FALSE,
+  main = NA,
+  sub = NULL,
+  title = NULL,
+  mar_note = NA,
+  pal_names = NA,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pal</code></td>
+<td>
+<p>A single color palette (as a vector of colors), 
+multiple color palettes (as a list), 
+or a recognized keyword (as a character string). 
+Default: <code>pal = "unikn_all"</code> (i.e., plot all color palettes 
+provided by the <b>unikn</b> package). 
+</p>
+<p>Recognized keywords are: 
+</p>
+
+<ol>
+<li> <p><code>"all"</code>: All color palettes of the <b>unikn</b> package.
+</p>
+</li>
+<li> <p><code>"all_unikn"</code> or <code>"unikn_all"</code>: All uni.kn color palettes 
+(of the <a href="https://www.uni-konstanz.de/">University of Konstanz</a>).
+</p>
+</li>
+<li> <p><code>"unikn_basic"</code>: All basic uni.kn palettes. 
+</p>
+</li>
+<li> <p><code>"grad_all"</code>: All uni.kn palettes with color gradients. 
+</p>
+</li>
+<li> <p><code>"pair_all"</code>: All uni.kn palettes with pairwise colors. 
+</p>
+</li>
+<li> <p><code>"pref_all"</code>: All preferred uni.kn colors and their gradients. 
+</p>
+</li>
+<li> <p><code>"add"</code>: Additional/contributed color palettes 
+(deprecated, as additional color palettes were migrated to the <b>unicol</b> R package).
+</p>
+</li>
+</ol>
+<p><code>seecol</code> does also recognize keywords (e.g., <code>"all_unikn"</code>) or 
+keywords without <code>"unikn"</code> (e.g., <code>"basic"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of colors to show or use. 
+If <code>n</code> is lower or higher than the length of the current 
+color palette <code>pal</code>, the color palette is reduced or extrapolated 
+(using <code>grDevices::colorRampPalette</code>). 
+Default: <code>n = "all"</code> (i.e., show all colors in palette).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>A factor modifying the opacity alpha 
+(as <code>alpha.f</code> in <code>adjustcolor</code>) to a value in <code>[0, 1]</code>. 
+Default: <code>alpha = NA</code> (i.e., no modification of opacity).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hex</code></td>
+<td>
+<p>Should HEX color values be shown? 
+Default: <code>hex = NULL</code> (i.e., show HEX color values 
+when there is sufficient space to print them).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rgb</code></td>
+<td>
+<p>Should RGB color values be shown?
+Default: <code>rgb = NULL</code> (i.e., show RGB color values 
+when there is sufficient space to print them).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col_bg</code></td>
+<td>
+<p>Color of plot background. 
+Default: <code>col_bg = NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col_brd</code></td>
+<td>
+<p>Color of shape borders (if shown). 
+Default: <code>col_brd = NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd_brd</code></td>
+<td>
+<p>Line width of shape borders (if shown). 
+Default: <code>lwd_brd = NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grid</code></td>
+<td>
+<p>Show grid in the color plot?
+Default: <code>grid = TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale_x</code></td>
+<td>
+<p>Scale color shapes (when comparing multiple palettes) to a fixed total width?
+Default: <code>scale_x = FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p>Main plot title (as a character string). 
+Default: <code>main = NA</code> creates a default title.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sub</code></td>
+<td>
+<p>Optional subtitle (as a character string). 
+Default: <code>sub = NULL</code> (i.e., no subtitle).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Deprecated plot title. 
+Use <code>main</code> instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mar_note</code></td>
+<td>
+<p>Optional margin note (on bottom right). 
+Default: <code>mar_note = NA</code> (i.e., no margin note).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pal_names</code></td>
+<td>
+<p>Names of color palettes or colors 
+(as a character vector). 
+Default: <code>pal_names = NA</code> (for default names).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other graphical parameters 
+(passed to <code>plot</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>seecol</code> has two main modes, based on the contents of its <code>pal</code> argument:
+</p>
+
+<ol>
+<li>
+<p> if <code>pal</code> is set to a <em>specific</em> color palette (or a vector of multiple colors or color palettes):
+</p>
+<p>Plot the current color palette and optional details on its colors.
+</p>
+</li>
+<li>
+<p> if <code>pal = "unikn_all"</code> or a list of <em>multiple</em> color palettes: 
+</p>
+<p>Plot visual vectors of all current color palettes for comparing them. 
+</p>
+</li>
+</ol>
+<p>Specifying <code>distinct = TRUE</code> removes visual duplicate colors (based on HEX values, 
+ignoring transparency), but only when showing an individual color palette <code>pal</code>. 
+</p>
+<p>Various title options (i.e., <code>main</code>, <code>sub</code>, and <code>mar_note</code>) and 
+a <code>pal_names</code> argument add control over plotted text labels. 
+However, the length of a character vector provided to <code>pal_names</code> must correspond 
+to the number of (custom) color palettes or colors.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usecol</code> for using color palettes; 
+<code>simcol</code> for finding similar colors; 
+<code>newpal</code> for defining new color palettes; 
+<code>grepal</code> for finding named colors; 
+<code>shades_of</code> to defining shades of a given color; 
+<code>ac</code> for adjusting color transparency; 
+<code>pal_unikn</code> for the default uni.kn color palette.
+</p>
+<p>Other color functions: 
+<code>ac()</code>,
+<code>demopal()</code>,
+<code>grepal()</code>,
+<code>newpal()</code>,
+<code>shades_of()</code>,
+<code>simcol()</code>,
+<code>usecol()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># See multiple color palettes: 
+seecol()  # default: seecol(pal = "all") 
+
+# See details of one color palette: 
+seecol(pal_unikn)  # see a specific color palette
+
+# Combining colors or color palettes: 
+seecol(c(rev(pal_seeblau), pal_seegruen))        # combine color palettes
+seecol(c(rev(pal_seeblau), "white", pal_pinky))  # combine color palettes and color names
+seecol(c("black", "firebrick", "gold"))          # combine color names
+
+# Scale a set of color palettes to a fixed width:
+seecol(scale_x = TRUE)
+
+# Using n to reduce or extend color palettes:
+seecol(n =  3)  # viewing reduced ranges of all palettes
+seecol(n = 12)  # viewing extended ranges of all palettes
+
+seecol(pal_unikn, n = 5, 
+       main = "Reduced version of pal_unikn (n = 5)")  # reducing pal_unikn
+seecol(pal_seeblau, n = 8, 
+       main = "Extended version of pal_seeblau (n = 8)")  # extending pal_seeblau
+
+# Combining and extending color palettes: 
+seecol(c(rev(pal_seeblau), "white", pal_bordeaux), n = 17, 
+       main = "Diverging custom color palette (with 17 colors)")
+
+# Defining custom color palettes:
+pal_mpg &lt;- c("#007367", "white", "#D0D3D4")  # mixing hex values and color names
+names(pal_mpg) &lt;- c("mpg green", "mpg white", "mpg grey")  # color names
+
+pal_bdg &lt;- usecol(c(Bordeaux, "gold"), n = 5)  # using usecol
+
+# Viewing extended color palette: 
+seecol(pal_mpg, n = 9, main = "Custom color palette of the Max Planck Society")
+
+# Comparing (and labeling) custom color palettes: 
+seecol(list(pal_mpg, pal_bdg, pal_unikn), scale_x = TRUE,
+       pal_names = c("Max Planck", "Bordeaux-Gold", "Uni Konstanz"), 
+       main = "Comparing and labeling custom color palettes")
+
+## Viewing color palettes from other packages: 
+# library(RColorBrewer)
+# seecol(brewer.pal(name = "RdBu", n = 11))  # viewing "RdBu" palette from RColorBrewer
+
+## Extending color palettes:
+# seecol(brewer.pal(name = "RdBu", n = 11), n = 15)  # extending palette to 15 colors
+
+</code></pre>
+
+
+</div>

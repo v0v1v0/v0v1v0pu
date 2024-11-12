@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_gen_write_plink</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Writes a PLINK format phenotype or covariate file</h2>
+
+<h3>Description</h3>
+
+<p>This function writes a space-delimited file with header, with the obligatory first two columns FID and IID. Use this function to write phenotype and covariate files for downstream genetic analysis in <a href="https://www.cog-genomics.org/plink2">plink</a> - the format is the same.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_gen_write_plink(x, path, ukb.variables, ukb.id = "eid",
+  na.strings = "NA")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A UKB dataset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>A path to a file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ukb.variables</code></td>
+<td>
+<p>A character vector of either the phenotypes for a PLINK phenotype file, or covariates for a PLINK covariate file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ukb.id</code></td>
+<td>
+<p>The id variable name (default = "eid").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.strings</code></td>
+<td>
+<p>String used for missing values. Defaults to NA.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function writes the id variable in your dataset to the first two columns of the output file with the names FID and IID - you do not need to have two id columns in the data.frame passed to the argument <code>x</code>. Use the <code>--pheno-name</code> and <code>--covar-name</code> PLINK flags to select columns by name. See the PLINK documentation for the <code>--pheno</code>, <code>--mpheno</code>, <code>--pheno-name</code>, and <code>--covar</code>, <code>--covar-name</code>, <code>--covar-number</code> flags.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukb_gen_read_sample</code> to read a sample file, and <code>ukb_gen_write_bgenie</code> to write phenotype and covariate files to BGENIE format.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+# Automatically inserts FID IID columns required by PLINK
+
+ukb_gen_write_plink(
+   my_ukb_data,
+   path = "my_ukb_plink.pheno",
+   ukb.variables = c("height", "weight", "iq")
+)
+
+ukb_gen_write_plink(
+   my_ukb_data,
+   path = "my_ukb_plink.cov",
+   ukb.variables = c("age", "socioeconomic_status", "genetic_pcs")
+)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

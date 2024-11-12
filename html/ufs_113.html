@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>formatPvalue</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pretty formatting of <em>p</em> values</h2>
+
+<h3>Description</h3>
+
+<p>Pretty formatting of <em>p</em> values
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">formatPvalue(values, digits = 3, spaces = TRUE, includeP = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>The p-values to format.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The number of digits to round to. Numbers smaller
+than this number will be shown as &lt;.001 or &lt;.0001 etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spaces</code></td>
+<td>
+<p>Whether to include spaces between symbols,
+operators, and digits.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>includeP</code></td>
+<td>
+<p>Whether to include the 'p' and '='-symbol in the
+results (the '&lt;' symbol is always included).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A formatted P value, roughly according to APA style
+guidelines. This means that the noZero function is used to
+remove the zero preceding the decimal point, and p values
+that would round to zero given the requested number of digits
+are shown as e.g. p&lt;.001.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>formatCI()</code>, <code>formatR()</code>, <code>noZero()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">formatPvalue(cor.test(mtcars$mpg,
+                      mtcars$disp)$p.value);
+formatPvalue(cor.test(mtcars$drat,
+                      mtcars$qsec)$p.value);
+</code></pre>
+
+
+</div>

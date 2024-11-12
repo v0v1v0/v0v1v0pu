@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_nextgram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Based on a vector with a word sequence, get n-grams (looking forward)</h2>
+
+<h3>Description</h3>
+
+<p>If you have annotated your text using <code>udpipe_annotate</code>,
+your text is tokenised in a sequence of words. Based on this vector of words in sequence
+getting n-grams comes down to looking at the next word and the subsequent word andsoforth.
+These words can be <code>pasted</code> together to form an n-gram containing
+the current word, the next word up, the subsequent word, ...
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_nextgram(x, n = 2, sep = " ")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector where each element is just 1 term or word</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>an integer indicating the ngram. Values of 1 will keep the x, a value of 2 will
+append the next term to the current term, a value of 3 will append the subsequent
+term and the term following that term to the current term</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>a character element indicating how to <code>paste</code> the subsequent words together</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector of the same length of <code>x</code> with the n-grams
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>paste</code>, <code>shift</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- sprintf("%s%s", LETTERS, 1:26)
+txt_nextgram(x, n = 2)
+
+data.frame(words = x,
+           bigram = txt_nextgram(x, n = 2),
+           trigram = txt_nextgram(x, n = 3, sep = "-"),
+           quatrogram = txt_nextgram(x, n = 4, sep = ""),
+           stringsAsFactors = FALSE)
+
+x &lt;- c("A1", "A2", "A3", NA, "A4", "A5")
+data.frame(x, 
+           bigram = txt_nextgram(x, n = 2, sep = "_"),
+           stringsAsFactors = FALSE)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ur.ers</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Elliott, Rothenberg and Stock Unit Root Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs the Elliott, Rothenberg and Stock unit root test. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ur.ers(y, type = c("DF-GLS", "P-test"), model = c("constant", "trend"),
+       lag.max = 4)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Vector to be tested for a unit root.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Test type, either <code>"DF-GLS"</code> (default), or <code>"P-test"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The deterministic model used for detrending.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lag.max</code></td>
+<td>
+<p>The maximum numbers of lags used for testing of a
+decent lag truncation for the <code>"P-test"</code> (<code>BIC</code> used),
+or the maximum number of lagged differences to be included in the test
+regression for <code>"DF-GLS"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>To improve the power of the unit root test, Elliot, Rothenberg and Stock
+proposed a local to unity detrending of the time series. ERS developed
+a feasible point optimal test, <code>"P-test"</code>, which takes serial
+correlation of the error term into account. The second test type is
+the <code>"DF-GLS"</code> test, which is an ADF-type test applied to the
+detrended data without intercept. Critical values for this test are
+taken from MacKinnon in case of <code>model="constant"</code> and else from
+Table 1 of Elliot, Rothenberg and Stock.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ur.ers</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Elliott, G., Rothenberg, T.J. and Stock, J.H. (1996), Efficient Tests
+for an Autoregressive Unit Root, <em>Econometrica</em>,
+<b>Vol. 64, No. 4</b>, 813–836.
+</p>
+<p>MacKinnon, J.G. (1991), Critical Values for Cointegration Tests,
+<em>Long-Run Economic Relationships</em>, eds. R.F. Engle and
+C.W.J. Granger, London, Oxford, 267–276.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ur.ers-class</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nporg)
+gnp &lt;- na.omit(nporg[, "gnp.r"])
+ers.gnp &lt;- ur.ers(gnp, type="DF-GLS", model="const", lag.max=4)
+summary(ers.gnp)
+</code></pre>
+
+
+</div>

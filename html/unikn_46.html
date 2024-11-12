@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>theme_unikn</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Basic unikn theme (for ggplot2)</h2>
+
+<h3>Description</h3>
+
+<p><code>theme_unikn</code> provides a basic <b>unikn</b> theme 
+to use in <b>ggplot2</b> commands.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">theme_unikn(
+  col_title = pal_seeblau[[4]],
+  base_size = 11,
+  base_family = "",
+  base_line_size = base_size/22,
+  base_rect_size = base_size/22
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>col_title</code></td>
+<td>
+<p>Color of title (text) elements (optional, numeric).
+Default: <code>col_title = pal_seeblau[[4]]</code>. 
+Consider using <code>col_title = "black"</code> when data uses 
+<code>Seeblau</code> colors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base_size</code></td>
+<td>
+<p>Base font size (optional, numeric). 
+Default: <code>base_size = 11</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base_family</code></td>
+<td>
+<p>Base font family (optional, character). 
+Default: <code>base_family = ""</code>. 
+Options include <code>"mono"</code>, <code>"sans"</code> (default), and "serif".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base_line_size</code></td>
+<td>
+<p>Base line size (optional, numeric). 
+Default: <code>base_line_size = base_size/22</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base_rect_size</code></td>
+<td>
+<p>Base rectangle size (optional, numeric). 
+Default: <code>base_rect_size = base_size/22</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The theme is lightweight and no-nonsense, but somewhat 
+opinionated (e.g., in using mostly grey scales to 
+allow emphasizing data points with color accents).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>theme_grau</code> for an alternative theme.
+</p>
+<p>Other plot functions: 
+<code>slide()</code>,
+<code>theme_grau()</code>,
+<code>xbox()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+  # Plotting iris dataset (using ggplot2, theme_unikn, and unikn colors):
+  
+  library('ggplot2')  # theme_unikn requires ggplot2 
+  
+  ggplot(datasets::iris) +
+    geom_jitter(aes(x = Petal.Length, y = Petal.Width, color = Species), size = 3, alpha = 2/3) +
+    scale_color_manual(values = usecol(pal = c(Pinky, Seeblau, Seegruen))) +
+    labs(tag = "A", title = "Iris petals",
+         caption = "Data from datasets::iris") + 
+    theme_unikn()
+
+
+</code></pre>
+
+
+</div>

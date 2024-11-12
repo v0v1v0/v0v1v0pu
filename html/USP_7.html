@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sumbasis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kernel entries in infinite dimensional case</h2>
+
+<h3>Description</h3>
+
+<p>Function to calculate each entry of the kernel matrix in the infinite dimensional
+example described in Section 7.4 of (Berrett et al. 2021). Here, a random function is converted
+to a sequence of coefficients and we use the Fourier basis on these coefficients. This
+function is only used in the function InfKern.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sumbasis(Ntrunc, M, x1, x2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Ntrunc</code></td>
+<td>
+<p>The total number of coefficients to look at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+<p>The maximum frequency to look at in the Fourier basis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x1</code></td>
+<td>
+<p>The coefficients of the first data point.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x2</code></td>
+<td>
+<p>The coefficients of the second data point.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The entry of the kernel corresponding to the two data points.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x1=runif(5); x2=runif(5); sumbasis(5,2,x1,x2)
+</code></pre>
+
+
+</div>

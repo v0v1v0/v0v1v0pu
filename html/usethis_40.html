@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>git_sitrep</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Git/GitHub sitrep</h2>
+
+<h3>Description</h3>
+
+<p>Get a situation report on your current Git/GitHub status. Useful for
+diagnosing problems. The default is to report all values; provide values
+for <code>tool</code> or <code>scope</code> to be more specific.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">git_sitrep(tool = c("git", "github"), scope = c("user", "project"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>tool</code></td>
+<td>
+<p>Report for <strong>git</strong>, or <strong>github</strong></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scope</code></td>
+<td>
+<p>Report globally for the current <strong>user</strong>, or locally for the
+current <strong>project</strong></p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# report all
+git_sitrep()
+
+# report git for current user
+git_sitrep("git", "user")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

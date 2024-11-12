@@ -1,0 +1,174 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_retrieve_links_grouped</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Bitlinks by Group</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve a paginated collection of Bitlinks for a Group
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_retrieve_links_grouped(
+  group_id = NA,
+  keyword = NULL,
+  search_query = NULL,
+  created_before = NULL,
+  created_after = NULL,
+  modified_after = NULL,
+  archived = "off",
+  deeplinks = "both",
+  domain_deeplinks = "both",
+  campaign_guid = NULL,
+  channel_guid = NULL,
+  custom_bitlink = "both",
+  tags = NULL,
+  encoding_login = NULL,
+  page = 1,
+  size = 50,
+  showRequestURL = F
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group_id</code></td>
+<td>
+<p>- a required string | A GUID for a Bitly group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keyword</code></td>
+<td>
+<p>- Custom keyword to filter on history entries</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>search_query</code></td>
+<td>
+<p>- string | the value that you would like to search</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>created_before</code></td>
+<td>
+<p>- Timestamp as an integer unix epoch</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>created_after</code></td>
+<td>
+<p>- Timestamp as an integer unix epoch</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>modified_after</code></td>
+<td>
+<p>- Timestamp as an integer unix epoch,
+see <code>as_datetime</code> or <code>anytime</code>'s <code>as_datetime</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>archived</code></td>
+<td>
+<p>- string | Default: "off" | Enum:"on" "off" "both" | Whether or not to include archived bitlinks</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deeplinks</code></td>
+<td>
+<p>- string | Default: "both" | Enum:"on" "off" "both" | Filter to only Bitlinks that contain deeplinks</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>domain_deeplinks</code></td>
+<td>
+<p>- string | Default: "both" | Enum:"on" "off" "both" | Filter to only Bitlinks
+that contain deeplinks configured with a custom domain</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>campaign_guid</code></td>
+<td>
+<p>- Filter to return only links for the given campaign GUID, can be provided</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>channel_guid</code></td>
+<td>
+<p>- Filter to return only links for the given channel GUID,
+can be provided, overrides all other parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>custom_bitlink</code></td>
+<td>
+<p>- string | Default: "both" | Enum:"on" "off" "both"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tags</code></td>
+<td>
+<p>- Array of string | filter by given tags</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>encoding_login</code></td>
+<td>
+<p>- Array of string | Filter by the login of the authenticated user that created the Bitlink</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>page</code></td>
+<td>
+<p>- Default: 1 | Integer specifying the numbered result at which to start</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>- string |  Default: 50 | The quantity of items to be be returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Group</h3>
+
+<p>Groups are a subdivision within an organization. A user will belong to a group within an organization.
+Most actions on our API will be on behalf of a group. For example, when you
+shorten a link, it will be on behalf of a user and a group.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference#getBitlinksByGroup">https://dev.bitly.com/api-reference#getBitlinksByGroup</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ui &lt;- bitly_user_info(showRequestURL = TRUE)
+rg &lt;- bitly_retrieve_links_grouped(group_id = ui$default_group_guid[1])
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

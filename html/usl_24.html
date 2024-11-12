@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sigma,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract Residual Standard Deviation 'Sigma'</h2>
+
+<h3>Description</h3>
+
+<p><code>sigma</code> Extract Residual Standard Deviation 'Sigma'
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+sigma(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>An object from class <code>USL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments passed to other methods.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A single number.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>, <code>USL-class</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(raytracer)
+
+## Print result from USL model for demo dataset
+print(sigma(usl(throughput ~ processors, raytracer)))
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>carbon</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Carbon Monoxide levels at different sites </h2>
+
+<h3>Description</h3>
+
+<p>Carbon Monoxide levels at different sites 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(carbon)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>Monoxide</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Site</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Borrowed from Kitchen's Exploring Statistics
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(carbon)
+boxplot(Monoxide ~ Site,data=carbon)
+</code></pre>
+
+
+</div>

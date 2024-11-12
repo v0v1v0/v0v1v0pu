@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_terrain</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a terrain tile with optional image overlay</h2>
+
+<h3>Description</h3>
+
+<p>Create a terrain tile with optional image overlay
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_terrain(
+  script,
+  method_name = NULL,
+  heightmap_path,
+  x_pos,
+  z_pos,
+  width,
+  height,
+  length,
+  heightmap_resolution,
+  texture_path = "",
+  exec = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>script</code></td>
+<td>
+<p>A <code>unifir_script</code> object, created by make_script or returned
+by an <code style="white-space: pre;">⁠add_prop_*⁠</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method_name</code></td>
+<td>
+<p>The internal name to use for the C# method created. Will
+be randomly generated if not set.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>heightmap_path</code></td>
+<td>
+<p>The file path to the heightmap to import as terrain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x_pos, z_pos</code></td>
+<td>
+<p>The position of the corner of the terrain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width, height, length</code></td>
+<td>
+<p>The dimensions of the terrain tile,
+in linear units.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>heightmap_resolution</code></td>
+<td>
+<p>The resolution of the heightmap image.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>texture_path</code></td>
+<td>
+<p>Optional: the file path to the image to use as a terrain
+overlay.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exec</code></td>
+<td>
+<p>Logical: Should the C# method be included in the set executed by
+MainFunc?</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p>Other props: 
+<code>add_default_player()</code>,
+<code>add_light()</code>,
+<code>add_prop()</code>,
+<code>add_texture()</code>,
+<code>import_asset()</code>,
+<code>instantiate_prefab()</code>,
+<code>load_png()</code>,
+<code>load_scene()</code>,
+<code>new_scene()</code>,
+<code>read_raw()</code>,
+<code>save_scene()</code>,
+<code>set_active_scene()</code>,
+<code>validate_path()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">if (requireNamespace("terra", quietly = TRUE)) {
+  raster &lt;- tempfile(fileext = ".tiff")
+  r &lt;- terra::rast(matrix(rnorm(1000^2, mean = 100, sd = 20), 1000),
+    extent = terra::ext(0, 1000, 0, 1000)
+  )
+  terra::writeRaster(r, raster)
+
+  script &lt;- make_script("example_script",
+    unity = waiver()
+  )
+  create_terrain(
+    script,
+    heightmap_path = raster,
+    x_pos = 0,
+    z_pos = 0,
+    width = 1000,
+    height = terra::minmax(r)[[2]],
+    length = 1000,
+    heightmap_resolution = 1000
+  )
+}
+</code></pre>
+
+
+</div>

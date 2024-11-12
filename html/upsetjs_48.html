@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>upsetjsSizingPolicy</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>upsetjs sizing policy</h2>
+
+<h3>Description</h3>
+
+<p>upsetjs sizing policy
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">upsetjsSizingPolicy(
+  defaultWidth = "100%",
+  defaultHeight = 400,
+  padding = 0,
+  browser.fill = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>defaultWidth</code></td>
+<td>
+<p>defaults to <code>"100%"</code> of the available width</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>defaultHeight</code></td>
+<td>
+<p>defaults to 400px tall</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>padding</code></td>
+<td>
+<p>defaults to 0px</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>browser.fill</code></td>
+<td>
+<p>defaults to <code>TRUE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>all other arguments supplied to <code>htmlwidgets::sizingPolicy</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An <code>htmlwidgets::sizingPolicy</code> object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs(sizingPolicy = upsetjsSizingPolicy(padding = 20)) %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3)))
+</code></pre>
+
+
+</div>

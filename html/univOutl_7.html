@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>skew.misc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Calculates some skewness measures.
+</h2>
+
+<h3>Description</h3>
+
+<p>The function calculates some skewness measures for the input vector data.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">skew.misc(x, weights=NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Input vector containing data for which skewness will be calculated.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+
+<p>Optional vector with eventual non-negative weights associated to the units in <code>x</code>
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function calculates Pearson's skewness coefficient, the MedCouple measure of skewness and the non-parametric Bowley's measure of symmetry. The Bowley's skewness measure uses quartiles:
+</p>
+<p style="text-align: center;"><code class="reqn">b = \frac{(Q_3 - Q_2) - (Q_2 - Q_1) }{Q_3 - Q_1}  </code>
+</p>
+
+<p>It ranges between -1 and +1, where positive (negative) values denote right (left) skewness. A value equal to 0 indicates symmetry.
+A crude measure of skewness can be obtained with a monotonic increasing function of b:
+</p>
+<p style="text-align: center;"><code class="reqn"> g=\frac{1+b}{1-b} </code>
+</p>
+
+<p>It ranges from 0 to Inf, g=1 indicates symmetry.
+</p>
+<p>A  measure of skewness similar to the Bowley's one is achieved by replacing Q3 and Q1 with respectively P90 and P10 percentiles:
+</p>
+<p style="text-align: center;"><code class="reqn">b_P = \frac{(P_{90} - P_{50}) - (P_{50} - P_{10}) }{P_{90} - P_{10}}  </code>
+</p>
+
+<p>Similarly
+</p>
+<p style="text-align: center;"><code class="reqn"> g_P=\frac{1+b_P}{1-b_P} </code>
+</p>
+
+<p>For major details see Kotz at al. (2006, vol. 12, pp. 7771-7772).
+</p>
+<p>The medCouple measure of skewness, M, ranges from -1 to +1 and is equal to 0 in case of symmetry, while <code class="reqn">M &gt; 0</code> indicates positive skewness. For major details see <code>mc</code>.
+</p>
+<p>Note that eventual weights, passed through the argument <code>weights</code>, are used ONLY in the calculation of the Bowley's type measures. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector with the estimated measures of skewness.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Marcello D'Orazio <a href="mailto:mdo.statmatch@gmail.com">mdo.statmatch@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Kotz S. et al. (2006) <em>Encyclopedia of Statistical Sciences, Volume 12</em>. John Wiley and Sons.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>mc</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(112233)
+y &lt;- rnorm(n = 30, mean = 50, sd = 10)
+y[20] &lt;- 100
+
+skew.misc(x = y, weights=NULL)
+
+# use weights
+ww &lt;- runif(n = 30, min = 1, max = 10)
+skew.misc(x = y, weights=ww)
+
+</code></pre>
+
+
+</div>

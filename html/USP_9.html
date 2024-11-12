@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>USP.test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Independence test for discrete data</h2>
+
+<h3>Description</h3>
+
+<p>Carry out a permutation independence test on a two-way contingency table.
+The test statistic is <code class="reqn">Tn</code>, as described in Sections 3.1 and 7.1 of (Berrett et al. 2021).
+This also appears as <code class="reqn">Un</code> in (Berrett and Samworth 2021).
+The critical value is found by sampling null contingency tables,
+with the same row and column totals as the input, via Patefield's algorithm, and recomputing
+the test statistic.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">USP.test(freq, B = 999, ties.method = "standard", nullstats = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>freq</code></td>
+<td>
+<p>Two-way contingency table whose independence is to be tested.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>B</code></td>
+<td>
+<p>The number of resampled null tables to be used to calibrate the test.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ties.method</code></td>
+<td>
+<p>If "standard" then calculate the p-value as in (5) of (Berrett et al. 2021),
+which is slightly conservative. If "random" then break ties randomly. This preserves Type I error
+control.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nullstats</code></td>
+<td>
+<p>If TRUE, returns a vector of the null statistic values.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns the p-value for this independence test and the value of the test statistic, <code class="reqn">T_n</code>,
+as defined in (Berrett et al. 2021). The third element of the list is the table of expected counts,
+and the final element is the table of contributions to <code class="reqn">T_n</code>. If nullstats=TRUE is used, then the function also
+returns a vector of the null statistics.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+<p>Berrett TB, Samworth RJ (2021).
+“USP: an independence test that improves on Pearson’s chi-squared and the G-test.”
+<em>Submitted, available at arXiv:2101.10880</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">freq=r2dtable(1,rep(10,5),rep(10,5))[[1]] + 4*diag(rep(1,5))
+USP.test(freq,999)
+
+freq=diag(1:5); USP.test(freq,999)
+
+freq=r2dtable(1,rep(10,5),rep(10,5))[[1]];
+test=USP.test(freq,999,nullstats=TRUE)
+plot(density(test$NullStats,from=0,
+to=max(max(test$NullStats),test$TestStat)),
+    xlim=c(min(test$NullStats),max(max(test$NullStats),test$TestStat)),
+    main="Test Statistics")
+abline(v=test$TestStat,col=2); TestStats=c(test$TestStat,test$NullStats)
+abline(v=quantile(TestStats,probs=0.95),lty=2)
+</code></pre>
+
+
+</div>

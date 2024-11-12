@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dist_subset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract parts of a <code>dist</code> object.</h2>
+
+<h3>Description</h3>
+
+<p>Extract a subset of values from a distance matrix. This function also works
+to re-arrange the rows of a distance matrix, if they are provided in the
+desired order.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dist_subset(d, idx)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+<p>A distance matrix object of class <code>dist</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>idx</code></td>
+<td>
+<p>Indices specifying the subset of distances to extract.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A distance matrix.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">m4 &lt;- matrix(1:16, nrow=4, dimnames=list(LETTERS[1:4]))
+dm4 &lt;- dist(m4)
+dist_subset(dm4, c("A", "B", "C"))
+dist_subset(dm4, c("D", "C", "B", "A"))
+</code></pre>
+
+
+</div>

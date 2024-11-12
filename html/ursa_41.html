@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bandname</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Band names for raster image.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>bandname</code> (<code>names</code>) returns names of bands for object of class <code>ursaRaster</code> or existing ENVI labelled *.hdr file.
+<code>bandname&lt;-</code> (<code>names&lt;-</code>) sets names of bands for object of class <code>ursaRaster</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bandname(x)
+bandname(x) &lt;- value
+
+## S3 method for class 'ursaRaster'
+names(x)
+
+## S3 replacement method for class 'ursaRaster'
+names(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>. In the <code>bandname</code> function it is allowed to specify character ‘<span class="file">ENVI labelled *.hdr</span>’ file name.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+
+<p>Character of length the same length of number of bands of <code>x</code>
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>names</code> is a synonym for <code>bandname</code>. <code>names&lt;-</code> is a synonym for <code>bandname&lt;-</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>bandname</code> and <code>names</code>, character vector.
+</p>
+<p>For <code>bandname&lt;-</code> and <code>names&lt;-</code>, updated object of class <code>ursaRaster</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>nband</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a1 &lt;- pixelsize()
+a2 &lt;- c("Band 1"=a1,Band2=a1/2,sqrt=sqrt(a1),NA)
+print(a2)
+print(bandname(a2))
+bandname(a2)[1:2] &lt;- c("Original","Half")
+print(a2)
+print(bandname(a2))
+</code></pre>
+
+
+</div>

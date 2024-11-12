@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>SE_from_p</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute an SE from a beta and p value</h2>
+
+<h3>Description</h3>
+
+<p><code>SE_from_p</code> takes beta and p, and returns an SE.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">SE_from_p(beta = NULL, p = NULL, SE = NULL, lower = NULL, upper = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>The effect size</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>The p-value for the effect</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SE</code></td>
+<td>
+<p>Standard error</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower</code></td>
+<td>
+<p>Lower CI</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>upper</code></td>
+<td>
+<p>Upper CI</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Standard error
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxAPA()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">SE_from_p(beta = .0020, p = .780)
+SE_from_p(beta = .0020, p = .01)
+SE_from_p(beta = .0020, SE = 0.01)
+umxAPA(.0020, p = .01)
+</code></pre>
+
+
+</div>

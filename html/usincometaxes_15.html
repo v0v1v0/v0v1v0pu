@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_dataset_for_taxsim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert a data frame to the TAXSIM 35 output.</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a data set that is in the format required for <code>taxsim_calculate_taxes</code>,
+checks it to make sure it is in the proper format for TAXSIM 35, and then cleans so it can be sent to TAXSIM 35.
+This function is useful for troubleshooting. It is not needed to calculate taxes. The function is useful
+if you continue receiving unreasonable errors from <code>taxsim_calculate_taxes</code>. In such as case,
+you can run this function on your data set. You should then save the resulting
+data frame as a csv file. Then, upload the file to <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_dataset_for_taxsim(.data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>.data</code></td>
+<td>
+<p>Data frame containing the information that will be used to calculate taxes.
+This data set will be sent to TAXSIM. Data frame must have specified column names and data types.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p><code>create_dataset_for_taxsim</code> takes the same columns as column names as <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame that that can be manually uploaded to <a href="http://taxsim.nber.org/taxsim35/">TAXSIM 35</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+family_income &lt;- data.frame(
+    taxsimid = c(1, 2),
+    state = c('North Carolina', 'NY'),
+    year = c(2015, 2015),
+    mstat = c('single', 'married, jointly'),
+    pwages = c(10000, 100000),
+    page = c(26, 36)
+)
+
+family_taxes &lt;- create_dataset_for_taxsim(family_income)
+
+
+</code></pre>
+
+
+</div>

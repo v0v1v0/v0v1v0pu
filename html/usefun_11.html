@@ -1,0 +1,121 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_roc_stats</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate ROC statistics</h2>
+
+<h3>Description</h3>
+
+<p>Use this function to generate the most useful statistics related to the
+generation of a basic ROC (Receiver Operating Characteristic) curve.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_roc_stats(df, pred_col, label_col, direction = "&lt;")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>a <code>data.frame</code> with (at least) two columns. See next two
+parameters for what values these two columns should have (which should match
+one to one).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pred_col</code></td>
+<td>
+<p>string. The name of the column of the <code>df</code> data.frame
+that has the prediction values. The values can be any numeric, negative,
+positive or zero. What matters is the <strong>ranking</strong> of these values which
+is clarified with the <code>direction</code> parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label_col</code></td>
+<td>
+<p>string. The name of the column of the <code>df</code> data.frame
+that has the true positive labelings/observed classes for the
+prediction values. This column must have either <em>1</em> or <em>0</em>
+elements representing either a <em>positive</em> or <em>negative</em> classification
+label for the corresponding values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>string. Can be either <em>&gt;</em> or <em>&lt;</em> (default value)
+and indicates the direction/ranking of the prediction values with respect to
+the positive class labeling (for a specific threshold). If <strong>smaller</strong>
+prediction values indicate the positive class/label use <strong>&lt;</strong> whereas
+if <strong>larger</strong> prediction values indicate the positive class/label
+(e.g. probability of positive class), use <strong>&gt;</strong>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list with two elements:
+</p>
+
+<ul>
+<li> <p><code>roc_stats</code>: a <code>tibble</code> which includes the <strong>thresholds</strong> for the ROC curve and the <strong>confusion matrix stats</strong> for each threshold as follows: <em>TP</em> (#True Positives), <em>FN</em> (#False Negatives), <em>TN</em> (#True Negatives), <em>FP</em> (#False Positives), <em>FPR</em> (False Positive Rate - the x-axis values for the ROC curve) and <em>TPR</em> (True Positive Rate - the y-axis values for the ROC curve).
+Also included are the <em>dist-from-chance</em> (the vertical distance of
+the corresponding (FPR,TPR) point to the chance line or positive diagonal)
+and the <em>dist-from-0-1</em> (the euclidean distance of the corresponding
+(FPR,TPR) point from (0,1)).
+</p>
+</li>
+<li> <p><code>AUC</code>: a number representing the Area Under the (ROC) Curve.
+</p>
+</li>
+</ul>
+<p>The returned results provide an easy way to compute two optimal <em>cutpoints</em>
+(thresholds) that dichotomize the predictions to positive and negative.
+The first is the <em>Youden index</em>, which is the maximum vertical distance from the
+ROC curve to the chance line or positive diagonal. The second is the point
+of the ROC curve closest to the (0,1) - the point of perfect differentiation.
+See examples below.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># load libraries
+library(readr)
+library(dplyr)
+
+# load test tibble
+test_file = system.file("extdata", "test_df.tsv", package = "usefun", mustWork = TRUE)
+test_df = readr::read_tsv(test_file, col_types = "di")
+
+# get ROC stats
+res = get_roc_stats(df = test_df, pred_col = "score", label_col = "observed")
+
+# Plot ROC with a legend showing the AUC value
+plot(x = res$roc_stats$FPR, y = res$roc_stats$TPR,
+  type = 'l', lwd = 2, col = '#377EB8', main = 'ROC curve',
+  xlab = 'False Positive Rate (FPR)', ylab = 'True Positive Rate (TPR)')
+legend('bottomright', legend = round(res$AUC, digits = 3),
+  title = 'AUC', col = '#377EB8', pch = 19)
+grid()
+abline(a = 0, b = 1, col = '#FF726F', lty = 2)
+
+# Get two possible cutoffs
+youden_index_df = res$roc_stats %&gt;%
+  filter(dist_from_chance == max(dist_from_chance))
+min_classification_df = res$roc_stats %&gt;%
+  filter(dist_from_0_1 == min(dist_from_0_1))
+
+</code></pre>
+
+
+</div>

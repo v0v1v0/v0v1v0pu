@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_github_links</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Use GitHub links in URL and BugReports</h2>
+
+<h3>Description</h3>
+
+<p>Populates the <code>URL</code> and <code>BugReports</code> fields of a GitHub-using R package with
+appropriate links. The GitHub repo to link to is determined from the current
+project's GitHub remotes:
+</p>
+
+<ul>
+<li>
+<p> If we are not working with a fork, this function expects <code>origin</code> to be a
+GitHub remote and the links target that repo.
+</p>
+</li>
+<li>
+<p> If we are working in a fork, this function expects to find two GitHub
+remotes: <code>origin</code> (the fork) and <code>upstream</code> (the fork's parent) remote. In
+an interactive session, the user can confirm which repo to use for the
+links. In a noninteractive session, links are formed using <code>upstream</code>.
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_github_links(overwrite = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+<p>By default, <code>use_github_links()</code> will not overwrite existing
+fields. Set to <code>TRUE</code> to overwrite existing links.</p>
+</td>
+</tr></table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+use_github_links()
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

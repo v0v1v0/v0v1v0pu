@@ -1,0 +1,139 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>document_term_frequencies</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Aggregate a data.frame to the document/term level by calculating how many times a term occurs per document</h2>
+
+<h3>Description</h3>
+
+<p>Aggregate a data.frame to the document/term level by calculating how many times a term occurs per document
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">document_term_frequencies(x, document, ...)
+
+## S3 method for class 'data.frame'
+document_term_frequencies(
+  x,
+  document = colnames(x)[1],
+  term = colnames(x)[2],
+  ...
+)
+
+## S3 method for class 'character'
+document_term_frequencies(
+  x,
+  document = paste("doc", seq_along(x), sep = ""),
+  split = "[[:space:][:punct:][:digit:]]+",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame or data.table containing a field which can be considered 
+as a document (defaults to the first column in <code>x</code>) and a field which can be considered as a term 
+(defaults to the second column in <code>x</code>). If the dataset also contains a column called 'freq', this will be summed over instead of counting the number 
+of rows occur by document/term combination.<br>
+If <code>x</code> is a character vector containing several terms, the text will be split by the argument <code>split</code>
+before doing the agregation at the document/term level.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>document</code></td>
+<td>
+<p>If <code>x</code> is a data.frame, the column in <code>x</code> which identifies a document. If <code>x</code>
+is a character vector then <code>document</code> is a vector of the same length as <code>x</code> where <code>document[i]</code> is the
+document id which corresponds to the text in <code>x[i]</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed on to the methods</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>term</code></td>
+<td>
+<p>If <code>x</code> is a data.frame, the column in <code>x</code> which identifies a term. Defaults to the second column
+in <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>split</code></td>
+<td>
+<p>The regular expression to be used if <code>x</code> is a character vector. 
+This will split the character vector <code>x</code> in pieces by the provides split argument. 
+Defaults to splitting according to spaces/punctuations/digits.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.table with columns doc_id, term, freq indicating how many times a term occurred in each document.
+If freq occurred in the input dataset the resulting data will have summed the freq. If freq is not in the dataset,
+will assume that freq is 1 for each row in the input dataset <code>x</code>.
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>data.frame</code>: Create a data.frame with one row per document/term combination indicating the frequency of the term in the document
+</p>
+</li>
+<li> <p><code>character</code>: Create a data.frame with one row per document/term combination indicating the frequency of the term in the document
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+##
+## Calculate document_term_frequencies on a data.frame
+##
+data(brussels_reviews_anno)
+
+x &lt;- document_term_frequencies(brussels_reviews_anno[, c("doc_id", "token")])
+x &lt;- document_term_frequencies(brussels_reviews_anno[, c("doc_id", "lemma")])
+str(x)
+
+brussels_reviews_anno$my_doc_id &lt;- paste(brussels_reviews_anno$doc_id, 
+                                         brussels_reviews_anno$sentence_id)
+x &lt;- document_term_frequencies(brussels_reviews_anno[, c("my_doc_id", "lemma")])
+
+##
+## Calculate document_term_frequencies on a character vector
+##
+data(brussels_reviews)
+x &lt;- document_term_frequencies(x = brussels_reviews$feedback, document = brussels_reviews$id, 
+                               split = " ")
+x &lt;- document_term_frequencies(x = brussels_reviews$feedback, document = brussels_reviews$id, 
+                               split = "[[:space:][:punct:][:digit:]]+")
+                               
+##
+## document-term-frequencies on several fields to easily include bigram and trigrams
+##
+library(data.table)
+x &lt;- as.data.table(brussels_reviews_anno)
+x &lt;- x[, token_bigram  := txt_nextgram(token, n = 2), by = list(doc_id, sentence_id)]
+x &lt;- x[, token_trigram := txt_nextgram(token, n = 3), by = list(doc_id, sentence_id)]
+x &lt;- document_term_frequencies(x = x, 
+                               document = "doc_id", 
+                               term = c("token", "token_bigram", "token_trigram"))
+head(x)
+</code></pre>
+
+
+</div>

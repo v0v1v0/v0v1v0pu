@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>apply_jacobian</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evaluate Jacobian of model.</h2>
+
+<h3>Description</h3>
+
+<p>Evaluate Jacobian of model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">apply_jacobian(
+  url,
+  name,
+  out_wrt,
+  in_wrt,
+  parameters,
+  vec,
+  config = jsonlite::fromJSON("{}")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>URL the model is running at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Name of the desired model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out_wrt</code></td>
+<td>
+<p>Output variable to take Jacobian with respect to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>in_wrt</code></td>
+<td>
+<p>Input variable to take Jacobian with respect to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>Model input parameter (a list of vectors).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vec</code></td>
+<td>
+<p>Vector to multiply Jacobian by.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>config</code></td>
+<td>
+<p>Model-specific configuration options.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Jacobian with respect to given input and output variables, applied to given vector.
+</p>
+
+
+</div>

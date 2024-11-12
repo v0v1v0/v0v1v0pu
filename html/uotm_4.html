@@ -1,0 +1,41 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>arma.plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot the time series data.</h2>
+
+<h3>Description</h3>
+
+<p>This function is to plot the time series figure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">arma.plot(data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data containing time series.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The arma.plot method returns a figure.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ts &lt;- arma.sim(ars = c(-0.9, -1.4, -0.7, -0.6), mas = c(0.5, -0.4), nobs = 100)
+arma.plot(ts)
+</code></pre>
+
+
+</div>

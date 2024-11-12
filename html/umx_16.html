@@ -1,0 +1,226 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GFF</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Twin data: General Family Functioning, divorce, and well-being.</h2>
+
+<h3>Description</h3>
+
+<p>Measures of family functioning, happiness and related variables in twins, and
+their brothers and sisters. (see details)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(GFF)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 1000 rows of twin-family data columns.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Several scales in the data are described in  van der Aa et al. (2010).
+General Family Functioning (GFF) refers to adolescents' evaluations general family health
+vs. pathology. It assesses problem solving, communication, roles within the household,
+affection, and control. GFF was assessed with a Dutch translation of the General Functioning
+sub-scale of the McMaster Family Assessment Device (FAD) (Epstein et al., 1983).
+</p>
+<p>Family Conflict (FC) refers to adolescents' evaluations of the amount of openly
+expressed anger, aggression, and conflict among family members. Conflict
+sub-scale of the Family Environment Scale (FES) (Moos, 1974)
+</p>
+<p>Quality of life in general (QLg) was assessed with the 10-step Cantril
+Ladder from best- to worst-possible life (Cantril, 1965).
+</p>
+
+<ul>
+<li> <p><em>zyg_6grp</em>: Six-level zygosity: MZMM, DZMM, MZFF, DZFF, DZMF, DZFM
+</p>
+</li>
+<li> <p><em>zyg_2grp</em>: Two-level zygosity measure: 'MZ', 'DZ'
+</p>
+</li>
+<li> <p><em>divorce</em>: Parental divorce status: 0 = No, 1 = Yes
+</p>
+</li>
+<li> <p><em>sex_T1</em>: Sex of twin 1: 0 = "male", 1 = "female"
+</p>
+</li>
+<li> <p><em>age_T1</em>: Age of twin 1 (years)
+</p>
+</li>
+<li> <p><em>gff_T1</em>: General family functioning for twin 1
+</p>
+</li>
+<li> <p><em>fc_T1</em>: Family conflict sub-scale of the FES
+</p>
+</li>
+<li> <p><em>qol_T1</em>: Quality of life for twin 1
+</p>
+</li>
+<li> <p><em>hap_T1</em>: General happiness for twin 1
+</p>
+</li>
+<li> <p><em>sat_T1</em>: Satisfaction with life for twin 1
+</p>
+</li>
+<li> <p><em>AD_T1</em>: Anxiety and Depression for twin 1
+</p>
+</li>
+<li> <p><em>SOMA_T1</em>: Somatic complaints for twin 1
+</p>
+</li>
+<li> <p><em>SOC_T1</em>: Social problems for twin 1
+</p>
+</li>
+<li> <p><em>THOU_T1</em>: Thought disorder problems for twin 1
+</p>
+</li>
+<li> <p><em>sex_T2</em>: Sex of twin 2
+</p>
+</li>
+<li> <p><em>age_T2</em>: Age of twin 2
+</p>
+</li>
+<li> <p><em>gff_T2</em>: General family functioning for twin 2
+</p>
+</li>
+<li> <p><em>fc_T2</em>: Family conflict sub-scale of the FES
+</p>
+</li>
+<li> <p><em>qol_T2</em>: Quality of life for twin 2
+</p>
+</li>
+<li> <p><em>hap_T2</em>: General happiness for twin 2
+</p>
+</li>
+<li> <p><em>sat_T2</em>: Satisfaction with life for twin 2
+</p>
+</li>
+<li> <p><em>AD_T2</em>: Anxiety and Depression for twin 2
+</p>
+</li>
+<li> <p><em>SOMA_T2</em>: Somatic complaints for twin 2
+</p>
+</li>
+<li> <p><em>SOC_T2</em>: Social problems for twin 2
+</p>
+</li>
+<li> <p><em>THOU_T2</em>: Thought disorder problems for twin 2
+</p>
+</li>
+<li> <p><em>sex_Ta</em>: Sex of sib 1
+</p>
+</li>
+<li> <p><em>age_Ta</em>: Age of sib 1
+</p>
+</li>
+<li> <p><em>gff_Ta</em>: General family functioning for sib 1
+</p>
+</li>
+<li> <p><em>fc_Ta</em>: Family conflict sub-scale of the FES
+</p>
+</li>
+<li> <p><em>qol_Ta</em>: Quality of life for sib 1
+</p>
+</li>
+<li> <p><em>hap_Ta</em>: General happiness for sib 1
+</p>
+</li>
+<li> <p><em>sat_Ta</em>: Satisfaction with life for sib 1
+</p>
+</li>
+<li> <p><em>AD_Ta</em>: Anxiety and Depression for sib 1
+</p>
+</li>
+<li> <p><em>SOMA_Ta</em>: Somatic complaints for sib 1
+</p>
+</li>
+<li> <p><em>SOC_Ta</em>: Social problems for sib 1
+</p>
+</li>
+<li> <p><em>THOU_Ta</em>: Thought disorder problems for sib 1
+</p>
+</li>
+<li> <p><em>sex_Ts</em>: Sex of sib 2
+</p>
+</li>
+<li> <p><em>age_Ts</em>: Age of sib 2
+</p>
+</li>
+<li> <p><em>gff_Ts</em>: General family functioning for sib 2
+</p>
+</li>
+<li> <p><em>fc_Ts</em>: Family conflict sub-scale of the FES
+</p>
+</li>
+<li> <p><em>qol_Ts</em>: Quality of life for sib 2
+</p>
+</li>
+<li> <p><em>hap_Ts</em>: General happiness for sib 2
+</p>
+</li>
+<li> <p><em>sat_Ts</em>: Satisfaction with life for sib 2
+</p>
+</li>
+<li> <p><em>AD_Ts</em>: Anxiety and Depression for sib 2
+</p>
+</li>
+<li> <p><em>SOMA_Ts</em>: Somatic complaints for sib 2
+</p>
+</li>
+<li> <p><em>SOC_Ts</em>: Social problems for sib 2
+</p>
+</li>
+<li> <p><em>THOU_Ts</em>: Thought disorder problems for sib 2
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>van der Aa, N., Boomsma, D. I., Rebollo-Mesa, I., Hudziak, J. J., &amp; Bartels,
+M. (2010). Moderation of genetic factors by parental divorce in adolescents'
+evaluations of family functioning and subjective wellbeing. Twin Research
+and Human Genetics, <strong>13</strong>, 143-162. <a href="https://doi.org/10.1375/twin.13.2.143">doi:10.1375/twin.13.2.143</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other datasets: 
+<code>Fischbein_wt</code>,
+<code>docData</code>,
+<code>iqdat</code>,
+<code>umx</code>,
+<code>us_skinfold_data</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Twin 1 variables (end in '_T1')
+data(GFF)
+umx_names(GFF, "1$") # Just variables ending in 1 (twin 1)
+str(GFF) # first few rows
+
+
+m1 = umxACE(selDVs= "gff", sep = "_T",
+	mzData = subset(GFF, zyg_2grp == "MZ"), 
+	dzData = subset(GFF, zyg_2grp == "DZ")
+)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

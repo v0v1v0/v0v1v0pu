@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_curve</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute the model for a given subject's data and best-fit parameters</h2>
+
+<h3>Description</h3>
+
+<p>This function calculates the biphasic or single phase model given a subject's data and best-fit parameters
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_curve(data, best_param, param_names, whichcurve = get_biphasic)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data frame with columns for the subject's identifier ('id') and timing of sampling ('time')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>best_param</code></td>
+<td>
+<p>named numeric vector of best fit parameters obtained from fitting the biphasic or single phase model to the subjects data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param_names</code></td>
+<td>
+<p>character vector containing the names of the parameters in 'best_param'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>whichcurve</code></td>
+<td>
+<p>character indicating which model function should be used. Use 'get_biphasic' for the biphasic model, or 'get_singlephase' for the single phase model. Defaults to 'get_biphasic'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data frame with columns for the sampling times ('time'), fitted viral load predictions ('fit'), and the corresponding subject identifier ('id')
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+nobs &lt;- 7
+example_param &lt;- c(A = 10000, delta = 0.03, B = 1000, gamma = 0.68)
+
+vldata &lt;- get_biphasic(params = example_param, timevec = seq(5, 100, length.out = nobs))
+
+subjectdata &lt;- data.frame(id = 123, time = seq(5, 100, length.out = nobs),
+                          vl = 10^ (log10(vldata) + rnorm(nobs, 0, 0.2)))
+
+get_curve(data = subjectdata, best_param = example_param, param_names = names(example_param))
+</code></pre>
+
+
+</div>

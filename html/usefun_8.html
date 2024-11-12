@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_common_values</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the common values of two vectors</h2>
+
+<h3>Description</h3>
+
+<p>This function prints and returns the common values of two vectors. The two
+vectors don't have to be the same length.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_common_values(vec1, vec2, vector.values.str = "nodes", with.gt = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vec1</code></td>
+<td>
+<p>vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vec2</code></td>
+<td>
+<p>vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vector.values.str</code></td>
+<td>
+<p>string. Used for printing, it tell us what are the
+values of the two vectors (use plural form). Default value: "nodes".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>with.gt</code></td>
+<td>
+<p>logical. Determines if the "&gt;" sign will be appended for nice
+printing in an R notebook (use with the chuck option <em>results = 'asis'</em>).
+Default value: TRUE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the vector of the common values. If there is only one value
+in common, the <code>vector.values.str</code> gets the last character stripped for
+readability. If there are no common values, it returns NULL.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>pretty_print_vector_values</code>, <code>pretty_print_string</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">vec1 = c(1,2,3)
+vec2 = c(3,4,1)
+
+common.names = get_common_values(vec1, vec2)
+
+</code></pre>
+
+
+</div>

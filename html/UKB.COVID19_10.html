@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>variantQC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variant QC for Genetic Analyses</h2>
+
+<h3>Description</h3>
+
+<p>Variant QC for Genetic Analyses
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">variantQC(snpQcFile, mfiDir, mafFilt = 0.001, infoFilt = 0.5, outDir)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>snpQcFile</code></td>
+<td>
+<p>file containing SNP QC info (ukb_snp_qc.txt)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mfiDir</code></td>
+<td>
+<p>directory where the per chromosome UKBiobank MAF/INFO files (ukb_mfi_chr*_v3.txt) are located</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mafFilt</code></td>
+<td>
+<p>minor allele frequency filter - default 0.001</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>infoFilt</code></td>
+<td>
+<p>imputation quality (INFO) score filter - default 0.5</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outDir</code></td>
+<td>
+<p>output directory</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>outputs SNP inclusion lists (SNPID and rsID formats) for given MAF/INFO filters. Also outputs list of SNPs to be used for genetic Relatedness Matrix (GRM) calculations.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+variantQC(snpQcFile=covid_example("sim_ukb_snp_qc.txt.gz"), 
+mfiDir=covid_example("alleleFreqs"), 
+mafFilt=0.001, 
+infoFilt=0.5, 
+outDir=covid_example("results"))
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

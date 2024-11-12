@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unc_postprocess</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Postprocess UD</h2>
+
+<h3>Description</h3>
+
+<p>ppud() adjusts uncertainty so that it is not less than a certain value. In particular, it is often used for UD_bal_model, where the uncertainty may be negative.
+min_lambda_calc() finds lambda such that the proportion of the minimum uncertainty is the specified value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ppud(UD, lambda_list)
+
+min_lambda_calc(UD, prop)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>UD</code></td>
+<td>
+<p>model-wise uncertainty or stage-wise uncertainty</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda_list</code></td>
+<td>
+<p>a numeric vector that adjust the degree to which uncertainties and average uncertainty are close.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prop</code></td>
+<td>
+<p>target proportion of least uncertainty</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(0)
+stage1 &lt;- LETTERS[1:3]
+stage2 &lt;- LETTERS[1:2]
+stage3 &lt;- LETTERS[1:4]
+y &lt;- rnorm(3*2*4)
+data &lt;- expand.grid(stage1=stage1,
+                    stage2=stage2,
+                    stage3=stage3)
+stages &lt;- names(data)
+data &lt;- cbind(data, y)
+
+UD_bal_model_var &lt;- UD_bal_model(data, "y", stages, u_var, flist_var)
+UD_bal_model_var
+UD_bal_model_mad &lt;- UD_bal_model(data, "y", stages, u_mad, flist_mad)
+UD_bal_model_mad 
+UD_bal_model_range &lt;- UD_bal_model(data, "y", stages, u_range, flist_range)
+UD_bal_model_range 
+
+UD_bal_stage_var &lt;- UD_model2stage(UD_bal_model_var)
+UD_bal_stage_var 
+UD_bal_stage_mad &lt;- UD_model2stage(UD_bal_model_mad)
+UD_bal_stage_mad 
+UD_bal_stage_range &lt;- UD_model2stage(UD_bal_model_range)
+UD_bal_stage_range 
+
+UD_list = ppud(UD_bal_model_range)
+plot(UD_list)
+
+lambda = min_lambda_calc(UD_bal_model_range, 0.01)
+UD_1percent = ppud(UD_bal_model_range, lambda)
+UD_1percent$UD[[1]]
+
+</code></pre>
+
+
+</div>

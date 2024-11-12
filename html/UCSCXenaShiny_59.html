@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_gene_cor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize Gene-Gene Correlation in TCGA</h2>
+
+<h3>Description</h3>
+
+<p>Visualize Gene-Gene Correlation in TCGA
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_gene_cor(
+  Gene1 = "CSF1R",
+  Gene2 = "JAK3",
+  data_type1 = "mRNA",
+  data_type2 = "mRNA",
+  use_regline = TRUE,
+  purity_adj = TRUE,
+  alpha = 0.5,
+  color = "#000000",
+  filter_tumor = TRUE,
+  opt_pancan = .opt_pancan
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Gene1</code></td>
+<td>
+<p>a molecular identifier (e.g., "TP53") or a formula specifying
+genomic signature (<code>"TP53 + 2 * KRAS - 1.3 * PTEN"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Gene2</code></td>
+<td>
+<p>a molecular identifier (e.g., "TP53") or a formula specifying
+genomic signature (<code>"TP53 + 2 * KRAS - 1.3 * PTEN"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_type1</code></td>
+<td>
+<p>choose gene profile type for the first gene, including "mRNA","transcript","methylation","miRNA","protein","cnv_gistic2"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_type2</code></td>
+<td>
+<p>choose gene profile type for the second gene, including "mRNA","transcript","methylation","miRNA","protein","cnv_gistic2"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use_regline</code></td>
+<td>
+<p>if <code>TRUE</code>, add regression line.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>purity_adj</code></td>
+<td>
+<p>whether performing partial correlation adjusted by purity</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>dot alpha.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color</code></td>
+<td>
+<p>dot color.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter_tumor</code></td>
+<td>
+<p>whether use tumor sample only, default <code>TRUE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt_pancan</code></td>
+<td>
+<p>specify one dataset for some molercular profiles</p>
+</td>
+</tr>
+</table>
+</div>

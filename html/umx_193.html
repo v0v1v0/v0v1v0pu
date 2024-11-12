@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_explode</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Explode a string (Like the php function <code>explode</code>)</h2>
+
+<h3>Description</h3>
+
+<p>Takes a string and returns an array of delimited strings (by default, each single character)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_explode(delimiter = character(), string)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>delimiter</code></td>
+<td>
+<p>what to break the string on. Default is empty string ""</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>string</code></td>
+<td>
+<p>an character string, e.g. "dog"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> a vector of strings, e.g. c("d", "o", "g")
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>, <a href="https://www.php.net/manual/en/function.explode.php">https://www.php.net/manual/en/function.explode.php</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other String Functions: 
+<code>umx_explode_twin_names()</code>,
+<code>umx_grep()</code>,
+<code>umx_names()</code>,
+<code>umx_paste_names()</code>,
+<code>umx_rot()</code>,
+<code>umx_str_chars()</code>,
+<code>umx_str_from_object()</code>,
+<code>umx_trim()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">umx_explode("", "dog") # "d" "o" "g"
+umx_explode(" ", "cats and dogs") # [1] "cats" "and"  "dogs"
+</code></pre>
+
+
+</div>

@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_pancan_anatomy</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize Single Gene Expression in Anatomy Location</h2>
+
+<h3>Description</h3>
+
+<p>Visualize Single Gene Expression in Anatomy Location
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_pancan_anatomy(
+  Gene = "TP53",
+  Gender = c("Female", "Male"),
+  data_type = "mRNA",
+  option = "D",
+  opt_pancan = .opt_pancan
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Gene</code></td>
+<td>
+<p>a molecular identifier (e.g., "TP53") or a formula specifying
+genomic signature (<code>"TP53 + 2 * KRAS - 1.3 * PTEN"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Gender</code></td>
+<td>
+<p>a string, "Female" (default) or "Male".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_type</code></td>
+<td>
+<p>choose gene profile type, including "mRNA","transcript","methylation","miRNA","protein","cnv"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>option</code></td>
+<td>
+<p>A character string indicating the color map option to use.
+Eight options are available:
+</p>
+
+<ul>
+<li> <p><code>"magma"</code> (or <code>"A"</code>)
+</p>
+</li>
+<li> <p><code>"inferno"</code> (or <code>"B"</code>)
+</p>
+</li>
+<li> <p><code>"plasma"</code> (or <code>"C"</code>)
+</p>
+</li>
+<li> <p><code>"viridis"</code> (or <code>"D"</code>)
+</p>
+</li>
+<li> <p><code>"cividis"</code> (or <code>"E"</code>)
+</p>
+</li>
+<li> <p><code>"rocket"</code> (or <code>"F"</code>)
+</p>
+</li>
+<li> <p><code>"mako"</code> (or <code>"G"</code>)
+</p>
+</li>
+<li> <p><code>"turbo"</code> (or <code>"H"</code>)
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt_pancan</code></td>
+<td>
+<p>specify one dataset for some molercular profiles</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>ggplot</code> object
+</p>
+
+
+</div>

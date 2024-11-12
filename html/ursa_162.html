@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>na.omit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Drop bands which don't have data.
+</h2>
+
+<h3>Description</h3>
+
+<p>The bands with band_blank images, are omitted.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+na.omit(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Ignored. For consistence with definition of generic function.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>, which has no bands without any data.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>band_blank</code>
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+session_grid(regrid(mul=1/4))
+a &lt;- ursa_new(value=1:3)
+print(a)
+a[2] &lt;- NA
+print(a)
+a2 &lt;- na.omit(a)
+print(a2)
+</code></pre>
+
+
+</div>

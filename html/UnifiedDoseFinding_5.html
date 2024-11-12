@@ -1,0 +1,194 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_oc_QuasiBOIN</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Generate operating characteristics for finding the maximum tolerated dose (MTD) defined by Equivalent Score (ET) using Quasi-CRM design using gBOIN
+</h2>
+
+<h3>Description</h3>
+
+<p>Obtain the operating characteristics of Quasi-CRM design (Yuan et al. 2007) and Robust-Quasi-CRM design (Pan et al. 2014) for finding the maximum tolerated dose (MTD) using Equivalent Score (ET) derived from toxicity grade information using the gBOIN design (Mu et al. 2017)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_oc_QuasiBOIN(target, p.true, score, ncohort, cohortsize, n.earlystop = 100,
+                 startdose = 1, p.saf = 0.6 * target, p.tox = 1.4 * target,
+                 cutoff.eli = 0.95, extrasafe = FALSE, offset = 0.05,
+                 ntrial = 1000, seed = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the target DLT rate
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.true</code></td>
+<td>
+
+<p>the true toxicity probability at each dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>score</code></td>
+<td>
+
+<p>the default value is score = seq(0, 1.5, by = 0.5) / 1.5
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncohort</code></td>
+<td>
+
+<p>the number of cohorts
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohortsize</code></td>
+<td>
+
+<p>the cohort size
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.earlystop</code></td>
+<td>
+
+<p>the early stopping parameter. The default value is n.earlystop = 100
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>startdose</code></td>
+<td>
+
+<p>the starting dose level. The default value is startdose = 1
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.saf</code></td>
+<td>
+
+<p>lower bound. The default value is p.saf = 0.6 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.tox</code></td>
+<td>
+
+<p>upper bound. The default value is p.tox = 1.4 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff.eli</code></td>
+<td>
+
+<p>the cutoff to eliminate an overly toxic dose for safety. The default value is cutoff.eli = 0.95
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extrasafe</code></td>
+<td>
+
+<p>extrasafe	set extrasafe = TRUE to impose a more stringent stopping rule. The default value is extrasafe = FALSE
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+
+<p>when extrasafe = TRUE will have effect. The default value is offset = 0.05
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ntrial</code></td>
+<td>
+
+<p>the number of simulated trials
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+
+<p>the seed. The default value is seed = 100
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>get_oc_QuasiBOIN()</code> returns the operating characteristics of Bayesian optimal interval design as a list object,
+including:
+(1) the target DLT rate,
+(2) the true DLT rate at different scale for each dose level,
+(3) number of cohort,
+(4) cohortsize,
+(5) starting dose level,
+(6) lower bound,
+(7) upper bound,
+(8) selection percentage of each dose level,
+(9) the average number of patients treated at each dose,
+(10) the average number of patients responded to toxicity at each dose level
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>Yuan, Z., R. Chappell, and H. Bailey. "The continual reassessment method for multiple toxicity grades: a Bayesian quasi-likelihood approach." Biometrics 63, no. 1 (2007): 173-179.
+</p>
+<p>Pan, Haitao, Cailin Zhu, Feng Zhang, Ying Yuan, Shemin Zhang, Wenhong Zhang, Chanjuan Li, Ling Wang, and Jielai Xia. "The continual reassessment method for multiple toxicity grades: a Bayesian model selection approach." PloS one 9, no. 5 (2014): e98147.
+</p>
+<p>Mu, Rongji, Ying Yuan, Jin Xu, Sumithra J. Mandrekar, and Jun Yin. "gBOIN: a unified model-assisted phase I trial design accounting for toxicity grades, and binary or continuous end points." Journal of the Royal Statistical Society. Series C: Applied Statistics 68, no. 2 (2019): 289-308.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">target &lt;- 0.47 / 1.5
+p.true &lt;- matrix(c(0.83, 0.12, 0.04, 0.01,
+                   0.75, 0.15, 0.07, 0.03,
+                   0.62, 0.18, 0.11, 0.09,
+                   0.51, 0.19, 0.14, 0.16,
+                   0.34, 0.16, 0.15, 0.35,
+                   0.19, 0.11, 0.11, 0.59), ncol = 4, byrow = TRUE)
+score &lt;- seq(0, 1.5,by = 0.5) / 1.5
+ncohort &lt;- 10
+cohortsize &lt;- 3
+ntrial &lt;- 4000
+get_oc_QuasiBOIN(target = target, p.true = p.true, score = score, ncohort = ncohort,
+                 cohortsize = cohortsize, ntrial = ntrial)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummaryMRDoC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Present the results of a Mendelian Randomization Direction of Causation Model in a table</h2>
+
+<h3>Description</h3>
+
+<p>Summarizes a MR Direction of Causation model, as returned by <code>umxMRDoC()</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummaryMRDoC(
+  model,
+  digits = 2,
+  std = TRUE,
+  CIs = FALSE,
+  comparison = NULL,
+  RMSEA_CI = FALSE,
+  report = c("markdown", "html"),
+  file = getOption("umx_auto_plot"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A fitted <code>umxDoC()</code> model to summarize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to show the standardized model (TRUE) (ignored: used extended = TRUE to get unstandardized)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Confidence intervals (default FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>Run mxCompare on a comparison model (default NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RMSEA_CI</code></td>
+<td>
+<p>Optionally compute CI on RMSEA.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>Print tables to the console (as 'markdown'), or open in browser ('html')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: NA = none; "name" = use the name of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Optional additional parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> nothing
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxDoC()</code>, <code>plot()</code>, <code>umxSummary()</code> work for DoC models.
+</p>
+</li></ul>
+<p>Other Summary functions: 
+<code>umxSummary.MxModel()</code>,
+<code>umxSummaryACEcov()</code>,
+<code>umxSummaryCP()</code>,
+<code>umxSummaryGxE()</code>,
+<code>umxSummaryIP()</code>
+</p>
+
+
+</div>

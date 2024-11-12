@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fci.binom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Abstract Randomized P-value for the Binomial Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the abstract randomized P-value for the UMPU two-tailed test
+for the binomial distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fci.binom(x, n, alpha = 0.05, p = seq(0, 1, length = 10001), flat = 1 / 4)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>binomial observation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>the significance level, one minus the coverage probability.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>the vector of parameter values at which (the membership function
+of) the fuzzy confidence interval is evaluated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flat</code></td>
+<td>
+<p>the amount of flat parts of the membership function shown,
+expressed as a fraction of the curved parts.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>prints the core and support of the fuzzy confidence interval
+and makes one or two plots (as appropriate) showing the edges of the
+fuzzy interval.
+</p>
+
+
+<h3>Value</h3>
+
+<p>none
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ump)
+fci.binom(4, 10)
+fci.binom(0, 10)
+fci.binom(9, 10)
+</code></pre>
+
+
+</div>

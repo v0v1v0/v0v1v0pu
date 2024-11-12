@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>suffix_extract</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>extract the suffix from domain names</h2>
+
+<h3>Description</h3>
+
+<p>domain names have suffixes - common endings that people
+can or could register domains under. This includes things like ".org", but
+also things like ".edu.co". A simple Top Level Domain list, as a
+result, probably won't cut it.
+</p>
+<p><code>suffix_extract</code> takes the list of public suffixes,
+as maintained by Mozilla (see <code>suffix_dataset</code>) and
+a vector of domain names, and produces a data.frame containing the
+suffix that each domain uses, and the remaining fragment.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">suffix_extract(domains, suffixes = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>domains</code></td>
+<td>
+<p>a vector of damains, from <code>domain</code>
+or <code>url_parse</code>. Alternately, full URLs can be provided
+and will then be run through <code>domain</code> internally.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffixes</code></td>
+<td>
+<p>a dataset of suffixes. By default, this is NULL and the function
+relies on <code>suffix_dataset</code>. Optionally, if you want more updated
+suffix data, you can provide the result of <code>suffix_refresh</code> for
+this parameter.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame of four columns, "host" "subdomain", "domain" &amp; "suffix".
+"host" is what was passed in. "subdomain" is the subdomain of the suffix.
+"domain" contains the part of the domain name that came before the matched suffix.
+"suffix" is, well, the suffix.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>suffix_dataset</code> for the dataset of suffixes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Using url_parse
+domain_name &lt;- url_parse("http://en.wikipedia.org")$domain
+suffix_extract(domain_name)
+
+# Using domain()
+domain_name &lt;- domain("http://en.wikipedia.org")
+suffix_extract(domain_name)
+
+## Not run: 
+#Relying on a fresh version of the suffix dataset
+suffix_extract(domain("http://en.wikipedia.org"), suffix_refresh())
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

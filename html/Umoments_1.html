@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>one_combination</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate symbolic expression for expectation</h2>
+
+<h3>Description</h3>
+
+<p>Generate a string with symbolic expression for expectation of powers and
+products of non-central (raw) sample moments of an arbitrary order.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">one_combination(powvect, smpsize = "n")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>powvect</code></td>
+<td>
+<p>vector of non-negative integers representing exponents
+<code class="reqn">j_1, \dots, j_m</code> of non-central moments in
+expectation (see "Details"). The position (index) of an element of this
+vector indicates a corresponding moment, e.g. for <code class="reqn">E(\overline{X}^5
+\overline{X^4})</code>, <code>powvect = c(5, 0, 0, 1)</code>. Thus the vector will have
+<code>m</code> elements if <code>m</code>'th is the highest moment.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smpsize</code></td>
+<td>
+<p>symbol to be used for sample size. Defaults to <code>"n"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For a zero-mean random variable <code>X</code> and a sample <code class="reqn">X_1, \dots,
+X_n</code>, find <code class="reqn">E(\bar{X}^{j_1} \overline{X^2}^{j_2}
+\overline{X^3}^{j_3} \cdots \overline{X^m}^{j_m})</code>, where <code class="reqn">overline{X^k} = 1/n
+\sum_{i = 1}^n X_i^{k}</code> is a <code class="reqn">k</code>'th
+non-central sample moment. The expression is given in terms of sample size
+and true moments <code class="reqn">\mu_k</code> of <code class="reqn">X</code>. These expectations can
+subsequently be used for generating unbiased central moment estimators of an
+arbitrary order, Edgeworth expansions, and possibly solving other
+higher-order problems.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A string representing a symbolic expression for further processing
+using computer algebra (e.g. with <em>Sage</em> or <em>SymPy</em>), for
+calculating numeric values, or to be rendered with <em>Latex</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">one_combination(c(5, 0, 2, 1))
+
+</code></pre>
+
+
+</div>

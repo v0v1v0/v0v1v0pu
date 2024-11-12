@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>export_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Write out the analysis plots</h2>
+
+<h3>Description</h3>
+
+<p>Write out the analysis plots
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">export_plot(plot_to_export, path_to_export, width = 7, height = 7)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>plot_to_export</code></td>
+<td>
+<p>Object containing plot we want to export</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path_to_export</code></td>
+<td>
+<p>Path of the .png file, we want to export to</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width</code></td>
+<td>
+<p>Width of plot in inches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height</code></td>
+<td>
+<p>Height of plot in inches</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Character vector of the status of the write
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+plot_to_export &lt;- vis_uniswap_stats_hist_v2()
+path_to_export &lt;- "~/Desktop/uniswappeR_plot_export.png"
+export_plot(plot_to_export,path_to_export)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

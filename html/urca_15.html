@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cajorls</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>OLS regression of VECM</h2>
+
+<h3>Description</h3>
+
+<p>This function returns the OLS regressions of a restricted VECM,
+<em>i.e.</em> it returns a list object with elements of class ‘lm’
+containing the restricted VECM and a matrix object with the normalised
+cointegrating relationships. The user can provide a certain number of
+which equation in the VECM should be estimated and reported, or if
+<code>"reg.number = NULL"</code> each equation in the VECM will be estimated
+and its results are reported. Furthermore, the cointegratioon rank has
+to be supplied too.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cajorls(z, r = 1, reg.number = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class <code>ca.jo</code> or <code>cajo.test</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r</code></td>
+<td>
+<p>An integer, signifiying the cointegration rank.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reg.number</code></td>
+<td>
+<p>The number of the equation in the VECM that should
+be estimated or if set to <code>NULL</code> (the default), all equations
+within the VECM are estimated.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The cointegration space is normalised as <code class="reqn">\bold{\beta}_c =
+   \bold{\beta}(S'\bold{\beta})^{-1}</code>, with <code class="reqn">S' = (I_r, 0)</code>. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a list object with elements of class <code>lm</code> for the
+restricted VECM and a matrix object with the normalised cointegrating
+vectors. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1995), <em>Likelihood-Based Inference in Cointegrated Vector
+Autoregressive Models</em>, Oxford University Press, Oxford.
+</p>
+<p>Lütkepohl, H. (2006), <em>New Introduction to Multiple Time Series
+Analysis</em>, Springer, New York.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code>, <code>cajools</code>, <code>lm</code>,
+<code>ca.jo-class</code> and <code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(finland)
+sjf &lt;- finland
+sjf.vecm &lt;- ca.jo(sjf, ecdet = "none", type = "eigen", K = 2,
+spec = "longrun", season = 4)
+sjf.vecm.rls &lt;- cajorls(sjf.vecm, r = 2)
+summary(sjf.vecm.rls$rlm)
+sjf.vecm.rls$beta
+</code></pre>
+
+
+</div>

@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.speciesLISA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot positional uncertainty based on LISA</h2>
+
+<h3>Description</h3>
+
+<p>Plot the values of LISAs at species occurrence locations, which can be used to identify the locations that need positional uncertainty treatment. </p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+## S4 method for signature 'speciesLISA,missing'
+plot(x, y, ...)
+## S4 method for signature 'speciesLISA,SpatialPolygons'
+plot(x, y, ...)
+## S4 method for signature 'speciesLISA,SpatialPolygonsDataFrame'
+plot(x, y, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> an object of class <code>speciesLISA</code>, which is the output of <code>speciesLisa</code> function. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p> optional. Boundary map of the study area, an object of class <code>SpatialPolygons</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> additional argument (see details)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function generates a map (i.e. a bubble plot) in which the species points present the magnitude of LISA in predictors at the location as open or filled circles with different sizes.
+</p>
+<p>Below are additional arguments:
+</p>
+<p><code>cex</code> the maximum symbol size (circle) in the plot. 
+<code>levels</code> specifies the number of LISA levels at which the points are presented .
+<code>xyLegend</code> a vector with two numbers, specifying the coordinates of the legend. If missing, the function tries to find the appropriate location for it.
+<code>...</code> <code>xlab</code>, <code>ylab</code> and <code>main</code> same as the base <code>plot</code> function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>plots the bubble plot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Babak Naimi <a href="mailto:naimi.b@gmail.com">naimi.b@gmail.com</a>
+</p>
+<p><a href="https://r-gis.net/">https://r-gis.net/</a>
+</p>
+<p><a href="https://www.biogeoinformatics.org/">https://www.biogeoinformatics.org/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code>speciesLisa</code>, <code>lisa</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">file &lt;- system.file("external/predictors.tif", package="usdm")
+
+r &lt;- rast(file) # reading a RasterBrick object including 4 rasters in the Netherlands
+
+r 
+
+plot(r) # visualize the raster layers
+
+sp.file &lt;- system.file("external/species_nl.shp", package="usdm")
+sp &lt;- vect(sp.file)
+
+
+splisa &lt;- speciesLisa(x=r,y=sp,uncertainty=15000,weights=c(0.22,0.2,0.38,0.2))
+
+splisa
+
+plot(splisa)
+
+bnd.file &lt;- system.file("external/boundary.shp", package="usdm")
+bnd &lt;- vect(bnd.file) # reading the boundary map
+
+plot(splisa,bnd)
+
+#plot(splisa,bnd,levels=c(2,4,6,8))
+
+#plot(splisa,bnd,levels=c(-5,-3,0,3,5))
+
+</code></pre>
+
+
+</div>

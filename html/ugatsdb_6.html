@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>expand_date</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate Temporal Identifiers from a Date Column</h2>
+
+<h3>Description</h3>
+
+<p>This function expands a date column and generates additional temporal identifiers from it (such as the year, month, quarter, fiscal year etc.).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">expand_date(
+  x,
+  gen = c("Year", "Quarter", "FY", "QFY", "Month"),
+  origin = "1899-12-30",
+  keep.date = TRUE,
+  remove.missing.date = TRUE,
+  sort = TRUE,
+  as.factor = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>either a vector of class 'Date', or coercible to date using <code>as.Date</code>, or a data frame / list with a date variable in the first column.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gen</code></td>
+<td>
+<p>character. A vector of identifiers to generate from <code>x</code>. The possible identifiers are found in <code>.Tvars</code>. The default setting is to generate all identifiers apart from "Day".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>origin</code></td>
+<td>
+<p>character / Date. Passed to <code>as.Date</code>: for converting numeric <code>x</code> to date.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keep.date</code></td>
+<td>
+<p>logical. <code>TRUE</code> will keep the date variable in the first column of the resulting dataset, <code>FALSE</code> will remove the date variable in favor of the generated identifiers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove.missing.date</code></td>
+<td>
+<p>logical. <code>TRUE</code> will remove missing values in <code>x</code>. If <code>x</code> is a dataset, the corresponding rows will be removed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sort</code></td>
+<td>
+<p>logical. <code>TRUE</code> will sort the data by the date column.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as.factor</code></td>
+<td>
+<p><code>TRUE</code> will generate quarters, fiscal years and months ('Quarter', 'FY', 'QFY', 'Month') as factor variables. It is also possible to use <code>as.factor = "ordered"</code> to generate ordered factors.
+<code>FALSE</code> will generate fiscal years as character and quarters and months as integer variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>data.table</code> containing the computed identifiers as columns. See Examples.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>make_date</code>, <code>ugatsdb</code> 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># First a basic example
+x &lt;- seq.Date(as.Date("1999-01-01"), as.Date("2000-01-01"), by = "month")
+expand_date(x)
+expand_date(x, gen = c("Year", "Month"), keep.date = FALSE)
+
+# Now using the API
+expand_date(get_data("BOU_CPI")) # Getting Monthly CPI data from the Bank of Uganda
+
+# Same thing
+get_data("BOU_CPI", expand.date = TRUE)
+
+
+</code></pre>
+
+
+</div>

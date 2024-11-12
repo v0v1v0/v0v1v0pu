@@ -1,0 +1,321 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>panel_annotation</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Add label or annotation to the image panel.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>panel_annotation</code> puts an annotation (text label) on the panel with raster image without anchors to any layer. Can be used as captions to image panels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">panel_annotation(...)
+
+# non-public
+.panel_annotation(label = expression(), position = "bottomright",
+                  lon = NA, lat = NA, x = NA, y = NA, cex = 1.0, adjust = 0.5,
+                  fg = "#000000", bg = "#FFFFFF1F", buffer = 1, fill = "#FFFFFF7F",
+                  font = par("family"), vertical = FALSE, alpha = 1,
+                  interpolate = FALSE, resample = FALSE, verbose = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are recognized via their names (using regular expressions) and classes:
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+      <em>Matched pattern</em> (<code>panel_annotation</code>) </td>
+<td style="text-align: left;"> <em>Argument</em> (<code>.panel_annotation</code>) </td>
+<td style="text-align: left;"> <em>Description</em>
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>((caption|ann(otation)*)</code> </td>
+<td style="text-align: left;"> </td>
+<td style="text-align: left;"> Logical or integer. Responsible for should annotation be displayed or not. If logical and <code>TRUE</code> then annotations are plotted on all panel of layout. If logical and <code>FALSE</code> then annotation is not displayed. If argument is a vector of positive integers, then annotations are plotted only in the specified panels, which sequence is defined in <code>compose_design</code> function and returned from <code>getOption("ursaPngLayout")$layout</code>. Default is <code>TRUE</code>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(label|text)</code> </td>
+<td style="text-align: left;"> <code>label</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>pos(ition)*</code> </td>
+<td style="text-align: left;"> <code>pos</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>lon(gitude)*</code> </td>
+<td style="text-align: left;"> <code>lon</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>lat(itude)*</code> </td>
+<td style="text-align: left;"> <code>lat</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>x$</code> </td>
+<td style="text-align: left;"> <code>x</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>y$</code> </td>
+<td style="text-align: left;"> <code>y</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>cex</code> </td>
+<td style="text-align: left;"> <code>cex</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>adj(ust)*</code> </td>
+<td style="text-align: left;"> <code>adjust</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>fg</code> </td>
+<td style="text-align: left;"> <code>fg</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>bg</code> </td>
+<td style="text-align: left;"> <code>bg</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>buf(fer)*</code> </td>
+<td style="text-align: left;"> <code>buffer</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>fill</code> </td>
+<td style="text-align: left;"> <code>fill</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>font</code> </td>
+<td style="text-align: left;"> <code>font</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>vert(ical)*</code> </td>
+<td style="text-align: left;"> <code>vertical</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>(alpha|transp(aren(cy)*)*)</code> </td>
+<td style="text-align: left;"> <code>alpha</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>interp(olate)*</code> </td>
+<td style="text-align: left;"> <code>interpolate</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>resample</code> </td>
+<td style="text-align: left;"> <code>resample</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+<tr>
+<td style="text-align: left;"> <code>verb(ose)*</code> </td>
+<td style="text-align: left;"> <code>verbose</code> </td>
+<td style="text-align: left;"> <em>See below</em>.
+      </td>
+</tr>
+</table>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Character, expression, or objects of classes <code>array</code> or <code>matrix</code>. Text, symbols or logo for displaying on image panel. Multi-row characters are allowed with delimiter <code>"\n"</code>. Default is <code>expression()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>position</code></td>
+<td>
+<p>Character keyword or numeric of length 2 in the interval [0,1]. Defines the location of scale bar. If character, then one of the "bottomleft", "bottomright", "topleft", "topright", "left", "right", "bottom", "top", or "center". If numeric then relative position on panel is defined using shift on horizontal and vertical axes from origin in the bottom-left corner. Default is <code>"bottomright"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lon</code></td>
+<td>
+<p>Numeric. Longitude for center of annotation's position. Default is <code>NA</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lat</code></td>
+<td>
+<p>Numeric. Latitude for center of annotation's position. Default is <code>NA</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Numeric. The horizontal coordinate of the annotation's position in the units of image grid. Default is <code>NA</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Numeric. The vertical coordinate of the annotation's position in the units of image grid. Default is <code>NA</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex</code></td>
+<td>
+<p>Positive numeric. The relative font size for annotation's label. Default is <code>1</code>. See description of argument <code>cex</code> in text function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adjust</code></td>
+<td>
+<p>One or two values in [0, 1]. Specifies the horizontal (and optionally vertical) adjustment of the labels. See description of argument <code>adj</code> in text function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fg</code></td>
+<td>
+<p>Character. Color name or code for label (texts and symbols). Default is <code>"#000000"</code> (black). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bg</code></td>
+<td>
+<p>Character. Color name or code for thin buffer around label's elements. Default is <code>NA</code>, which is interpreted as <code>"transparent"</code> for <em>captions</em> and as <code>"#FFFFFF1F"</code> for <em>annotations</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>buffer</code></td>
+<td>
+<p>Numeric. The relative width of buffer around label's elements. Default is <code>1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fill</code></td>
+<td>
+<p>Character. Color name or code for circumscribed rectangle around labels. Default is <code>NA</code>, which is interpreted as <code>"#FFFFFF7F"</code> for <em>captions</em> and as <code>"transparent"</code> for <em>annotations</em>.</p>
+</td>
+</tr>
+</table>
+<table>
+<tr style="vertical-align: top;">
+<td><code>font</code></td>
+<td>
+<p>Character. Font family. Default is <code>getOption("ursaPngFamily")</code>, which is specified by argument <code>font</code> (or <code>family</code>) in <code>compose_open()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vertical</code></td>
+<td>
+<p>Logical or numeric. Vertical or inclined orientation of label. If <code>FALSE</code>, then horizontal labeling. If <code>numeric</code> then <code>vertical</code> defines text direction in degrees. Limitation: value <code>1</code> is interpreted as <code>TRUE</code>. Default is <code>FALSE</code>, which means horizontal text direction.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interpolate</code></td>
+<td>
+<p>Logical. Passed as argument <code>interpolate</code> to function <code>rasterImage</code> for logo annotation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resample</code></td>
+<td>
+<p>Logical or numeric. Passed as argument <code>resample</code> to function <code>regrid</code> for logo annotation. Default is <code>FALSE</code>. If <code>TRUE</code> , then resized logo is drawn smoothly.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Numeric or character. Level of transparency for logos. If numeric, the either <code style="white-space: pre;">⁠0 &lt;= alpha &lt;= 1⁠</code> or <code>0 &lt;= alpha &lt;= 255</code>. If character, then one byte of hexadecimal value <code style="white-space: pre;">⁠"00" &lt;= alpha &lt;= "FF"⁠</code>. Default is <code>1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Logical. Value <code>TRUE</code> may provide some additional information on console. Default is <code>FALSE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is based on function text with adding some decoration elements. For low-level plotting use layout.text function, which is equal to function text with additional control of image panels.
+</p>
+<p>Since the most of character keywords of <code>position</code> have relation to the boundary of image panel, such annotation is assigned as a <em>caption</em> for image panel. Default decoration is shadowed background rectangle, which is implemented by function rect.
+</p>
+<p>If location is defined by two-dimensional vector (either relative position inside of image boundaries (<code>pos</code> is numeric of length two), or pair <code>lon</code>, <code>lat</code>, or pair <code>x</code>, <code>y</code>), then such labeling is assigned as an <em>annotation</em>. Default decoration is thin buffer around symbols. The implementaion is via application of function function text for small diplacements around original position.
+</p>
+<p>The priority of arguments (from higher to lower): 1) pair <code>lon</code>, <code>lat</code>, 2) pair <code>x</code>, <code>y</code>, 3) two-dimensional numeric of <code>pos</code>, 4) character keyword of <code>pos</code>. However, the default annotation is interpreted as a caption.
+</p>
+
+
+<h3>Value</h3>
+
+<p>This function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+## exam no.1 -- direct use
+compose_open(layout=c(2,3),legend=NULL,device="cairo")
+for (i in seq(6)) {
+   panel_new()
+   panel_annotation(label=LETTERS,cex=1.5)
+   panel_annotation(pos=c(0.7,0.2)
+                    ,label=paste("panel",paste("no.",i),sep="\n"))
+   if (i==1)
+      panel_annotation(pos="center")
+}
+compose_close()
+
+## exam no.2 -- indirect use
+display(pixelsize(),scale=2
+       ,ann.label="FJL",ann.lon=52,ann.lat=80,ann.buffer=1
+       ,ann.bg="#8F6FFF2F",ann.fill="#FFFF7F9F",ann.font="courier")
+</code></pre>
+
+
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>stud.recs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Student records</h2>
+
+<h3>Description</h3>
+
+<p>A simulation of student records used for placement purposes
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(stud.recs)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 160 observations on the following 6 variables.
+</p>
+
+<dl>
+<dt>seq.1</dt>
+<dd>
+<p>Score on sequential 1 test</p>
+</dd>
+<dt>seq.2</dt>
+<dd>
+<p>Score on sequential 2 test</p>
+</dd>
+<dt>seq.3</dt>
+<dd>
+<p>Score on sequential 3 test</p>
+</dd>
+<dt>sat.v</dt>
+<dd>
+<p>SAT verbal score</p>
+</dd>
+<dt>sat.m</dt>
+<dd>
+<p>SAT math score</p>
+</dd>
+<dt>num.grade</dt>
+<dd>
+<p>grade on first math class</p>
+</dd>
+<dt>letter.grade</dt>
+<dd>
+<p>grade on first math class</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Some simulated student records for placement purpores
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(stud.recs)
+hist(stud.recs$sat.v)
+with(stud.recs,cor(sat.v,sat.m))
+</code></pre>
+
+
+</div>

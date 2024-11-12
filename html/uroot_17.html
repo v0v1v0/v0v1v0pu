@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uroot.raw.pvalue</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Original Tables of Critical Values</h2>
+
+<h3>Description</h3>
+
+<p>Compute p-values by interpolation in the tables of critical values 
+provided in the original references given below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uroot.raw.pvalue(x, type = c("CH", "HEGY"), v, n, ctd, S, Ftpi)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric. The value of the CH statistic.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>a character specifying the type of test statistic.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>v</code></td>
+<td>
+<p>numeric, the degrees of freedom of the Von Mises distribution. Only for <code>type="CH"</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric, the number of observations.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>ctd</code></td>
+<td>
+<p>a character indicating the deterministic elements that were included 
+in the HEGY regression. This argument is defined as
+<code>paste(deterministic, collapse = "")</code>, where <code>deterministic</code> is the 
+argument of that name that was passed to <code>hegy.test</code>.
+Only for <code>type="ADF"</code> or <code>type="HEGY"</code>.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>S</code></td>
+<td>
+<p>numeric, the periodicity of the data.</p>
+</td>
+</tr></table>
+<table><tr style="vertical-align: top;">
+<td><code>Ftpi</code></td>
+<td>
+<p>a character indicating whether the type of statistic:
+<code>"zero"</code>, <code class="reqn">t</code>-test for the zero frequency; 
+<code>"pi"</code>,  <code class="reqn">t</code>-test for the frequency <code class="reqn">\pi</code>;
+<code>"pair"</code>, <code class="reqn">F</code>-test for the pairs of complex conjugates frequencies.
+Only for <code>type="ADF"</code> or <code>type="HEGY"</code>.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function is used internally by <code>ch.test</code> and 
+<code>hegy.test</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric giving the calculated p-value.
+</p>
+
+
+<h3>References</h3>
+
+<p>Beaulieu, J. J. Miron, J. A. (1993)
+"Seasonal Unit Roots in Aggregate U.S. Data".
+<em>Journal of Econometrics</em>, <b>55</b>(1-2), pp. 305-328.
+DOI: <a href="https://doi.org/10.1016/0304-4076%2893%2990018-Z">doi:10.1016/0304-4076(93)90018-Z</a>.
+</p>
+<p>Canova, F. and Hansen, Bruce E. (1995)
+"Are Seasonal Patterns Constant over Time? A Test for Seasonal Stability".
+<em>Journal of Business &amp; Economic Statistics</em>, <b>13</b>(3), pp. 237-252.
+DOI: <a href="https://doi.org/10.1080/07350015.1995.10524598">doi:10.1080/07350015.1995.10524598</a>.
+</p>
+<p>Hylleberg, S., Engle, R., Granger, C. and Yoo, B. (1990)
+"Seasonal integration and cointegration".
+<em>Journal of Econometrics</em> <b>44</b>(1), pp. 215-238.
+DOI: <a href="https://doi.org/10.1016/0304-4076%2890%2990080-D">doi:10.1016/0304-4076(90)90080-D</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ch.test</code>, <code>hegy.test</code>.
+</p>
+
+
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>interval.check</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>interval.check</h2>
+
+<h3>Description</h3>
+
+<p>Check which interval a number belongs to
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">interval.check(data, input = "Stop", times, fun = "&lt;=")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>character name of column we wish to compare</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>times</code></td>
+<td>
+<p>vector in ascending order where the differences between sequential elements are the intervals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fun</code></td>
+<td>
+<p>character containing comparator</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function takes in a data.frame with a specified column and compares that to a vector of times
+</p>
+
+
+<h3>Value</h3>
+
+<p>Vector indicating which element of <code>times</code> that row belongs to.  If the row is beyond any element NA is in it's spot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+head(cars)
+interval.check(cars, input="speed", times=seq(min(cars$speed), max(cars$speed), length=10))
+</code></pre>
+
+
+</div>

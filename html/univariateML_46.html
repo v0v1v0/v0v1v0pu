@@ -1,0 +1,140 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ProbabilityPlots</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Probability Plots Using Maximum Likelihood Estimates</h2>
+
+<h3>Description</h3>
+
+<p>Make quantile-quantile plots and probability-probability plots using maximum
+likelihood estimation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ppmlplot(y, obj, plot.it = TRUE, datax = FALSE, ...)
+
+ppmlline(...)
+
+ppmlpoints(y, obj, plot.it = TRUE, datax = TRUE, ...)
+
+qqmlplot(y, obj, plot.it = TRUE, datax = FALSE, ...)
+
+qqmlline(y, obj, datax = FALSE, probs = c(0.25, 0.75), qtype = 7, ...)
+
+qqmlpoints(y, obj, plot.it = TRUE, datax = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Numeric vector; The data to plot on the <code>y</code> axis when
+<code>datax</code> is <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>Either an <code>univariateML</code> object or a function that returns
+a <code>univariateML</code> object when called with <code>y</code> as its only
+argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.it</code></td>
+<td>
+<p>Logical; should the result be plotted?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>datax</code></td>
+<td>
+<p>Logical; should <code>y</code> be plotted on the <code>x</code>-axis?
+Defaults to <code>FALSE</code> in <code>qqmlplot</code> and <code>ppmlplot</code> but
+<code>TRUE</code> in <code>qqmlpoints</code> and <code>ppmlpoints</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Graphical parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probs</code></td>
+<td>
+<p>Numeric vector of length two, representing probabilities.
+Corresponding quantile pairs define the line drawn.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>qtype</code></td>
+<td>
+<p>The <code>type</code> of quantile computation used in <code>quantile</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>qqmlplot</code> produces a quantile-quantile plot (Q-Q plot) of the values in
+<code>y</code> with respect to the distribution defined by <code>obj</code>, which is
+either a <code>univariateML</code> object or a function returning a
+<code>univariateML</code> object when called with <code>y</code>. <code>qqmlline</code> adds a
+line to a “theoretical”, quantile-quantile plot which passes through
+the <code>probs</code> quantiles, by default the first and third quartiles.
+<code>qqmlpoints</code>behaves like <code>stats::points</code> and adds a Q-Q plot to
+an existing plot.
+</p>
+<p><code>ppmlplot</code>, <code>ppmlline</code>, and <code>ppmlpoints</code> produce
+probability-probability plots (or P-P plots). They behave similarly to the
+quantile-quantile plot functions.
+</p>
+<p>This function is modeled after qqnorm.
+</p>
+<p>Graphical parameters may be given as arguments to all the functions below.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>qqmlplot</code>, <code>qqmlpoints</code>, <code>ppmlplot</code>, and
+<code>ppmlpoints</code>, a list with components <code>x</code> (plotted on the x axis)
+and <code>y</code> (plotted on the y axis). <code>qqmlline</code> and <code>ppmlline</code>
+returns nothing.
+</p>
+
+
+<h3>References</h3>
+
+<p>M. B. Wilk, R. Gnadadesikan, Probability plotting methods for the analysis
+for the analysis of data, Biometrika, Volume 55, Issue 1, March 1968,
+Pages 1–17, https://doi.org/10.1093/biomet/55.1.1
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Make a single probability plot with a line.
+
+obj &lt;- mlgamma(Nile)
+qqmlplot(Nile, obj)
+qqmlline(Nile, obj)
+
+## Make multiple probability plots. datax = TRUE must be used to make this
+## look good.
+
+ppmlplot(airquality$Wind, mlgamma, main = "Many P-P plots")
+ppmlpoints(airquality$Wind, mlexp, col = "red")
+ppmlpoints(airquality$Wind, mlweibull, col = "purple")
+ppmlpoints(airquality$Wind, mllnorm, col = "blue")
+</code></pre>
+
+
+</div>

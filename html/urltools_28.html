@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tld_refresh</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve a TLD dataset</h2>
+
+<h3>Description</h3>
+
+<p><code>urltools</code> comes with an inbuilt
+dataset of top level domains (TLDs), <code>tld_dataset</code>.
+This is used in <code>tld_extract</code> to identify the top-level domain
+within a particular domain name.
+</p>
+<p>While updates to the dataset will be included in each new package release,
+there's going to be a gap between changes to TLDs and changes to the package.
+Accordingly, the package also includes <code>tld_refresh</code>, which generates
+and returns a <em>fresh</em> version of the dataset. This can then be passed through
+to <code>tld_extract</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tld_refresh()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>a dataset equivalent in format to <code>tld_dataset</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>tld_extract</code> to extract suffixes from domain names,
+or <code>tld_dataset</code> for the inbuilt, default version of the data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+new_tlds &lt;- tld_refresh()
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

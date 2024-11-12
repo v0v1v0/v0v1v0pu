@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>filterVariants</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Filter variants based on p values or depth</h2>
+
+<h3>Description</h3>
+
+<p>You can filter variants called with the the "callVariants" function based
+on adjusted p-value, minimum variant allele count and supply a list
+of assays and samples to plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">filterVariants(
+  object,
+  p.adjust = 0.2,
+  minVarCount = 5,
+  amplicons = NULL,
+  samples = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A UMIexperiment object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.adjust</code></td>
+<td>
+<p>Numeric. Adjusted p value (FDR). Default is 0.2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minVarCount</code></td>
+<td>
+<p>Integer. Minimum variant allele count. Default is 5.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>amplicons</code></td>
+<td>
+<p>NULL or list of assays to plot. NULL uses all.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>NULL or list of samples to plot. NULL uses all.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A UMIexperiment object with filtered variants. Can be used to
+generate VCF files.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>callVariants</code> on how to call variants.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+library(umiAnalyzer)
+main &lt;- system.file("extdata", package = "umiAnalyzer")
+
+simsen &lt;- createUmiExperiment(main)
+simsen &lt;- filterUmiObject(simsen)
+simsen &lt;- callVariants(simsen, computePrior = FALSE)
+simsen &lt;- filterVariants(simsen, p.adjust = 0.05)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

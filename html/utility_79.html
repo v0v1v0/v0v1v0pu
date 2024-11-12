@@ -1,0 +1,147 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>utility.endnode.classcounts.create</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Construct an end node that evaluates counts in different quality classes.</h2>
+
+<h3>Description</h3>
+
+<p>Function to construct a node that evaluates counts in different quality classes by assigning
+a value to the highest class with counts &gt; 0 and optionally increments this value with the
+counts in this and lower classses and given increments per count unit.
+The user can choose whether these increments can lead to a value higher than the basic value
+for counts in the next better class or if this value limits the potential increase.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">utility.endnode.classcounts.create(name.node,        # character(1)
+                                   name.attrib,      # character(n)
+                                   u.max.inc,        # list (n) of vect (&gt;=1)
+                                   names.u.max.inc = list(),
+                                   exceed.next     = TRUE,
+                                   utility         = TRUE,
+                                   required        = FALSE,
+                                   col             = "black",
+                                   shift.levels    = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name.node</code></td>
+<td>
+
+<p>name of the node to be constructed as a character string.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name.attrib</code></td>
+<td>
+
+<p>vector of names of attributes (counts in classes in decreasing order of value of the classes).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u.max.inc</code></td>
+<td>
+
+<p>list of vectors specifying the basic value and the increments for each class and classes of less value.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names.u.max.inc</code></td>
+<td>
+
+<p>(optional) list of vectors of names of parameters u.max.inc.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exceed.next</code></td>
+<td>
+
+<p>(optional) logical variable to indicate whether the level corresponding to the species
+classified at the next higher level can be exceeded with increments; 
+default value is TRUE.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>utility</code></td>
+<td>
+
+<p>(optional) logical variable indicating if a value function (<code>FALSE</code>) or a utility function (<code>TRUE</code>) is created.
+Default value is <code>TRUE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>required</code></td>
+<td>
+
+<p>(optional) logical variable indicating if the value of this node is required for aggregation at the next higher level.
+If this variable is <code>TRUE</code>, aggregation at the next higher level is not possible if this node returns NA.
+Default value is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+
+<p>(optional) color used for plotting the bounding box of the node in the objective hierarchy.
+Default value is <code>"black"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shift.levels</code></td>
+<td>
+
+<p>(optional) number of hierarchical levels by which the node in the objective hierarchy is shifted to make a branch fit better to other branches.
+Default value is <code>0</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns the created object of type <code>utility.endnode.classcounts</code> with the properties specified in the arguments of the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Peter Reichert &lt;peter.reichert@emeriti.eawag.ch&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Short description of the package: <br><br>
+Reichert, P., Schuwirth, N. and Langhans, S., 
+Constructing, evaluating and visualizing value and utility functions for decision support, Environmental Modelling &amp; Software 46, 283-291, 2013. <br><br>
+Textbooks on the use of utility and value functions in decision analysis: <br><br>
+Keeney, R. L. and Raiffa, H. Decisions with Multiple Objectives - Preferences and Value Tradeoffs. John Wiley &amp; Sons, 1976. <br><br>
+Eisenfuehr, F., Weber, M. and Langer, T., Rational Decision Making, Springer, Berlin, 2010.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Print, evaluate and plot the node with <br><br><code>print.utility.endnode.classcounts</code>, <br><code>summary.utility.endnode.classcounts</code>, <br><code>evaluate.utility.endnode.classcounts</code> and <br><code>plot.utility.endnode.classcounts</code>. <br><br>
+Create other end nodes with  <br><br><code>utility.endnode.discrete.create</code>, <br><code>utility.endnode.intpol1d.create</code>, <br><code>utility.endnode.parfun1d.create</code>, <br><code>utility.endnode.intpol2d.create</code>, or <br><code>utility.endnode.cond.create</code>, <br><code>utility.endnode.firstavail.create</code>, <br><br>
+Create other types of nodes with <br><br><code>utility.aggregation.create</code>, <br><code>utility.conversion.intpol.create</code>, or <br><code>utility.conversion.parfun.create</code>.
+</p>
+
+
+</div>

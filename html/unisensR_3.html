@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>readUnisensSignalEntry</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Read Unisens Signal Entry</h2>
+
+<h3>Description</h3>
+
+<p>Read Unisens Signal Entry
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">readUnisensSignalEntry(
+  unisensFolder,
+  id,
+  startIndex = 1,
+  endIndex = getUnisensSignalSampleCount(unisensFolder, id),
+  readInChunks = FALSE,
+  readChunkSize = 2^16
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>unisensFolder</code></td>
+<td>
+<p>String containing path to Unisens folder.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>String containing ID of the signal entry.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>startIndex</code></td>
+<td>
+<p>Integer of the value-index on which the read process starts, default: 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>endIndex</code></td>
+<td>
+<p>Integer of the value-index on which the read process ends, default: last Index of file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>readInChunks</code></td>
+<td>
+<p>Boolean determines if the reading process is done in chunks.
+This could be useful if you run into memory limits when reading big files. default: FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>readChunkSize</code></td>
+<td>
+<p>Integer defining the size of chunks if chunk reading is enabled, defined in samples, default: 2^16.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>DataFrame.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">unisensPath &lt;- system.file('extdata/unisensExample', package = 'unisensR', mustWork = TRUE)
+readUnisensSignalEntry(unisensPath, 'ecg.bin')
+</code></pre>
+
+
+</div>

@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>best.times</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Best track and field times by age and distance</h2>
+
+<h3>Description</h3>
+
+<p>A dataset giving world records in track and field running events for various
+distances and different age groups.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(best.times)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 113 observations on the following 6 variables.
+</p>
+
+<dl>
+<dt>Dist</dt>
+<dd>
+<p>Distance in meters (42195 is a marathon)</p>
+</dd>
+<dt>Name</dt>
+<dd>
+<p>Name of record holder</p>
+</dd>
+<dt>Date</dt>
+<dd>
+<p>Date of record</p>
+</dd>
+<dt>Time</dt>
+<dd>
+<p>Time in seconds</p>
+</dd>
+<dt>Time.1</dt>
+<dd>
+<p>Time as character</p>
+</dd>
+<dt>age</dt>
+<dd>
+<p>Age at time of record</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Age-graded race results allow competitors of different ages to compare
+their race performances. This data set allows one to see what the
+relationship is based on peak performances.  
+</p>
+
+
+<h3>Source</h3>
+
+<p>The data came from
+http://www.personal.rdg.ac.uk/~snsgrubb/athletics/agegroups.html
+which included a calculator to compare results.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(best.times)
+attach(best.times)
+by.dist = split(best.times,as.factor(Dist))
+lm(scale(Time) ~ age, by.dist[['400']])
+dists = names(by.dist)
+lapply(dists, function(n) print(lm(scale(Time) ~ age, by.dist[[n]])))
+</code></pre>
+
+
+</div>

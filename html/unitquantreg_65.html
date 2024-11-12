@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>residuals.unitquantreg</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Residuals method for <code>unitquantreg</code> objects</h2>
+
+<h3>Description</h3>
+
+<p>Extract various types of residuals from unit quantile regression models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'unitquantreg'
+residuals(object, type = c("quantile", "cox-snell", "working", "partial"), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>fitted model object of class <code>unitquantreg</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>character indicating type of residuals. The options are
+<code>"quantile"</code>, <code>"cox-snell"</code>, <code>"working"</code> and <code>"partial"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>currently not used.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>residuals</code> method can compute quantile
+and Cox-Snell residuals. These residuals are defined, respectively, by
+</p>
+<p style="text-align: center;"><code class="reqn">r_{Q} = \Phi^{-1}\left[ F(y_i \mid \widehat{\mu}_i, \widehat{\theta}_i)\right]</code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn">r_{CS} = -\log\left[1- F(y_i \mid \widehat{\mu}_i, \widehat{\theta}_i)\right]</code>
+</p>
+
+<p>where <code class="reqn">\widehat{\mu}_i</code> and <code class="reqn">\widehat{\theta}_i</code> are the fitted values
+of parameters <code class="reqn">\mu</code> and <code class="reqn">\theta</code>, <code class="reqn">F(\cdot \mid \cdot, \cdot)</code> is
+the cumulative distribution function (c.d.f.) and <code class="reqn">\Phi(\cdot)</code> is the
+c.d.f. of standard Normal distribution.
+</p>
+<p>Apart from the variability due the estimates of parameters,if the fitted
+regression model is correctly specified then the quantile
+residuals, <code class="reqn">r_Q</code>, follow a standard Normal distribution and
+the Cox-Snell residuals, <code class="reqn">r_{CS}</code>, follow a standard exponential
+distribution.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numeric vector of residuals extract from an object of class
+<code>unitquantreg</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>André F. B. Menezes
+</p>
+
+
+<h3>References</h3>
+
+<p>Cox, D. R. and Snell E. J., (1968). A general definition of residuals. <em>Journal of the Royal Statistical Society - Series B</em>, <b>30</b>(2), 248–265.
+</p>
+<p>Dunn, P. K. and Smyth, G. K., (1996). Randomized quantile residuals. <em>Journal of Computational and Graphical Statistics</em>, <b>5</b>(3), 236–244.
+</p>
+
+
+</div>

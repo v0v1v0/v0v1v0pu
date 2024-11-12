@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compute_nightingale_ratio_qc_flags</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Aggregate QC Flags when computing Nightingale's 81 biomarker ratios</h2>
+
+<h3>Description</h3>
+
+<p>For the 81 biomarker ratios computed by <code>compute_nightingale_ratios()</code>,
+aggregates the biomarker QC flags from the biomarkers composing each ratio
+(see <code>nmr_info</code>), which can be useful for determining the reason
+underlying missing values in the biomarker ratios.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compute_nightingale_ratio_qc_flags(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>data.frame</code> containing NMR metabolomics data from UK Biobank.
+May either be raw field data output by
+<a href="https://biobank.ctsu.ox.ac.uk/crystal/exinfo.cgi?src=accessing_data_guide">ukbconv</a>
+or data with column names corresponding to biomarkers listed in <code>nmr_info</code>.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>If your UK Biobank project only has access to a subset of biomarkers, then
+this function will only return the subset of ratios that can be computed from
+the biomarker data provided.
+</p>
+<p>Biomarker QC Flags in the input data are also returned alongside those
+aggregated by this function for the computed biomarker ratios.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> with QC flags aggregated for all computed
+biomarker ratios.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>nmr_info</code> for list of computed biomarker ratios and
+<code>extract_biomarkers()</code> for details on how raw data from
+<a href="https://biobank.ctsu.ox.ac.uk/crystal/exinfo.cgi?src=accessing_data_guide">ukbconv</a>
+is processed.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ukb_data &lt;- ukbnmr::test_data # Toy example dataset for testing package
+biomarker_qc_flags &lt;- compute_nightingale_ratio_qc_flags(ukb_data)
+
+</code></pre>
+
+
+</div>

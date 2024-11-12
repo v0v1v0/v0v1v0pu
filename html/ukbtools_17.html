@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_gen_het</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Heterozygosity outliers</h2>
+
+<h3>Description</h3>
+
+<p><strong>Defunct. See help("ukb_defunct")</strong>.
+</p>
+<p>Heterozygosity outliers are typically removed from genetic association analyses. This function returns either a vector of heterozygosity outliers to remove (+/- 3sd from mean heterozygosity), or a data frame with heterozygosity scores for all samples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_gen_het(data, all.het = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A UKB dataset created with <code>ukb_df</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all.het</code></td>
+<td>
+<p>Set <code>all.het = TRUE</code> for heterozygosity scores for all samples. By default <code>all.het = FALSE</code> returns a vector of sample IDs for individuals +/-3SD from the mean heterozygosity.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>UKB have published <a href="http://www.ukbiobank.ac.uk/wp-content/uploads/2014/04/UKBiobank_genotyping_QC_documentation-web.pdf">full details of genotyping and quality control</a> for the interim genotype data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of IDs if <code>all.het = FALSE</code> (default), or a dataframe with ID, heterozygosity and PCA-corrected heterozygosity if <code>all.het = TRUE</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+#' # Heterozygosity outliers (+/-3SD)
+outlier_het_ids &lt;- ukb_gen_het(my_ukb_data)
+
+# Retrieve all raw and pca-corrected heterozygosity scores
+ukb_het &lt;- ukb_gen_het(my_ukb_data, all.het = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>nottingham_2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Supporting colours of the University of Nottingham, England/UK</h2>
+
+<h3>Description</h3>
+
+<p><code>nottingham_2</code> provides the nine supporting colours and five corresponding tints 
+(per colour) of the <a href="https://www.nottingham.ac.uk">University of Nottingham</a>, England/UK.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">nottingham_2
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 54.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The supporting colours are accents. They add warmth and vibrancy and can elevate designs.
+</p>
+<p>Inspired by the <a href="https://www.nottingham.ac.uk">University of Nottingham</a> campus, 
+key brand messages and the city of Nottingham, nine colours build up 
+the palette to complement the primary <code>Nottingham blue</code> (see <code>nottingham_1</code>).
+</p>
+<p>The supporting palette should be used sparingly,
+with a maximum of two supporting colours in any one asset.
+</p>
+<p>Where colour is used within an asset, <code>Nottingham blue</code> needs to be visually dominant and
+the supporting palette should be less than half of the make-up of colour within the asset.
+</p>
+<p>Supporting colours can and should be used for campaigns and initiatives, 
+to help audience recognition and aid navigation.
+</p>
+<p>Users must choose the correct colour output for the asset and its usage
+(RGB for digital and CMYK for print), as values have been created 
+to keep the most vibrancy in print and the best colour representation across digital channels.
+</p>
+<p>Each colour has five tints that can also be used for variety and to assist legibility. 
+HEX codes have been provided for each tint, and these should be used when 
+creating digital artwork, rather than using opacity.
+</p>
+<p><code>nottingham_2</code> uses the HEX color definitions.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of colours (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>unicol</strong>, 2023-09-04.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Colour definitions are based on the UoN's 
+<a href="https://www.nottingham.ac.uk/brand/visual/colour.aspx">Colour guidelines</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>nottingham_1</code> for primary colours of the University of Nottingham;
+<code>nottingham_3</code> for neutral colours of the University of Nottingham;
+<code>seecol</code> for viewing and comparing colour palettes;
+<code>usecol</code> for using colour palettes;
+<code>simcol</code> for finding similar colours;
+<code>newpal</code> for defining new colour palettes;
+<code>grepal</code> for finding named colours.
+</p>
+<p>Other UK university color palettes: 
+<code>nottingham_1</code>,
+<code>nottingham_3</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">nottingham_2
+main_cols &lt;- seq(1, 49, by = 6)
+unikn::seecol(nottingham_2[main_cols], main = "Main supporting colors of UoN")
+
+</code></pre>
+
+
+</div>

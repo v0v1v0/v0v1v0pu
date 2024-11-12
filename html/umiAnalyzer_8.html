@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>createUmiExperiment</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Method for creating a UMI experiment object</h2>
+
+<h3>Description</h3>
+
+<p>Method for creating a UMI experiment object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">createUmiExperiment(
+  mainDir,
+  experimentName = NULL,
+  sampleNames = NULL,
+  importBam = FALSE,
+  as.shiny = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mainDir</code></td>
+<td>
+<p>Main experiment directory</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>experimentName</code></td>
+<td>
+<p>Name of the experiment</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampleNames</code></td>
+<td>
+<p>List of sample names. Can be either NULL or list. If NULL all subdirectories of mainDir will be searched.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>importBam</code></td>
+<td>
+<p>Logical. Should bam files be imported on creation? Default is False.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as.shiny</code></td>
+<td>
+<p>Set to TRUE if run within a shiny::withProgress environment</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of class UMIexperiment
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main = system.file('extdata', package = 'umiAnalyzer')
+
+samples &lt;- list.dirs(path = main, full.names = FALSE, recursive = FALSE)
+
+exp1 &lt;- createUmiExperiment(experimentName = 'exp1',mainDir = main,sampleNames = samples)
+
+</code></pre>
+
+
+</div>

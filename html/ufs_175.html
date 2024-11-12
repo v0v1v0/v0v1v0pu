@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cramersV</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Cramer's V and its confidence interval</h2>
+
+<h3>Description</h3>
+
+<p>These functions compute the point estimate and confidence interval for
+Cramer's V.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cramersV(x, y = NULL, digits = 2)
+
+## S3 method for class 'CramersV'
+print(x, digits = x$input$digits, ...)
+
+confIntV(
+  x,
+  y = NULL,
+  conf.level = 0.95,
+  samples = 500,
+  digits = 2,
+  method = c("bootstrap", "fisher"),
+  storeBootstrappingData = FALSE
+)
+
+## S3 method for class 'confIntV'
+print(x, digits = x$input$digits, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Either a crosstable to analyse, or one of two vectors to use to
+generate that crosstable. The vector should be a factor, i.e. a categorical
+variable identified as such by the 'factor' class).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>If x is a crosstable, y can (and should) be empty. If x is a
+vector, y must also be a vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Minimum number of digits after the decimal point to show in
+the result.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Any additional arguments are passed on to the <code>print</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>Level of confidence for the confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>Number of samples to generate when bootstrapping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Whether to use Fisher's Z or bootstrapping to compute the
+confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>storeBootstrappingData</code></td>
+<td>
+<p>Whether to store (or discard) the data
+generating during the bootstrapping procedure.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A point estimate or a confidence interval for Cramer's V, an effect
+size to describe the association between two categorical variables.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### Get confidence interval for Cramer's V
+### Note that by using 'table', and so removing the raw data, inhibits
+### bootstrapping, which could otherwise take a while.
+confIntV(table(infert$education, infert$induced));
+
+</code></pre>
+
+
+</div>

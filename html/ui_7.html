@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LogL.probit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Loglikelihood used by ui.probit</h2>
+
+<h3>Description</h3>
+
+<p>This function derives the Loglikelihood for <code>ui.probit</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">LogL.probit(par, rho, X.z = X.z, X.y = X.y, y = y, z = z)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>par</code></td>
+<td>
+<p>Coeficient values the logliklihood should be drived at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>The value of the sensitivity parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X.z</code></td>
+<td>
+<p>covariate matrix for missingness mechanism</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X.y</code></td>
+<td>
+<p>covariate matrix for the outcome regression</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>outcome vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>indicator of wether y is missing or not</p>
+</td>
+</tr>
+</table>
+</div>

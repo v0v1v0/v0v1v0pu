@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>confIntSD</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Confidence interval for standard deviation</h2>
+
+<h3>Description</h3>
+
+<p>This function is vectorized.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">confIntSD(x, n = NULL, conf.level = 0.95)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Either a standard deviation, in which case <code>n</code> must also be
+provided, or a vector, in which case <code>n</code> must be NULL.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The sample size is <code>x</code> is a standard deviation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>The confidence level</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector or matrix.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ufs::confIntSD(mtcars$mpg);
+ufs::confIntSD(c(6, 7), c(32, 32));
+</code></pre>
+
+
+</div>

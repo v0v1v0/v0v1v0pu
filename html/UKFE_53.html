@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Kappa3Est</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Kappa3 distribution estimates from parameters</h2>
+
+<h3>Description</h3>
+
+<p>Estimated quantiles as function of return period (RP) and vice versa, from user input parameters
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Kappa3Est(loc, scale, shape, q = NULL, RP = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>loc</code></td>
+<td>
+<p>location parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scale</code></td>
+<td>
+<p>scale parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape</code></td>
+<td>
+<p>shape parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>quantile. magnitude of the variable under consideration</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If the argument q is used, it overrides RP and provides RP as a function of q (magnitude of variable) as opposed to q as a function of RP. This is the Kappa3 distribution as defined in Kjeldsen, T (2019), 'The 3-parameter Kappa distribution as an alternative for use with FEH pooling groups.'Circulation - The Newsletter of the British Hydrological Society, no. 142.
+</p>
+
+
+<h3>Value</h3>
+
+<p>quantile as a function of RP or vice versa
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get an annual maximum sample, estimate the parameters and estimate 50-year RP
+AM.27090 &lt;- GetAM(27090)
+#Get parameters and Store as an object
+Pars &lt;- as.numeric(Kappa3Pars(AM.27090$Flow))
+#get estimate of 50-yr flow
+Kappa3Est(Pars[1], Pars[2], Pars[3], RP = 50)
+#Estimate the RP for a 600m3/s discharge
+Kappa3Est(Pars[1], Pars[2], Pars[3], q = 600)
+</code></pre>
+
+
+</div>

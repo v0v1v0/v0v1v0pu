@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>band_group</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Extract certain statistics of each band.
+</h2>
+
+<h3>Description</h3>
+
+<p>Function from this <code>band.*</code> list returns required statistics for each band.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">band_mean(obj)
+band_sd(obj)
+band_sum(obj)
+band_min(obj)
+band_max(obj)
+band_n(obj)
+band_nNA(obj)
+band_quantile(obj, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Arguments, which are passed to generic <code>quantile</code> function, e.g. <code>probs</code>, <code>type</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+
+<ul>
+<li> <p><code>band_mean</code> returns mean value.
+</p>
+</li>
+<li> <p><code>band_sd</code> returns value of standard deviation with <code>n-1</code> denominator.
+</p>
+</li>
+<li> <p><code>band_sum</code> returns sum of values.
+</p>
+</li>
+<li> <p><code>band_min</code> returns minimal value.
+</p>
+</li>
+<li> <p><code>band_max</code> returns maximal value.
+</p>
+</li>
+<li> <p><code>band_n</code> returns number of non-<code>NA</code> pixels.
+</p>
+</li>
+<li> <p><code>band_nNA</code> returns number of <code>NA</code> pixels.
+</p>
+</li>
+<li> <p><code>band_quantile</code> returns matrix of quantiles.
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>Named vector of numerical or integer values. Band names are used for naming.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Currently, implementation is not optimal, because firstly bundle of statistics is computed using band_stat function, and then required statistics is extracted.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>band_stat</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy()
+print(a)
+print(a&lt;80)
+print(class(a))
+a[a&lt;80]
+a[a&lt;80] &lt;- NA
+b1 &lt;- band_stat(a)
+print(b1)
+b2.n &lt;- band_n(a)
+str(b2.n)
+b2.mean &lt;- band_mean(a)
+print(b1$mean)
+print(b2.mean)
+print(b1$mean-b2.mean)
+print(band_quantile(a))
+</code></pre>
+
+
+</div>

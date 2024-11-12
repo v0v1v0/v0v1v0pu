@@ -1,0 +1,136 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ReBaggRegress</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+REBaggRegress: RE(sampled) BAG(ging), an ensemble method for dealing with imbalanced regression problems.
+</h2>
+
+<h3>Description</h3>
+
+<p>This function handles imbalanced regression problems by learneing a special purpose bagging ensemble.
+A number of weak learners selected by the user are trained on resamples of the training data provided.
+The resamples are built taking into consideration the imbalance of the problem. 
+Currently, there are 4 different methods for building the resamples used.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ReBaggRegress(form, train, rel="auto", thr.rel, learner, learner.pars,
+       nmodels, samp.method = "variationSMT", aggregation="Average", quiet=TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>form</code></td>
+<td>
+
+<p>A formula describing the prediction problem.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>train</code></td>
+<td>
+
+<p>A data frame containing the training (imbalanced) data set.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rel</code></td>
+<td>
+
+<p>The relevance function which can be automatically ("auto") determined (the default) or may be provided by the user through a matrix.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thr.rel</code></td>
+<td>
+
+<p>A number indicating the relevance threshold above which a case is considered as belonging to the rare "class".
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>learner</code></td>
+<td>
+
+<p>The learning algorithm to be used as weak learner.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>learner.pars</code></td>
+<td>
+
+<p>A named list with the learner parameters.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nmodels</code></td>
+<td>
+
+<p>A numeric indicating the number of models to train. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samp.method</code></td>
+<td>
+
+<p>A character specifying the method used for building the resamples
+of the training set provided. 
+Possible characters are: "balance", "variation", "balanceSMT", "variationSMT".
+The "balance" methods builds a number (nmodels) of samples that use all 
+the rare cases and the same nr of normal cases. The "variation" method
+build a number of baggs with all the rare cases and varying percentages of normal cases.
+The SMT sufix is used when the SmoteR strategy is used to generate the new examples.
+Defaults to "variationSMT".
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>aggregation</code></td>
+<td>
+<p>charater specifying the method used for aggregating the results
+obtained by the individual learners. 
+For now, the only method available is by averaging the models predictions.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>logical specifying if development should be shown or not. Defaults to TRUE
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns an object of class BagModel. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a> and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>References</h3>
+
+<p>Branco, P. and Torgo, L. and Ribeiro, R.P. (2018) <em>REBAGG: REsampled BAGGing for Imbalanced Regression</em> LIDTA2018: 2nd International Workshop on Learning with Imbalanced Domains: Theory and Applications (Co-located with ECML/PKDD 2018) Dublin, Ireland
+</p>
+
+
+</div>

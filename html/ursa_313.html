@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursa_grid</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Extract and assign spatial parameters of raster images.
+</h2>
+
+<h3>Description</h3>
+
+<p>Raster image (<code>ursaRaster</code>) contains embedded spatial parameters (<code>ursaGrid</code>) in item <code>$grid</code>. These functions manipulate with item <code>$grid</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ursa_grid(obj)
+ursa_grid(obj) &lt;- value
+
+ursa_ncol(obj)
+ursa_nrow(obj)
+ursa_columns(obj)
+ursa_rows(obj)
+ursa_samples(obj)
+ursa_lines(obj)
+
+ursa_extent(obj)
+ursa_bbox(obj)
+
+consistent_grid(obj, ref, expand = 1, border = rep(0, 4), verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p><code>ursaRaster</code> object. For <code>ursa_grid</code> function <code>list</code> of <code>ursaRaster</code> objects is allowed.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+
+<p><code>ursaGrid</code> object.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ref</code></td>
+<td>
+
+<p><code>ursaGrid</code> reference object.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expand</code></td>
+<td>
+
+<p>Podsitive numeric. Multiplier of boundary box.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>border</code></td>
+<td>
+
+<p><code>integer</code> of length 1 or 4. If length 4, then vector (bottom, left, top, right) in cells for extent expand. If length &lt;4, then value is repeated for length 4. Passed to <code>regrid()</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+
+<p>Logical. Some output in console. Primarily for debug purposes.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>ursa_grid&lt;-</code> may used to minor corrections of spatial parameters. Howevert, it seems that this function is not claimed in practice.
+</p>
+<p><code>ursa_ncol</code>, <code>ursa_columns</code>, <code>ursa_samples</code> are synonyms for extracting number of columns/samples.
+</p>
+<p><code>ursa_nrow</code>, <code>ursa_rows</code>, <code>ursa_lines</code> are synonyms for extracting number of rows/lines.
+</p>
+<p><code>ursa_extent</code>, <code>ursa_bbox</code>, are synonyms for extracting boundary box (spatial extent).
+</p>
+<p><code>consistent_grid</code> trasforms dimension (<code>ursa_nrow()</code> by <code>ursa_ncol()</code>) <code>obj</code>-grid to dimension of <code>ref</code>-grid. This helpful for multipanel plotting if objects have different boundary boxes.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>ursa_grid</code> return value of <code>$grid</code> item of <code>ursaRaster</code> object.
+</p>
+<p><code>ursa_grid&lt;-</code> return <code>ursaRaster</code> with modified <code>$grid</code> item.
+</p>
+<p><code>ursa_ncol</code>, <code>ursa_columns</code>, <code>ursa_samples</code> return integer of length 1.
+</p>
+<p><code>ursa_nrow</code>, <code>ursa_rows</code>, <code>ursa_lines</code> return integer of length 1.
+</p>
+<p><code>ursa_extent</code>, <code>ursa_bbox</code> return numeric of length 4 (xmin, ymin, xmax, ymax).
+</p>
+<p><code>ursa_consistent</code> returns <code>ursaGrid</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- pixelsize()
+print(ursa_grid(a))
+ursa_grid(a)$crs &lt;- gsub("\\.0+","",ursa_grid(a)$crs)
+print(ursa_grid(a))
+</code></pre>
+
+
+</div>

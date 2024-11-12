@@ -1,0 +1,196 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fin_interest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute the value of a principal &amp; annual deposits at a compound interest over a number of years</h2>
+
+<h3>Description</h3>
+
+<p>Allows you to determine the final value of an initial <code>principal</code> (with optional
+periodic <code>deposits</code>), over a number of years (<code>yrs</code>) at a given rate of <code>interest</code>.
+Principal and deposits are optional. You control compounding periods each year (n) and whether deposits occur at the beginning or end of the year.
+The function outputs a nice table of annual returns, formats the total using a user-settable currency <code>symbol</code>. Can also <code>report</code> using a web table.
+</p>
+<p><em>notes</em>: Graham valuation: fair P/E = 9 + (1.5 * growth%). e.g.  $INTEL fair P/E = 9+.5<em>3 = 10.5 up to  9+2</em>10 = 29
+Can move the weighting between a conservative .5 and an optimistic 2 (in terms of how long the growth will last and how low the hurdle rate is)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fin_interest(
+  principal = 0,
+  deposits = 0,
+  inflate = 0,
+  interest = 0.05,
+  yrs = 10,
+  final = NULL,
+  n = 12,
+  when = "beginning",
+  symbol = NULL,
+  largest_with_cents = 0,
+  baseYear = as.numeric(format(Sys.time(), "%Y")),
+  table = TRUE,
+  report = c("markdown", "html")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>principal</code></td>
+<td>
+<p>The initial investment at time 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deposits</code></td>
+<td>
+<p>Optional periodic additional investment each <em>year</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inflate</code></td>
+<td>
+<p>How much to inflate deposits over time (default = 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interest</code></td>
+<td>
+<p>Annual interest rate (default = .05)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yrs</code></td>
+<td>
+<p>Duration of the investment (default = 10).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>final</code></td>
+<td>
+<p>if set (default = NULL), returns the rate required to turn principal into final after yrs (principal defaults to 1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Compounding intervals per year (default = 12 (monthly), 365 for daily)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>when</code></td>
+<td>
+<p>Deposits made at the "beginning" (of each year) or "end"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>symbol</code></td>
+<td>
+<p>Currency symbol to embed in the result.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>largest_with_cents</code></td>
+<td>
+<p>Default = 0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>baseYear</code></td>
+<td>
+<p>Default = current year (for table row labels)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>Whether to print a table of annual returns (default TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>"markdown" or "html",</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Value of balance after yrs of investment.
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://en.wikipedia.org/wiki/Compound_interest">https://en.wikipedia.org/wiki/Compound_interest</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_set_dollar_symbol()</code>, <code>fin_percent()</code>, <code>fin_NI()</code>, <code>fin_valuation()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Functions: 
+<code>deg2rad()</code>,
+<code>fin_JustifiedPE()</code>,
+<code>fin_NI()</code>,
+<code>fin_percent()</code>,
+<code>fin_ticker()</code>,
+<code>fin_valuation()</code>,
+<code>rad2deg()</code>,
+<code>umxBrownie()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# 1. Value of a principal after yrs years at 5% return, compounding monthly.
+# Report in browser as a nice table of annual returns and formatted totals.
+fin_interest(principal = 5000, interest = 0.05, rep= "html")
+
+## End(Not run)
+
+# Report as a nice markdown table
+fin_interest(principal = 5000, interest = 0.05, yrs = 10)
+
+umx_set_dollar_symbol("£")
+# 2 What rate is needed to increase principal to final value in yrs time?
+fin_interest(final = 1.4, yrs=5)
+fin_interest(principal = 50, final=200, yrs = 5)
+
+# 3. What's the value of deposits of $100/yr after 10 years at 7% return?
+fin_interest(deposits = 100, interest = 0.07, yrs = 10, n = 12)
+
+# 4. What's the value of $20k + $100/yr over 10 years at 7% return?
+fin_interest(principal= 20e3, deposits= 100, interest= .07, yrs= 10, symbol="$")
+
+# 5. What is $10,000 invested at the end of each year for 5 years at 6%?
+fin_interest(deposits = 10e3, interest = 0.06, yrs = 5, n=1, when= "end")
+
+# 6. What will $20k be worth after 10 years at 15% annually (n=1)?
+fin_interest(deposits=20e3, interest = 0.15, yrs = 10, n=1, baseYear=1)
+# $466,986
+
+# manual equivalent
+sum(20e3*(1.15^(10:1))) # 466985.5
+
+# 7. Annual (rather than monthly) compounding (n=1)
+fin_interest(deposits = 100, interest = 0.07, yrs = 10, n=1)
+
+# 8 Interest needed to increase principal to final value in yrs time.
+fin_interest(principal = 100, final=200, yrs = 5)
+
+</code></pre>
+
+
+</div>

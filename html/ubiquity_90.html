@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_zero_inputs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zero All Model Inputs</h2>
+
+<h3>Description</h3>
+
+<p>Multiple default inputs can be specified in the system file. At
+the scripting level this function can be used to set all inputs to zero.
+Then only the subsequently specified inputs will be applied.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_zero_inputs(cfg, bolus = TRUE, rates = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bolus</code></td>
+<td>
+<p>Boolean value indicating weather bolus inputs should be set to zero</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rates</code></td>
+<td>
+<p>Boolean value indicating weather infusion rate inputs should be set to zero</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Ubiquity system object with the specified inputs set to zero
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>system_set_rate</code>, <code>system_set_bolus</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+# Clear only infusion rates
+cfg = system_zero_inputs(cfg, bolus=TRUE, rates=FALSE)
+
+# Clear all inputs:
+cfg = system_zero_inputs(cfg)
+
+</code></pre>
+
+
+</div>

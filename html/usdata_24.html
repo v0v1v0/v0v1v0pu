@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>us_temp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>US Temperature Data</h2>
+
+<h3>Description</h3>
+
+<p>A representative set of monitoring locations were taken from NOAA data that had both
+years of interest (1950 and 2022).  The information was collected so as to
+spread the measurements across the continental United States.  Daily high and low
+temperatures are given for each of 24 weather stations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">us_temp
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 17250 observations on the following 9 variables.
+</p>
+
+<dl>
+<dt>station</dt>
+<dd>
+<p>Station ID, measurements from 24 stations.</p>
+</dd>
+<dt>name</dt>
+<dd>
+<p>Name of the station.</p>
+</dd>
+<dt>latitude</dt>
+<dd>
+<p>Latitude of the station.</p>
+</dd>
+<dt>longitude</dt>
+<dd>
+<p>Longitude of the station.</p>
+</dd>
+<dt>elevation</dt>
+<dd>
+<p>Elevation of the station.</p>
+</dd>
+<dt>date</dt>
+<dd>
+<p>Date of observed temperature.</p>
+</dd>
+<dt>tmax</dt>
+<dd>
+<p>High temp for the observed day.</p>
+</dd>
+<dt>tmin</dt>
+<dd>
+<p>Low temp for the observed day.</p>
+</dd>
+<dt>year</dt>
+<dd>
+<p>Factor variable for year, levels: <code>1950</code> and <code>2022</code>.</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Please keep in mind that these are two annual snapshots from
+a few dozen arbitrarily selected weather stations.  A complete
+analysis would consider more than two years of data and a more
+precise random sample uniformly distributed across the United States.
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://www.ncei.noaa.gov/cdo-web/">https://www.ncei.noaa.gov/cdo-web/</a>, retrieved 2023-09-23.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(ggplot2)
+library(maps)
+library(sf)
+library(dplyr)
+
+# Summarize temperature by station and year for plotting
+summarized_temp &lt;- us_temp |&gt;
+  group_by(station, year, latitude, longitude) |&gt;
+  summarize(tmax_med = median(tmax, na.rm = TRUE), .groups = "drop") |&gt;
+  mutate(plot_shift = ifelse(year == "1950", 0, 2))
+
+# Make a map of the US as a baseline
+usa &lt;- st_as_sf(maps::map("state", fill = TRUE, plot = FALSE))
+
+# Layer the US map with summarized temperatures
+ggplot(data = usa) +
+  geom_sf() +
+  geom_point(
+    data = summarized_temp,
+    aes(x = longitude + plot_shift, y = latitude, fill = tmax_med, shape = year),
+    color = "black", size = 3
+  ) +
+  scale_fill_gradient(high = "red", low = "yellow") +
+  scale_shape_manual(values = c(21, 24)) +
+  labs(
+    title = "Median high temperature, 1950 and 2022",
+    x = "Longitude",
+    y = "Latitude",
+    fill = "Median\nhigh temp",
+    shape = "Year"
+  )
+</code></pre>
+
+
+</div>

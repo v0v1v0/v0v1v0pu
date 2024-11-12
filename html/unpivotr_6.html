@@ -1,0 +1,236 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>direction</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Directions from data cells to headers</h2>
+
+<h3>Description</h3>
+
+<p>How to use functions with a <code>direction</code> parameter.
+</p>
+<p>Data cells relate to header cells by their proximity in a given direction.
+The point of view is always <em>from</em> the data cell <em>to</em> the header.  For
+example, the direction <code>"up"</code> means "from each data cell go directly up to a
+cell at the edge of the table, which is the header cell."
+</p>
+<p>Scroll down to the "Tables" section for a visual explanation.
+</p>
+<p>Legacy directions <code>"N"</code>, <code style="white-space: pre;">⁠"NNW", ⁠</code>"W"<code style="white-space: pre;">⁠, ⁠</code>"WNW"', etc. are still supported.
+Scroll down to the "Legacy directions" section for how they map to the new
+directions.
+</p>
+
+<ul>
+<li> <p><code>"up"</code> means from each data cell go directly up to a cell at the edge of
+the the table, which is the header cell.
+</p>
+</li>
+<li> <p><code>"up-left"</code> means from each data cell go directly up to a cell at the edge
+of the the table, then if the cell is blank go left until a cell that has a
+value, which is the header cell.
+</p>
+</li>
+<li> <p><code>"up-right"</code> means from each data cell go directly up to a cell at the edge
+of the the table, then if the cell is blank go right until a cell that has a
+value, which is the header cell.
+</p>
+</li>
+<li> <p><code>"left"</code> means from each data cell go directly left to a cell at the edge
+of the the table, which is the header cell.
+</p>
+</li>
+<li> <p><code>"left-up"</code> means from each data cell go directly left to a cell at the
+edge of the the table, then if the cell is blank go up until a cell that has
+a value, which is the header cell.
+</p>
+</li>
+<li> <p><code>"left-down"</code> means from each data cell go directly left to a cell at the
+edge of the the table, then if the cell is blank go down until a cell that
+has a value, which is the header cell.
+</p>
+</li>
+<li> <p><code>"right"</code> means from each data cell go directly right to a cell at the edge
+of the the table, which is the header cell.
+</p>
+</li>
+<li> <p><code>"right-up"</code> means from each data cell go directly right to a cell at the
+edge of the the table, then if the cell is blank go up until a cell that has
+a value, which is the header cell.
+</p>
+</li>
+<li> <p><code>"right-down"</code> means from each data cell go directly right to a cell at the
+edge of the the table, then if the cell is blank go down until a cell that
+has a value, which is the header cell.
+</p>
+</li>
+<li> <p><code>"down"</code> means from each data cell go directly down to a cell at the edge
+of the the table, which is the header cell.
+</p>
+</li>
+<li> <p><code>"down-left"</code> means from each data cell go directly down to a cell at the
+edge of the the table, then if the cell is blank go left until a cell that
+has a value, which is the header cell.
+</p>
+</li>
+<li> <p><code>"down-right"</code> means from each data cell go directly down to a cell at the
+edge of the the table, then if the cell is blank go right until a cell that
+has a value, which is the header cell.
+</p>
+</li>
+</ul>
+<h3>-ish</h3>
+
+<p>The difference between <code>"up"</code> and <code>"up-ish"</code> (and similar pairs of directions)
+is that <code>"up"</code> finds headers directly above the data cell, whereas <code>"up-ish"</code>
+matches the nearest header, whether above-left, above-right or directly above
+the data cell.  This is useful for matching headers that are not aligned to
+the edge of the data cells that they refer to.  There can be a tie in the
+directions <code>"up-ish"</code>, <code>"down-ish"</code>, <code>"left-ish"</code> and <code>"right-ish"</code> , causing
+<code>NA</code>s to be returned in the place of header values.  Avoid ties by using
+<code>justify()</code> first to align header cells to the corner of the data cells they
+describe.
+</p>
+
+<ul>
+<li> <p><code>"up-ish"</code> means the closest cell at the top edge of the table without
+crossing a border defined by the <code>border</code> parameter.
+</p>
+</li>
+<li> <p><code>"left-ish"</code> means the closest cell at the left-hand edge of the table
+without crossing a border defined by the <code>border</code> parameter.
+</p>
+</li>
+<li> <p><code>"right-ish"</code> means the closest cell at the right-hand edge of the table
+without crossing a border defined by the <code>border</code> parameter.
+</p>
+</li>
+<li> <p><code>"down-ish"</code> means the closest cell at the bottom edge of the table without
+crossing a border defined by the <code>border</code> parameter.
+</p>
+</li>
+</ul>
+<h3>Tables</h3>
+
+<div class="sourceCode"><pre>+----------------+-------------+-------------+
+|                | up-left     | up-left     |
++                +-------------+-------------+
+|                | up   | up   | up   | up   |
++----------------+------+------+------+------+
+| left-up | left | data | data | data | data |
++         +------+------+------+------+------+
+|         | left | data | data | data | data |
++---------+------+------+------+------+------+
+| left-up | left | data | data | data | data |
++         +------+------+------+------+------+
+|         | left | data | data | data | data |
++---------+------+------+------+------+------+
+</pre></div>
+<div class="sourceCode"><pre>+-------------+-------------+------------------+
+| up-right    | up-right    |                  |
++-------------+-------------+                  +
+| up   | up   | up   | up   |                  |
++------+------+------+------+------------------+
+| data | data | data | data | right | right-up |
++------+------+------+------+-------+          +
+| data | data | data | data | right |          |
++------+------+------+------+-------+----------+
+| data | data | data | data | right | right-up |
++------+------+------+------+-------+          +
+| data | data | data | data | right |          |
++------+------+------+------+-------+----------+
+</pre></div>
+<div class="sourceCode"><pre>+-----------+------+------+------+------+------+
+|           | left | data | data | data | data |
++           +------+------+------+------+------+
+| left-down | left | data | data | data | data |
++-----------+------+------+------+------+------+
+|           | left | data | data | data | data |
++           +------+------+------+------+------+
+| left-down | left | data | data | data | data |
++-----------+------+------+------+------+------+
+|                  | down | down | down | down |
++                  +------+------+------+------+
+|                  | down-left   | down-left   |
++-----------+------+-------------+-------------+
+</pre></div>
+<div class="sourceCode"><pre>'+------+------+------+------+-------+------------+
+| data | data | data | data | right |            |
++------+------+------+------+-------+            +
+| data | data | data | data | right | right-down |
++------+------+------+------+-------+------------+
+| data | data | data | data | right |            |
++------+------+------+------+-------+            +
+| data | data | data | data | right | right-down |
++------+------+------+------+-------+------------+
+| down | down | down | down |                    |
++------+------+------+------+                    +
+|  down-right |  down-right |                    |
++-------------+-------------+--------------------+
+</pre></div>
+<div class="sourceCode"><pre>+-----------------+----------------------+-----------------------------+
+|                 |        up-ish        |               up-ish        |
++                 +----------------------+-----------------------------+
+|                 | up   | up     | up   | up   | up   | up     | up   |
++-----------------+------+--------+------+------+------+--------+------+
+|          | left | data | data   | data | data | data | data   | data |
++          +------+------+--------+------+------+------+--------+------+
+| left-ish | left | data | data   | data | data | data | data   | data |
++          +------+------+--------+------+------+------+--------+------+
+|          | left | data | data   | data | data | data | data   | data |
++----------+------+------+--------+------+------+------+--------+------+
+|          | left | data | data   | data | data | data | data   | data |
++          +------+------+--------+------+------+------+--------+------+
+|          | left | data | data   | data | data | data | data   | data |
++          +------+------+--------+------+------+------+--------+------+
+| left-ish | left | data | data   | data | data | data | data   | data |
++          +------+------+--------+------+------+------+--------+------+
+|          | left | data | data   | data | data | data | data   | data |
++----------+------+------+--------+------+------+------+-----  -+------+
+</pre></div>
+<div class="sourceCode"><pre>+------+----------+------+------+------+----------+------+-------+-----------+
+| data | data     | data | data | data | data     | data | right |           |
++------+----------+------+------+------+----------+------+-------+           +
+| data | data     | data | data | data | data     | data | right | right-ish |
++------+----------+------+------+------+----------+------+-------+           +
+| data | data     | data | data | data | data     | data | right |           |
++------+----------+------+------+------+----------+------+-------+-----------+
+| data | data     | data | data | data | data     | data | right |           |
++------+----------+------+------+------+----------+------+-------+           +
+| data | data     | data | data | data | data     | data | right |           |
++------+----------+------+------+------+----------+------+-------+           +
+| data | data     | data | data | data | data     | data | right | right-ish |
++------+----------+------+------+------+----------+------+-------+           +
+| data | data     | data | data | data | data     | data | right |           |
++------+----------+------+------+------+----------+------+-------+-----------+
+| down | down     | down | down | down | down     | down |                   |
++------+----------+------+------+------+----------+------+                   +
+|        down-ish        |               down-ish        |                   |
++------------------------+-------------------------------+-------------------+
+</pre></div>
+
+
+<h3>Legacy directions</h3>
+
+<p>Older versions of unpivotr used different names for the directions, based on
+the points of the compass.  These are still supported but are discouraged.
+</p>
+<div class="sourceCode"><pre>| old direction | new direction |
+|---------------|---------------|
+| N             | up            |
+| NNW           | up-left       |
+| NNE           | up-right      |
+| W             | left          |
+| WNW           | left-up       |
+| WSW           | left-down     |
+| E             | right         |
+| ENE           | right-up      |
+| ESE           | right-down    |
+| S             | down          |
+| SSW           | down-left     |
+| SSE           | down-right    |
+</pre></div>
+
+
+</div>

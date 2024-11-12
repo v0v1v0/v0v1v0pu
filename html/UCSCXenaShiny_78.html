@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_toil_Mut</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize molecular profile difference between mutation and wild status of queried gene</h2>
+
+<h3>Description</h3>
+
+<p>Visualize molecular profile difference between mutation and wild status of queried gene
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_toil_Mut(
+  mut_Gene = "TP53",
+  Gene = NULL,
+  data_type = NULL,
+  Mode = c("Boxplot", "Violinplot"),
+  Show.P.value = TRUE,
+  Show.P.label = TRUE,
+  Method = c("wilcox.test", "t.test"),
+  values = c("#DF2020", "#DDDF21"),
+  draw_quantiles = c(0.25, 0.5, 0.75),
+  trim = TRUE,
+  opt_pancan = .opt_pancan
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mut_Gene</code></td>
+<td>
+<p>the queried gene to determine grouping based on mutation and wild status</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Gene</code></td>
+<td>
+<p>a molecular identifier (e.g., "TP53") or a formula specifying
+genomic signature (<code>"TP53 + 2 * KRAS - 1.3 * PTEN"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_type</code></td>
+<td>
+<p>choose gene profile type,
+including "mRNA", "transcript", "methylation", "miRNA".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Mode</code></td>
+<td>
+<p>choose one visualize mode to represent data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Show.P.value</code></td>
+<td>
+<p><code>TRUE</code> or <code>FALSE</code> whether to count P value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Show.P.label</code></td>
+<td>
+<p><code>TRUE</code> or <code>FALSE</code> present p value with number or label <code>*</code>, <code style="white-space: pre;">⁠**⁠</code>, <code style="white-space: pre;">⁠***⁠</code> and <code style="white-space: pre;">⁠****⁠</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Method</code></td>
+<td>
+<p>default method is wilcox.test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>the color to fill mutation or wild status</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>draw_quantiles</code></td>
+<td>
+<p>draw quantiles for violinplot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trim</code></td>
+<td>
+<p>whether to trim the violin</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt_pancan</code></td>
+<td>
+<p>specify one dataset for some molercular profiles</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>ggplot</code> object or a tibble data.frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+p &lt;- vis_toil_Mut(mut_Gene = "TP53")
+p &lt;- vis_toil_Mut(mut_Gene = "TP53", Gene = "TNF")
+p &lt;- vis_toil_Mut(mut_Gene = "TP53", Gene = "hsa-let-7d-3p", data_type = "miRNA")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

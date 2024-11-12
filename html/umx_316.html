@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>xmu_dot_rank</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper to make a graphviz rank string</h2>
+
+<h3>Description</h3>
+
+<p>Given a list of names, this filters the list, and returns a graphviz string to force them into the given rank.
+e.g. <code>"{rank=same; as1};"</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">xmu_dot_rank(vars, pattern, rank)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vars</code></td>
+<td>
+<p>a list of strings</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>regular expression to filter vars</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rank</code></td>
+<td>
+<p>"same", "max", "min"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>string
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>xmu_dot_define_shapes()</code>
+</p>
+</li></ul>
+<p>Other Graphviz: 
+<code>xmu_dot_define_shapes()</code>,
+<code>xmu_dot_make_paths()</code>,
+<code>xmu_dot_make_residuals()</code>,
+<code>xmu_dot_maker()</code>,
+<code>xmu_dot_mat2dot()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">xmu_dot_rank(c("as1"), "^[ace]s[0-9]+$", "same")
+</code></pre>
+
+
+</div>

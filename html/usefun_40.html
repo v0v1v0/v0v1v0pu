@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>specify_decimal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Specify decimal</h2>
+
+<h3>Description</h3>
+
+<p>Use this function to transform a given decimal number to the desired
+precision by choosing the number of digits after the decimal point.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">specify_decimal(number, digits.to.keep)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>number</code></td>
+<td>
+<p>numeric</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits.to.keep</code></td>
+<td>
+<p>numeric. Refers to the digits to keep after decimal
+point '.'. This value should be 15 or less.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the pruned number in string format
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># 0.123
+specify_decimal(0.1233213, 3)
+
+</code></pre>
+
+
+</div>

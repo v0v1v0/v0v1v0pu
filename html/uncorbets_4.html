@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>max_effective_bets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Risk-Diversification powered by the Minimum Torsion Algorithm</h2>
+
+<h3>Description</h3>
+
+<p>Finds the allocation that maximizes the <code>effective_bets</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">max_effective_bets(x0, sigma, t, tol = 1e-20, maxeval = 5000L, maxiter = 5000L)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x0</code></td>
+<td>
+<p>A <code>numeric</code> vector for the search starting point. Usually the
+"one over n" allocation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>A <code>n x n</code> covariance matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t</code></td>
+<td>
+<p>A <code>n x n</code> torsion matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>An <code>interger</code> with the convergence tolerance.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxeval</code></td>
+<td>
+<p>An <code>integer</code> with the maximum number of evaluations of the
+objective function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxiter</code></td>
+<td>
+<p>An <code>integer</code> with the maximum number of iterations.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>list</code> with the following components:
+</p>
+
+<ul>
+<li> <p><code>weights</code>: the optimal allocation policy
+</p>
+</li>
+<li> <p><code>enb</code>: the optimal effective number of bets
+</p>
+</li>
+<li> <p><code>counts</code>: the number of iterations of the objective and the gradient
+</p>
+</li>
+<li> <p><code>lambda_lb</code>: the lower bound Lagrange multipliers
+</p>
+</li>
+<li> <p><code>lambda_ub</code>: the upper bound Lagrange multipliers
+</p>
+</li>
+<li> <p><code>lambda_eq</code>: the equality Lagrange multipliers
+</p>
+</li>
+<li> <p><code>gradient</code>: the gradient of the objective function at the optimum
+</p>
+</li>
+<li> <p><code>hessian</code>: hessian of the objective function at the optimum
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>solnl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># extract the invariants from the data
+set.seed(123)
+log_ret &lt;- matrix(stats::rnorm(400), ncol = 4) / 10
+
+# compute the covariance matrix
+sigma &lt;- stats::cov(log_ret)
+
+# torsion
+torsion_cov &lt;- torsion(sigma = sigma, model = 'minimum-torsion', method = 'exact')
+
+# 1/N reference
+b &lt;- rep(1 / ncol(log_ret), ncol(log_ret))
+
+max_effective_bets(x0 = b, sigma = sigma, t = torsion_cov)
+</code></pre>
+
+
+</div>

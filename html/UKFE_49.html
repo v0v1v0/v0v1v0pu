@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GumbelPars</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Gumbel distribution parameter estimates</h2>
+
+<h3>Description</h3>
+
+<p>Estimated parameters from a sample (with Lmoments or maximum likelihood estimation) or from L1 (first L-moment), Lcv (linear coefficient of variation)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GumbelPars(x = NULL, mle = FALSE, L1, LCV)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>numeric vector. The sample</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mle</code></td>
+<td>
+<p>logical argument with a default of FALSE. If FALSE the parameters are estimated with Lmoments, if TRUE the parameters are estimated by maximum likelihood estimation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>L1</code></td>
+<td>
+<p>first Lmoment</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>LCV</code></td>
+<td>
+<p>linear coefficient of variation</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The L-moment estimated parameters are by the method detailed in 'Hosking J. Wallis J. 1997 Regional Frequency Analysis: An Approach Based on L-moments. Cambridge University Press, New York'
+</p>
+
+
+<h3>Value</h3>
+
+<p>Parameter estimates (location, scale)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get an annual maximum sample and estimate the parameters using Lmoments
+AM.27090 &lt;- GetAM(27090)
+GumbelPars(AM.27090$Flow)
+#Estimate parameters using MLE
+GumbelPars(AM.27090$Flow, mle = TRUE)
+#calculate Lmoments and estimate the parmeters with L1 and Lcv
+Pars &lt;- as.numeric(Lmoms(AM.27090$Flow)[c(1,5)])
+GumbelPars(L1 = Pars[1], LCV = Pars[2])
+</code></pre>
+
+
+</div>

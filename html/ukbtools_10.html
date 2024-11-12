@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_defunct</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Defunct genetic metadata functions</h2>
+
+<h3>Description</h3>
+
+<p>The genetic metadata functions were written to retrieve genetic metadata from the phenotype file for the <a href="http://biobank.ctsu.ox.ac.uk/crystal/label.cgi?id=199001">interim genotype release</a>. <strong>The fields retrieved became obselete when the full genotyping results (500K individuals) were released at the end of 2017.</strong> With the release of the full genotyping results, sample QC (ukb_sqc_v2.txt) and marker QC (ukb_snp_qc.txt) data are now supplied as separate files. The contents of these files, along with all other genetic files are described fully in <a href="https://biobank.ctsu.ox.ac.uk/crystal/refer.cgi?id=531">UKB Resource 531</a>.
+</p>
+
+<ul>
+<li>
+<p> ukb_gen_meta(data)
+</p>
+</li>
+<li>
+<p> ukb_gen_pcs(data)
+</p>
+</li>
+<li>
+<p> ukb_gen_excl(data)
+</p>
+</li>
+<li>
+<p> ukb_gen_rel(data)
+</p>
+</li>
+<li>
+<p> ukb_gen_het(data, all.het = FALSE)
+</p>
+</li>
+<li>
+<p> ukb_gen_excl_to_na(data, x, ukb.id = "eid", data.frame = FALSE)
+</p>
+</li>
+<li>
+<p> ukb_gen_write_plink_excl(path)
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_defunct()
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p>See also lists new functionality that works with the files described in <a href="https://biobank.ctsu.ox.ac.uk/crystal/refer.cgi?id=531">UKB Resource 531</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukb_gen_sqc_names</code>, <code>ukb_gen_rel_count</code>, <code>ukb_gen_related_with_data</code>, <code>ukb_gen_samples_to_remove</code>
+</p>
+
+
+</div>

@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multilabel_evaluate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evaluate multi-label predictions</h2>
+
+<h3>Description</h3>
+
+<p>This method is used to evaluate multi-label predictions. You can create a
+confusion matrix object or use directly the test dataset and the predictions.
+You can also specify which measures do you desire use.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multilabel_evaluate(object, ...)
+
+## S3 method for class 'mldr'
+multilabel_evaluate(object, mlresult, measures = c("all"), labels = FALSE, ...)
+
+## S3 method for class 'mlconfmat'
+multilabel_evaluate(object, measures = c("all"), labels = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A mldr dataset or a mlconfmat confusion matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Extra parameters to specific measures.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mlresult</code></td>
+<td>
+<p>The prediction result (Optional, required only when the
+mldr is used).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>measures</code></td>
+<td>
+<p>The measures names to be computed. Call
+<code>multilabel_measures()</code> to see the expected measures. You can also
+use <code>"bipartition"</code>, <code>"ranking"</code>, <code>"label-based"</code>,
+<code>"example-based"</code>, <code>"macro-based"</code>, <code>"micro-based"</code> and
+<code>"label-problem"</code> to include a set of measures. (Default: "all").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Logical value defining if the label results should be also
+returned. (Default: <code>FALSE</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If labels is FALSE return a vector with the expected multi-label
+measures, otherwise, a list contained the multi-label and label measures.
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>mldr</code>: Default S3 method
+</p>
+</li>
+<li> <p><code>mlconfmat</code>: Default S3 method
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Madjarov, G., Kocev, D., Gjorgjevikj, D., &amp; Dzeroski, S. (2012). An
+extensive experimental comparison of methods for multi-label learning.
+Pattern Recognition, 45(9), 3084-3104.
+Zhang, M.-L., &amp; Zhou, Z.-H. (2014). A Review on Multi-Label Learning
+Algorithms. IEEE Transactions on Knowledge and Data Engineering, 26(8),
+1819-1837.
+Gibaja, E., &amp; Ventura, S. (2015). A Tutorial on Multilabel Learning.
+ACM Comput. Surv., 47(3), 52:1-2:38.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other evaluation: 
+<code>cv()</code>,
+<code>multilabel_confusion_matrix()</code>,
+<code>multilabel_measures()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+prediction &lt;- predict(br(toyml), toyml)
+
+# Compute all measures
+multilabel_evaluate(toyml, prediction)
+multilabel_evaluate(toyml, prediction, labels=TRUE) # Return a list
+
+# Compute bipartition measures
+multilabel_evaluate(toyml, prediction, "bipartition")
+
+# Compute multilples measures
+multilabel_evaluate(toyml, prediction, c("accuracy", "F1", "macro-based"))
+
+# Compute the confusion matrix before the measures
+cm &lt;- multilabel_confusion_matrix(toyml, prediction)
+multilabel_evaluate(cm)
+multilabel_evaluate(cm, "example-based")
+multilabel_evaluate(cm, c("hamming-loss", "subset-accuracy", "F1"))
+
+</code></pre>
+
+
+</div>

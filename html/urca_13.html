@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cajolst</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Testing Cointegrating Rank with Level Shift at Unknown time</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>cajolst</code> implements the procedure by Luetkepohl
+<em>et al.</em> to test for the cointegration rank of a VAR process with
+a level shift at an unknown time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cajolst(x, trend = TRUE, K = 2, season = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Data matrix to be investigated for cointegration.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trend</code></td>
+<td>
+<p>A linear trend is included in the auxiliary regressions
+for data adjustment (default is <code>TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p>The lag order of the series (levels) in the VAR, must be at
+least equal to <code class="reqn">K = 2</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>season</code></td>
+<td>
+<p>If seasonal dummies should be included, the data
+frequency must be set accordingly, <em>i.e</em> ‘4’ for quarterly data.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note, that the slot <code>"x"</code> of the returned object contains the
+adjusted data series, that is, a matrix adjusted for the temptative
+break point, and if applicable, a linear trend and/or seasonal
+effects. The VECM is then estimated and tested for cointegration rank
+subject to the adjusted matrix. The break point is contained in the
+slot <code>"bp"</code>. Please note, that the <em>transitory</em> VECM
+specification is estimated and that only the trace test is
+available. The critical values are taken from Trenkler, Carsten (2003).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class <code>ca.jo</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>L\"utkepohl, H., Saikkonen, P. and Trenkler, C. (2004), Testing for the
+Cointegrating Rank of a VAR Process with Level Shift at Unknown Time,
+<em>Econometrica</em>, <b>Vol. 72, No. 2</b>, 647–662.
+</p>
+<p>Trenkler, Carsten (2003), A new set of critical values for systems
+cointegration tests with a prior adjustment for deterministic terms,
+<em>Economics Bulletin</em>, <b>Vol. 3, No. 11</b>, 1–9. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>plotres</code>, <code>alrtest</code>, <code>ablrtest</code>,
+<code>blrtest</code>, <code>ca.jo</code>, <code>cajools</code>,
+<code>lttest</code>, <code>ca.jo-class</code> and <code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.lst &lt;- cajolst(sjd, trend=TRUE, K=2, season=4)
+summary(sjd.lst)
+</code></pre>
+
+
+</div>

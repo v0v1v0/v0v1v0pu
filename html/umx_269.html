@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_strings2numeric</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A wrapper to map columns of strings to numeric.</h2>
+
+<h3>Description</h3>
+
+<p>If you give one column name, this is changed to numeric, and returned as a <strong>vector</strong>.
+If you give multiple column names, or don't set cols, each is changed to numeric, and the updated <strong>data.frame</strong> is returned.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_strings2numeric(df, cols = NA, mapStrings = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>The df</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>(optional) list of columns (default = use all)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mapStrings</code></td>
+<td>
+<p>legal strings which will be mapped in order to numbers.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> df
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tmp = data.frame(x=letters)
+umx_strings2numeric(tmp, mapStrings = letters)
+umx_strings2numeric(tmp, cols= "x", mapStrings = letters)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>prez_pwr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Presidential Power.</h2>
+
+<h3>Description</h3>
+
+<p>Data from a Pew Research Center poll about Presidential
+power/control over gas prices.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">prez_pwr
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 365 rows and 3 variables.
+</p>
+
+<dl>
+<dt>president</dt>
+<dd>
+<p>Sitting President at time of the poll.</p>
+</dd>
+<dt>party</dt>
+<dd>
+<p>Political party of the respondent with levels d(emocrat)
+and r(epublican).</p>
+</dd>
+<dt>has_pwr</dt>
+<dd>
+<p>Respondent answer to the question: "Is
+the price of gasoline something the president can do
+alot about, or is that beyond the president's control?"</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://www.pewresearch.org/short-reads/2013/07/25/can-a-president-control-gas-prices-depends-on-when-you-ask/">Pew Research Center, May 2006 &amp; March 2012</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ggplot2)
+ggplot(prez_pwr, aes(has_pwr, fill = party)) +
+  geom_bar() +
+  labs(
+    title = "Is the price of gasoline something the president can do alot about?",
+    x = "",
+    y = "Number of respondents",
+    fill = "Respondent Party"
+  ) +
+  facet_wrap(~president)
+</code></pre>
+
+
+</div>

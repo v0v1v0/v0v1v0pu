@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>var_Deville</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Deville's approximate variance estimators</h2>
+
+<h3>Description</h3>
+
+<p>Compute Deville's approximate variance estimators of class 2, which require only
+first-order inclusion probabilities and only for sample units
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">var_Deville(y, pik, method)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>numeric vector of sample observations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pik</code></td>
+<td>
+<p>numeric vector of first-order inclusion probabilities for sample units</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>string indicating the desired approximate variance estimator.
+One of "Deville1", "Deville2", "Deville3", "Hajek", "Rosen", "FixedPoint",
+"Brewer1", "HartleyRao", "Berger", "Tille", "MateiTille1", "MateiTille2",
+"MateiTille3", "MateiTille4", "MateiTille5", "Brewer2", "Brewer3", "Brewer4".</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a scalar, the estimated variance
+</p>
+
+
+</div>

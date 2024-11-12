@@ -1,0 +1,161 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ushr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Master function</h2>
+
+<h3>Description</h3>
+
+<p>This function performs the entire analysis, from data filtering to fitting the biphasic/single phase models. The biphasic/single phase models should be used when ART comprises of RTI/PIs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ushr(data, filter = TRUE, detection_threshold = 20, censortime = 365,
+  censor_value = 10, decline_buffer = 500, initial_buffer = 3,
+  threshold_buffer = 10, VL_max_decline = 10000, CI_max_diff = 1000,
+  n_min_single = 3, n_min_biphasic = 6, nsuppression = 1,
+  forward_param_transform_fn = list(log, log, log, log),
+  inv_param_transform_fn = list(exp, exp, exp, exp),
+  initial_params = c(A = 10000, delta = 0.68, B = 1000, gamma = 0.03),
+  searchmethod = "Nelder-Mead")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>raw data set. Must be a data frame with the following columns: 'id' - stating the unique identifier for each subject; 'vl' - numeric vector stating the viral load measurements for each subject; 'time'- numeric vector stating the time at which each measurement was taken.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter</code></td>
+<td>
+<p>Logical TRUE/FALSE indicating whether the data should be processed (highly recommended) prior to model fitting. Default is TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>detection_threshold</code></td>
+<td>
+<p>numeric value indicating the detection threshold of the assay used to measure viral load. Measurements below this value will be assumed to represent undetectable viral levels. Default value is 20.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>censortime</code></td>
+<td>
+<p>numeric value indicating the maximum time point to include in the analysis. Subjects who do not suppress viral load below the detection threshold within this time will be discarded from model fitting. Units are assumed to be same as the 'time' measurements. Default value is 365.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>censor_value</code></td>
+<td>
+<p>positive numeric value indicating the maximum time point to include in the analysis. Subjects who do not suppress viral load below the detection threshold within this time will be discarded. Units are assumed to be the same as the 'time' column. Default value is 365.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decline_buffer</code></td>
+<td>
+<p>numeric value indicating the maximum allowable deviation of values away from a strictly decreasing sequence in viral load. This allows for e.g. measurement noise and small fluctuations in viral load. Default value is 500.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initial_buffer</code></td>
+<td>
+<p>integer value indicating the maximum number of initial observations from which the beginning of each trajectory will be chosen. Default value is 3.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold_buffer</code></td>
+<td>
+<p>numeric value indicating the range above the detection threshold which represents potential skewing of model fits. Subjects with their last two data points within this range will have the last point removed. Default value is 10.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>VL_max_decline</code></td>
+<td>
+<p>numeric value indicating the maximum allowable difference between first and second viral load measurements. Default is 10,000.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CI_max_diff</code></td>
+<td>
+<p>numeric value indicating the maximum allowable relative difference between lower and upper 95% confidence intervals i.e. (upper CI - lower CI)/lower CI. Default is 1000.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_min_single</code></td>
+<td>
+<p>numeric value indicating the minimum number of data points required to be included in the analysis. Defaults to 3. It is highly advised not to go below this threshold.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_min_biphasic</code></td>
+<td>
+<p>numeric value indicating the minimum number of data points required to fit the biphasic model. Defaults to 6. It is highly advised not to go below this threshold.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nsuppression</code></td>
+<td>
+<p>numerical value (1 or 2) indicating whether suppression is defined as having one observation below the detection threshold, or two sustained observations. Default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forward_param_transform_fn</code></td>
+<td>
+<p>list of transformation functions to be used when fitting the model in optim. Defaults to log transformations for all parameters (to allow unconstrained optimization).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inv_param_transform_fn</code></td>
+<td>
+<p>list of transformation functions to be used when back-transforming the transformed parameters. Should be the inverse of the forward transformation functions. Defaults to exponential.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initial_params</code></td>
+<td>
+<p>named numeric vector of initial parameter guesses. Defaults to c(A = 10000, delta = 0.68, B = 1000, gamma = 0.03).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>searchmethod</code></td>
+<td>
+<p>optimization algorithm to be passed to 'optim()'. Defaults to 'Nelder-Mead'.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Steps include:
+1. Processing the raw data.
+2. Fitting the biphasic model to subjects with eligible data e.g. those with enough data points and reliable confidence interval estimates.
+3. Fitting the single phase model to the remaining subjects.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a list containing the filtered data ('data_filtered'); parameter estimates for the biphasic and single phase models ('biphasicCI' and 'singleCI'); and predictions from the biphasic and single phase models ('biphasic_fits' and 'single_fits').
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(1234567)
+
+simulated_data &lt;- simulate_data(nsubjects = 20)
+
+model_output &lt;- ushr(data = simulated_data)
+
+</code></pre>
+
+
+</div>

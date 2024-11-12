@@ -1,0 +1,143 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>XB.IDX</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Xie and Beni (XB) index
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes the XB (X. L. Xie and G. Beni, 1991) index for a result of either FCM or EM clustering from user specified <code>cmin</code> to <code>cmax</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">XB.IDX(x, cmax, cmin = 2, method = "FCM", fzm = 2, nstart = 20, iter = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric data frame or matrix where each column is a variable to be used for cluster analysis and each row is a data point.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmax</code></td>
+<td>
+<p>a maximum number of clusters to be considered.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmin</code></td>
+<td>
+<p>a minimum number of clusters to be considered. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which clustering method to be used (<code>"FCM"</code> or <code>"EM"</code>). The default is <code>"FCM"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fzm</code></td>
+<td>
+<p>a number greater than 1 giving the degree of fuzzification for <code>method = "FCM"</code>. The default is <code>2</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nstart</code></td>
+<td>
+<p>a maximum number of initial random sets for FCM for <code>method = "FCM"</code>. The default is <code>20</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>a maximum number of iterations for <code>method = "FCM"</code>. The default is <code>100</code>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The XB index is defined as <br></p>
+<p style="text-align: center;"><code class="reqn"> XB(c) = \frac{\sum_{j=1}^c\sum_{i=1}^n\mu_{ij}^2\| {x}_i-{v}_j\|^2}
+             {n \cdot \min_{j\neq k} \{ \| {v}_j-{v}_k\|^2 \}}.</code>
+</p>
+
+<p>The lowest value of <code class="reqn">XB(c)</code> indicates a valid optimal partition.<br></p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>XB</code></td>
+<td>
+<p>the XB index for <code>c</code> from <code>cmin</code> to <code>cmax</code> shown in a data frame where the first and the second columns are <code>c</code> and the XB index, respectively.
+</p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Nathakhun Wiroonsri and Onthada Preedasawakul
+</p>
+
+
+<h3>References</h3>
+
+<p>X. Xie and G. Beni, “A validity measure for fuzzy clustering,” IEEE
+Transactions on Pattern Analysis and Machine Intelligence, vol. 13, no. 8,
+pp. 841–847, 1991.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>R1_data, TANG.IDX, FzzyCVIs, WP.IDX, Hvalid</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UniversalCVI)
+
+# The data is from Wiroonsri (2024).
+x = R1_data[,1:2]
+
+# ---- FCM algorithm ----
+
+# Compute the XB index
+FCM.XB = XB.IDX(scale(x), cmax = 15, cmin = 2, method = "FCM",
+  fzm = 2, nstart = 20, iter = 100)
+print(FCM.XB)
+
+# The optimal number of cluster
+FCM.XB[which.min(FCM.XB$XB),]
+
+# ---- EM algorithm ----
+
+# Compute the XB index
+EM.XB = XB.IDX(scale(x), cmax = 15, cmin = 2, method = "EM",
+  nstart = 20, iter = 100)
+print(EM.XB)
+
+# The optimal number of cluster
+EM.XB[which.min(EM.XB$XB),]
+</code></pre>
+
+
+</div>

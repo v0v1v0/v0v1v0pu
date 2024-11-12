@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>divorce</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Time until divorce for divorced women (by age)</h2>
+
+<h3>Description</h3>
+
+<p>The <code>divorce</code> data frame has 25 rows and 6 columns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(divorce)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>time of divorce</dt>
+<dd>
+<p>a factor</p>
+</dd>
+<dt>all ages</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>0-17</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>18-19</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>20-24</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>25-100</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Forgot source
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(divorce)
+apply(divorce[,2:6],2,sum)	# percent divorced by age of marriage
+</code></pre>
+
+
+</div>

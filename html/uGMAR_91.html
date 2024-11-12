@@ -1,0 +1,273 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>random_ind</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create random GMAR, StMAR, or G-StMAR model compatible parameter vector</h2>
+
+<h3>Description</h3>
+
+<p><code>random_ind</code> creates a random GMAR, StMAR, or G-StMAR model compatible mean-parametrized parameter vector.
+</p>
+<p><code>smart_ind</code> creates a random GMAR, StMAR, or G-StMAR model compatible parameter vector close to argument <code>params</code>.
+Sometimes returns exactly the given parameter vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">random_ind(
+  p,
+  M,
+  model = c("GMAR", "StMAR", "G-StMAR"),
+  restricted = FALSE,
+  constraints = NULL,
+  mu_scale,
+  sigma_scale,
+  forcestat = FALSE
+)
+
+smart_ind(
+  p,
+  M,
+  params,
+  model = c("GMAR", "StMAR", "G-StMAR"),
+  restricted = FALSE,
+  constraints = NULL,
+  mu_scale,
+  sigma_scale,
+  accuracy,
+  which_random = numeric(0),
+  forcestat = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a positive integer specifying the autoregressive order of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+
+<dl>
+<dt>For <strong>GMAR</strong> and <strong>StMAR</strong> models:</dt>
+<dd>
+<p>a positive integer specifying the number of mixture components.</p>
+</dd>
+<dt>For <strong>G-StMAR</strong> models:</dt>
+<dd>
+<p>a size (2x1) integer vector specifying the number of <em>GMAR type</em> components <code>M1</code> in the
+first element and <em>StMAR type</em> components <code>M2</code> in the second element. The total number of mixture components is <code>M=M1+M2</code>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>is "GMAR", "StMAR", or "G-StMAR" model considered? In the G-StMAR model, the first <code>M1</code> components
+are <em>GMAR type</em> and the rest <code>M2</code> components are <em>StMAR type</em>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>restricted</code></td>
+<td>
+<p>a logical argument stating whether the AR coefficients <code class="reqn">\phi_{m,1},...,\phi_{m,p}</code> are restricted
+to be the same for all regimes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>constraints</code></td>
+<td>
+<p>specifies linear constraints imposed to each regime's autoregressive parameters separately.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>a list of size <code class="reqn">(pxq_{m})</code> constraint matrices <strong><code class="reqn">C_{m}</code></strong> of full column rank
+satisfying <strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> for all <code class="reqn">m=1,...,M</code>, where
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p})</code> and <strong><code class="reqn">\psi_{m}</code></strong><code class="reqn">=(\psi_{m,1},...,\psi_{m,q_{m}})</code>.</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>a size <code class="reqn">(pxq)</code> constraint matrix <strong><code class="reqn">C</code></strong> of full column rank satisfying
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong>, where <strong><code class="reqn">\phi</code></strong><code class="reqn">=(\phi_{1},...,\phi_{p})</code> and
+<strong><code class="reqn">\psi</code></strong><code class="reqn">=\psi_{1},...,\psi_{q}</code>.</p>
+</dd>
+</dl>
+<p>The symbol <code class="reqn">\phi</code> denotes an AR coefficient. Note that regardless of any constraints, the autoregressive order
+is always <code>p</code> for all regimes.
+Ignore or set to <code>NULL</code> if applying linear constraints is not desired.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu_scale</code></td>
+<td>
+<p>a real valued vector of length two specifying the mean (the first element) and standard deviation (the second element)
+of the normal distribution from which the <code class="reqn">\phi_{m,0}</code> <strong>or</strong> <code class="reqn">\mu_{m}</code> (depending on the desired parametrization)
+parameters (for random regimes) should be generated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma_scale</code></td>
+<td>
+<p>a positive real number specifying the standard deviation of the (zero mean, positive only by taking absolute value)
+normal distribution from which the component variance parameters (for random regimes) should be generated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forcestat</code></td>
+<td>
+<p>use the algorithm by Monahan (1984) to force stationarity on the AR parameters (slower) for random regimes?
+Not supported for constrained models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>params</code></td>
+<td>
+<p>a real valued parameter vector specifying the model.
+</p>
+
+<dl>
+<dt>For <strong>non-restricted</strong> models:</dt>
+<dd>
+<p>Size <code class="reqn">(M(p+3)+M-M1-1x1)</code> vector <strong><code class="reqn">\theta</code></strong><code class="reqn">=</code>(<strong><code class="reqn">\upsilon_{1}</code></strong><code class="reqn">,...,</code><strong><code class="reqn">\upsilon_{M}</code></strong>,
+<code class="reqn">\alpha_{1},...,\alpha_{M-1},</code><strong><code class="reqn">\nu</code></strong>) where
+</p>
+
+<ul>
+<li> <p><strong><code class="reqn">\upsilon_{m}</code></strong><code class="reqn">=(\phi_{m,0},</code><strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">,</code><code class="reqn">\sigma_{m}^2)</code>
+</p>
+</li>
+<li> <p><strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=(\phi_{m,1},...,\phi_{m,p}), m=1,...,M</code>
+</p>
+</li>
+<li> <p><strong><code class="reqn">\nu</code></strong><code class="reqn">=(\nu_{M1+1},...,\nu_{M})</code>
+</p>
+</li>
+<li> <p><code class="reqn">M1</code> is the number of GMAR type regimes.
+</p>
+</li>
+</ul>
+<p>In the <strong>GMAR</strong> model, <code class="reqn">M1=M</code> and the parameter <strong><code class="reqn">\nu</code></strong> dropped. In the <strong>StMAR</strong> model, <code class="reqn">M1=0</code>.
+</p>
+<p>If the model imposes <strong>linear constraints</strong> on the autoregressive parameters:
+Replace the vectors <strong><code class="reqn">\phi_{m}</code></strong> with the vectors <strong><code class="reqn">\psi_{m}</code></strong> that satisfy
+<strong><code class="reqn">\phi_{m}</code></strong><code class="reqn">=</code><strong><code class="reqn">C_{m}\psi_{m}</code></strong> (see the argument <code>constraints</code>).
+</p>
+</dd>
+<dt>For <strong>restricted</strong> models:</dt>
+<dd>
+<p>Size <code class="reqn">(3M+M-M1+p-1x1)</code> vector <strong><code class="reqn">\theta</code></strong><code class="reqn">=(\phi_{1,0},...,\phi_{M,0},</code><strong><code class="reqn">\phi</code></strong><code class="reqn">,</code>
+<code class="reqn">\sigma_{1}^2,...,\sigma_{M}^2,</code><code class="reqn">\alpha_{1},...,\alpha_{M-1},</code><strong><code class="reqn">\nu</code></strong>), where <strong><code class="reqn">\phi</code></strong>=<code class="reqn">(\phi_{1},...,\phi_{p})</code>
+contains the AR coefficients, which are common for all regimes.
+</p>
+<p>If the model imposes <strong>linear constraints</strong> on the autoregressive parameters:
+Replace the vector <strong><code class="reqn">\phi</code></strong> with the vector <strong><code class="reqn">\psi</code></strong> that satisfies
+<strong><code class="reqn">\phi</code></strong><code class="reqn">=</code><strong><code class="reqn">C\psi</code></strong> (see the argument <code>constraints</code>).
+</p>
+</dd>
+</dl>
+<p>Symbol <code class="reqn">\phi</code> denotes an AR coefficient, <code class="reqn">\sigma^2</code> a variance, <code class="reqn">\alpha</code> a mixing weight, and <code class="reqn">\nu</code> a degrees of
+freedom parameter. If <code>parametrization=="mean"</code>, just replace each intercept term <code class="reqn">\phi_{m,0}</code> with the regimewise mean
+<code class="reqn">\mu_m = \phi_{m,0}/(1-\sum\phi_{i,m})</code>. In the <strong>G-StMAR</strong> model, the first <code>M1</code> components are <em>GMAR type</em>
+and the rest <code>M2</code> components are <em>StMAR type</em>.
+Note that in the case <strong>M=1</strong>, the mixing weight parameters <code class="reqn">\alpha</code> are dropped, and in the case of <strong>StMAR</strong> or <strong>G-StMAR</strong> model,
+the degrees of freedom parameters <code class="reqn">\nu</code> have to be larger than <code class="reqn">2</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>accuracy</code></td>
+<td>
+<p>a real number larger than zero specifying how close to <code>params</code> the generated parameter vector should be.
+Standard deviation of the normal distribution from which new parameter values are drawn from will be corresponding parameter
+value divided by <code>accuracy</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which_random</code></td>
+<td>
+<p>a numeric vector of maximum length <code>M</code> specifying which regimes should be random instead of "smart" when
+using <code>smart_ind</code>. Does not affect mixing weight parameters. Default in none.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>These functions can be used, for example, to create initial populations for the genetic algorithm. Mean-parametrization
+(instead of intercept terms <code class="reqn">\phi_{m,0}</code>) is assumed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns estimated parameter vector with the form described in <code>initpop</code>.
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li>
+<p> Monahan J.F. 1984. A Note on Enforcing Stationarity in Autoregressive-Moving Average Models.
+<em>Biometrica</em> <strong>71</strong>, 403-404.
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(1)
+
+# GMAR model parameter vector
+params22 &lt;- random_ind(p=2, M=2, mu_scale=c(0, 1), sigma_scale=1)
+smart22 &lt;- smart_ind(p=2, M=2, params22, accuracy=10)
+cbind(params22, smart22)
+
+# Restricted GMAR parameter vector
+params12r &lt;- random_ind(p=1, M=2, restricted=TRUE, mu_scale=c(-2, 2), sigma_scale=2)
+smart12r &lt;- smart_ind(p=1, M=2, params12r, restricted=TRUE, accuracy=20)
+cbind(params12r, smart12r)
+
+# StMAR parameter vector: first regime is random in the "smart individual"
+params13t &lt;- random_ind(p=1, M=3, model="StMAR", mu_scale=c(3, 1), sigma_scale=3)
+smart13t &lt;- smart_ind(p=1, M=3, params13t, model="StMAR", accuracy=15,
+                      mu_scale=c(3, 3), sigma_scale=3, which_random=1)
+cbind(params13t, smart13t)
+
+# Restricted StMAR parameter vector
+params22tr &lt;- random_ind(p=2, M=2, model="StMAR", restricted=TRUE,
+                         mu_scale=c(3, 2), sigma_scale=0.5)
+smart22tr &lt;- smart_ind(p=2, M=2, params22tr, model="StMAR", restricted=TRUE,
+                       accuracy=30)
+cbind(params22tr, smart22tr)
+
+# G-StMAR parameter vector
+params12gs &lt;- random_ind(p=1, M=c(1, 1), model="G-StMAR", mu_scale=c(0, 1),
+                         sigma_scale=1)
+smart12gs &lt;- smart_ind(p=1, M=c(1, 1), params12gs, model="G-StMAR",
+                       accuracy=20)
+cbind(params12gs, smart12gs)
+
+# Such StMAR(3,2) that the AR coefficients are restricted to be
+# the same for both regimes and that the second AR coefficients are
+# constrained to zero. Second regime is random in the "smart individual".
+params32trc &lt;- random_ind(p=3, M=2, model="StMAR", restricted=TRUE,
+                          constraints=matrix(c(1, 0, 0, 0, 0, 1), ncol=2),
+                          mu_scale=c(-2, 0.5), sigma_scale=4)
+smart32trc &lt;- smart_ind(p=3, M=2, params32trc, model="StMAR", restricted=TRUE,
+                        constraints=matrix(c(1, 0, 0, 0, 0, 1), ncol=2),
+                        mu_scale=c(0, 0.1), sigma_scale=0.1, which_random=2,
+                        accuracy=20)
+cbind(params32trc, smart32trc)
+</code></pre>
+
+
+</div>

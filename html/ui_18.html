@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>profile.uiprobit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot of UI and CI</h2>
+
+<h3>Description</h3>
+
+<p>Plot function for objects returned from <code>ui.probit</code>.
+Plots confidence intervals for different values of rho and the uncertainty interval.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'uiprobit'
+profile(fitted, plot.all = TRUE, which = NA,
+  intercept = FALSE, xlab = NULL, ylab = NULL, cex.lab = 2,
+  mar = c(6, 6, 2, 2), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fitted</code></td>
+<td>
+<p>An object of class uiprobit</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.all</code></td>
+<td>
+<p>If TRUE, plots all covariates.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>which</code></td>
+<td>
+<p>Specify which variables should be plotted by either sending in their names in a vector or a vector with their numbers (1 intercept, 2 for the first covariate etc.).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intercept</code></td>
+<td>
+<p>If TRUE, also plots the intercept.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+<p>Title for x-axis, default is <code>expression(rho)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+<p>Title for y-axis, default is the variable names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cex.lab</code></td>
+<td>
+<p>Size of lables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mar</code></td>
+<td>
+<p>Margin around panels in plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments, use is discouraged.</p>
+</td>
+</tr>
+</table>
+</div>

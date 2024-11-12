@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bright.stars</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> List of bright stars with Hipparcos catalog number</h2>
+
+<h3>Description</h3>
+
+<p>List of bright stars with Hipparcos catalog number.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(bright.stars)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 96 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>name</dt>
+<dd>
+<p>Common name of star</p>
+</dd>
+<dt>hip</dt>
+<dd>
+<p>HIP number for identification</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The source of star names goes back to the Greeks and Arabs. Few are
+modern. This is a list of 96 common stars.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Form the Hipparcos website http://astro.estec.esa.nl/Hipparcos/ident6.html.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(bright.stars)
+all.names  = paste(bright.stars$name, sep="", collapse="")
+x = unlist(strsplit(tolower(all.names), ""))
+letter.dist = sapply(letters, function(i) sum(x == i))
+data(scrabble)			#  for frequency info
+p = scrabble$frequency[1:26];p=p/sum(p)
+chisq.test(letter.dist, p=p)	# compare with English
+</code></pre>
+
+
+</div>

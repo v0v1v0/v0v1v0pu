@@ -1,0 +1,149 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Prediction</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prediction of new observations</h2>
+
+<h3>Description</h3>
+
+<p>Computing a prediction for new observations
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Prediction(object, data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object inheriting from class ZIHR</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataset of observed variables with the same format as the data in the object</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>It provides a summary of the output of the ZIHR function, including parameter estimations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Estimation, standard errors and 95% credible intervals for predictions
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Taban Baghfalaki <a href="mailto:t.baghfalaki@gmail.com">t.baghfalaki@gmail.com</a>, Mojtaba Ganjali <a href="mailto:m-ganjali@sbu.ac.ir">m-ganjali@sbu.ac.ir</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ZIHR</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Example 1
+data(dataD)
+index &lt;- 1:(dim(dataD)[1])
+IND_new &lt;- sample(index, .5 * length(index))
+datat &lt;- dataD[IND_new, ]
+datav &lt;- dataD[-IND_new, ]
+modelY &lt;- y~x1 + x2
+modelZ &lt;- z~x1
+D1 &lt;- ZIHR(modelY, modelZ,
+           data = datat, n.chains = 2, n.iter = 1000,
+           n.burnin = 500, n.thin = 1, family = "Poisson"
+)
+
+
+  SummaryZIHR(D1)
+  Prediction(D1, data = datav)
+
+
+  D2 &lt;- ZIHR(modelY, modelZ,
+             data = datat, n.chains = 2, n.iter = 1000,
+             n.burnin = 500, n.thin = 1, family = "Bell"
+  )
+  SummaryZIHR(D2)
+
+
+
+  # Example 2
+  data(dataC)
+  modelY &lt;- y~x1 + x2
+  modelZ &lt;- z~x1
+  C &lt;- ZIHR(modelY, modelZ,
+            data = dataC, n.chains = 2, n.iter = 1000,
+            n.burnin = 500, n.thin = 1, family = "Gaussian"
+  )
+  SummaryZIHR(C)
+
+  Prediction(C, data = datav)
+
+
+
+  # Example 3
+  data(dataP)
+  modelY &lt;- y~x1 + x2
+  modelZ &lt;- z~x1
+  P1 &lt;- ZIHR(modelY, modelZ,
+             data = dataP, n.chains = 2, n.iter = 1000,
+             n.burnin = 500, n.thin = 1, family = "Exponential"
+  )
+  SummaryZIHR(P1)
+
+  P2 &lt;- ZIHR(modelY, modelZ,
+             data = dataP, n.chains = 2, n.iter = 1000,
+             n.burnin = 500, n.thin = 1, family = "Gamma"
+  )
+  SummaryZIHR(P2)
+
+  P3 &lt;- ZIHR(modelY, modelZ,
+             data = dataP, n.chains = 2, n.iter = 1000,
+             n.burnin = 500, n.thin = 1, family = "Weibull"
+  )
+  SummaryZIHR(P3)
+
+
+  # Example B
+  data(dataB)
+  modelY &lt;- y~x1 + x2
+  modelZ &lt;- z~x1
+  P &lt;- ZIHR(modelY, modelZ,
+            data = dataB, n.chains = 2, n.iter = 1000,
+            n.burnin = 500, n.thin = 1, family = "Beta"
+  )
+  SummaryZIHR(P)
+
+  # Example C
+  data(dataI)
+  modelY &lt;- y~x1 + x2
+  modelZ &lt;- z~x1
+  P4 &lt;- ZIHR(modelY, modelZ,
+             data = dataI, n.chains = 2, n.iter = 1000,
+             n.burnin = 500, n.thin = 1, family = "inverse.gaussian"
+  )
+  SummaryZIHR(P4)
+
+</code></pre>
+
+
+</div>

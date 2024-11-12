@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>url_update</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Update URLs in a package</h2>
+
+<h3>Description</h3>
+
+<p>First uses url_check to check and then updates any URLs which are permanent (301)
+redirects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">url_update(path = ".", results = url_check(path))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>Path to the package</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>results</code></td>
+<td>
+<p>results from url_check.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The results from <code>url_check(path)</code>, invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+url_update("my_pkg")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

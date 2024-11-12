@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_make_sql_from_excel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert an excel spreadsheet in a text file on sql statements.</h2>
+
+<h3>Description</h3>
+
+<p>Unlikely to be of use to anyone but the package author :-)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_make_sql_from_excel(theFile = "Finder")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>theFile</code></td>
+<td>
+<p>The xlsx file to read. Default = "Finder")</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>On OS X, by default, the file selected in the front-most Finder window will be chosen.
+If it is blank, a choose file dialog will be thrown.
+</p>
+<p>Read an xlsx file and convert into SQL insert statements (placed on the clipboard)
+On MacOS, the function can access the current front-most Finder window.
+</p>
+<p>The file name should be the name of the test.
+Columns should be headed:
+itemText	direction	scale	type	[optional	response	options]
+</p>
+<p>The SQL fields generated are:
+itemID, test, native_item_number, item_text, direction, scale, format, author
+</p>
+<p>tabbedPlus: list scored from 0 to n-1
+</p>
+<p>tabbedVertPlus: tabbed, but vertical lay-out
+</p>
+<p>number	2+2\&lt;itemBreak\&gt;min='0' max='7' step='1'
+</p>
+<p>5fm Scored 1-5, anchored: Strongly Disagree | Disagree  | Neutral | Agree | Strongly Agree
+</p>
+<p>intro (not) scored, and sequenced as item 0
+</p>
+
+
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other File Functions: 
+<code>dl_from_dropbox()</code>,
+<code>umx_file_load_pseudo()</code>,
+<code>umx_move_file()</code>,
+<code>umx_open()</code>,
+<code>umx_rename_file()</code>,
+<code>umx_write_to_clipboard()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# An example Excel spreadsheet
+# local uncompiled path
+fp = system.file("inst/extdata", "GQ6.sql.xlsx", package = "umx")
+# installed path
+fp = system.file("extdata", "GQ6.sql.xlsx", package = "umx")
+umx_open(fp)
+umx_make_sql_from_excel() # Using file selected in front-most Finder window
+umx_make_sql_from_excel("~/Desktop/test.xlsx") # provide a path
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.table</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Frequency of unique values
+</h2>
+
+<h3>Description</h3>
+
+<p><code>as.table</code> is an implementation of function <code>base::table</code> for values of raster image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+as.table(x, ...)
+
+ursa_table(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>ursaRaster</code> object.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Other arguments which passed to function <code>table</code> of package <span class="pkg">base</span>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>ursaRaster</code> has a <code>colortable</code>, then values are replaced by names of categories.
+</p>
+<p><code>ursa_table</code> is synonym to method <code>as.table</code> for class <code>`ursaRaster`</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>table</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- colorize(pixelsize(),nbreak=4)
+t1 &lt;- as.table(a)
+print(t1)
+str(t1)
+ursa_colortable(a) &lt;- NULL
+t2 &lt;- as.table(a)
+print(t2)
+</code></pre>
+
+
+</div>

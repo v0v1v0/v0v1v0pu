@@ -1,0 +1,140 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_paste_names</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Concatenate base variable names with suffixes to create wide-format variable names (i.e twin-format)</h2>
+
+<h3>Description</h3>
+
+<p>It's easier to work with base names, rather than the twice-as-long hard-to-typo list of column names.
+<code>umx_paste_names</code> adds suffixes to names so you can work with that nice short list.
+So, you provide <code>bmi</code>, and you get back fully specified family-wise names: <code>c("bmi_T1", "bmi_T2")</code>
+</p>
+<p><em>note</em>: <code>tvars</code> is a shortcut for <code>umx_paste_names</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_paste_names(
+  varNames,
+  sep = "",
+  suffixes = 1:2,
+  covNames = NULL,
+  prefix = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>varNames</code></td>
+<td>
+<p>a list of <em>base</em> names, e.g c("bmi", "IQ")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>A string separating the name and the twin suffix, e.g. "_T" (default is "")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffixes</code></td>
+<td>
+<p>a list of terminal suffixes differentiating the twins default = 1:2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>covNames</code></td>
+<td>
+<p>a list of <em>base</em> names for covariates (to be sorted last in list), e.g c("age", "sex")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>a string to prepend to each label, e.g "mean" -&gt; "mean_age" "mean_sex"</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><strong>Method 1</strong>: <em>Use complete suffixes</em>
+</p>
+<p>You can provide complete suffixes like "_T1" and "_T2". This has the benefit of being explicit
+and very general:
+</p>
+<div class="sourceCode"><pre>umx_paste_names(c("var1", "var2"), suffixes = c("_T1", "_T2"))
+</pre></div>
+<p><em>Note</em>: for quick typing, <code>tvars</code> is an alias for <code>umx_paste_names</code>
+</p>
+<p><strong>Method 2</strong>: <em>Use sep and a suffix vector.</em>
+</p>
+<p>Alternatively, you can use <code>sep</code> to add a constant like "_T" after each basename, along
+with a vector of suffixes. This has the benefit of showing what is varying:
+This is then suffixed with e.g. "1", "2".
+</p>
+<div class="sourceCode"><pre>umx_paste_names(c("var1", "var2"), sep = "_T", suffixes = 1:2)
+</pre></div>
+<p><em>Working with covariates</em>
+</p>
+<p>If you are using <code>umxACEcov()</code>, you <strong>need</strong> to keep all the covariates at the end of the list.
+Here's how:
+</p>
+<div class="sourceCode"><pre>umx_paste_names(c("var1", "var2"), cov = c("cov1"), sep = "_T", suffixes = 1:2)
+</pre></div>
+<p><em>note</em>: in conventional twin models, the expCov matrix is T1 vars, followed by T2 vars. For covariates, you want
+T1vars, T2 vars, T1 covs, T2 covs. This is what <code>covNames</code> accomplishes.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> vector of suffixed var names, i.e., c("v1_T1", "v2_T1", "v1_T2", "v2_T2", "cov_T1", "cov_T2")
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p><code>namez()</code> <code>umx_explode_twin_names()</code>
+</p>
+<p>Other String Functions: 
+<code>umx_explode_twin_names()</code>,
+<code>umx_explode()</code>,
+<code>umx_grep()</code>,
+<code>umx_names()</code>,
+<code>umx_rot()</code>,
+<code>umx_str_chars()</code>,
+<code>umx_str_from_object()</code>,
+<code>umx_trim()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># two styles doing the same thing: first is more general
+umx_paste_names("bmi", suffixes = c("_T1", "_T2"))
+umx_paste_names("bmi", sep = "_T", suffixes = 1:2)
+varNames = umx_paste_names(c("N", "E", "O", "A", "C"), "_T", 1:2)
+umx_paste_names(c("IQ", "C"), cov = c("age"), sep = "_T", suffixes = 1:2)
+umx_paste_names(c("IQ", "C"), cov = c("age"), sep = "_T", prefix= "mean_")
+# For quick-typing, tvars is an alias for umx_paste_names
+tvars(c("IQ", "C"), cov = "age", sep = "_T", prefix= "mean_")
+tvars("IQ")
+</code></pre>
+
+
+</div>

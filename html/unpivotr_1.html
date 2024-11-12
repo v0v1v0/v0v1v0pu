@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unpivotr-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Un-pivot complex and irregular data layouts.</h2>
+
+<h3>Description</h3>
+
+<p>'Unpivotr' provides tools for converting data from complex or irregular
+layouts to a columnar structure.  For example, tables with multi-level column
+or row headers, or spreadsheets of several tables, nested HTML tables, and
+data that uses several different sentinel values.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The best way to learn unpivotr is the free online book <a href="https://nacnudus.github.io/spreadsheet-munging-strategies/">Spreadsheet Munging Strategies</a>.
+</p>
+<p>Header and data cells can selected by their contents, position, data type and
+formatting, and can be associated with one other by their relative positions.
+</p>
+<p>The input data must be a data frame with the columns 'row' and 'col' to
+describe the position of a 'cell' of data.  For cells that are to be
+interpreted as data, further columns containing the 'value' of the cell are,
+of course, necessary for there to be any point in using this package, though
+they are not actually required for any of the given functions.
+</p>
+<p>Data frames and HTML tables can be converted into a format meeting these
+requirements by using the <code>as_cells()</code> function.  Excel (.xlsx)
+files can be imported directly into the required format with the 'tidyxl'
+package, available at <a href="https://github.com/nacnudus/tidyxl">https://github.com/nacnudus/tidyxl</a>, which has the
+advantage that it retains cell formatting and comments.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>Maintainer</strong>: Duncan Garmonsway <a href="mailto:nacnudus@gmail.com">nacnudus@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Useful links:
+</p>
+
+<ul>
+<li> <p><a href="https://github.com/nacnudus/unpivotr">https://github.com/nacnudus/unpivotr</a>
+</p>
+</li>
+<li>
+<p> Report bugs at <a href="https://github.com/nacnudus/unpivotr/issues">https://github.com/nacnudus/unpivotr/issues</a>
+</p>
+</li>
+</ul>
+</div>

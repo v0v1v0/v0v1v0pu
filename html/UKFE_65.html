@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>NonFloodAdj</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Non-flood adjustment</h2>
+
+<h3>Description</h3>
+
+<p>Adjusts the linear coefficient of variation (Lcv) and the linear skewness to account for non-flood years
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">NonFloodAdj(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The annual maximum sample. Numeric vector</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The method is the “permeable adjustment method” detailed in chapter 19, volume three of the Flood Estimation Handbook, 1999. The method makes no difference for sites where there are no annual maximums (AM) in the sample that are &lt; median(AM)/2. Once applied the results can be used with the LRatioChange function to update the associated member of a pooling group. There is also the NonFloodAdjPool() function which can be used for multiple sites in a pooling group.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list is returned. The first element of the list is a dataframe with one row and two columns. Lcv in the first column and Lskew in the second. The second element of the list is another dataframe with one row and three columns. Number of non-flood years in the first column, sample size in the second and the percent of non-flood year in the third.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Get an anuual maximum sample with a BFIHOST above 0.65 and with some
+# annual maximums lower than median(AM)/2. And then apply the function.
+NonFloodAdj(GetAM(44013)[,2])
+</code></pre>
+
+
+</div>

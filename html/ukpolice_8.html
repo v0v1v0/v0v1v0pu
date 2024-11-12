@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_crime_loc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Crimes at a specific location</h2>
+
+<h3>Description</h3>
+
+<p>Returns details of crimes within a one mile radius of a given point, at a
+specific location ID, or from within a custom polygon.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_crime_loc(location, date = NULL, ...)
+
+ukc_crime_coord(lat, lng, date = NULL, ...)
+
+ukc_crime_poly(poly_df, date = NULL, ...)
+
+ukc_crime_location(lat, lng, location, date = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>If specified, <code>lat</code> and <code>lng</code> are ignored. Location IDs are
+available through other methods including <code>ukc_street_crime()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>The year and month in "YYYY-MM" form. If <code>NULL</code>, latest
+available month will be returned. Also accepts dates in formats that can be
+coerced to <code>Date</code> class with <code>as.Date()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to <code>httr::GET</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lat</code></td>
+<td>
+<p>Latitude. Accepts a single value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lng</code></td>
+<td>
+<p>Longitude. Accepts a single value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>poly_df</code></td>
+<td>
+<p>a dataframe containing the lat/lng pairs which define
+the boundary of the custom area, or a <code>sf</code> or
+<code>SpatialPointsDataFrame</code> object.
+The first and last coordinates need not be the same — they will be joined
+by a straight line once the request is made. If a dataframe, the lat/lng
+must be the first two columns, or named <code>"lat"</code> and <code>"lng"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If specified, <code>lat</code> and <code>lng</code> must be the same length. <code>location</code>
+or both <code>lat</code> and <code>lng</code> must be specified.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>tibble</code> with details of crimes at a given location.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The API will return a 400 status code in response to a GET request
+longer than 4094 characters.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+x &lt;- ukc_crime_location(lat = 52, lng = 0)
+
+y &lt;- ukc_crime_location(location = 802171)
+
+poly_df_3 &lt;- data.frame(
+  lat = c(52.268, 52.794, 52.130),
+  lng = c(0.543, 0.238, 0.478)
+)
+
+z &lt;- ukc_crime_poly(poly_df_3)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

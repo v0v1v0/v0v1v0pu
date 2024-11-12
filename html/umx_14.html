@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>FishersMethod</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fishers Method of combining p-values.</h2>
+
+<h3>Description</h3>
+
+<p><code>FishersMethod</code> implements R.A. Fisher's (1925) method for creating a meta-analytic p-value by combining a
+set of p-values from tests of the same hypothesis in independent samples. See also Stouffer's method
+for combining Z scores, which allows weighting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">FishersMethod(pvalues, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pvalues</code></td>
+<td>
+<p>A vector of p-values, e.g. c(.041, .183)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>More p-values if you want to offer them up one by one instead of wrapping in a vector for <code>pvalues</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> A meta-analytic p-value
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Fisher, R.A. (1925). <em>Statistical Methods for Research Workers</em>. Oliver and Boyd (Edinburgh). ISBN 0-05-002170-2.
+</p>
+</li></ul>
+<ul>
+<li>
+<p> Fisher, R. A (1948). "Questions and answers #14". <em>The American Statistician</em>. <strong>2</strong>: 30–31. <a href="https://doi.org/10.2307/2681650">doi:10.2307/2681650</a>.
+</p>
+</li>
+<li>
+<p> Stouffer, S. A. and Suchman, E. A. and DeVinney, L. C. and Star, S. A. and Williams, R. M. Jr. (1949) The American Soldier,
+Vol. 1 - Adjustment during Army Life. Princeton, Princeton University Press.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p>Other Miscellaneous Stats Functions: 
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">FishersMethod(c(.041, .378))
+</code></pre>
+
+
+</div>

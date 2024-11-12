@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ML.probit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit maximum likelihood for fixed values of rho</h2>
+
+<h3>Description</h3>
+
+<p>This is a support function for <code>ui.probit</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ML.probit(out.formula, mis.formula = NULL, data, rho = c(-0.5, 0.5),
+  progress = TRUE, method = "NR")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>out.formula</code></td>
+<td>
+<p>Formula for outcome regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mis.formula</code></td>
+<td>
+<p>Formula for regression model for the missingness mechanism.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data frame containing the variables in the formulas</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>Vector containing the values of rho for which we want to fit the likelihood.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>progress</code></td>
+<td>
+<p>If TRUE prints out process time for each maximazation of the likelihood.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Maximazation method to be passed through <code>maxLik</code></p>
+</td>
+</tr>
+</table>
+</div>

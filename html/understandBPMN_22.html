@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>filtered_path_log_parallel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Filter path log with only traces containing the parallel gateway together with the relevant activity</h2>
+
+<h3>Description</h3>
+
+<p> This functions returns a path log with no traces with a parallel gateway of which the given activity is part but not included
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">filtered_path_log_parallel(structured_path_log, xml_internal_doc,
+  activity_name)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>structured_path_log</code></td>
+<td>
+<p>repetition and path log list object created by the function create_repetition_and_path_log</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xml_internal_doc</code></td>
+<td>
+<p>document object created using the create_internal_document function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>activity_name</code></td>
+<td>
+<p>name of the activity for the relevant filtering</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the filtered path log
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: direct_parallel_relations(repetition_and_path_log, xml_internal_doc)
+</code></pre>
+
+
+</div>

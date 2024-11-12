@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u_char_match</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Character Matching</h2>
+
+<h3>Description</h3>
+
+<p>Match Unicode characters to Unicode character ranges.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">u_char_match(x, table, nomatch = NA_integer_)
+x %uin% table
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object which can be coerced to a <code>u_char</code>
+vector of Unicode characters via <code>as.u_char</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object coercible to a <code>u_char_range</code>
+vector of Unicode character range via <code>as.u_char_range</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nomatch</code></td>
+<td>
+<p>the value to be returned (after coercion to integer) in
+the case when no match is found.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>u_char_match</code> returns a vector of the positions of the (first)
+matches of the Unicode characters given by <code>x</code> (after coercion
+via <code>as.u_char</code>) to the Unicode character ranges given by
+<code>table</code> (after coercion via <code>as.u_char_range</code>).
+</p>
+<p><code>%uin%</code> returns a logical vector indicating if there was a
+match or not.
+</p>
+
+
+</div>

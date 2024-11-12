@@ -1,0 +1,189 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_oc_RQ_CRM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Generate operating characteristics for finding the maximum tolerated dose (MTD) defined by Equivalent Score (ET) using Quasi-CRM design
+</h2>
+
+<h3>Description</h3>
+
+<p>Obtain the operating characteristics of Quasi-CRM design (Yuan et al. 2007) and Robust-Quasi-CRM design (Pan et al. 2014) for finding the maximum tolerated dose (MTD) using Equivalent Score (ET) derived from toxicity grade information
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_oc_RQ_CRM(ptox, skeletons, target, score, cohortsize,
+              ncohort, n.earlystop = 100, start.dose = 1,
+              mselection = 1, cutoff.eli = 0.90, ntrial = 10,
+              seed = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ptox</code></td>
+<td>
+
+<p>true toxicity probability at each dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>skeletons</code></td>
+<td>
+
+<p>a matrix to provide multiple skeletons with each row presenting a skeleton. If just one row, the function implements the Quasi-CRM design; if &gt;=2 rows, the function implements the Robust-Quasi-CRM designn
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the target toxicity score
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>score</code></td>
+<td>
+
+<p>the vector weight for ordinal toxicity levels
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohortsize</code></td>
+<td>
+
+<p>the cohort size
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncohort</code></td>
+<td>
+
+<p>the number of cohort
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.earlystop</code></td>
+<td>
+
+<p>the early stopping parameter. The default value is n.earlystop = 100
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start.dose</code></td>
+<td>
+
+<p>the starting dose level. The default value is start.dose = 1
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mselection</code></td>
+<td>
+
+<p>mselection = 1 (or 0) indicate to use Bayesian model selection (or mode averaging) to make inference across multiple skeletons. The default value is mselection = 1. It only applies to the Robust-Quasi-CRM design
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cutoff.eli</code></td>
+<td>
+
+<p>the cutoff to eliminate an overly toxic dose for safety. The default value is cutoff.eli = 0.90
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ntrial</code></td>
+<td>
+
+<p>the number of simulated trials. The default value is ntrial = 10
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+
+<p>the seed. The default value is seed = 100
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>get_oc_RQ_CRM()</code> returns the operating characteristics of (Robust)-Quasi-CRM design as a list object, including: (1) selection percentage at each dose level (2) patients treated at each dose level
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>Yuan, Z., R. Chappell, and H. Bailey. "The continual reassessment method for multiple toxicity grades: a Bayesian quasi-likelihood approach." Biometrics 63, no. 1 (2007): 173-179.
+</p>
+<p>Pan, Haitao, Cailin Zhu, Feng Zhang, Ying Yuan, Shemin Zhang, Wenhong Zhang, Chanjuan Li, Ling Wang, and Jielai Xia. "The continual reassessment method for multiple toxicity grades: a Bayesian model selection approach." PloS one 9, no. 5 (2014): e98147.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### Scenario 1 in Yuan et al. (2007) and Pan et al. (2014)
+target &lt;- 0.47
+score &lt;- c(0, 0.5, 1, 1.5)
+cohortsize &lt;- 3
+ncohort &lt;- 10
+ntrial &lt;- 10
+
+ptox &lt;- matrix(nrow = 4, ncol = 6)
+ptox[1,] &lt;- c(0.83, 0.75, 0.62, 0.51, 0.34, 0.19)
+ptox[2,] &lt;- c(0.12, 0.15, 0.18, 0.19, 0.16, 0.11)
+ptox[3,] &lt;- c(0.04, 0.07, 0.11, 0.14, 0.15, 0.11)
+ptox[4,] &lt;- c(0.01, 0.03, 0.09, 0.16, 0.35, 0.59)
+
+
+### specify one skeleton (Quasi-CRM design)
+p1 &lt;- c(0.11, 0.25, 0.40, 0.55, 0.75, 0.85)
+
+get_oc_RQ_CRM(ptox = ptox, skeletons = p1, target = target,
+              score = score, cohortsize = cohortsize,
+              ncohort = ncohort, ntrial = ntrial)
+
+
+
+
+###########################################
+
+### specify three skeletons (Quasi-CRM design)
+p1 &lt;- c(0.11, 0.25, 0.40, 0.55, 0.75, 0.85)
+p2 &lt;- c(0.05, 0.10, 0.15, 0.25, 0.40, 0.65)
+p3 &lt;- c(0.20, 0.40, 0.60, 0.75, 0.85, 0.95)
+skeletons &lt;- rbind(p1, p2, p3)
+
+
+get_oc_RQ_CRM(ptox = ptox, skeletons = skeletons, target = target,
+              score = score, cohortsize = cohortsize,
+              ncohort = ncohort, ntrial = ntrial)
+
+
+</code></pre>
+
+
+</div>

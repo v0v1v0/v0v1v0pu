@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>UMIexperiment-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UMIexperiment class</h2>
+
+<h3>Description</h3>
+
+<p>The UMIexperiment is the core data object, storing all data and relevant
+analysis data associated with your experiment. Each object has number of
+slots storing raw data, graphs and processed data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class UMIexperiment
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>Optional project name for record keeping.</p>
+</dd>
+<dt><code>cons.data</code></dt>
+<dd>
+<p>The raw consensus data supplied by the user.</p>
+</dd>
+<dt><code>summary.data</code></dt>
+<dd>
+<p>Summary data from UMIErrorCorrect</p>
+</dd>
+<dt><code>raw.error</code></dt>
+<dd>
+<p>Cons0 error profile</p>
+</dd>
+<dt><code>reads</code></dt>
+<dd>
+<p>Consensus reads imported using the parseBamFiles function.</p>
+</dd>
+<dt><code>meta.data</code></dt>
+<dd>
+<p>Sample data optionally supplied by the user.</p>
+</dd>
+<dt><code>filters</code></dt>
+<dd>
+<p>A list of filtered cons.data, which can be accessed separately.</p>
+</dd>
+<dt><code>plots</code></dt>
+<dd>
+<p>A list of generated plots.</p>
+</dd>
+<dt><code>variants</code></dt>
+<dd>
+<p>Consensus table generated with the umiAnalyzer variant caller.</p>
+</dd>
+<dt><code>merged.data</code></dt>
+<dd>
+<p>Data generated using the mergeTechnicalReplicates function.</p>
+</dd>
+</dl>
+</div>

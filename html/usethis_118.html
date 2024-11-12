@@ -1,0 +1,34 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_cran_comments</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>CRAN submission comments</h2>
+
+<h3>Description</h3>
+
+<p>Creates <code>cran-comments.md</code>, a template for your communications with CRAN when
+submitting a package. The goal is to clearly communicate the steps you have
+taken to check your package on a wide range of operating systems. If you are
+submitting an update to a package that is used by other packages, you also
+need to summarize the results of your reverse dependency checks.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_cran_comments(open = rlang::is_interactive())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>open</code></td>
+<td>
+<p>Open the newly created file for editing? Happens in RStudio, if
+applicable, or via <code>utils::file.edit()</code> otherwise.</p>
+</td>
+</tr></table>
+</div>

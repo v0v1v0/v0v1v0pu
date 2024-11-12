@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>interactiveChart</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>make it an interactive chart</h2>
+
+<h3>Description</h3>
+
+<p>make it an interactive chart
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">interactiveChart(upsetjs, value = TRUE, events_nonce = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>whether to enable or disable or set the mode: hover, click, contextMenu</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>events_nonce</code></td>
+<td>
+<p>whether to enable send a unique once (event date) for each event to prevent deduplication</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;%
+  fromList(list(a = c(1, 2, 3), b = c(2, 3))) %&gt;%
+  interactiveChart()
+</code></pre>
+
+
+</div>

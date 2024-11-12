@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>kblXtra</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Wrapper for kableExtra for consistent <code>ufs</code> table styling</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper for kableExtra for consistent <code>ufs</code> table styling
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">kblXtra(
+  x,
+  digits = 2,
+  format = "html",
+  escape = FALSE,
+  print = TRUE,
+  viewer = FALSE,
+  kable_classic = FALSE,
+  lightable_options = "striped",
+  html_font = "\"Arial Narrow\", \"Source Sans Pro\", sans-serif",
+  full_width = TRUE,
+  table.attr = "style='border:0px solid black !important;'",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The dataframe to print</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits, format, escape, table.attr, lightable_options, html_font, full_width</code></td>
+<td>
+<p>Defaults
+that are passed to <code>knitr::kable()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>print</code></td>
+<td>
+<p>Wther to print the table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>viewer</code></td>
+<td>
+<p>Whether to show the table in the viewer</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kable_classic</code></td>
+<td>
+<p>Whether to call <code>kable_classic</code>; otherwise,
+<code>kable_styling</code> is called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments are passed to <code>knitr::kable()</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The table, invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">kblXtra(mtcars);
+</code></pre>
+
+
+</div>

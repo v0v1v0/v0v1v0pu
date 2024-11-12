@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxFactorScores</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return factor scores from a model as an easily consumable dataframe.</h2>
+
+<h3>Description</h3>
+
+<p>umxFactorScores takes a model, and computes factors scores using the selected method (one
+of 'ML', 'WeightedML', or 'Regression')
+It is a simple wrapper around mxFactorScores. For missing data, you must specify the least number of
+variables allowed for a score (subjects with fewer than minManifests will return a score of NA.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxFactorScores(
+  model,
+  type = c("ML", "WeightedML", "Regression"),
+  minManifests = NA,
+  return = c("Scores", "StandardErrors")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>The model from which to generate scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Method of computing the score ('ML', 'WeightedML', or 'Regression').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minManifests</code></td>
+<td>
+<p>The minimum number of variables not NA to return a score for a participant (Default = ask).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return</code></td>
+<td>
+<p>What to return (defaults to "Scores", which is what most users want, but can return "StandardErrors" on each score.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> dataframe of scores.
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>mxFactorScores()</code>
+</p>
+</li></ul>
+<p>Other Reporting Functions: 
+<code>umxAPA()</code>,
+<code>umxGetLatents()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxGetParameters()</code>,
+<code>umxParameters()</code>,
+<code>umx_aggregate()</code>,
+<code>umx_time()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+m1 = umxEFA(mtcars, factors = 2)
+x = umxFactorScores(m1, type = 'Regression', minManifests = 3)
+
+# =========================================================================
+# = histogram of F1 and plot of F1 against F2 showing they are orthogonal =
+# =========================================================================
+hist(x$F1)
+plot(F1 ~ F2, data = x)
+
+m1 = umxEFA(mtcars, factors = 1)
+x = umxFactorScores(m1, type = 'Regression', minManifests = 3)
+x
+
+## End(Not run)
+</code></pre>
+
+
+</div>

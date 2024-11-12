@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>nibabynames</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Northern Ireland baby names</h2>
+
+<h3>Description</h3>
+
+<p>Full baby name data from 1997 to 2020 for Northern Ireland
+from the Northern Ireland Statistics and Research Agency.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">nibabynames
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 22,596 observations on 6 variables.
+</p>
+
+<dl>
+<dt>year</dt>
+<dd>
+<p>A year (1997-2020).</p>
+</dd>
+<dt>sex</dt>
+<dd>
+<p>Sex, <code>M</code> for male and <code>F</code> for female.</p>
+</dd>
+<dt>name</dt>
+<dd>
+<p>A name.</p>
+</dd>
+<dt>n</dt>
+<dd>
+<p>Count of name within year and sex.</p>
+</dd>
+<dt>rank</dt>
+<dd>
+<p>Rank of name within year and sex.</p>
+</dd>
+<dt>nation</dt>
+<dd>
+<p>Nation of data source: <code style="white-space: pre;">⁠Northern Ireland⁠</code>.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Northern Ireland Statistics and Research Agency. 2021. <a href="https://www.nisra.gov.uk/publications/baby-names-2020-0">Baby Names Statistics Boys and Girls</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ggplot2)
+library(dplyr)
+
+nibabynames %&gt;%
+  filter(name == "Joseph") %&gt;%
+  ggplot(aes(x = year, y = n)) +
+  geom_line() +
+  labs(
+    title = "Popularity of the name `Joseph` in Northern Ireland", 
+    x = "Year", y = "Number of babies"
+    )
+</code></pre>
+
+
+</div>

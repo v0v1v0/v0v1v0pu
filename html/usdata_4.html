@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>county</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>United States Counties</h2>
+
+<h3>Description</h3>
+
+<p>Data for 3142 counties in the United States. See the
+<code>county_complete</code> data set for additional variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">county
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 3142 observations on the following 14 variables.
+</p>
+
+<dl>
+<dt>name</dt>
+<dd>
+<p>County names.</p>
+</dd>
+<dt>state</dt>
+<dd>
+<p>State names.</p>
+</dd>
+<dt>pop2000</dt>
+<dd>
+<p>Population in 2000.</p>
+</dd>
+<dt>pop2010</dt>
+<dd>
+<p>Population in 2010.</p>
+</dd>
+<dt>pop2017</dt>
+<dd>
+<p>Population in 2017.</p>
+</dd>
+<dt>pop_change</dt>
+<dd>
+<p>Population change from 2010 to 2017.</p>
+</dd>
+<dt>poverty</dt>
+<dd>
+<p>Percent of population in poverty in 2017.</p>
+</dd>
+<dt>homeownership</dt>
+<dd>
+<p>Home ownership rate, 2006-2010.</p>
+</dd>
+<dt>multi_unit</dt>
+<dd>
+<p>Percent of housing units in multi-unit structures,
+2006-2010.</p>
+</dd>
+<dt>unemployment_rate</dt>
+<dd>
+<p>Unemployment rate in 2017.</p>
+</dd>
+<dt>metro</dt>
+<dd>
+<p>Whether the county contains a metropolitan area.</p>
+</dd>
+<dt>median_edu</dt>
+<dd>
+<p>Median education level (2013-2017).</p>
+</dd>
+<dt>per_capita_income</dt>
+<dd>
+<p>Per capita (per person) income
+(2013-2017).</p>
+</dd>
+<dt>median_hh_income</dt>
+<dd>
+<p>Median household income.</p>
+</dd>
+<dt>smoking_ban</dt>
+<dd>
+<p>Describes whether the type of county-level
+smoking ban in place in 2010, taking one of the values <code>"none"</code>,
+<code>"partial"</code>, or <code>"comprehensive"</code>.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>These data were collected from Census Quick Facts (no longer
+available as of 2020) and its accompanying pages. Smoking ban data were from
+a variety of sources.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>county_complete</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(ggplot2)
+
+ggplot(county, aes(x = median_edu, y = median_hh_income)) +
+  geom_boxplot()
+</code></pre>
+
+
+</div>

@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>esr_pars</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Effective Sampling Rate for Parameters</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the effective sampling rate (<code>esr</code>) for each parameter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">esr_pars(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments passed to methods.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>By default
+</p>
+<p style="text-align: center;"><code class="reqn">\frac{1}{1 + 2 \sum_{k = 1}^\infty\rho_k(\theta)}</code>
+</p>
+
+<p>from Brooks et al. (2011) where the infinite sum is truncated at
+lag <code class="reqn">k</code> when <code class="reqn">\rho_{k+1}(\theta) &lt; 0</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A uniquely named numeric vector of values between 0 and 1
+indicating the esr value for each parameter.
+</p>
+
+
+<h3>References</h3>
+
+<p>Brooks, S., Gelman, A., Jones, G.L., and Meng, X.-L. (Editors). 2011.
+Handbook for Markov Chain Monte Carlo. Taylor &amp; Francis, Boca Raton.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other convergence: 
+<code>converged_pars()</code>,
+<code>converged_terms()</code>,
+<code>converged()</code>,
+<code>esr_terms()</code>,
+<code>esr()</code>,
+<code>rhat_pars()</code>,
+<code>rhat_terms()</code>,
+<code>rhat()</code>
+</p>
+
+
+</div>

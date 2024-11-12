@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>contar_letras</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove de da e dos of names .</h2>
+
+<h3>Description</h3>
+
+<p><code>contar_letras</code> return number of any letters on alphabet for each column.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">contar_letras(base, columns, suffix = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>A data table, data frame or character vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>columns</code></td>
+<td>
+<p>for apply the function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffix</code></td>
+<td>
+<p>Suffix name for the new column.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.table number of any letters on alphabet for each column
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">   base &lt;- data.frame(nome = c("João das Neves", "Pedro dos Anjos", "Maria das Gracas"))
+   base &lt;- contar_letras(base, "nome")
+</code></pre>
+
+
+</div>

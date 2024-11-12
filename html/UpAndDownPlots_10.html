@@ -1,0 +1,155 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ud_prep</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Prepares data for drawing an UpAndDown plot
+</h2>
+
+<h3>Description</h3>
+
+<p>Checks input parameters and sorts the data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ud_prep(data, weight=1, v1, v2, levs, sortLev, reverse=c(FALSE, FALSE, FALSE))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+
+<p>the dataset to be analysed
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weight</code></td>
+<td>
+
+<p>a variable for weighting the individual items, the default is for every item to be weighted equally
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>v1</code></td>
+<td>
+
+<p>the variable specifying the start value in the comparison
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>v2</code></td>
+<td>
+
+<p>the variable specifying the end value in the comparison
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>levs</code></td>
+<td>
+
+<p>up to three grouping variables to define the plot levels in order from highest to lowest
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortLev</code></td>
+<td>
+
+<p>how the grouping variables named in levs are to be sorted.  Each entry must be one of "orig", "base", "final", "perc", "abs" (i.e., no sorting, sorting by initial value, sorting by final value, sorting by percentage change, sorting by absolute change).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reverse</code></td>
+<td>
+
+<p>whether a sorting is to be reversed or not.  Each entry must be TRUE or FALSE (the default) and is set separately for each level.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function prepares the data for <code>ud_plot</code> to draw UpAndDown plots.  As well as carrying out some basic checks, any NA values in the variables v1 and v2 are converted to 0.  There are a number of options for sorting the data.  If a level is nested, then it is sorted within the next highest level.  If a level is not nested, then it is sorted as if it were the top level.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>levs</code></td>
+<td>
+
+<p>the variables specifying the grouping levels for the plot
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sortLev</code></td>
+<td>
+
+<p>the sorting method used for each plot level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reverse</code></td>
+<td>
+
+<p>whether individual sortings should be reversed or not
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hx</code></td>
+<td>
+
+<p>a summary of the nesting of the grouping variables
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lgv</code></td>
+<td>
+
+<p>the numbers of categories in the grouping variables
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+
+<p>an extended version of the dataset comprising the original variables and the derived absolute and percentage changes for the different levels specified in levs.  The levels are sorted according to the sortLev settings chosen and the corresponding percentages.
+The dataset is primarily for providing the necessary input for the Ud_plot function.
+</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Antony Unwin unwin@math.uni-augsburg.de
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">yy &lt;- ud_prep(CPIuk, weight="Weight", v1="Aug2017", v2="Aug2018",
+levs=c("Sector", "Subsector", "Component"), sortLev=c("perc", "perc", "perc"))
+</code></pre>
+
+
+</div>

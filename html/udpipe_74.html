@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_paste</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Concatenate strings with options how to handle missing data</h2>
+
+<h3>Description</h3>
+
+<p>NA friendly version for concatenating string
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_paste(..., collapse = " ", na.rm = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>character vectors</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>collapse</code></td>
+<td>
+<p>a character string to be used to paste the vectors together. Defaults to a space: ' '.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical, if set to <code>TRUE</code>, will replace NA with ”. If set to <code>FALSE</code>, will have a resulting value of NA
+if at least one element is <code>NA</code>, in a similar spirit as <code>mean</code>. Defaults to <code>FALSE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character vector
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>paste</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c(1, 2, 3, NA, NA)
+y &lt;- c("a", "b", "c", NA, "OK")
+paste(x, y, sep = "-")
+txt_paste(x, y, collapse = "-", na.rm = TRUE)
+txt_paste(x, y, collapse = "-", na.rm = FALSE)
+
+x &lt;- c(NA, "a", "b")
+y &lt;- c("1", "2", NA)
+z &lt;- c("-", "*", NA)
+txt_paste(x, y, z, collapse = "", na.rm = TRUE)
+txt_paste(x, y, z, "_____", collapse = "", na.rm = TRUE)
+txt_paste(x, y, z, "_____", collapse = "", na.rm = FALSE)
+</code></pre>
+
+
+</div>

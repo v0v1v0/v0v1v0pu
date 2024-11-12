@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_is_MxData</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check if an object is an mxData object</h2>
+
+<h3>Description</h3>
+
+<p>Is the input an MxData?
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_is_MxData(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object to test for being an MxData object</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>- Boolean
+</p>
+
+
+<h3>References</h3>
+
+<p>- &lt;https://github.com/tbates/umx&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_model()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_check()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">umx_is_MxData(mtcars)
+umx_is_MxData(mxData(mtcars, type= "raw"))
+umx_is_MxData(mxData(cov(mtcars), type= "cov", numObs = 73))
+umx_is_MxData(mxDataWLS(na.omit(twinData[, c("wt1", "wt2")]), type= "WLS"))
+</code></pre>
+
+
+</div>

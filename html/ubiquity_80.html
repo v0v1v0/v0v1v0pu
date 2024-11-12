@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_set_parameter</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set Value for Parameter</h2>
+
+<h3>Description</h3>
+
+<p>Assigns a value for a named parameter in a parameter list.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_set_parameter(cfg, parameters, pname, value)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parameters</code></td>
+<td>
+<p>vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pname</code></td>
+<td>
+<p>parameter name</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>value</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>To set the parameter Vc to a value of 3, the following would be used:
+</p>
+<pre>parameters = system_fetch_parameters(cfg) 
+parameters = system_set_parameter(cfg, parameters, pname = 'Vc', value = 3) 
+</pre>
+
+
+<h3>Value</h3>
+
+<p>parameters vector with <code>pname</code> set to <code>value</code>
+</p>
+
+
+</div>

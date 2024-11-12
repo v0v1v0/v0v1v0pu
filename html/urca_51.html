@@ -1,0 +1,121 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>show-methods</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Methods for Function show in Package ‘urca’</h2>
+
+<h3>Description</h3>
+
+<p>Displays the outcome of the unit root/cointegration tests.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>object = "ca.jo"</dt>
+<dd>
+<p>Displays the test statistic of the Johansen procedure.</p>
+</dd>
+<dt>object = "cajo.test"</dt>
+<dd>
+<p>Displays the test statistic of a restricted
+VAR with respect to <code class="reqn">\bold{\alpha}</code> and/or <code class="reqn">\bold{\beta}</code>.</p>
+</dd>
+<dt>object = "ca.po"</dt>
+<dd>
+<p>Displays the test statistic of the Phillips and
+Ouliaris cointegration test.</p>
+</dd>
+<dt>object = "ur.df"</dt>
+<dd>
+<p>Displays the test statistic of the Augmented,
+Dickey and Fuller unit root test.</p>
+</dd>
+<dt>object = "ur.ers"</dt>
+<dd>
+<p>Displays the test statistic of the Elliott,
+Rothenberg and Stock unit root test.</p>
+</dd>
+<dt>object = "ur.kpss"</dt>
+<dd>
+<p>Displays the test statistic of the Kwiatkowski
+<em>et al.</em> unit root test.</p>
+</dd>
+<dt>object = "ur.pp"</dt>
+<dd>
+<p>Displays the test statistic of the Phillips and
+Perron unit root test.</p>
+</dd>
+<dt>object = "ur.df"</dt>
+<dd>
+<p>Displays the test statistic of the augmented
+Dickey-Fuller unit root test.</p>
+</dd>
+<dt>object = "ur.sp"</dt>
+<dd>
+<p>Displays the test statistic of the Schmidt and
+Phillips unit root test.</p>
+</dd>
+<dt>object = "ur.za"</dt>
+<dd>
+<p>Displays the test statistic of the Zivot and
+Andrews unit root test.</p>
+</dd>
+<dt>object = "sumurca"</dt>
+<dd>
+<p>Displays the summary output.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo-class</code>, <code>cajo.test-class</code>,
+<code>ca.po-class</code>, <code>ur.ers-class</code>,
+<code>ur.kpss-class</code>, <code>ur.pp-class</code>,
+<code>ur.sp-class</code>, <code>ur.df-class</code> and <code>ur.za-class</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nporg)
+gnp &lt;- na.omit(nporg[, "gnp.r"])
+gnp.l &lt;- log(gnp)
+#
+ers.gnp &lt;- ur.ers(gnp, type="DF-GLS", model="trend", lag.max=4)
+show(ers.gnp)
+#
+kpss.gnp &lt;- ur.kpss(gnp.l, type="tau", lags="short")
+show(kpss.gnp)
+#
+pp.gnp &lt;- ur.pp(gnp, type="Z-tau", model="trend", lags="short")
+show(pp.gnp)
+#
+df.gnp &lt;- ur.df(gnp, type="trend", lags=4)
+show(df.gnp)
+#
+sp.gnp &lt;- ur.sp(gnp, type="tau", pol.deg=1, signif=0.01)
+show(sp.gnp)
+#
+za.gnp &lt;- ur.za(gnp, model="both", lag=2)
+show(za.gnp)
+#
+data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.vecm &lt;- ca.jo(sjd, ecdet = "const", type="eigen", K=2, season=4)
+show(sjd.vecm)
+#
+HD0 &lt;- matrix(c(-1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1), c(5,4))
+show(blrtest(sjd.vecm, H=HD0, r=1))
+</code></pre>
+
+
+</div>

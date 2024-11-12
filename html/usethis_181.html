@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_rstudio</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add RStudio Project infrastructure</h2>
+
+<h3>Description</h3>
+
+<p>It is likely that you want to use <code>create_project()</code> or <code>create_package()</code>
+instead of <code>use_rstudio()</code>! Both <code style="white-space: pre;">⁠create_*()⁠</code> functions can add RStudio
+Project infrastructure to a pre-existing project or package. <code>use_rstudio()</code>
+is mostly for internal use or for those creating a usethis-like package for
+their organization. It does the following in the current project, often after
+executing <code>proj_set(..., force = TRUE)</code>:
+</p>
+
+<ul>
+<li>
+<p> Creates an <code>.Rproj</code> file
+</p>
+</li>
+<li>
+<p> Adds RStudio files to <code>.gitignore</code>
+</p>
+</li>
+<li>
+<p> Adds RStudio files to <code>.Rbuildignore</code>, if project is a package
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_rstudio(line_ending = c("posix", "windows"), reformat = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>line_ending</code></td>
+<td>
+<p>Line ending</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reformat</code></td>
+<td>
+<p>If <code>TRUE</code>, the <code>.Rproj</code> is setup with common options that
+reformat files on save: adding a trailing newline, trimming trailing
+whitespace, and setting the line-ending. This is best practice for
+new projects.
+</p>
+<p>If <code>FALSE</code>, these options are left unset, which is more appropriate when
+you're contributing to someone else's project that does not have its own
+<code>.Rproj</code> file.</p>
+</td>
+</tr>
+</table>
+</div>

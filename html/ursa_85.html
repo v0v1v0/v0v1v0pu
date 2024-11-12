@@ -1,0 +1,274 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_envi</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Create ENVI or GDAL files on disk
+</h2>
+
+<h3>Description</h3>
+
+
+<p><code>create_envi</code> creates ENVI binary and header files on disk. ENVI binary file is filled by blank (zero) values.
+<br><code>create_gdal</code> is just an entry for GDAL wrapper; currently via internal ENVI implementation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_gdal(x, ...)
+
+create_envi(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+
+<p>Filename, or any refenerce object to help assign properties of new ENVI file. Can be missed.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+
+<p>Use <code>name = value</code> sequence. Properties of new ENVI file are extracted from keywords in 'name' and data types of 'value'.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Prior <span class="pkg">ursa</span> version &lt; 3.10, <code>create_gdal()</code> used classes and methods from package <span class="pkg">rgdal</span>. Currenty, alternatives are not found for complete replacement of <span class="pkg">rgdal</span>. At the present, ENVI binary and header are created, firstly, and <code>close()</code> transforms to desired GDAL format, finally.
+</p>
+<p><code>create_envi</code> and <code>create_gdal</code> use parameters of grid (boundary box, cell size, projection) from reference object of class <code>ursaRaster</code> in argument <code>x</code> or calls <code>session_grid</code>. You may specify values of GDAL or ENVI binary file later using <code>[&lt;-</code>. If <code>x</code> is object of class <code>ursaRaster</code> then metadata parameters (interleave, data type, ignore value, etc) are inherited. 
+</p>
+<p>Keywords:
+</p>
+
+<ul>
+<li>
+<p><code>fname</code> - character. File name for created GDAL or ENVI file.
+<br><br><em>For</em> <code>create_envi</code> <em>only</em>: If <code>compress</code> of <code>connections</code> is not specified then example for “fileout” file name:
+</p>
+
+<ul>
+<li>
+<p>"fileout" - If external 'gzip' is found then "fileout.envigz" is created else "fileout.envi"
+</p>
+</li>
+<li>
+<p>"fileout.envi" - "fileout.envi" is created without any compression.
+</p>
+</li>
+<li>
+<p>"fileout." - "fileout" is created without any compression.
+</p>
+</li>
+<li>
+<p>"fileout.bin" - "fileout.bin" is created without any compression.
+</p>
+</li>
+<li>
+<p>"fileout.img" - "fileout.img" is created without any compression.
+</p>
+</li>
+<li>
+<p>"fileout.dat" - "fileout.dat" is created without any compression.
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>driver</code> - character. <em>For</em> <code>create_gdal</code> <em>only</em>. Which GDAL driver is used.
+</p>
+</li>
+<li>
+<p><code>layername</code> - character of length&gt;=1. Layernames (‘Band name’ in ENVI header file)
+</p>
+</li>
+<li>
+<p><code>bandname</code> - character of length&gt;=1. Layernames (‘Band name’ in ENVI header file)
+</p>
+</li>
+<li>
+<p><code>name</code> - character of length&gt;=1. Layernames (‘Band name’ in ENVI header file)
+</p>
+</li>
+<li>
+<p><code>nodata</code> - integer or numeric. Value in GDAL or ENVI binary file, which is interpretted as <code>NA</code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+</p>
+</li>
+<li>
+<p><code>ignore</code> - integer or numeric. Value in GDAL or ENVI binary file, which is interpretted as <code>NA</code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+</p>
+</li>
+<li>
+<p><code>ignorevalue</code> - integer or numeric. Value in GDAL or ENVI binary file, which is interpretted as <code>NA</code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+</p>
+</li>
+<li>
+<p><code>bg</code> - integer or numeric. Value in GDAL or ENVI binary file, which is interpretted as <code>NA</code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+</p>
+</li>
+<li>
+<p><code>connection</code> - character. <em>For</em> <code>create_envi</code> <em>only</em>. <code>connections</code> for ENVI binary file.
+<br><br> Valid values are:
+</p>
+
+<ul>
+<li>
+<p>"gz" - connection is "gzfile"
+</p>
+</li>
+<li>
+<p>"bz" - connection is "bzfile"
+</p>
+</li>
+<li>
+<p>"xz" - connection is "xzfile"
+</p>
+</li>
+<li>
+<p>"file" - connection is "file"
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>interleave</code> - character. Interleave. Valid values are "bsq", "bil", "bip". For <code>create_gdal</code> and <code>driver="GTiff"</code> valid values are "bsq" and "bil".
+</p>
+</li>
+<li>
+<p><code>datatype</code> - character or integer (numeric). Data type.
+<br><br> Valid values are:
+</p>
+
+<ul>
+<li>
+<p>1, "byte", "Byte", "UInt8" = Byte: 8-bit unsigned integer
+</p>
+</li>
+<li>
+<p>2, "integer", "Int16" = Integer: 16-bit signed integer
+</p>
+</li>
+<li>
+<p>3, "Int32" = Long: 32-bit signed integer
+</p>
+</li>
+<li>
+<p>4, "real", "float", "Float32" = Floating-point: 32-bit single-precision
+</p>
+</li>
+<li>
+<p>5, "Float64" = Double-precision: 64-bit double-precision floating-point
+</p>
+</li>
+<li>
+<p>11, "UInt8" = Byte: 8-bit signed integer. <b>Not in specification.</b> Only for use with this package.
+</p>
+</li>
+<li>
+<p>12, "UInt16" = Integer: 16-bit unsigned integer
+</p>
+</li>
+<li>
+<p>13, "UInt32" = Long: 32-bit unsigned integer
+</p>
+</li>
+</ul>
+<p>Specification <a href="https://envi.geoscene.cn/help/Subsystems/envi/Content/ExploreImagery/ENVIHeaderFiles.htm">https://envi.geoscene.cn/help/Subsystems/envi/Content/ExploreImagery/ENVIHeaderFiles.htm</a> is used.
+
+</p>
+</li>
+<li>
+<p><code>byteorder</code> - numeric (integer). Byte order.
+</p>
+</li>
+<li>
+<p><code>bands</code> - numeric( integer). Number of bands/layers
+</p>
+</li>
+<li>
+<p><code>nband</code> - numeric( integer). Number of bands/layers
+</p>
+</li>
+<li>
+<p><code>nlayer</code> - numeric( integer). Number of bands/layers
+</p>
+</li>
+<li>
+<p><code>layers</code> - numeric( integer). Number of bands/layers
+</p>
+</li>
+<li>
+<p><code>compress</code> - integer (numeric) or logical. <em>For</em> <code>create_envi</code> <em>only</em>. Should ENVI binary file be compressed after closing connection.
+</p>
+</li>
+<li>
+<p><code>wkt</code> - integer (numeric) or logical. Forced adding ‘coordinate system string’ to ENVI header file
+</p>
+</li>
+<li>
+<p><code>ext</code> - character. <em>For</em> <code>create_envi</code> <em>only</em>. Extension of ENVI binary file. For extensions not in <code>c("envi","bin","dat","img")</code> list
+</p>
+</li>
+</ul>
+<p>If file name is unknown, then random file name is used with informing via <code>message()</code>. 
+
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code> with opened connection of GDAL or ENVI binary file.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a></p>
+
+
+<h3>See Also</h3>
+
+
+<p><code>ursa_new</code> creates object of class <code>ursaRaster</code> in memory and allows to assign values at once.
+</p>
+<p>Use <code>session_grid</code> to check or specify parameters of grid before calling <code>create_envi</code>.
+</p>
+<p>Use <code>[&lt;-</code> to assign values to ENVI binary file after calling <code>create_envi</code>.
+</p>
+<p>Use <code>close</code> (or <code>close_envi</code>) to close <code>connections</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- create_envi()
+fname &lt;- a$con$fname
+dir(pattern=basename(envi_list(fname)))
+close(a)
+invisible(envi_remove(fname))
+
+a &lt;- create_envi("exam1",layername=paste("Band",1:5)
+                ,ignorevalue=99,datatype="Int16",interleave="bil")
+ursa_info(a)
+print(a[])
+close(a)
+invisible(envi_remove("exam1"))
+</code></pre>
+
+
+</div>

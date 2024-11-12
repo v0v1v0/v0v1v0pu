@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_dim_dist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize the distribution difference of samples after dimension reduction analysis</h2>
+
+<h3>Description</h3>
+
+<p>Visualize the distribution difference of samples after dimension reduction analysis
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_dim_dist(
+  ids = c("TP53", "KRAS", "PTEN", "MDM2", "CDKN1A"),
+  data_type = "mRNA",
+  group_info = NULL,
+  DR_method = c("PCA", "UMAP", "tSNE"),
+  palette = "Set1",
+  add_margin = NULL,
+  opt_pancan = .opt_pancan
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ids</code></td>
+<td>
+<p>molecular identifiers (&gt;=3)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_type</code></td>
+<td>
+<p>molecular types, refer to query_pancan_value() function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group_info</code></td>
+<td>
+<p>two-column grouping information with names 'Sample','Group'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DR_method</code></td>
+<td>
+<p>the dimension reduction method</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>palette</code></td>
+<td>
+<p>the color setting of RColorBrewer</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add_margin</code></td>
+<td>
+<p>the marginal plot (NULL, "density", "boxplot")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opt_pancan</code></td>
+<td>
+<p>specify one dataset for some molercular profiles</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a ggplot object or rawdata list
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+group_info = tcga_clinical_fine %&gt;% 
+  dplyr::filter(Cancer=="BRCA") %&gt;% 
+  dplyr::select(Sample, Code) %&gt;% 
+  dplyr::rename(Group=Code)
+
+vis_dim_dist(
+  ids = c("TP53", "KRAS", "PTEN", "MDM2", "CDKN1A"),
+  group_info = group_info
+)
+
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

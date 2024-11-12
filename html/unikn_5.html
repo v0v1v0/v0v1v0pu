@@ -1,0 +1,173 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>newpal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Define a new color palette</h2>
+
+<h3>Description</h3>
+
+<p><code>newpal</code> allows defining new color palettes 
+(as data frames or vectors).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">newpal(col, names = NULL, pattern = NULL, replacement = NULL, as_df = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>col</code></td>
+<td>
+<p>A required vector of colors 
+(specified as R color names, HEX codes, or RGB values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>names</code></td>
+<td>
+<p>An optional character vector of color names. 
+Default: <code>names = NULL</code>, using default color names. 
+Setting <code>names = NA</code> removes all color names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p>A pattern to be replaced in <code>names</code> (as REGEX). 
+Default: <code>pattern = NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replacement</code></td>
+<td>
+<p>A replacement for <code>pattern</code> in <code>names</code> (as REGEX).
+Default: <code>replacement = NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>as_df</code></td>
+<td>
+<p>Should the new color palette be returned as 
+a data frame (rather than as a vector)? 
+Default: <code>as_df = FALSE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Specifying <code>pattern</code> and <code>replacment</code> allows modifying <code>names</code> 
+by regular expressions (using <code>gsub(..., perl = TRUE)</code>).
+</p>
+<p>By default, new palette is returned as a (named) vector. 
+Setting <code>as_df = TRUE</code> returns new palette as a data frame.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A (named) vector or data frame.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for viewing and comparing color palettes;  
+<code>usecol</code> for using color palettes; 
+<code>simcol</code> for finding similar colors; 
+<code>grepal</code> for finding named colors; 
+<code>shades_of</code> to defining shades of a given color; 
+<code>ac</code> for adjusting color transparency; 
+<code>pal_unikn</code> for the default uni.kn color palette.
+</p>
+<p>Other color functions: 
+<code>ac()</code>,
+<code>demopal()</code>,
+<code>grepal()</code>,
+<code>seecol()</code>,
+<code>shades_of()</code>,
+<code>simcol()</code>,
+<code>usecol()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">newpal(col = c("black", "white"), names = c("dark", "bright"))
+
+# Example: 3 ways of defining a new color palette:
+
+# (1) From R color names: -----
+
+pal_flag_de &lt;- newpal(col = c("black", "firebrick3", "gold"),
+                      names = c("Schwarz", "Rot", "Gold"))
+seecol(pal_flag_de, main = "Colors of the German flag")
+
+# (2) From HEX values: -----
+
+# (a) Google logo colors:
+# Source: https://www.schemecolor.com/google-logo-colors.php
+color_google &lt;- c("#4285f4", "#34a853", "#fbbc05", "#ea4335")
+names_google &lt;- c("blueberry", "sea green", "selective   yellow", "cinnabar")
+pal_google   &lt;- newpal(color_google, names_google, pattern = "\\s+", replacement = "_")
+
+seecol(pal_google, main = "Colors of the Google logo", col_brd = "white", lwd_brd = 10)
+
+# (b) German flag (revised):
+# Based on a different source at
+# &lt;https://www.schemecolor.com/germany-flag-colors.php&gt;:
+pal_flag_de_2 &lt;- newpal(col = c("#000000", "#dd0000", "#ffce00"),
+                        names = c("black", "red", "gold")
+                        )
+seecol(pal_flag_de_2, main = "Colors of the German flag (www.schemecolor.com)")
+
+# (c) Mixing HEX and R color names:
+pal_mpg &lt;- newpal(col = c("#007367", "white", "#D0D3D4"),
+                  names = c("MPG green", "white", "MPG grey"),
+                  pattern = "([A-Z])", replacement = "\\L\\1"  # replace upper by lowercase
+                  )
+seecol(pal_mpg, main = "The colors of the Max Planck Society", col_bg = "grey")
+
+# (3) From RGB values: -----
+
+# A barrier-free color palette
+# Source: Okabe &amp; Ito (2002): Color Universal Design (CUD):
+#         Fig. 16 of &lt;https://jfly.uni-koeln.de/color/&gt;:  
+
+# (a) Vector of colors (as RGB values):
+o_i_colors &lt;- c(rgb(  0,   0,   0, maxColorValue = 255),  # black
+                rgb(230, 159,   0, maxColorValue = 255),  # orange
+                rgb( 86, 180, 233, maxColorValue = 255),  # skyblue
+                rgb(  0, 158, 115, maxColorValue = 255),  # green
+                rgb(240, 228,  66, maxColorValue = 255),  # yellow
+                rgb(  0, 114, 178, maxColorValue = 255),  # blue
+                rgb(213,  94,   0, maxColorValue = 255),  # vermillion
+                rgb(204, 121, 167, maxColorValue = 255)   # purple
+)
+
+# (b) Vector of color names:
+o_i_names &lt;- c("black", "orange", "skyblue", "green", "yellow", "blue", "vermillion", "purple")
+
+# (c) Use newpal() to combine colors and names:
+pal_okabe_ito &lt;- newpal(col = o_i_colors, names = o_i_names, 
+                        pattern = "(^[a-z])", replacement = "\\U\\1")  # capitalize initial
+
+seecol(pal_okabe_ito,
+       main = "Color-blind friendly color scale (Okabe &amp; Ito, 2002)")
+
+# (+) Compare custom color palettes: ----- 
+
+my_pals &lt;- list(pal_flag_de, pal_flag_de_2, pal_google, pal_mpg, pal_okabe_ito)
+seecol(my_pals, col_brd = "white", lwd_brd = 4,
+       main = "Comparing custom color palettes")
+
+</code></pre>
+
+
+</div>

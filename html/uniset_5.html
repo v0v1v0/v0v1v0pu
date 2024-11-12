@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uniset_getstn</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Settings Object
+description Source the list holding the key=value pairs from the settings.R
+file.</h2>
+
+<h3>Description</h3>
+
+<p>Get Settings Object
+description Source the list holding the key=value pairs from the settings.R
+file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uniset_getstn(uniset_handover)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>uniset_handover</code></td>
+<td>
+<p>List length two, containing two elements:
+</p>
+
+<ol>
+<li> <p><code>pkgname</code>: The name of the target package.
+</p>
+</li>
+<li> <p><code>funcname</code>: The name of the function in the target package handing over
+the required values. See examples at <code>uniset</code>.
+</p>
+</li>
+</ol>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A list holding the key=value pairs from the settings.R file on
+on success, NULL if sourcing the file was not successful.
+</p>
+
+
+<h3>Important</h3>
+
+<p>This function is meant to be called from within the
+target package.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">{
+## Not run: 
+# to be called from within the target package
+uniset_getstn(uniset_handover)
+
+## End(Not run)
+}
+</code></pre>
+
+
+</div>

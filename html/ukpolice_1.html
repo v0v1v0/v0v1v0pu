@@ -1,0 +1,32 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukpolice-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ukpolice: Download Data on UK Police and Crime</h2>
+
+<h3>Description</h3>
+
+<p>Downloads data from the 'UK Police' public data API. Includes data on UK
+police forces and police force areas, crime reports, and the use of
+stop-and-search powers.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Most functions return a <code>tibble</code> with the requested data, with the exception
+of <code>ukc_specific_outcome()</code> in some cases, which returns a list containing a
+list and a <code>tibble</code>.
+</p>
+<p>Data accessed through <code>ukpolice</code> is licenced with
+<a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>.
+</p>
+<p>The API allows for 15 requests each second, but up to 30 in a single second
+if in a single burst. The API does not require authentication.
+See the <a href="https://data.police.uk/docs/">API documentation</a> for more details.
+</p>
+
+
+</div>

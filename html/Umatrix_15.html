@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ustarmatrixCalc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ustarmatrixCalc</h2>
+
+<h3>Description</h3>
+
+<p>The UStarMatrix is a combination of the Umatrix (average distance to neighbours) and Pmatrix (density in a point). It can be used to improve the Umatrix, if the dataset contains density based structures.</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Umatrix</code></td>
+<td>
+<p>A given Umatrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Pmatrix</code></td>
+<td>
+<p>A density matrix</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>UStarMatrix</p>
+
+
+<h3>References</h3>
+
+<p>Ultsch, A. U* C: Self-organized Clustering with Emergent Feature Maps. in Lernen, Wissensentdeckung und Adaptivitaet (LWA). 2005. Saarbruecken, Germany.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data("Hepta")
+e = esomTrain(Hepta$Data, Key = 1:nrow(Hepta$Data))
+Pmatrix = pmatrixForEsom(Hepta$Data,
+                         e$Weights,
+                         e$Lines,
+                         e$Columns,
+                          e$Toroid)
+Ustarmatrix = ustarmatrixCalc(e$Umatrix, Pmatrix)
+plotMatrix(Ustarmatrix, e$BestMatches)
+</code></pre>
+
+
+</div>

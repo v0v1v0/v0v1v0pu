@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DDF99Pars</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>DDF99 parameters from .xml files</h2>
+
+<h3>Description</h3>
+
+<p>Imports the FEH 1999 depth duration frequency parameters from xml files either from an FEH webservice download or from the Peakflows dataset downloaded from the national river flow archive (NRFA) website
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DDF99Pars(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the xml file path</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function is coded to import DDF99 parameters from xml files from the NRFA or the FEH web-server. File paths for importing data require forward slashes. On some operating systems, such as windows, the copy and pasted file paths will have backward slashes and would need to be changed accordingly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with two elements, each a data frame with columns; parameters and associated Values
+The first data frame is for the catchment average parameters (these still require an ARF adjustment where appropriate) and the second for the 1km2 grid point parameters.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Import DDF99 parameters from a NRFA peakflows xml file and display in console
+## Not run: DDF99.4003 &lt;- DDF99Pars("C:/Data/NRFAPeakFlow_v11/Suitable for QMED/04003.xml")
+## Not run: DDF99.4003
+#Import DDF99 parameters from a FEH webserver xml file and display in the console
+## Not run: DDF99.MySite &lt;- DDF99Pars("C:/Data/FEH_Catchment_384200_458200.xml")
+</code></pre>
+
+
+</div>

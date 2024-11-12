@@ -1,0 +1,131 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_residualize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Easily residualize variables in long or wide dataframes, returning them changed in-place.</h2>
+
+<h3>Description</h3>
+
+<p>Residualize one or more variables residualized against covariates, and return a
+complete dataframe with residualized variable in place.
+Optionally, this also works on wide (i.e., twin) data. Just supply suffixes to identify
+the paired-wide columns (see examples).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_residualize(var, covs = NULL, suffixes = NULL, data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>var</code></td>
+<td>
+<p>The base name of the variable you want to residualize. Alternatively, a
+regression <code>formula()</code> containing var on the lhs, and covs on the rhs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>covs</code></td>
+<td>
+<p>Covariates to residualize on.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suffixes</code></td>
+<td>
+<p>Suffixes that identify the variable for each twin, i.e. c("_T1", "_T2")
+Up to you to check all variables are present!</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataframe containing all the variables</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In R, residuals for a variable can be found with the following statement:
+</p>
+<p><code>tmp = residuals(lm(var ~ cov1 + cov2, data = data, na.action = na.exclude))</code>
+</p>
+<p>This tmp variable could then be written over the old data:
+</p>
+<p>umx_residualize obviates the user having to build the lm, set na.action, or replace the data.
+In addition, it has the powerful feature of operating on a list of variables, and of operating on
+wide data, expanding the var name using a set of variable-name suffixes.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> dataframe with var residualized in place (i.e under its original column name)
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Twin Data functions: 
+<code>umx_long2wide()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_twin_data_nice()</code>,
+<code>umx_scale_wide_twin_data()</code>,
+<code>umx_wide2long()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Residualize mpg on cylinders and displacement
+r1 = umx_residualize("mpg", c("cyl", "disp"), data = mtcars)
+r2 = residuals(lm(mpg ~ cyl + disp, data = mtcars, na.action = na.exclude))
+all(r1$mpg == r2)
+
+# =============================
+# = Use the formula interface =
+# =============================
+r1 = umx_residualize(mpg ~ cyl + I(cyl^2) + disp, data = mtcars)
+
+# validate against using lm
+r2 = residuals(lm(mpg ~ cyl + I(cyl^2) + disp, data = mtcars, na.action = na.exclude))
+all(r1$mpg == r2)
+
+# ===========================================================
+# = Residualize twin data (i.e. wide or "1 family per row") =
+# ===========================================================
+# Make some toy "twin" data to demonstrate with
+tmp = mtcars
+tmp$mpg_T1  = tmp$mpg_T2  = tmp$mpg
+tmp$cyl_T1  = tmp$cyl_T2  = tmp$cyl
+tmp$disp_T1 = tmp$disp_T2 = tmp$disp
+
+covs = c("cyl", "disp")
+tmp= umx_residualize(var="mpg", covs=covs, suffixes=c("_T1","_T2"), data = tmp)
+str(tmp[1:5, 12:17])
+
+# ===================================
+# = Residualize several DVs at once =
+# ===================================
+df1 = umx_residualize(c("mpg", "hp"), cov = c("cyl", "disp"), data = tmp)
+df2 = residuals(lm(hp ~ cyl + disp, data = tmp, na.action = na.exclude))
+all(df1$hp == df2)
+</code></pre>
+
+
+</div>

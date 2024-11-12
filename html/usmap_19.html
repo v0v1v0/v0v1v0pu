@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>earthquakes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Earthquakes (2019)</h2>
+
+<h3>Description</h3>
+
+<p>US earthquakes with a magnitude of 2.5 or greater, occurring in the
+first half of 2019, from January 1 to June 30, from USGS.<br><br>
+The data is formatted for transforming with <code>usmap_transform()</code>.
+Once the longitude and latitude is transformed, it can be added to
+<code>plot_usmap()</code> using <code>ggplot2::ggplot()</code> layers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(earthquakes)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 2254 rows and 3 variables.
+</p>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li> <p><code>lon</code> The longitude of the earthquake's location.
+</p>
+</li>
+<li> <p><code>lat</code> The latitude of the earthquake's location.
+</p>
+</li>
+<li> <p><code>mag</code> The magnitude of the earthquake.
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul>
+<li> <p><a href="https://www.usgs.gov/programs/earthquake-hazards/earthquakes">https://www.usgs.gov/programs/earthquake-hazards/earthquakes</a>
+</p>
+</li>
+<li> <p><a href="https://earthquake.usgs.gov/earthquakes/search/">https://earthquake.usgs.gov/earthquakes/search/</a>
+</p>
+</li>
+</ul>
+</div>

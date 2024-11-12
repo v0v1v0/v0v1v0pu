@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>state2abbr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert state names to abbreviations</h2>
+
+<h3>Description</h3>
+
+<p>Two utility functions. One converts state names to the state abbreviations,
+and the second does the opposite.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">state2abbr(state)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>state</code></td>
+<td>
+<p>A vector of state name, where there is a little fuzzy matching.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Returns a vector of the same length with the corresponding state
+names or abbreviations.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Diez
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>abbr2state</code>, <code>county</code>, <code>county_complete</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+state2abbr("Minnesota")
+
+# Some spelling/capitalization errors okay
+state2abbr("mINnesta")
+</code></pre>
+
+
+</div>

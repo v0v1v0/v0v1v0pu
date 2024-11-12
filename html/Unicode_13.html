@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u_char_names</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Character Names</h2>
+
+<h3>Description</h3>
+
+<p>Find the names or labels of Unicode characters, or Unicode characters
+by their name.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">u_char_name(x)
+u_char_from_name(x, type = c("exact", "grep"), ...)
+u_char_label(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object which can be coerced to a <code>u_char</code>
+vector of Unicode characters via <code>as.u_char</code> for
+<code>u_char_name</code> and <code>u_char_label</code>;
+a character vector otherwise.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>one of <code>"exact"</code> or <code>"grep"</code>, or an abbreviation
+thereof.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>arguments to be passed to <code>grepl</code> when using
+this for pattern matching.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The Unicode Standard provides a convention for labeling code points
+that do not have character names (control, reserved, noncharacter,
+private-use and surrogate code points).  These labels can be obtained
+by <code>u_char_label</code>.
+</p>
+<p>By default, exact matching is used for finding Unicode characters by
+name.  When <code>type = "grep"</code>, <code>grepl</code> is used for
+matching <code>x</code> against the Unicode character names; for now, Hangul
+syllable and CJK Unified Ideograph names are ignored in this case.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>u_char_name</code> and <code>u_char_label</code>, a character vector
+with the names or labels, respectively, of the corresponding Unicode
+characters.
+</p>
+<p>For <code>u_char_from_name</code>, a <code>u_char</code> object giving the
+Unicode characters with name exactly matching the given names.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- as.u_char(utf8ToInt("Austria"))
+u_char_name(x)
+
+## Derived Hangul syllable character names are also supported for
+## finding characters by exact matching:
+x &lt;- u_char_name("0xAC00")
+x
+u_char_from_name(x)
+
+## Find all Unicode characters with name matching 'DIGIT ONE'.
+x &lt;- u_char_from_name("\\bDIGIT ONE\\b", "g")
+## And show their names.
+u_char_name(x)
+</code></pre>
+
+
+</div>

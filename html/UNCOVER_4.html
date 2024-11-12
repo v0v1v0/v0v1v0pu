@@ -1,0 +1,205 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.UNCOVER</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot various outputs of UNCOVER</h2>
+
+<h3>Description</h3>
+
+<p>Allows visualisation of many aspects of UNCOVER, including
+co-variate, posterior and diagnostic plots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'UNCOVER'
+plot(
+  x,
+  type = "covariates",
+  plot_var = x$Minimum_Spanning_Tree_Variables,
+  diagnostic_x_axis = "full",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object of class <code>"UNCOVER"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Can be one of; <code>"covariates"</code> for cluster assignment
+visualisation for the co-variates, <code>"fitted"</code> for co-variate visualisation
+with respect to their fitted values, <code>"samples"</code> for posterior visualisation
+or <code>"diagnostics"</code> for diagnostic plots. See details. Defaults to
+<code>"covariates"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_var</code></td>
+<td>
+<p>Vector specifying which columns (or associated logistic
+regression coefficients) of the co-variate matrix should be plotted. Does not
+apply when <code>type=="diagnostics"</code>. Defaults to all columns being selected.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diagnostic_x_axis</code></td>
+<td>
+<p>Only applies if <code style="white-space: pre;">⁠"type=="diagnostics"⁠</code>. Either
+<code>"full"</code> (default) for all observations indices to be plotted on the x-axis
+or <code>"minimal"</code> for only some observations indices to be plotted on the
+x-axis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments to be passed to methods</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>type=="covariates"</code>, the resulting plot will be a ggpairs plot.
+The diagonal entries will be a plot of K density plots (K being the number
+of clusters). The off-diagonal elements are scatter-plots of the
+observations, given a label according to their true response and a colour
+based on their assigned cluster. If <code>length(plot_var)==1</code> then the density
+plot and the scatter-plot are combined. If a cluster contains less than two
+data points the density will not be plotted.
+</p>
+<p>If <code style="white-space: pre;">⁠"type=="fitted"⁠</code>, the resulting plot will be a ggpairs plot. The
+diagonal entries will be two density plots, one for data predicted to have
+response 0 by the model (red) and one for training data predicted to have
+response 1 by the model (green). The off-diagonal elements are
+scatter-plots of the observations, given a label according to their actual
+response and a colour scale based on their predicted response. If
+<code>length(plot_var)==1</code> then the density plot and the scatter-plot are
+combined. If a predicted class (0 or 1) contains less than two data points
+the density will not be plotted.
+</p>
+<p>If <code>type=="samples"</code>, the resulting plot will be a ggpairs plot of the
+clusters posteriors, giving the coefficient densities in the diagonal and
+scatter-plots of the posterior samples in the off-diagonal. The transparency
+is increased in the upper triangle for scenarios when posteriors overlap.
+</p>
+<p>If <code>"type==diagnostics"</code>, the resulting plot depends on the deforestation
+criterion used to create the <code>"UNCOVER"</code> object:
+</p>
+
+<dl>
+<dt><code>"None"</code></dt>
+<dd>
+<p>A plot tracking the overall log Bayesian evidence every time
+an action is executed.</p>
+</dd>
+<dt><code>"NoC"</code></dt>
+<dd>
+<p>A plot tracking the overall log Bayesian evidence after every
+action and a plot tracking the number of clusters after every action.</p>
+</dd>
+<dt><code>"SoC"</code></dt>
+<dd>
+<p>Three plots; one tracking the overall log Bayesian evidence
+after every action, one tracking the number of criterion breaking clusters
+after every action and one tracking the minimum cluster size after every
+action.</p>
+</dd>
+<dt><code>"MaxReg"</code></dt>
+<dd>
+<p>A plot tracking the overall log Bayesian evidence every
+time an action is executed. Actions are coloured and each action has an
+associated coloured dashed line indicating the log Bayesian evidence plus
+the logarithm of the maximum tolerance provided.</p>
+</dd>
+<dt><code>"Validation"</code></dt>
+<dd>
+<p>A plot tracking the overall log Bayesian evidence
+after every action (for both the training data and all of the data) and a
+plot tracking the robustness statistic after every deforestation action.</p>
+</dd>
+<dt><code>"Diverse"</code></dt>
+<dd>
+<p>Three plots; one tracking the overall log Bayesian
+evidence after every action, one tracking the number of criterion breaking
+clusters after every action and one tracking the minimum minority class
+across clusters after every action.</p>
+</dd>
+</dl>
+<p>Actions are defined as either edge removals, edge additions or edge
+additions in the deforestation stage. The syntax for an action will be the
+'type_of_action.edge'. For example the removal of an edge connecting
+observation 1 and observation 2 will be displayed 'Rem.1-2'. If the edge was
+being added this would be displayed 'Def.Add.1-2' if in the deforestation
+stage and 'Add.1-2' otherwise. When the data for the <code>"UNCOVER"</code> object
+created is large setting <code>diagnostic_x_axis=="minimal"</code> is recommended as it
+gives a more visually appealing output.
+</p>
+
+
+<h3>Value</h3>
+
+<p>No return value, called for side effects
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>UNCOVER()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+require(graphics)
+# First we generate a co-variate matrix and binary response vector
+CM &lt;- matrix(rnorm(200),100,2)
+rv &lt;- sample(0:1,100,replace=TRUE)
+
+# We can then run our algorithm for each of the different deforestation
+# criteria
+UN.none &lt;- UNCOVER(X = CM,y = rv, deforest_criterion = "None", verbose = FALSE)
+UN.noc &lt;- UNCOVER(X = CM,y = rv, deforest_criterion = "NoC",
+                  options = UNCOVER.opts(max_K = 3), verbose = FALSE)
+UN.soc &lt;- UNCOVER(X = CM,y = rv, deforest_criterion = "SoC",
+                  options = UNCOVER.opts(min_size = 10), verbose = FALSE)
+UN.maxreg &lt;- UNCOVER(X = CM,y = rv, deforest_criterion = "MaxReg",
+                     options = UNCOVER.opts(reg = 1), verbose = FALSE)
+UN.validation &lt;- UNCOVER(X = CM,y = rv, deforest_criterion = "Validation",
+                         options = UNCOVER.opts(train_frac = 0.8),
+                         verbose = FALSE)
+UN.diverse &lt;- UNCOVER(X = CM,y = rv, deforest_criterion = "Diverse",
+                       options = UNCOVER.opts(n_min_class = 2), verbose = FALSE)
+plot(UN.none,type = "covariates")
+plot(UN.none,type = "fitted")
+plot(UN.none,type = "samples")
+plot(UN.none,type = "diagnostics",diagnostic_x_axis = "minimal")
+plot(UN.noc,type = "diagnostics",diagnostic_x_axis = "minimal")
+plot(UN.soc,type = "diagnostics",diagnostic_x_axis = "minimal")
+plot(UN.maxreg,type = "diagnostics",diagnostic_x_axis = "minimal")
+plot(UN.validation,type = "diagnostics",diagnostic_x_axis = "minimal")
+plot(UN.diverse,type = "diagnostics",diagnostic_x_axis = "minimal")
+
+# If we only wanted to view the second co-variate
+plot(UN.none,type = "covariates",plot_var=2)
+plot(UN.none,type = "fitted",plot_var=2)
+plot(UN.none,type = "samples",plot_var=2)
+
+
+</code></pre>
+
+
+</div>

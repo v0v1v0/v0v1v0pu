@@ -1,0 +1,181 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lossfunc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Loss Functions</h2>
+
+<h3>Description</h3>
+
+<p>This functions allows for the calculation of loss functions for the
+selection of models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lossfunc(obj = list(Loss = NULL, ES = NULL), beta = 1e-04)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>a list that contains the following elements:
+</p>
+
+<dl>
+<dt><code>Loss</code></dt>
+<dd>
+<p>a numeric vector that contains the values of a loss series
+ordered from past to present; is set to <code>NULL</code> by default</p>
+</dd>
+<dt><code>ES</code></dt>
+<dd>
+<p>a numeric vector that contains the estimated values of the
+ES for the same time points of the loss series <code>Loss</code>; is set to
+<code>NULL</code> by default</p>
+</dd>
+</dl>
+<p>Please note that a list returned by the <code>varcast</code> function can be directly
+passed to <code>lossfunc</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>a single numeric value; a measure for the opportunity cost of
+capital; default is <code>1e-04</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Given a negative return series <code>obj$Loss</code>, the corresponding Expected
+Shortfall (ES) estimates <code>obj$ES</code> and a parameter <code>beta</code> that
+defines the opportunity cost of capital, four different definitions of loss
+functions are considered.
+</p>
+<p>Let <code class="reqn">K</code> be the number of observations and <code class="reqn">r_t</code> the observed return series.
+Following Sarma et al. (2003)
+</p>
+<p style="text-align: center;"><code class="reqn">l_{t,1} = \{\widehat{ES}_t (\alpha) + r_t \}^2,</code>
+</p>
+
+<p>if <code class="reqn">-r_t &gt; \widehat{ES}_t(\alpha)</code>
+</p>
+<p style="text-align: center;"><code class="reqn">l_{t,1} = \beta * \widehat{ES}_t (\alpha),</code>
+</p>
+
+<p>otherwise,
+</p>
+<p>is a suitable loss function (firm's loss function), where <code class="reqn">\beta</code> is the
+opportunity cost of capital. The regulatory loss function
+is identical to the firm's loss function with the exception of
+<code class="reqn">l_{t,1} = 0</code> for <code class="reqn">-r_t \leq \widehat{ES}_t (\alpha)</code>.
+</p>
+<p>Abad et al. (2015) proposed another loss function
+</p>
+<p style="text-align: center;"><code class="reqn">l_{t,a} = \{\widehat{ES}_t(\alpha) + r_t\}^2,</code>
+</p>
+
+<p>if <code class="reqn">-r_t &gt; \widehat{ES}_t(\alpha)</code>
+</p>
+<p style="text-align: center;"><code class="reqn">l_{t,a} = \beta * (\widehat{ES}_t (\alpha) + r_t),</code>
+</p>
+
+<p>otherwise,
+</p>
+<p>that, however, also considers opportunity costs for <code class="reqn">r_t &gt; 0</code>. An adjustment has
+been proposed by Feng. Following his idea,
+</p>
+<p style="text-align: center;"><code class="reqn">l_{t,2} = \{\widehat{ES}_t(\alpha) + r_t\}^2,</code>
+</p>
+
+<p>if <code class="reqn">-r_t &gt; \widehat{ES}_t (\alpha)</code>
+</p>
+<p style="text-align: center;"><code class="reqn">l_{t,2} = \beta * \min\{\widehat{ES}_t(\alpha) + r_t, \widehat{ES}_t(\alpha)\},</code>
+</p>
+
+<p>otherwise,
+</p>
+<p>should be considered as a compromise of the regulatory and the firm's loss
+functions. Note that instead of the ES, also a series of Value-at-Risk values
+can be inserted for the argument <code>obj$ES</code>. However this is not possible if
+a list returned by the <code>varcast</code> function is directly passed to
+<code>lossfunc</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>an S3 class object, which is a list of
+</p>
+
+<dl>
+<dt>loss.func1</dt>
+<dd>
+<p>Regulatory loss function.</p>
+</dd>
+<dt>loss.func2</dt>
+<dd>
+<p>Firm's loss function following Sarma et al. (2003).</p>
+</dd>
+<dt>loss.func3</dt>
+<dd>
+<p>Loss function following Abad et al. (2015).</p>
+</dd>
+<dt>loss.func4</dt>
+<dd>
+<p>Feng's loss function. A compromise of regulatory and
+firm's loss function.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+
+<ul>
+<li>
+<p> Sebastian Letmathe (Scientific Employee) (Department of Economics,
+Paderborn University) <br></p>
+</li>
+<li>
+<p> Dominik Schulz (Scientific Employee) (Department of Economics,
+Paderborn University), <br></p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Abad, P., Muela, S. B., &amp; Martín, C. L. (2015). The role of the loss function
+in value-at-risk comparisons. The Journal of Risk Model Validation, 9(1), 1-19.
+</p>
+<p>Sarma, M., Thomas, S., &amp; Shah, A. (2003). Selection of Value-at-Risk models.
+Journal of Forecasting, 22(4), 337-358.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+# Example for Walmart Inc. (WMT)
+prices &lt;- WMT$price.close
+output &lt;- varcast(prices)
+Loss &lt;- -output$ret.out
+ES &lt;- output$ES
+loss.data &lt;- list(Loss = Loss, ES = ES)
+lossfunc(loss.data)
+
+# directly passing an output object of 'varcast()' to 'lossfunc()'
+x &lt;- WMT$price.close
+output &lt;- varcast(prices)
+lossfunc(output)
+
+</code></pre>
+
+
+</div>

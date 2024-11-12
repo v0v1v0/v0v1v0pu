@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>random_arcoefs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create random AR coefficients</h2>
+
+<h3>Description</h3>
+
+<p><code>random_arcoefs</code> generates random AR coefficients.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">random_arcoefs(p, forcestat = FALSE, sd = 0.6/p)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a positive integer specifying the autoregressive order of the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forcestat</code></td>
+<td>
+<p>use the algorithm by Monahan (1984) to force stationarity on the AR parameters (slower)?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd</code></td>
+<td>
+<p>if <code>forcestat==FALSE</code>, then AR parameters are drawn from zero mean normal distribution with sd given by this parameter.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>forcestat==TRUE</code>, then the AR coefficients are relatively large, otherwise they are usually relatively small.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns <code class="reqn">px1</code> vector containing random AR coefficients.
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li>
+<p> Monahan J.F. 1984. A Note on Enforcing Stationarity in Autoregressive-Moving Average Models.
+<em>Biometrica</em> <strong>71</strong>, 403-404.
+</p>
+</li></ul>
+</div>

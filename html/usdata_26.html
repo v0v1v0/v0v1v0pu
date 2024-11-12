@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>voter_count</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>US Voter Turnout Data.</h2>
+
+<h3>Description</h3>
+
+<p>State-level data on federal elections held in November
+between 1980 and 2014.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">voter_count
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 936 rows and 7 variables.
+</p>
+
+<dl>
+<dt>year</dt>
+<dd>
+<p>Year election was held.</p>
+</dd>
+<dt>region</dt>
+<dd>
+<p>Specifies if data is state or national total.</p>
+</dd>
+<dt>voting_eligible_population</dt>
+<dd>
+<p>Number of citizens eligible to vote; does not count felons.</p>
+</dd>
+<dt>total_ballots_counted</dt>
+<dd>
+<p>Number of ballots cast.</p>
+</dd>
+<dt>highest_office</dt>
+<dd>
+<p>Number of ballots that contained a vote for the highest office of that election.</p>
+</dd>
+<dt>percent_total_ballots_counted</dt>
+<dd>
+<p>Overall voter turnout percentage.</p>
+</dd>
+<dt>percent_highest_office</dt>
+<dd>
+<p>Highest office voter turnout percentage.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="https://www.electproject.org/election-data/voter-turnout-data">United States Election Project</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(ggplot2)
+
+ggplot(voter_count, aes(x = percent_highest_office, y = percent_total_ballots_counted)) +
+  geom_point() +
+  labs(
+    title = "Total Ballots V Highest Office",
+    x = "Highest Office",
+    y = "Total Ballots"
+  )
+</code></pre>
+
+
+</div>

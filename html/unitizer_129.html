@@ -1,0 +1,40 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unitizerGlobalBase-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Structures For Tracking Global Options</h2>
+
+<h3>Description</h3>
+
+<p>Immplemented as S4 classes just so we can ensure everything is guaranteed
+to have the right slots.  This is done by defining a virtual class that has
+a validity function that checks the required slots exist.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Not we don't use "ANY" slots here because that would allow partially
+specified sub classes (i.e. classes with slots that are "ANY"), which we
+do not want to allow.
+</p>
+<p><code>unitizerGlobalTrackingStore</code> is used to keep "compressed" versions of
+<code>unitizerGlobal$tracking</code>.  The compressed versions obviously lose some
+information.  In particular, environments or things that have environments
+as parents, or large objects, are not stored and instead a reference to
+a <code>unitizerDummy</code> object is stored.  This object unambiguously
+identifies a non-stored object since no user or system code should
+normally creating a <code>unitizerDummy</code> object.
+</p>
+<p><code>unitizerGlobalState</code> tracks a single state which is just one value from
+each of the slots of <code>unitizerGlobalTrackingStore</code>
+</p>
+<p>When comparing state between new and reference tests, only explicitly stored
+items are compared (though any extra or missing items may be brought up as
+possible mismatches).
+</p>
+
+
+</div>

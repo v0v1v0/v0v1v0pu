@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AutoSalesXGermany</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Sales of cars and vans in Germany by manufacturer (edited version of AutoSales).
+</h2>
+
+<h3>Description</h3>
+
+<p>Sales of cars and vans in Germany for 2017 and 2018.  The market is divided into 14 segments and in the two years 2017 and 2018 there were 50 competing manufacturers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(AutoSalesX)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 173 observations on the following 5 variables.
+</p>
+
+<dl>
+<dt><code>Sector</code></dt>
+<dd>
+<p>Car, Van, Other</p>
+</dd>
+<dt><code>Segment</code></dt>
+<dd>
+<p>Market segment</p>
+</dd>
+<dt><code>Manufacturer</code></dt>
+<dd>
+<p>Manufacturer</p>
+</dd>
+<dt><code>sales17</code></dt>
+<dd>
+<p>Sales in 2017</p>
+</dd>
+<dt><code>sales18</code></dt>
+<dd>
+<p>Sales in 2018</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>This is a 'cleaned' and reduced version of the dataset AutoSales from this package.<br></p>
+<p>Vehicles selling less than 1000 in both years have been reclassified as 'Other'.  The data have been aggregated by manufacturer within segments.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Kraftfahrt-Bundesamt <br><a href="https://www.kba.de/DE/Statistik/Fahrzeuge/Neuzulassungen/MonatlicheNeuzulassungen/monatl_neuzulassungen_node.html">https://www.kba.de/DE/Statistik/Fahrzeuge/Neuzulassungen/MonatlicheNeuzulassungen/monatl_neuzulassungen_node.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(dplyr)
+yx &lt;- ud_prep(AutoSalesX %&gt;% filter(Segment=="Compact"), v1="sales17",
+      v2="sales18", levs=c("Manufacturer"), sortLev=c("base"))
+y5 &lt;- ud_plot(yx, labelvar="Manufacturer")
+y5$uadl
+</code></pre>
+
+
+</div>

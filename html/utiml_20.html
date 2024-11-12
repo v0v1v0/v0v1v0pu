@@ -1,0 +1,153 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Multi-label cross-validation</h2>
+
+<h3>Description</h3>
+
+<p>Perform the cross validation procedure for multi-label learning.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cv(
+  mdata,
+  method,
+  ...,
+  cv.folds = 10,
+  cv.sampling = c("random", "iterative", "stratified"),
+  cv.results = FALSE,
+  cv.predictions = FALSE,
+  cv.measures = "all",
+  cv.cores = getOption("utiml.cores", 1),
+  cv.seed = getOption("utiml.seed", NA)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mdata</code></td>
+<td>
+<p>A mldr dataset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>The multi-label classification method. It also accepts the name
+of the method as a string.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional parameters required by the method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.folds</code></td>
+<td>
+<p>Number of folds. (Default: 10)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.sampling</code></td>
+<td>
+<p>The method to split the data. The default methods are:
+</p>
+
+<dl>
+<dt>random</dt>
+<dd>
+<p>Split randomly the folds.</p>
+</dd>
+<dt>iterative</dt>
+<dd>
+<p>Split the folds considering the labels proportions
+individually. Some specific label can not occurs in all
+folds.</p>
+</dd>
+<dt>stratified</dt>
+<dd>
+<p>Split the folds considering the labelset proportions.</p>
+</dd>
+</dl>
+<p>(Default: "random")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.results</code></td>
+<td>
+<p>Logical value indicating if the folds results should be
+reported (Default: FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.predictions</code></td>
+<td>
+<p>Logical value indicating if the predictions should be
+reported (Default: FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.measures</code></td>
+<td>
+<p>The measures names to be computed. Call
+<code>multilabel_measures()</code> to see the expected measures. You can also
+use <code>"bipartition"</code>, <code>"ranking"</code>, <code>"label-based"</code>,
+<code>"example-based"</code>, <code>"macro-based"</code>, <code>"micro-based"</code> and
+<code>"label-problem"</code> to include a set of measures. (Default: "all").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.cores</code></td>
+<td>
+<p>The number of cores to parallelize the cross validation
+procedure. (Default: <code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.seed</code></td>
+<td>
+<p>An optional integer used to set the seed. (Default:
+<code>options("utiml.seed", NA)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If cv.results and cv.prediction are FALSE, the return is a vector
+with the expected multi-label measures, otherwise, a list contained the
+multi-label and the other expected results (the label measures and/or the
+prediction object) for each fold.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other evaluation: 
+<code>multilabel_confusion_matrix()</code>,
+<code>multilabel_evaluate()</code>,
+<code>multilabel_measures()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Run 10 folds for BR method
+res1 &lt;- cv(toyml, br, base.algorithm="RANDOM", cv.folds=10)
+
+#Run 3 folds for RAkEL method and get the fold results and the prediction
+res2 &lt;- cv(mdata=toyml, method="rakel", base.algorithm="RANDOM", k=2, m=10,
+ cv.folds=3, cv.results=TRUE, cv.predictions=TRUE)
+</code></pre>
+
+
+</div>

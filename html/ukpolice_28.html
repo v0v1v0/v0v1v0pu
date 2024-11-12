@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_street_crime_outcome</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Street level crime outcomes</h2>
+
+<h3>Description</h3>
+
+<p>Returns details on crimes at a given location, if given the id of a specific
+location. If given latitude and longitude, finds the nearest pre-defined
+location and returns the crimes which occurred there.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_street_crime_outcome(lat, lng, location, date = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lat</code></td>
+<td>
+<p>Latitude. Accepts a single value or a vector of values to create
+a custom polygon.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lng</code></td>
+<td>
+<p>Longitude. Accepts a single value or a vector of values to create
+a custom polygon.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>If specified, <code>lat</code> and <code>lng</code> are ignored. Location IDs are
+available through other methods including <code>ukc_street_crime()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>The year and month in "YYYY-MM" form. If <code>NULL</code>, latest
+available month will be returned.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If specified, <code>lat</code> and <code>lng</code> must be the same length. <code>location</code>
+or both <code>lat</code> and <code>lng</code> must be specified.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>tibble</code> with details of street crime outcomes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+street_crime_outcome1 &lt;- ukc_street_crime_outcome(location = 883498)
+
+street_crime_outcome2 &lt;- ukc_street_crime_outcome(lat = 52, lng = 0)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

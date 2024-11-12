@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pr.boot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Bootstrap Confidence Intervals for Precision-Recall Curves</h2>
+
+<h3>Description</h3>
+
+<p>This functions calculates bootstrap percentile CIs for PR curves
+using <a href="https://CRAN.R-project.org/package=precrec"><span class="pkg">precrec</span></a>.
+These can then be used in a plotting function, see example.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pr.boot(
+  labels,
+  preds,
+  boot.n = 10000,
+  boot.stratified = TRUE,
+  alpha = 0.1,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>(<code>numeric()</code>)<br>
+Vector of responses/labels (only two classes/values allowed: cases/positive
+class = 1 and controls/negative class = 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preds</code></td>
+<td>
+<p>(<code>numeric()</code>)<br>
+Vector of prediction values. Higher values denote positive class.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>boot.n</code></td>
+<td>
+<p>(<code>numeric(1)</code>)<br>
+Number of bootstrap resamples. Default: 10000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>boot.stratified</code></td>
+<td>
+<p>(<code>logical(1)</code>)<br>
+Whether the bootstrap resampling is stratified (same number of cases/controls
+in each replicate as in the original sample) or not.
+It is advised to use stratified resampling when classes from <code>labels</code> are
+imbalanced. Default: TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>(<code>numeric(1)</code>)<br>
+Confidence level for bootstrap percentile interval (between 0 and 1).
+Default is 0.1, corresponding to 90% confidence intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters to pass on to precrec::evalmod, except <code>mode</code>
+(set to <code>rocpr</code>) and <code>raw_curves</code> (set to <code>TRUE</code>). For example <code>x_bins</code>
+indicates the minimum number of recall points on the x-axis.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A tibble with columns:
+</p>
+
+<ul>
+<li> <p><code>recall</code>: recall of original data
+</p>
+</li>
+<li> <p><code>precision</code>: precision of original data
+</p>
+</li>
+<li> <p><code>low_precision</code>: low value of the bootstrap confidence interval
+</p>
+</li>
+<li> <p><code>high_precision</code>: high value of the bootstrap confidence interval
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Saito, Takaya, Rehmsmeier, Marc (2016).
+“Precrec: fast and accurate precision-recall and ROC curve calculations in R.”
+<em>Bioinformatics</em>, <b>33</b>(1), 145–147.
+<a href="https://doi.org/10.1093/bioinformatics/btw570">doi:10.1093/bioinformatics/btw570</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(42)
+# imbalanced labels
+labels = sample(c(0,1), 100, replace = TRUE, prob = c(0.8,0.2))
+# predictions
+preds = rnorm(100)
+
+# get CIs for PR curve
+pr_tbl = pr.boot(labels, preds, boot.n = 100, x_bins = 30) # default x_bin is 1000
+pr_tbl
+
+# draw PR curve + add the bootstrap percentile confidence bands
+library(ggplot2)
+
+pr_tbl |&gt;
+  ggplot(aes(x = recall, y = precision)) +
+  geom_step() +
+  ylim(c(0,1)) +
+  geom_ribbon(aes(ymin = precision_low, ymax = precision_high), alpha = 0.2)
+
+</code></pre>
+
+
+</div>

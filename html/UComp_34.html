@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ident</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ident</h2>
+
+<h3>Description</h3>
+
+<p>Autocorrelation functions of a time series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ident(y, nCoef = min(37, floor(length(y)/4)), nPar = 0, runFromTests = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a vector, ts or tsibble object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nCoef</code></td>
+<td>
+<p>number of autocorrelation coefficients to estimate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nPar</code></td>
+<td>
+<p>number of parameters in a model if y is a residual</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runFromTests</code></td>
+<td>
+<p>internal check</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector with all the dimensions
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>colMedians</code>, <code>rowMedians</code>, <code>tests</code>,
+<code>sumStats</code>, <code>gaussTest</code>,
+<code>cusum</code>, <code>varTest</code>, <code>conv</code>,
+<code>armaFilter</code>, <code>dif</code>, <code>roots</code>,
+<code>zplane</code>, <code>acft</code>, <code>slide</code>,
+<code>plotSlide</code>, <code>Accuracy</code>, <code>tsDisplay</code>,
+<code>size</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">ident(AirPassengers)
+</code></pre>
+
+
+</div>

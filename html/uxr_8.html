@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compare_rates_between_groups</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compare Rates Between Groups</h2>
+
+<h3>Description</h3>
+
+<p>Compare Rates Between Groups
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compare_rates_between_groups(
+  data,
+  group,
+  event,
+  test,
+  input = "long",
+  output = "console"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group</code></td>
+<td>
+<p>column in dataframe : group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>event</code></td>
+<td>
+<p>column in dataframe : event</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>Type of test (fisher, n-1 two prop)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input</code></td>
+<td>
+<p>Defaults to "long"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>"console" prints output to console; "tibble" returns tibble</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>results
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">design = c("A","B")
+complete = c(34, 24)
+incomplete = c(317, 301)
+data &lt;- data.frame(design, complete, incomplete)
+data &lt;- data |&gt; tidyr::pivot_longer(!design, names_to = "rate", values_to = "n") |&gt;
+  tidyr::uncount(n)
+compare_rates_between_groups(data, group = design, event = rate)
+</code></pre>
+
+
+</div>

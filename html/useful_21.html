@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>find.case</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>find.case</h2>
+
+<h3>Description</h3>
+
+<p>Checks if strings are all upper or all lower case
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">find.case(string, case = c("upper", "lower", "mixed", "numeric"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>string</code></td>
+<td>
+<p>Character vector of strings to check cases</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>case</code></td>
+<td>
+<p>Whether checking for upper or lower case</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Checks if strings are all upper or all lower case.  If string is all numbers it returns TRUE.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of TRUE AND FALSE
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>See Also</h3>
+
+<p>upper.case lower.case numeric.case mixed.case
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">toCheck &lt;- c('BIG', 'little', 'Mixed', 'BIG WITH SPACE', 'little with space', 'MIXED with SPACE')
+find.case(toCheck, 'upper')
+find.case(toCheck, 'lower')
+</code></pre>
+
+
+</div>

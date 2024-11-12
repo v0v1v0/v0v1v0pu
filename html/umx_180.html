@@ -1,0 +1,156 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_aggregate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convenient formula-based cross-tabs &amp; built-in summary functions</h2>
+
+<h3>Description</h3>
+
+<p>A common task is preparing summary tables, aggregating over some grouping factor.
+Like mean and sd of age, by sex. R's <code>aggregate()</code> function is useful and powerful, allowing
+xtabs based on a formula.
+</p>
+<p>umx_aggregate makes using it a bit easier. In particular, it has some common functions
+for summarizing data built-in, like "mean (sd)" (the default).
+</p>
+<p><code>umx_aggregate(mpg ~ cyl, data = mtcars, what = "mean_sd")</code>
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+cyl        </td>
+<td style="text-align: left;"> mpg</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+4 (n = 11) </td>
+<td style="text-align: left;"> 26.66 (4.51)</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+6 (n = 7)  </td>
+<td style="text-align: left;"> 19.74 (1.45)</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+8 (n = 14) </td>
+<td style="text-align: left;"> 15.1 (2.56)</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+</tr>
+</table>
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_aggregate(
+  formula = DV ~ condition,
+  data = df,
+  what = c("mean_sd", "n"),
+  digits = 2,
+  report = c("markdown", "html", "txt")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>The aggregation formula. e.g., DV ~ condition.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>frame to aggregate (defaults to df for common case)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what</code></td>
+<td>
+<p>function to use. Default reports "mean (sd)".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>to round results to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>Format for the table: Default is markdown.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> table
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_apply()</code>, <code>aggregate()</code>
+</p>
+</li></ul>
+<p>Other Reporting Functions: 
+<code>umxAPA()</code>,
+<code>umxFactorScores()</code>,
+<code>umxGetLatents()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxGetParameters()</code>,
+<code>umxParameters()</code>,
+<code>umx_time()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># =====================================
+# = Basic use, compare with aggregate =
+# =====================================
+aggregate(mpg ~ cyl, FUN = mean, na.rm = TRUE, data = mtcars)
+umx_aggregate(mpg ~ cyl, data = mtcars)
+
+# =============================================
+# = Use different (or user-defined) functions =
+# =============================================
+umx_aggregate(mpg ~ cyl, data = mtcars, what = "n")
+umx_aggregate(mpg ~ cyl, data = mtcars, what = function(x){sum(!is.na(x))})
+
+# turn off markdown
+umx_aggregate(mpg ~ cyl, data = mtcars, report = "txt")
+
+# ============================================
+# = More than one item on the left hand side =
+# ============================================
+umx_aggregate(cbind(mpg, qsec) ~ cyl, data = mtcars, digits = 3)
+# Transpose table
+t(umx_aggregate(cbind(mpg, qsec) ~ cyl, data = mtcars))
+
+## Not run: 
+umx_aggregate(cbind(moodAvg, mood) ~ condition, data = study1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

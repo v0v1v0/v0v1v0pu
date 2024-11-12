@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ifelseObj</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Conditional returning of an object</h2>
+
+<h3>Description</h3>
+
+<p>The ifelseObj function just evaluates a condition, returning
+one object if it's true, and another if it's false.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ifelseObj(condition, ifTrue, ifFalse)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>condition</code></td>
+<td>
+<p>Condition to evaluate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ifTrue</code></td>
+<td>
+<p>Object to return if the condition is true.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ifFalse</code></td>
+<td>
+<p>Object to return if the condition is false.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>One of the two objects
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dat &lt;- ifelseObj(sample(c(TRUE, FALSE), 1), mtcars, Orange);
+
+</code></pre>
+
+
+</div>

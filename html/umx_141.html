@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxRotate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generic SEM factor model loading rotation function</h2>
+
+<h3>Description</h3>
+
+<p>See <code>umxRotate.MxModelCP()</code> to rotate the factor loadings of a <code>umxCP()</code> model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxRotate(
+  model,
+  rotation = c("varimax", "promax"),
+  tryHard = "yes",
+  freeLoadingsAfter = TRUE,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>a model to rotate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rotation</code></td>
+<td>
+<p>name of the rotation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Default ("yes") is to tryHard</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freeLoadingsAfter</code></td>
+<td>
+<p>Whether to keep the rotated loadings fixed (Default, free them again)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>print detail about the rotation</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> Rotated solution
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxConfint()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>
+</p>
+
+
+</div>

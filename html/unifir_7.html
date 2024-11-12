@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>add_texture</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add a Texture2D layer to a terrain tile object</h2>
+
+<h3>Description</h3>
+
+<p>This function adds a helper method, <code>AddTexture</code>, to the
+C# script. This function is typically used to add textures to
+heightmaps in a Unity scene, for instance by functions
+like create_terrain. It requires some arguments be provided
+at the C# level, and so is almost always called with <code>exec = FALSE</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">add_texture(script, method_name = NULL, exec = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>script</code></td>
+<td>
+<p>A <code>unifir_script</code> object, created by make_script or returned
+by an <code style="white-space: pre;">⁠add_prop_*⁠</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method_name</code></td>
+<td>
+<p>The internal name to use for the C# method created. Will
+be randomly generated if not set.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exec</code></td>
+<td>
+<p>Logical: Should the C# method be included in the set executed by
+MainFunc?</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The <code>unifir_script</code> object passed to <code>script</code>, with an <code>AddTexture</code>
+method appended.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other props: 
+<code>add_default_player()</code>,
+<code>add_light()</code>,
+<code>add_prop()</code>,
+<code>create_terrain()</code>,
+<code>import_asset()</code>,
+<code>instantiate_prefab()</code>,
+<code>load_png()</code>,
+<code>load_scene()</code>,
+<code>new_scene()</code>,
+<code>read_raw()</code>,
+<code>save_scene()</code>,
+<code>set_active_scene()</code>,
+<code>validate_path()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># First, create a script object.
+# CRAN doesn't have Unity installed, so pass
+# a waiver object to skip the Unity-lookup stage:
+script &lt;- make_script("example_script",
+  unity = waiver()
+)
+
+# Now add props:
+script &lt;- add_texture(script)
+
+# Lastly, execute the script via the `action` function
+
+</code></pre>
+
+
+</div>

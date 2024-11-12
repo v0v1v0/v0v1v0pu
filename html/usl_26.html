@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>summary,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>USL Object Summary</h2>
+
+<h3>Description</h3>
+
+<p><code>summary</code> method for class "<code>USL</code>".
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A USL object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments passed to other methods.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>usl</code>, <code>USL-class</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(raytracer)
+
+## Show summary for demo dataset
+summary(usl(throughput ~ processors, raytracer))
+
+## Extract model coefficients
+summary(usl(throughput ~ processors, raytracer))$coefficients
+
+</code></pre>
+
+
+</div>

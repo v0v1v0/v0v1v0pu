@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_stop_search_no_location</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Stop and Searches without location</h2>
+
+<h3>Description</h3>
+
+<p>Returns details of stop and searches that cannot be mapped to a particular
+location. Note that the police force must be specified. For all stop and
+searches carried out by a police force, use <code>ukc_stop_search_force()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_stop_search_no_location(force, date = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>force</code></td>
+<td>
+<p>A string containing the name of the police force to return data
+for. Must be specified, and is not case sensitive.
+See <code>ukc_forces()</code> for details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>The year and month in "YYYY-MM" form. Also accepts dates in
+formats that can be coerced to <code>Date</code> class with <code>as.Date()</code>. If <code>NULL</code>,
+the latest available month will be returned. Note that not all forces
+will necessarily have reported stop and search data for the latest month;
+check availability with the <code>ukc_available()</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>tibble</code> with details of stop and searches without a specific
+location.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukc_stop_search_force()</code>
+</p>
+<p><code>ukc_stop_search_location()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ss_no_location &lt;- ukc_stop_search_no_location(force = "city-of-london")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

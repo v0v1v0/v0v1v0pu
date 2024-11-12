@@ -1,0 +1,151 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>read_gdal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Read GDAL supported raster files.
+</h2>
+
+<h3>Description</h3>
+
+<p><code>read_gdal</code> creates <code>ursaRaster</code> object from GDAL supported raster files using functions from packages with low-level raster reading.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">read_gdal(fname, resetGrid = TRUE, band = NULL,
+          engine = c("native", "sf"),
+          verbose = FALSE, ...)
+
+ursa_read(fname, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fname</code></td>
+<td>
+
+<p>Character. GDAL supported raster file name.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resetGrid</code></td>
+<td>
+
+<p>Logical. If <code>TRUE</code> then new sessional grid is based on opened raster image. Default is <code>TRUE</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>band</code></td>
+<td>
+
+<p>Character (regular expression) or integer.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>engine</code></td>
+<td>
+
+<p>Character. Functionality of which package is used for reading data. This is experimental list, which future depends on evolution of reviewed packages and their availability for partial reading of multiband rasters.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+
+<p>Logical. Value <code>TRUE</code> may provide some additional information on console. Default is <code>FALSE</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Ignored.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>ursa_read</code> is simplified implementation of <code>gdal_read</code>.
+</p>
+<p>The composite GDAL formats (e.g., <a href="https://gdal.org/en/latest/drivers/raster/netcdf.html">NetCDF: Network Common Data Format</a>, <a href="https://gdal.org/en/latest/drivers/raster/hdf5.html">HDF5: Hierarchical Data Format Release 5</a>) are likely unsupported.
+</p>
+<p><code>read_gdal</code> uses functions from other other packages. It's a wrapper.
+
+
+
+
+</p>
+<p>Category names and color tables are supported.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class <code>ursaRaster</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+
+<p><code>as.ursa</code> is an alternative call for GDAL raster files import.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+
+# rgdal::gdalDrivers()
+if (requireNamespace("sf"))
+   print(sf::st_drivers())
+if (file.exists(Fin1 &lt;- system.file("gdal/gdalicon.png",package="sf"))) {
+   a1 &lt;- read_gdal(Fin1)
+   print(a1)
+   display(a1)
+}
+Fin2 &lt;- tempfile(fileext=".")
+a &lt;- ursa_dummy(1,resetGrid=TRUE)
+b &lt;- colorize(a[a&gt;91],stretch="equal",name=format(Sys.Date()+seq(0,6),"%A %d"))
+write_envi(b,Fin2)
+b1 &lt;- read_gdal(Fin2)
+b2 &lt;- read_envi(Fin2,resetGrid=TRUE)
+envi_remove(Fin2)
+print(c('same colortable?'=identical(ursa_colortable(b1),ursa_colortable(b2))))
+print(ursa_colortable(b1))
+print(as.table(b1))
+print(c('same values?'=identical(ursa_value(b1),ursa_value(b2))))
+print(c('same grid?'=identical(ursa_grid(b1),ursa_grid(b2))))
+if (requireNamespace("sf")) {
+   p1 &lt;- sf::st_crs(ursa_crs(b1))
+   p2 &lt;- sf::st_crs(ursa_crs(b2))
+   print(c('same proj4string for CRS?'=identical(p1$proj4string,p2$proj4string)))
+   print(c('same WKT for CRS?'=identical(p1$Wkt,p2$Wkt)))
+   ursa_crs(b1) &lt;- ursa_crs(b2)
+   print(c('after same CRS, same grid?'=identical(ursa_grid(b1),ursa_grid(b2))))
+}
+display(b1,detail="l")
+</code></pre>
+
+
+</div>

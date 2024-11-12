@@ -1,0 +1,80 @@
+<div class="container"><main><table style="width: 100%;"><tr>
+<td>View</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Invoke a Data Viewer</h2>
+
+<h3>Description</h3>
+
+<p>Invoke a spreadsheet-style data viewer on a matrix-like <span class="rlang"><b>R</b></span> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">View(x, title)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr>
+<td><code id="x">x</code></td>
+<td>
+<p>an <span class="rlang"><b>R</b></span> object which can be coerced to a data frame with
+non-zero numbers of rows and columns.</p>
+</td>
+</tr>
+<tr>
+<td><code id="title">title</code></td>
+<td>
+<p>title for viewer window.  Defaults to name of <code>x</code>
+prefixed by <code>Data:</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Object <code>x</code> is coerced (if possible) to a data frame, then
+columns are converted to character using <code>format.data.frame</code>.
+The object is then viewed in a spreadsheet-like data viewer, a
+read-only version of <code>data.entry</code>.
+</p>
+<p>If there are row names on the data frame that are not <code>1:nrow</code>,
+they are displayed in a separate first column called <code>row.names</code>.
+</p>
+<p>Objects with zero columns or zero rows are not accepted.
+</p>
+
+<dl>
+<dt>On Unix-alikes,</dt>
+<dd>
+<p>the array of cells can be navigated by the
+cursor keys and Home, End, Page Up and Page Down (where supported by
+X11) as well as Enter and Tab.</p>
+</dd>
+<dt>On Windows,</dt>
+<dd>
+<p>the array of cells can be navigated <em>via</em>
+the scrollbars and by the cursor keys, Home, End, Page Up and Page Down.
+</p>
+<p>On Windows, the initial size of the data viewer window is taken
+from the default dimensions of a pager (see <code>Rconsole</code>),
+but adjusted downwards to show a whole number of rows and columns.</p>
+</dd>
+</dl>
+<h3>Value</h3>
+
+<p>Invisible <code>NULL</code>.  The functions puts up a window and returns
+immediately: the window can be closed via its controls or menus.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>edit.data.frame</code>,
+<code>data.entry</code>.
+</p>
+
+</main></div>

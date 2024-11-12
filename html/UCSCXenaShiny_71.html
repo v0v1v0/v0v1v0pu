@@ -1,0 +1,196 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_identifier_grp_comparison</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize Comparison of an Molecule Identifier between Groups</h2>
+
+<h3>Description</h3>
+
+<p>NOTE: the dataset must be dense matrix in UCSC Xena data hubs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_identifier_grp_comparison(
+  dataset = NULL,
+  id = NULL,
+  grp_df,
+  samples = NULL,
+  fun_type = c("betweenstats", "withinstats"),
+  type = c("parametric", "nonparametric", "robust", "bayes"),
+  pairwise.comparisons = TRUE,
+  p.adjust.method = c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr",
+    "none"),
+  ggtheme = cowplot::theme_cowplot(),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dataset</code></td>
+<td>
+<p>the dataset to obtain identifiers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>the molecule identifier.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grp_df</code></td>
+<td>
+<p>When <code>dataset</code> and <code>id</code> are all not <code>NULL</code>, it should be a <code>data.frame</code> with 2 or 3 columns.
+</p>
+
+<ul>
+<li>
+<p> The first column refers to sample ID.
+</p>
+</li>
+<li>
+<p> The second column refers to groups indicated in axis X.
+</p>
+</li>
+<li>
+<p> The third column is optional, which indicates facet variable.
+When any of <code>dataset</code> and <code>id</code> is <code>NULL</code>, it should be a <code>data.frame</code> with 3 or 4 columns.
+</p>
+</li>
+<li>
+<p> The first column refers to sample ID.
+</p>
+</li>
+<li>
+<p> The second column refers to values indicated in axis Y.
+</p>
+</li>
+<li>
+<p> The third column refers to groups indicated in axis X.
+</p>
+</li>
+<li>
+<p> The fourth column is optional, which indicates facet variable.
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>default is <code>NULL</code>, can be common sample names for two datasets.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fun_type</code></td>
+<td>
+<p>select the function to compare groups.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>A character specifying the type of statistical approach:
+</p>
+
+<ul>
+<li> <p><code>"parametric"</code>
+</p>
+</li>
+<li> <p><code>"nonparametric"</code>
+</p>
+</li>
+<li> <p><code>"robust"</code>
+</p>
+</li>
+<li> <p><code>"bayes"</code>
+</p>
+</li>
+</ul>
+<p>You can specify just the initial letter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pairwise.comparisons</code></td>
+<td>
+<p>whether pairwise comparison</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.adjust.method</code></td>
+<td>
+<p>Adjustment method for <em>p</em>-values for multiple
+comparisons. Possible methods are: <code>"holm"</code> (default), <code>"hochberg"</code>,
+<code>"hommel"</code>, <code>"bonferroni"</code>, <code>"BH"</code>, <code>"BY"</code>, <code>"fdr"</code>, <code>"none"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ggtheme</code></td>
+<td>
+<p>A <code>{ggplot2}</code> theme. Default value is
+<code>ggstatsplot::theme_ggstatsplot()</code>. Any of the <code>{ggplot2}</code> themes (e.g.,
+<code>theme_bw()</code>), or themes from extension packages are allowed (e.g.,
+<code>ggthemes::theme_fivethirtyeight()</code>, <code>hrbrthemes::theme_ipsum_ps()</code>, etc.).
+But note that sometimes these themes will remove some of the details that
+<code>{ggstatsplot}</code> plots typically contains. For example, if relevant,
+<code>ggbetweenstats()</code> shows details about multiple comparison test as a label
+on the secondary Y-axis. Some themes (e.g.
+<code>ggthemes::theme_fivethirtyeight()</code>) will remove the secondary Y-axis and
+thus the details as well.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other parameters passing to ggstatsplot::ggbetweenstats or ggstatsplot::ggwithinstats.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a (gg)plot object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+library(UCSCXenaTools)
+expr_dataset &lt;- "TCGA.LUAD.sampleMap/HiSeqV2_percentile"
+cli_dataset &lt;- "TCGA.LUAD.sampleMap/LUAD_clinicalMatrix"
+id &lt;- "TP53"
+cli_df &lt;- XenaGenerate(
+  subset = XenaDatasets == "TCGA.LUAD.sampleMap/LUAD_clinicalMatrix"
+) %&gt;%
+  XenaQuery() %&gt;%
+  XenaDownload() %&gt;%
+  XenaPrepare()
+
+# group data.frame with 2 columns
+vis_identifier_grp_comparison(expr_dataset, id, cli_df[, c("sampleID", "gender")])
+# group data.frame with 3 columns
+vis_identifier_grp_comparison(
+  expr_dataset, id,
+  cli_df[, c("sampleID", "pathologic_M", "gender")] %&gt;%
+    dplyr::filter(pathologic_M %in% c("M0", "MX"))
+)
+
+# When not use the value of `identifier` from `dataset`
+vis_identifier_grp_comparison(grp_df = cli_df[, c(1, 2, 71)])
+vis_identifier_grp_comparison(grp_df = cli_df[, c(1, 2, 71, 111)])
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

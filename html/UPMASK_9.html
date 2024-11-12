@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>kde2dForSubset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute the density based distance quantity using a 2D Kernel Density Estimation</h2>
+
+<h3>Description</h3>
+
+<p><code>kde2dForSubset</code> will compute the 2D Kernel Density Estimation for 
+the requested subset of data and will return the quantiy <code>(max(d)-mean(d))/sd(d)</code>
+if the option <code>returnDistance</code> is set to TRUE.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">kde2dForSubset(df, setw=1, n=50, showStats=TRUE, printPlots=TRUE, 
+returnDistance=FALSE, positionDataIndexes=c(1,2))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>a data frame to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>setw</code></td>
+<td>
+<p>an integer with the class of the stars to perform the analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of points in the regular grid of the density estimation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showStats</code></td>
+<td>
+<p>a boolean indicating if the user wants to see output statistics</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>printPlots</code></td>
+<td>
+<p>a boolean indicating if the user wants to see plots</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnDistance</code></td>
+<td>
+<p>a boolean indicating if the distance between the max and the mean in units of standard deviations should be returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>positionDataIndexes</code></td>
+<td>
+<p>an array of integers indicating the columns of the file containing the spatial position measurements</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A double representing the density based distance quantity.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://dx.doi.org/10.1051/0004-6361/201321143">Krone-Martins, A. &amp; Moitinho, A., A&amp;A, v.561, p.A57, 2014</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create a simple data set with the values and errors
+toyDataDF &lt;- data.frame(x=runif(50, 0, 10), y=runif(50, 0, 10), resMclust.class=rep(1, 50))
+
+# Run the KDE 2D analysis for the required subset
+disV &lt;- kde2dForSubset(toyDataDF, showStats=FALSE, printPlots=FALSE, returnDistance=TRUE)
+
+# Clean the environment
+rm(list=c("toyDataDF", "disV"))
+ 
+</code></pre>
+
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.reliability</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print a scale "reliability" object</h2>
+
+<h3>Description</h3>
+
+<p>Print method for the <code>reliability()</code> function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'reliability'
+print(x, digits = 4, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A <code>reliability()</code> result.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>The rounding precision.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> invisible reliability object (x)
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>print()</code>, <code>reliability()</code>,
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># treat vehicle aspects as items of a test
+data(mtcars)
+reliability(cov(mtcars))
+</code></pre>
+
+
+</div>

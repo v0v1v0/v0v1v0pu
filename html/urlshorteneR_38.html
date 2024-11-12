@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_retrieve_org_shorten_counts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Organization Shorten Counts</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve all the shorten counts for a specific organization
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_retrieve_org_shorten_counts(organization_id = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>organization_id</code></td>
+<td>
+<p>- a required string | A GUID for a Bitly organization.
+You may also simply pass "" (double quotes), but this should be avoided at all costs.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>facet - Enum: "countries" "referrers" "referrers_by_domain" "referring_domains" "referring_networks" "shorten_counts"
+</p>
+
+
+<h3>Organizations</h3>
+
+<p>Organizations are part of our hierarchy. This is the top level where a group and user will belong.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference/#getOrganizationShortenCounts">https://dev.bitly.com/api-reference/#getOrganizationShortenCounts</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+all_orgs &lt;- bitly_retrieve_orgs()
+osc &lt;- bitly_org_shorten_counts(organization_id = all_orgs$guid)
+df_org_short_counts &lt;- data.frame(osc, stringsAsFactors = FALSE)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

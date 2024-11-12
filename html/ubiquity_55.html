@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_log_entry</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add Log Entry</h2>
+
+<h3>Description</h3>
+
+<p>Appends a specified line to the analysis log
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_log_entry(cfg, entry)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>entry</code></td>
+<td>
+<p>string containing the log entry</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Boolean variable indicating success (<code>TRUE</code>) or failure (<code>FALSE</code>)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+# Initialzing the log file
+system_log_entry(cfg, "Text of log entry")
+
+</code></pre>
+
+
+</div>

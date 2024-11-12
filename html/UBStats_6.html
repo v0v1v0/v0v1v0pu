@@ -1,0 +1,282 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>distr.plot.x</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Analysis of a univariate distribution using plots</h2>
+
+<h3>Description</h3>
+
+<p><code>distr.plot.x()</code> generates plots of a univariate distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">distr.plot.x(
+  x,
+  freq = "counts",
+  plot.type,
+  ord.freq = "none",
+  breaks,
+  adj.breaks = TRUE,
+  interval = FALSE,
+  bw = FALSE,
+  color = NULL,
+  use.scientific = FALSE,
+  data,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An unquoted string identifying the variable whose
+distribution has to be analysed. <code>x</code> can be the name of a vector
+or a factor in the workspace or the name of one of the columns in the
+data frame specified in the <code>data</code> argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>freq</code></td>
+<td>
+<p>A single character specifying the frequencies to be
+displayed. Allowed options (possibly abbreviated) are <code>"counts"</code>,
+<code>"percentages"</code>, <code>"proportions"</code>, <code>"densities"</code>
+(for histograms and density plots).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot.type</code></td>
+<td>
+<p>A single character specifying the type of plot to build.
+Allowed options are <code>"pie"</code>, <code>"bars"</code>, <code>"spike"</code>,
+<code>"histogram"</code>, <code>"density"</code>, <code>"boxplot"</code>, and
+<code>"cumulative"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ord.freq</code></td>
+<td>
+<p>A single character vector that can be specified when
+<code>plot.type = "pie"</code> or <code>plot.type = "bars"</code>. It indicates
+whether the levels of <code>x</code> should be displayed in a standard order
+(<code>ord.freq = "none"</code>, the default) or in an increasing
+or decreasing order (<code>ord.freq = "increasing"</code> or
+<code>ord.freq = "decreasing"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>breaks</code></td>
+<td>
+<p>Allows to classify a <em>numerical</em> variable <code>x</code> into
+intervals. It can be an integer indicating the number of intervals of
+equal width used to classify <code>x</code>, or a vector of increasing numeric
+values defining the endpoints of intervals (closed on the left and open
+on the right; the last interval is closed on the right too). To cover
+the entire range of values the maximum and the minimum values should be
+included between the first and the last break. It is possible to specify
+a set of breaks covering only a portion of the <code>x</code> range.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adj.breaks</code></td>
+<td>
+<p>Logical value indicating whether the endpoints of
+intervals of a numerical variable <code>x</code> when classified
+into intervals should be displayed avoiding scientific notation;
+default to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interval</code></td>
+<td>
+<p>Logical value indicating whether <code>x</code> is a variable
+measured in intervals (<code>TRUE</code>). If the detected intervals are not
+consistent (e.g. overlapping intervals, or intervals with upper endpoint
+higher than the lower one), the variable is analyzed as it is, even if
+results are not necessarily consistent; default to
+<code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bw</code></td>
+<td>
+<p>Logical value indicating whether plots should be colored
+in scale of greys (<code>TRUE</code>) rather than using a standard
+palette (<code>FALSE</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color</code></td>
+<td>
+<p>Optional string vector allowing to specify colors
+to use in the plot rather than a standard palette
+(<code>NULL</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.scientific</code></td>
+<td>
+<p>Logical value indicating whether numbers on
+axes should be displayed using scientific notation
+(<code>TRUE</code>); default to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>An optional data frame containing <code>x</code>.
+If not found in <code>data</code>, <code>x</code> is taken from the environment
+from which <code>distr.plot.x()</code> is called.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to low level functions.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, called for side effects.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raffaella Piccarreta <a href="mailto:raffaella.piccarreta@unibocconi.it">raffaella.piccarreta@unibocconi.it</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>distr.table.x()</code> for tabulating a univariate
+distribution.
+</p>
+<p><code>distr.table.xy()</code> for tabulating a bivariate
+distribution.
+</p>
+<p><code>distr.plot.xy()</code> for plotting a bivariate
+distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(MktDATA, package = "UBStats")
+
+# Pie charts 
+# - A character variable: grey scale
+distr.plot.x(x = LikeMost, plot.type = "pie", bw = TRUE, data = MktDATA)
+# - A discrete numeric variable: user-defined palette
+distr.plot.x(x = Children, plot.type = "pie", 
+             color=c("red","gold","green","forestgreen"),
+             data = MktDATA)
+
+# Bar charts 
+# - A factor: standard order of levels 
+distr.plot.x(x = Education, plot.type = "bars", 
+             freq = "percentage", data = MktDATA)
+# - A factor: levels arranged by decreasing percentage 
+distr.plot.x(x = Education, plot.type = "bars", 
+             freq = "perc", ord.freq = "dec", data = MktDATA)
+# - A discrete variable (note: distance between values
+#   not taken into account)
+distr.plot.x(x = NPickUp_Purch, plot.type = "bars",
+             freq = "percentage", data = MktDATA)
+
+# Spike plots 
+# - A discrete variable
+distr.plot.x(x = NPickUp_Purch, plot.type = "spike", 
+             freq = "percent", data = MktDATA)
+# - A factor (levels placed at the same distance)
+distr.plot.x(x = Education, plot.type = "spike", 
+             freq = "prop",data = MktDATA)
+# - A variable measured in classes (levels placed at the 
+#   same distance)
+distr.plot.x(x = Income.S, interval = TRUE,
+             plot.type = "spike", 
+             freq = "prop",data = MktDATA)
+# - A numeric variable classified into intervals
+#   (levels placed at the same distance)
+distr.plot.x(x = AOV, breaks = 5, plot.type = "spike", 
+             data = MktDATA)
+
+# Cumulative distribution plots
+# - A discrete variable
+distr.plot.x(x = Children, plot.type = "cum", data = MktDATA)
+# - A continuous numerical variable 
+distr.plot.x(x = AOV, plot.type = "cum", 
+             freq = "perc", data = MktDATA)
+# - A numeric variable classified into intervals
+distr.plot.x(AOV, plot.type = "cum", 
+             breaks = c(0,20,40,60,80,100,180), data = MktDATA)
+# - A variable measured in classes
+distr.plot.x(Income, plot.type = "cum", interval = TRUE, 
+             freq = "percent", data = MktDATA)
+# - A factor
+distr.plot.x(x = Education, plot.type = "cum", 
+             freq = "prop",data = MktDATA)
+
+# Histograms 
+# - A continuous numerical variable: no breaks provided
+#    default classes built by R
+distr.plot.x(x = AOV, plot.type = "histogram", data = MktDATA)
+# - A continuous numerical variable: equal width intervals
+distr.plot.x(x = AOV, plot.type = "histogram", 
+             breaks = 10, data = MktDATA)
+# - A continuous numerical variable: specified breaks
+distr.plot.x(AOV, plot.type = "histogram", 
+             breaks = c(0,20,40,60,80,100,180), 
+             data = MktDATA)
+# - A variable measured in classes
+distr.plot.x(Income, plot.type = "histogram", 
+             interval = TRUE, data = MktDATA)
+
+# Density plots 
+# - A  numerical variable
+distr.plot.x(x = AOV, plot.type = "density", data = MktDATA)
+# - A  numerical variable: breaks are ignored
+distr.plot.x(AOV, plot.type = "density", 
+             breaks = c(0,20,40,60,80,100,180), 
+             data = MktDATA)
+# - A variable measured in classes
+distr.plot.x(Income, plot.type = "density", 
+             interval = TRUE, data = MktDATA)
+
+# Boxplots (only for numerical unclassified variables)
+# - A  numerical variable
+distr.plot.x(x = TotVal, plot.type = "boxplot", data = MktDATA)
+# - A  numerical variable: with specified breaks
+#   the plot is not built
+# distr.plot.x(AOV, plot.type = "boxplot", 
+#              breaks = c(0,20,40,60,80,100,180), 
+#              data = MktDATA)
+
+# Arguments adj.breaks, use.scientific
+#  A variable with a very wide range (very small densities)
+LargeX&lt;-MktDATA$AOV*5000000 
+#  - Default formatting for intervals' endpoints
+distr.plot.x(LargeX, breaks = 5, plot.type = "spike")
+#  - Scientific notation for intervals' endpoints
+distr.plot.x(LargeX, breaks = 5,plot.type = "spike",
+             adj.breaks = FALSE)
+#  - Default formatting for axes
+distr.plot.x(LargeX, breaks = 5,plot.type = "histogram",
+             freq = "densities")
+#  - Scientific notation for axes
+distr.plot.x(LargeX, breaks = 5,plot.type = "histogram",
+             freq = "densities",use.scientific = TRUE)
+
+</code></pre>
+
+
+</div>

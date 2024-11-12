@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GumbelGF</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Gumbel distribution growth factors</h2>
+
+<h3>Description</h3>
+
+<p>Estimated growth factors as a function of return period, with inputs of Lcv &amp; LSkew (linear coefficient of variation &amp; linear skewness)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GumbelGF(lcv, RP)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>lcv</code></td>
+<td>
+<p>linear coefficient of variation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RP</code></td>
+<td>
+<p>return period</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Growth factors are calculated by the method outlined in the Flood Estimation Handbook, volume 3, 1999.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Gumbel estimated growth factor
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Estimate the 50-year growth factors from an Lcv of 0.17.
+GumbelGF(0.17, RP = 50)
+</code></pre>
+
+
+</div>

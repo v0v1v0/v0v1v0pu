@@ -1,0 +1,174 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxTwoStage</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build a SEM implementing the instrumental variable design</h2>
+
+<h3>Description</h3>
+
+<p><code>umxMR</code> (<code>umxTwoStage</code>) implements a Mendelian randomization or instrumental variable Structural Equation Model.
+For ease of learning, the parameters follow the <code>tsls()</code> function in the sem package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxTwoStage(
+  formula = Y ~ X,
+  instruments = ~qtl,
+  data,
+  std = FALSE,
+  subset,
+  contrasts = NULL,
+  name = "IV_model",
+  tryHard = c("no", "yes", "ordinal", "search"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>The structural equation to be estimated (default = Y ~ X). A constant is implied if not explicitly deleted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>instruments</code></td>
+<td>
+<p>A one-sided formula specifying instrumental variables (default = qtl).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Frame containing the variables in the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Standardize the manifests before running model (default is FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subset</code></td>
+<td>
+<p>(optional) vector specifying a subset of observations to be used in fitting the model.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>contrasts</code></td>
+<td>
+<p>An optional list (not supported)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>The model name (default is "IVmodel")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Default ('no') uses normal mxRun. "yes" uses mxTryHard. Other options: "ordinal", "search"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>arguments to be passed along. (not supported)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The example is a <a href="https://en.wikipedia.org/wiki/Mendelian_randomization">Mendelian Randomization</a>
+analysis showing the utility of SEM over two-stage regression.
+</p>
+<p>The following figure shows how the MR model appears as a path diagram:
+</p>
+<p><img src="../help/figures/TSLS.png" width="50%" alt="Figure: Mendelian Randomization analysis.png"></p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Fox, J. (1979) Simultaneous equation models and two-stage least-squares. In Schuessler, K. F. (ed.) <em>Sociological Methodology</em>, Jossey-Bass.
+</p>
+</li></ul>
+<ul>
+<li>
+<p> Greene, W. H. (1993) <em>Econometric Analysis</em>, Second Edition, Macmillan.
+</p>
+</li>
+<li>
+<p> Sekula, P., Del Greco, M. F., Pattaro, C., &amp; Kottgen, A. (2016). Mendelian Randomization as an Approach to
+Assess Causality Using Observational Data. <em>Journal of the American Society of Nephrology</em>, <strong>27</strong>), 3253-3265. <a href="https://doi.org/10.1681/ASN.2016010098">doi:10.1681/ASN.2016010098</a>
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umx_make_MR_data()</code>, <code>umxDiffMZ()</code>, <code>umxDoC()</code>, <code>umxDiscTwin()</code>
+</p>
+</li></ul>
+<p>Other Super-easy helpers: 
+<code>umxEFA()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# ====================================
+# = Mendelian Randomization analysis =
+# ====================================
+
+library(umx)
+df = umx_make_MR_data(10e4)
+m1 = umxMR(Y ~ X, instruments = ~ qtl, data = df)
+parameters(m1)
+plot(m1, means = FALSE, min="") # help DiagrammR layout the plot.
+m2 = umxModify(m1, "qtl_to_X", comparison=TRUE, tryHard="yes", name="QTL_affects_X") # yip
+m3 = umxModify(m1, "X_to_Y"  , comparison=TRUE, tryHard="yes", name="X_affects_Y") # nope
+plot(m3, means = FALSE)
+
+# Errant analysis using ordinary least squares regression (WARNING this result is CONFOUNDED!!)
+m1 = lm(Y ~ X    , data = df); coef(m1) # incorrect .35 effect of X on Y
+m1 = lm(Y ~ X + U, data = df); coef(m1) # Controlling U reveals the true 0.1 beta weight
+
+df = umx_make_MR_data(10e4) 
+m1 = umxMR(Y ~ X, instruments = ~ qtl, data = df)
+coef(m1)
+
+# ======================
+# = Now with sem::tsls =
+# ======================
+# library(sem) # may require you to install X11
+m2 = sem::tsls(formula = Y ~ X, instruments = ~ qtl, data = df)
+coef(m2)
+
+# Try with missing value for one subject: A benefit of the FIML approach in OpenMx.
+m3 = tsls(formula = Y ~ X, instruments = ~ qtl, data = (df[1, "qtl"] = NA))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

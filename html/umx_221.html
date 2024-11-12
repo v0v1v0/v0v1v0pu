@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_make_fake_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umx_make_fake_data</h2>
+
+<h3>Description</h3>
+
+<p>This function takes as argument an existing dataset, which 
+must be either a matrix or a data frame. Each column of the 
+dataset must consist either of numeric variables or ordered 
+factors. When one or more ordered factors are included, 
+then a heterogeneous correlation matrix is computed using 
+John Fox's polycor package. Pairwise complete observations 
+are used for all covariances, and the exact pattern of 
+missing data present in the input is placed in the output,
+provided a new sample size is not requested. Warnings from
+the polycor::hetcor function are suppressed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_make_fake_data(
+  dataset,
+  digits = 2,
+  n = NA,
+  use.names = TRUE,
+  use.levels = TRUE,
+  use.miss = TRUE,
+  mvt.method = "eigen",
+  het.ML = FALSE,
+  het.suppress = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dataset</code></td>
+<td>
+<p>The original dataset of which to make a simulacrum</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>= Round the data to the requested digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of rows to generate (NA = all rows in dataset)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.names</code></td>
+<td>
+<p>Whether to name the variables (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.levels</code></td>
+<td>
+<p>= Whether to use existing levels (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.miss</code></td>
+<td>
+<p>Whether to have data missing as in original (defaults to TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mvt.method</code></td>
+<td>
+<p>= Passed to hetcor (default = "eigen")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>het.ML</code></td>
+<td>
+<p>= Passed to hetcor (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>het.suppress</code></td>
+<td>
+<p>Passed to hetcor (default = TRUE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- new dataframe
+</p>
+
+
+<h3>See Also</h3>
+
+<p>[OpenMx::mxGenerateData()]
+</p>
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">fakeCars = umx_make_fake_data(mtcars)
+</code></pre>
+
+
+</div>

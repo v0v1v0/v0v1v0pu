@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>gg_log10_xaxis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make Pretty ggplot x-Axis Log 10 Scale</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper for <code>gg_axis</code> to create a log 10 x-axis
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">gg_log10_xaxis(
+  fo,
+  xlim_min = NULL,
+  xlim_max = NULL,
+  y_tick_label = TRUE,
+  x_tick_label = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fo</code></td>
+<td>
+<p>ggplot figure object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlim_min</code></td>
+<td>
+<p>set to a number to define the lower bound of the x-axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlim_max</code></td>
+<td>
+<p>set to a number to define the upper bound of the x-axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y_tick_label</code></td>
+<td>
+<p><code>TRUE</code> to show y tick labels, <code>FALSE</code> to hide the y tick labels</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x_tick_label</code></td>
+<td>
+<p><code>TRUE</code> to show x tick labels, <code>FALSE</code> to hide the x tick labels</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>ggplot object with formatted axis
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>gg_axis</code> and <code>gg_log10_xaxis</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library("ggplot2")
+df = data.frame(x = seq(0.01,10,.01),
+               y = seq(0.01,10,.01)^2)
+p       = ggplot(df, aes(x=x, y=y)) + geom_line()
+# pretty up the axes
+p       = prepare_figure(fo=p, purpose="print")
+# pretty log10 y-axis 
+p_logy  = gg_log10_yaxis(fo=p)
+# pretty log10 x-axis 
+p_logx  = gg_log10_xaxis(fo=p)
+# pretty log10 yx-axis 
+p_logxy = gg_axis(fo=p)
+</code></pre>
+
+
+</div>

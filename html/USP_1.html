@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>coeffs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate coefficients of a function's series expansion</h2>
+
+<h3>Description</h3>
+
+<p>This function is used in InfKern to produce the kernel matrix from functional
+data defined on the interval <code class="reqn">[0,1]</code>. For further details see Section 7.4
+of (Berrett et al. 2021).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">coeffs(X, Ntrunc)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>The discretised functions whose coefficients are required.
+This should be a matrix with one row per function, and with <code class="reqn">Ndisc</code> columns,
+where <code class="reqn">Ndisc</code> is the grid size of the discretisation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ntrunc</code></td>
+<td>
+<p>The number of coefficients that are required.
+The function returns coefficients 1,...,<code class="reqn">Ntrunc</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The coefficients of <code class="reqn">X</code> in its expansion in terms of sine functions.
+See (Berrett et al. 2021) for more detail.
+</p>
+
+
+<h3>References</h3>
+
+<p>Berrett TB, Kontoyiannis I, Samworth RJ (2021).
+“Optimal rates for independence testing via U-statistic permutation tests.”
+<em>Annals of Statistics, to appear</em>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">t=seq(from=0,to=1,length.out=1000); X=t^2
+U=coeffs(X,100)[1,]; L=5
+plot(t,X,type="l")
+approx=rep(0,1000)
+for(l in 1:L){
+approx=approx+qnorm(U[l])*sqrt(2)*sin((l-1/2)*pi*t)/((l-1/2)*pi)
+lines(t,approx,col=l+1)
+}
+</code></pre>
+
+
+</div>

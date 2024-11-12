@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GridRefConvert</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert between British National Grid Reference (BNG) and Latitude and Longitude.</h2>
+
+<h3>Description</h3>
+
+<p>Function to convert between BNG easting &amp; northing and Latitude &amp; Longitude (or vice versa).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GridRefConvert(x, fromBNG = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector of length 2. Either latitude and longitude (if fromBNG = FALSE) or easting and northing (if fromBNG = TRUE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fromBNG</code></td>
+<td>
+<p>A logical argument with a default of TRUE. When TRUE it converts from easting and northing to latitude and longitude. When FALSE it converts from latitude and longitude to easting and northing.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data.frame with the converted grid references. Either latitude and longitude if BNG = TRUE. Or easting and northing if fromBNG = FALSE.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Get Latitude and Longitude for a BNG numeric reference.
+GridRefConvert(c(462899, 187850))
+#Now we'll get easting and northing as a function of latitude and longitude
+GridRefConvert(c(51.6, -1), fromBNG = FALSE)
+</code></pre>
+
+
+</div>

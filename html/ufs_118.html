@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ggBarChart</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Bar chart using ggplot</h2>
+
+<h3>Description</h3>
+
+<p>This function provides a simple interface to create a <code>ggplot2::ggplot()</code>
+bar chart.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ggBarChart(vector, plotTheme = ggplot2::theme_bw(), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vector</code></td>
+<td>
+<p>The vector to display in the bar chart.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plotTheme</code></td>
+<td>
+<p>The theme to apply.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>And additional arguments are passed to <code>ggplot2::geom_bar()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>ggplot2::ggplot()</code> plot is returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Gjalt-Jorn Peters
+</p>
+<p>Maintainer: Gjalt-Jorn Peters <a href="mailto:gjalt-jorn@userfriendlyscience.com">gjalt-jorn@userfriendlyscience.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ggplot2::geom_bar()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+ggBarChart(mtcars$cyl);
+
+</code></pre>
+
+
+</div>

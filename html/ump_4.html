@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umpu.binom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UMPU Test for the Binomial Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the uniformly most powerful unbiased (UMPU) two-tailed test
+for the binomial distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umpu.binom(x, n, p, alpha, maxiter = 10, tol = 1e-9)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>binomial observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of observations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>the success probability under the null hypothesis.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>the significance level.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxiter</code></td>
+<td>
+<p>the maximum number of iterations allowed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>tolerance used in testing floating point numbers.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>At most one of <code>x</code>, <code>p</code>, and <code>alpha</code> is allowed to be
+a vector.  Evaluates the critical function for the UMPU two-tailed
+test for the binomial distribution, which satisfies the following
+</p>
+<pre>
+    x &lt;- seq(0, n)
+    phix &lt;- umpu.binom(x, n, p, alpha)
+    px &lt;- dbinom(x, n, p)
+    sum(phix * px) == alpha
+    sum(x * phix * px) == n * p * alpha
+  </pre>
+<p>when <code>p</code> is strictly between zero and one.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a vector of values of the critical function.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ump)
+umpu.binom(0:10, 10, 0.6, 0.1)
+</code></pre>
+
+
+</div>

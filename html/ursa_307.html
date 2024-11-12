@@ -1,0 +1,193 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursa_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Print metadata for raster image.
+</h2>
+
+<h3>Description</h3>
+
+<p>Function shows information about raster CRS, data type, storage mode, nodata value, structure of band names.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ursa_info(obj, detail = NA, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p><code>ursaRaster</code> object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>detail</code></td>
+<td>
+
+<p><em>Not used. Reserved for potential detail levels</em>
+</p>
+</td>
+</tr>
+</table>
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Arguments, which are passed to <code>str</code>.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p><code>ursa_info</code> generates a list and then shows structure of this list via function <code>str</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of <em>temporal</em> class <code>ursaMetadata</code> is a list with items:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>columns</code></td>
+<td>
+<p>Number of columns (samples)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows</code></td>
+<td>
+<p>Number of rows (lines)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resx</code></td>
+<td>
+<p>Grid cell size by horizontal axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resy</code></td>
+<td>
+<p>Grid cell size by vertical axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minx</code></td>
+<td>
+<p>Left margin of boundary box</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxx</code></td>
+<td>
+<p>Right margin of boundary box</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>miny</code></td>
+<td>
+<p>Bottom margin of boundary box</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxy</code></td>
+<td>
+<p>Top margin of boundary box</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>proj4</code></td>
+<td>
+<p>PROJ.4 string</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nodata</code></td>
+<td>
+<p><em>Optional</em>. Value, which is interpreted as <code>NA</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>datatype</code></td>
+<td>
+<p><em>Optional</em>. If data are on disk, then integer code of data type.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interleave</code></td>
+<td>
+<p><em>Optional</em>. If data are on disk, then abbreviation of bands interleave.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mode</code></td>
+<td>
+<p>Character of length 2: <code>storage mode</code> and <code>class</code> of value. If data has not been read, then class is <code>"logical"</code>. If data is not in memory, then storage mode is <code>"raw"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bandname</code></td>
+<td>
+<p>Band names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colortable</code></td>
+<td>
+<p><em>Optional</em>. Structure of color table.</p>
+</td>
+</tr>
+</table>
+<p>Function returns <code>NULL</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>str</code><br><code>print.ursaRaster</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- as.integer(round(ursa_dummy(nband=3)))
+
+print(a) ## print data
+ursa_info(a,digits=1) ## print metadata
+
+fname &lt;- tempfile()
+write_envi(a,fname,compress=FALSE)
+b1 &lt;- open_envi(fname)
+ursa_info(b1)
+close(b1)
+b2 &lt;- read_envi(fname)
+ursa_info(b2)
+
+# print ENVI header
+sapply(c(" -------------- begin --------------",readLines(paste0(fname,".hdr"))
+        ," --------------- end ---------------"),message)
+
+envi_remove(fname)
+</code></pre>
+
+
+</div>

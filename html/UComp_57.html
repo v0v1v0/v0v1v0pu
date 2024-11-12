@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>PTSestim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>PTSestim</h2>
+
+<h3>Description</h3>
+
+<p>Estimates and forecasts PTS models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">PTSestim(m)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>an object of type <code>PTS</code> created with <code>PTSmodel</code></p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p><code>PTSestim</code> estimates and forecasts a time series using an
+a PTS model
+</p>
+
+
+<h3>Value</h3>
+
+<p>The same input object with the appropriate fields
+filled in, in particular:
+</p>
+
+<ul>
+<li>
+<p> p0:       Initial values for parameter search
+</p>
+</li>
+<li>
+<p> p:        Estimated parameters
+</p>
+</li>
+<li>
+<p> lambda:   Estimated Box-Cox lambda parameter
+</p>
+</li>
+<li>
+<p> v:        Estimated innovations (white noise in correctly specified models)
+</p>
+</li>
+<li>
+<p> yFor:     Forecasted values of output
+</p>
+</li>
+<li>
+<p> yForV:    Variance of forecasted values of output
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>PTSmodel</code>, <code>PTSsetup</code>, <code>PTSvalidate</code>,
+<code>PTScomponents</code>, <code>PTS</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+m1 &lt;- PTSsetup(log(AirPassengers))
+m1 &lt;- PTSestim(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

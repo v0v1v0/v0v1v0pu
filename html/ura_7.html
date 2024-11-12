@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rater_agreement</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>rater_agreement</h2>
+
+<h3>Description</h3>
+
+<p><code>rater_agreement</code> calculates the percent agreement between each rater and the other raters who coded the same subjects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">rater_agreement(object_name, rater_column, subject_column, coding_column)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object_name</code></td>
+<td>
+<p>A dataframe or tibble containing raters' codings. Each row should contain the assigned coding
+from a given rater-subject.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rater_column</code></td>
+<td>
+<p>The name of the column containing the raters' names as a string.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subject_column</code></td>
+<td>
+<p>The name of the column containing the names of the subjects being coded as a string.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coding_column</code></td>
+<td>
+<p>The name of the column containing the codings assigned by the raters as a string.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A tibble where each row notes the percent agreement between rater i and all other raters who coded the same subjects (percent_agree).
+The n_multi_coded column notes how many subjects have been coded by rater i that have also been coded by other raters (i.e., the denominator for the percent_agree value).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Benjamin Goehring &lt;bengoehr@umich.edu&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Example data: 3 raters assigning binary values to 10 subjects
+example_data &lt;- tibble::tribble(
+  ~rater,	~subject,	~coding,
+  1,	1,	1,
+  1,	2,	0,
+  1,	3,	1,
+  1,	4,	0,
+  2,	3,	1,
+  2,	9,	0,
+  2,	10,	1,
+  2,	4,	1,
+  2,	5,	1,
+  2,	6,	1,
+  3,	5,	1,
+  3,	6,	1,
+  3,	7,	1,
+  3,	8,	1,
+)
+
+# Find percent agreement by rater
+rater_agreement(example_data,
+                rater_column = 'rater',
+                subject_column = 'subject',
+                coding_column = 'coding')
+
+
+</code></pre>
+
+
+</div>

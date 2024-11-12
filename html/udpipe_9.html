@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as_word2vec</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert a matrix of word vectors to word2vec format</h2>
+
+<h3>Description</h3>
+
+<p>The word2vec format provides in the first line the dimension of the word vectors and in the following lines one
+has the elements of the wordvector where each line covers one word or token.<br></p>
+<p>The function is basically a utility function which allows one to write wordvectors created with other R packages in 
+the well-known word2vec format which is used by <code>udpipe_train</code> to train the dependency parser.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as_word2vec(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a matrix with word vectors where the rownames indicate the word or token and the number of columns
+of the matrix indicate the side of the word vector</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a character string of length 1 containing the word vectors in word2vec format which can be written to a file on disk
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">wordvectors &lt;- matrix(rnorm(1000), nrow = 100, ncol = 10)
+rownames(wordvectors) &lt;- sprintf("word%s", seq_len(nrow(wordvectors)))
+wv &lt;- as_word2vec(wordvectors)
+cat(wv)
+
+f &lt;- file(tempfile(fileext = ".txt"), encoding = "UTF-8")
+cat(wv, file = f)
+close(f)
+</code></pre>
+
+
+</div>

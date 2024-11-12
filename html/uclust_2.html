@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bn3</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes Bn Statistic for 3 Groups.</h2>
+
+<h3>Description</h3>
+
+<p>Returns the value for the Bn statistic that measures the degree of separation between three groups.
+The statistic is computed as a combination of differences of average within group and between group distances.
+Large values of Bn indicate large group separation. Under overall sample homogeneity we have E(Bn)=0.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bn3(group_id, md = NULL, data = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group_id</code></td>
+<td>
+<p>A vector of 1s, 2s and 3s indicating to which group the samples belong. Must be in the same order as data or md.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>md</code></td>
+<td>
+<p>Matrix of distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data matrix. Each row represents an observation.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Either <code>data</code> OR <code>md</code> should be provided.
+If data are entered directly, Bn will be computed considering the squared Euclidean distance.
+</p>
+<p>For more detail see
+Bello, Debora Zava,  Marcio Valk and Gabriela Bettella Cybis.
+"Clustering inference in multiple groups." arXiv preprint arXiv:2106.09115 (2021).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Value of the Bn3 statistic.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">n=7
+set.seed(1234)
+x=matrix(rnorm(n*10),ncol=10)
+bn3(c(1,2,2,2,3,3,3),data=x)     # option (a) entering the data matrix directly
+md=as.matrix(dist(x))^2
+bn3(c(1,2,2,2,3,3,3),md)         # option (b) entering the distance matrix
+</code></pre>
+
+
+</div>

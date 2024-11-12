@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>isTrue</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>More flexible version of isTRUE</h2>
+
+<h3>Description</h3>
+
+<p>Returns <code>TRUE</code> for <code>TRUE</code> elements, <code>FALSE</code> for <code>FALSE</code> elements,
+and whatever is specified in <code>na</code> for <code>NA</code> items.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">isTrue(x, na = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The vector to check for <code>TRUE</code>, <code>FALSE</code>, and <code>NA</code> values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na</code></td>
+<td>
+<p>What to return for <code>NA</code> values.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A logical vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">isTrue(c(TRUE, FALSE, NA));
+isTrue(c(TRUE, FALSE, NA), na=TRUE);
+
+</code></pre>
+
+
+</div>

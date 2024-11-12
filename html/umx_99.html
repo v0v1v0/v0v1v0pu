@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxGetLatents</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the latentVars from a RAM model</h2>
+
+<h3>Description</h3>
+
+<p>Get the latentVars from a RAM model, optionally targeting a submodel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxGetLatents(model, targetModel = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>a <code>umxRAM()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>targetModel</code></td>
+<td>
+<p>name of the model to extract from</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> variables
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxGetManifests()</code>, <code>umxRAM()</code>, <code>umxSuperModel()</code>
+</p>
+</li></ul>
+<p>Other Reporting Functions: 
+<code>umxAPA()</code>,
+<code>umxFactorScores()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxGetParameters()</code>,
+<code>umxParameters()</code>,
+<code>umx_aggregate()</code>,
+<code>umx_time()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+library(umx)
+# Create two sets of data in which X &amp; Y correlate ~ .4 in both datasets.
+manifests = c("x", "y")
+tmp = umx_make_TwinData(nMZpairs = 100, nDZpairs = 150, 
+		AA = 0, CC = .4, EE = .6, varNames = manifests)
+
+grp1   = tmp[tmp$zygosity == "MZ", manifests]
+g1Data = mxData(cov(grp1), type = "cov", numObs = nrow(grp1), means=umx_means(grp1))
+
+grp2   = tmp[tmp$zygosity == "DZ", manifests]
+g2Data = mxData(cov(grp2), type = "cov", numObs = nrow(grp2), means=umx_means(grp2))
+# Model 1 (could add autoRun = FALSE if you don't want to run this as it is being built)
+m1 = umxRAM("m1", data = g1Data,
+	umxPath("x", to = "y", labels = "beta"),
+	umxPath(var = manifests, labels = c("Var_x", "Resid_y_grp1")),
+	umxPath(means = manifests, labels = c("Mean_x", "Mean_y"))
+)
+
+# Model 2
+m2 = umxRAM("m2", data = g2Data,
+	umxPath("x", to = "y", labels = "beta"),
+	umxPath(var = manifests, labels=c("Var_x", "Resid_y_grp2")),
+	umxPath(means = manifests, labels=c("Mean_x", "Mean_y"))
+)
+
+m3 = umxSuperModel('top', m1, m2)
+umxGetLatents(m3)
+umxGetLatents(m3, targetModel = "m1")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>untb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Ecological drift simulation under the Unified Neutral
+Theory of Biodiversity</h2>
+
+<h3>Description</h3>
+
+<p>Simulates ecological drift under the UNTB.  Function <code>untb()</code>
+carries out the simulation; function <code>select()</code>
+carries out a single generational step.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">untb(start, prob=0, D=1, gens=150, keep=FALSE, meta=NULL)
+select(a, D=length(a), prob=0, meta=NULL)
+select.mutate(a, D=length(a), prob.of.mutate=0)
+select.immigrate(a, D=length(a), prob.of.immigrate=0, meta)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>a, start</code></td>
+<td>
+<p>Starting ecosystem; coerced to class census.  Usually,
+pass an object of class count; see examples.  To start
+with a monoculture of size 10, use <code>start=rep(1,10)</code> and to
+use <code>start=1:10</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prob, prob.of.immigrate, prob.of.mutate</code></td>
+<td>
+<p>Probability of
+“new” organism not being a descendent of an existing
+individual</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>D</code></td>
+<td>
+<p>Number of organisms that die in each timestep</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gens</code></td>
+<td>
+<p>Number of generations to simulate</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keep</code></td>
+<td>
+<p>In function <code>untb()</code> Boolean with default
+<code>FALSE</code> meaning to return the system at the end of the
+simulation and <code>TRUE</code> meaning to return a matrix whose rows are
+the ecosystem at successive times</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>meta</code></td>
+<td>
+<p>In function <code>untb()</code>, the metacommunity; coerced to a
+<code>count</code> object.  Default of <code>NULL</code> means to use a
+“greedy” system in which every mutation gives rise to a new,
+previously unencountered species.  This would correspond to an
+infinitely large, infinitely diverse, Hubbellian ecosystem (which is
+not too ridiculous an assumption for a small island near a large
+diverse mainland).
+</p>
+<p>In function <code>select.immigrate()</code>, a simplified representation
+of a metacommunity.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Functions <code>select.immigrate()</code> and <code>select.mutate()</code> are not
+really intended for the end user; they use computationally efficient
+(and opaque) integer arithmetic.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>S. P. Hubbell 2001.  “The Unified Neutral Theory of Biodiversity”.
+Princeton University Press.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(butterflies)
+untb(start=butterflies, prob=0, gens=100)
+
+a &lt;- untb(start=1:10,prob=0.005, gens=1000,keep=TRUE)
+plot(species.count(a),type="b")
+matplot(species.table(a),type="l",lty=1)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>partial_permut</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get partial permutation of a vector</h2>
+
+<h3>Description</h3>
+
+<p>Get partial permutation of a vector
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">partial_permut(x, exp_sim = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector with at least 2 elements</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exp_sim</code></td>
+<td>
+<p>a value between 0 and 1 indicating the level of <em>expected
+similarity</em> between the input and output vector. Default value is <strong>0</strong>
+(random permutation).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a partially (random) permutated vector. If <code>exp_sim = 0</code> then
+the result is equal to <code>sample(x)</code> (a random permutation). If
+<code>exp_sim = 1</code> then the result is always the same as the input vector.
+For <code>exp_sim</code> values between <em>0</em> and <em>1</em> we randomly sample
+a subset of the input vector inversely proportionate to the <code>exp_sim</code>
+value (e.g. <code>exp_sim = 0.8 =&gt; 20%</code> of the elements) and randomly
+permutate these elements only.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(42)
+partial_permut(x = LETTERS, exp_sim = 0)
+partial_permut(x = LETTERS, exp_sim = 0.5)
+partial_permut(x = LETTERS, exp_sim = 0.9)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,105 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>iqdat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Twin data: IQ measured longitudinally across 4 ages.</h2>
+
+<h3>Description</h3>
+
+<p>Measures of IQ across four ages in 261 pairs of identical twins and 301 pairs of fraternal (DZ) twins. (see details).
+It is used as data for the [umxSimplex()] examples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(iqdat)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 562 rows (twin families). Nine measures on each twin.
+</p>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li>
+<p> zygosity Zygosity (MZ or DZ)
+</p>
+</li>
+<li>
+<p> IQ_age1_T1 T1 IQ measured at age 1
+</p>
+</li>
+<li>
+<p> IQ_age2_T1 T1 IQ measured at age 2
+</p>
+</li>
+<li>
+<p> IQ_age3_T1 T1 IQ measured at age 3
+</p>
+</li>
+<li>
+<p> IQ_age4_T1 T1 IQ measured at age 4
+</p>
+</li>
+<li>
+<p> IQ_age1_T2 T2 IQ measured at age 1
+</p>
+</li>
+<li>
+<p> IQ_age2_T2 T2 IQ measured at age 2
+</p>
+</li>
+<li>
+<p> IQ_age3_T2 T2 IQ measured at age 3
+</p>
+</li>
+<li>
+<p> IQ_age4_T2 T2 IQ measured at age 4
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Boomsma, D. I., Martin, N. G., &amp; Molenaar, P. C. (1989). Factor and simplex models for repeated measures: 
+application to two psychomotor measures of alcohol sensitivity in twins. *Behavior Genetics*, **19**, 79-96.
+Retrieved from &lt;https://www.ncbi.nlm.nih.gov/pubmed/2712815&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>[umxSimplex()]
+</p>
+<p>Other datasets: 
+<code>Fischbein_wt</code>,
+<code>GFF</code>,
+<code>docData</code>,
+<code>umx</code>,
+<code>us_skinfold_data</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+data(iqdat)
+str(iqdat)
+par(mfrow = c(1, 3))  # 1 rows and 3 columns
+plot(IQ_age4_T1 ~ IQ_age4_T2, ylim = c(50, 150), data = subset(iqdat, zygosity == "MZ"))
+plot(IQ_age4_T1 ~ IQ_age4_T2, ylim = c(50, 150), data = subset(iqdat, zygosity == "DZ"))
+plot(IQ_age1_T1 ~ IQ_age4_T2, data = subset(iqdat, zygosity == "MZ"))
+par(mfrow = c(1, 1))  # back to as it was
+
+## End(Not run)
+</code></pre>
+
+
+</div>

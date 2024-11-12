@@ -1,0 +1,382 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Functions for Structural Equation Modeling in OpenMx</h2>
+
+<h3>Description</h3>
+
+<p><code>umx</code> allows you to more easily build, run, modify, and report structural models,
+building on the OpenMx package.
+All core functions are organized into families, so they are easier to find
+(so if you know a function similar to what you are looking for, look at other members of its "family" at the bottom of its help file.
+</p>
+<p>Please cite as: Bates, T. C., Neale, M. C., &amp; Maes, H. H. (2019).
+umx: A library for Structural Equation and Twin Modelling in R.
+<em>Twin Research and Human Genetics</em>, <strong>22</strong>, 27-41. <a href="https://doi.org/10.1017/thg.2019.2">doi:10.1017/thg.2019.2</a>.
+</p>
+<p>All the functions have full-featured and well commented examples, some even have <em>figures</em>,
+so use the help, even if you think it won't help :-)
+Have a look, for example at <code>umxRAM()</code>
+</p>
+<p>Check out NEWS about new features at <code>news(package = "umx")</code>
+</p>
+
+
+<h3>Details</h3>
+
+<p>Introductory working examples are below. You can run all demos with demo(umx)
+When I have a vignette, it will be: vignette("umx", package = "umx")
+</p>
+<p>There is a helpful blog at <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+<p>(Only) if you want the bleeding-edge version:
+</p>
+<p>devtools::install_github("tbates/umx")
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>Maintainer</strong>: Timothy C. Bates <a href="mailto:timothy.c.bates@gmail.com">timothy.c.bates@gmail.com</a> (<a href="https://orcid.org/0000-0002-1153-9007">ORCID</a>)
+</p>
+<p>Other contributors:
+</p>
+
+<ul>
+<li>
+<p> Nathan Gillespie <a href="mailto:nathan.gillespie@vcuhealth.org">nathan.gillespie@vcuhealth.org</a> [witness]
+</p>
+</li>
+<li>
+<p> Hermine Maes <a href="mailto:hmeaes@vcu.edu">hmeaes@vcu.edu</a> [contributor]
+</p>
+</li>
+<li>
+<p> Michael C. Neale <a href="mailto:neale@vcu.edu">neale@vcu.edu</a> [contributor]
+</p>
+</li>
+<li>
+<p> Joshua N. Pritikin <a href="mailto:jpritikin@pobox.com">jpritikin@pobox.com</a> [contributor]
+</p>
+</li>
+<li>
+<p> Luis De Araujo <a href="mailto:ldearaujo@unimelb.edu.au">ldearaujo@unimelb.edu.au</a> [contributor]
+</p>
+</li>
+<li>
+<p> Brenton Wiernik <a href="mailto:wiernik@umn.edu">wiernik@umn.edu</a> [contributor]
+</p>
+</li>
+<li>
+<p> Michael Zakharin <a href="mailto:s1775682@sms.ed.ac.uk">s1775682@sms.ed.ac.uk</a> [witness]
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Bates, T. C., Neale, M. C., &amp; Maes, H. H. (2019). umx: A library for Structural
+Equation and Twin Modelling in R. <em>Twin Research and Human Genetics</em>, <strong>22</strong>, 27-41. <a href="https://doi.org/10.1017/thg.2019.2">doi:10.1017/thg.2019.2</a>,
+<a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, tutorial: <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Useful links:
+</p>
+
+<ul>
+<li> <p><a href="https://github.com/tbates/umx#readme">https://github.com/tbates/umx#readme</a>
+</p>
+</li>
+<li>
+<p> Report bugs at <a href="https://github.com/tbates/umx/issues">https://github.com/tbates/umx/issues</a>
+</p>
+</li>
+</ul>
+<p>Other Core Model Building Functions: 
+<code>umxMatrix()</code>,
+<code>umxModify()</code>,
+<code>umxPath()</code>,
+<code>umxRAM()</code>,
+<code>umxSuperModel()</code>
+</p>
+<p>Other Model Summary and Comparison: 
+<code>umxCompare()</code>,
+<code>umxEquate()</code>,
+<code>umxMI()</code>,
+<code>umxReduce()</code>,
+<code>umxSetParameters()</code>,
+<code>umxSummary()</code>
+</p>
+<p>Other Reporting Functions: 
+<code>umxAPA()</code>,
+<code>umxFactorScores()</code>,
+<code>umxGetLatents()</code>,
+<code>umxGetManifests()</code>,
+<code>umxGetModel()</code>,
+<code>umxGetParameters()</code>,
+<code>umxParameters()</code>,
+<code>umx_aggregate()</code>,
+<code>umx_time()</code>
+</p>
+<p>Other Super-easy helpers: 
+<code>umxEFA()</code>,
+<code>umxTwoStage()</code>
+</p>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>
+</p>
+<p>Other Twin Data functions: 
+<code>umx_long2wide()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_twin_data_nice()</code>,
+<code>umx_residualize()</code>,
+<code>umx_scale_wide_twin_data()</code>,
+<code>umx_wide2long()</code>
+</p>
+<p>Other Miscellaneous Stats Functions: 
+<code>FishersMethod()</code>,
+<code>SE_from_p()</code>,
+<code>geometric_mean()</code>,
+<code>harmonic_mean()</code>,
+<code>oddsratio()</code>,
+<code>reliability()</code>,
+<code>umxCov2cor()</code>,
+<code>umxHetCor()</code>,
+<code>umxParan()</code>,
+<code>umxWeightedAIC()</code>,
+<code>umx_apply()</code>,
+<code>umx_cor()</code>,
+<code>umx_means()</code>,
+<code>umx_r_test()</code>,
+<code>umx_round()</code>,
+<code>umx_scale()</code>,
+<code>umx_var()</code>
+</p>
+<p>Other Teaching and testing Functions: 
+<code>tmx_genotypic_effect()</code>,
+<code>tmx_is.identified()</code>
+</p>
+<p>Other Get and set: 
+<code>umx_get_checkpoint()</code>,
+<code>umx_get_options()</code>,
+<code>umx_set_auto_plot()</code>,
+<code>umx_set_auto_run()</code>,
+<code>umx_set_checkpoint()</code>,
+<code>umx_set_condensed_slots()</code>,
+<code>umx_set_cores()</code>,
+<code>umx_set_data_variance_check()</code>,
+<code>umx_set_dollar_symbol()</code>,
+<code>umx_set_optimization_options()</code>,
+<code>umx_set_optimizer()</code>,
+<code>umx_set_plot_file_suffix()</code>,
+<code>umx_set_plot_format()</code>,
+<code>umx_set_plot_use_hrbrthemes()</code>,
+<code>umx_set_separator()</code>,
+<code>umx_set_silent()</code>,
+<code>umx_set_table_format()</code>
+</p>
+<p>Other Check or test: 
+<code>umx_check_names()</code>,
+<code>umx_is_class()</code>,
+<code>umx_is_endogenous()</code>,
+<code>umx_is_exogenous()</code>,
+<code>umx_is_numeric()</code>,
+<code>umx_is_ordered()</code>
+</p>
+<p>Other Plotting functions: 
+<code>ggAddR()</code>,
+<code>plot.MxLISRELModel()</code>,
+<code>plot.MxModelTwinMaker()</code>,
+<code>plot.MxModel()</code>,
+<code>umxPlotACEcov()</code>,
+<code>umxPlotACEv()</code>,
+<code>umxPlotACE()</code>,
+<code>umxPlotCP()</code>,
+<code>umxPlotDoC()</code>,
+<code>umxPlotFun()</code>,
+<code>umxPlotGxEbiv()</code>,
+<code>umxPlotGxE()</code>,
+<code>umxPlotIP()</code>,
+<code>umxPlotSexLim()</code>,
+<code>umxPlotSimplex()</code>,
+<code>umxPlot()</code>
+</p>
+<p>Other Data Functions: 
+<code>noNAs()</code>,
+<code>prolific_anonymize()</code>,
+<code>prolific_check_ID()</code>,
+<code>prolific_read_demog()</code>,
+<code>umxFactor()</code>,
+<code>umxHetCor()</code>,
+<code>umx_as_numeric()</code>,
+<code>umx_cont_2_quantiles()</code>,
+<code>umx_lower2full()</code>,
+<code>umx_make_MR_data()</code>,
+<code>umx_make_TwinData()</code>,
+<code>umx_make_fake_data()</code>,
+<code>umx_make_raw_from_cov()</code>,
+<code>umx_merge_randomized_columns()</code>,
+<code>umx_polychoric()</code>,
+<code>umx_polypairwise()</code>,
+<code>umx_polytriowise()</code>,
+<code>umx_read_lower()</code>,
+<code>umx_rename()</code>,
+<code>umx_reorder()</code>,
+<code>umx_score_scale()</code>,
+<code>umx_select_valid()</code>,
+<code>umx_stack()</code>,
+<code>umx_strings2numeric()</code>
+</p>
+<p>Other File Functions: 
+<code>dl_from_dropbox()</code>,
+<code>umx_file_load_pseudo()</code>,
+<code>umx_make_sql_from_excel()</code>,
+<code>umx_move_file()</code>,
+<code>umx_open()</code>,
+<code>umx_rename_file()</code>,
+<code>umx_write_to_clipboard()</code>
+</p>
+<p>Other String Functions: 
+<code>umx_explode_twin_names()</code>,
+<code>umx_explode()</code>,
+<code>umx_grep()</code>,
+<code>umx_names()</code>,
+<code>umx_paste_names()</code>,
+<code>umx_rot()</code>,
+<code>umx_str_chars()</code>,
+<code>umx_str_from_object()</code>,
+<code>umx_trim()</code>
+</p>
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umxVersion()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>
+</p>
+<p>Other datasets: 
+<code>Fischbein_wt</code>,
+<code>GFF</code>,
+<code>docData</code>,
+<code>iqdat</code>,
+<code>us_skinfold_data</code>
+</p>
+<p>Other Advanced Model Building Functions: 
+<code>umxAlgebra()</code>,
+<code>umxFixAll()</code>,
+<code>umxJiggle()</code>,
+<code>umxRun()</code>,
+<code>umxThresholdMatrix()</code>,
+<code>umxUnexplainedCausalNexus()</code>,
+<code>xmuLabel()</code>,
+<code>xmuValues()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require("umx")
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = demoOneFactor, type="cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G"  , fixedAt= 1)
+)
+
+# umx added informative labels, created starting values, 
+# Ran your model (if autoRun is on), and displayed a brief summary
+# including a comparison if you modified a model...!
+
+# umxSummary generates journal-ready fit information.
+# We can choose std=T for standardized parameters and can also
+# filter out some types of parameter (e.g. means or residuals)
+
+umxSummary(m1, std = TRUE, residuals=FALSE)
+
+# parameters() flexibly retrieves model coefficients. 
+# For example just G-loadings greater than |.3| and rounded to 2-digits.
+parameters(m1, thresh="above", b=.3, pattern = "G_to.*", digits = 2)
+
+# (The built-in coef works as for lm etc.)
+coef(m1)
+
+# ==================
+# = Model updating =
+# ==================
+# umxModify modifies, renames, re-runs, and compares a model
+# Can we set the loading of x1 on G to zero? (nope...)
+m2 = umxModify(m1, "G_to_x1", name = "no_effect_of_g_on_X1", comparison = TRUE)
+
+# note1: umxSetParameters can do this with some additional flexibility
+# note2 "comparison = TRUE" above is the same as calling 
+# umxCompare, like this
+umxCompare(m1, m2)
+
+
+# ========================
+# = Confidence intervals =
+# ========================
+
+# umxSummary() will show these, but you can also use the confint() function
+confint(m1) # OpenMx's SE-based confidence intervals
+
+
+# umxConfint formats everything you need nicely, and allows adding CIs (with parm=)
+umxConfint(m1, parm = 'all', run = TRUE) # likelihood-based CIs
+
+# And make a Figure and open in browser
+plot(m1, std = TRUE)
+
+# If you just want the .dot code returned set file = NA
+plot(m1, std = TRUE, file = NA)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

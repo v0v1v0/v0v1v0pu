@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>$,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract parts of a "<code>USL</code>" object</h2>
+
+<h3>Description</h3>
+
+<p>The operator extracts a part of a <code>USL-class</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+x$name
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Object from which to extract elements.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>A literal character string or a name (possibly quoted).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is a generic method for the class used in the usl package.
+</p>
+<p>The operator is used internally by functions like <code>coef</code>, so
+it is necessary to have a working implementation of the <code>coef</code>
+function.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>USL-class</code>, <code>Extract</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## get coefficients from a usl model
+usl.model$coefficients
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

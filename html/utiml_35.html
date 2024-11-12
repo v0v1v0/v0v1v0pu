@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lcard_threshold</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Threshold based on cardinality</h2>
+
+<h3>Description</h3>
+
+<p>Find and apply the best threshold based on cardinality of training set.
+The threshold is choice based on how much the average observed label
+cardinality is close to the average predicted label cardinality.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lcard_threshold(prediction, cardinality, probability = FALSE)
+
+## Default S3 method:
+lcard_threshold(prediction, cardinality, probability = FALSE)
+
+## S3 method for class 'mlresult'
+lcard_threshold(prediction, cardinality, probability = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>prediction</code></td>
+<td>
+<p>A matrix or mlresult.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cardinality</code></td>
+<td>
+<p>A real value of training dataset label cardinality, used
+to define the threshold value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probability</code></td>
+<td>
+<p>A logical value. If <code>TRUE</code> the predicted values are
+the score between 0 and 1, otherwise the values are bipartition 0 or 1.
+(Default: <code>FALSE</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A mlresult object.
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>default</code>: Cardinality Threshold for matrix or data.frame
+</p>
+</li>
+<li> <p><code>mlresult</code>: Cardinality Threshold for mlresult
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Read, J., Pfahringer, B., Holmes, G., &amp; Frank, E. (2011). Classifier chains
+for multi-label classification. Machine Learning, 85(3), 333-359.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other threshold: 
+<code>fixed_threshold()</code>,
+<code>mcut_threshold()</code>,
+<code>pcut_threshold()</code>,
+<code>rcut_threshold()</code>,
+<code>scut_threshold()</code>,
+<code>subset_correction()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">prediction &lt;- matrix(runif(16), ncol = 4)
+lcard_threshold(prediction, 2.1)
+</code></pre>
+
+
+</div>

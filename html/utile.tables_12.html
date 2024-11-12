@@ -1,0 +1,182 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_table.data.frame</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build summary tables from data.frame objects</h2>
+
+<h3>Description</h3>
+
+<p>Takes a data.frame object and summarizes the columns into a
+ready to export, human-readable summary table. Capable of stratifying data
+and performing appropriate hypothesis testing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'data.frame'
+build_table(
+  .object,
+  ...,
+  .by,
+  .inverse = FALSE,
+  .label.stat = TRUE,
+  .stat = c("mean", "median"),
+  .stat.pct.sign = FALSE,
+  .col.overall = TRUE,
+  .col.missing = FALSE,
+  .test.continuous = c("anova", "kruskal", "wilcoxon"),
+  .test.nominal = c("chisq", "fisher"),
+  .test.simulate.p = FALSE,
+  .col.test = FALSE,
+  .digits = 1,
+  .p.digits = 4
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.object</code></td>
+<td>
+<p>A data.frame.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions separated by commas representing
+columns in the data.frame. May be specified using
+<code>tidyselect helpers</code>. If left empty,
+all columns are summarized.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.by</code></td>
+<td>
+<p>An unquoted expression. The data column to stratify the
+summary by.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.inverse</code></td>
+<td>
+<p>A logical. For logical data, report the frequency
+of FALSE values instead of the TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.label.stat</code></td>
+<td>
+<p>A logical. Append the type of summary statistic
+to the column label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.stat</code></td>
+<td>
+<p>A character. Name of the summary statistic to use for numeric data.
+Supported options include the mean ('mean') and median ('median').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.stat.pct.sign</code></td>
+<td>
+<p>A logical. Paste a percent symbol after all
+reported frequencies.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.col.overall</code></td>
+<td>
+<p>A logical. Append a column with the statistic for all data.
+If <code>.by</code> is not specified, this parameter is ignored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.col.missing</code></td>
+<td>
+<p>A logical. Append a column listing the
+frequencies of missing data for each row.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.test.continuous</code></td>
+<td>
+<p>A character. A character. Name of statistical test to compare groups.
+Supported options include ANOVA linear model ('anova'), Kruskal-Wallis ('kruskal'),
+and Wilcoxon rank sum ('wilcoxon') tests.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.test.nominal</code></td>
+<td>
+<p>A character. Name of statistical test to compare groups.
+Supported options include Pearson's Chi-squared Test ('chisq') and Fisher's
+Exact Test ('fisher').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.test.simulate.p</code></td>
+<td>
+<p>A logical. Whether to use Monte Carlo simulation of
+the p-value when testing nominal data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.col.test</code></td>
+<td>
+<p>A logical. Append a column containing the test
+each p-value was derived from.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.digits</code></td>
+<td>
+<p>An integer. The number of digits to round numbers to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.p.digits</code></td>
+<td>
+<p>An integer. The number of p-value digits to report.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of class <code>tbl_df</code> (tibble) summarizing the provided
+object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>build_table</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Sample data
+df &lt;- data.frame(
+  strata = factor(sample(letters[2:3], 1000, replace = TRUE)),
+  numeric = sample(1:100, 1000, replace = TRUE),
+  numeric2 = sample(1:100, 1000, replace = TRUE),
+  factor = factor(sample(1:5, 1000, replace = TRUE)),
+  logical = sample(c(TRUE,FALSE), 1000, replace = TRUE)
+)
+
+# Summarize all columns
+build_table(df, .by = strata)
+
+# Summarize &amp; rename selected columns
+build_table(df, numeric2, factor, .by = strata)
+</code></pre>
+
+
+</div>

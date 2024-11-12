@@ -1,0 +1,112 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>volkov</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Expected frequency of species</h2>
+
+<h3>Description</h3>
+
+<p>Given a community size, biodiversity parameter <code class="reqn">\theta</code>,
+and an immigration rate <code class="reqn">m</code>, returns the expected frequency of
+species with <code class="reqn">n</code>  individuals, for <code class="reqn">0&lt;n\leq J</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">volkov(J, params, bins = FALSE, give = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>J</code></td>
+<td>
+<p>Size of community</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>params</code></td>
+<td>
+<p>A two-element vector with first element interpreted as
+theta, the Fundamental biodiversity parameter and the second, m,
+interpreted as the probability of immigration.  This argument will
+accept the output of <code>optimal.params()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bins</code></td>
+<td>
+<p>Boolean, with default <code>FALSE</code> meaning to return the
+expected number of species with <code class="reqn">1,2,\ldots,J</code>
+individuals, and <code>FALSE</code> meaning to return the binned total,
+using a Preston-like binning system as used in <code>preston()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>give</code></td>
+<td>
+<p>Boolean, with <code>TRUE</code> meaning to return <em>all</em> the
+output of <code>integrate()</code>, and default <code>FALSE</code> meaning to
+return just the value of the integral</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns an object of class “phi”.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The method used is slightly inefficient: the terms to the left of the
+integral sign [in Volkov's equation 7] are integrated and this is,
+strictly, unnecessary as it is not a function of <code class="reqn">y</code>.  However,
+taking advantage of this fact results in messy code.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>I. Volkov and others 2003. “Neutral theory and relative species
+abundance in ecology”.  <em>Nature</em>, volume 424, number 28.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>phi</code>,<code>preston</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  volkov(J=21457,c(theta=47.226, m=0.1)) # Example in figure 1
+
+## End(Not run) 
+
+volkov(J=20,params=c(theta=1,m=0.4))
+
+ data(butterflies)
+ r &lt;- plot(preston(butterflies,n=9,orig=TRUE))
+
+ ## Not run:   jj &lt;- optimal.params(butterflies)    # needs PARI/GP
+
+ jj &lt;- c(9.99980936124759, 0.991791987473506)
+
+ points(r,volkov(no.of.ind(butterflies), jj, bins=TRUE),type="b")
+ 
+</code></pre>
+
+
+</div>

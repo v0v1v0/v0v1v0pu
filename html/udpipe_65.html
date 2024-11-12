@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_contains</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check if text contains a certain pattern</h2>
+
+<h3>Description</h3>
+
+<p>Look up text which has a certain pattern. This pattern lookup is performed by executing a regular expression using <code>grepl</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_contains(x, patterns, value = FALSE, ignore.case = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector with text</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>patterns</code></td>
+<td>
+<p>a regular expression which might be contained in <code>x</code>, a vector of these
+or a list of pattern elements where the list elements <code>include</code> and <code>exclude</code> indicate to find a pattern in <code>x</code>
+while excluding elements which have another pattern</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>logical, indicating to return the elements of <code>x</code> where the pattern was found or just a logical vector. Defaults to FALSE indicating to return a logical.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore.case</code></td>
+<td>
+<p>logical, if set to <code>FALSE</code>, the pattern matching is case sensitive and if TRUE, case is ignored during matching. Passed on to <code>grepl</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other parameters which can be passed on to <code>grepl</code> e.g. fixed/perl/useBytes</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a logical vector of the same length as <code>x</code> indicating if one of the patterns was found in <code>x</code>.<br> 
+Or the vector of elements of <code>x</code> where the pattern was found in case argument <code>value</code> is set to <code>TRUE</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>grepl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("The cats are eating catfood", 
+       "Our cat is eating the catfood", 
+       "the dog eats catfood, he likes it", 
+       NA)
+txt_contains(x, patterns = c("cat", "dog")) 
+txt_contains(x, patterns = c("cat", "dog"), value = TRUE) 
+txt_contains(x, patterns = c("eats"), value = TRUE) 
+txt_contains(x, patterns = c("^The"), ignore.case = FALSE, value = TRUE) 
+txt_contains(x, patterns = list(include = c("cat"), exclude = c("dog")), 
+             value = TRUE) 
+txt_contains(x, "cat") &amp; txt_contains(x, "dog")
+</code></pre>
+
+
+</div>

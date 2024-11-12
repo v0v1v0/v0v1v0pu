@@ -1,0 +1,120 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vis_identifier_dim_dist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualize the distribution difference of samples after Molecule Identifier dimension reduction analysis</h2>
+
+<h3>Description</h3>
+
+<p>NOTE: the dataset must be dense matrix in UCSC Xena data hubs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">vis_identifier_dim_dist(
+  dataset = NULL,
+  ids = NULL,
+  grp_df,
+  samples = NULL,
+  return.data = FALSE,
+  DR_method = c("PCA", "UMAP", "tSNE"),
+  add_margin = NULL,
+  palette = "Set1"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dataset</code></td>
+<td>
+<p>the dataset to obtain identifiers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ids</code></td>
+<td>
+<p>the molecule identifiers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grp_df</code></td>
+<td>
+<p>When <code>dataset</code> and <code>id</code> are all not <code>NULL</code>, it should be a <code>data.frame</code> with 2 columns.
+</p>
+
+<ul>
+<li>
+<p> The first column refers to sample ID.
+</p>
+</li>
+<li>
+<p> The second column refers to groups indicated in axis X.
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>default is <code>NULL</code>, can be common sample names for two datasets.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return.data</code></td>
+<td>
+<p>whether to reture the raw meta/matrix data (list) instead of plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DR_method</code></td>
+<td>
+<p>the dimension reduction method</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add_margin</code></td>
+<td>
+<p>the marginal plot (NULL, "density", "boxplot")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>palette</code></td>
+<td>
+<p>the color setting of RColorBrewer</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>ggplot</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+library(UCSCXenaTools)
+expr_dataset &lt;- "TCGA.LUAD.sampleMap/HiSeqV2_percentile"
+ids = c("TP53", "KRAS", "PTEN", "MDM2", "CDKN1A")
+
+cli_dataset &lt;- "TCGA.LUAD.sampleMap/LUAD_clinicalMatrix"
+cli_df &lt;- XenaGenerate(
+  subset = XenaDatasets == cli_dataset
+) %&gt;%
+  XenaQuery() %&gt;%
+  XenaDownload() %&gt;%
+  XenaPrepare()
+grp_df = cli_df[, c("sampleID", "gender")]
+vis_identifier_dim_dist(expr_dataset, ids, grp_df, DR_method="PCA")
+
+</code></pre>
+
+
+</div>

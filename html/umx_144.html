@@ -1,0 +1,182 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSetParameters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Change or fix parameters (e.g. their values, labels, bounds, ..) in a model.</h2>
+
+<h3>Description</h3>
+
+<p><code>umxSetParameters</code> is used to alter values, and other parameter properties in an <code>mxModel()</code>.
+A common use is setting new values and changing parameters from free to false.
+<em>Note</em>: If you just want to modify and re-run a model, you probably want <code>umxModify()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSetParameters(
+  model,
+  labels,
+  free = NULL,
+  values = NULL,
+  newlabels = NULL,
+  lbound = NULL,
+  ubound = NULL,
+  indep = FALSE,
+  strict = TRUE,
+  name = NULL,
+  regex = FALSE,
+  test = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an <code>mxModel()</code> to set parameters in.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>= labels to find</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free</code></td>
+<td>
+<p>= new value for free</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>= new values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newlabels</code></td>
+<td>
+<p>= newlabels</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lbound</code></td>
+<td>
+<p>= value for lbound</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ubound</code></td>
+<td>
+<p>= value for ubound</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indep</code></td>
+<td>
+<p>= whether to look in indep models</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strict</code></td>
+<td>
+<p>whether to complain if labels not found</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>= new name for the returned model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>patterns to match for labels (or if TRUE, use labels as regular expressions)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>Just show what you would do? (defaults to FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Using <code>umxSetParameters</code>, you use <code style="white-space: pre;">⁠labels=⁠</code> to select the parameters you want to update.
+You can set their free/fixed state with <code style="white-space: pre;">⁠free=⁠</code>, and set new values with <code style="white-space: pre;">⁠values = ⁠</code>. Likewise
+for bounds.
+</p>
+<p><code>umxSetParameters</code> supports pattern matching (regular expressions) to select labels. Set <code style="white-space: pre;">⁠regex=⁠</code>
+to a regular expression matching the labels you want to select. e.g. "G_to_.*" would match
+"G_to_anything".
+</p>
+<p><strong>Details</strong>
+Internally, <code>umxSetParameters</code> is equivalent to a call to <code>omxSetParameters</code> where you
+have the ability to generate a pattern-based label list,
+and, because this can create duplicate labels, we also call <code>omxAssignFirstParameters()</code>
+to equate the start values for parameters which now have identical labels.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxModify()</code>, <code>xmuLabel()</code>
+</p>
+</li></ul>
+<p>Other Model Summary and Comparison: 
+<code>umxCompare()</code>,
+<code>umxEquate()</code>,
+<code>umxMI()</code>,
+<code>umxReduce()</code>,
+<code>umxSummary()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+latents  = c("G")
+manifests = names(demoOneFactor)
+m1 = umxRAM("One Factor", data = mxData(demoOneFactor[1:80,], type = "raw"),
+	umxPath(from = latents, to = manifests),
+	umxPath(v.m. = manifests),
+	umxPath(v1m0 = latents)
+)
+parameters(m1)
+# Match all labels
+umxSetParameters(m1, regex = "^", newlabels= "m1_", test = TRUE)
+# Change path to x1 to x2, equating these two paths
+m2 = umxSetParameters(m1, "G_to_x1", newlabels= "G_to_x2", test = FALSE)
+parameters(m2) 
+
+
+## End(Not run)
+</code></pre>
+
+
+</div>

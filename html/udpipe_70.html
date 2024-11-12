@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_highlight</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Highlight words in a character vector</h2>
+
+<h3>Description</h3>
+
+<p>Highlight words in a character vector. The words provided in <code>terms</code> are 
+highlighted in the text by wrapping it around the following charater: |.
+So 'I like milk and sugar in my coffee' would give 'I like |milk| and sugar in my coffee' if you 
+want to highlight the word milk
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_highlight(x, terms)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a character vector with text</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>terms</code></td>
+<td>
+<p>a vector of words to highlight which appear in <code>x</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A character vector with the same length of <code>x</code> where the terms provided in <code>terms</code>
+are put in between || to highlight them
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- "I like milk and sugar in my coffee."
+txt_highlight(x, terms = "sugar")
+txt_highlight(x, terms = c("milk", "my"))
+</code></pre>
+
+
+</div>

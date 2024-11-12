@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>close</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Close connections for files with data
+</h2>
+
+<h3>Description</h3>
+
+<p><code>close()</code> for <code>ursaRaster</code> object closes connection for opened file using inheritted function <code>base::close</code>. Function <code>close_envi()</code> closes opened connection for ENVI binary file. 
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+close(...)
+
+close_envi(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Object or sequence of objects of class <code>ursaRaster</code>.
+</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>NULL</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>close</code> of <span class="pkg">base</span> package
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- create_envi()
+fname &lt;- a$con$fname
+message(paste("Created file",dQuote(basename(fname)),"will be deleted."))
+print(dir(pattern=basename(envi_list(fname))))
+close(a)
+invisible(envi_remove(fname))
+</code></pre>
+
+
+</div>

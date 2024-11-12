@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sample_qc_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Nightingale biomarker sample processing information</h2>
+
+<h3>Description</h3>
+
+<p>Contains details on the sample processing and quality control information for
+the NMR biomarker data in UK Biobank.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sample_qc_info
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data table with 18 rows and 3 columns:
+</p>
+
+<dl>
+<dt>Name</dt>
+<dd>
+<p>Column name assigned to the sample information field</p>
+</dd>
+<dt>Description</dt>
+<dd>
+<p>Brief description of the field contents. Further details
+on the Nightingale sample QC columns can be found in the <a href="https://biobank.ndph.ox.ac.uk/showcase/refer.cgi?id=3004">accompanying resource on the UK Biobank showcase</a>.</p>
+</dd>
+<dt>UKB.Field.ID</dt>
+<dd>
+<p>Field ID in UK Biobank, see <a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=222">https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=222</a>.
+Rows missing <code>UKB.Field.ID</code> entries correspond to additional sample
+processing information derived from these fields and returned by <code>remove_technical_variation</code>.</p>
+</dd>
+</dl>
+</div>

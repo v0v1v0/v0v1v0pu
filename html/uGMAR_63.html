@@ -1,0 +1,223 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.gsmar</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Forecast GMAR, StMAR, or G-StMAR process</h2>
+
+<h3>Description</h3>
+
+<p><code>predict.gsmar</code> forecasts the specified GMAR, StMAR, or G-StMAR process by using the given
+data to simulate its possible future values. For one-step forecasts using the exact formula for conditional
+mean is supported.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'gsmar'
+predict(
+  object,
+  ...,
+  n_ahead,
+  nsimu = 10000,
+  pi = c(0.95, 0.8),
+  pred_type = c("median", "mean", "cond_mean"),
+  pi_type = c("two-sided", "upper", "lower", "none"),
+  plot_res = TRUE,
+  mix_weights = TRUE,
+  nt
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>object of class <code>'gsmar'</code> created with function <code>fitGSMAR</code> or <code>GSMAR</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed to <code>grid</code> (ignored if <code>plot_res==FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_ahead</code></td>
+<td>
+<p>a positive integer specifying how many steps in the future should be forecasted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nsimu</code></td>
+<td>
+<p>a positive integer specifying to how many simulations the forecast should be based on.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pi</code></td>
+<td>
+<p>a numeric vector specifying confidence levels for the prediction intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pred_type</code></td>
+<td>
+<p>should the prediction be based on sample "median" or "mean"? Or should it
+be one-step-ahead forecast based on the exact conditional mean (<code>"cond_mean"</code>)? prediction
+intervals won't be calculated if the exact conditional mean is used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pi_type</code></td>
+<td>
+<p>should the prediction intervals be "two-sided", "upper", or "lower"?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot_res</code></td>
+<td>
+<p>a logical argument defining whether the forecast should be plotted or not.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mix_weights</code></td>
+<td>
+<p><code>TRUE</code> if forecasts for mixing weights should be plotted, <code>FALSE</code> in not.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nt</code></td>
+<td>
+<p>a positive integer specifying the number of observations to be plotted
+along with the prediction. Default is <code>round(length(data)*0.15)</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>predict.gsmar</code> uses the last <code>p</code> values of the data to simulate <code>nsimu</code>
+possible future values for each step-ahead. The point prediction is then obtained by calculating
+the sample median or mean for each step and the prediction intervals are obtained from the
+empirical fractiles.
+</p>
+<p>The function <code>simulate.gsmar</code> can also be used directly for quantile based forecasting.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a class <code>'gsmarpred'</code> object containing, among the specifications,...
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>$pred</code></td>
+<td>
+<p>Point forecasts</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>$pred_ints</code></td>
+<td>
+<p>Prediction intervals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>$mix_pred</code></td>
+<td>
+<p>Point forecasts for mixing weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mix_pred_ints</code></td>
+<td>
+<p>Individual prediction intervals for mixing weights, as <code>[, , m]</code>, m=1,..,M.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p> Galbraith, R., Galbraith, J. 1974. On the inverses of some patterned matrices arising
+in the theory of stationary time series. <em>Journal of Applied Probability</em> <strong>11</strong>, 63-71.
+</p>
+</li>
+<li>
+<p> Kalliovirta L. (2012) Misspecification tests based on quantile residuals.
+<em>The Econometrics Journal</em>, <strong>15</strong>, 358-393.
+</p>
+</li>
+<li>
+<p> Kalliovirta L., Meitz M. and Saikkonen P. 2015. Gaussian Mixture Autoregressive model for univariate time series.
+<em>Journal of Time Series Analysis</em>, <strong>36</strong>(2), 247-266.
+</p>
+</li>
+<li>
+<p> Meitz M., Preve D., Saikkonen P. 2023. A mixture autoregressive model based on Student's t-distribution.
+<em>Communications in Statistics - Theory and Methods</em>, <strong>52</strong>(2), 499-515.
+</p>
+</li>
+<li>
+<p> Virolainen S. 2022. A mixture autoregressive model based on Gaussian and Student's t-distributions.
+Studies in Nonlinear Dynamics &amp; Econometrics, <strong>26</strong>(4) 559-580.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>simulate.gsmar</code>, <code>cond_moments</code>, <code>fitGSMAR</code>, <code>GSMAR</code>,
+<code>quantile_residual_tests</code>, <code>diagnostic_plot</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## These examples take approximately 30 seconds to run.
+
+# G-StMAR model with one GMAR type and one StMAR type regime
+fit42gs &lt;- fitGSMAR(M10Y1Y, p=4, M=c(1, 1), model="G-StMAR",
+                    ncalls=1, seeds=4)
+
+# Forecast 12 steps ahead based on 10000 simulated sample paths, prediction
+# interval confidence levels 0.95 and 0.8, prediction based on sample median,
+# and two-sided prediction intevals:
+mypred &lt;- predict(fit42gs, n_ahead=12, nsimu=10000, pi=c(0.95, 0.8),
+                  pred_type="median", pi_type="two-sided")
+mypred
+plot(mypred)
+
+# Forecast 24 steps ahead based on 1000 simulated sample paths, prediction
+# interval confidence level 0.99 and 0.9, prediction based on sample mean,
+# and upper prediction intevals:
+mypred2 &lt;- predict(fit42gs, n_ahead=24, nsimu=1000, pi=c(0.99, 0.9),
+                   pred_type="mean", pi_type="upper")
+
+# Forecast 24 steps ahead based on 1000 simulated sample paths, prediction
+# interval confidence level 0.99, 0.95, 0.9 and 0.8, prediction based on
+# sample median, and lower prediction intevals:
+mypred3 &lt;- predict(fit42gs, n_ahead=24, nsimu=1000, pi=c(0.99, 0.95, 0.9, 0.8),
+                   pred_type="median", pi_type="lower")
+
+# GMAR model
+params12 &lt;- c(1.70, 0.85, 0.30, 4.12, 0.73, 1.98, 0.63)
+gmar12 &lt;- GSMAR(data=simudata, p=1, M=2, params=params12, model="GMAR")
+pred12 &lt;- predict(gmar12, n_ahead=10, nsimu=1000, pi=c(0.95, 0.9, 0.8),
+                  pred_type="median", pi_type="two-sided")
+pred12
+plot(pred12)
+
+# One-step prediction based on the exact conditional mean:
+predict(gmar12, n_ahead=1, pred_type="cond_mean", plot_res=FALSE)
+
+</code></pre>
+
+
+</div>

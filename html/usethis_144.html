@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>use_git_hook</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add a git hook</h2>
+
+<h3>Description</h3>
+
+<p>Sets up a git hook using the specified script. Creates a hook directory if
+needed, and sets correct permissions on hook.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">use_git_hook(hook, script)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>hook</code></td>
+<td>
+<p>Hook name. One of "pre-commit", "prepare-commit-msg",
+"commit-msg", "post-commit", "applypatch-msg", "pre-applypatch",
+"post-applypatch", "pre-rebase", "post-rewrite", "post-checkout",
+"post-merge", "pre-push", "pre-auto-gc".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>script</code></td>
+<td>
+<p>Text of script to run</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p>Other git helpers: 
+<code>use_git()</code>,
+<code>use_git_config()</code>,
+<code>use_git_ignore()</code>
+</p>
+
+
+</div>

@@ -1,0 +1,178 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fetch</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fetch Data from UCSC Xena Hosts</h2>
+
+<h3>Description</h3>
+
+<p>When you want to query just data for several genes/samples from UCSC Xena datasets, a better way
+is to use these <code>fetch_</code> functions instead of downloading a whole dataset. Details about functions
+please see the following sections.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fetch(host, dataset)
+
+fetch_dense_values(
+  host,
+  dataset,
+  identifiers = NULL,
+  samples = NULL,
+  check = TRUE,
+  use_probeMap = FALSE,
+  time_limit = 30
+)
+
+fetch_sparse_values(host, dataset, genes, samples = NULL, time_limit = 30)
+
+fetch_dataset_samples(host, dataset, limit = NULL)
+
+fetch_dataset_identifiers(host, dataset)
+
+has_probeMap(host, dataset, return_url = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>host</code></td>
+<td>
+<p>a UCSC Xena host, like "https://toil.xenahubs.net".
+All available hosts can be printed by <code>xena_default_hosts()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataset</code></td>
+<td>
+<p>a UCSC Xena dataset, like "tcga_RSEM_gene_tpm".
+All available datasets can be printed by running <code>XenaData$XenaDatasets</code> or
+obtained from <a href="https://xenabrowser.net/datapages/">UCSC Xena datapages</a>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>identifiers</code></td>
+<td>
+<p>Identifiers could be probe (like "ENSG00000000419.12"),
+gene (like "TP53") etc.. If it is <code>NULL</code>, all identifiers in the dataset will be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>ID of samples, like "TCGA-02-0047-01".
+If it is <code>NULL</code>, all samples in the dataset will be used. However, it is better to download
+the whole datasets if you query many samples and genes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check</code></td>
+<td>
+<p>if <code>TRUE</code>, check whether specified <code>identifiers</code> and <code>samples</code> exist the dataset
+(all failed items will be filtered out). However, if <code>FALSE</code>, the code is much faster.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use_probeMap</code></td>
+<td>
+<p>if <code>TRUE</code>, will check if the dataset has ProbeMap firstly.
+When the dataset you want to query has a identifier-to-gene mapping, identifiers can be
+gene symbols even the identifiers of dataset are probes or others.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_limit</code></td>
+<td>
+<p>time limit for getting response in seconds.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>genes</code></td>
+<td>
+<p>gene names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>number of samples, if <code>NULL</code>, return all samples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return_url</code></td>
+<td>
+<p>if <code>TRUE</code>, returns the info of probeMap
+instead of a logical value when the result exists.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>There are three primary data types: dense matrix (samples by probes (or say identifiers)),
+sparse (sample, position, variant), and segmented (sample, position, value).
+</p>
+<p>Dense matrices can be genotypic or phenotypic, it is a sample-by-identifiers matrix.
+Phenotypic matrices have associated field metadata (descriptive names, codes, etc.).
+Genotypic matricies may have an associated probeMap, which maps probes to genomic locations.
+If a matrix has hugo probeMap, the probes themselves are gene names. Otherwise, a probeMap is
+used to map a gene location to a set of probes.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>matirx</code> or character vector or a <code>list</code>.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>fetch_dense_values</code>: fetches values from a dense matrix.
+</p>
+</li>
+<li> <p><code>fetch_sparse_values</code>: fetches values from a sparse <code>data.frame</code>.
+</p>
+</li>
+<li> <p><code>fetch_dataset_samples</code>: fetches samples from a dataset
+</p>
+</li>
+<li> <p><code>fetch_dataset_identifiers</code>: fetches identifies from a dataset.
+</p>
+</li>
+<li> <p><code>has_probeMap</code>: checks if a dataset has ProbeMap.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(UCSCXenaTools)
+
+host &lt;- "https://toil.xenahubs.net"
+dataset &lt;- "tcga_RSEM_gene_tpm"
+samples &lt;- c("TCGA-02-0047-01", "TCGA-02-0055-01", "TCGA-02-2483-01", "TCGA-02-2485-01")
+probes &lt;- c("ENSG00000282740.1", "ENSG00000000005.5", "ENSG00000000419.12")
+genes &lt;- c("TP53", "RB1", "PIK3CA")
+
+
+# Fetch samples
+fetch_dataset_samples(host, dataset, 2)
+# Fetch identifiers
+fetch_dataset_identifiers(host, dataset)
+# Fetch expression value by probes
+fetch_dense_values(host, dataset, probes, samples, check = FALSE)
+# Fetch expression value by gene symbol (if the dataset has probeMap)
+has_probeMap(host, dataset)
+fetch_dense_values(host, dataset, genes, samples, check = FALSE, use_probeMap = TRUE)
+
+</code></pre>
+
+
+</div>

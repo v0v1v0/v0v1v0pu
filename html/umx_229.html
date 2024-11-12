@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_move_file</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Move files</h2>
+
+<h3>Description</h3>
+
+<p>On OS X, <code>umx_move_file</code> can access the current front-most Finder window.
+The file moves are fast and, because you can use regular expressions, powerful.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_move_file(
+  baseFolder = NA,
+  regex = NULL,
+  fileNameList = NA,
+  destFolder = NA,
+  test = TRUE,
+  overwrite = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>baseFolder</code></td>
+<td>
+<p>The folder to search in. If set to "Finder" (and you are on OS X) it will use the current
+front-most Finder window. If it is blank, a choose folder dialog will be thrown.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>string to select files to process within the selected folder.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fileNameList</code></td>
+<td>
+<p>List of files to move.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>destFolder</code></td>
+<td>
+<p>Folder to move files to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>Boolean determining whether to change the names, or just report a dry run.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+<p>Boolean determining whether to overwrite files or not (default = FALSE (safe)).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>file.rename()</code>, <code>regex()</code>
+</p>
+<p>Other File Functions: 
+<code>dl_from_dropbox()</code>,
+<code>umx_file_load_pseudo()</code>,
+<code>umx_make_sql_from_excel()</code>,
+<code>umx_open()</code>,
+<code>umx_rename_file()</code>,
+<code>umx_write_to_clipboard()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+base = "~/Desktop/"
+dest = "~/Music/iTunes/iTunes Music/Music/"
+umx_move_file(baseFolder = base, fileNameList = toMove, destFolder = dest, test= TRUE)
+
+# ============================================================
+# = Move all files in downloads ending in ".jpeg" to Desktop =
+# ============================================================
+umx_move_file(baseFolder = "~/Downloads/", regex=".jpeg", 
+	destFolder = "~/Desktop/", test= TRUE)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>analyze_gene_drug_response_asso</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Analyze Association between Gene (Signature) and Drug Response with CCLE Data</h2>
+
+<h3>Description</h3>
+
+<p>Analyze partial correlation of gene-drug association after
+controlling for tissue average expression.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">analyze_gene_drug_response_asso(gene_list, combine = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>gene_list</code></td>
+<td>
+<p>a gene symbol list.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combine</code></td>
+<td>
+<p>if <code>TRUE</code>, combine the expression of gene list as
+a gene signature.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a <code>data.frame</code>
+</p>
+
+<ul>
+<li>
+<p> If <code>combine</code> is <code>TRUE</code>, genes are combined as <code>signature</code>.
+</p>
+</li>
+<li> <p><code>mean.diff</code> and <code>median.diff</code> indicate mean and median of
+normalized expression difference between High IC50 cells and Low IC50 cells.
+The cutoff between High and Low are median IC50.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+analyze_gene_drug_response_asso("TP53")
+analyze_gene_drug_response_asso(c("TP53", "KRAS"))
+analyze_gene_drug_response_asso(c("TP53", "KRAS"), combine = TRUE)
+
+# Visualization
+vis_gene_drug_response_asso("TP53")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

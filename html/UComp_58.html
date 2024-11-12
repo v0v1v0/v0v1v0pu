@@ -1,0 +1,193 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>PTSmodel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>PTSmodel</h2>
+
+<h3>Description</h3>
+
+<p>Estimates and forecasts PTS general univariate models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">PTSmodel(
+  y,
+  u = NULL,
+  model = "???",
+  s = frequency(y),
+  h = 2 * s,
+  criterion = "aicc",
+  lambda = 1,
+  armaIdent = FALSE,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a time series to forecast (it may be either a numerical vector or
+a time series object). This is the only input required. If a vector, the additional
+input <code>s</code> should be supplied compulsorily (see below).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>u</code></td>
+<td>
+<p>a matrix of input time series. If
+the output wanted to be forecast, matrix <code>u</code> should contain future values for inputs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>the model to estimate. It is a single string indicating the type of
+model for each component with one or two letters:
+</p>
+
+<ul>
+<li>
+<p> Error: ? / N / A
+</p>
+</li>
+<li>
+<p> Trend: ? / N / A / Ad / L
+</p>
+</li>
+<li>
+<p> Seasonal: ? / N / A / D (trigonometric with different variances)
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+<p>seasonal period of time series (1 for annual, 4 for quarterly, ...)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>h</code></td>
+<td>
+<p>forecast horizon. If the model includes inputs h is not used, the lenght of u is used instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion</code></td>
+<td>
+<p>information criterion for identification ("aic", "bic" or "aicc").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Box-Cox lambda parameter (NULL: estimate)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>armaIdent</code></td>
+<td>
+<p>check for arma models for error component (TRUE / FALSE).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>intermediate estimation output (TRUE / FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>PTSmodel</code> is a function for modelling and forecasting univariate
+time series according to Power-Trend-Seasonal (PTS).
+It sets up the model with a number of control variables that
+govern the way the rest of functions in the package work. It also estimates
+the model parameters by Maximum Likelihood and forecasts the data.
+Standard methods applicable to UComp objects are print, summary, plot,
+fitted, residuals, logLik, AIC, BIC, coef, predict, tsdiag.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>PTS</code>. It is a list with fields including all the inputs and
+the fields listed below as outputs. All the functions in this package fill in
+part of the fields of any <code>PTS</code> object as specified in what follows (function
+<code>PTS</code> fills in all of them at once):
+</p>
+<p>After running <code>PTSmodel</code> or <code>PTSestim</code>:
+</p>
+
+<ul>
+<li>
+<p> p0:       Initial values for parameter search
+</p>
+</li>
+<li>
+<p> p:        Estimated parameters
+</p>
+</li>
+<li>
+<p> lambda:   Estimated Box-Cox lambda parameter
+</p>
+</li>
+<li>
+<p> v:        Estimated innovations (white noise in correctly specified models)
+</p>
+</li>
+<li>
+<p> yFor:     Forecasted values of output
+</p>
+</li>
+<li>
+<p> yForV:    Variance of forecasted values of output
+</p>
+</li>
+</ul>
+<p>After running <code>PTSvalidate</code>:
+</p>
+
+<ul><li>
+<p> table: Estimation and validation table
+</p>
+</li></ul>
+<p>After running <code>PTScomponents</code>:
+</p>
+
+<ul><li>
+<p> comp:  Estimated components in matrix form
+</p>
+</li></ul>
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>PTS</code>, <code>PTSsetup</code>, <code>PTSvalidate</code>,
+<code>PTScomponents</code>, <code>PTSestim</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+m1 &lt;- PTSmodel(log(AirPassengers))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

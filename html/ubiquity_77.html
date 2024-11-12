@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_set_guess</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Alter Initial Guess and Parameter Bounds</h2>
+
+<h3>Description</h3>
+
+<p>Default values for parameters are taken from the <code>system.txt</code> file
+either when the parameter was defined (<code>&lt;P&gt;</code>) or when it was reassigned
+for a parameter set (<code>&lt;PSET:?:?&gt;?</code>). These can be altered at the
+scripting level using this function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_set_guess(cfg, pname, value, lb = NULL, ub = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pname</code></td>
+<td>
+<p>name of parameter to set</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>value to assign</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lb</code></td>
+<td>
+<p>optionally change the lower bound (<code>NULL</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ub</code></td>
+<td>
+<p>optionally change the upper bound (<code>NULL</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>When performing a parameter estimation, the initial guess will be the value
+specified in the <code>system.txt</code> file for the currently selected parameter set. The
+following command can be used after the parameter set has been selected to
+specify the value (<code>VALUE</code>) of the parameter <code>PNAME</code> and optionally the lower (<code>lb</code>)
+and upper (<code>ub</code>) bounds:
+</p>
+<pre>cfg = system_set_guess(cfg, pname="PNAME", value=VALUE, lb=NULL, ub=NULL)</pre>
+<p>To set the initial guess for the parameter Vc to a value of 3, the following
+would be used:
+</p>
+<pre>cfg = system_set_guess(cfg, "Vc", value=3)</pre>
+<p>To specify the guess and overwrite the upper bound on Vc and set it to 5
+</p>
+<pre>cfg = system_set_guess(cfg, "Vc", value=3, ub=5) </pre>
+
+
+<h3>Value</h3>
+
+<p>cfg ubiquity system object with guess and bounds assigned
+</p>
+
+
+</div>

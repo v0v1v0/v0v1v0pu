@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>units_options</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>set one or more units global options</h2>
+
+<h3>Description</h3>
+
+<p>set units global options, mostly related how units are printed and plotted
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">units_options(..., sep, group, negative_power, parse, set_units_mode,
+  auto_convert_names_to_symbols, simplify, allow_mixed, unitless_symbol,
+  define_bel)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>named options (character) for which the value is queried</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>character length two; default <code>c("~", "~")</code>; space separator between variable and units, and space separator between two different units</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group</code></td>
+<td>
+<p>character length two; start and end group, may be two empty strings, a parenthesis pair, or square brackets; default: square brackets.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>negative_power</code></td>
+<td>
+<p>logical, default <code>FALSE</code>; should denominators have negative power, or follow a division symbol?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parse</code></td>
+<td>
+<p>logical, default <code>TRUE</code>; should the units be made into an expression (so we get subscripts)? Setting to <code>FALSE</code> may be useful if parse fails, e.g. if the unit contains symbols that assume a particular encoding</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>set_units_mode</code></td>
+<td>
+<p>character; either <code>"symbols"</code> or <code>"standard"</code>; see set_units; default is <code>"symbols"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>auto_convert_names_to_symbols</code></td>
+<td>
+<p>logical, default <code>TRUE</code>: should names, such as <code>degree_C</code> be converted to their usual symbol?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>simplify</code></td>
+<td>
+<p>logical, default <code>NA</code>; simplify units in expressions?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>allow_mixed</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, combining mixed units creates a <code>mixed_units</code> object, if <code>FALSE</code> it generates an error</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unitless_symbol</code></td>
+<td>
+<p>character; set the symbol to use for unitless (1) units</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>define_bel</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, define the unit <code>B</code> (i.e., the <em>bel</em>, widely used with the <em>deci-</em> prefix as <code>dB</code>, <em>decibel</em>) as an alias of <code>lg(re 1)</code>. <code>TRUE</code> by default, unless <code>B</code> is already defined in the existing XML database.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This sets or gets units options. Set them by using named arguments, get them by passing the option name.
+</p>
+<p>The default <code>NA</code> value for <code>simplify</code> means units are not simplified in set_units or as_units, but are simplified in arithmetical expressions.
+</p>
+
+
+<h3>Value</h3>
+
+<p>in case options are set, invisibly a named list with the option values that are being set; if an option is queried, the current option value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">old = units_options(sep = c("~~~", "~"), group = c("", "")) # more space, parenthesis
+old
+## set back to defaults:
+units_options(sep = c("~", "~"), group = c("[", "]"), negative_power = FALSE, parse = TRUE)
+units_options("group")
+</code></pre>
+
+
+</div>

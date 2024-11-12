@@ -1,0 +1,189 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>makeTP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Flight Track Planning tool</h2>
+
+<h3>Description</h3>
+
+<p>makeTP generates a flight track chaining up point objects with respect to a heterogenous surface and known obstacles as documented by an DSM for taking top down pictures. It creates a single control file for autonomous picture retrieval flights.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">makeTP(
+  projectDir = tempdir(),
+  locationName = "treePos",
+  missionTrackList = NULL,
+  launchPos = c(8.772055, 50.814689),
+  demFn = NULL,
+  flightAltitude = 100,
+  climbDist = 7.5,
+  aboveTreeAlt = 15,
+  circleRadius = 1,
+  takeOffAlt = 50,
+  presetFlightTask = "remote",
+  maxSpeed = 25,
+  followSurfaceRes = 5,
+  altFilter = 0.5,
+  windCondition = 1,
+  launchAltitude = -9999,
+  uavType = "pixhawk",
+  cameraType = "MAPIR2",
+  copy = FALSE,
+  runDir = ""
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>projectDir</code></td>
+<td>
+<p><code>character</code> path to the main folder where several projects can be hosted, default is <code>tempdir()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>locationName</code></td>
+<td>
+<p><code>character</code> base name string of the mission, default is <code>"treePos"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>missionTrackList</code></td>
+<td>
+<p><code>character</code> filename of the mission tracklist (target positions), default is <code>NULL</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>launchPos</code></td>
+<td>
+<p><code>list</code> launch position c(longitude,latitude), default is <code>c(8.772055,50.814689)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>demFn</code></td>
+<td>
+<p><code>character</code> filename of the used DSM data file, default is <code>NULL</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flightAltitude</code></td>
+<td>
+<p><code>numeric</code> set the AGL flight altitude (AGL while the provided raster model represents this surface) of the mission, default is <code>100</code>
+default is (<code style="white-space: pre;">⁠= 0.0⁠</code>). If set to <code>-99</code> it will be
+calculated from the swath width of the pictures. NOTE: This makes only sense for
+<code>followSurface = TRUE</code> to smooth curves.
+For <code>flightPlanMode = "waypoint"</code> camera actions (DJI only EXPERIMENTAL) are DISABLED during curve flights.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>climbDist</code></td>
+<td>
+<p><code>numeric</code> distance within the uav will climb on the caluclated save flight altitude in meter, default is <code>7.5</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>aboveTreeAlt</code></td>
+<td>
+<p><code>numeric</code> minimum flight height above target trees in meter, default is <code>15.0</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>circleRadius</code></td>
+<td>
+<p><code>numeric</code> radius to circle around above target trees in meter, default is <code>1.0</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>takeOffAlt</code></td>
+<td>
+<p>altitude <code>numeric</code> climb altitude of the uav at take off position in meter, default is <code>50.0</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>presetFlightTask</code></td>
+<td>
+<p><code>character</code> (DJI only EXPERIMENTAL). NOTE: it is strongly recommended to use the default <code>"remote"</code> <br>
+Further options are: <br><code>"simple_ortho"</code> takes one picture/waypoint,
+<code>"multi_ortho"</code> takes 4 picture at a waypoint, two vertically down and two in forward and backward viewing direction and an angele of -60deg,
+<code>"simple_pano"</code> takes a 360 deg panorama picture and
+<code>"remote"</code> which assumes that the camera is controlled by the remote control (RC)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxSpeed</code></td>
+<td>
+<p><code>numeric</code>  cruising speed, default is <code>25.0</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>followSurfaceRes</code></td>
+<td>
+<p><code>numeric</code>, default is <code>5</code> meter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>altFilter</code></td>
+<td>
+<p><code>numeric</code> allowed altitude differences bewteen two waypoints in meter, default is <code>0.5</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>windCondition</code></td>
+<td>
+<p><code>numeric</code>options are 1= calm 2= light air 1-5km/h, 3= light breeze 6-11km/h, 4=gentle breeze 12-19km/h 5= moderate breeze 20-28km/h, default is <code>1</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>launchAltitude</code></td>
+<td>
+<p><code>numeric</code> altitude of launch position. If set to <code>-9999</code> a DEM is required for extracting the MSL, default is <code>-9999</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>uavType</code></td>
+<td>
+<p><code>character</code>  type of UAV. Currently "dji_csv" and "pixhawk" are supported, default is <code>"pixhawk"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cameraType</code></td>
+<td>
+<p><code>character</code>, default is <code>"MAPIR2"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>copy</code></td>
+<td>
+<p><code>boolean</code> copy used file to data folder default is <code>FALSE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runDir</code></td>
+<td>
+<p><code>character</code> runtime folder</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## (1) get example DEM data
+dsmFn &lt;- system.file("extdata", "mrbiko.tif", package = "uavRmp")
+## (2) make position flight plan
+makeTP  &lt;-  makeTP(missionTrackList= tutorial_flightArea,
+                  demFn = dsmFn,
+                  uavType = "pixhawk",
+                  launchPos = c(8.679,50.856))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

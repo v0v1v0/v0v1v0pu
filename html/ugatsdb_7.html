@@ -1,0 +1,149 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Data from the Database</h2>
+
+<h3>Description</h3>
+
+<p>This is the main function of the package to retrieve data from the database. It constructs an SQL query which is sent to the database and returns the data as a <code>data.table</code> in R.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_data(
+  dsid = NULL,
+  series = NULL,
+  from = NULL,
+  to = NULL,
+  labels = TRUE,
+  wide = TRUE,
+  expand.date = FALSE,
+  ordered = TRUE,
+  return.query = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dsid</code></td>
+<td>
+<p>character. (Optional) id's of datasets matching the 'DSID' column of the 'DATASET' table (retrieved using <code>datasets()</code>). If none of the following arguments are used, all series from those datasets will be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>series</code></td>
+<td>
+<p>character. (Optional) codes of series matching the 'Series' column of the 'Series' table (retrieved using <code>series()</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+<p>set the start time of the data retrieved by either supplying a start date, a date-string of the form <code>"YYYY-MM-DD"</code> or <code>"YYYY-MM"</code>,
+year-quarters of the form <code>"YYYYQN"</code> or <code>"YYYY-QN"</code>, a numeric year <code>YYYY</code> (numeric or character), or a fiscal year of the form <code>"YYYY/YY"</code>. These expressions are converted to a regular date by <code>make_date</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>same as <code>from</code>: to set the time period until which data is retrieved. For expressions that are not full "YYYY-MM-DD" dates, the last day of the period is chosen.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>logical. <code>TRUE</code> will also return labels (series descriptions) along with the series codes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wide</code></td>
+<td>
+<p>logical. <code>TRUE</code> calls <code>long2wide</code> on the result. <code>FALSE</code> returns the data in a long format without missing values (suitable for <code>ggplot2</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expand.date</code></td>
+<td>
+<p>logical. <code>TRUE</code> will call <code>expand_date</code> on the result.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ordered</code></td>
+<td>
+<p>logical. <code>TRUE</code> orders the result by 'Date' and, if <code>labels = TRUE</code>, by series, maintaining the column-order of series in the dataset(s).
+<code>FALSE</code> returns the result in a random order, to the benefit of faster query execution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return.query</code></td>
+<td>
+<p>logical. <code>TRUE</code> will not query the database but instead return the constructed SQL query as a character string.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to <code>long2wide</code> (if <code>wide = TRUE</code>) or <code>expand_date</code> (if <code>expand.date = TRUE</code>), no conflicts between these two.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>labels = FALSE</code>, the 'SERIES' table is not joined to the 'DATA' table, and <code>ordered = TRUE</code> will order datasets and series retrieved in alphabetic order.
+If <code>labels = TRUE</code> data is ordered by series and date within each dataset, preserving the order of columns in the dataset. If multiple datasets are received they are ordered alphabetically according to the 'DSID' column.
+</p>
+<p>It is possible query multiple series from multiple datasets e.g. <code>get_data(c("DSID1", "DSID2"), c("SERFROM1", "SERFROM2"))</code> etc., but care needs to be taken that the series queried do not occur in both datasets (see <code>.IDvars</code>, and check using <code>series(c("DSID1", "DSID2"))</code>).
+Series from datasets at different frequencies can be queried, but, if <code>wide = TRUE</code>, this will result in missing values for all but the first observations per period in the lower frequency series.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.table</code> with the result of the query.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>long2wide</code>, <code>expand_date</code>, <code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Return monthly macroeconomic indicators from the year 2000 onwards
+get_data("BOU_MMI", from = 2000, wide = FALSE)
+
+# Return wide format with date expanded
+get_data("BOU_MMI", from = 2000, expand.date = TRUE)
+
+# Same thing in multiple steps (with additional customization options):
+library(magrittr) # Pipe %&gt;% operators
+get_data("BOU_MMI", from = 2000, wide = FALSE) %&gt;% long2wide %&gt;% expand_date
+
+# Getting a single series
+get_data("BOU_MMI", "M2", 2000)
+
+# Getting High-Frequency activity indicators from BoU and Revenue &amp; Expense from MoFPED
+get_data(c("BOU_MMI", "MOF_TOT", "WB_WDI"), c("CIEA", "BTI", "REV_GRA", "EXP_LEN"))
+
+# Getting daily interest rates and plotting
+library(xts)   # Time series class
+get_data("BOU_I", from = 2018, wide = FALSE) %&gt;%
+   long2wide(names_from = "Label") %&gt;%
+   as.xts %&gt;%
+   plot(legend.loc = "topleft")
+
+</code></pre>
+
+
+</div>

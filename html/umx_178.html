@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxVersion</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or print the version of umx, along with detail from OpenMx and general system info.</h2>
+
+<h3>Description</h3>
+
+<p>umxVersion returns the version information for umx, and for OpenMx and R.
+Essential for bug-reports! This function can also test for a minimum version.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxVersion(
+  model = NULL,
+  min = NULL,
+  verbose = TRUE,
+  return = c("umx_vers", "OpenMx_vers")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>Optional to show optimizer in this model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min</code></td>
+<td>
+<p>Optional minimum version string to test for, e.g. '2.7.0' (Default = NULL).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>= TRUE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return</code></td>
+<td>
+<p>Which package (umx or OpenMx) to 'return' version info for (Default = umx).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>packageVersion()</code>, <code>install.OpenMx()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Utility Functions: 
+<code>install.OpenMx()</code>,
+<code>libs()</code>,
+<code>qm()</code>,
+<code>umxLav2RAM()</code>,
+<code>umxModelNames()</code>,
+<code>umxRAM2Lav()</code>,
+<code>umx_array_shift()</code>,
+<code>umx_find_object()</code>,
+<code>umx_lower.tri()</code>,
+<code>umx_msg()</code>,
+<code>umx_open_CRAN_page()</code>,
+<code>umx_pad()</code>,
+<code>umx_print()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = umxVersion(); x
+</code></pre>
+
+
+</div>

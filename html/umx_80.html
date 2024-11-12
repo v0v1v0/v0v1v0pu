@@ -1,0 +1,168 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxConfint</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get confidence intervals from a umx model</h2>
+
+<h3>Description</h3>
+
+<p>Implements confidence interval function for umx models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxConfint(
+  object,
+  parm = c("existing", "all", "or one or more labels", "smart"),
+  wipeExistingRequests = TRUE,
+  level = 0.95,
+  run = FALSE,
+  showErrorCodes = FALSE,
+  optimizer = c("SLSQP", "NPSOL", "CSOLNP", "current")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>An <code>mxModel()</code>, possibly already containing <code>mxCI()</code>s that have been <code>mxRun()</code> with intervals = TRUE))</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parm</code></td>
+<td>
+<p>Which parameters to get confidence intervals for. Can be "existing", "all", or one or more parameter names.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wipeExistingRequests</code></td>
+<td>
+<p>Whether to remove existing CIs when adding new ones (ignored if parm = 'existing').</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>The confidence level required (default = .95)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>run</code></td>
+<td>
+<p>Whether to run the model (defaults to FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showErrorCodes</code></td>
+<td>
+<p>(default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>optimizer</code></td>
+<td>
+<p>For difficult CIs, trying other optimizers can help!</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note: By default, requesting new CIs wipes the existing ones.
+To keep these, set wipeExistingRequests = FALSE.
+</p>
+<p>Because CIs can take time to run, by default only already-computed CIs will be reported. To run new CIs, set run = TRUE .
+</p>
+<p><em>Note</em>: <code>confint()</code> is an OpenMx function which will return SE-based CIs.
+</p>
+<p>If <code>parm</code> is empty, and <code>run = FALSE</code>, a message will alert you to set <code>run = TRUE</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>stats::confint()</code>, <code>OpenMx::mxSE()</code>, <code>umxCI()</code>, <code>OpenMx::mxCI()</code>
+</p>
+</li></ul>
+<p>Other Reporting functions: 
+<code>RMSEA.MxModel()</code>,
+<code>RMSEA.summary.mxmodel()</code>,
+<code>RMSEA()</code>,
+<code>extractAIC.MxModel()</code>,
+<code>loadings.MxModel()</code>,
+<code>loadings()</code>,
+<code>residuals.MxModel()</code>,
+<code>tmx_show.MxMatrix()</code>,
+<code>tmx_show()</code>,
+<code>umxCI_boot()</code>,
+<code>umxCI()</code>,
+<code>umxExpCov()</code>,
+<code>umxExpMeans()</code>,
+<code>umxFitIndices()</code>,
+<code>umxRotate()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+
+manifests = names(demoOneFactor)
+m1 = umxRAM("OneFactor", data = demoOneFactor, type = "cov",
+	umxPath(from = "G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+
+m1 = umxConfint(m1, run = TRUE) # There are no existing CI requests...
+
+# Add a CI request for "G_to_x1", run, and report. Save with this CI computed
+m2 = umxConfint(m1, parm = "G_to_x1", run = TRUE) 
+
+# Just print out any existing CIs
+umxConfint(m2)
+
+# CI requests added for free matrix parameters. User prompted to set run = TRUE
+m3 = umxConfint(m1, "all")
+
+# Run the requested CIs
+m3 = umxConfint(m3, run = TRUE) 
+
+# Run CIs for free one-headed (asymmetric) paths in RAM model. 
+#   note: Deletes other existing requests,
+tmp = umxConfint(m1, parm = "A", run = TRUE)
+
+# Wipe existing CIs, add G_to_x1
+tmp = umxConfint(m1, parm = "G_to_x1", run = TRUE, wipeExistingRequests = TRUE) 
+
+# For some twin models, a "smart" mode is implemented
+# note: only implemented for umxCP so far
+m2 =  umxConfint(m1, "smart")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

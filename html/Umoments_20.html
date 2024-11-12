@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uM5pool</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pooled central moment estimates - two-sample</h2>
+
+<h3>Description</h3>
+
+<p>Calculate pooled unbiased estimates of central moments and their powers and
+products.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uM5pool(m2, m3, m5, n_x, n_y)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>m2</code></td>
+<td>
+<p>naive biased variance estimate <code class="reqn">m_2 = 1/(n_x + n_y) \sum_{i =
+1}^{n_x} ((X_i - \bar{X})^2 + \sum_{i = 1}^{n_y} ((Y_i - \bar{Y})^2</code> for vectors <code>X</code> and <code>Y</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m3</code></td>
+<td>
+<p>naive biased third central moment estimate <code class="reqn">m_3 = 1/(n_x + n_y)
+\sum_{i = 1}^{n_x} ((X_i - \bar{X})^3 + \sum_{i = 1}^{n_y} ((Y_i -
+\bar{Y})^3</code> for vectors
+<code>X</code> and <code>Y</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m5</code></td>
+<td>
+<p>naive biased fifth central moment estimate <code class="reqn">m_5 = 1/(n_x + n_y)
+\sum_{i = 1}^{n_x} ((X_i - \bar{X})^5 + \sum_{i = 1}^{n_y} ((Y_i -
+\bar{Y})^5</code> for vectors
+<code>X</code> and <code>Y</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_x</code></td>
+<td>
+<p>number of observations in the first group.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_y</code></td>
+<td>
+<p>number of observations in the second group.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Pooled estimate of a fifth central moment.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other pooled estimates (two-sample): 
+<code>uM2M3pool()</code>,
+<code>uM2M4pool()</code>,
+<code>uM2pool()</code>,
+<code>uM2pow2pool()</code>,
+<code>uM2pow3pool()</code>,
+<code>uM3pool()</code>,
+<code>uM3pow2pool()</code>,
+<code>uM4pool()</code>,
+<code>uM6pool()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">nx &lt;- 10
+ny &lt;- 8
+shp &lt;- 3
+smpx &lt;- rgamma(nx, shape = shp) - shp
+smpy &lt;- rgamma(ny, shape = shp)
+mx &lt;- mean(smpx)
+my &lt;- mean(smpy)
+m  &lt;- numeric(5)
+for (j in 2:5) {
+  m[j] &lt;- mean(c((smpx - mx)^j, (smpy - my)^j))
+}
+uM5pool(m[2], m[3], m[5], nx, ny)
+</code></pre>
+
+
+</div>

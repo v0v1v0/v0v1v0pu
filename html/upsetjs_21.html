@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fromExpression</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>generates the sets from a lists object that contained the cardinalities of both sets and combinations (&amp;)</h2>
+
+<h3>Description</h3>
+
+<p>generates the sets from a lists object that contained the cardinalities of both sets and combinations (&amp;)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fromExpression(
+  upsetjs,
+  value,
+  symbol = "&amp;",
+  order.by = "cardinality",
+  colors = NULL,
+  type = "intersection"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>the expression list input</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>symbol</code></td>
+<td>
+<p>the symbol how to split list names to get the sets</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.by</code></td>
+<td>
+<p>order intersections by cardinality or name</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>the optional list with set name to color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>the type of intersections this data represents (intersection,union,distinctIntersection)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">upsetjs() %&gt;% fromExpression(list(a = 3, b = 2, `a&amp;b` = 2))
+</code></pre>
+
+
+</div>

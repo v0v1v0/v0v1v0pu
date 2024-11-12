@@ -1,0 +1,204 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_oc_gBOIN_TB</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Generate operating characteristics for finding the maximum tolerated dose (MTD) defined by Toxicity Burden (TB) Score  using gBOIN design
+</h2>
+
+<h3>Description</h3>
+
+<p>Obtain the operating characteristics of the generalized Bayesian optimal interval (gBOIN) design (Mu et al. 2017) for maximum tolerated dose (MTD) (defined by the toxicity burden (BT) score proposed by Bekele et al. (2004))-based dosing-finding trials using. The algorithm of this function is exactly same to the get_oc_gBOIN_Continuous() just the input parameter is used by the TB score
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_oc_gBOIN_TB(target, pmat, weight, ncohort, cohortsize,
+                n.earlystop = 100, ntrial, mu_1 = 0.6 * target,
+                mu_2 = 1.4 * target, startdose = 1, seed = 100)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the target TB score
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pmat</code></td>
+<td>
+
+<p>pmat is a list. Each element is a matrix, representing the probability of different toxicity type and scale under
+different dose levels.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weight</code></td>
+<td>
+
+<p>the severity weight
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncohort</code></td>
+<td>
+
+<p>the number of cohort
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cohortsize</code></td>
+<td>
+
+<p>the cohort size
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.earlystop</code></td>
+<td>
+
+<p>the early stopping parameter. The default value is n.earlystop = 100
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ntrial</code></td>
+<td>
+
+<p>the number of simulated trial
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu_1</code></td>
+<td>
+
+<p>the lower bound. The default value is p.saf = 0.6 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu_2</code></td>
+<td>
+
+<p>the upper bound. The default value is mu_2 = 1.4 * target
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>startdose</code></td>
+<td>
+
+<p>the starting dose level. The default value is startdose = 1
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+
+<p>the seed. The default value is seed = 100
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>get_oc_gBOIN_TB()</code> returns the operating characteristics of  generalized Bayesian optimal interval design as a list object, including: (1) selection percentage of each dose, (2) the average number of patients treated at each dose
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>Bekele, B. Nebiyou, and Peter F. Thall. "Dose-finding based on multiple toxicities in a soft tissue sarcoma trial." Journal of the American Statistical Association 99, no. 465 (2004): 26-35.
+</p>
+<p>Rongji Mu, Ying Yuan, Jin Xu, Sumithra J. Mandrekar, Jun Yin: gBOIN: a unified model-assisted phase I trial design accounting for toxicity grades, and binary or continuous end points. Royal Statistical Society 2019
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">target &lt;- 3.344
+ncohort &lt;- 10
+cohortsize &lt;- 3
+ntrial &lt;- 1000
+rate &lt;- 1.1
+weight &lt;- rate * rbind(c(0,1,1.5,5,6), c(0,2.5,6,rep(0,2)), c(0,2,3,6,0),
+                       c(0,1.5,2,0,0), c(0,0.5,1,0,0))
+pmat &lt;- list()
+pmat[[1]] &lt;- rbind(c(0.5,0.5,rep(0,3)),
+                   c(1,rep(0,4)),
+                   c(1,rep(0,4)),
+                   c(1,rep(0,4)),
+                   c(0.5,0,0.5,0,0))
+pmat[[2]] &lt;- rbind(c(0.5,0,0.5,0,0),
+                   c(1,rep(0,4)),
+                   c(0.5,0.5,0,0,0),
+                   c(0.5,0.5,rep(0,3)),
+                   c(0.46,0,0.54,rep(0,2)))
+pmat[[3]] &lt;- rbind(c(0.5,0,0.5,0,0),
+                   c(0.4,0.6,0,0,0),
+                   c(0.25,0.75,0,0,0),
+                   c(0.5,0.5,0,0,0),
+                   c(1,0,0,0,0))
+pmat[[4]] &lt;- rbind(c(0.5,0,0.5,0,0),
+                   c(0.4,0.6,0,0,0),
+                   c(0.25,0.75,0,0,0),
+                   c(0.5,0.5,0,0,0),
+                   c(0.5,0,0.5,0,0))
+pmat[[5]] &lt;- rbind(c(0.5,0,0.5,0,0),
+                   c(0,1,0,0,0),
+                   c(0.25,0.75,0,0,0),
+                   c(0.5,0.5,0,0,0),
+                   c(0.5,0,0.5,0,0))
+pmat[[6]] &lt;- rbind(c(0,0.5,0.5,0,0),
+                   c(0,1,0,0,0),
+                   c(0,1,0,0,0),
+                   c(0.5,0.5,0,0,0),
+                   c(0.5,0,0.5,0,0))
+pmat[[7]] &lt;- rbind(c(0,0.5,0.5,0,0),
+                   c(0,1,0,0,0),
+                   c(0,1,0,0,0),
+                   c(0,0.5,0.5,0,0),
+                   c(0.5,0,0.5,0,0))
+pmat[[8]] &lt;- rbind(c(0,0.5,0.5,0,0),
+                   c(0,1,0,0,0),
+                   c(0,0,1,0,0),
+                   c(0,0.5,0.5,0,0),
+                   c(0.5,0,0.5,0,0))
+pmat[[9]] &lt;- rbind(c(0,0,1,0,0),
+                   c(0,1,0,0,0),
+                   c(0,0,1,0,0),
+                   c(0,0,1,0,0),
+                   c(0,0,1,0,0))
+pmat[[10]] &lt;- rbind(c(0,0,1,0,0),
+                    c(0,1,0,0,0),
+                    c(1/3,0,0,2/3,0),
+                    c(0,0,1,0,0),
+                    c(0,0,1,0,0))
+get_oc_gBOIN_TB(target = target, pmat = pmat, weight = weight,
+                ncohort = ncohort, cohortsize = cohortsize,
+                ntrial = ntrial)
+</code></pre>
+
+
+</div>

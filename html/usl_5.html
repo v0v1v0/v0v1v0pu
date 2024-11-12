@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>efficiency,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Efficiency of the system</h2>
+
+<h3>Description</h3>
+
+<p>The efficiency of a system expressed in terms of the deviation from
+linear scalability.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+efficiency(object)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A USL object.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The function returns a vector which contains the deviation from linearity
+for every measurement of the model input.  A value of <code>1</code> indicates
+linear scalability while values less than <code>1</code> correspond to the
+fraction of the measurement compared to linear scalability.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of numeric values.
+</p>
+
+
+<h3>References</h3>
+
+<p>Neil J. Gunther. Guerrilla Capacity Planning: A Tactical
+Approach to Planning for Highly Scalable Applications and Services.
+Springer, Heidelberg, Germany, 1st edition, 2007.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(raytracer)
+
+## Show the efficiency
+efficiency(usl(throughput ~ processors, raytracer))
+
+</code></pre>
+
+
+</div>

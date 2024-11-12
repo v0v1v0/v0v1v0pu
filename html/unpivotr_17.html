@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>purpose</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sense-of-purpose in the 2014 New Zealand General Social Survey</h2>
+
+<h3>Description</h3>
+
+<p>A dataset containing the self-rated sense-of-purpose of respondents to the
+2014 New Zealand General Social Survey.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">purpose
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A list of eight data frames.  The first data frame, <code>Tidy</code>, contains
+the raw data in a standard tabular format:
+</p>
+
+<ul>
+<li> <p><code>Sex</code> Character, two levels
+</p>
+</li>
+<li> <p><code style="white-space: pre;">⁠Age group (Life-stages)⁠</code> Character, age-range in years, four levels
+</p>
+</li>
+<li> <p><code style="white-space: pre;">⁠Highest qualification⁠</code> Character, five levels
+</p>
+</li>
+<li> <p><code style="white-space: pre;">⁠Sense of purpose⁠</code> Character, score-range, two levels and NA
+</p>
+</li>
+<li> <p><code>Value</code> Numeric, number of respondents (weighted? rounded?), has NAs
+</p>
+</li>
+<li> <p><code>Flags</code> Character, metadata flags, two levels and NA
+</p>
+</li>
+</ul>
+<p>The next six data frames are pivot tables of the first data frame.  The
+data frames are named by the compass directions that are suggested for
+unpivoting them.
+</p>
+<p>The final data frame is a 'tidy' representation of small-multiple pivot
+tables.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The description provided by Statistics New Zealand is below.
+</p>
+<p>"The 2014 New Zealand General Social Survey (NZGSS) is the fourth of the
+survey series. We run the NZGSS every two years and interview around 8,500
+people about a range of social and economic outcomes.
+</p>
+<p>It provides new and redeveloped data about different aspects of people's
+lives and their well-being. In particular, the survey provides a view of how
+well-being outcomes are distributed across different groups within the New
+Zealand population.
+</p>
+<p>Symbols used in this table:
+</p>
+
+<ul>
+<li> <p><code>S</code> Data has been suppressed.
+</p>
+</li>
+<li> <p><code>*</code> Relative sampling error of 50 percent or more. Numbers may not add to
+the total because 'Don't know' and 'Refused' have been excluded.
+</p>
+</li>
+</ul>
+<p>Data quality:
+These statistics have been produced in accordance with the Official
+Statistics System principles and protocols for quality. They conform to the
+Statistics NZ Methodological Standard for Reporting of Data Quality."
+</p>
+
+
+<h3>Source</h3>
+
+<p>The data is 'Sense of purpose by highest qualification, age group, and sex,
+2014' from the Statistics New Zealand portal NZ.Stat
+<a href="https://nzdotstat.stats.govt.nz/wbos/Index.aspx#">https://nzdotstat.stats.govt.nz/wbos/Index.aspx#</a>, retrieved on
+2016-08-19.  It can be found in the section 'People and communities' &gt;
+'Self-rated well-being (NZGSS)'.  The data was exported in the Excel (.xlsx)
+file format and is available at 'extdata/purpose.xlsx' in the package
+directory.
+</p>
+
+
+</div>

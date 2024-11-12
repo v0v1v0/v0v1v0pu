@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>govrace10</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Election results for 2010 Governor races in the U.S.</h2>
+
+<h3>Description</h3>
+
+<p>Election results for 2010 Governor races in the U.S.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">govrace10
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 37 observations on the following 23 variables.
+</p>
+
+<dl>
+<dt>id</dt>
+<dd>
+<p>Unique identifier for the race, which does not overlap with other
+2010 races (see <code>houserace10</code> and <code>senaterace10</code>)</p>
+</dd>
+<dt>state</dt>
+<dd>
+<p>State name</p>
+</dd>
+<dt>abbr</dt>
+<dd>
+<p>State name abbreviation</p>
+</dd>
+<dt>name1</dt>
+<dd>
+<p>Name of the winning candidate</p>
+</dd>
+<dt>perc1</dt>
+<dd>
+<p>Percentage of vote for winning candidate (if more than one candidate)</p>
+</dd>
+<dt>party1</dt>
+<dd>
+<p>Party of winning candidate</p>
+</dd>
+<dt>votes1</dt>
+<dd>
+<p>Number of votes for winning candidate</p>
+</dd>
+<dt>name2</dt>
+<dd>
+<p>Name of candidate with second most votes</p>
+</dd>
+<dt>perc2</dt>
+<dd>
+<p>Percentage of vote for candidate who came in second</p>
+</dd>
+<dt>party2</dt>
+<dd>
+<p>Party of candidate with second most votes</p>
+</dd>
+<dt>votes2</dt>
+<dd>
+<p>Number of votes for candidate who came in second</p>
+</dd>
+<dt>name3</dt>
+<dd>
+<p>Name of candidate with third most votes</p>
+</dd>
+<dt>perc3</dt>
+<dd>
+<p>Percentage of vote for candidate who came in third</p>
+</dd>
+<dt>party3</dt>
+<dd>
+<p>Party of candidate with third most votes</p>
+</dd>
+<dt>votes3</dt>
+<dd>
+<p>Number of votes for candidate who came in third</p>
+</dd>
+<dt>name4</dt>
+<dd>
+<p>Name of candidate with fourth most votes</p>
+</dd>
+<dt>perc4</dt>
+<dd>
+<p>Percentage of vote for candidate who came in fourth</p>
+</dd>
+<dt>party4</dt>
+<dd>
+<p>Party of candidate with fourth most votes</p>
+</dd>
+<dt>votes4</dt>
+<dd>
+<p>Number of votes for candidate who came in fourth</p>
+</dd>
+<dt>name5</dt>
+<dd>
+<p>Name of candidate with fifth most votes</p>
+</dd>
+<dt>perc5</dt>
+<dd>
+<p>Percentage of vote for candidate who came in fifth</p>
+</dd>
+<dt>party5</dt>
+<dd>
+<p>Party of candidate with fifth most votes</p>
+</dd>
+<dt>votes5</dt>
+<dd>
+<p>Number of votes for candidate who came in fifth</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>MSNBC.com, retrieved 2010-11-09.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+table(govrace10$party1, govrace10$party2)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>reconstr.bu</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reconstruct a bottom-up Unbalanced Haar decomposition</h2>
+
+<h3>Description</h3>
+
+<p>Reconstructs a vector from its bottom-up Unbalanced Haar decomposition stored in an object returned
+by <code>best.unbal.haar.bu</code> or <code>hard.thresh.bu</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">reconstr.bu(buh.bu)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>buh.bu</code></td>
+<td>
+<p>    an object of the type returned by <code>best.unbal.haar.bu</code> and <code>hard.thresh.bu</code></p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>the inverse Unbalanced Haar transform of <code>buh.bu</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Piotr Fryzlewicz</p>
+
+
+<h3>See Also</h3>
+
+<p><code>best.unbal.haar.bu</code>, <code>hard.thresh.bu</code>, <code>reconstr</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- rnorm(1000)
+x.uh &lt;- best.unbal.haar.bu(x)
+x.uh.th &lt;- hard.thresh.bu(x.uh)
+x.uh.th.r &lt;- reconstr.bu(x.uh.th)
+ts.plot(x.uh.th.r)
+</code></pre>
+
+
+</div>

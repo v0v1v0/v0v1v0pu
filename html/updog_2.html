@@ -1,0 +1,156 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dbetabinom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Beta-Binomial Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution function, quantile function and random generation
+for the beta-binomial distribution when parameterized
+by the mean <code>mu</code> and the overdispersion parameter <code>rho</code>
+rather than the typical shape parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dbetabinom(x, size, mu, rho, log)
+
+pbetabinom(q, size, mu, rho, log_p)
+
+qbetabinom(p, size, mu, rho)
+
+rbetabinom(n, size, mu, rho)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>A vector of quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>A vector of sizes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>Either a scalar of the mean for each observation,
+or a vector of means of each observation, and thus
+the same length as <code>x</code> and <code>size</code>. This must
+be between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>Either a scalar of the overdispersion parameter
+for each observation, or a vector of overdispersion
+parameters of each observation, and thus the same length as
+<code>x</code> and <code>size</code>. This must be between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log_p</code></td>
+<td>
+<p>A logical vector either of length 1 or the same
+length as <code>x</code> and <code>size</code>. This determines whether
+to return the log probabilities for all observations
+(in the case that its length is 1) or for
+each observation (in the case that
+its length is that of <code>x</code> and <code>size</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>A vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The number of observations.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Let <code class="reqn">\mu</code> and <code class="reqn">\rho</code> be the mean and overdispersion parameters.
+Let <code class="reqn">\alpha</code> and <code class="reqn">\beta</code> be the usual shape parameters of
+a beta distribution. Then we have the relation
+</p>
+<p style="text-align: center;"><code class="reqn">\mu = \alpha/(\alpha + \beta),</code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn">\rho = 1/(1 + \alpha + \beta).</code>
+</p>
+
+<p>This necessarily means that
+</p>
+<p style="text-align: center;"><code class="reqn">\alpha = \mu (1 - \rho)/\rho,</code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn">\beta = (1 - \mu) (1 - \rho)/\rho.</code>
+</p>
+
+
+
+<h3>Value</h3>
+
+<p>Either a random sample (<code>rbetabinom</code>),
+the density (<code>dbetabinom</code>), the tail
+probability (<code>pbetabinom</code>), or the quantile
+(<code>qbetabinom</code>) of the beta-binomial distribution.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>dbetabinom()</code>: Density function.
+</p>
+</li>
+<li> <p><code>pbetabinom()</code>: Distribution function.
+</p>
+</li>
+<li> <p><code>qbetabinom()</code>: Quantile function.
+</p>
+</li>
+<li> <p><code>rbetabinom()</code>: Random generation.
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- rbetabinom(n = 10, size = 10, mu = 0.1, rho = 0.01)
+dbetabinom(x = 1, size = 10, mu = 0.1, rho = 0.01, log = FALSE)
+pbetabinom(q = 1, size = 10, mu = 0.1, rho = 0.01, log_p = FALSE)
+qbetabinom(p = 0.6, size = 10, mu = 0.1, rho = 0.01)
+
+
+</code></pre>
+
+
+</div>

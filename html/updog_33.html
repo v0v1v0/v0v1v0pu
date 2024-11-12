@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>wem</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>EM algorithm to fit weighted ash objective.</h2>
+
+<h3>Description</h3>
+
+<p>Solves the following optimization problem
+</p>
+<p style="text-align: center;"><code class="reqn">\max_{\pi} \sum_k w_k \log(\sum_j \pi_j \ell_jk).</code>
+</p>
+
+<p>It does this using a weighted EM algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">wem(weight_vec, lmat, pi_init, lambda, itermax, obj_tol)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>weight_vec</code></td>
+<td>
+<p>A vector of weights. Each element of <code>weight_vec</code> corresponds
+to a column of <code>lmat</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lmat</code></td>
+<td>
+<p>A matrix of inner weights. The columns are the "individuals" and the rows are the "classes."</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pi_init</code></td>
+<td>
+<p>The initial values of <code>pivec</code>. Each element of <code>pi_init</code>
+corresponds to a row of <code>lmat</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>The penalty on the pi's. Should be greater than 0 and really really small.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>itermax</code></td>
+<td>
+<p>The maximum number of EM iterations to take.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>obj_tol</code></td>
+<td>
+<p>The objective stopping criterion.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector of numerics.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(2)
+n &lt;- 3
+p &lt;- 5
+lmat &lt;- matrix(stats::runif(n * p), nrow = n)
+weight_vec &lt;- seq_len(p)
+pi_init &lt;- stats::runif(n)
+pi_init &lt;- pi_init / sum(pi_init)
+wem(weight_vec = weight_vec,
+    lmat       = lmat,
+    pi_init    = pi_init,
+    lambda     = 0,
+    itermax    = 100,
+    obj_tol    = 10^-6)
+
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>display_rgb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Plot RGB (RGBA) color composition in the PNG format.
+</h2>
+
+<h3>Description</h3>
+
+<p>Raster images are forced to be interpreted as color composition with 3 (RGB) or 4 (RGBA) channels. Values should be in the range between 0 and 255.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">display_rgb(obj, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code> or <code>list</code> of <code>ursaRaster</code> objects.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Passed to hierarchy of plotting functions:
+</p>
+
+<ul>
+<li> <p><code>compose_open</code>
+</p>
+
+<ul><li> <p><code>compose_design</code>
+</p>
+</li></ul>
+</li>
+<li> <p><code>compose_plot</code>
+</p>
+
+<ul>
+<li> <p><code>panel_new</code>
+</p>
+</li>
+<li> <p><code>panel_raster</code>
+</p>
+</li>
+<li> <p><code>panel_decor</code>
+</p>
+
+<ul>
+<li> <p><code>panel_graticule</code>
+</p>
+</li>
+<li> <p><code>panel_coastline</code>
+</p>
+</li>
+<li> <p><code>panel_scalebar</code>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li> <p><code>compose_close</code>
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If argument <code>obj</code> is <code>list</code> of <code>ursaRaster</code> objects (or object of class <code>ursaStack</code>) then <code>obj</code> is coerced to class <code>ursaRaster</code> ('stack' is coerced to 'brick').
+</p>
+<p>Colorbar is not plotted.
+</p>
+<p>By default, the created PNG has 24 bits per pixel. This is equal to parameter <code>bpp=24</code> (<code>compose_close</code>). It is allow to specify other value, e.g., <code>display_rgb(a,bpp=8)</code>.
+</p>
+<p>By default, labels of gridlines are located in bottom and left sides of the panel with raster. This is equal to parameter <code>margin=c(TRUE,TRUE,FALSE,FALSE)</code> (<code>panel_graticule</code>). It is allow to specify other value, e.g., <code>display_rgb(a,margin=T)</code>.
+</p>
+<p>Currently, for color compositions the argument <code>useRaster</code> (<code>panel_raster</code>) is introduced to fix possible coordinate mismatch for Cairo-devices, but have never used.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function returns <code>NULL</code> value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>display</code>, <code>display_brick</code>, <code>display_stack</code>
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(nband=3)
+display_rgb(a)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rand-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Method "rand"</h2>
+
+<h3>Description</h3>
+
+<p><code>rand</code> is a generic function used to produce random vectors from the
+distribution defined by various objects. The generic function invokes particular
+<code>methods</code> which depend on the <code>class</code> of the first
+argument.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'ANY'
+rand(object, n, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object from which random numbers from a distribution is
+desired</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric scalar specifying quantity of random numbers</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments affecting the random numbers produced</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The form of the value returned by <code>rand</code> depends on the
+class of its argument. See the documentation of the particular methods
+for details of what is produced by that method.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+</p>
+
+
+</div>

@@ -1,0 +1,123 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukhp_get</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get House Price Data</h2>
+
+<h3>Description</h3>
+
+<p>The UK House Price Index (UK HPI) captures changes in the value of residential
+properties. The UK HPI uses sales data collected on residential housing
+transactions, whether for cash or with a mortgage. Data is available at a
+national and regional level, as well as counties, local authorities and London boroughs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukhp_get(
+  region = "england",
+  item = "housePriceIndex",
+  regexp = FALSE,
+  start_date = NULL,
+  end_date = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>region</code></td>
+<td>
+<p>the region to select. If regexp is set to FALSE then the matching
+should be exact, see <code>ukhp_avail_regions</code> for available regions. If regexp
+is set to TRUE then partial matching is possible. Furthermore if it is set to
+NULL then selects all available regions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>item</code></td>
+<td>
+<p>the item to select. See <code>ukhp_avail_items</code> for the available
+categories.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regexp</code></td>
+<td>
+<p>use regular expression in sparql to search for regions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start_date</code></td>
+<td>
+<p>the start date as YYYY-MM-DD.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>end_date</code></td>
+<td>
+<p>the end date as YYYY-MM-DD.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>query modifiers passed through <code>rdf_modifiers</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Properties have been included:
+</p>
+
+<ul>
+<li>
+<p> in England and Wales since January 1995
+</p>
+</li>
+<li>
+<p> in Scotland since January 2004
+</p>
+</li>
+<li>
+<p> in Northern Ireland since January 2005
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>Returns a tibble in long format.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rdf_modifiers</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# This is case sensitive
+ukhp_get("england")
+
+# However you can use regular expression instead of exact match
+ukhp_get("england", regexp = TRUE)
+
+# For all available items
+ukhp_avail_items()
+
+ukhp_get(c("england", "wales"), item = c("salesVolume", "housePriceIndexDetached"))
+
+</code></pre>
+
+
+</div>

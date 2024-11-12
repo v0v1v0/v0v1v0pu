@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>%not_in%</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Opposite of %in%</h2>
+
+<h3>Description</h3>
+
+<p>Given vectors A and B, returns only the entities from vector A that don't occur in vector B.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">x %not_in% table
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The vector you want to check.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>Table in which to do lookups against x.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Same form of return as %in% — except it will return only elements on the lhs that aren't present on the rhs
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">c(1, 2, 3, 4, 5) %not_in% c(4, 5, 6, 7, 8)
+
+</code></pre>
+
+
+</div>

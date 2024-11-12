@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uni_lisbon</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Colors of the University of Lisbon, Portugal</h2>
+
+<h3>Description</h3>
+
+<p><code>uni_lisbon</code> provides the two basic (and monochromatic) colors 
+of the <a href="https://www.ulisboa.pt">University of Lisbon</a>, Portugal.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uni_lisbon
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 2.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The 2 primary colors are 
+<code>"black"</code> (corresponding to RGB <code>0 0 0</code> and HEX <code>"#000000"</code>) and 
+<code>"white"</code> (corresponding to RGB <code>255 255 255</code> and HEX <code>"#FFFFFF"</code>).  
+</p>
+<p><code>uni_lisbon</code> is defined by R color names.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of colors (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>P. M. Santos to <strong>unicol</strong>, 2023-08-17.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Color definitions are based on ULisboa's  
+<a href="https://www.ulisboa.pt/sites/ulisboa.pt/files/basicpage/docs/ulisboa_manual_normas_graficas_versao1.pdf">Manual normas graficas (PDF)</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes;
+<code>simcol</code> for finding similar colors;
+<code>newpal</code> for defining new color palettes;
+<code>grepal</code> for finding named colors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">uni_lisbon
+unikn::seecol(uni_lisbon, col_bg = "lightgrey",  
+              main = "Colors of the University of Lisbon")  # view color palette
+unikn::demopal(uni_lisbon, main = "Universidade de Lisboa") # demo color palette 
+
+</code></pre>
+
+
+</div>

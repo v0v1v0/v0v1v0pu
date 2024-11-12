@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dirwin.hall</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Irwin-Hall density</h2>
+
+<h3>Description</h3>
+
+<p>Irwin-Hall density
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dirwin.hall(x, n, log = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A number between 0 and <code>n</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of uniform distributions in the unit interval to sum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log</code></td>
+<td>
+<p>If it evaluates to <code>TRUE</code> it returns the log of the
+density instead of the density.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Gives the density of the Irwin-Hall distribution. It is
+the density of the sum of <code>n</code> uniform distributions on the
+interval (0,1).
+</p>
+<p style="text-align: center;"><code class="reqn">
+  h(y;n) = \frac{1}{(n-1)!}\sum_{k=0}^{ \left\lfloor y \right\rfloor } (-1)^k {n \choose k} (y-k)^{n-1}
+</code>
+</p>
+
+<p>where <code class="reqn">x \in [0,1]</code> and <code class="reqn">n</code> is a positive integer.
+</p>
+<p>This function is not numerically stable. The examples have some cases of this.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+dirwin.hall(2,5)
+
+# Numerically unstable example
+# Run the following one after the other
+# See how it goes from positive to negative (which means overflowing )
+dirwin.hall(35,50)
+dirwin.hall(36,50)
+dirwin.hall(37,50)
+dirwin.hall(38,50)
+
+</code></pre>
+
+
+</div>

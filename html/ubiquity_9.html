@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>calculate_variance</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculates the Variance in od_general</h2>
+
+<h3>Description</h3>
+
+<p>Takes the variance specified as a string and evaluates it
+locally, and returns that value
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">calculate_variance(
+  SIMINT_parameters,
+  SIMINT_varstr,
+  SIMINT_odchunk,
+  SIMINT_cfg
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_parameters</code></td>
+<td>
+<p>system parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_varstr</code></td>
+<td>
+<p>string containing variance calculation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_odchunk</code></td>
+<td>
+<p>chunk of observation details containing predictions, observations and the time</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SIMINT_cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Variance calculated for a given set of parameters in a model
+</p>
+
+
+</div>

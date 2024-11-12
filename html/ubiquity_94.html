@@ -1,0 +1,37 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ubiquity_name_check</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check Names of Cohorts, Analyses, Reports, etc.</h2>
+
+<h3>Description</h3>
+
+<p>Checks names specified for different analysis aspects (cohorts,
+analyses, reports, etc.) to make sure that they start with a letter and
+contain only letters, numbers and _
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ubiquity_name_check(test_name)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>test_name</code></td>
+<td>
+<p>string containing the name to be tested</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>List with Boolean element <code>isgood</code> that is <code>TRUE</code> when the name tests correct, <code>FALSE</code> when it fails. The element <code>msgs</code> contains a verbose message on why it fails.
+</p>
+
+
+</div>

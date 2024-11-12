@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_set_optimization_options</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set options that affect optimization in OpenMx</h2>
+
+<h3>Description</h3>
+
+<p><code>umx_set_optimization_options</code> provides access to get and set options affecting optimization.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_set_optimization_options(
+  opt = c("mvnRelEps", "mvnMaxPointsA", "Parallel diagnostics"),
+  value = NULL,
+  model = NULL,
+  silent = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>opt</code></td>
+<td>
+<p>default returns current values of the options listed. Currently
+"mvnRelEps", "mvnMaxPointsA", and "Parallel diagnostics".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>If not NULL, the value to set the opt to (can be a list of length(opt))</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A model for which to set the optimizer. Default (NULL) sets the optimizer globally.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>If TRUE, no message will be printed.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><em>note</em>: For <code>mvnRelEps</code>, values between .0001 to .01 are conventional. Smaller values slow optimization.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> current values if no value set.
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Get and set: 
+<code>umx_get_checkpoint()</code>,
+<code>umx_get_options()</code>,
+<code>umx_set_auto_plot()</code>,
+<code>umx_set_auto_run()</code>,
+<code>umx_set_checkpoint()</code>,
+<code>umx_set_condensed_slots()</code>,
+<code>umx_set_cores()</code>,
+<code>umx_set_data_variance_check()</code>,
+<code>umx_set_dollar_symbol()</code>,
+<code>umx_set_optimizer()</code>,
+<code>umx_set_plot_file_suffix()</code>,
+<code>umx_set_plot_format()</code>,
+<code>umx_set_plot_use_hrbrthemes()</code>,
+<code>umx_set_separator()</code>,
+<code>umx_set_silent()</code>,
+<code>umx_set_table_format()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># show current value for selected or all options
+umx_set_optimization_options() # print the existing state(s)
+umx_set_optimization_options("mvnRelEps") 
+## Not run: 
+umx_set_optimization_options("mvnRelEps", .01) # update globally
+umx_set_optimization_options("Parallel diagnostics", value = "Yes") 
+
+## End(Not run)
+</code></pre>
+
+
+</div>

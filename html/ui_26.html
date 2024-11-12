@@ -1,0 +1,181 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ui.ols</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Uncertainty intervals for OLS regression</h2>
+
+<h3>Description</h3>
+
+<p>This function allows you to derive uncertainty intervals for OLS regression when there is missing data in the continuous outcome. The uncertainty intervals can be used as a sensitivity analysis to ignorability (missing at random). Note that rho=0 render the same results as a complete case analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ui.ols(out.formula, mis.formula = NULL, data, rho = c(-0.3, 0.3),
+  alpha = 0.05, gridn = 101)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>out.formula</code></td>
+<td>
+<p>Formula for outcome regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mis.formula</code></td>
+<td>
+<p>Formula for missingness mechanism. If NULL the same covariates as in the outcome regression will be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data.frame containing the variables in the formula.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>The limits of rho for which the uncertainty interval should be constructed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Default 0.05 corresponding to a confidence level of 95 for CI and UI.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gridn</code></td>
+<td>
+<p>The number of distinct points within the interval <code>rho</code> at which confidence intervals should be constructed. Default is 101.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In order to visualize the results, you can use <code>plot.uiols</code>, 
+or <code>profile.uiols</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>The matched call</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ci</code></td>
+<td>
+<p>Confidence intervals for different values of <code>rho</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ui</code></td>
+<td>
+<p>Uncertainty intervals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coef</code></td>
+<td>
+<p>Estimated coefficients (outcome regression) for different values of <code>rho</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>out.model</code></td>
+<td>
+<p>Outcome regression model when rho=0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mis.model</code></td>
+<td>
+<p>Regression model for missingness mechanism (selection).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>The range of <code>rho</code> for which we want to construct an uncertainty interval</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gridrho</code></td>
+<td>
+<p>The values of <code>rho</code> for which bias and standard errors are derived</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>Consistant estimate of sigma</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>se</code></td>
+<td>
+<p>Standard error for different values of <code>rho</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ciols</code></td>
+<td>
+<p>Confidence intervals from a complete case analysis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ident.bound</code></td>
+<td>
+<p>Bounds for the coefficient estimates.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Minna Genbäck
+</p>
+
+
+<h3>References</h3>
+
+<p>Genbäck, M., Stanghellini, E., de Luna, X. (2015). Uncertainty Intervals for Regression Parameters with Non-ignorable Missingness in the Outcome. <em>Statistical Papers</em>, 56(3), 829-847.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(MASS)
+n&lt;-500
+delta&lt;-c(0.5,0.3,0.1)
+beta&lt;-c(0.8,-0.2,0.3)
+X&lt;-cbind(rep(1,n),rnorm(n),rbinom(n,1,0.5))
+x&lt;-X[,-1]
+rho=0.4
+error&lt;-mvrnorm(n,c(0,0),matrix(c(1,rho*2,rho*2,4),2))
+zstar&lt;-X%*%delta+error[,1]
+z&lt;-as.numeric(zstar&gt;0)
+y&lt;-X%*%beta+error[,2]
+y[z==0]&lt;-NA
+data&lt;-data.frame(y,x,z)
+ui&lt;-ui.ols(y~X1+X2,data=data,rho=c(-0.5,0.5))
+ui
+plot(ui)
+
+</code></pre>
+
+
+</div>

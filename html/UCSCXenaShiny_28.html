@@ -1,0 +1,236 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_ccle_cn_value</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fetch Identifier Value from Pan-cancer Dataset</h2>
+
+<h3>Description</h3>
+
+<p>Identifier includes gene/probe etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_ccle_cn_value(identifier)
+
+get_ccle_gene_value(identifier, norm = c("rpkm", "nc"))
+
+get_ccle_protein_value(identifier)
+
+get_ccle_mutation_status(identifier)
+
+get_pancan_value(
+  identifier,
+  subtype = NULL,
+  dataset = NULL,
+  host = available_hosts(),
+  samples = NULL,
+  ...
+)
+
+get_pancan_gene_value(identifier, norm = c("tpm", "fpkm", "nc"))
+
+get_pancan_transcript_value(identifier, norm = c("tpm", "fpkm", "isopct"))
+
+get_pancan_protein_value(identifier)
+
+get_pancan_mutation_status(identifier)
+
+get_pancan_cn_value(identifier, gistic2 = TRUE, use_thresholded_data = FALSE)
+
+get_pancan_methylation_value(
+  identifier,
+  type = c("450K", "27K"),
+  rule_out = NULL,
+  aggr = c("NA", "mean", "Q0", "Q25", "Q50", "Q75", "Q100")
+)
+
+get_pancan_miRNA_value(identifier)
+
+get_pcawg_gene_value(identifier)
+
+get_pcawg_fusion_value(identifier)
+
+get_pcawg_promoter_value(identifier, type = c("raw", "relative", "outlier"))
+
+get_pcawg_miRNA_value(identifier, norm = c("TMM", "UQ"))
+
+get_pcawg_APOBEC_mutagenesis_value(
+  identifier = c("tCa_MutLoad_MinEstimate", "APOBECtCa_enrich", "A3A_or_A3B",
+    "APOBEC_tCa_enrich_quartile", "APOBECrtCa_enrich", "APOBECytCa_enrich",
+    "APOBECytCa_enrich-APOBECrtCa_enrich", "BH_Fisher_p-value_tCa", "ntca+tgan",
+    "rtCa_to_G+rtCa_to_T", "rtca+tgay", "tCa_to_G+tCa_to_T",
+    "ytCa_rtCa_BH_Fisher_p-value", "ytCa_rtCa_Fisher_p-value", "ytCa_to_G+ytCa_to_T",
+    "ytca+tgar")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>identifier</code></td>
+<td>
+<p>a length-1 character representing a gene symbol, ensembl gene id, or probe id.
+Gene symbol is highly recommended.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>norm</code></td>
+<td>
+<p>the normalization method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subtype</code></td>
+<td>
+<p>a length-1 chracter representing a regular expression for matching
+<code>DataSubtype</code> column of UCSCXenaTools::XenaData.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataset</code></td>
+<td>
+<p>a length-1 chracter representing a regular expression for matching
+<code>XenaDatasets</code> of UCSCXenaTools::XenaData.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>host</code></td>
+<td>
+<p>a character vector representing host name(s), e.g. "toilHub".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>a character vector representing samples want to be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gistic2</code></td>
+<td>
+<p>if <code>TRUE</code> (default), use GISTIC2 data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use_thresholded_data</code></td>
+<td>
+<p>if <code>TRUE</code>, use GISTIC2-thresholded value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>methylation type, one of "450K" and "27K".
+for function <code>get_pcawg_promoter_value</code>, it can be one of
+"raw", "relative", "outlier".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rule_out</code></td>
+<td>
+<p>methylation sites to rule out before analyzing.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>aggr</code></td>
+<td>
+<p>apporaches to aggregate the methylation data, default is 'NA',
+in such case, a mean value is obtained for gene-level methylation.
+Allowed value is one of <code>c("NA", "mean", "Q0", "Q25", "Q50", "Q75", "Q100")</code>.
+Here, <code>Q50</code> is median.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a named vector or <code>list</code>.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>get_ccle_cn_value()</code>: Fetch copy number value from CCLE dataset
+</p>
+</li>
+<li> <p><code>get_ccle_gene_value()</code>: Fetch gene expression value from CCLE dataset
+</p>
+</li>
+<li> <p><code>get_ccle_protein_value()</code>: Fetch gene protein expression value from CCLE dataset
+</p>
+</li>
+<li> <p><code>get_ccle_mutation_status()</code>: Fetch gene mutation info from CCLE dataset
+</p>
+</li>
+<li> <p><code>get_pancan_value()</code>: Fetch identifier value from pan-cancer dataset
+</p>
+</li>
+<li> <p><code>get_pancan_gene_value()</code>: Fetch gene expression value from pan-cancer dataset
+</p>
+</li>
+<li> <p><code>get_pancan_transcript_value()</code>: Fetch gene transcript expression value from pan-cancer dataset
+</p>
+</li>
+<li> <p><code>get_pancan_protein_value()</code>: Fetch protein expression value from pan-cancer dataset
+</p>
+</li>
+<li> <p><code>get_pancan_mutation_status()</code>: Fetch mutation status value from pan-cancer dataset
+</p>
+</li>
+<li> <p><code>get_pancan_cn_value()</code>: Fetch gene copy number value from pan-cancer dataset processed by GISTIC 2.0
+</p>
+</li>
+<li> <p><code>get_pancan_methylation_value()</code>: Fetch gene expression value from CCLE dataset
+</p>
+</li>
+<li> <p><code>get_pancan_miRNA_value()</code>: Fetch miRNA expression value from pan-cancer dataset
+</p>
+</li>
+<li> <p><code>get_pcawg_gene_value()</code>: Fetch specimen-level gene expression value from PCAWG cohort
+</p>
+</li>
+<li> <p><code>get_pcawg_fusion_value()</code>: Fetch specimen-level gene fusion value from PCAWG cohort
+</p>
+</li>
+<li> <p><code>get_pcawg_promoter_value()</code>: Fetch specimen-level gene promoter activity value from PCAWG cohort
+</p>
+</li>
+<li> <p><code>get_pcawg_miRNA_value()</code>: Fetch specimen-level miRNA value from PCAWG cohort
+</p>
+</li>
+<li> <p><code>get_pcawg_APOBEC_mutagenesis_value()</code>: Fetch specimen-level gene fusion value from PCAWG cohort
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Fetch TP53 expression value from pan-cancer dataset
+t1 &lt;- get_pancan_value("TP53",
+  dataset = "TcgaTargetGtex_rsem_isoform_tpm",
+  host = "toilHub"
+)
+t2 &lt;- get_pancan_gene_value("TP53")
+t3 &lt;- get_pancan_protein_value("AKT")
+t4 &lt;- get_pancan_mutation_status("TP53")
+t5 &lt;- get_pancan_cn_value("TP53")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

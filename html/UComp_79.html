@@ -1,0 +1,90 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>TETSestim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>TETSestim</h2>
+
+<h3>Description</h3>
+
+<p>Estimates and forecasts TOBIT TETS models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">TETSestim(m)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>an object of type <code>TETS</code> created with <code>TETSmodel</code></p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p><code>TETSestim</code> estimates and forecasts a time series using an
+a TOBIT TETS model
+</p>
+
+
+<h3>Value</h3>
+
+<p>The same input object with the appropriate fields 
+filled in, in particular:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Estimated parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yFor</code></td>
+<td>
+<p>Forecasted values of output</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>yForV</code></td>
+<td>
+<p>Variance of forecasted values of output</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ySimul</code></td>
+<td>
+<p>Bootstrap simulations for forecasting distribution evaluation</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Diego J. Pedregal
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>TETS</code>, <code>TETSmodel</code>, <code>TETSvalidate</code>,
+<code>TETScomponents</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+m1 &lt;- TETSsetup(log(gdp))
+m1 &lt;- TETSestim(m1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

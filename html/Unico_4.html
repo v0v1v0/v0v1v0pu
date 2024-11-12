@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tensor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Inferring the underlying source-specific 3D tensor</h2>
+
+<h3>Description</h3>
+
+<p>Infers the underlying (sources by features by observations) 3D tensor from the observed (features by observations) 2D mixture, under the assumption of the Unico model that each observation is a mixture of unique source-specific values (in each feature in the data). In the context of bulk genomics containing a mixture of cell types (i.e. the input could be CpG sites by individuals for DNA methylation and genes by individuals for RNA expression), <code>tensor</code> allows to estimate the cell-type-specific levels for each individual in each CpG site/gene (i.e. a tensor of CpG sites/genes by individuals by cell types).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tensor(
+  X,
+  W,
+  C1,
+  C2,
+  Unico.mdl,
+  parallel = TRUE,
+  num_cores = NULL,
+  log_file = "Unico.log",
+  verbose = FALSE,
+  debug = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>An <code>m</code> by <code>n</code> matrix of measurements of <code>m</code> features for <code>n</code> observations. Each column in <code>X</code> is assumed to be a mixture of <code>k</code> sources. Note that <code>X</code> must include row names and column names and that NA values are currently not supported. <code>X</code> should not include features that are constant across all observations. Note that <code>X</code> could potentially be different from the <code>X</code> used to learn <code>Unico.mdl</code> (i.e. the original observed 2D mixture used to fit the model).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+<p>An <code>n</code> by <code>k</code> matrix of weights - the weights of <code>k</code> sources for each of the <code>n</code> mixtures (observations). All the weights must be positive and each row - corresponding to the weights of a single observation - must sum up to 1. Note that <code>W</code> must include row names and column names and that NA values are currently not supported.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C1</code></td>
+<td>
+<p>An <code>n</code> by <code>p1</code> design matrix of covariates that may affect the hidden source-specific values (possibly a different effect size in each source). Note that <code>C1</code> must include row names and column names and should not include an intercept term. NA values are currently not supported. Note that all covariates in <code>C1</code> must be present and match the order of the set of covariates in <code>C1</code> stored in <code>Unico.mdl</code> (i.e. the original set of source-specific covariates available when initially fitting the model).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C2</code></td>
+<td>
+<p>An <code>n</code> by <code>p2</code> design matrix of covariates that may affect the mixture (i.e. rather than directly the sources of the mixture; for example, variables that capture biases in the collection of the measurements). Note that <code>C2</code> must include row names and column names and should not include an intercept term. NA values are currently not supported. Note that all covariates in <code>C2</code> must be present and match the order of the set of covariates in <code>C2</code> stored in <code>Unico.mdl</code> (i.e. the original set of not source-specific covariates available when initially fitting the model).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Unico.mdl</code></td>
+<td>
+<p>The entire set of model parameters estimated by Unico on the 2D mixture matrix (i.e. the list returned by applying function <code>Unico</code> to <code>X</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>A logical value indicating whether to use parallel computing (possible when using a multi-core machine).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>num_cores</code></td>
+<td>
+<p>A numeric value indicating the number of cores to use (activated only if <code>parallel == TRUE</code>). If <code>num_cores == NULL</code> then all available cores except for one will be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log_file</code></td>
+<td>
+<p>A path to an output log file. Note that if the file <code>log_file</code> already exists then logs will be appended to the end of the file. Set <code>log_file</code> to <code>NULL</code> to prevent output from being saved into a file; note that if <code>verbose == FALSE</code> then no output file will be generated regardless of the value of <code>log_file</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>A logical value indicating whether to print logs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>debug</code></td>
+<td>
+<p>A logical value indicating whether to set the logger to a more detailed debug level; set <code>debug</code> to <code>TRUE</code> before reporting issues.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>After obtaining all the estimated parameters in the Unico model (by calling Unico), <code>tensor</code> uses the conditional distribution <code class="reqn">Z_{jh}^i|X_{ij}=x_{ij}</code> for estimating the <code class="reqn">k</code> source-specific levels of each sample <code class="reqn">i</code> at each feature <code class="reqn">j</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>k</code> by <code>m</code> by <code>n</code> array with the estimated source-specific values. The first axis/dimension in the array corresponds to the different sources.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data = simulate_data(n=100, m=2, k=3, p1=1, p2=1, taus_std=0, log_file=NULL)
+res = list()
+res$params.hat = Unico(data$X, data$W, data$C1, data$C2, parallel=FALSE, log_file=NULL)
+res$Z = tensor(data$X, data$W, data$C1, data$C2, res$params.hat, parallel=FALSE, log_file=NULL)
+
+</code></pre>
+
+
+</div>

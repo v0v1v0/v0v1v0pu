@@ -1,0 +1,42 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>initProj</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Defines and creates folders and variables</h2>
+
+<h3>Description</h3>
+
+<p>Defines and creates (if necessary) all folders variables
+set the SAGA path variables and other system variables
+exports all variables to the global environment
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">initProj(
+  projRootDir = getwd(),
+  projFolders = c("log/", "control/", "run/", "data/")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>projRootDir</code></td>
+<td>
+<p>project github root directory (your github name)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>projFolders</code></td>
+<td>
+<p>list of subfolders in project</p>
+</td>
+</tr>
+</table>
+</div>

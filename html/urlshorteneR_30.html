@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_retrieve_group_shorten_counts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve Group Shorten Counts</h2>
+
+<h3>Description</h3>
+
+<p>Get all the shorten counts for a specific group
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_retrieve_group_shorten_counts(group_id = NA, showRequestURL = F)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>group_id</code></td>
+<td>
+<p>- a required string | A GUID for a Bitly group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Group</h3>
+
+<p>Groups are a subdivision within an organization. A user will belong to a group within an organization.
+Most actions on our API will be on behalf of a group. For example, when you
+shorten a link, it will be on behalf of a user and a group.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference#getGroupShortenCounts">https://dev.bitly.com/api-reference#getGroupShortenCounts</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ui &lt;- bitly_user_info(showRequestURL = TRUE)
+rg &lt;- bitly_retrieve_group_shorten_counts(group_id = ui$default_group_guid[1])
+
+## End(Not run)
+</code></pre>
+
+
+</div>

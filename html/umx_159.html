@@ -1,0 +1,235 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxSummarySexLim</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Shows a compact, publication-style, summary of a umx Sex Limitation model</h2>
+
+<h3>Description</h3>
+
+<p>Summarize a fitted Cholesky model returned by <code>umxSexLim()</code>. Can control digits, report comparison model fits,
+optionally show the Rg (genetic and environmental correlations), and show confidence intervals. The report parameter allows
+drawing the tables to a web browser where they may readily be copied into non-markdown programs like Word.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxSummarySexLim(
+  model,
+  digits = 2,
+  file = getOption("umx_auto_plot"),
+  comparison = NULL,
+  std = TRUE,
+  showRg = FALSE,
+  CIs = TRUE,
+  report = c("markdown", "html"),
+  extended = FALSE,
+  zero.print = ".",
+  show = c("std", "raw"),
+  returnStd = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>a <code>umxSexLim()</code> model to summarize</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>round to how many digits (default = 2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The name of the dot file to write: "name" = use the name of the model.
+Defaults to NA = do not create plot output</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>comparison</code></td>
+<td>
+<p>you can run mxCompare on a comparison model (NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>std</code></td>
+<td>
+<p>Whether to standardize the output (default = TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRg</code></td>
+<td>
+<p>= whether to show the genetic correlations (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CIs</code></td>
+<td>
+<p>Whether to show Confidence intervals if they exist (T)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>report</code></td>
+<td>
+<p>If "html", then open an html table of the results</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extended</code></td>
+<td>
+<p>how much to report (FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zero.print</code></td>
+<td>
+<p>How to show zeros (".")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show</code></td>
+<td>
+<p>Here to support being called from generic xmu_safe_run_summary. User should ignore: can be c("std", "raw")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnStd</code></td>
+<td>
+<p>Whether to return the standardized form of the model (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other parameters to control model summary</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See documentation for summary functions for other types of umx model here: <code>umxSummary()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional <code>mxModel()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://tbates.github.io">https://tbates.github.io</a>,  <a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxSexLim()</code>, <code>umxPlotSexLim()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoCp()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# ======================================================
+# = Beta: Should be good to use for Boulder/March 2020 =
+# ======================================================
+
+# =============================================
+# = Run Qualitative Sex Differences ACE model =
+# =============================================
+
+# =========================
+# = Load and Process Data =
+# =========================
+require(umx)
+umx_set_optimizer("SLSQP")
+data("us_skinfold_data")
+# rescale vars
+us_skinfold_data[, c('bic_T1', 'bic_T2')] = us_skinfold_data[, c('bic_T1', 'bic_T2')]/3.4
+us_skinfold_data[, c('tri_T1', 'tri_T2')] = us_skinfold_data[, c('tri_T1', 'tri_T2')]/3
+us_skinfold_data[, c('caf_T1', 'caf_T2')] = us_skinfold_data[, c('caf_T1', 'caf_T2')]/3
+us_skinfold_data[, c('ssc_T1', 'ssc_T2')] = us_skinfold_data[, c('ssc_T1', 'ssc_T2')]/5
+us_skinfold_data[, c('sil_T1', 'sil_T2')] = us_skinfold_data[, c('sil_T1', 'sil_T2')]/5
+
+# Variables for Analysis
+selDVs = c('ssc','sil','caf','tri','bic')
+# Data for each of the 5 twin-type groups
+mzmData = subset(us_skinfold_data, zyg == 1)
+mzfData = subset(us_skinfold_data, zyg == 2)
+dzmData = subset(us_skinfold_data, zyg == 3)
+dzfData = subset(us_skinfold_data, zyg == 4)
+dzoData = subset(us_skinfold_data, zyg == 5)
+
+# ======================
+# = Bivariate example =
+# ======================
+
+selDVs = c('tri','bic')
+m1 = umxSexLim(selDVs = selDVs, sep = "_T", A_or_C = "A", tryHard = "yes",
+	mzmData = mzmData, dzmData = dzmData, 
+	mzfData = mzfData, dzfData = dzfData, 
+	dzoData = dzoData
+)
+umxSummary(m1, file = NA);
+
+# ===============
+# = Switch to C =
+# ===============
+m1 = umxSexLim(selDVs = selDVs, sep = "_T", A_or_C = "C", tryHard = "yes",
+	mzmData = mzmData, dzmData = dzmData, 
+	mzfData = mzfData, dzfData = dzfData, 
+	dzoData = dzoData
+)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

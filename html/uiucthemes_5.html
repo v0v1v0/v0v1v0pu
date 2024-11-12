@@ -1,0 +1,202 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>beamer_orange</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Beamer Illinois Orange Presentation Template for RMarkdown</h2>
+
+<h3>Description</h3>
+
+<p>Generates from an RMarkdown file a Beamer presentation with "Illinois" (UIUC)
+colors and identity standards with a focus on "Orange" and "White".
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">beamer_orange(
+  toc = FALSE,
+  slide_level = 3,
+  incremental = FALSE,
+  fig_width = 10,
+  fig_height = 7,
+  fig_crop = TRUE,
+  fig_caption = TRUE,
+  dev = "pdf",
+  df_print = "default",
+  fonttheme = "default",
+  highlight = "default",
+  keep_tex = FALSE,
+  latex_engine = "pdflatex",
+  citation_package = c("default", "natbib", "biblatex"),
+  includes = NULL,
+  md_extensions = NULL,
+  pandoc_args = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>toc</code></td>
+<td>
+<p><code>TRUE</code> to include a table of contents in the output (only
+level 1 headers will be included in the table of contents).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>slide_level</code></td>
+<td>
+<p>The heading level which defines individual slides. By
+default this is the highest header level in the hierarchy that is followed
+immediately by content, and not another header, somewhere in the document.
+This default can be overridden by specifying an explicit
+<code>slide_level</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>incremental</code></td>
+<td>
+<p><code>TRUE</code> to render slide bullets incrementally. Note
+that if you want to reverse the default incremental behavior for an
+individual bullet you can precede it with <code>&gt;</code>. For example:
+<em><code>&gt; - Bullet Text</code></em></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fig_width</code></td>
+<td>
+<p>Default width (in inches) for figures</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fig_height</code></td>
+<td>
+<p>Default height (in inches) for figures</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fig_crop</code></td>
+<td>
+<p><code>TRUE</code> to automatically apply the <code>pdfcrop</code> utility
+(if available) to pdf figures</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fig_caption</code></td>
+<td>
+<p><code>TRUE</code> to render figures with captions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dev</code></td>
+<td>
+<p>Graphics device to use for figure output (defaults to pdf)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df_print</code></td>
+<td>
+<p>Method to be used for printing data frames. Valid values
+include "default", "kable", "tibble", and "paged". The "default" method
+uses a corresponding S3 method of <code>print</code>, typically
+<code>print.data.frame</code>. The "kable" method uses the
+<code>knitr::kable</code> function. The "tibble" method uses
+the <span class="pkg">tibble</span> package to print a summary of the data frame. The "paged"
+method creates a paginated HTML table (note that this method is only valid
+for formats that produce HTML). In addition to the named methods you can
+also pass an arbitrary function to be used for printing data frames. You
+can disable the <code>df_print</code> behavior entirely by setting the option
+<code>rmarkdown.df_print</code> to <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fonttheme</code></td>
+<td>
+<p>Beamer font theme (e.g. "structurebold").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>highlight</code></td>
+<td>
+<p>Syntax highlighting style. Supported styles include
+"default", "tango", "pygments", "kate", "monochrome", "espresso",
+"zenburn", and "haddock". Pass <code>NULL</code> to prevent syntax highlighting.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keep_tex</code></td>
+<td>
+<p>Keep the intermediate tex file used in the conversion to PDF</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>latex_engine</code></td>
+<td>
+<p>LaTeX engine for producing PDF output. Options are
+"pdflatex", "lualatex", and "xelatex".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>citation_package</code></td>
+<td>
+<p>The LaTeX package to process citations, <code>natbib</code>
+or <code>biblatex</code>. Use <code>default</code> if neither package is to be used,
+which means citations will be processed via the command
+<code>pandoc-citeproc</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>includes</code></td>
+<td>
+<p>Named list of additional content to include within the
+document (typically created using the <code>includes</code> function).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>md_extensions</code></td>
+<td>
+<p>Markdown extensions to be added or removed from the
+default definition or R Markdown. See the <code>rmarkdown_format</code> for
+additional details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pandoc_args</code></td>
+<td>
+<p>Additional command line options to pass to pandoc</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A modified <code>beamer_presentation</code>  based on the "Illinois" (UIUC)
+Beamer themed template.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Prof. Steven A Culpepper (Beamer Orange Theme)
+James Joseph Balamuta (Theme Hooks)
+See AUTHORS for more specific details behind each of the contributions.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Generate slide deck from beamer template
+rmarkdown::draft("slide_deck.Rmd", template = "beamer_orange", package = "uiucthemes")
+
+# Compile the document
+rmarkdown::render("slide_deck/slide_deck.Rmd")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

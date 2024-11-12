@@ -1,0 +1,128 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukc_stop_search_loc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Stop and search</h2>
+
+<h3>Description</h3>
+
+<p>Returns details on stops and searches at a given location. The stop and
+searches returned in the API, like the crimes, are only an approximation
+of where the actual stop and searches occurred, they are not the exact
+locations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukc_stop_search_loc(location, date = NULL, ...)
+
+ukc_stop_search_coord(lat, lng, date = NULL, ...)
+
+ukc_stop_search_poly(poly_df, date = NULL, ...)
+
+ukc_stop_search_location(lat, lng, location, date = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>location</code></td>
+<td>
+<p>If specified, <code>lat</code> and <code>lng</code> are ignored. Location IDs are
+available through other methods including <code>ukc_street_crime()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>The year and month in "YYYY-MM" form. If <code>NULL</code>, latest
+available month will be returned. Also accepts dates in formats that can be
+coerced to <code>Date</code> class with <code>as.Date()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to <code>httr::GET</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lat</code></td>
+<td>
+<p>Latitude. Accepts a single value or a vector of values to create
+a custom polygon.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lng</code></td>
+<td>
+<p>Longitude. Accepts a single value or a vector of values to create
+a custom polygon.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>poly_df</code></td>
+<td>
+<p>a dataframe containing the lat/lng pairs which define
+the boundary of the custom area, or a <code>sf</code> or
+<code>SpatialPointsDataFrame</code> object.
+The first and last coordinates need not be the same — they will be joined
+by a straight line once the request is made. If a dataframe, the lat/lng
+must be the first two columns, or named <code>"lat"</code> and <code>"lng"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Functions accept one of <code>lat</code> and <code>lng</code> pairs, <code>location</code> IDs or
+a dataframe containing lat/lng pairs defining the boundary of a custom area.
+</p>
+<p>If specified, <code>lat</code> and <code>lng</code> must be the same length. If only one
+set of coordinates are given, all recorded stop and searches within a one
+mile radius are returned. If multiple pairs, all recorded stop and searches
+within a custom drawn polygon will be returned.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>tibble</code> with details of stop and searches outcomes.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukc_stop_search_force()</code>
+</p>
+<p><code>ukc_stop_search_no_location()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+ukc_stop_search2 &lt;- ukc_stop_search_coord(
+  lat = c(52.268, 53.194, 52.130),
+  lng = c(0.543, 0.238, 0.478)
+)
+
+
+poly_df_4 &lt;- data.frame(
+  lat = c(52.268, 52.794, 52.130, 52.000),
+  long = c(0.543, 0.238, 0.478, 0.400)
+)
+
+ukc_data_poly_4 &lt;- ukc_stop_search_poly(poly_df = poly_df_4)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,167 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>panel_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Add graphical elements to the image panel
+</h2>
+
+<h3>Description</h3>
+
+<p>Standard fuctions for plotting from package <span class="pkg">graphics</span> are used for manual adding elements to current plot. Theses series of functions used that standard instruments with additional controling the acceptability of plotting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">panel_plot(obj,...)
+
+panel_box(...)
+panel_lines(...)
+panel_points(...)
+panel_text(...)
+panel_abline(...)
+panel_polygon(...)
+panel_segments(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+
+<p>In <code>panel_plot</code> arguments are passed to function <code>plot</code>.<br>
+In <code>panel_box</code> arguments are passed to function <code>box</code>.<br>
+In <code>panel_lines</code> arguments are passed to function <code>lines</code>.<br>
+In <code>panel_points</code> arguments are passed to function <code>points</code>.<br>
+In <code>panel_text</code> arguments are passed to function <code>text</code>.<br>
+In <code>panel_abline</code> arguments are passed to function <code>abline</code>.<br>
+In <code>panel_polygon</code> arguments are passed to function <code>polygon</code>.<br>
+In <code>panel_segments</code> arguments are passed to function <code>segments</code>.<br></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If unable to get value <code>TRUE</code> from <code>getOption("ursaPngPlot")</code> then plotting is disable, and any function from this series returns <code>NULL</code>.
+</p>
+<p>Generally, for spatial objects argument <code>add=TRUE</code> is used in <code>panel_plot</code>.
+</p>
+
+
+
+<h3>Value</h3>
+
+<p>For spatial objects (simple features from <span class="pkg">sf</span> or spatial abstract classes from <span class="pkg">sp</span>) function <code>panel_plot</code> returns object of class <code>ursaLegend</code>. It is a list with items, which can be used to as arguments of <code>legend()</code>. This is intermediate step for experimental feature (not ready) to display colorbars on plot panel. For other objects function <code>panel_plot</code> returns value of function <code>plot</code>.
+</p>
+<p>Function <code>panel_box</code> returns value of function <code>box</code>.<br>
+Function <code>panel_lines</code> returns value of function <code>lines</code>.<br>
+Function <code>panel_points</code> returns value of function <code>points</code>.<br>
+Function <code>panel_text</code> returns value of function <code>text</code>.<br>
+Function <code>panel_abline</code> returns value of function <code>abline</code>.<br>
+Function <code>panel_polygon</code> returns value of function <code>polygon</code>.<br>
+Function <code>panel_segments</code> returns value of function <code>segments</code>.<br></p>
+
+
+<h3>Note</h3>
+
+<p>For plotted elements it is possible to create legend for colors using color bars. No shapes kind and size, no line widths.
+</p>
+<p>To convert object <code>x</code> of class <code>ursaLegend</code> to object of class <code>ursaColorTable</code> please use <code>ursa_colortable(x)</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>panel_contour</code>
+</p>
+
+<p>Package <span class="pkg">graphics</span> (<code>help(package="graphics")</code>) and functions <code>plot</code>, <code>box</code>, <code>lines</code>, <code>points</code>, <code>text</code>, <code>abline</code>, <code>polygon</code>, <code>segments</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+# require(rgdal) ## 'rgdal' is retired
+a &lt;- pixelsize()
+g1 &lt;- session_grid()
+n &lt;- 12L
+k &lt;- 5L
+x &lt;- with(g1,runif(n,min=minx,max=maxx))
+y &lt;- with(g1,runif(n,min=miny,max=maxy))
+panel_plot(x,y) ## plots nothing, because 'compose_open(...,dev=F)' is not called yet
+shpname &lt;- tempfile(fileext=".shp")
+layername &lt;- gsub("\\.shp$","",basename(shpname))
+if (requireNamespace("sp")) {
+   sl &lt;- lapply(seq(k),function(id){
+      x &lt;- sort(with(g1,runif(n,min=minx,max=maxx)))
+      y &lt;- sort(with(g1,runif(n,min=miny,max=maxy)))
+      sp::Lines(sp::Line(cbind(x,y)),ID=id)
+   })
+   sl &lt;- sp::SpatialLines(sl,proj4string=sp::CRS(ursa_proj(g1)))#,id=length(sl))
+   lab &lt;- t(sapply(sp::coordinates(sl),function(xy) xy[[1]][round(n/2),]))
+   lab &lt;- as.data.frame(cbind(lab,z=seq(k)))
+   sl &lt;- sp::SpatialLinesDataFrame(sl
+                 ,data=data.frame(ID=runif(k,min=5,max=9),desc=LETTERS[seq(k)]))
+   print(sl@data)
+   ct &lt;- colorize(sl@data$ID)#,name=sldf@data$desc)
+   try(writeOGR(sl,dirname(shpname),layername,driver="ESRI Shapefile")) ## 'rgdal' is retired
+   spatial_write(sl,shpname)
+} else if (requireNamespace("sf")) {
+   sl &lt;- lapply(seq(k),function(id) {
+      x &lt;- sort(with(g1,runif(n,min=minx,max=maxx)))
+      y &lt;- sort(with(g1,runif(n,min=miny,max=maxy)))
+      sf::st_linestring(cbind(x,y))
+   })
+   sl &lt;- sf::st_sfc(sl,crs=as.character(ursa_crs(g1)))
+   sl &lt;- sf::st_sf(ID=runif(k,min=5,max=9),desc=LETTERS[seq(k)],geometry=sl)
+   print(spatial_data(sl))
+   lab &lt;- do.call("rbind",lapply(sf::st_geometry(sl),colMeans))
+   lab &lt;- as.data.frame(cbind(lab,z=seq(k)))
+   ct &lt;- colorize(sl$ID)
+   sf::st_write(sl,shpname)
+}
+compose_open(layout=c(1,2),legend=list(list("bottom",2)))
+panel_new()
+panel_decor()
+panel_lines(x,y,col="orange")
+panel_points(x,y,cex=5,pch=21,col="transparent",bg="#00FF005F")
+panel_points(0,0,pch=3)
+panel_text(0,0,"North\nPole",pos=4,cex=1.5,family="Courier New",font=3)
+panel_new()
+panel_decor()
+if (exists("sl"))
+   panel_plot(sl,lwd=4,col="grey20")
+if ((exists("ct"))&amp;&amp;(file.exists(shpname)))
+   panel_plot(shpname,lwd=3,col=ct$colortable[ct$index])
+if (exists("lab"))
+   panel_points(lab$x,lab$y,pch=as.character(lab$z),cex=2)
+if (exists("ct"))
+   compose_legend(ct$colortable)
+compose_close()
+file.remove(dir(path=dirname(shpname)
+               ,pattern=paste0(layername,"\\.(cpg|dbf|prj|shp|shx)")
+               ,full.names=TRUE))
+</code></pre>
+
+
+</div>

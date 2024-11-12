@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uhclust</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>U-statistic based significance hierarchical clustering</h2>
+
+<h3>Description</h3>
+
+<p>Hierarchical clustering method that partitions the data only when these partitions are statistically significant.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uhclust(md = NULL, data = NULL, alpha = 0.05, rep = 15, plot = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>md</code></td>
+<td>
+<p>Matrix of distances between all data points.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data matrix. Each row represents an observation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Significance level.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rep</code></td>
+<td>
+<p>Number of times to repeat optimization procedures. Important for problems with
+multiple optima.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Logical, <code>TRUE</code> if p-value annotated dendrogram should be plotted.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is the significance hierarchical clustering procedure of Valk and Cybis (2018). The data are
+repeatedly partitioned into two subgroups, through function <code>uclust</code>, according to a hierarchical scheme.
+The procedure stops when resulting subgroups are homogeneous or have fewer than 3 elements.
+This function should be used in high dimension small sample size settings.
+</p>
+<p>Either <code>data</code> or <code>md</code> should be provided.
+If data are entered directly, Bn will be computed considering the squared Euclidean distance.
+</p>
+<p>Variance of <code>bn</code> is estimated through resampling, and thus, p-values may vary a bit in different runs.
+</p>
+<p>For more detail see Cybis, Gabriela B., Marcio Valk, and Sílvia RC Lopes. "Clustering and classification problems in genetics through U-statistics."
+Journal of Statistical Computation and Simulation 88.10 (2018)
+and Valk, Marcio, and Gabriela Bettella Cybis. "U-statistical inference for hierarchical clustering." Journal of Computational and Graphical Statistics 30(1) (2021).
+</p>
+<p>See also <code>is_homo</code>, <code>uclust</code> and <code>Utest_class</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class <code>hclust</code> with three additional attribute arrays:</p>
+
+<dl>
+<dt>Pvalues</dt>
+<dd>
+<p> P-values from uclust for the final data partition at each node of the dendrogram. This
+array is in the same order of <code>height</code>, and only contains values for tests that were performed.</p>
+</dd>
+<dt>alpha</dt>
+<dd>
+<p> Bonferroni corrected significance levels for uclust for the data partitions at each node
+of the dendrogram. This array is in the same order of <code>height</code>, and only contains values for tests that were performed.</p>
+</dd>
+<dt>groups</dt>
+<dd>
+<p> Final group assignments.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+x = matrix(rnorm(100000),nrow=50)  #creating homogeneous Gaussian dataset
+res = uhclust(data=x)
+
+
+x[1:30,] = x[1:30,]+0.7   #Heterogeneous dataset
+x[1:10,] = x[1:10,]+0.4
+res = uhclust(data=x)
+res$groups
+
+</code></pre>
+
+
+</div>

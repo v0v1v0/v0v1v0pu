@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot_usmap</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Conveniently plot basic US map</h2>
+
+<h3>Description</h3>
+
+<p>Conveniently plot basic US map
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plot_usmap(
+  regions = c("states", "state", "counties", "county"),
+  include = c(),
+  exclude = c(),
+  data = data.frame(),
+  values = "values",
+  theme = theme_map(),
+  labels = FALSE,
+  label_color = "black",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>regions</code></td>
+<td>
+<p>The region breakdown for the map, can be one of
+(<code>"states"</code>, <code>"state"</code>, <code>"counties"</code>, <code>"county"</code>).
+The default is <code>"states"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include</code></td>
+<td>
+<p>The regions to include in the resulting map. If <code>regions</code> is
+<code>"states"</code>/<code>"state"</code>, the value can be either a state name, abbreviation or FIPS code.
+For counties, the FIPS must be provided as there can be multiple counties with the
+same name. If states are provided in the county map, only counties in the included states
+will be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+<p>The regions to exclude in the resulting map. If <code>regions</code> is
+<code>"states"</code>/<code>"state"</code>, the value can be either a state name, abbreviation or FIPS code.
+For counties, the FIPS must be provided as there can be multiple counties with the
+same name. The regions listed in the <code>include</code> parameter are applied first and the
+<code>exclude</code> regions are then removed from the resulting map. Any excluded regions
+not present in the included regions will be ignored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A data frame containing values to plot on the map. This
+parameter should be a data frame consisting of two columns,
+a FIPS code (2 characters for state, 5 characters for county)
+and the value that should be associated with that region. The
+columns of <code>data</code> <em>must</em> be <code>fips</code> or <code>state</code> and
+the value of the <code>values</code> parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>The name of the column that contains the values to be associated
+with a given region. The default is <code>"value"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theme</code></td>
+<td>
+<p>The theme that should be used for plotting the map. The default
+is <code>theme_map</code> from <a href="https://github.com/jrnold/ggthemes">ggthemes</a>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Whether or not to display labels on the map. Labels are not displayed
+by default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label_color</code></td>
+<td>
+<p>The color of the labels to display. Corresponds to the <code>color</code>
+option in the <code>ggplot2::aes()</code> mapping. The default is <code>"black"</code>.
+<a href="https://usmap.dev/docs/Rcolor.pdf">Click here</a>
+for more color options.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments to pass to <code>ggplot2::aes()</code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like <code>color = "red"</code>
+or <code>linewidth = 3</code>. They affect the appearance of the polygons used to render
+the map (for example fill color, line color, line thickness, etc.). If any of
+<code>color</code>/<code>colour</code>, <code>fill</code>, or <code>linewidth</code> are not specified they
+are set to their default values of <code>color="black"</code>, <code>fill="white"</code>,
+and <code>linewidth=0.4</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot2::ggplot object that contains a basic
+US map with the described parameters. Since the result is a <code>ggplot</code>
+object, it can be extended with more ggplot2::Geom layers, scales, labels,
+themes, etc.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>usmap, <code>ggplot2::theme()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot_usmap()
+plot_usmap(regions = "states")
+plot_usmap(regions = "counties")
+plot_usmap(regions = "state")
+plot_usmap(regions = "county")
+
+# Output is ggplot object so it can be extended
+# with any number of ggplot layers
+library(ggplot2)
+plot_usmap(include = c("CA", "NV", "ID", "OR", "WA")) +
+  labs(title = "Western States")
+
+# Color maps with data
+plot_usmap(data = statepop, values = "pop_2022")
+
+# Include labels on map (e.g. state abbreviations)
+plot_usmap(data = statepop, values = "pop_2022", labels = TRUE)
+# Choose color for labels
+plot_usmap(data = statepop, values = "pop_2022", labels = TRUE, label_color = "white")
+
+</code></pre>
+
+
+</div>

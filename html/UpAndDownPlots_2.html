@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>AutoSalesGermany</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Sales of cars and vans in Germany in the years 2017 and 2018.
+</h2>
+
+<h3>Description</h3>
+
+<p>Sales of cars and vans in Germany for 2017 and 2018.  The market is divided into 14 segments and in the two years 2017 and 2018 there were 50 competing manufacturers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(AutoSales)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 393 observations on the following 7 variables.
+</p>
+
+<dl>
+<dt><code>Sector</code></dt>
+<dd>
+<p>Car, Van, Other</p>
+</dd>
+<dt><code>Segment</code></dt>
+<dd>
+<p>The KBA splits the market into 14 segments</p>
+</dd>
+<dt><code>ModelSeries</code></dt>
+<dd>
+<p>Full vehicle name reported by KBA</p>
+</dd>
+<dt><code>Manufacturer</code></dt>
+<dd>
+<p>Manufacturer</p>
+</dd>
+<dt><code>Model</code></dt>
+<dd>
+<p>Model name</p>
+</dd>
+<dt><code>sales17</code></dt>
+<dd>
+<p>Sales in 2017</p>
+</dd>
+<dt><code>sales18</code></dt>
+<dd>
+<p>Sales in 2018</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The Kraftfahrt-Bundesamt (KBA, National Vehicle Authority in Germany) publishes spreadsheets of sales every month including year-to-date figures.  The full vehicle name has been split into manufacturer and model names.  NAs have been transformed to 0's.  The variable names and market segments have been anglicised.<br></p>
+<p>A 'cleaned' and reduced version of the dataset is available as AutoSalesX in this package.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Kraftfahrt-Bundesamt <br><a href="https://www.kba.de/DE/Statistik/Fahrzeuge/Neuzulassungen/MonatlicheNeuzulassungen/monatl_neuzulassungen_node.html">https://www.kba.de/DE/Statistik/Fahrzeuge/Neuzulassungen/MonatlicheNeuzulassungen/monatl_neuzulassungen_node.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">yy &lt;- ud_prep(AutoSales, v1="sales17", v2="sales18", levs=c("Segment"), sortLev=c("perc"))
+y1 &lt;- ud_plot(yy, labelvar="Segment")
+y1$uadl
+</code></pre>
+
+
+</div>

@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fin_valuation</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Work the valuation of a company</h2>
+
+<h3>Description</h3>
+
+<p><code>fin_valuation</code> uses the revenue, operating margin, expenses and PE to compute a market capitalization.
+Better to use a more powerful online site.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fin_valuation(
+  revenue = 6e+06 * 30000,
+  opmargin = 0.08,
+  expenses = 0.2,
+  PE = 30,
+  symbol = "$",
+  use = c("B", "M")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>revenue</code></td>
+<td>
+<p>Revenue of the company</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>opmargin</code></td>
+<td>
+<p>Margin on operating revenue</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expenses</code></td>
+<td>
+<p>Additional fixed costs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>PE</code></td>
+<td>
+<p>of the company</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>symbol</code></td>
+<td>
+<p>Currency</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use</code></td>
+<td>
+<p>reporting values in "B" (billion) or "M" (millions)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Revenue is multiplied by opmargin to get a gross profit. From this the proportion specified in <code>expenses</code> is subtracted
+and the resulting earnings turned into a price via the <code>PE</code>
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> value
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>fin_interest()</code>, <code>fin_NI()</code>, <code>fin_percent()</code>
+</p>
+</li></ul>
+<p>Other Miscellaneous Functions: 
+<code>deg2rad()</code>,
+<code>fin_JustifiedPE()</code>,
+<code>fin_NI()</code>,
+<code>fin_interest()</code>,
+<code>fin_percent()</code>,
+<code>fin_ticker()</code>,
+<code>rad2deg()</code>,
+<code>umxBrownie()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">fin_valuation(rev=7e9, opmargin=.1, PE=33)
+# Market cap =  $18,480,000,000
+# (Based on PE= 33, operating Income of $0.70 B, and net income =$0.56B
+
+</code></pre>
+
+
+</div>

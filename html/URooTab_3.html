@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uroot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Conduct unit root test using <code>EViews</code> routines</h2>
+
+<h3>Description</h3>
+
+<p>Use this function to conduct unit root test using <code>EViews</code> routines
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uroot(
+  series,
+  test = c("adf", "pp"),
+  info = "sic",
+  caption = NULL,
+  format = kable_format(),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>series</code></td>
+<td>
+<p>A vector of names or wildcard expressions for series object(s) contained in a dataframe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>Name of the unit root test. For example, <code>ADF</code>, <code>PP</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>info</code></td>
+<td>
+<p>Name of the information criterion. For example, <code>SIC</code>, <code>AIC</code>, <code>HQ</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption</code></td>
+<td>
+<p>Table caption as in <code>kable</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>Table format in <code>kable</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments supported by <code>EviewsR</code> <code>import_kable()</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An EViews workfile
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(URooTab)
+
+set.seed(1234)
+x=rnorm(100)
+y=cumsum(x)
+z=cumsum(y)
+dataFrame=data.frame(x,y,z)
+
+# Check if `EViews` is installed before running the tests
+
+eviewsExecutables=c('eviews','eviews10',paste0('Eviews',9:13,'_X',c(86,64)))
+if(any(Sys.which(eviewsExecutables)!="")) uroot(series=dataFrame,format="markdown",info="sic")
+
+
+</code></pre>
+
+
+</div>

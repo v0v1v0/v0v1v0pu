@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>species.count</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Ecosystem diagnostics for output of untb()</h2>
+
+<h3>Description</h3>
+
+<p>Provides ecosystem diagnostics of species count datasets (species
+counts and species tables), useful for the output of <code>untb()</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">species.count(x)
+species.table(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An integer matrix whose rows are integers
+representing the individuals' species</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>These functions takes a matrix argument, which is interpreted as the
+output of <code>untb(...,keep=TRUE)</code>.
+</p>
+<p>Function <code>species.count()</code> returns the total number of species
+present in each row (ie at each timestep).
+</p>
+<p>Function <code>species.table()</code> returns a matrix <code class="reqn">M</code> where
+<code>M[i,j]</code>   column of the matrix is the abundance of species <code class="reqn">j</code> 
+at time <code>i</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>See Also</h3>
+
+<p><code>preston</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">a &lt;- untb(start=rep(1,50), prob=0.01, gens=2000, keep=TRUE)
+
+plot(species.count(a),type="b")
+matplot(species.table(a),type="l",lty=1)
+
+jj &lt;- a[2000,]
+print(jj)
+as.count(jj)
+
+</code></pre>
+
+
+</div>

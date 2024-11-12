@@ -1,0 +1,163 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predict.LDA_VEM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predict method for an object of class LDA_VEM or class LDA_Gibbs</h2>
+
+<h3>Description</h3>
+
+<p>Gives either the predictions to which topic a document belongs or 
+the term posteriors by topic indicating which terms are emitted by each topic.<br>
+If you provide in <code>newdata</code> a document term matrix 
+for which a document does not contain any text and hence does not have any terms with nonzero entries,
+the prediction will give as topic prediction NA values (see the examples).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'LDA_VEM'
+predict(
+  object,
+  newdata,
+  type = c("topics", "terms"),
+  min_posterior = -1,
+  min_terms = 0,
+  labels,
+  ...
+)
+
+## S3 method for class 'LDA_Gibbs'
+predict(
+  object,
+  newdata,
+  type = c("topics", "terms"),
+  min_posterior = -1,
+  min_terms = 0,
+  labels,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class LDA_VEM or LDA_Gibbs as returned by <code>LDA</code> from the topicmodels package</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>a document/term matrix containing data for which to make a prediction</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>either 'topic' or 'terms' for the topic predictions or the term posteriors</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min_posterior</code></td>
+<td>
+<p>numeric in 0-1 range to output only terms emitted by each 
+topic which have a posterior probability equal or higher than <code>min_posterior</code>. 
+Only used if <code>type</code> is 'terms'. Provide -1 if you want to keep all values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min_terms</code></td>
+<td>
+<p>integer indicating the minimum number of terms to keep in the output when <code>type</code> is 'terms'. Defaults to 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>a character vector of the same length as the number of topics in the topic model. 
+Indicating how to label the topics. Only valid for type = 'topic'. 
+Defaults to topic_prob_001 up to topic_prob_999.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed on to topicmodels::posterior</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul>
+<li>
+<p>in case of type = 'topic': a data.table with columns 
+doc_id, 
+topic (the topic number to which the document is assigned to), 
+topic_label (the topic label)
+topic_prob (the posterior probability score for that topic), 
+topic_probdiff_2nd (the probability score for that topic - the probability score for the 2nd highest topic) 
+and the probability scores for each topic as indicated by topic_labelyourownlabel
+</p>
+</li>
+<li>
+<p>n case of type = 'terms': a list of data.frames with columns term and prob, 
+giving the posterior probability that each term is emitted by the topic
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>posterior-methods</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Build document/term matrix on dutch nouns
+data(brussels_reviews_anno)
+data(brussels_reviews)
+x &lt;- subset(brussels_reviews_anno, language == "nl")
+x &lt;- subset(x, xpos %in% c("JJ"))
+x &lt;- x[, c("doc_id", "lemma")]
+x &lt;- document_term_frequencies(x)
+dtm &lt;- document_term_matrix(x)
+dtm &lt;- dtm_remove_lowfreq(dtm, minfreq = 10)
+dtm &lt;- dtm_remove_tfidf(dtm, top = 100)
+
+
+## Fit a topicmodel using VEM
+library(topicmodels)
+mymodel &lt;- LDA(x = dtm, k = 4, method = "VEM")
+
+## Get topic terminology
+terminology &lt;- predict(mymodel, type = "terms", min_posterior = 0.05, min_terms = 3)
+terminology
+
+## Get scores alongside the topic model
+dtm &lt;- document_term_matrix(x, vocabulary = mymodel@terms)
+scores &lt;- predict(mymodel, newdata = dtm, type = "topics")
+scores &lt;- predict(mymodel, newdata = dtm, type = "topics", 
+                  labels = c("mylabel1", "xyz", "app-location", "newlabel"))
+head(scores)
+table(scores$topic)
+table(scores$topic_label)
+table(scores$topic, exclude = c())
+table(scores$topic_label, exclude = c())
+
+## Fit a topicmodel using Gibbs
+library(topicmodels)
+mymodel &lt;- LDA(x = dtm, k = 4, method = "Gibbs")
+terminology &lt;- predict(mymodel, type = "terms", min_posterior = 0.05, min_terms = 3)
+scores &lt;- predict(mymodel, type = "topics", newdata = dtm)
+
+</code></pre>
+
+
+</div>

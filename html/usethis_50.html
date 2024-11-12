@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>proj_sitrep</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Report working directory and usethis/RStudio project</h2>
+
+<h3>Description</h3>
+
+<p><code>proj_sitrep()</code> reports
+</p>
+
+<ul>
+<li>
+<p> current working directory
+</p>
+</li>
+<li>
+<p> the active usethis project
+</p>
+</li>
+<li>
+<p> the active RStudio Project
+</p>
+</li>
+</ul>
+<p>Call this function if things seem weird and you're not sure
+what's wrong or how to fix it. Usually, all three of these should coincide
+(or be unset) and <code>proj_sitrep()</code> provides suggested commands for getting
+back to this happy state.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">proj_sitrep()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>A named list, with S3 class <code>sitrep</code> (for printing purposes),
+reporting current working directory, active usethis project, and active
+RStudio Project
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other project functions: 
+<code>proj_utils</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">proj_sitrep()
+</code></pre>
+
+
+</div>

@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>trinity_2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Secondary colours of Trinity College Dublin, Ireland</h2>
+
+<h3>Description</h3>
+
+<p><code>trinity_2</code> provides the secondary colour palette  
+of <a href="https://www.tcd.ie">Trinity College Dublin</a>, Ireland.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">trinity_2
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 55.
+</p>
+
+
+<h3>Details</h3>
+
+<p><code>trinity_2</code> uses the HEX color definitions.
+</p>
+<p>The secondary colour palette supports the primary colours of <code>trinity_1</code>. 
+</p>
+<p>It is used for graphic elements within communications 
+(e.g., in illustrations, charts, diagrams and iconography). 
+It can also be used to add colour to items where a photographic image is unsuitable or unavailable 
+(e.g., posters, slides or backdrops). 
+</p>
+<p>It is important to remember that these are supporting colours only; 
+they should not predominate or overwhelm the 
+primary blue, grey, and white colours (of <code>trinity_1</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A names vector of colors (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>unicol</strong>, 2023-09-05.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Color definitions are based on <a href="https://www.tcd.ie">TCD</a>'s 
+<a href="https://www.tcd.ie/identity/colour-palette/">visual identity guidelines</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>trinity_1</code> for primary colors of Trinity College Dublin; 
+<code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes;
+<code>simcol</code> for finding similar colors;
+<code>newpal</code> for defining new color palettes;
+<code>grepal</code> for finding named colors.
+</p>
+<p>Other Irish university color palettes: 
+<code>galway_1</code>,
+<code>galway_2</code>,
+<code>limerick_1</code>,
+<code>limerick_2</code>,
+<code>maynooth</code>,
+<code>trinity_1</code>,
+<code>ucc_1</code>,
+<code>ucc_2</code>,
+<code>ucd</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">trinity_2
+main_cols &lt;- seq(1, 51, by = 5)
+unikn::seecol(trinity_2[main_cols], 
+              main = "Main secondary colours of the Trinity College Dublin")  # view palette
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,127 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ca.po-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Representation of class ca.po</h2>
+
+<h3>Description</h3>
+
+<p>This class contains the relevant information by applying the Phillips
+and Ouliaris cointegration test to a data matrix.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>z</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: A data matrix, or an
+object that can be coerced to it.</p>
+</dd>
+<dt>
+<code>type</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The type of
+the test, either the <code>"Pu"</code>-test or the normalisation
+invariant <code>"Pz"</code>-test.</p>
+</dd>
+<dt>
+<code>model</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: Determines
+how the series should be detrended.</p>
+</dd>
+<dt>
+<code>lag</code>:</dt>
+<dd>
+<p>Object of class <code>"integer"</code>: The lags used
+for variance/covariance correction.</p>
+</dd>
+<dt>
+<code>cval</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The critical
+values of the test at the 1%, 5% and 10% level of significance.</p>
+</dd>
+<dt>
+<code>res</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code>: The residuals of
+the the cointegration regression(s).</p>
+</dd>
+<dt>
+<code>teststat</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>: The value
+of the test statistic.</p>
+</dd>
+<dt>
+<code>testreg</code>:</dt>
+<dd>
+<p>Object of class <code>"ANY"</code>: The summary
+output of the cointegration regression(s).</p>
+</dd>
+<dt>
+<code>test.name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code>: The
+name of the test, <em>i.e.</em> ‘Phillips and Ouliaris’.</p>
+</dd>
+</dl>
+<h3>Extends</h3>
+
+<p>Class <code>urca</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Type <code>showMethods(classes="ca.po")</code> at the R prompt for a
+complete list of methods which are available for this class.
+</p>
+<p>Useful methods include
+</p>
+
+<dl>
+<dt>
+<code>show</code>:</dt>
+<dd>
+<p>test statistic.</p>
+</dd>
+<dt>
+<code>summary</code>:</dt>
+<dd>
+<p>like show, but critical value and summary of
+test regression(s) added.</p>
+</dd>
+<dt>
+<code>plot</code>:</dt>
+<dd>
+<p>Residual plot(s) and their acfs' and pacfs'.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Phillips, P.C.B. and Ouliaris, S. (1990), Asymptotic Properties of
+Residual Based Tests for Cointegration, <em>Econometrica</em>,
+<b>Vol. 58, No. 1</b>, 165–193.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.po</code> and <code>urca-class</code>. 
+</p>
+
+
+</div>

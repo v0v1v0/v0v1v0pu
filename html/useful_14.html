@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ComputeHartigan</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute Hartigan's Number</h2>
+
+<h3>Description</h3>
+
+<p>Runs the computation found in http://www.stat.columbia.edu/~madigan/DM08/descriptive.ppt.pdf
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ComputeHartigan(FitActualWSS, FitPlus1WSS, nrow)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>FitActualWSS</code></td>
+<td>
+<p>the WSS from a kmeans fit</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FitPlus1WSS</code></td>
+<td>
+<p>the WSS from a kmeans fit</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nrow</code></td>
+<td>
+<p>the number of rows in the original dataset</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Not exported, only used by <code>FitKMeans</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>The computed Hartigan Number
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+www.jaredlander.com
+</p>
+
+
+<h3>References</h3>
+
+<p>http://www.stat.columbia.edu/~madigan/DM08/descriptive.ppt.pdf
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>kmeans</code> <code>FitKMeans</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(iris)
+hartiganResults &lt;- FitKMeans(iris[, -ncol(iris)])
+PlotHartigan(hartiganResults)
+
+</code></pre>
+
+
+</div>

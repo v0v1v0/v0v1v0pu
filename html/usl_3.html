@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>confint,USL-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Confidence Intervals for USL model parameters</h2>
+
+<h3>Description</h3>
+
+<p>Estimate confidence intervals for one or more parameters in a USL model.
+The intervals are calculated from the parameter standard error using the
+Student t distribution at the given level.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'USL'
+confint(object, parm, level = 0.95)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A USL object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parm</code></td>
+<td>
+<p>A specification of which parameters are to be given confidence
+intervals, either a vector of numbers or a vector of names. If missing,
+all parameters are considered.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>The confidence level required.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Bootstrapping is no longer used to estimate confidence intervals.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix (or vector) with columns giving lower and upper confidence
+limits for each parameter. These will be labelled as (1-level)/2 and
+1 - (1-level)/2 in % (by default 2.5% and 97.5%).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>usl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(usl)
+
+data(specsdm91)
+
+## Create USL model
+usl.model &lt;- usl(throughput ~ load, specsdm91)
+
+## Print confidence intervals
+confint(usl.model)
+
+</code></pre>
+
+
+</div>

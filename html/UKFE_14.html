@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DesHydro</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Design hydrograph extraction</h2>
+
+<h3>Description</h3>
+
+<p>Extracts a mean hydrograph from a flow series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DesHydro(
+  x,
+  qu = 0.8,
+  n = 10,
+  thr = 0.975,
+  xst = NULL,
+  xend = NULL,
+  RetAll = FALSE,
+  Smooth = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric vector. The flow series of interest</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>qu</code></td>
+<td>
+<p>the quantile of flow which separates peaks and truncates either side of the peak to form the event hydrograph. The default is 0.8</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of event hydrographs from which to derive the mean hydrograph. Default is 10. Depending on the length of x, there may be less than 10</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thr</code></td>
+<td>
+<p>threshold above which event peaks are selected. The default is 0.975</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xst</code></td>
+<td>
+<p>an integer to truncate the x axis of the plot and resulting design hydrograph. The first point of the design hydrograph</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xend</code></td>
+<td>
+<p>an integer to truncate the x axis of the plot and resulting design hydrograph. The last point of the design hydrograph</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RetAll</code></td>
+<td>
+<p>logical argument with a default of false. If TRUE, all the hydrographs from which the mean is derived are returned in a data.frame. If FALSE, the mean hydrograph is returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Smooth</code></td>
+<td>
+<p>an integer (from 0 to 5). To smooth the design hydrograph. The default is 1 which provides the minimum level of smoothing. 0 is no smoothing and 5 is the highest</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>All the peaks over a user defined threshold are identified and separated by a user defined value 'qu', which is a quantile of flow. The top n peaks are selected and the hydrographs extracted. Each hydrograph is centred on the peak and truncated either side, where the flow falls below the 'qu' quantile flow. All events are scaled to have a peak flow of one, and the mean of these is taken as the scaled design hydrograph. After an initial view of the hydrograph, it can be truncated using the 'xst' and 'xend' arguments. The default is to select 10 hydrographs for averaging, however, there may well be fewer if the sample is short.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a numeric vector which is the mean of the top n peak events in the flow series. Also a plot of the n hydrographs and the design hydrograph. If the RetAll argument equals TRUE, a data.frame of the n hydrographs is returned instead.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The smoothing is done by rolling average, where the the mean is of points from n to the left up to n to the right. The n is chosen by the Smooth argument.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Extract a design hydrograph from the Thames daily mean flow. Then print the resulting hydrograph
+ThamesDesHydro &lt;- DesHydro(ThamesPQ$Q)
+ThamesDesHydro
+#Do the same but truncate the design hydrograph and the plot from the first point to the 30th
+DesHydro(ThamesPQ$Q, xst = 1, xend = 30)
+#adjust the qu value to see the impact
+ThamesDesHydro &lt;- DesHydro(ThamesPQ$Q, qu = 0.7)
+#Return all the hydrographs
+ThamesHydros &lt;- DesHydro(ThamesPQ$Q, xst = 1, xend = 30, RetAll = TRUE)
+#view the first six rows of the hydrographs
+head(ThamesHydros)
+</code></pre>
+
+
+</div>

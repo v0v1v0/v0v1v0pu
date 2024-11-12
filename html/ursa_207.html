@@ -1,0 +1,314 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ursaConnection</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Connection of raster objects.
+</h2>
+
+<h3>Description</h3>
+
+<p>Class <code>ursaConnection</code> is a part of class <code>ursaRaster</code>. It defines storage of raster images and manipulations with reading and writing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaConnection'
+print(x, ...)
+
+## S3 method for class 'ursaConnection'
+seek(con, where = NA, origin = "start", rw = "", ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>ursaConnection</code> object in function <code>print</code>.
+
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>con</code></td>
+<td>
+
+<p><code>ursaConnection</code> object in function <code>seek</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>where</code></td>
+<td>
+
+<p>Passed to <code>seek</code> for class <code>connection</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>origin</code></td>
+<td>
+
+<p>Passed to <code>seek</code> for class <code>connection</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rw</code></td>
+<td>
+
+<p>Passed to <code>seek</code> for class <code>connection</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p><code>print</code>: Further arguments passed to generic functions <code>print</code> and <code>str</code>.<br><code>seek</code>: Further arguments passed to function <code>seek</code> for class <code>connection</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>ursaConnection</code> get item <code>$con</code> from <code>ursaRaster</code> object.
+</p>
+<p>Functions <code>print</code> and <code>is.con</code> are for developers rather than users.
+</p>
+<p>Non-public function <code>.con.skeleton()</code> is used to generate the blank <code>ursaConnection</code> object. This approach provides unified sequence of list's items:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>ursaConnection</code> is a list. The most of names have a relation to specification of <a href="https://envi.geoscene.cn/help/Subsystems/envi/Content/ExploreImagery/ENVIHeaderFiles.htm">ENVI Header Files</a>. Items:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>driver</code></td>
+<td>
+<p>Character. Keyword of supported image formats. Allowed "ENVI" or "GDAL".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>Integer. Number of image columns (samples)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lines</code></td>
+<td>
+<p>Integer. Number of image rows (lines)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bands</code></td>
+<td>
+<p>Integer. Number of image bands (channels, layers)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>datatype</code></td>
+<td>
+<p>Integer. Keyword for data type (4 - 32-bit floating point, 2 - 16-bit signed integer, <em>etc</em>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>interleave</code></td>
+<td>
+<p>Character <code>"bsq"</code>, <code>"bil"</code>, <code>"bip"</code>. Data interleave - streams of bytes in storage.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>byteorder</code></td>
+<td>
+<p>Integer, 0 or 1. The order of bytes. <code>byteorder=0</code> less significant byte first, <code>byteorder=1</code> most significant byte first</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>endian</code></td>
+<td>
+<p>Character. See <code style="white-space: pre;">⁠\dQuote{endian}⁠</code> argument in <code>readBin</code> and <code>writeBin</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>swap</code></td>
+<td>
+<p>Integer 0 or 1. Passed to C-funcions <code>fread</code> and <code>fwrite</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>signed</code></td>
+<td>
+<p>Logical. Derived from <code>$datatype</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>Integer. Header offset in binary file. Default is 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wkt</code></td>
+<td>
+<p>Logical. In ENVI Header files <code>wkt=TRUE</code> forced to use “coordinate system string” field instead of “projection info” field</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nodata</code></td>
+<td>
+<p>Numeric. Replacement <code>NA</code> values in the storage.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mode</code></td>
+<td>
+<p>Character. <code>storage.mode</code> of data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sizeof</code></td>
+<td>
+<p>Integer, positive. Size in bytes for stored values. Extracted from <code>$datatype</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indexC</code></td>
+<td>
+<p>Integer vector. Sample indices in spatial cropping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indexR</code></td>
+<td>
+<p>Integer vector. Line indices in spatial cropping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>indexZ</code></td>
+<td>
+<p>Integer vector. Band indices</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>posC</code></td>
+<td>
+<p>Integer vector. Sample indices in partial reading.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>posR</code></td>
+<td>
+<p>Integer vector. Line indices in partial reading.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>posZ</code></td>
+<td>
+<p>Integer vector. Band indices in spatial crottping or partial reading.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fname</code></td>
+<td>
+<p>Character. File name. If <code>driver=ENVI</code>, then full path for ENVI binary file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>connection</code></td>
+<td>
+<p>Character. See <code>connections</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>compress</code></td>
+<td>
+<p>Signed integer. <code>0L</code> no compressing, <code>-1L</code> comressed file plus decompressed file,<code>-2L</code> decompressed file, <code>1L</code> - file will be compressed. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seek</code></td>
+<td>
+<p>Logical. Does connection support <code>seek</code>?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>handle</code></td>
+<td>
+<p><code>connections</code> in fact</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ursa(obj,"con")</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+print(methods(class="ursaConnection"))
+
+a &lt;- pixelsize()
+write_envi(rep(a,5),"tmp1",compress=FALSE)
+## change spatial domain for cropping example
+g &lt;- session_grid(regrid(lim=c(-1200000,-1400000,1600000,1800000)))
+print(g)
+b &lt;- open_envi("tmp1")
+d &lt;- b[,30:70]
+print(ursa(d[2:3],"con"))
+close(b)
+envi_remove("tmp1")
+</code></pre>
+
+
+</div>

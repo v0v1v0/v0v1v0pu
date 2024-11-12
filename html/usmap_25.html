@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>map_with_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Join county or state level data to US map data</h2>
+
+<h3>Description</h3>
+
+<p>Join county or state level data to US map data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">map_with_data(data, values = "values", include = c(), exclude = c(), na = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The data that should be joined to a US map. This
+parameter should be a data frame consisting of two columns,
+a fips code (2 characters for state, 5 characters for county)
+and the value that should be associated with that region. The
+columns of <code>data</code> <em>must</em> be <code>fips</code> or <code>state</code> and
+the value of the <code>values</code> parameter. If both <code>fips</code> and <code>state</code>
+are provided, this function uses the <code>fips</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>The name of the column that contains the values to be associated
+with a given region. The default is <code>"values"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include</code></td>
+<td>
+<p>The regions to include in the resulting map. If <code>regions</code> is
+<code>"states"</code>/<code>"state"</code>, the value can be either a state name, abbreviation or FIPS code.
+For counties, the FIPS must be provided as there can be multiple counties with the
+same name. If states are provided in the county map, only counties in the included states
+will be returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exclude</code></td>
+<td>
+<p>The regions to exclude in the resulting map. If <code>regions</code> is
+<code>"states"</code>/<code>"state"</code>, the value can be either a state name, abbreviation or FIPS code.
+For counties, the FIPS must be provided as there can be multiple counties with the
+same name. The regions listed in the <code>include</code> parameter are applied first and the
+<code>exclude</code> regions are then removed from the resulting map. Any excluded regions
+not present in the included regions will be ignored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na</code></td>
+<td>
+<p>The value to be inserted for states or counties that don't have
+a value in <code>data</code>. This value must be of the same type as the <code>value</code>
+column of <code>data</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame composed of the map data frame (from <code>us_map()</code>) except
+an extra column containing the values in <code>data</code> is included.
+</p>
+<p>The result can be plotted using <code>ggplot2::ggplot()</code> or <code>plot_usmap()</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>plot_usmap()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">state_data &lt;- data.frame(fips = c("01", "02", "04"), values = c(1, 5, 8))
+df &lt;- map_with_data(state_data, na = 0)
+
+state_data &lt;- data.frame(state = c("AK", "CA", "Utah"), values = c(6, 9, 3))
+df &lt;- map_with_data(state_data, na = 0)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,366 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_set_option</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Setting Analysis Options</h2>
+
+<h3>Description</h3>
+
+<p>Different options associated performing analyses (e.g running
+simulations, performing parameter estimation, logging, etc.) can be set
+with this function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_set_option(cfg, group, option, value)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group</code></td>
+<td>
+<p>options are grouped together by the underlying activity being performed: "estimation",  "general", "logging", "simulation", "solver", "stochastic", or "titration"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>option</code></td>
+<td>
+<p>for each group there are a set of options</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>corresponding value for the option</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><b><code>group="estimation"</code></b>
+</p>
+<p>The default estimation in R is performed using either the <code>optim</code> or <code>optimx</code> libraries.
+This is selected by setting the <code>optimizer</code> option:
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "optimizer",
+                       value  = "optim")
+</pre>
+<p>The optimization routine then specified using the <code>method</code>. By default this <code>option</code> is
+set to <code>Nelder-Mead</code>.
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "method",
+                       value  = "Nelder-Mead")
+</pre>
+<p>And different attributes are then selected using the control.
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "control",
+                       value  = list(trace  = TRUE,
+                                     maxit  = 500,
+                                     REPORT = 10))
+</pre>
+<p>For the different methods and control options, see the documentation for the <code>optim</code>
+and <code>optimx</code> libraries.
+</p>
+<p>To perform a global optimization you can install either the particle swarm (<code>pso</code>)
+genetic algorithm (<code>GA</code>) libraries.
+To use the particle swarm set the <code>optimizer</code> and <code>method</code>:
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "optimizer",
+                       value  = "pso")
+
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "method",
+                       value  = "psoptim")
+</pre>
+<p>The control option is a list described <code>pso</code> documentation.
+</p>
+<p>To use the genetic algorithm set the optimizer and method:
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "optimizer",
+                       value  = "ga")
+
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "method",
+                       value  = "ga")
+</pre>
+<p>The control option is a list and the list elements are the named options in the GA
+documentation. Use the following as an example:
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "control",
+                       value  = list(maxiter  = 10000,
+                                    optimArgs = list(
+                                      method  = "Nelder-Mead",
+                                      maxiter = 1000)))
+</pre>
+<p>To alter initial guesses see: <code>system_set_guess</code>
+</p>
+<p>When performing parameter estimation, the internal function
+<code>system_od_general</code> is used. This is the function that simulates your
+system at the conditions defined for the different cohorts. This is pretty
+flexible but if you want to go beyond this you can set the
+<code>observation_function</code> option:
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "observation_function",
+                       value  = "my_od")
+</pre>
+<p>That will instruct the optimziation routines to use the user defined
+function <code>my_od</code>. You will need to construct that function to have the
+same input/output format as <code>system_od_general</code>.
+</p>
+<p><b><code>group=general</code></b>
+</p>
+
+<ul><li> <p><code>"output_directory"</code>   = String where analysis outputs will be
+placed. Generally you wont want to change this, but it can be useful in Shiny
+apps where you need to have each shiny user generate output in that
+users directory : <code>file.path(".", "output")</code>
+</p>
+</li></ul>
+<p><b><code>group=logging</code></b>
+</p>
+<p>By default ubiquity prints different information to the console and logs this
+information to a log file. The following options can be used to control
+this behavior:
+</p>
+
+<ul>
+<li> <p><code>"enabled"</code>   = Boolean variable to control logging: <code>TRUE</code>
+</p>
+</li>
+<li> <p><code>"file"</code>      = String containing the name of the log file: <code>file.path("transient", "ubiquity_log.txt")</code>
+</p>
+</li>
+<li> <p><code>"timestamp"</code> = Boolean switch to control appending a time stamp to log entries: <code>TRUE</code>
+</p>
+</li>
+<li> <p><code>"ts_str"</code>    = String format of timestamp: "
+</p>
+</li>
+<li> <p><code>"debug"</code>     = Boolean switch to control debugging (see below): <code>FALSE</code>
+</p>
+</li>
+<li> <p><code>"verbose"</code>   = Boolean switch to control printing to the console <code>FALSE</code>
+</p>
+</li>
+</ul>
+<p>To enable debugging of different functions (like when performing esitmation), 
+set the <code>debug</code> option to <code>TRUE</code>. Important function calls will be 
+trapped and information will be logged and reported to the console.
+</p>
+<pre>
+cfg = system_set_option(cfg, 
+                       group  = "estimation",
+                       option = "debug",
+                       value  = FALSE)
+</pre>
+<p><b><code>group="simulation"</code></b>
+</p>
+
+<ul>
+<li> <p><code>"include_important_output_times"</code> - Automatically add bolus, infusion rate switching times, etc: <code>"yes"</code>(default), <code>"no"</code>.
+</p>
+</li>
+<li> <p><code>"integrate_with"</code> - Specify if the ODE solver should use the Rscript (<code>"r-file"</code>) or compiled C (<code>"c-file"</code>), if the build process can compile and load the C version it will be the default otherwise it will switch over to the R script.
+</p>
+</li>
+<li> <p><code>"output_times"</code> - Vector of times to evaulate the simulation (default <code>seq(0,100,1)</code>).
+</p>
+</li>
+<li> <p><code>"solver"</code> - Selects the ODE solver: <code>"lsoda"</code> (default), <code>"lsode"</code>, <code>"vode"</code>, etc.; see the documentation for <code>deSolve</code> for an exhaustive list.
+</p>
+</li>
+<li> <p><code>"sample_bolus_delta"</code> - Spacing used when sampling around bolus events (default <code>1e-6</code>). 
+</p>
+</li>
+<li> <p><code>"sample_forcing_delta"</code> - Spacing used when sampling around forcing functions (infusion rates, covariates, etc) (default <code>1e-3</code>). 
+</p>
+</li>
+</ul>
+<p><b><code>group=solver</code></b>
+</p>
+<p>Depending on the solver, different options can be set. The documentation
+for  <code>deSolve</code> lists the different solvers. For a full list of options, see the
+documentation for the specific solver (e.g. <code>?lsoda</code>). Some common options
+to consider are:
+</p>
+
+<ul>
+<li> <p><code>"atol"</code> - Relative error tolerance
+</p>
+</li>
+<li> <p><code>"rtol"</code> - Absolute error tolerance
+</p>
+</li>
+<li> <p><code>"hmin"</code> - Minimum integration step size
+</p>
+</li>
+<li> <p><code>"hmax"</code> - Maximum integration step size
+</p>
+</li>
+</ul>
+<p>To select the <code>vode</code> solver and set the maximum step size to 0.01, the
+following would be used:
+</p>
+<pre>
+cfg=system_set_option(cfg,
+                     group  = "simulation",
+                     option = "solver", 
+                     value  = "vode")
+
+cfg=system_set_option(cfg,
+                     group  = "solver",
+                     option = "hmax", 
+                     value  = 0.01)
+</pre>
+<p><b><code>group="stochastic"</code></b>
+</p>
+<p>When running stochastic simulations (inter-individual variability applied to system
+parameters) it can be useful to specify the following:
+</p>
+
+<ul>
+<li>
+<p><code>"ci"</code> - Confidence interval (default <code>95</code>)
+</p>
+</li>
+<li>
+<p><code>"nsub"</code> - Number of subjects (default <code>100</code>)
+</p>
+</li>
+<li>
+<p><code>"seed"</code> - Seed for the random numebr generator (default <code>8675309</code>)
+</p>
+</li>
+<li>
+<p><code>"ponly"</code> - Only generate the subject parameters but do not run the simulations (default <code>FALSE</code>)
+</p>
+</li>
+<li>
+<p><code>"ssp"</code> - A list of the calculated static secondary parameters to include (default all parameters defined by <code>&lt;As&gt;</code>)
+</p>
+</li>
+<li>
+<p><code>"outputs"</code> - A list of the predicted outputs to include (default all outputs defined by <code>&lt;O&gt;</code>)
+</p>
+</li>
+<li>
+<p><code>"states"</code> - A list of the predicted states to include(default all states)
+</p>
+</li>
+<li>
+<p><code>"sub_file"</code> - Name of data set loaded with (<code>system_load_data</code>) containing subject level parameters and coviariates
+</p>
+</li>
+<li>
+<p><code>"sub_file_sample"</code> - Controls how subjects are sampled from the dataset
+</p>
+</li>
+</ul>
+<p>If you wanted to generate <code>1000</code> subjects but only wanted the parameters, you would
+use the following:
+</p>
+<pre>
+cfg = system_set_option(cfg,
+                       group  = "stochastic", 
+                       option = "nsub ",
+                       value  = 1000)
+
+cfg = system_set_option(cfg,
+                       group  = "stochastic", 
+                       option = "ponly",
+                       value  = TRUE )
+</pre>
+<p>If you wanted to exclude both states and secondary parameters, while only including 
+the output <code>Cp_nM</code>, you would do the following:
+</p>
+<pre>
+
+cfg = system_set_option (cfg, 
+                        group  = "stochastic",
+                        option = "ssp",
+                        value  = list())
+
+cfg = system_set_option (cfg, 
+                        group  = "stochastic",
+                        option = "states",
+                        value  = list())
+
+cfg = system_set_option (cfg, 
+                        group  = "stochastic",
+                        option = "outputs",
+                        value  = c("Cp_nM")) 
+</pre>
+<p>To pull subject information from a data file instead of generating the subject
+parameters from IIV information the <code>sub_file</code> option can be used. The value here
+<code>SUBFILE_NAME</code> is the name given to a dataset loaded with
+(<code>system_load_data</code>):
+</p>
+<pre>
+cfg=system_set_option(cfg, 
+                     group  = "stochastic",
+                     option = "sub_file",
+                     value  = "SUBFILE_NAME")
+</pre>
+<p>Sampling from the dataset can be controlled using the <code>sub_file_sample</code> option:
+</p>
+<pre>
+cfg=system_set_option(cfg, 
+                     group  = "stochastic",
+                     option = "sub_file_sample",
+                     value  = "with replacement")
+</pre>
+<p>Sampling can be done sequentially (<code>"sequential"</code>), with replacement
+(<code>"with replacement"</code>), or without replacement (<code>"without replacement"</code>)
+</p>
+<p><b><code>group="titration"</code></b>
+</p>
+<p><code>"titrate"</code> - By default titration is disable (set to <code>FALSE</code>). If you are
+going to use titration, enable it here by setting this option to <code>TRUE</code>.
+This will force #' <code>simulate_subjects</code> to use 
+<code>run_simulation_titrate</code> internally when running simulations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Ubiquity system object with the option set
+</p>
+
+
+</div>

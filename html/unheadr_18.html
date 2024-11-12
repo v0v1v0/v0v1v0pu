@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>untangle2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Rectangling embedded subheaders</h2>
+
+<h3>Description</h3>
+
+<p>Rectangling embedded subheaders
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">untangle2(df, regex, orig, new)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>A data frame with embedded subheaders.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>regex</code></td>
+<td>
+<p>Regular expression to match the subheaders.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>orig</code></td>
+<td>
+<p>Variable containing the extraneous subheaders.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>new</code></td>
+<td>
+<p>Name of variable that will contain the group values.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Special thanks to Jenny Bryan for fixing the initial tidyeval code
+and overall function structure.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A tibble without the matched subheaders and a new variable containing
+the grouping data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(primates2017)
+# put taxonomic family in its own variable (matches the suffix "DAE")
+untangle2(primates2017, "DAE$", scientific_name, family)
+# put geographic regions in their own variable (matching them all by name)
+untangle2(
+  primates2017, "Asia|Madagascar|Mainland Africa|Neotropics",
+  scientific_name, family
+)
+# with magrittr pipes (re-exported in this package)
+primates2017 %&gt;%
+  untangle2("DAE$", scientific_name, family) %&gt;%
+  untangle2(
+    "Asia|Madagascar|Mainland Africa|Neotropics",
+    scientific_name, region
+  )
+</code></pre>
+
+
+</div>

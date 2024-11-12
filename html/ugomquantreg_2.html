@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ammonia</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Ammonia oxidized to acid nitric data set</h2>
+
+<h3>Description</h3>
+
+<p>The data come from experiments with a plant where ammonia is oxidized to acid nitric.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(ammonia, package = "ugomquantreg")
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data-frame with 21 observations and 4 columns:
+</p>
+
+<ul>
+<li> <p><code>stackloss</code>: the percentage of ammonia lost.
+</p>
+</li>
+<li> <p><code>airflow</code>: the air flow to the plant.
+</p>
+</li>
+<li> <p><code>watertemp</code>: the cooling water inlet temperature.
+</p>
+</li>
+<li> <p><code>acidconc</code>: the acid concentration.
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Josmar Mazucheli <a href="mailto:jmazucheli@gmail.com">jmazucheli@gmail.com</a>
+</p>
+<p>Bruna Alves <a href="mailto:pg402900@uem.br">pg402900@uem.br</a>
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://support.sas.com/rnd/app/stat/examples/BayesQuantile/quantile.htm">https://support.sas.com/rnd/app/stat/examples/BayesQuantile/quantile.htm</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Brownlee, K. A., (1965). Statistical Theory and Methodology in Science and Engineering. <em>New York: John Wiley &amp; Sons</em>.
+</p>
+<p>Yu, K., and Moyeed, R. A., (2001). Bayesian quantile regression. <em>Statistics and Probability Letters</em>, <b>54</b>(4) 437–447.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(ammonia, package = "ugomquantreg")
+
+library(gamlss)
+
+tau &lt;- 0.50
+fit.logit &lt;- gamlss(stackloss ~ airflow + watertemp + acidconc, data = ammonia, 
+family = UGOM(sigma.link="identity"))
+
+tau &lt;- 0.50
+fit.probit &lt;- gamlss(stackloss ~ airflow + watertemp + acidconc, 
+data = ammonia, family = UGOM(mu.link = "probit", sigma.link = "log"))
+
+fittaus &lt;- lapply(c(0.10, 0.25, 0.50, 0.75, 0.90), function(Tau){
+ tau &lt;&lt;- Tau;
+ gamlss(stackloss ~ airflow + watertemp + acidconc, data = ammonia, 
+ family = UGOM(mu.link = "logit", sigma.link = "log"))
+})
+
+sapply(fittaus, coef)
+</code></pre>
+
+
+</div>

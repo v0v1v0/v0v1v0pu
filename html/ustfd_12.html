@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ustfd_table_columns</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return a table of known fields for known endpoints</h2>
+
+<h3>Description</h3>
+
+<p><code>ustfd_table_columns</code> returns the column dictionaries for the specified endpoint(s).
+See <code>ustfd_tables()</code> for known endpoints.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ustfd_table_columns(endpoints = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>endpoints</code></td>
+<td>
+<p>one or more strings representing a valid endpoint</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>The format of a dictionary is a tibble with one row for every
+table column and the following columns:
+</p>
+
+<ul>
+<li> <p><code>endpoint</code> - the ID of the table this column belongs to
+</p>
+</li>
+<li> <p><code>colum_name</code> - the field name recognizable to the API interface
+</p>
+</li>
+<li> <p><code>data_type</code> - one of: "DATE", "STRING", "CURRENCY", "NUMBER",
+"PERCENTAGE", "YEAR", "QUARTER", "MONTH", "DAY"
+</p>
+</li>
+<li> <p><code>pretty_name</code> - a descriptive label
+</p>
+</li>
+<li> <p><code>definition</code> -  definition of the colmn's value
+</p>
+</li>
+<li> <p><code>is_required</code> - logical value
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>tibble
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://fiscaldata.treasury.gov/api-documentation/#fields-by-endpoint">https://fiscaldata.treasury.gov/api-documentation/#fields-by-endpoint</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other ustfd_user: 
+<code>endpoint_exists()</code>,
+<code>ustfd_all_pages()</code>,
+<code>ustfd_datasets()</code>,
+<code>ustfd_query()</code>,
+<code>ustfd_simple()</code>,
+<code>ustfd_tables()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ustfd)
+ustfd_table_columns(ustfd_tables(ustfd_datasets()$dataset[2])$endpoint)
+
+
+
+</code></pre>
+
+
+</div>

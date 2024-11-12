@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sampleQC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sample QC for genetic analyses</h2>
+
+<h3>Description</h3>
+
+<p>Sample QC for genetic analyses
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sampleQC(ukb.data, withdrawnFile, ancestry = "all", software = "SAIGE", outDir)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ukb.data</code></td>
+<td>
+<p>tab delimited UK Biobank phenotype file, containing sample qc fields (with default UKBiobank codes as column names)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>withdrawnFile</code></td>
+<td>
+<p>csv file with withdrawn IDs from UK Biobank</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ancestry</code></td>
+<td>
+<p>specify "WhiteBritish" or "all" - defaults to "all"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>software</code></td>
+<td>
+<p>specify "SAIGE" or "plink" - defaults to "SAIGE"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>outDir</code></td>
+<td>
+<p>specify directory for sample QC file and inclusion/exclusion lists</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>outputs sample QC file, and sample inclusion / exclusion lists for specified software
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+sampleQC(ukb.data=covid_example("sim_ukb.tab.gz"), 
+withdrawnFile=covid_example("sim_withdrawn.csv.gz"), 
+ancestry="all", 
+software="SAIGE", 
+outDir=covid_example("results"))
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

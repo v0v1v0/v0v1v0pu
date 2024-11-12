@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>nextItem,unitizerList-method</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Iterate through items of a <code>unitizerList</code> ObjectJK</h2>
+
+<h3>Description</h3>
+
+<p>Extraction process is a combination of steps:
+</p>
+
+<ol>
+<li>
+<p> Move Internal pointer with <code>nextItem</code> or <code>prevItem</code>
+</p>
+</li>
+<li>
+<p> Retrieve item <code>getItem</code>
+</p>
+</li>
+<li>
+<p> Check whether we're done iterating with <code>done</code>
+</p>
+</li>
+</ol>
+<p><code>done</code> will return TRUE if the pointer is on either the
+first or last entry depending on what direction you are iterating.
+If you wish to iterate from the last item forward, you should either
+<code>reset</code> with parameter <code>reverse</code> set to TRUE, or re-order
+the items.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S4 method for signature 'unitizerList'
+nextItem(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a <code>unitizerList</code> object</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>unitizerList</code> for <code>getItem</code>,
+an item from the list, which could be anything
+</p>
+
+
+</div>

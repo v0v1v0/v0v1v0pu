@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>prepare_figure</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make ggplot Figure Pretty</h2>
+
+<h3>Description</h3>
+
+<p>Takes a ggplot object and alters the line thicknesses and makes
+other cosmetic changes to make it more appropriate for exporting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">prepare_figure(
+  purpose = "present",
+  fo,
+  y_tick_minor = FALSE,
+  y_tick_major = FALSE,
+  x_tick_minor = FALSE,
+  x_tick_major = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>purpose</code></td>
+<td>
+<p>either <code>"present"</code> (default), <code>"print"</code> or <code>"shiny"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fo</code></td>
+<td>
+<p>ggplot figure object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y_tick_minor</code></td>
+<td>
+<p>Boolean value to control grid lines</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y_tick_major</code></td>
+<td>
+<p>Boolean value to control grid lines</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x_tick_minor</code></td>
+<td>
+<p>Boolean value to control grid lines</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x_tick_major</code></td>
+<td>
+<p>Boolean value to control grid lines</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>ggplot object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library("ggplot2")
+df = data.frame(x = seq(0.01,10,.01),
+               y = seq(0.01,10,.01)^2)
+p       = ggplot(df, aes(x=x, y=y)) + geom_line()
+# pretty up the axes
+p       = prepare_figure(fo=p, purpose="print")
+# pretty log10 y-axis 
+p_logy  = gg_log10_yaxis(fo=p)
+# pretty log10 x-axis 
+p_logx  = gg_log10_xaxis(fo=p)
+# pretty log10 yx-axis 
+p_logxy = gg_axis(fo=p)
+</code></pre>
+
+
+</div>

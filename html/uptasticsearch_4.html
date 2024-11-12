@@ -1,0 +1,163 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>es_search</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Execute an ES query and get a data.table</h2>
+
+<h3>Description</h3>
+
+<p>Given a query and some optional parameters, <code>es_search</code> gets results
+from HTTP requests to Elasticsearch and returns a data.table
+representation of those results.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">es_search(es_host, es_index, size = 10000, query_body = "{}",
+  scroll = "5m", max_hits = Inf,
+  n_cores = ceiling(parallel::detectCores()/2),
+  break_on_duplicates = TRUE, ignore_scroll_restriction = FALSE,
+  intermediates_dir = getwd())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>es_host</code></td>
+<td>
+<p>A string identifying an Elasticsearch host. This should be of the form 
+<code>[transfer_protocol][hostname]:[port]</code>. For example, <code>'http://myindex.thing.com:9200'</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>es_index</code></td>
+<td>
+<p>The name of an Elasticsearch index to be queried. Note that passing
+<code>NULL</code> is not supported. Technically, not passing an index
+to Elasticsearch is legal and results in searching over all indexes.
+To be sure that this very expensive query is not executed by accident,
+uptasticsearch forbids this. If you want to execute a query over
+all indexes in the cluster, set this argument to <code>"_all"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>Number of records per page of results. See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html">Elasticsearch docs</a> for more.
+Note that this will be reset to 0 if you submit a <code>query_body</code> with
+an "aggs" request in it. Also see <code>max_hits</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>query_body</code></td>
+<td>
+<p>String with a valid Elasticsearch query. Default is an empty query.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scroll</code></td>
+<td>
+<p>How long should the scroll context be held open? This should be a
+duration string like "1m" (for one minute) or "15s" (for 15 seconds).
+The scroll context will be refreshed every time you ask Elasticsearch
+for another record, so this parameter should just be the amount of
+time you expect to pass between requests. See the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">Elasticsearch scroll/pagination docs</a>
+for more information.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_hits</code></td>
+<td>
+<p>Integer. If specified, <code>es_search</code> will stop pulling data as soon
+as it has pulled this many hits. Default is <code>Inf</code>, meaning that
+all possible hits will be pulled.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_cores</code></td>
+<td>
+<p>Number of cores to distribute fetching and processing over.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>break_on_duplicates</code></td>
+<td>
+<p>Boolean, defaults to TRUE. <code>es_search</code> uses the size of the final object it returns
+to check whether or not some data were lost during the processing.
+If you have duplicates in the source data, you will have to set this flag to
+FALSE and just trust that no data have been lost. Sorry :( .</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ignore_scroll_restriction</code></td>
+<td>
+<p>There is a cost associated with keeping an
+Elasticsearch scroll context open. By default,
+this function does not allow arguments to <code>scroll</code>
+which exceed one hour. This is done to prevent
+costly mistakes made by novice Elasticsearch users.
+If you understand the cost of keeping the context
+open for a long time and would like to pass a <code>scroll</code>
+value longer than an hour, set <code>ignore_scroll_restriction</code>
+to <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intermediates_dir</code></td>
+<td>
+<p>When scrolling over search results, this function writes
+intermediate results to disk. By default, 'es_search' will create a temporary
+directory in whatever working directory the function is called from. If you
+want to change this behavior, provide a path here. 'es_search' will create
+and write to a temporary directory under whatever path you provide.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.x/search-request-scroll.html">ES 6 scrolling strategy</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+###=== Example 1: Get low-scoring food survey results ===###
+
+query_body &lt;- '{"query":{"filtered":{"filter":{"bool":{"must":[
+               {"exists":{"field":"customer_comments"}},
+               {"terms":{"overall_satisfaction":["very low","low"]}}]}}},
+               "query":{"match_phrase":{"customer_comments":"food"}}}}'
+
+# Execute the query, parse into a data.table
+commentDT &lt;- es_search(es_host = 'http://mydb.mycompany.com:9200'
+                       , es_index = "survey_results"
+                       , query_body = query_body
+                       , scroll = "1m"
+                       , n_cores = 4)
+
+###=== Example 2: Time series agg features ===###
+
+# Create query that will give you daily summary stats for revenue
+query_body &lt;- '{"query":{"filtered":{"filter":{"bool":{"must":[
+               {"exists":{"field":"pmt_amount"}}]}}}},
+               "aggs":{"timestamp":{"date_histogram":{"field":"timestamp","interval":"day"},
+               "aggs":{"revenue":{"extended_stats":{"field":"pmt_amount"}}}}},"size":0}'
+
+# Execute the query and get the result
+resultDT &lt;- es_search(es_host = "http://es.custdb.mycompany.com:9200"
+                      , es_index = 'ticket_sales'
+                      , query_body = query_body)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

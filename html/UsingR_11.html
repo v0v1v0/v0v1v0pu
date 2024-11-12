@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>baycheck</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Population estimate of type of Bay Checkerspot butterfly</h2>
+
+<h3>Description</h3>
+
+<p>Estimates of the population of a type of Bay Checkerspot butterfly
+near San Francisco.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(baycheck)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 27 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt>year</dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt>Nt</dt>
+<dd>
+<p>estimated number</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>From chapter 4 of Morris and Doak, <em>Quantitative Conservation
+Biology: Theory and Practice of Population Viability Analysis</em>,
+Sinauer Associates, 2003.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(baycheck)
+plot(Nt ~ year,baycheck)
+## fit Ricker model N_{t+1} = N_t e^{-rt}W_t
+n = length(baycheck$year)
+yt = with(baycheck,log(Nt[-1]/Nt[-n]))
+nt = with(baycheck,Nt[-n])
+lm(yt ~ nt,baycheck)
+</code></pre>
+
+
+</div>

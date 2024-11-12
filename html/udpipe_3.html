@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.data.frame.udpipe_connlu</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert the result of udpipe_annotate to a tidy data frame</h2>
+
+<h3>Description</h3>
+
+<p>Convert the result of <code>udpipe_annotate</code> to a tidy data frame
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'udpipe_connlu'
+as.data.frame(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object of class <code>udpipe_connlu</code> as returned by <code>udpipe_annotate</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>currently not used</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame with columns doc_id, paragraph_id, sentence_id, sentence, 
+token_id, token, lemma, upos, xpos, feats, head_token_id, dep_rel, deps, misc <br></p>
+<p>The columns paragraph_id, sentence_id are integers, the other fields
+are character data in UTF-8 encoding. <br></p>
+<p>To get more information on these fields, visit <a href="https://universaldependencies.org/format.html">https://universaldependencies.org/format.html</a> 
+or look at <code>udpipe</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>udpipe_annotate</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">model    &lt;- udpipe_download_model(language = "dutch-lassysmall")
+
+if(!model$download_failed){
+
+ud_dutch &lt;- udpipe_load_model(model$file_model)
+txt &lt;- c("Ik ben de weg kwijt, kunt u me zeggen waar de Lange Wapper ligt? Jazeker meneer", 
+         "Het gaat vooruit, het gaat verbazend goed vooruit")
+x &lt;- udpipe_annotate(ud_dutch, x = txt)
+x &lt;- as.data.frame(x)
+head(x)
+
+}
+
+## cleanup for CRAN only - you probably want to keep your model if you have downloaded it
+if(file.exists(model$file_model)) file.remove(model$file_model)
+</code></pre>
+
+
+</div>

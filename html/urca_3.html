@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>alphaols</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>OLS regression of VECM weighting matrix</h2>
+
+<h3>Description</h3>
+
+<p>This functions estimates the <code class="reqn">\bold{\alpha}</code> matrix of a VECM.
+The following OLS regression of the R-form of the VECM is hereby
+utilised:
+</p>
+<p style="text-align: center;"><code class="reqn">\bold{R}_{0t} = \bold{\alpha}\bold{\beta}\prime \bold{R}_{kt} +
+    \bold{\varepsilon}_t \qquad t=1, \dots, T</code>
+</p>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">alphaols(z, reg.number = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class <code>ca.jo</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reg.number</code></td>
+<td>
+<p>The number of the equation in the R-form that should
+be estimated or if set to <code>NULL</code> (the default), all equations
+within the R-form are estimated.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The cointegrating relations, <em>i.e.</em> <code class="reqn">\bold{R}_{kt}\prime
+    \bold{\beta}</code> are calculated by using <code>z@RK</code> and <code>z@V</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class <code>lm</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bernhard Pfaff</p>
+
+
+<h3>References</h3>
+
+<p>Johansen, S. (1988), Statistical Analysis of Cointegration Vectors,
+<em>Journal of Economic Dynamics and Control</em>, <b>12</b>, 231–254.
+</p>
+<p>Johansen, S. and Juselius, K. (1990), Maximum Likelihood Estimation and
+Inference on Cointegration – with Applications to the Demand for
+Money, <em>Oxford Bulletin of Economics and Statistics</em>, <b>52,
+2</b>, 169–210.
+</p>
+<p>Johansen, S. (1991), Estimation and Hypothesis Testing of
+Cointegration Vectors in Gaussian Vector Autoregressive Models,
+<em>Econometrica</em>, <b>Vol. 59, No. 6</b>, 1551–1580.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ca.jo</code>, <code>lm</code>, <code>ca.jo-class</code>
+and <code>urca-class</code>. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(denmark)
+sjd &lt;- denmark[, c("LRM", "LRY", "IBO", "IDE")]
+sjd.vecm1 &lt;- ca.jo(sjd, ecdet = "const", type="eigen", K=2, spec="longrun",
+season=4)
+summary(alphaols(sjd.vecm1))
+summary(alphaols(sjd.vecm1, reg.number=1))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>irpplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Visualising individual response patterns</h2>
+
+<h3>Description</h3>
+
+<p>Visualising individual response patterns
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">irpplot(
+  data,
+  row,
+  columns,
+  dataName = NULL,
+  title = paste("Row", row, "in dataset", dataName)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A dataframe with the dataset containing
+the responses.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>row</code></td>
+<td>
+<p>A vector with indices of the rows for which
+you want the individual response patterns. These can be
+either the relevant row numbers, or if character row
+names are set, the names ot the rleevant rows.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>columns</code></td>
+<td>
+<p>A vector with the names of the variables
+you want the individual response patterns for.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataName, title</code></td>
+<td>
+<p>Optionally, you can override the
+dataset name that is used in the title; or, the title
+(the dataset name is only used in the title).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>ggplot2::ggplot()</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">### Get a dataset
+dat &lt;- ufs::bfi;
+
+### Show the individual responses for
+### the tenth participant
+irpplot(dat, 10, 1:20);
+
+### Set some missing values
+dat[10, c(1, 5, 15)] &lt;- NA;
+
+### Show the individual responses again
+irpplot(dat, 10, 1:20);
+</code></pre>
+
+
+</div>

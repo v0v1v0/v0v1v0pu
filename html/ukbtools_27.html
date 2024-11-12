@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukb_gen_write_bgenie</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Writes a BGENIE format phenotype or covariate file.</h2>
+
+<h3>Description</h3>
+
+<p>Writes a space-delimited file with a header, missing character set to "-999", and observations (i.e. UKB subject ids) in sample file order. Use this function to write phenotype and covariate files for downstream genetic analysis in <a href="https://jmarchini.org/bgenie/">BGENIE</a> - the format is the same.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukb_gen_write_bgenie(x, ukb.sample, ukb.variables, path, ukb.id = "eid",
+  na.strings = "-999")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A UKB dataset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ukb.sample</code></td>
+<td>
+<p>A UKB sample file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ukb.variables</code></td>
+<td>
+<p>A character vector of either the phenotypes for a BGENIE phenotype file, or covariates for a BGENIE covariate file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>A path to a file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ukb.id</code></td>
+<td>
+<p>The eid variable name (default = "eid").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.strings</code></td>
+<td>
+<p>Character string to be used for missing value in output file. Default = "-999"</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Uses a <code>dplyr::left_join</code> to the sample file to match sample file order. Any IDs in the sample file not included in the phenotype or covariate data will be missing for all variables selected. See <a href="https://jmarchini.org/bgenie-usage/">BGENIE usage</a> for descriptions of the <code>--pheno</code> and <code>--covar</code> flags to read phenotype and covariate data into BGENIE.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ukb_gen_read_sample</code> to read a sample file, <code>ukb_gen_excl_to_na</code> to update a phenotype with NAs for samples to-be-excluded based on genetic metadata, and <code>ukb_gen_write_plink</code> to write phenotype and covariate files to PLINK format.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+
+# Automatically sorts observations to match UKB sample file and writes missing values as -999
+
+my_ukb_sample &lt;- ukb_gen_read_sample("ukb.sample")
+
+ukb_gen_write_bgenie(
+   my_ukb_data,
+   ukb.sample = my_ukb_sample,
+   ukb.variables = c("height", "weight", "iq")
+   path = "my_ukb_bgenie.pheno",
+)
+
+ukb_gen_write_bgenie(
+   my_ukb_data,
+   ukb.sample = my_ukb_sample,
+   ukb.variables = c("age", "socioeconomic_status", "genetic_pcs")
+   path = "my_ukb_bgenie.cov",
+)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

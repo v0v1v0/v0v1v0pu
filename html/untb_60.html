@@ -1,0 +1,126 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>preston</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Preston diagram of an ecosystem</h2>
+
+<h3>Description</h3>
+
+<p>Gives a standard Preston diagram for an ecosystem.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">preston(x,n=NULL,original=FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Ecosystem vector that is coerced to class <code>count</code>, or a
+matrix whose rows are species counts</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>An integer specifying the number of species abundance classes
+to use, with default <code>NULL</code> meaning to use
+<code class="reqn">1+\log_2(J)</code>.  Must be greater than 1 if specified.
+If <code>x</code> is a vector, <code>NULL</code> is not acceptable as the
+program does not try to guess what is required</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>original</code></td>
+<td>
+<p>Boolean, with default <code>FALSE</code> meaning to use the
+nonoverlapping technique discussed below, and <code>TRUE</code>
+meaning to use Preston's original formulation.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The Preston diagram is a table showing the number of species having
+abundances in specified abundance classes.  Consider the following
+Preston diagram, created with <code>original = FALSE</code>:
+</p>
+<pre>
+                  1  2  3-4  5-8  9-16  17-32  33-64  65-Inf
+number of species 10 5    7    5     1      5      4       0
+</pre>
+<p>This shows that there are 10 species with abundance 1 (that is,
+singletons); 5 species with abundance 2; 7 species with abundance 3-4; 5
+species with abundance 5-8, and so on.  This method is used by Hubbell
+(2001), and Chisholm and Burgman (2004).
+</p>
+<p>Setting argument <code>original</code> to <code>TRUE</code> means to follow Preston
+(1948) and count any species with an abundance on the boundary between
+two adjacent abundance classes as being split 50-50 between the classes.
+Thus the fourth class would be
+<code class="reqn">\phi_4/2+\phi_5+\phi_6+\phi_7+\phi_8/2</code>
+where <code class="reqn">\phi_i</code> is the number of species with abundance
+<code class="reqn">i</code> (given by <code>phi(x)</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function <code>preston()</code> returns an object of class “<code>preston</code>”.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li>
+<p>F. W. Preston 1948. “The Commonness, and Rarity, of Species”.
+<em>Ecology</em> 29(3):254-283
+</p>
+</li>
+<li>
+<p>R. A. Chisholm and M. A. Burgman 2004. “The unified neutral
+theory of biodiversity and biogeography: comment”.  <em>Ecology</em> 85(11):
+3172-3174
+</p>
+</li>
+<li>
+<p>S. P. Hubbell 2001.  “The Unified Neutral Theory of Biodiversity”.
+Princeton University Press
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>phi</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">preston(untb(start=rep(1,100), prob=0.01, gens=1000, keep=FALSE))
+
+data(butterflies)
+preston(butterflies)
+preston(butterflies,original=TRUE)
+
+data(copepod)
+preston(copepod)
+plot(preston(copepod))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LM.output</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract Model Residuals and other Regression Diagnostics</h2>
+
+<h3>Description</h3>
+
+<p><code>LM.output()</code>  Provides fitted values, residuals and other basic
+quantities used to check the quality of regression fits.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">LM.output(object, data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>An object returned by function lm.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>An optional data frame containing the data
+frame possibly specified in the call of function lm.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A dataframe containing the variables in the model
+and the model's fitted values, residuals
+and influence statistics, merged with the dataframe
+specified in the call of function lm, or with the
+dataframe possibly specified in <code>data</code>
+(if it is consistent with the model's output)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raffaella Piccarreta <a href="mailto:raffaella.piccarreta@unibocconi.it">raffaella.piccarreta@unibocconi.it</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(MktDATA, package = "UBStats")
+
+# Model and output based on a given dataframe
+mod1 &lt;- lm(TotVal ~ Baseline + Kids + Age, data = MktDATA)
+# Equivalent calls (since data is specified in lm() 
+mod1_out &lt;- LM.output(mod1, data = MktDATA)
+dim(mod1_out)
+mod1_out &lt;- LM.output(mod1)
+dim(mod1_out) # same as above
+
+# Model based on a dataframe's columns
+mod2 &lt;- lm(MktDATA$TotVal ~ MktDATA$Baseline + 
+           MktDATA$Kids + MktDATA$Age)
+mod2_out &lt;- LM.output(mod2)
+# note: colnames in mod2_out
+colnames(mod2_out)
+# note that the dataframe in 'data' is not considered
+# as compatible, because the names of columns differ
+mod2_out &lt;- LM.output(mod2, data = MktDATA)
+
+</code></pre>
+
+
+</div>

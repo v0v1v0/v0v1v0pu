@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fromDataFrame</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>extract the sets from a data frame (rows = elems, columns = sets, cell = contained)</h2>
+
+<h3>Description</h3>
+
+<p>extract the sets from a data frame (rows = elems, columns = sets, cell = contained)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fromDataFrame(
+  upsetjs,
+  df,
+  attributes = NULL,
+  order.by = "cardinality",
+  limit = NULL,
+  shared = NULL,
+  shared.mode = "click",
+  colors = NULL,
+  c_type = NULL,
+  store.elems = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>upsetjs</code></td>
+<td>
+<p>an object of class <code>upsetjs</code> or <code>upsetjs_proxy</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>the data.frame like structure</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attributes</code></td>
+<td>
+<p>the optional column list or data frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.by</code></td>
+<td>
+<p>order intersections by cardinality or degree</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit</code></td>
+<td>
+<p>limit the ordered sets to the given limit</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shared</code></td>
+<td>
+<p>a crosstalk shared data frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shared.mode</code></td>
+<td>
+<p>whether on 'hover' or 'click' (default) is synced</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colors</code></td>
+<td>
+<p>the optional list with set name to color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c_type</code></td>
+<td>
+<p>the combination type to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>store.elems</code></td>
+<td>
+<p>whether to store the set elements within the structures (set to false for big data frames)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the object given as first argument
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">df &lt;- as.data.frame(list(a = c(1, 1, 1), b = c(0, 1, 1)), row.names = c("a", "b", "c"))
+upsetjs() %&gt;% fromDataFrame(df)
+</code></pre>
+
+
+</div>

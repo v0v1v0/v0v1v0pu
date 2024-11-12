@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>timeSeriesGrid</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot time series data</h2>
+
+<h3>Description</h3>
+
+<p>Function for plotting time series or other meta data. Uses facet wrap to
+display user-provided categorical variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">timeSeriesGrid(
+  object,
+  filter.name = "default",
+  cut.off = 5,
+  min.count = 0,
+  min.vaf = 0,
+  amplicons = NULL,
+  samples = NULL,
+  x_variable = NULL,
+  y_variable = "Max Non-ref Allele Frequency",
+  columns = "Sample Name",
+  rows = "Name",
+  color_by = "Name",
+  fdr = 0.05,
+  use.caller = TRUE,
+  bed_positions = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>A consensus data table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter.name</code></td>
+<td>
+<p>"default"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cut.off</code></td>
+<td>
+<p>5</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min.count</code></td>
+<td>
+<p>0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>min.vaf</code></td>
+<td>
+<p>0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>amplicons</code></td>
+<td>
+<p>NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x_variable</code></td>
+<td>
+<p>NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y_variable</code></td>
+<td>
+<p>"Max Non-ref Allele Frequency"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>columns</code></td>
+<td>
+<p>"Sample Name"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows</code></td>
+<td>
+<p>"Name"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color_by</code></td>
+<td>
+<p>"Name"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fdr</code></td>
+<td>
+<p>0.05</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.caller</code></td>
+<td>
+<p>TRUE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bed_positions</code></td>
+<td>
+<p>NULL</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A ggplot object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umiAnalyzer)
+
+main &lt;- system.file("extdata", package = "umiAnalyzer")
+simsen &lt;- createUmiExperiment(main)
+simsen &lt;- filterUmiObject(simsen)
+
+metaData &lt;- system.file("extdata", "metadata.txt", package = "umiAnalyzer")
+simsen &lt;- importDesign(object = simsen,file = metaData)
+
+bed_dir &lt;- system.file("extdata", "simple.bed", package = "umiAnalyzer")
+bed &lt;- importBedFile(path = bed_dir)
+
+time_plot &lt;- timeSeriesGrid(simsen, x_variable = "time", bed_positions = bed)
+
+</code></pre>
+
+
+</div>

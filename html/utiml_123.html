@@ -1,0 +1,150 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>scut_threshold</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>SCut Score-based method</h2>
+
+<h3>Description</h3>
+
+<p>This is a label-wise method that adjusts the threshold for each label to
+achieve a specific loss function using a validation set or cross validation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">scut_threshold(
+  prediction,
+  expected,
+  loss.function = NA,
+  cores = getOption("utiml.cores", 1)
+)
+
+## Default S3 method:
+scut_threshold(
+  prediction,
+  expected,
+  loss.function = NA,
+  cores = getOption("utiml.cores", 1)
+)
+
+## S3 method for class 'mlresult'
+scut_threshold(
+  prediction,
+  expected,
+  loss.function = NA,
+  cores = getOption("utiml.cores", 1)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>prediction</code></td>
+<td>
+<p>A matrix or mlresult.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expected</code></td>
+<td>
+<p>The expected labels for the prediction. May be a matrix with
+the label values or a mldr object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>loss.function</code></td>
+<td>
+<p>A loss function to be optimized. If you want to use your
+own error function see the notes and example. (Default: Mean Squared Error)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cores</code></td>
+<td>
+<p>The number of cores to parallelize the computation Values higher
+than 1 require the <span class="pkg">parallel</span> package. (Default:
+<code>options("utiml.cores", 1)</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Different from the others threshold methods instead of return the bipartition
+results, it returns the threshold values for each label.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector with the threshold values for each label
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>default</code>: Default scut_threshold
+</p>
+</li>
+<li> <p><code>mlresult</code>: Mlresult scut_threshold
+</p>
+</li>
+</ul>
+<h3>Note</h3>
+
+<p>The loss function is a R method that receive two vectors, the expected
+values of the label and the predicted values, respectively. Positive values
+are represented by the 1 and the negative by the 0.
+</p>
+
+
+<h3>References</h3>
+
+<p>Fan, R.-E., &amp; Lin, C.-J. (2007). A study on threshold selection for
+multi-label classification. Department of Computer Science, National
+Taiwan University.
+</p>
+<p>Al-Otaibi, R., Flach, P., &amp; Kull, M. (2014). Multi-label Classification: A
+Comparative Study on Threshold Selection Methods. In First International
+Workshop on Learning over Multiple Contexts (LMCE) at ECML-PKDD 2014.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other threshold: 
+<code>fixed_threshold()</code>,
+<code>lcard_threshold()</code>,
+<code>mcut_threshold()</code>,
+<code>pcut_threshold()</code>,
+<code>rcut_threshold()</code>,
+<code>subset_correction()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">names &lt;- list(1:10, c("a", "b", "c"))
+prediction &lt;- matrix(runif(30), ncol = 3, dimnames = names)
+classes &lt;- matrix(sample(0:1, 30, rep = TRUE), ncol = 3, dimnames = names)
+thresholds &lt;- scut_threshold(prediction, classes)
+fixed_threshold(prediction, thresholds)
+
+
+# Penalizes only FP predictions
+mylossfunc &lt;- function (real, predicted) {
+   mean(predicted - real * predicted)
+}
+prediction &lt;- predict(br(toyml, "RANDOM"), toyml)
+scut_threshold(prediction, toyml, loss.function = mylossfunc, cores = 2)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>filename_to_storeid</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a Store ID from a Test File Name</h2>
+
+<h3>Description</h3>
+
+<p>Create a Store ID from a Test File Name
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">filename_to_storeid(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>character(1L) file name ending in .r or .R</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>store id name, or NULL if <code>x</code> doesn't meet expectations
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">filename_to_storeid(file.path("tests", "unitizer", "foo.R"))
+filename_to_storeid(file.path("tests", "unitizer", "boo.r"))
+# does not end in [rR]
+filename_to_storeid(file.path("tests", "unitizer", "boo"))
+</code></pre>
+
+
+</div>

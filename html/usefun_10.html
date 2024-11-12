@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_percentage_of_matches</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get percentage of matches between two vectors</h2>
+
+<h3>Description</h3>
+
+<p>Use this function on two numeric vectors with the same <code>names</code> attribute
+(columns) and same length, in order to find the percentage of common elements
+(value matches between the two vectors). The same <code>names</code> for the two
+vectors ensures that their values are logically matched one-to-one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_percentage_of_matches(vec1, vec2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>vec1</code></td>
+<td>
+<p>numeric vector with <code>names</code> attribute</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vec2</code></td>
+<td>
+<p>numeric vector with <code>names</code> attribute</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the percentage of common values (exact matches) between the two
+vectors. Can only be a value between 0 (no common elements) and 1 (perfect
+element match). Note that <em>NaN</em> and <em>NA</em> values are allowed in
+the input vectors, but they will always count as a mismatch.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">vec1 = c(1, 2, 3, 2)
+vec2 = c(20, 2, 2.5, 8)
+vec3 = c(1, 2, 333, 222)
+names.vec = c(seq(1,4))
+names(vec1) = names.vec
+names(vec2) = names.vec
+names(vec3) = names.vec
+
+match.1.2 = get_percentage_of_matches(vec1, vec2)
+match.1.3 = get_percentage_of_matches(vec1, vec3)
+
+</code></pre>
+
+
+</div>

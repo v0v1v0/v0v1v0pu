@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umx_check_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check for required features in an OpenMx.</h2>
+
+<h3>Description</h3>
+
+<p>Allows the user to straight-forwardly require a specific model type (i.e., 
+"RAM", "LISREL", etc.), whether or not the model has data, if it has been run or not. 
+You can also test whether is has a means model or not and (in future) test if it has submodels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umx_check_model(
+  obj,
+  type = NULL,
+  hasData = NULL,
+  beenRun = NULL,
+  hasMeans = NULL,
+  checkSubmodels = FALSE,
+  callingFn = "a function"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object to check</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>what type the model must be, i.e., "RAM", "LISREL", etc. (defaults to not checking NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hasData</code></td>
+<td>
+<p>whether the model should have data or not (defaults to not checking NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beenRun</code></td>
+<td>
+<p>whether the model has been run or not (defaults to not checking NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hasMeans</code></td>
+<td>
+<p>whether the model should have a means model or not (defaults to not checking NULL)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>checkSubmodels</code></td>
+<td>
+<p>whether to check submodels (not implemented yet) (default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>callingFn</code></td>
+<td>
+<p>= Name of the calling function to help the user locate the error.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>- boolean
+</p>
+
+
+<h3>References</h3>
+
+<p>- &lt;https://github.com/tbates/umx&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Test: 
+<code>umx_check_OS()</code>,
+<code>umx_check_names()</code>,
+<code>umx_check_parallel()</code>,
+<code>umx_check()</code>,
+<code>umx_has_CIs()</code>,
+<code>umx_has_been_run()</code>,
+<code>umx_has_means()</code>,
+<code>umx_has_square_brackets()</code>,
+<code>umx_is_MxData()</code>,
+<code>umx_is_MxMatrix()</code>,
+<code>umx_is_MxModel()</code>,
+<code>umx_is_RAM()</code>,
+<code>umx_is_cov()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(umx)
+data(demoOneFactor)
+manifests = names(demoOneFactor)
+m1 = umxRAM("check_model_ex", data = demoOneFactor, type = "cov",
+	umxPath("G", to = manifests),
+	umxPath(var = manifests),
+	umxPath(var = "G", fixedAt = 1)
+)
+umx_check_model(m1) # TRUE, this is a model
+umx_check_model(m1, type = "RAM") # equivalent to umx_is_RAM()
+umx_check_model(m1, hasData = TRUE)
+
+
+umx_check_model(m1, hasMeans = TRUE)
+umx_check_model(m1, beenRun = FALSE)
+# Model with no data
+m1 = umxRAM("x ~~ .3*y", autoRun = FALSE)
+umx_check_model(m1, hasData = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>summarize_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summarize model output</h2>
+
+<h3>Description</h3>
+
+<p>This function summarizes the output of model fitting..
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">summarize_model(model_output, data, stats = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model_output</code></td>
+<td>
+<p>output from model fitting using ushr().</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>dataframe of original data used for model fitting. Must include named 'id' column with subject identifiers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stats</code></td>
+<td>
+<p>logical TRUE/FALSE: should the median and sd lifespans also be returned? Default is FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list containing (i) a summary of which subjects were successfully fit using the biphasic or single phase models, with their corresponding infected cell lifespan estimates ('summary'); (ii) if stats = TRUE: summary statistics for the estimated parameters from the biphasic model ('biphasicstats'); and (iii) if stats = TRUE: summary statistics for the estimated parameters from the single phase model ('singlestats').
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(1234567)
+
+simulated_data &lt;- simulate_data(nsubjects = 20)
+
+model_output &lt;- ushr(data = simulated_data)
+
+summarize_model(model_output, data = simulated_data)
+
+</code></pre>
+
+
+</div>

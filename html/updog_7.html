@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>format_multidog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return arrayicized elements from the output of <code>multidog</code>.</h2>
+
+<h3>Description</h3>
+
+<p>This function will allow you to have genotype estimates, maximum posterior
+probability, and other values in the form of a matrix/array. If multiple
+variable names are provided, the data are formatted as a 3-dimensional
+array with the dimensions corresponding to (individuals, SNPs, variables).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">format_multidog(x, varname = "geno")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The output of <code>multidog</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>varname</code></td>
+<td>
+<p>A character vector of the variable names whose values
+populate the cells. These should be column names from <code>x$inddf</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that the order of the individuals will be reshuffled. The order of the
+SNPs should be the same as in <code>x$snpdf</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Gerard
+</p>
+
+
+</div>

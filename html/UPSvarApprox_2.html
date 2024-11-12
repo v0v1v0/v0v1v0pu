@@ -1,0 +1,354 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>approx_var_est</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Approximated Variance Estimators</h2>
+
+<h3>Description</h3>
+
+<p>Approximated variance estimators which use only first-order inclusion probabilities
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">approx_var_est(y, pik, method, sample = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>numeric vector of sample observations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pik</code></td>
+<td>
+<p>numeric vector of first-order inclusion probabilities of length N,
+the population size,  or n, the sample size
+depending on the chosen method (see Details for more information)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>string indicating the desired approximate variance estimator.
+One of "Deville1", "Deville2", "Deville3", "Hajek", "Rosen", "FixedPoint",
+"Brewer1", "HartleyRao", "Berger", "Tille", "MateiTille1", "MateiTille2",
+"MateiTille3", "MateiTille4", "MateiTille5", "Brewer2", "Brewer3", "Brewer4".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample</code></td>
+<td>
+<p>Either a numeric vector of length equal to the sample size with
+the indices of sample units, or a boolean vector of the same length of <code>pik</code>, indicating which
+units belong to the sample (<code>TRUE</code> if the unit is in the sample,
+<code>FALSE</code> otherwise.
+Only used with estimators of the third class (see Details for more information).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>two optional parameters can be modified to control the iterative
+procedures in methods <code>"MateiTille5"</code>, <code>"Tille"</code> and
+<code>"FixedPoint"</code>: <code>maxIter</code> sets the maximum number
+of iterations to perform and <code>eps</code> controls the convergence error</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The choice of the estimator to be used is made through the argument <code>method</code>,
+the list of methods and their respective equations is presented below.
+</p>
+<p>Matei and Tillé (2005) divides the approximated variance estimators into
+three classes, depending on the quantities they require:
+</p>
+
+<ol>
+<li>
+<p> First and second-order inclusion probabilities:
+The first class is composed of the Horvitz-Thompson estimator (Horvitz and Thompson 1952)
+and the Sen-Yates-Grundy estimator (Yates and Grundy 1953; Sen 1953),
+which are available through function <code>varHT</code> in package <code>sampling</code>;
+</p>
+</li>
+<li>
+<p> Only first-order inclusion probabilities and only for sample units;
+</p>
+</li>
+<li>
+<p> Only first-order inclusion probabilities, for the entire population.
+</p>
+</li>
+</ol>
+<p>Haziza, Mecatti and Rao (2008) provide a common form to express most of the
+estimators in class 2 and 3:
+</p>
+<p style="text-align: center;"><code class="reqn">\widehat{var}(\hat{t}_{HT}) = \sum_{i \in s}c_i e_i^2 </code>
+</p>
+
+<p>where <code class="reqn"> e_i = \frac{y_i}{\pi_i} - \hat{B} </code>, with
+</p>
+<p style="text-align: center;"><code class="reqn"> \hat{B} = \frac{\sum_{i\in s} a_i (y_i/\pi_i) }{\sum_{i\in s} a_i} </code>
+</p>
+
+<p>and <code class="reqn">a_i</code> and <code class="reqn">c_i</code> are parameters that define the different
+estimators:
+</p>
+
+<ul>
+<li> <p><code>method="Hajek"</code> [Class 2]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1}(1-\pi_i) ; \quad a_i= c_i</code>
+</p>
+
+</li>
+<li> <p><code>method="Deville2"</code> [Class 2]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = (1-\pi_i)\Biggl\{ 1 - \sum_{j\in s}\Bigl[ \frac{1-\pi_j}{\sum_{k\in s} (1-\pi_k)} \Bigr]^2 \Biggr\}^{-1} ; \quad a_i= c_i</code>
+</p>
+
+</li>
+<li> <p><code>method="Deville3"</code> [Class 2]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = (1-\pi_i)\Biggl\{ 1 - \sum_{j\in s}\Bigl[ \frac{1-\pi_j}{\sum_{k\in s} (1-\pi_k)} \Bigr]^2 \Biggr\}^{-1}; \quad a_i= 1 </code>
+</p>
+
+</li>
+<li> <p><code>method="Rosen"</code> [Class 2]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1} (1-\pi_i); \quad a_i= (1-\pi_i)log(1-\pi_i) / \pi_i</code>
+</p>
+
+</li>
+<li> <p><code>method="Brewer1"</code> [Class 2]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1}(1-\pi_i); \quad a_i= 1</code>
+</p>
+
+</li>
+<li> <p><code>method="Brewer2"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1} \Bigl(1-\pi_i+ \frac{\pi_i}{n} - n^{-2}\sum_{j \in U} \pi_j^2 \Bigr) ; \quad a_i=1</code>
+</p>
+
+</li>
+<li> <p><code>method="Brewer3"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1} \Bigl(1-\pi_i - \frac{\pi_i}{n} - n^{-2}\sum_{j \in U} \pi_j^2 \Bigr); \quad a_i = 1</code>
+</p>
+
+</li>
+<li> <p><code>method="Brewer4"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1} \Bigl(1-\pi_i - \frac{\pi_i}{n-1} + n^{-1}(n-1)^{-1}\sum_{j \in U} \pi_j^2 \Bigr); \quad a_i=1</code>
+</p>
+
+</li>
+<li> <p><code>method="Berger"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1} (1-\pi_i) \Biggl[ \frac{\sum_{j\in s} (1-\pi_j)}{\sum_{j\in U} (1-\pi_j)} \Biggr] ; \quad a_i=c_i</code>
+</p>
+
+</li>
+<li> <p><code>method="HartleyRao"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn">c_i = \frac{n}{n-1} \Bigl(1-\pi_i - n^{-1}\sum_{j \in s}\pi_i + n^{-1}\sum_{j\in U} \pi_j^2 \Bigr) ; \quad a_i=1</code>
+</p>
+
+</li>
+</ul>
+<p>Some additional estimators are defined in Matei and Tillé (2005):
+</p>
+
+<ul>
+<li> <p><code>method="Deville1"</code> [Class 2]
+</p>
+<p style="text-align: center;"><code class="reqn">\widehat{var}(\hat{t}_{HT}) = \sum_{i \in s} \frac{c_i}{ \pi_i^2} (y_i - y_i^*)^2 </code>
+</p>
+
+<p>where
+</p>
+<p style="text-align: center;"><code class="reqn"> y_i^* = \pi_i \frac{\sum_{j \in s} c_j y_j / \pi_j}{\sum_{j \in s} c_j} </code>
+</p>
+
+<p>and <code class="reqn">c_i = (1-\pi_i)\frac{n}{n-1} </code>
+</p>
+</li>
+<li> <p><code>method="Tille"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn">
+     \widehat{var}(\hat{t}_{HT}) = \biggl( \sum_{i \in s} \omega_i \biggr)
+     \sum_{i\in s} \omega_i (\tilde{y}_i - \bar{\tilde{y}}_\omega )^2
+     - n \sum_{i\in s}\biggl( \tilde{y}_i - \frac{\hat{t}_{HT}}{n} \biggr)^2
+     </code>
+</p>
+
+<p>where  <code class="reqn">\tilde{y}_i = y_i / \pi_i </code>,
+<code class="reqn">\omega_i = \pi_i / \beta_i</code>
+and <code class="reqn">\bar{\tilde{y}}_\omega =
+                  \biggl( \sum_{i \in s} \omega_i \biggr)^{-1} \sum_{i \in s} \omega_i \tilde{y}_i </code>
+</p>
+<p>The coefficients <code class="reqn">\beta_i</code> are computed iteratively through the
+following procedure:
+</p>
+
+<ol>
+<li> <p><code class="reqn">\beta_i^{(0)} = \pi_i, \,\, \forall i\in U</code>
+</p>
+</li>
+<li> <p><code class="reqn"> \beta_i^{(2k-1)} = \frac{(n-1)\pi_i}{\beta^{(2k-2)} - \beta_i^{(2k-2)}}  </code>
+</p>
+</li>
+<li> <p><code class="reqn">\beta_i^{2k} = \beta_i^{(2k-1)}
+        \Biggl( \frac{n(n-1)}{(\beta^(2k-1))^2 - \sum_{i\in U} (\beta_k^{(2k-1)})^2 } \Biggr)^{(1/2)} </code>
+</p>
+</li>
+</ol>
+<p>with <code class="reqn">\beta^{(k)} = \sum_{i\in U} \beta_i^{i}, \,\, k=1,2,3, \dots </code>
+</p>
+</li>
+<li> <p><code>method="MateiTille1"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn">\widehat{var}(\hat{t}_{HT}) = \frac{n(N-1)}{N(n-1)} \sum_{i\in s} \frac{b_i}{\pi_i^3} (y_i - \hat{y}_i^*)^2 </code>
+</p>
+
+<p>where </p>
+<p style="text-align: center;"><code class="reqn">\hat{y}_i^* = \pi_i \frac{\sum_{i\in s} b_i y_i/\pi_i^2}{\sum_{i\in s} b_i/\pi_i} </code>
+</p>
+
+<p>and the coefficients <code class="reqn">b_i</code> are computed iteratively by the algorithm:
+</p>
+
+<ol>
+<li> <p style="text-align: center;"><code class="reqn">b_i^{(0)} = \pi_i (1-\pi_i) \frac{N}{N-1}, \,\, \forall i \in U </code>
+</p>
+
+</li>
+<li> <p style="text-align: center;"><code class="reqn"> b_i^{(k)} = \frac{(b_i^{(k-1)})^2 }{\sum_{j\in U} b_j^{(k-1)} } + \pi_i(1-\pi_i) </code>
+</p>
+
+</li>
+</ol>
+<p>a necessary condition for convergence is checked and, if not satisfied,
+the function returns an alternative solution that uses only one iteration:
+</p>
+<p style="text-align: center;"><code class="reqn">b_i = \pi_i(1-\pi_i)\Biggl( \frac{N\pi_i(1-\pi_i)}{ (N-1)\sum_{j\in U}\pi_j(1-\pi_j) } + 1 \Biggr) </code>
+</p>
+
+</li>
+<li> <p><code>method="MateiTille2"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn"> \widehat{var}(\hat{t}_{HT}) = \frac{1}{1 - \sum_{i\in U} \frac{d_i^2}{\pi_i} }
+     \sum_{i\in s} (1-\pi_i) \Biggl( \frac{y_i}{\pi_i} - \frac{\hat{t}_{HT}}{n} \Biggr)^2 </code>
+</p>
+
+<p>where
+</p>
+<p style="text-align: center;"><code class="reqn"> d_i = \frac{\pi_i(1-\pi_i)}{\sum_{j\in U} \pi_j(1-\pi_j) } </code>
+</p>
+
+</li>
+<li> <p><code>method="MateiTille3"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn"> \widehat{var}(\hat{t}_{HT}) = \frac{1}{1 - \sum_{i\in U} \frac{d_i^2}{\pi_i} }
+     \sum_{i\in s} (1-\pi_i) \Biggl( \frac{y_i}{\pi_i} -
+     \frac{ \sum_{j\in s} (1-\pi_j)\frac{y_j}{\pi_j} }{ \sum_{j\in s} (1-\pi_j)  } \Biggr)^2 </code>
+</p>
+
+<p>where <code class="reqn">d_i</code> is defined as in <code>method="MateiTille2"</code>.
+</p>
+</li>
+<li> <p><code>method="MateiTille4"</code> [Class 3]
+</p>
+<p style="text-align: center;"><code class="reqn"> \widehat{var}(\hat{t}_{HT}) = \frac{1}{1 - \sum_{i\in U} b_i/n^2 }
+     \sum_{i\in s} \frac{b_i}{\pi_i^3} (y_i - y_i^* )^2  </code>
+</p>
+
+<p>where
+</p>
+<p style="text-align: center;"><code class="reqn">  y_i^* = \pi_i \frac{ \sum_{j\in s} b_j y_j/\pi_j^2 }{  \sum_{j\in s} b_j/\pi_j } </code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn"> b_i = \frac{ \pi_i(1-\pi_i)N }{ N-1 } </code>
+</p>
+
+</li>
+<li> <p><code>method="MateiTille5"</code> [Class 3]
+This estimator is defined as in <code>method="MateiTille4"</code>, and the <code class="reqn">b_i</code>
+values are defined as in <code>method="MateiTille1"</code>
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>a scalar, the estimated variance
+</p>
+
+
+<h3>References</h3>
+
+<p>Matei, A.; Tillé, Y., 2005. Evaluation of variance approximations and estimators
+in maximum entropy sampling with unequal probability and fixed sample size.
+Journal of Official Statistics 21 (4), 543-570.
+</p>
+<p>Haziza, D.; Mecatti, F.; Rao, J.N.K. 2008.
+Evaluation of some approximate variance estimators under the Rao-Sampford
+unequal probability sampling design. Metron LXVI (1), 91-108.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+### Generate population data ---
+N &lt;- 500; n &lt;- 50
+
+set.seed(0)
+x &lt;- rgamma(500, scale=10, shape=5)
+y &lt;- abs( 2*x + 3.7*sqrt(x) * rnorm(N) )
+
+pik &lt;- n * x/sum(x)
+s   &lt;- sample(N, n)
+
+ys &lt;- y[s]
+piks &lt;- pik[s]
+
+### Estimators of class 2 ---
+approx_var_est(ys, piks, method="Deville1")
+approx_var_est(ys, piks, method="Deville2")
+approx_var_est(ys, piks, method="Deville3")
+approx_var_est(ys, piks, method="Hajek")
+approx_var_est(ys, piks, method="Rosen")
+approx_var_est(ys, piks, method="FixedPoint")
+approx_var_est(ys, piks, method="Brewer1")
+
+### Estimators of class 3 ---
+approx_var_est(ys, pik, method="HartleyRao", sample=s)
+approx_var_est(ys, pik, method="Berger", sample=s)
+approx_var_est(ys, pik, method="Tille", sample=s)
+approx_var_est(ys, pik, method="MateiTille1", sample=s)
+approx_var_est(ys, pik, method="MateiTille2", sample=s)
+approx_var_est(ys, pik, method="MateiTille3", sample=s)
+approx_var_est(ys, pik, method="MateiTille4", sample=s)
+approx_var_est(ys, pik, method="MateiTille5", sample=s)
+approx_var_est(ys, pik, method="Brewer2", sample=s)
+approx_var_est(ys, pik, method="Brewer3", sample=s)
+approx_var_est(ys, pik, method="Brewer4", sample=s)
+
+
+</code></pre>
+
+
+</div>

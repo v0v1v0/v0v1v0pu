@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>inner.prod.max</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unbalanced Haar wavelet which maximises the inner product</h2>
+
+<h3>Description</h3>
+
+<p>The function finds the Unbalanced Haar vector which yields the largest (in absolute value)
+inner product with the input vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">inner.prod.max(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>    a vector</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The index where <code>abs(inner.prod.iter(x))</code> is maximised. If two or more maxima are found, the <code>med</code>
+of their locations is returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Piotr Fryzlewicz</p>
+
+
+<h3>See Also</h3>
+
+<p><code>inner.prod.iter</code>, <code>med</code>, <code>inner.prod.max.p</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">inner.prod.max(c(rep(0, 100), rep(1, 200)))
+</code></pre>
+
+
+</div>

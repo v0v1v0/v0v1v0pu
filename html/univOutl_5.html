@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot4ratios</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Draws a scatter-plot that summarizes the findings of the Hidiroglou-Berthelot outliers' or the ratioSize detection method.
+</h2>
+
+<h3>Description</h3>
+
+<p>The function gets the output of the function of <code>HBmethod</code> or <code>ratioSize</code> when they are ran with the argument <code>return.dataframe = TRUE</code>) to draw a scatter-plot of ratios vs. the corresponding importance measures.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plot4ratios(out)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>out</code></td>
+<td>
+
+<p>Is the output of  <code>HBmethod</code> or <code>ratioSize</code> when they are launched with the argument <code>return.dataframe = TRUE</code>.
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function draws a scatter-plot. With the output of <code>HBmethod</code> the ratios (=yt2/yt1) are on Y axis while their importance measure ( max(yt1, yt2)^U) are represented on the X axis. With the output of <code>ratioSize</code> on the Y axis the centered ratios are reported. In addition the acceptance bounds are drawn (blue lines); the dots (in red color) outside the bounds are the outliers. This is considered a useful diagnostic plot to understand how the procedure identifies the outliers.  
+</p>
+
+
+<h3>Value</h3>
+
+<p>A scatter-plot is drawn and, in addition, the output includes a data.frame with the data used to derive the plot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Marcello D'Orazio <a href="mailto:mdo.statmatch@gmail.com">mdo.statmatch@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hidiroglou, M.A. and Berthelot, J.-M. (1986) ‘Statistical editing and Imputation for Periodic Business Surveys’. <em>Survey Methodology</em>, Vol 12, pp. 73-83.
+</p>
+<p>Hidiroglou, M.A. and Emond, N. (2018) ‘Modifying the Hidiroglou-Berthelot (HB) method’. <em>Unpublished note</em>, Business Survey Methods Division, Statistics Canada, May 18 2018.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>HBmethod</code>, <code>ratioSize</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># generate some data
+set.seed(222)
+x0 &lt;- rnorm(30, 50, 5)
+set.seed(333)
+rr &lt;- runif(30, 0.9, 1.2)
+rr[10] &lt;- 2
+x1 &lt;- x0 * rr
+
+# run HBmethod with argument return.dataframe = TRUE
+out &lt;- HBmethod(yt1 = x0, yt2 = x1,  
+                return.dataframe = TRUE)
+# draw the scatterplot
+plot4ratios(out)
+
+</code></pre>
+
+
+</div>

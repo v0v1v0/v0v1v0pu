@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>performCuts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perform cuts in the data</h2>
+
+<h3>Description</h3>
+
+<p><code>performCuts</code> will perform cuts in the data. This function is provided
+as a place holder, and it is empty, but it is called by <code>UPMASK</code>, so if the user 
+needs to perform cuts in the data for the UPMASK analysis, this function should be 
+tailored.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">performCuts(originalData)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>originalData</code></td>
+<td>
+<p>a data frame to use as the baseline</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A data frame.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create a simple data set with the values and errors
+toyDataDF &lt;- data.frame(x=runif(10, 0, 10), dx=rep(0.2, 10), y=runif(10, 0, 10), 
+                        dy=rep(0.1, 10))
+
+# Call the function to perform cuts
+newToyDataDF &lt;- performCuts(toyDataDF)
+
+# Clean the environment
+rm(list=c("toyDataDF", "newToyDataDF"))
+ 
+</code></pre>
+
+
+</div>

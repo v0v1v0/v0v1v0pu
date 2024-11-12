@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.univariateML</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot, Lines and Points Methods for Maximum Likelihood Estimates</h2>
+
+<h3>Description</h3>
+
+<p>The <code>plot</code>, <code>lines</code>, and <code>points</code> methods for
+<code>univariateML</code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'univariateML'
+plot(x, range = NULL, ...)
+
+## S3 method for class 'univariateML'
+lines(x, range = NULL, ...)
+
+## S3 method for class 'univariateML'
+points(x, range = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a <code>univariateML</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range</code></td>
+<td>
+<p>range of <code>x</code> values to plot, i.e. <code>c(lower, upper)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>parameters passed to <code>plot</code>, <code>lines</code>, or <code>points</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An invisible copy of <code>x</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(mlweibull(datasets::precip), main = "Annual Precipitation in US Cities")
+lines(mlgamma(datasets::precip), lty = 2)
+rug(datasets::precip)
+</code></pre>
+
+
+</div>

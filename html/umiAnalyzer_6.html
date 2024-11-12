@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>beta_binom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Beta binomial model</h2>
+
+<h3>Description</h3>
+
+<p>Code was obtained from VGAM package function VGAM::rbetabinom.ab. The VGAM
+package is available under the GPL-3 license and maintained by
+Thomas Yee &lt;t.yee at auckland.ac.nz&gt;. Source code of the function is identical
+to rbetabinom.ab, but the function name was changed to beta_binom.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">beta_binom(n, size, shape1, shape2, limit.prob = 0.5, .dontuse.prob = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>n</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>size</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape1</code></td>
+<td>
+<p>alpha</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shape2</code></td>
+<td>
+<p>beta</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limit.prob</code></td>
+<td>
+<p>0.5</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.dontuse.prob</code></td>
+<td>
+<p>NULL</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Numeric
+</p>
+
+
+<h3>References</h3>
+
+<p>Yee TW (2015). Vector Generalized Linear and Additive Models: With an Implementation in R. Springer, New York, USA.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">beta_binom(10,5, 0.5, 1)
+beta_binom(10,2, 0.5, 1)
+
+</code></pre>
+
+
+</div>

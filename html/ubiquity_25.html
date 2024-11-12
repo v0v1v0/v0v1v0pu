@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>nm_select_records</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Select Records from NONMEM-ish Data Set</h2>
+
+<h3>Description</h3>
+
+<p>Retrieves a subset of a NONMEM-ish data set based on a list containing filtering information.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">nm_select_records(cfg, values, filter)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>dataframe containing the dataset with column headers</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter</code></td>
+<td>
+<p>list with element names as headers for <code>values</code> with values from the same header OR'd and values across headers AND'd</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If the dataset has the headings <code>ID</code>, <code>DOSE</code> and <code>SEX</code>  and
+<code>filter</code> has the following format:
+</p>
+<pre>
+filter = list()
+filter$ID   = c(1:4)
+filter$DOSE = c(5,10)
+filter$SEX  = c(1)
+</pre>
+<p>It would be translated into the boolean filter:
+</p>
+<pre>
+((ID==1) | (ID==2) | (ID==3) | (ID==4)) &amp; ((DOSE == 5) | (DOSE==10)) &amp; (SEX == 1)
+</pre>
+
+
+<h3>Value</h3>
+
+<p>subset of dataset
+</p>
+
+
+</div>

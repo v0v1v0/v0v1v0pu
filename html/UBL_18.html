@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>phi</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Relevance function. 
+</h2>
+
+<h3>Description</h3>
+
+<p>This function allows to obtain the relevance function values on a set of target variable values given the interpolating points.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">phi(y, control.parms)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+
+<p>The target variable values of the problem.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control.parms</code></td>
+<td>
+<p>A named list supplied by the phi.control function with the parameters needed for obtaining the relevance values.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The phi function specifies the regions of interest in the target
+variable. It does so by performing a Monotone Cubic Spline
+Interpolation over a set of maximum and minimum relevance points. 
+The notion of relevance can be associated with rarity.
+Nonetheless, this notion may depend on the domain experts knowledge.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns the relevance values. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Rita Ribeiro
+<a href="mailto:rpribeiro@dcc.fc.up.pt">rpribeiro@dcc.fc.up.pt</a>, Paula Branco <a href="mailto:paobranco@gmail.com">paobranco@gmail.com</a>, and Luis Torgo <a href="mailto:ltorgo@dcc.fc.up.pt">ltorgo@dcc.fc.up.pt</a> </p>
+
+
+<h3>References</h3>
+
+<p>Ribeiro, R., 2011. Utility-based regression 
+(Doctoral dissertation, PhD thesis, 
+Dep. Computer Science, Faculty of Sciences - 
+University of Porto).
+</p>
+<p>Fritsch, F.N. and Carlson, R.E., 1980. Monotone piecewise cubic interpolation.
+SIAM Journal on Numerical Analysis, 17(2), pp.238-246.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>phi.control</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# example of a relevance function where the extremes are the important values.
+data(morley)
+# the target variable
+y &lt;- morley$Speed
+
+phiF.args &lt;- phi.control(y,method="extremes",extr.type="both")
+y.phi &lt;- phi(y, control.parms=phiF.args)
+plot(y, y.phi)
+
+</code></pre>
+
+
+</div>

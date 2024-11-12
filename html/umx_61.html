@@ -1,0 +1,148 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tmx_genotypic_effect</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Graphical display of genotypic effects.</h2>
+
+<h3>Description</h3>
+
+<p><code>tmx_genotypic_effect</code> allows you to explore the concept of genotypic effect at a locus. With it,
+you can interactively explore the effects of allele frequency, additive variance, and
+<a href="https://en.wikipedia.org/wiki/Dominance_(genetics)">dominance</a>.
+</p>
+<p>This function lets you explore the simplest two–allele system (<code>B</code> and <code>b</code>), with three possible
+genotypes, <code>BB</code>, <code>Bb</code>, and <code>bb</code>.
+</p>
+<p>The point between the two homozygotes is <code>m</code> – the mean effect of the homozygous genotypes.
+</p>
+<p>Parameter <code>a</code> is half the measured phenotypic difference between the homozygotes <code>BB</code> and <code>bb</code>.
+It corresponds to the additive effect of each additional <code>B</code> allele, relative to the <code>bb</code> phenotype.
+</p>
+<p>Parameter <code>d</code> is the deviation of the heterozygote <code>Bb</code> phenotype from the homozygote mid-point <code>m</code>.
+It corresponds to the non-additive (dominance) effect of the <code>B</code> allele. The heterozygote phenotype
+may lie on either side of <code>m</code> and the sign of <code>d</code> will vary accordingly.
+</p>
+<p><strong>Old system</strong> from book ed 2:
+</p>
+<p>Adapted from Mather and Jinks, 1977, p. 32). See book issue old-style nomenclature
+https://github.com/tbates/BGBook/issues/23
+</p>
+<p><code>u</code> = Frequency of the dominant allele (now = <code>p</code>).
+<code>v</code> = Frequency of the recessive allele (now = <code>q</code>).
+</p>
+<p><code>m</code> = midpoint between the two homozygotes
+<code>d</code> = half the difference between the two homozygote (now <code>a</code>)
+</p>
+<p><code>h</code> = deviation of the heterozygote from <code>m</code> (now = <code>d</code>)
+</p>
+<p>New system:
+</p>
+<p><code>u</code> and <code>v</code> -&gt; <code>p</code> and  <code>q</code>
+</p>
+<p><code>d</code> and <code>h</code> -&gt; <code>a</code> and <code>d</code>
+</p>
+<p>See BGBook issue 23
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tmx_genotypic_effect(p = 0.75, q = (1 - p), a = 0.5, d = 0, m = 0, show = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>The frequency of the B allele (Default .5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>The frequency of the b allele (Default 1-p)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>Half the difference between the two homozygote phenotypes (Default .5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+<p>The deviation of the heterozygote from m (Default 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>The value of the midpoint between the homozygotes (Default 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show</code></td>
+<td>
+<p>Whether to draw the plot or just return it (Default = TRUE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li>
+<p> optional plot
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li>
+<p> Neale, M. C. (2005). Quantitative Genetics. In Encyclopedia of Life Sciences. New York: John Wiley &amp; Sons, Ltd.
+<a href="https://vipbg.vcu.edu/vipbg/Articles/2005_book_chapters_ascertainment_corrections.pdf">pdf</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+<p>Other Teaching and testing Functions: 
+<code>tmx_is.identified()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(umx);
+
+
+# =========================
+# = Pure additivity: d= 0 =
+# =========================
+tmx_genotypic_effect(p = .5, a = 1, d = 0, m = 0, show = TRUE);
+
+# =============================
+# = Complete dominance: a=d=1 =
+# =============================
+tmx_genotypic_effect(p = .5, q =.5, a = 1, d = 1, m = 0, show = TRUE);
+
+# ===========================
+# = Over dominance: a&lt; d =1 =
+# ===========================
+tmx_genotypic_effect(p = .5, q =.5, a =.5, d = 1, m = 0)
+
+p = tmx_genotypic_effect(p = .5, q = .5, a = 1, d = .5, m = 0, show = TRUE); 
+# p = p + ggplot2::geom_point() 
+# p + ggplot2::geom_text(hjust = 0, nudge_x = 0.05, label= "x")
+# ggsave(paste0(base, "c03_genotypic_effect_by_gene_dose.pdf"), width = 4.6, height = 4.6)
+
+
+</code></pre>
+
+
+</div>

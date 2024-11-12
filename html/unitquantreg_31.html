@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pairwise.vuong.test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pairwise vuong test</h2>
+
+<h3>Description</h3>
+
+<p>Calculate pairwise comparisons between fitted models performing
+vuong test for objects of class <code>unitquantreg</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pairwise.vuong.test(
+  ...,
+  lt,
+  p.adjust.method = p.adjust.methods,
+  alternative = c("two.sided", "less", "greater")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p><code>unitquantreg</code> objects separated by commas.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lt</code></td>
+<td>
+<p>a list with one or more <code>unitquantreg</code> objects.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.adjust.method</code></td>
+<td>
+<p>a character string specifying the method for multiple
+testing adjustment; almost always one of
+<code>p.adjust.methods</code>. Can be abbreviated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>indicates the alternative hypothesis and must be one
+of <code>"two.sided"</code> (default), <code>"less"</code>, or <code>"greater"</code>.
+Can be abbreviated.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Object of class <code>"pairwise.htest"</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>vuong.test</code>, <code>p.adjust</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(sim_bounded, package = "unitquantreg")
+sim_bounded_curr &lt;- sim_bounded[sim_bounded$family == "uweibull", ]
+
+models &lt;- c("uweibull", "kum", "ulogistic")
+lt_fits &lt;- lapply(models, function(fam) {
+  unitquantreg(formula = y1 ~ x, tau = 0.5, data = sim_bounded_curr,
+               family = fam)
+})
+
+ans &lt;- pairwise.vuong.test(lt = lt_fits)
+ans
+
+</code></pre>
+
+
+</div>

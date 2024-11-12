@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>panel_border</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add a panel border to a ggplot2 plot</h2>
+
+<h3>Description</h3>
+
+<p>A simple <code>ggplot2</code> theme which replaces the axis lines with
+a bordered panel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">panel_border(base_size = 12, base_color = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>base_size</code></td>
+<td>
+<p>A numeric. Base size. Used to calculate line size and spacing.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base_color</code></td>
+<td>
+<p>A character. Base color for lines.</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>This should be placed after the primary theme for the plot.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ggplot2)
+
+ggplot(datasets::mtcars, aes(x = wt, y = hp, color = as.factor(cyl))) +
+  geom_point() +
+  facet_wrap(~as.logical(am)) +
+  theme_basic() +
+  panel_border()
+</code></pre>
+
+
+</div>

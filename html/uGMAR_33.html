@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_minval</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns the default smallest allowed log-likelihood for given data.</h2>
+
+<h3>Description</h3>
+
+<p><code>get_minval</code> returns the default smallest allowed log-likelihood for given data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_minval(data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a numeric vector or class <code>'ts'</code> object containing the data. <code>NA</code> values are not supported.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function exists simply to avoid duplication inside the package.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns <code>-(10^(ceiling(log10(length(data))) + 1) - 1)</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>fitGSMAR</code>, <code>GAfit</code>
+</p>
+
+
+</div>

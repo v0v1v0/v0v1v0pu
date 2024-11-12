@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>FitAndResiduals</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes a linear regression fit and residuals 
+on possibly multivariate responses</h2>
+
+<h3>Description</h3>
+
+<p>Computes a linear regression fit and residuals 
+on possibly multivariate responses
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">FitAndResiduals(Y, X, BetaHat)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>a numeric matrix, to act as response</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>a numeric matrix, to act as covariates</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BetaHat</code></td>
+<td>
+<p>a numeric matrix, to act as slope</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list consisting of two vectors, the 
+fitted values and residuals
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"> ## Not run: 
+ DataY = cbind(CCU12_Precip$Precip, CCU12_Precip$TMax);
+DataX = cbind(rep(1, length(CCU12_Precip$Precip)), CCU12_Precip$TMin)			
+BetaHat.New = WLS(DataY, DataX)
+Results.New = FitAndResiduals(DataY, DataX, BetaHat.New);
+    		
+## End(Not run)
+
+
+</code></pre>
+
+
+</div>

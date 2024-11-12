@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_user_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve information for the current authenticated user</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve information for the current authenticated user
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_user_info(showRequestURL = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>login - the specified bitly login or the login of the authenticated user
+</p>
+<p>name - the user's full/display name
+</p>
+<p>default_group_guid	- a group to which user belongs
+</p>
+<p>created - Timestamp for the moment the user signed up (uses <code>ymd_hms</code>)
+</p>
+<p>is_active - whether a user profile is active
+</p>
+<p>modified - Timestamp of the last modification to the user profile (uses <code>ymd_hms</code>)
+</p>
+<p>is_sso_user - is Single-Sign-On enabled for the user (PREMIUM FEATURE)
+</p>
+<p>is_2fa_enabled - is 2 Step verification enabled ?
+</p>
+<p>email - user's emails
+</p>
+
+
+<h3>User</h3>
+
+<p>User operations such as changing your name or fetching basic user information apply only to the authenticated user.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference/#getUser">https://dev.bitly.com/api-reference/#getUser</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+   ui &lt;- bitly_user_info(showRequestURL = TRUE)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

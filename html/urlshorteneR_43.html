@@ -1,0 +1,139 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_update_bitlink</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Update a Bitlink</h2>
+
+<h3>Description</h3>
+
+<p>See <a href="https://dev.bitly.com/api-reference/#updateBitlink">https://dev.bitly.com/api-reference/#updateBitlink</a>
+Update fields in the Bitlink
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_update_bitlink(
+  bitlink = NULL,
+  archived = NULL,
+  tags = NULL,
+  showRequestURL = FALSE,
+  created_at = NULL,
+  title = NULL,
+  created_by = NULL,
+  long_url = NULL,
+  client_id = NULL,
+  custom_bitlinks = NULL,
+  link = NULL,
+  id = NULL,
+  deeplinks = list(bitlink = NULL, install_url = NULL, created = NULL, modified = NULL,
+    app_uri_path = NULL, install_type = NULL, app_guid = NULL, guid = NULL, os = NULL)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>bitlink</code></td>
+<td>
+<p>- required, a Bitlink made of the domain and hash</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>archived</code></td>
+<td>
+<p>- string | Default: "off" | Enum:"on" "off" "both" | Whether or not to include archived bitlinks</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tags</code></td>
+<td>
+<p>- Array of string, use e.g. <code>c("test1", "test2")</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- show URL which has been build and requested from server. For debug
+purposes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>created_at</code></td>
+<td>
+<p>- update created at parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>- title of the bitlink</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>created_by</code></td>
+<td>
+<p>- update user</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>long_url</code></td>
+<td>
+<p>- required, a long URL to be shortened (example: https://www.idnes.cz).
+Must contain http/https</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>client_id</code></td>
+<td>
+<p>- The client ID of an OAuth app</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>custom_bitlinks</code></td>
+<td>
+<p>- update custom_bitlinks</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>link</code></td>
+<td>
+<p>- link</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>- id</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deeplinks</code></td>
+<td>
+<p>- string | Default: "both" | Enum:"on" "off" "both" | Filter to only Bitlinks that contain deeplinks</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+bitly_update_bitlink(bitlink = "bit.ly/DPetrov", title = "novy titulek")
+
+## hash is the one which is only returned. Dont use
+bitly_update_bitlink(bitlink = "on.natgeo.com/1bEVhwE")
+
+## manyHashes &lt;- list("bit.ly/DPetrov", "bit.ly/1QU8CFm", "bit.ly/1R1LPSE", "bit.ly/1LNqqva")
+## for (u in 1:length(manyHashes)) {
+##   print(bitly_update_bitlink(bitlink = manyHashes[[u]],
+##                 title = stri_rand_strings(1, 8, pattern = "[A-Za-z0-9]")))
+## }
+
+## End(Not run)
+</code></pre>
+
+
+</div>

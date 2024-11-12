@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>next_Ivanova_binary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Determine the dose for the next cohort of new patients of binary endpoint using design by Ivanova et al (2009)
+</h2>
+
+<h3>Description</h3>
+
+<p>Determine the dose for the next cohort of new patients for single-agent trials of binary endpoint that aim to find a MTD using design by Ivanova et al (2009)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">next_Ivanova_binary(target, eps, y, n, d)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>target</code></td>
+<td>
+
+<p>the target toxicity rate
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eps</code></td>
+<td>
+
+<p>the decision criterion
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+
+<p>the number of toxicity patients at each dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+
+<p>the number of patients enrolled at each dose level
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+
+<p>the current dose level
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>next_Ivanova_binary()</code> returns recommended dose level for the next cohort as a numeric value
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Chia-Wei Hsu, Haitao Pan, Rongji Mu
+</p>
+
+
+<h3>References</h3>
+
+<p>Ivanova, Anastasia, and Se Hee Kim. "Dose finding for continuous and ordinal outcomes with a monotone objective function: a unified approach." Biometrics 65, no. 1 (2009): 307-315.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">target &lt;- 0.3
+eps &lt;- 1
+y &lt;- c(0, 4, 0, 0, 0, 0)
+n &lt;- c(3, 15, 0, 0, 0, 0)
+d &lt;- 2
+next_Ivanova_binary(target = target, eps = eps, y = y, n = n, d = d)
+
+</code></pre>
+
+
+</div>

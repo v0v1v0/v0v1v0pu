@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mixed_units</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create or convert to a mixed units list-column</h2>
+
+<h3>Description</h3>
+
+<p>Create or convert to a mixed units list-column
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mixed_units(x, values, ...)
+
+## S3 replacement method for class 'mixed_units'
+units(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>numeric, or vector of class <code>units</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>character vector with units encodings, or list with symbolic units of class <code>mixed_symbolic_units</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>ignored</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>see values</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>if <code>x</code> is of class <code>units</code>, <code>values</code> should be missing or of class <code>mixed_symbolic_units</code>; if <code>x</code> is numeric, <code>values</code> should be a character vector the length of <code>x</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">a &lt;- 1:4
+u &lt;- c("m/s", "km/h", "mg/L", "g")
+mixed_units(a, u)
+units(a) = as_units("m/s")
+mixed_units(a) # converts to mixed representation
+</code></pre>
+
+
+</div>

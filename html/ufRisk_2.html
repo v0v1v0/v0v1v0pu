@@ -1,0 +1,234 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>covtest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unconditional and Conditional Coverage Tests, Independence Test</h2>
+
+<h3>Description</h3>
+
+<p>The conditional (Kupiec, 1995), the unconditional coverage
+test (Christoffersen, 1998) and the independence test (Christoffersen, 1998)
+of the Value-at-Risk (VaR) can be applied.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">covtest(obj = list(Loss = NULL, VaR = NULL, p = NULL), conflvl = 0.95)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>a list that contains the following elements:
+</p>
+
+<dl>
+<dt><code>Loss</code></dt>
+<dd>
+<p>a numeric vector that contains the values of a loss series
+ordered from past to present; is set to <code>NULL</code> by default.</p>
+</dd>
+<dt><code>VaR</code></dt>
+<dd>
+<p>a numeric vector that contains the estimated values of the
+VaR for the same time points of the loss series <code>Loss</code>;
+is set to <code>NULL</code> by default.</p>
+</dd>
+<dt><code>p</code></dt>
+<dd>
+<p>a numeric vector with one element; defines the probability p
+stated in the null hypotheses of the coverage tests (see the section
+<code>Details</code> for more information); is set to <code>NULL</code> by default.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conflvl</code></td>
+<td>
+<p>a numeric vector with one element; the significance
+level at which the null hypotheses are evaluated; is set to <code>0.95</code> by
+default.
+Please note that a list returned by the <code>varcast</code> function can be directly
+passed to <code>covtest</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>With this function, the conditional and the unconditional coverage
+tests introduced by Kupiec (1995) and Christoffersen (1998) can be applied.
+Given a return series <code class="reqn">r_t</code> with <code class="reqn">n</code> observations, divide the
+series into <code class="reqn">n-K</code> in-sample and <code class="reqn">K</code> out-of-sample observations,
+fit a model to the in-sample data and obtain rolling one-step forecasts of
+the VaR for the out-of-sample time points.
+</p>
+<p>Define
+</p>
+<p style="text-align: center;"><code class="reqn">I_t = 1,</code>
+</p>
+
+<p>if <code class="reqn">-r_t &gt; \widehat{VaR}_t (\alpha)</code> or
+</p>
+<p style="text-align: center;"><code class="reqn">I_t = 0,</code>
+</p>
+<p> otherwise,
+</p>
+<p>for <code class="reqn">t = n + 1, n + 2, ..., n + K</code> as the hit sequence, where <code class="reqn">\alpha</code> is
+the confidence level for the VaR (often <code class="reqn">\alpha = 0.95</code> or <code class="reqn">\alpha = 0.99</code>).
+Furthermore, denote <code class="reqn">p = \alpha</code> and let <code class="reqn">w</code> be the actual covered
+proportion of losses in the data.
+</p>
+<p>1. Unconditional coverage test:
+</p>
+<p style="text-align: center;"><code class="reqn">H_{0, uc}: p = w</code>
+</p>
+
+<p>Let <code class="reqn">K_1</code> be the number of ones in <code class="reqn">I_t</code> and analogously <code class="reqn">K_0</code> the number of
+zeros (all conditional on the first observation).
+Also calculate <code class="reqn">\hat{w} = K_0 / (K - 1)</code>. Obtain
+</p>
+<p style="text-align: center;"><code class="reqn">L(I_t, p) = p^{K_0}(1 - p)^{K_1}</code>
+</p>
+
+<p>and
+</p>
+<p style="text-align: center;"><code class="reqn">L(I_t, \hat{w}) = \hat{w}^{K_0}(1 - \hat{w})^{K_1}</code>
+</p>
+
+<p>and subsequently the test statistic
+</p>
+<p style="text-align: center;"><code class="reqn">LR_{uc} = -2  * \ln \{L(I_t, p) / L(I_t, \hat{w})\}.</code>
+</p>
+
+<p><code class="reqn">LR_{uc}</code> now asymptotically follows a chi-square-distribution with one degree
+of freedom.
+</p>
+<p>2. Conditional coverage test:
+</p>
+<p>The conditional coverage test combines the unconditional coverage test
+with a test on independence. Denote by <code class="reqn">w_{ij}</code> the probability of an <code class="reqn">i</code> on day
+<code class="reqn">t-1</code> being followed by a <code class="reqn">j</code> on day <code class="reqn">t</code>, where <code class="reqn">i</code> and <code class="reqn">j</code> correspond to the value of
+<code class="reqn">I_t</code> on the respective day.
+</p>
+<p style="text-align: center;"><code class="reqn">H_{0, cc}: w_{00} = w{10} = p</code>
+</p>
+
+<p>with <code class="reqn">i = 0, 1</code> and <code class="reqn">j = 0, 1</code>.
+</p>
+<p>Let <code class="reqn">K_{ij}</code> be the number of observations, where the values on two following days
+follow the pattern <code class="reqn">ij</code>. Calculate
+</p>
+<p style="text-align: center;"><code class="reqn">L(I_t, \hat{w}_{00}, \hat{w}_{10})
+= \hat{w}_{00}^{K_{00}}(1 - \hat{w}_{00})^{K_{01}} * \hat{w}_{10})^{K_{10}}(1 - \hat{w}_{10})^{K_{11}},</code>
+</p>
+
+<p>where <code class="reqn">\hat{w}_{00} = K_{00} / K_0</code> and <code class="reqn">\hat{w}_{10} = K_{10} / K_1</code>. The test
+statistic is then given by
+</p>
+<p style="text-align: center;"><code class="reqn">LR_{cc} = -2  * \ln \{ L(I_t, p) / L(I_t, \hat{w}_{00}, \hat{w}_{10}) \},</code>
+</p>
+
+<p>which asymptotically follows a chi-square-distribution with two degrees of
+freedom.
+</p>
+<p>3. Independence test:
+</p>
+<p style="text-align: center;"><code class="reqn">H_{0,ind}: w_{00} = w_{10}</code>
+</p>
+
+<p>The asymptotically chi-square-distributed test statistic (one degree of
+freedom) is given by
+</p>
+<p style="text-align: center;"><code class="reqn">LR_{ind} = -2  * \ln \{L(I_t, \hat{w}_{00}, \hat{w}_{10}) / L(I_t, \hat{w})\}.</code>
+</p>
+
+<p>—————————————————————————–
+</p>
+<p>The function needs four inputs: the out-of-sample loss series <code>obj$Loss</code>, the
+corresponding estimated VaR series <code>obj$VaR</code>, the coverage level <code>obj$p</code>,
+for which the VaR has been calculated and the significance level <code>conflvl</code>,
+at which the null hypotheses are evaluated. If an object returned by this function
+is entered into the R console, a detailed overview of the test
+results is printed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list of class <code>ufRisk</code> with the following four elements:
+</p>
+
+<dl>
+<dt>p</dt>
+<dd>
+<p>probability p stated in the null hypotheses of the coverage tests.</p>
+</dd>
+<dt>p.uc</dt>
+<dd>
+<p>the p-value of the unconditional coverage test.</p>
+</dd>
+<dt>p.cc</dt>
+<dd>
+<p>the p-value of the conditional coverage test.</p>
+</dd>
+<dt>p.ind</dt>
+<dd>
+<p>the p-value of the independence test.</p>
+</dd>
+<dt>conflvl</dt>
+<dd>
+<p>the significance level at which the null hypotheses are
+evaluated.</p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+
+<ul>
+<li>
+<p> Sebastian Letmathe (Scientific Employee) (Department of Economics,
+Paderborn University) <br></p>
+</li>
+<li>
+<p> Dominik Schulz (Scientific Employee) (Department of Economics,
+Paderborn University), <br></p>
+</li>
+</ul>
+<h3>References</h3>
+
+<p>Christoffersen, P. F. (1998). Evaluating interval forecasts. International
+economic review, pp. 841-862.
+</p>
+<p>Kupiec, P. (1995). Techniques for verifying the accuracy of risk measurement
+models. The J. of Derivatives, 3(2).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+# Example for Walmart Inc. (WMT)
+prices &lt;- WMT$price.close
+output &lt;- varcast(prices)
+Loss &lt;- -output$ret.out
+VaR &lt;- output$VaR.v
+covtest.data &lt;- list(Loss = Loss, VaR = VaR, p = 0.99)
+covtest(covtest.data)
+
+# directly passing an output object of 'varcast()' to 'covtest()'
+output &lt;- varcast(prices)
+covtest(output)
+
+</code></pre>
+
+
+</div>

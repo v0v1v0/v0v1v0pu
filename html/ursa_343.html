@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.matrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Convert raster image to a matrix
+</h2>
+
+<h3>Description</h3>
+
+<p><code>as.matrix(coords=TRUE)</code> prepares a list from the first band of <code>ursaRaster</code>, which is suitable as input parameter for functions <code>image</code>, <code>contour</code> and <code>filled.contour</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'ursaRaster'
+as.matrix(x, ...)
+## S3 method for class 'ursaRaster'
+x[[i]]
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Object of class <code>ursaRaster</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Set of arguments, which are recognized via their names (using regular expressions) and classes.
+</p>
+
+<dl>
+<dt><code>(coord(s)*|crd|^$)</code></dt>
+<dd>
+<p>Logical If <code>TRUE</code> then <code>list</code> is created with <code>x</code>, <code>y</code>, <code>z</code> components, where component <code>$z</code> contains matrix, components <code>$x</code> and <code>$y</code> are coordinates for elements if matrix. 
+</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>i</code></td>
+<td>
+
+<p>Positive integer or character of lentg. If integer, then band index. If character, then band name. If missing, then first band (value <code>1L</code>) is used.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Item <code>colortable</code> is mainly for internal usage, e. g., for mapping. Item <code>proj</code> is useful for convertion back to <code>ursaRaster</code> object by calling <code>as.ursa</code> function.
+</p>
+<p>Extract operator <code>x[[i]]</code> is a wrapper for <code>as.matrix(x[i],coords=TRUE)</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>Depending of argument <code>coords</code>.
+</p>
+<p>If <code>coords=FALSE</code>, then it is a two-dimensional matrix <code>c(samples*lines, bands)</code>, unclassed from <code>ursaValue</code> class.
+</p>
+<p>If <code>coords=TRUE</code>, then it is a list:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Numeric. Midpoints of cells on horizontal axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>Numeric. Midpoints of cells on vertical axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>Numeric. Matrix of values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attr(*,"proj")</code></td>
+<td>
+<p>PROJ.4 string for grid, defined by <code>x</code> and <code>y</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>attr(*,"colortable")</code></td>
+<td>
+<p>Optional. Object of class <code>ursaColorTable</code>. Missing if raster has no color table.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Nikita Platonov <a href="mailto:platonov@sevin.ru">platonov@sevin.ru</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">session_grid(NULL)
+a &lt;- ursa_dummy(nband=3,min=0,max=100)
+a &lt;- a[a&gt;=20 &amp; a&lt;=80]
+ignorevalue(a) &lt;- 121
+str(ursa_value(a[2]))
+str(as.matrix(a[2]))
+b1 &lt;- a[[2]]
+str(b1)
+image(b1,asp=1)
+b2 &lt;- as.matrix(a[2:3],coords=TRUE)
+print(c('theSame?'=identical(b1,b2)))
+a2 &lt;- as.ursa(b2)
+res &lt;- c(src=a[2],exported_then_imported=a2,diff=a[2]-a2)
+print(res)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fortify.kmeans</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>fortify.kmeans</h2>
+
+<h3>Description</h3>
+
+<p>Fortify a kmeans model with its data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'kmeans'
+fortify(model, data = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p><code>kmeans</code> model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data used to fit the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Not Used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Prepares a kmeans object to be plotted using <code>cmdscale</code> to compute the projected x/y coordinates.  If <code>data</code> is not provided, then just the center points are calculated.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The original data with extra columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>.x</code></td>
+<td>
+<p>The projected x position.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.y</code></td>
+<td>
+<p>The projected y position.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.Cluster</code></td>
+<td>
+<p>The cluster that point belongs to.</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Jared P. Lander
+</p>
+
+
+<h3>See Also</h3>
+
+<p>kmeans fortify ggplot plot.kmeans
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+k1 &lt;- kmeans(x=iris[, 1:4], centers=3)
+hold &lt;- fortify(k1, data=iris)
+head(hold)
+hold2 &lt;- fortify(k1)
+head(hold2)
+
+</code></pre>
+
+
+</div>

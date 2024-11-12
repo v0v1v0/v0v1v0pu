@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_set_bolus</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set Bolus Inputs</h2>
+
+<h3>Description</h3>
+
+<p>Defines infusion rates specified in the system file using  <code>&lt;B:times&gt;</code> and   <code>&lt;B:events&gt;</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_set_bolus(cfg, state, times, values)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>state</code></td>
+<td>
+<p>name of the state to apply the bolus</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>times</code></td>
+<td>
+<p>list of injection times</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>corresponding list injection values</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Ubiquity system object with the bolus information set
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>system_zero_inputs</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Creating a system file from the mab_pk example
+fr = system_new(file_name        = "system.txt", 
+                system_file      = "mab_pk", 
+                overwrite        = TRUE, 
+                output_directory = tempdir())
+
+# Building the system 
+cfg = build_system(system_file  = file.path(tempdir(), "system.txt"),
+      output_directory          = file.path(tempdir(), "output"),
+      temporary_directory       = tempdir())
+
+# Clearing all inputs
+cfg = system_zero_inputs(cfg)
+
+# SC dose of 200 mg
+cfg = system_set_bolus(cfg, state   ="At", 
+                            times   = c(  0.0),  #  day
+                            values  = c(200.0))  #  mg
+
+</code></pre>
+
+
+</div>

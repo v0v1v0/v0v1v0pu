@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pr.test</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compare two Precision-Recall curves</h2>
+
+<h3>Description</h3>
+
+<p>Test the hypothesis that the true difference in PR AUCs is equal to 0.
+We implement the same bootstrap method based on the idea from <code>pROC::roc.test()</code>.
+The PR AUC is calculated using <code>PRROC::pr.curve()</code> with the interpolation
+method of Davis (2006).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pr.test(
+  labels,
+  pred1,
+  pred2,
+  boot.n = 10000,
+  boot.stratified = TRUE,
+  alternative = "two.sided"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>(<code>numeric()</code>)<br>
+Vector of responses/labels (only two classes/values allowed: cases/positive
+class = 1 and controls/negative class = 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pred1</code></td>
+<td>
+<p>(<code>numeric()</code>)<br>
+Vector of prediction values. Higher values denote positive class.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pred2</code></td>
+<td>
+<p>(<code>numeric()</code>)<br>
+Vector of prediction values. Higher values denote positive class.
+Must have the same length as <code>pred1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>boot.n</code></td>
+<td>
+<p>(<code>numeric(1)</code>)<br>
+Number of bootstrap resamples. Default: 10000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>boot.stratified</code></td>
+<td>
+<p>(<code>logical(1)</code>)<br>
+Whether the bootstrap resampling is stratified (same number of cases/controls
+in each replicate as in the original sample) or not.
+It is advised to use stratified resampling when classes from <code>labels</code> are
+imbalanced. Default: TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>(<code>character(1)</code>)<br>
+Specifies the alternative hypothesis. Either "two.sided", "less" or "greater".
+Default: "two.sided".</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list with the AUCs of the two original prediction vectors and the
+p-value of the bootstrap-based test.
+</p>
+
+
+<h3>References</h3>
+
+<p>Davis J, Goadrich M (2006).
+“The relationship between precision-recall and ROC curves.”
+<em>Proceedings of the 23rd International Conference on Machine Learning</em>, <b>148</b>(4), 233–240.
+<a href="https://doi.org/10.1145/1143844.1143874">doi:10.1145/1143844.1143874</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(42)
+# imbalanced labels
+labels = sample(c(0,1), 20, replace = TRUE, prob = c(0.8,0.2))
+# predictions
+pred1 = rnorm(20)
+pred2 = rnorm(20)
+pr.test(labels, pred1, pred2, boot.n = 1000, boot.stratified = FALSE)
+pr.test(labels, pred1, pred2, boot.n = 1000, boot.stratified = TRUE)
+
+</code></pre>
+
+
+</div>

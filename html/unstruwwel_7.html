@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unstruwwel</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Detect and Parse Historic Dates</h2>
+
+<h3>Description</h3>
+
+<p>Detect and Parse Historic Dates, e.g., to ISO 8601:2-2019.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unstruwwel(
+  x,
+  language = NULL,
+  verbose = TRUE,
+  scheme = "time-span",
+  fuzzify = c(0, 0)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Input vector. Either a character vector, or something
+coercible to one.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>language</code></td>
+<td>
+<p>Language code of the input vector as defined in
+ISO 639-1. If <code>NULL</code>, language is detected automatically.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>If <code>TRUE</code>, additional diagnostics are printed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>scheme</code></td>
+<td>
+<p>Scheme code of the output list. Either <code>time-span</code>,
+<code>iso-format</code>, or <code>object</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fuzzify</code></td>
+<td>
+<p>A numerical vector of length 2 to extend the interval
+of approximate or uncertain time periods. This is only applied if
+<code>scheme == "time-span"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A named list of vectors or objects of <code>R6Class</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Although multiple languages can be detected, only dominant
+ones are ultimately set.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">if (interactive()) {
+unstruwwel("1. Hälfte 19. Jahrhundert", language = "de")
+unstruwwel("circa between 1901 and 1905", language = "en")
+}
+
+</code></pre>
+
+
+</div>

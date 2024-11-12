@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ustfd_response_meta_object</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract Metadata From Parsed API Response</h2>
+
+<h3>Description</h3>
+
+<p><code>ustfd_response_meta_object()</code>  will return the meta object included in a
+successful API response. The meta object is a list with the following items:
+</p>
+
+<ul>
+<li> <p><code>count</code> - the number of records in the response
+</p>
+</li>
+<li> <p><code>labels</code> - a named list of labels for each field
+</p>
+</li>
+<li> <p><code>dataTypes</code> - a named list describing the data type for each field
+</p>
+</li>
+<li> <p><code>dataFormats</code> - a named list describing the data format for each field
+</p>
+</li>
+<li> <p><code>total-count</code> - the total number of records matching the query
+</p>
+</li>
+<li> <p><code>total-pages</code> - the total number of pages of records matching the query
+</p>
+</li>
+</ul>
+<h3>Usage</h3>
+
+<pre><code class="language-R">ustfd_response_meta_object(response)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>response</code></td>
+<td>
+<p>a parsed response returned by <code>ustfd_json_response()</code></p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a list
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other ustfd_low_level: 
+<code>ustfd_json_response()</code>,
+<code>ustfd_request()</code>,
+<code>ustfd_response_payload()</code>,
+<code>ustfd_url()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+library(ustfd)
+query &lt;- ustfd_query('v1/accounting/dts/dts_table_2', sort =c('-record_date'))
+response &lt;- ustfd_request(query)
+payload_table &lt;- ustfd_response_payload(response)
+payload_meta &lt;- ustfd_response_meta_object(response)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

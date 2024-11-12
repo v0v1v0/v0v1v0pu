@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bitly_update_campaign</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Update A Channel (Premium)</h2>
+
+<h3>Description</h3>
+
+<p>Update an existing Channel
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bitly_update_campaign(
+  campaign_guid = NULL,
+  group_guid = NULL,
+  channel_guids = NULL,
+  description = NULL,
+  name = NULL,
+  showRequestURL = T
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>campaign_guid</code></td>
+<td>
+<p>- string | A GUID for a Bitly campaign</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group_guid</code></td>
+<td>
+<p>- a GUID for a Bitly group</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>channel_guids</code></td>
+<td>
+<p>- a list of strings</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>description</code></td>
+<td>
+<p>- description of campaign</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>- its name</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showRequestURL</code></td>
+<td>
+<p>- an optional T/F value to whether show URL which has been
+build and requested from server. For debug purposes, default FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Campaigns</h3>
+
+<p>Bitly Campaigns allows you to build and manage omnichannel campaigns.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://dev.bitly.com/api-reference/#updateCampaign">https://dev.bitly.com/api-reference/#updateCampaign</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+cc &lt;- bitly_update_campaign(
+  group_guid = "", channel_guids = list("1", "2", "3"),
+  description = "description", name = "name"
+)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot data</h2>
+
+<h3>Description</h3>
+
+<p>This function plots raw, filtered, or simulated data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plot_data(data, textsize = 9, pointsize = 1, linesize = 0.5,
+  facet_col = NULL, detection_threshold = 20)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>data frame of raw, filtered, or simulated data. Must include the following columns: 'id' - stating the unique identifier for each subject; 'vl' - numeric vector stating the viral load measurements for each subject; 'time'- numeric vector stating the time at which each measurement was taken.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>textsize</code></td>
+<td>
+<p>numeric value for base text size in ggplot. Default is 9.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pointsize</code></td>
+<td>
+<p>numeric value for point size in ggplot. Default is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linesize</code></td>
+<td>
+<p>numeric value for line width in ggplot. Default is 0.5.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>facet_col</code></td>
+<td>
+<p>numeric value for number of columns to use when faceting subject panels. Defaults to NULL (i.e. ggplot default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>detection_threshold</code></td>
+<td>
+<p>numeric value indicating the detection threshold of the assay used to measure viral load. Default value is 20.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+set.seed(1234567)
+
+simulated_data &lt;- simulate_data(nsubjects = 20)
+
+plot_data(simulated_data)
+
+</code></pre>
+
+
+</div>

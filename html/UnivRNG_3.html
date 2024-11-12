@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>draw.beta.binomial</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates variates from Beta-binomial distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function implements pseudo-random number generation for a Beta-binomial distribution with pmf
+</p>
+<p style="text-align: center;"><code class="reqn">f(x|n,\alpha,\beta) = \frac{n!}{x!(n-x)!B(\alpha,\beta)}\int_{0}^{1}\pi^{\alpha-1+x}(1-\pi)^{n+\beta-1-x}d\pi</code>
+</p>
+
+<p>for <code class="reqn">x=0,1,2,...</code>, <code class="reqn">\alpha&gt;0</code>, and <code class="reqn">\beta&gt;0</code>, where <code class="reqn">n</code> is the sample size, <code class="reqn">\alpha</code> and <code class="reqn">\beta</code> are the shape parameters and <code class="reqn">B(\alpha,\beta)</code> is the complete beta function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">draw.beta.binomial(nrep,alpha,beta,n)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrep</code></td>
+<td>
+<p>Number of data points to generate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>First shape parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Second shape parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of trials.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of length five containing generated data, the theoretical mean, the empirical mean, the theoretical variance, and the empirical variance with names y, theo.mean, emp.mean, theo.var, and emp.var, respectively.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">draw.beta.binomial(nrep=100000,alpha=0.2,beta=0.25,n=10)
+
+draw.beta.binomial(nrep=100000,alpha=2,beta=3,n=10)
+
+draw.beta.binomial(nrep=100000,alpha=600,beta=400,n=20)
+</code></pre>
+
+
+</div>

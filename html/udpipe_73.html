@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>txt_overlap</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get the overlap between 2 vectors</h2>
+
+<h3>Description</h3>
+
+<p>Get the overlap between 2 vectors
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">txt_overlap(x, y)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a vector</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector with elements of <code>x</code> which are also found in <code>y</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("a", "b", "c")
+y &lt;- c("b", "c", "e", "z")
+txt_overlap(x, y)
+txt_overlap(y, x)
+</code></pre>
+
+
+</div>

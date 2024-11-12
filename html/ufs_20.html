@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>carelessObject</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute diagnostics for careless responding</h2>
+
+<h3>Description</h3>
+
+<p>This function is a wrapper for the functions from
+the <code>careless</code> package. Normally, you'd probably
+call <code>carelessReport</code> which calls this function
+to generate a report of suspect participants.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">carelessObject(
+  data,
+  items = names(data),
+  flagUnivar = 0.99,
+  flagMultivar = 0.95,
+  irvSplit = 4,
+  responseTime = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>The dataframe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>items</code></td>
+<td>
+<p>The items to look at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flagUnivar</code></td>
+<td>
+<p>How extreme a score has to be for it
+to be flagged as suspicous univariately.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>flagMultivar</code></td>
+<td>
+<p>This has not been implemented yet.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>irvSplit</code></td>
+<td>
+<p>Whether to split for the IRV, and if so,
+in how many parts.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>responseTime</code></td>
+<td>
+<p>If not <code>NULL</code>, the name of a column
+containing the participants' response times.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of class <code>carelessObject</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">carelessObject(mtcars);
+</code></pre>
+
+
+</div>

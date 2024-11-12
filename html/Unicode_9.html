@@ -1,0 +1,121 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>u_char_basics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Unicode Character Objects</h2>
+
+<h3>Description</h3>
+
+<p>Data structures and basic methods for Unicode character data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as.u_char(x)
+as.u_char_range(x)
+as.u_char_seq(x, sep = NA_character_)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>R objects coercible to the respective Unicode character data
+types, see <b>Details</b>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>a character string.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Package <span class="pkg">Unicode</span> provides three basic classes for representing
+Unicode characters: <code>u_char</code> for vectors of Unicode characters,
+<code>u_char_range</code> for vectors of Unicode character ranges, and
+<code>u_char_seq</code> for vectors of Unicode character sequences.  Objects
+from these classes are created via the respective coercion functions.
+</p>
+<p><code>as.u_char</code> knows to coerce integers or hex strings (with or
+without a leading ‘<span class="samp">⁠0x⁠</span>’ or the ‘<span class="samp">⁠U+⁠</span>’ typically used for
+Unicode characters) giving the corresponding code points.  It can also
+handle Unicode character ranges, flattening them out into the
+corresponding vector of Unicode characters.  To “coerce” a
+UTF-8 encoded <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> character string to the corresponding Unicode
+character object, use coercion on the result of obtaining the integer
+code points via <code>utf8ToInt</code>.
+</p>
+<p><code>as.u_char_range</code> knows to coerce character strings of single
+Unicode characters or a Unicode range expression with the hex codes of
+two Unicode characters collapsed by ‘<span class="samp">⁠..⁠</span>’ (currently, hard-wired).
+It can also handle <code>u_char</code> objects, coercing them to ranges of
+single code points.
+</p>
+<p><code>as.u_char_seq</code> knows to coerce character strings with the hex
+codes of Unicode characters collapsed by a non-empty <code>sep</code>.  The
+default corresponds to using ‘<span class="samp">⁠,⁠</span>’ if the strings use surrounding
+angles, and ‘<span class="samp">⁠ ⁠</span>’ otherwise.  If <code>sep</code> is empty or has length
+zero, the character strings are used as is, re-encoded in UTF-8 if
+necessary, and mapped to the corresponding Unicode character sequences
+using <code>utf8ToInt</code>.  <code>as.u_char_seq</code> can also handle
+Unicode character ranges (giving the corresponding flattened out
+Unicode character sequences), or lists of objects coercible to Unicode
+characters via <code>as.u_char</code>.
+</p>
+<p>All classes currently have <code>as.character</code>, <code>as.data.frame</code>,
+<code>c</code>, <code>format</code>, <code>print</code>, <code>rep</code>, <code>unique</code> and
+<code>[</code> subscript methods.  More methods will be added eventually.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>as.u_char</code>, a <code>u_char</code> object giving a vector of
+Unicode characters.
+</p>
+<p>For <code>as.u_char_range</code>, a <code>u_char_range</code> object giving a
+vector of Unicode character ranges.
+</p>
+<p>For <code>as.u_char_seq</code>, a <code>u_char_seq</code> object giving a
+vector of Unicode character sequences.
+</p>
+
+
+<h3>References</h3>
+
+<p>Unicode Character Database (<a href="https://www.unicode.org/ucd/">https://www.unicode.org/ucd/</a>),<br><a href="https://en.wikipedia.org/wiki/Unicode">https://en.wikipedia.org/wiki/Unicode</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- as.u_char_range(c("00AA..00AC", "01CC"))
+x
+## Corresponding Unicode character sequence object:
+as.u_char_seq(x)
+## Corresponding Unicode character object with all code points:
+as.u_char(x)
+## Inspect all Unicode characters in the range:
+u_char_inspect(x)
+
+## Turning R character strings into the respective Unicode character
+## sequences:
+as.u_char_seq(c("Austria", "Trantor"), "")
+## which can then be subscripted "as usual", e.g.:
+x &lt;- as.u_char_seq(c("Austria", "Trantor"), "")[[1L]][c(3L, 5L)]
+x
+## To reassemble the character strings:
+intToUtf8(x)
+</code></pre>
+
+
+</div>

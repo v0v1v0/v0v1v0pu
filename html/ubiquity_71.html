@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>system_rpt_read_template</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Initialize a New Report</h2>
+
+<h3>Description</h3>
+
+<p>Creates a new officer report based either on the ubiquity
+template or one specified by the user. Once created, content can then be
+added.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">system_rpt_read_template(
+  cfg,
+  template = "PowerPoint",
+  mapping = NULL,
+  rptname = "default"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cfg</code></td>
+<td>
+<p>ubiquity system object</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template</code></td>
+<td>
+<p>Type of internal template to use ("PowerPoint" or "Word") or path to template file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mapping</code></td>
+<td>
+<p>Path to an onbrand yaml mapping file: If an internal ubiquity
+template has been supplied, this argument will be ignored and the yaml file
+from ubiquity will be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rptname</code></td>
+<td>
+<p>report name</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The 'template' and 'mapping' inputs can specify either the internal
+ubiquity templates or user-defined templates  If you specify 'template'
+values of 'PowerPoint' or 'Word' then the internal
+ubiquity templates for PowerPoint or Word will be used and the mapping
+information will be ignored.
+</p>
+<p>If templates other than the values above are specified you will need also
+supply a yaml mapping file for an 'onbrand' reporting template. The
+vignette below highlights how to go about creating these files.
+</p>
+
+
+<h3>Value</h3>
+
+<p>ubiquity system object with and empty report initialized
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Reporting vignette (<code>vignette("Reporting", package = "ubiquity")</code>)
+</p>
+<p>Custom Office Template vignette (<code>vignette("Custom_Office_Templates", package="onbrand")</code>)
+</p>
+
+
+</div>

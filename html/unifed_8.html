@@ -1,0 +1,42 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>summary_unifed_glm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summarizing Generalized Linear Model Fits</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper function for summary.glm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">summary_unifed_glm(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class "glm".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments for <code>stats::summary.glm</code>.
+</p>
+<p>This wrapper function was created in order to automatically set to
+1 the dispersion parameter of a fitted unifed GLM. When the package
+is loaded the summary method of the glm class is rewritten using
+this function.</p>
+</td>
+</tr>
+</table>
+</div>

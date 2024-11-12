@@ -1,0 +1,300 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>CancerModel-class</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The "CancerModel" Class</h2>
+
+<h3>Description</h3>
+
+<p>A <code>CancerModel</code> object contains a number of pieces of information
+representing an abstract, heterogeneous collection of cancer patients.
+It can be used to simulate patient outcome data linked to hit classes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">CancerModel(name,
+            nPossible,
+            nPattern,
+            HIT = function(n) 5,
+            SURV = function(n) rnorm(n, 0, 0.3),
+            OUT = function(n) rnorm(n, 0, 0.3),
+            survivalModel=NULL,
+            prevalence=NULL)
+nPatterns(object)
+nPossibleHits(object)
+nHitsPerPattern(object)
+outcomeCoefficients(object)
+survivalCoefficients(object)
+## S4 method for signature 'CancerModel'
+ncol(x)
+## S4 method for signature 'CancerModel'
+nrow(x)
+## S4 method for signature 'CancerModel'
+rand(object, n, balance = FALSE, ...)
+## S4 method for signature 'CancerModel'
+summary(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>character string specifying name given to this model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object, x</code></td>
+<td>
+<p>object of class <code>CancerModel</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nPossible</code></td>
+<td>
+<p>integer scalar specifying number of potential hits relevant
+to the kind of cancer being modeled</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nPattern</code></td>
+<td>
+<p>integer scalar specifying number of different cancer subtypes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>HIT</code></td>
+<td>
+<p>function that generates non-negative integers from a discrete
+distribution. Used to determine the number of hits actually present in each
+cancer subtype.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SURV</code></td>
+<td>
+<p>function that generates real numbers from a continuous
+distributions. Used in simulations to select the coefficients associated
+with each hit in Cox proportional hazards models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>OUT</code></td>
+<td>
+<p>function that generates real numbers from a continuous
+distributions. Used in simulations to select the coefficients associated
+with each hit in logistic models of a binary outcome.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>survivalModel</code></td>
+<td>
+<p>object of class <code>SurvivalModel</code> used to simulate
+survival times for each simulated patient</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prevalence</code></td>
+<td>
+<p>optional numeric vector of relative prevalences of cancer
+subtypes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>numeric scalar specifying quantity of random numbers</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>balance</code></td>
+<td>
+<p>logical scalar specifying how patients should be simulated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>extra arguments for generic routines</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>rand</code> method is the most important method for objects of this
+class.  It returns a data frame with four columns: the
+<code>CancerSubType</code> (as an integer that indexes into the
+<code>hitPattern</code> slot of the object), a binary <code>Outcome</code> that
+takes on values <code>"Bad"</code> or <code>"Good"</code>, an <code>LFU</code> column
+with censored survival times, and a logical <code>Event</code> column that
+describes whether the simulated survival event has occurred.
+</p>
+<p>The <code>rand</code> method for the <code>CancerModel</code> class adds an extra
+logical parameter, <code>balance</code>, to the signature specified by the
+default method.  If <code>balance = FALSE</code> (the default), then
+patients are simulated based on the <code>prevalence</code> defined as part
+of the model.   If <code>balance = TRUE</code>, then patients are simulated
+with equal numbers in each hit pattern class, ordered by the hit
+pattern class.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The <code>CancerModel</code> function is used to contruct and return an object of
+the <code>CancerModel</code> class.
+</p>
+<p>The <code>ncol</code> and <code>nrow</code> functions return integers with the size of
+the matrix of hit patterns.
+</p>
+<p>The <code>rand</code> method returns data frame with four columns:
+</p>
+
+<table>
+<tr>
+<td style="text-align: left;">
+    <code>CancerSubType</code> </td>
+<td style="text-align: left;"> integer index into object's 'hitPattern' slot </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    <code>Outcome</code> </td>
+<td style="text-align: left;"> outcomes with values "Bad" or "Good" </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    <code>LFU</code>     </td>
+<td style="text-align: left;"> censored survival times </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    <code>Event</code>   </td>
+<td style="text-align: left;"> has simulated survival event has occurred? </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  </td>
+</tr>
+</table>
+<h3>Objects from the Class</h3>
+
+<p>Although objects of the class can be created by a direct call to
+new, the preferred method is to use the
+<code>CancerModel</code> generator function.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt>
+<code>name</code>:</dt>
+<dd>
+<p>Object of class <code>"character"</code></p>
+</dd>
+<dt>
+<code>hitPattern</code>:</dt>
+<dd>
+<p>Object of class <code>"matrix"</code></p>
+</dd>
+<dt>
+<code>survivalBeta</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>
+containing the coeffieicents associated with each hit in a
+Cox proportional hazards model of survival.</p>
+</dd>
+<dt>
+<code>outcomeBeta</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>
+containing the coefficients associated with each hit in a logistic
+model to predict a binary outcome.</p>
+</dd>
+<dt>
+<code>prevalence</code>:</dt>
+<dd>
+<p>Object of class <code>"numeric"</code>
+containing the prevalence of each cancer subtype. </p>
+</dd>
+<dt>
+<code>survivalModel</code>:</dt>
+<dd>
+<p>Object of class <code>"survivalModel"</code>
+containing parameters used to simualte survival times. </p>
+</dd>
+<dt>
+<code>call</code>:</dt>
+<dd>
+<p>object of class <code>"call"</code> recording the
+function call used to initialize the object.</p>
+</dd>
+</dl>
+<h3>Methods</h3>
+
+
+<dl>
+<dt>ncol</dt>
+<dd>
+<p><code>signature(x = "CancerModel")</code>: ... </p>
+</dd>
+<dt>nrow</dt>
+<dd>
+<p><code>signature(x = "CancerModel")</code>: ... </p>
+</dd>
+<dt>rand</dt>
+<dd>
+<p><code>signature(object = "CancerModel")</code>: ... </p>
+</dd>
+<dt>summary</dt>
+<dd>
+<p><code>signature(object = "CancerModel")</code>: ... </p>
+</dd>
+</dl>
+<h3>Author(s)</h3>
+
+<p>Kevin R. Coombes <a href="mailto:krc@silicovore.com">krc@silicovore.com</a>,
+</p>
+
+
+<h3>References</h3>
+
+<p>Zhang J, Coombes KR.<br><em>Sources of variation in false discovery rate estimation include
+sample size, correlation, and inherent differences between groups.</em><br>
+BMC Bioinformatics. 2012; 13 Suppl 13:S1. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>SurvivalModel</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">showClass("CancerModel")
+set.seed(391629)
+# set up survival outcome; baseline is exponential
+sm &lt;- SurvivalModel(baseHazard=1/5, accrual=5, followUp=1)
+# now build a CancerModel with 6 subtypes
+cm &lt;- CancerModel(name="cansim",
+                  nPossible=20,
+                  nPattern=6,
+                  OUT = function(n) rnorm(n, 0, 1), 
+                  SURV= function(n) rnorm(n, 0, 1),
+                  survivalModel=sm)
+# simulate 100 patients
+clinical &lt;- rand(cm, 100)
+summary(clinical)
+</code></pre>
+
+
+</div>

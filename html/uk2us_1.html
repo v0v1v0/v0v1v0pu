@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>convert_uk2us</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert words from UK to US English</h2>
+
+<h3>Description</h3>
+
+<p><code>convert_uk2us</code> converts a vector of words from UK to US English.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">convert_uk2us(x, crosswalk = uk2us::ukus_crosswalk)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector of words to convert.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>crosswalk</code></td>
+<td>
+<p>Data frame with columns <code>uk</code> and <code>us</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector of converted words.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>convert_us2uk</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">convert_uk2us(c("centre", "colour", "colourize"))
+
+</code></pre>
+
+
+</div>

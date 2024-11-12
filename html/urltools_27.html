@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tld_extract</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extract TLDs</h2>
+
+<h3>Description</h3>
+
+<p><code>tld_extract</code> extracts the top-level domain (TLD) from
+a vector of domain names. This is distinct from the suffixes, extracted with
+<code>suffix_extract</code>; TLDs are <em>top</em> level, while suffixes are just
+domains through which internet users can publicly register domains (the difference
+between <code>.org.uk</code> and <code>.uk</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">tld_extract(domains, tlds = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>domains</code></td>
+<td>
+<p>a vector of domains, retrieved through <code>url_parse</code> or
+<code>domain</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tlds</code></td>
+<td>
+<p>a dataset of TLDs. If NULL (the default), <code>tld_extract</code> relies
+on urltools' <code>tld_dataset</code>; otherwise, you can pass in the result of
+<code>tld_refresh</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame of two columns: <code>domain</code>, with the original domain names,
+and <code>tld</code>, the identified TLD from the domain.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>suffix_extract</code> for retrieving suffixes (distinct from TLDs).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Using the inbuilt dataset
+domains &lt;- domain("https://en.wikipedia.org/wiki/Main_Page")
+tld_extract(domains)
+
+# Using a refreshed one
+tld_extract(domains, tld_refresh())
+
+</code></pre>
+
+
+</div>

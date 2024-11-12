@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umatrixForEsom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>umatrixForEsom</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the Umatrix for given ESOM projection</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Weights</code></td>
+<td>
+<p>Weights from which the Umatrix will be calculated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Lines</code></td>
+<td>
+<p>Number of lines of the SOM that is described by weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Columns</code></td>
+<td>
+<p>Number of columns of the SOM that is described by weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>Boolean describing if the neural grid should be borderless</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Umatrix</p>
+
+
+<h3>References</h3>
+
+<p>Ultsch, A. and H.P. Siemon, Kohonen's Self Organizing Feature Maps for Exploratory Data Analysis. 1990.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data("Hepta")
+e = esomTrain(Hepta$Data, Key = 1:nrow(Hepta$Data))
+umatrix = umatrixForEsom(e$Weights,
+                         Lines=e$Lines,
+                         Columns=e$Columns,
+                         Toroid=e$Toroid)
+plotMatrix(umatrix,e$BestMatches)
+</code></pre>
+
+
+</div>

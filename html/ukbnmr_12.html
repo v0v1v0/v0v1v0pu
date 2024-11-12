@@ -1,0 +1,236 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>remove_technical_variation</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove technical variation from NMR biomarker data in UK Biobank.</h2>
+
+<h3>Description</h3>
+
+<p>Remove technical variation from NMR biomarker data in UK Biobank.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">remove_technical_variation(
+  x,
+  remove.outlier.plates = TRUE,
+  skip.biomarker.qc.flags = FALSE,
+  version = 2L
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>data.frame</code> containing a dataset extracted by
+<a href="https://biobank.ctsu.ox.ac.uk/crystal/exinfo.cgi?src=accessing_data_guide">ukbconv</a>
+with <a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=220">UK Biobank fields</a>
+containing the <a href="https://research.nightingalehealth.com/biomarkers/">Nightingale Health NMR metabolomics biomarker</a> data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove.outlier.plates</code></td>
+<td>
+<p>logical, when set to <code>FALSE</code> biomarker
+concentrations on outlier shipment plates (see details) are not set to
+missing but simply flagged in the <code>biomarker_qc_flags</code> <code>data.frame</code>
+in the returned <code>list</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>skip.biomarker.qc.flags</code></td>
+<td>
+<p>logical, when set to <code>TRUE</code> biomarker QC
+flags are not processed or returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>version</code></td>
+<td>
+<p>version of the QC algorithm to apply. Set to 1 to use the
+algorithm as described in Ritchie S. C. <em>et al.</em> 2023. Defaults to 2, to
+run the updated algorithm modified after examining the phase 2 NMR biomarker
+data released by UK Biobank in July 2023 (see details).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A multi-step procedure (version 1) is applied to the raw biomarker data to
+remove the effects of technical variation:
+</p>
+
+<ol>
+<li>
+<p>First biomarker data is filtered to the 107 biomarkers that
+cannot be derived from any combination of other biomarkers.
+</p>
+</li>
+<li>
+<p>Absolute concentrations are log transformed, with a small offset
+applied to biomarkers with concentrations of 0.
+</p>
+</li>
+<li>
+<p>Each biomarker is adjusted for the time between sample preparation
+and sample measurement (hours).
+</p>
+</li>
+<li>
+<p>Each biomarker is adjusted for systematic differences between rows
+(A-H) on the 96-well shipment plates.
+</p>
+</li>
+<li>
+<p>Each biomarker is adjusted for remaining systematic differences
+between columns (1-12) on the 96-well shipment plates.
+</p>
+</li>
+<li>
+<p>Each biomarker is adjusted for drift over time within each of the six
+spectrometers. To do so, samples are grouped into 10 bins, within each
+spectrometer, by the date the majority of samples on their respective
+96-well plates were measured.
+</p>
+</li>
+<li>
+<p>Regression residuals after the sequential adjustments are
+transformed back to absolute concentrations.
+</p>
+</li>
+<li>
+<p>Samples belonging to shipment plates that are outliers of
+non-biological origin are identified and set to missing.
+</p>
+</li>
+<li>
+<p>The 61 composite biomarkers and 81 biomarker ratios are recomputed
+from their adjusted parts.
+</p>
+</li>
+<li>
+<p>An additional 76 biomarker ratios of potential biological
+significance are computed.
+</p>
+</li>
+</ol>
+<p>At each step, adjustment for technical covariates is performed using
+robust linear regression. Plate row, plate column, and
+sample measurement date bin are treated as factors, using the group with the
+largest sample size as reference in the regression.
+</p>
+<p>Further details can be found in Ritchie S. C. <em>et al.</em> Quality control
+and removal of technical variation of NMR metabolic biomarker data in
+~120,000 UK Biobank participants, <em>Sci Data</em> <strong>10</strong>, 64 (2023). doi:
+<a href="https://www.nature.com/articles/s41597-023-01949-y">10.1038/s41597-023-01949-y</a>
+</p>
+<p>Version 2 of the algorithm (the default) modifies the above procedure to (1)
+adjust for well and column within each processing batch separately in steps 4
+and 5, and (2) in step 6 instead of splitting samples into 10 bins per
+spectrometer uses a fixed bin size of approximately 2,000 samples per bin,
+ensuring samples measured on the same plate and plates measured on the same
+day are grouped into the same bin.
+</p>
+<p>The first modification was made as applying version 1 of the algorithm
+revealed introduced stratification by well position when examining the
+corrected concentrations in each data release separately.
+</p>
+<p>The second modification was made to ensure consistent bin sizes across data
+releases when correcting for drift over time. Otherwise, spectrometers used
+in multiple data releases would have different bin sizes when adjusting
+different releases. A bin split is also hard coded on spectrometer 5 between
+plates 0490000006726 and 0490000006714 which correspond to a large change in
+concentrations akin to a spectrometer recalibration event most strongly
+observed for alanine concentrations.
+</p>
+<p>This function takes 20-30 minutes to run and requires at least 14 GB of RAM.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>list</code> containing three <code>data.frames</code>: </p>
+
+<dl>
+<dt>biomarkers</dt>
+<dd>
+<p>A <code>data.frame</code> with column names "eid",
+and "visit_index", containing project-specific sample identifier and
+UK Biobank visit index (0 for baseline assessment, 1 for first repeat
+assessment), followed by columns for each biomarker containing their
+absolute concentrations (or ratios thereof) adjusted for technical
+variation. See <code>nmr_info</code> for information on each biomarker.</p>
+</dd>
+<dt>biomarker_qc_flags</dt>
+<dd>
+<p>A <code>data.frame</code> with the same format as
+<code>biomarkers</code> with entries corresponding to the
+<a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=221">quality
+control indicators</a> for each sample. "High plate outlier" and "Low
+plate outlier" indicate the value was set to missing due to systematic
+abnormalities in the biomarker's concentration on the sample's shipment
+plate compared to all other shipment plates (see Details). For
+composite and derived biomarkers, quality control flags are aggregates
+of any quality control flags for the underlying biomarkers from which
+the composite biomarker or ratio is derived.</p>
+</dd>
+<dt>sample_processing</dt>
+<dd>
+<p>A <code>data.frame</code> containing the
+<a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=222">processing
+information and quality control indicators</a> for each sample, including
+those derived for removal of unwanted technical variation by this
+function. See <code>sample_qc_info</code> for details.</p>
+</dd>
+<dt>log_offset</dt>
+<dd>
+<p>A <code>data.frame</code> containing diagnostic information on
+the offset applied so that biomarkers with concentrations of 0 could
+be log transformed, and any right shift applied to prevent negative
+concentrations after rescaling adjusted residuals back to absolute
+concentrations. Should contain only biomarkers with minimum
+concentrations of 0 (in the "Minimum" column). "Minimum.Non.Zero"
+gives the smallest non-zero concentration for the biomarker.
+"Log.Offset" the small offset added to all samples prior to
+log transformation: half the mininum non-zero concentration.
+"Right.Shift" gives the small offset added to prevent negative
+concentrations that arise after rescaling residuals to log
+concentrations: this should be at least one order of magnitude
+smaller than the smallest non-zero value (i.e. the offset added
+should amount to noise in numeric precision for all samples). See
+publication for more details.</p>
+</dd>
+<dt>outlier_plate_detection</dt>
+<dd>
+<p>A <code>data.frame</code> containing diagnostic
+information and details of outlier plate detection. For each of the
+107 non-derived biomarkers, the median concentration on each of the
+1,352 plates was calculated, then plates were flagged as outliers if
+their median value deviated more than expected from the mean of plate
+medians. "Mean.Plate.Medians" gives the mean of the plate medians for
+each biomarker. "Lower.Limit" and "Upper.Limit" give the values below
+and above which plates are flagged as outliers based on their plate
+median. See publication for more details.</p>
+</dd>
+<dt>algorithm_version</dt>
+<dd>
+<p>Version of the algorithm run, currently either 1
+or 2.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">ukb_data &lt;- ukbnmr::test_data # Toy example dataset for testing package
+processed &lt;- remove_technical_variation(ukb_data)
+
+</code></pre>
+
+
+</div>

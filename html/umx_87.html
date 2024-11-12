@@ -1,0 +1,173 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxDoCp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make a direction of causation model based on umxPath statements</h2>
+
+<h3>Description</h3>
+
+<p>Makes a direction of causation model with <code>umxPath()</code> statements
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxDoCp(
+  var1Indicators,
+  var2Indicators,
+  mzData = NULL,
+  dzData = NULL,
+  sep = "_T",
+  causal = TRUE,
+  name = "DoC",
+  autoRun = getOption("umx_auto_run"),
+  intervals = FALSE,
+  tryHard = c("no", "yes", "ordinal", "search"),
+  optimizer = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>var1Indicators</code></td>
+<td>
+<p>The indicators of trait 1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>var2Indicators</code></td>
+<td>
+<p>The indicators of trait 2</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mzData</code></td>
+<td>
+<p>The MZ twin dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dzData</code></td>
+<td>
+<p>The DZ twin dataframe</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>(Default "_T")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>causal</code></td>
+<td>
+<p>(Default TRUE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>= "DoC"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autoRun</code></td>
+<td>
+<p>Default: getOption("umx_auto_run")_</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intervals</code></td>
+<td>
+<p>Whether to run intervals (Default FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tryHard</code></td>
+<td>
+<p>Default "no" (valid = "yes", "ordinal", "search")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>optimizer</code></td>
+<td>
+<p>Whether to set this for this run (Default no))</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>See also <code>umxDoC()</code>
+</p>
+
+
+<h3>Value</h3>
+
+
+<ul><li>
+<p> [A direction of causation model with <code>umxPath()</code> statements.
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>umxDoC()</code>
+</p>
+</li></ul>
+<p>Other Twin Modeling Functions: 
+<code>power.ACE.test()</code>,
+<code>umxACEcov()</code>,
+<code>umxACEv()</code>,
+<code>umxACE()</code>,
+<code>umxCP()</code>,
+<code>umxDiffMZ()</code>,
+<code>umxDiscTwin()</code>,
+<code>umxDoC()</code>,
+<code>umxGxE_window()</code>,
+<code>umxGxEbiv()</code>,
+<code>umxGxE()</code>,
+<code>umxIP()</code>,
+<code>umxMRDoC()</code>,
+<code>umxReduceACE()</code>,
+<code>umxReduceGxE()</code>,
+<code>umxReduce()</code>,
+<code>umxRotate.MxModelCP()</code>,
+<code>umxSexLim()</code>,
+<code>umxSimplex()</code>,
+<code>umxSummarizeTwinData()</code>,
+<code>umxSummaryACEv()</code>,
+<code>umxSummaryACE()</code>,
+<code>umxSummaryDoC()</code>,
+<code>umxSummaryGxEbiv()</code>,
+<code>umxSummarySexLim()</code>,
+<code>umxSummarySimplex()</code>,
+<code>umxTwinMaker()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# ================
+# = 1. Load Data =
+# ================
+data(docData)
+var1 = paste0("varA", 1:3)
+var2 = paste0("varB", 1:3)
+tmp = umx_scale_wide_twin_data(varsToScale= c(var1, var2), sep= "_T", data= docData)
+mzData = subset(docData, zygosity %in% c("MZFF", "MZMM"))
+dzData = subset(docData, zygosity %in% c("DZFF", "DZMM"))
+m1 = umxDoCp(var1, var2, mzData= mzData, dzData= dzData, sep = "_T", causal= TRUE)
+
+
+## End(Not run)
+</code></pre>
+
+
+</div>

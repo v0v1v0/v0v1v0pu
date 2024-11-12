@@ -1,0 +1,218 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>build_row</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Build summary rows</h2>
+
+<h3>Description</h3>
+
+<p>Summarize data into a data.frame with row(s). Includes optional
+stratification and null hypothesis testing using a factor or logical
+variable.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">build_row(x, ...)
+
+## S3 method for class 'data.frame'
+build_row(
+  x,
+  y = NA_real_,
+  label = NULL,
+  label.stat = TRUE,
+  stat.pct.sign = FALSE,
+  col.overall = TRUE,
+  col.missing = FALSE,
+  col.test = FALSE,
+  digits = 1,
+  ...
+)
+
+## S3 method for class 'numeric'
+build_row(
+  x,
+  y = NA_real_,
+  label = NULL,
+  label.stat = TRUE,
+  stat = c("mean", "median"),
+  stat.pct.sign = FALSE,
+  col.overall = TRUE,
+  col.missing = FALSE,
+  test = c("anova", "kruskal", "wilcoxon"),
+  col.test = FALSE,
+  digits = 1,
+  p.digits = 4,
+  ...
+)
+
+## S3 method for class 'logical'
+build_row(
+  x,
+  y = NA_real_,
+  label = NULL,
+  label.stat = TRUE,
+  inverse = FALSE,
+  stat.pct.sign = FALSE,
+  col.overall = TRUE,
+  col.missing = FALSE,
+  test = c("chisq", "fisher"),
+  test.simulate.p = FALSE,
+  col.test = FALSE,
+  digits = 1,
+  p.digits = 4,
+  ...
+)
+
+## S3 method for class 'factor'
+build_row(
+  x,
+  y = NA_real_,
+  label = NULL,
+  label.stat = TRUE,
+  stat.pct.sign = FALSE,
+  col.overall = TRUE,
+  col.missing = FALSE,
+  test = c("chisq", "fisher"),
+  test.simulate.p = FALSE,
+  col.test = FALSE,
+  digits = 1,
+  p.digits = 4,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data.frame, numeric, factor, or logical. Data to summarize.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments passed to the appropriate S3 method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>A factor or logical. Data to optionally stratify <code>x</code> by.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>A character. A label for the summarized data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label.stat</code></td>
+<td>
+<p>A logical. Append the summary statistic used to the label.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stat.pct.sign</code></td>
+<td>
+<p>A logical. Paste a percentage symbol with each frequency.
+frequency.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.overall</code></td>
+<td>
+<p>A logical. Append a column with the statistic for all data.
+If <code>y</code> is not specified, this parameter is ignored.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.missing</code></td>
+<td>
+<p>A logical. Append a column with counts of missing data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.test</code></td>
+<td>
+<p>A logical. Append a column with the name of the statistical
+test used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>An integer. Number of digits to round to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stat</code></td>
+<td>
+<p>A character. Name of the summary statistic to use. Supported options
+include the mean (<code>'mean'</code>) and median (<code>'median'</code>) for continuous data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>A character. Name of statistical test to compare groups.
+Supported options: [continuous data] ANOVA linear model (<code>'anova'</code>),
+Kruskal-Wallis (<code>'kruskal'</code>), and Wilcoxon rank sum (<code>'wilcoxon'</code>) tests;
+[nominal data] Pearson's Chi-squared Test (<code>'chisq'</code>) and Fisher's Exact Test
+(<code>'fisher'</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.digits</code></td>
+<td>
+<p>An integer. Number of p-value digits to report.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inverse</code></td>
+<td>
+<p>A logical. For logical data, report frequencies of the
+<code>FALSE</code> values instead.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test.simulate.p</code></td>
+<td>
+<p>A logical. Whether to use Monte Carlo simulation of
+the p-value when testing nominal data.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An object of class <code>tbl_df</code> (tibble) summarizing the provided
+data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">strata &lt;- as.factor(datasets::mtcars$cyl)
+
+# Create a "count" row from a data.frame for a factor
+build_row(x = datasets::mtcars, y = strata)
+
+# Create a row summarizing a numeric by a factor
+build_row(label = 'MPG', x = as.numeric(datasets::mtcars$mpg), y = strata)
+
+# Create a row summarizing a logical by a factor
+build_row(label = 'VS', x = as.logical(datasets::mtcars$vs), y = strata)
+
+# Create a row summarizing a factor by a factor
+build_row(label = 'Carb', x = as.factor(datasets::mtcars$carb), y = strata)
+</code></pre>
+
+
+</div>

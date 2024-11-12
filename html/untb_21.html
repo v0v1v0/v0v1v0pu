@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>expected.abundance</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Expected abundances under the neutral model</h2>
+
+<h3>Description</h3>
+
+<p>Returns a vector of expected abundances of the i-th ranked species under
+the neutral model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">expected.abundance(J, theta)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>J</code></td>
+<td>
+<p>Size of the ecosystem</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>Biodiversity parameter</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns an object of class <code>count</code>.  Species names (capital
+letters) are assigned by function <code>count()</code>. 
+</p>
+
+
+<h3>Note</h3>
+
+<p>Function is very slow even for moderate J. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>S. P. Hubbell 2001.  “The Unified Neutral Theory of Biodiversity”.
+Princeton University Press.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rand.neutral</code>,<code>count</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">expected.abundance(J=10,theta=3)
+
+sum(expected.abundance(J=10,theta=3))  #should be 10
+</code></pre>
+
+
+</div>

@@ -1,0 +1,149 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>uni_magdeburg_2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Faculty colors of the University of Magdeburg, Germany</h2>
+
+<h3>Description</h3>
+
+<p><code>uni_magdeburg_2</code> provides the faculty colors 
+of the <a href="https://www.ovgu.de/">Otto von Guericke University Magdeburg</a> (OVGU), Germany.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">uni_magdeburg_2
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>character</code> of length 27.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The pre-defined set of faculty colors allows to target publications and presentations 
+to each faculty, allowing for visual differentiation between different units.
+</p>
+<p>Using a set of faculty colors usually prevents the use of the primary university color (and vice versa). 
+</p>
+<p><code>uni_magdeburg_2</code> is based on RGB color definitions.
+</p>
+<p>Just as the primary <code>OVGU rot</code>, each faculty color should be used 
+next to the logo for emphasis purposes.
+Large areas of a faculty color obstruct a fresh and young appeal of a publication 
+and should only be used in special cases. 
+</p>
+<p>Whereas the background <code>white</code> is only implicitly perceived, 
+it is the most important corporate design element of the OVGU. 
+White areas are not wasted space, but rather necessary elements to structure content, 
+reveal connections, set accents, and improve readability.
+</p>
+<p>See <code>uni_magdeburg_3</code> for the colors of the medical faculty and university hospital 
+of the <a href="https://www.ovgu.de/">OVGU Magdeburg</a>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector of colors (HEX/HTML codes of type character).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><strong>unicol</strong>, 2023-10-03.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Color definitions are based on the <a href="https://www.ovgu.de/">OVGU</a>'s 
+<a href="https://www.cd.ovgu.de/Logo_+Farbe_+Schrift/Farbe.html">Corporate design</a> guidelines (HTML).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>uni_magdeburg_1</code> for primary colors of the OVGU Magdeburg;
+<code>uni_magdeburg_3</code> for medical and hospital colors of the OVGU Magdeburg;
+<code>seecol</code> for viewing and comparing color palettes;
+<code>usecol</code> for using color palettes;
+<code>simcol</code> for finding similar colors;
+<code>newpal</code> for defining new color palettes;
+<code>grepal</code> for finding named colors.
+</p>
+<p>Other German university color palettes: 
+<code>fu_0</code>,
+<code>fu_1</code>,
+<code>fu_2</code>,
+<code>fu_3</code>,
+<code>hu_1</code>,
+<code>hu_1_2022</code>,
+<code>hu_1_digital</code>,
+<code>hu_2</code>,
+<code>hu_2_2022</code>,
+<code>hu_3_accent</code>,
+<code>lmu_1</code>,
+<code>lmu_2</code>,
+<code>lmu_3</code>,
+<code>rptu</code>,
+<code>uni_bonn_1</code>,
+<code>uni_bonn_2</code>,
+<code>uni_freiburg_0</code>,
+<code>uni_freiburg_1</code>,
+<code>uni_freiburg_2</code>,
+<code>uni_freiburg_blue</code>,
+<code>uni_freiburg_br</code>,
+<code>uni_freiburg_grey</code>,
+<code>uni_freiburg_info</code>,
+<code>uni_goettingen_1</code>,
+<code>uni_goettingen_2</code>,
+<code>uni_goettingen_3</code>,
+<code>uni_halle</code>,
+<code>uni_hamburg_1</code>,
+<code>uni_hamburg_2</code>,
+<code>uni_heidelberg</code>,
+<code>uni_jena_1</code>,
+<code>uni_jena_2</code>,
+<code>uni_kassel</code>,
+<code>uni_kiel_1</code>,
+<code>uni_kiel_2</code>,
+<code>uni_koeln_1</code>,
+<code>uni_koeln_2</code>,
+<code>uni_konstanz_1</code>,
+<code>uni_konstanz_2</code>,
+<code>uni_magdeburg_1</code>,
+<code>uni_magdeburg_3</code>,
+<code>uni_mannheim_1</code>,
+<code>uni_mannheim_2</code>,
+<code>uni_potsdam</code>,
+<code>uni_regensburg_1</code>,
+<code>uni_regensburg_2</code>,
+<code>uni_regensburg_3</code>,
+<code>uni_stuttgart_1</code>,
+<code>uni_stuttgart_print</code>,
+<code>uni_ulm_1</code>,
+<code>uni_ulm_2</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">uni_magdeburg_2
+unikn::seecol(uni_magdeburg_2, col_bg = "grey90", 
+              main = "Faculty colors of the Uni Magdeburg (OVGU)")  # view entire palette
+              
+# Using a partial palette: 
+unikn::demopal(uni_magdeburg_2[c(19:21, 25:27)], type = 4, seed = 123, 
+               main = "Colors of the Natural Sciences of the OVGU Magdeburg")
+              
+</code></pre>
+
+
+</div>

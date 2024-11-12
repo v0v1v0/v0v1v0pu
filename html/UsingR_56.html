@@ -1,0 +1,152 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Body measurements to predict percentage of body fat in males</h2>
+
+<h3>Description</h3>
+
+<p>A data set containing many physical measurements of 252 males. Most of
+the variables can be measured with a scale or tape measure. Can they
+be used to predict the percentage of body fat? If so, this offers an
+easy alternative to an underwater weighing technique.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(fat)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 252 observations on the following 19 variables.
+</p>
+
+<dl>
+<dt>case</dt>
+<dd>
+<p>Case Number</p>
+</dd>
+<dt>body.fat</dt>
+<dd>
+<p>Percent body fat using Brozek's equation,
+457/Density - 414.2</p>
+</dd>
+<dt>body.fat.siri</dt>
+<dd>
+<p>Percent body fat using Siri's equation,
+495/Density - 450</p>
+</dd>
+<dt>density</dt>
+<dd>
+<p>Density (gm/cm<code class="reqn">\mbox{\textasciicircum}</code>2)</p>
+</dd>
+<dt>age</dt>
+<dd>
+<p>Age (yrs)</p>
+</dd>
+<dt>weight</dt>
+<dd>
+<p>Weight (lbs)</p>
+</dd>
+<dt>height</dt>
+<dd>
+<p>Height (inches)</p>
+</dd>
+<dt>BMI</dt>
+<dd>
+<p>Adiposity index = Weight/Height<code class="reqn">\mbox{\textasciicircum}</code>2 (kg/m<code class="reqn">\mbox{\textasciicircum}</code>2)</p>
+</dd>
+<dt>ffweight</dt>
+<dd>
+<p>Fat Free Weight
+= (1 - fraction of body fat) * Weight,            using Brozek's formula (lbs)</p>
+</dd>
+<dt>neck</dt>
+<dd>
+<p>Neck circumference (cm)</p>
+</dd>
+<dt>chest</dt>
+<dd>
+<p>Chest circumference (cm)</p>
+</dd>
+<dt>abdomen</dt>
+<dd>
+<p>Abdomen circumference (cm) "at the umbilicus
+and level with the iliac crest"</p>
+</dd>
+<dt>hip</dt>
+<dd>
+<p>Hip circumference (cm)</p>
+</dd>
+<dt>thigh</dt>
+<dd>
+<p>Thigh circumference (cm)</p>
+</dd>
+<dt>knee</dt>
+<dd>
+<p>Knee circumference (cm)</p>
+</dd>
+<dt>ankle</dt>
+<dd>
+<p>Ankle circumference (cm)</p>
+</dd>
+<dt>bicep</dt>
+<dd>
+<p>Extended biceps circumference (cm)</p>
+</dd>
+<dt>forearm</dt>
+<dd>
+<p>Forearm circumference (cm)</p>
+</dd>
+<dt>wrist</dt>
+<dd>
+<p>Wrist circumference (cm) "distal to the
+styloid processes"</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>From the source:
+</p>
+<p>“The data are as received from Dr. Fisher.  Note, however, that there
+are a few errors.  The body densities for cases 48, 76, and 96, for
+instance, each seem to have one digit in error as can be seen from the
+two body fat percentage values.  Also note the presence of a man (case
+42) over 200 pounds in weight who is less than 3 feet tall (the height
+should presumably be 69.5 inches, not 29.5 inches)!  The percent body
+fat estimates are truncated to zero when negative (case 182).”
+</p>
+
+
+<h3>Source</h3>
+
+<p>This data set comes from the collection of the <em>Journal of
+Statistics Education</em> at
+<a href="http://jse.amstat.org/datasets/fat.txt">http://jse.amstat.org/datasets/fat.txt</a>. The
+data set was contributed by Roger W. Johnson.
+</p>
+
+
+<h3>References</h3>
+
+<p>The source of the data is attributed to Dr. A. Garth Fisher, Human
+Performance Research Center, Brigham Young University, Provo, Utah
+84602,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(fat)
+f = body.fat ~ age + weight + height + BMI + neck + chest + abdomen +
+hip + thigh + knee + ankle + bicep + forearm + wrist
+res = lm(f, data=fat)
+summary(res)
+</code></pre>
+
+
+</div>

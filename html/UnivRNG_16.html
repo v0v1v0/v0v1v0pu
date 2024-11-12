@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>draw.von.mises</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generates variates from Von Mises distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function implements pseudo-random number generation for a Von Mises distribution with pdf
+</p>
+<p style="text-align: center;"><code class="reqn">f(x|K)=\frac{1}{2\pi I_{0}(K)}e^{Kcos(x)}</code>
+</p>
+
+<p>for <code class="reqn">-\pi \leq x \leq \pi</code> and <code class="reqn">K &gt; 0</code> where <code class="reqn">I_{0}(K)</code> is a modified Bessel function of the first kind of order 0.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">draw.von.mises(nrep,K)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nrep</code></td>
+<td>
+<p>Number of data points to generate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p>Parameter of the desired von Mises distribution.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of length three containing generated data, the theoretical mean, and the empirical mean with names y, theo.mean, and emp.mean, respectively.</p>
+
+
+<h3>References</h3>
+
+<p>Best, D. J., &amp; Fisher, N. I. (1979). Efficient simulation of the von mises distribution. <em>Applied Statistics</em>, <b>28</b>, 152-157.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">draw.von.mises(nrep=100000,K=10)
+
+draw.von.mises(nrep=100000,K=0.5)
+</code></pre>
+
+
+</div>

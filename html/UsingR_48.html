@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>DOTplot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Make big DOT plot likestripchart </h2>
+
+<h3>Description</h3>
+
+<p>A variant of the <code>stripchart</code> using big dots as the default.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">DOTplot(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>May be a vector, data frame, matrix (each column a variable),
+list or model formula. Treats each variable or group as a univariate
+dataset and 
+makes corresponding DOTplot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>arguments passed onto
+<code>points</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns the graphic only.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> John Verzani</p>
+
+
+<h3>See Also</h3>
+
+<p> See also as <code>stripchart</code>, <code>dotplot</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = c(1,1,2,3,5,8)
+DOTplot(x,main="Fibonacci",cex=2)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_randomKde2d</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute the density based distance quantity using a 2D Kernel Density Estimation</h2>
+
+<h3>Description</h3>
+
+<p><code>create_randomKde2d</code> will compute the 2D Kernel Density Estimation for 
+a random sampling of the requested number of points and will return the quantiy 
+<code>(max(d)-mean(d))/sd(d)</code>, if the option <code>returnDistance</code> is set to TRUE.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_randomKde2d(nstars, maxX, maxY, nKde=50, printPlots=FALSE, 
+showStats=FALSE, returnDistance=FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>nstars</code></td>
+<td>
+<p>an integer with the number of stars to consider</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxX</code></td>
+<td>
+<p>the length of the field in X</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxY</code></td>
+<td>
+<p>the length of the field in Y</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nKde</code></td>
+<td>
+<p>the number of samplings of the kernel in each direction</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>printPlots</code></td>
+<td>
+<p>a boolean indicating if the user wants to see plots</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>showStats</code></td>
+<td>
+<p>a boolean indicating if the user wants to see statistics</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnDistance</code></td>
+<td>
+<p>a boolean indicating if the user wants statistics to be returned</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A double representing the density based distance quantity.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alberto Krone-Martins, Andre Moitinho
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://dx.doi.org/10.1051/0004-6361/201321143">Krone-Martins, A. &amp; Moitinho, A., A&amp;A, v.561, p.A57, 2014</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Compute the density based distance quantity with random fields
+distVar &lt;- create_randomKde2d(100, 10, 10, showStats=FALSE, 
+                              printPlots=FALSE, returnDistance=TRUE)
+
+# Clean the environment
+rm(distVar)
+ 
+</code></pre>
+
+
+</div>

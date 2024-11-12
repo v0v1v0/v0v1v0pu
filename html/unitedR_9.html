@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simRedCard</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate red card(s)</h2>
+
+<h3>Description</h3>
+
+<p>Simulates red card(s) in the united and returns the adjusted lineup.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simRedCard(obj, lineup, Hard)
+
+## S4 method for signature 'formation,numeric,matrix'
+simRedCard(obj, lineup, Hard)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>object of the class <code>formation</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lineup</code></td>
+<td>
+<p>lineup of the corresponding object <code>obj</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Hard</code></td>
+<td>
+<p>matrix of hardness to be used</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>list</code> with two elements: 
+</p>
+
+<ul>
+<li>
+<p><code>vector</code> adjusted lineup for the red card(s)
+</p>
+</li>
+<li>
+<p><code>numeric</code> number of red cards
+</p>
+</li>
+</ul>
+</div>

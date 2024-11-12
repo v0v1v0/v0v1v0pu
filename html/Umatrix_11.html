@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plotMatrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>plotMatrix</h2>
+
+<h3>Description</h3>
+
+<p>Draws a plot based of given Umatrix or Pmatrix.</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Matrix</code></td>
+<td>
+<p>Umatrix or Pmatrix to be plotted</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BestMatches</code></td>
+<td>
+<p>Positions of BestmMtches to be plotted onto the Umatrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Cls</code></td>
+<td>
+<p>Class identifier for the BestMatches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ClsColors</code></td>
+<td>
+<p>Vector of colors that will be used to colorize the different classes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ColorStyle</code></td>
+<td>
+<p>If "Umatrix" the colors of a Umatrix (Blue -&gt; Green -&gt; Brown -&gt; White) will be used; If "Pmatrix" the colors of a Pmatrix (White -&gt; Yellow -&gt; Red) will be used</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Toroid</code></td>
+<td>
+<p>Should the Umatrix be drawn 4times?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BmSize</code></td>
+<td>
+<p>Integer between 0.1 and 5, magnification factor of the drawn BestMatch circles</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DrawLegend</code></td>
+<td>
+<p>If TRUE, a color legend will be drawn next to the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FixedRatio</code></td>
+<td>
+<p>If TRUE, the plot will be drawn with a fixed ratio of x and y axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CutoutPol</code></td>
+<td>
+<p>Only draws the area within given polygon</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Nrlevels</code></td>
+<td>
+<p>Number of height levels that will be used within the Umatrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TransparentContours</code></td>
+<td>
+<p>Use half transparent contours. Looks better but is slow</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Imx</code></td>
+<td>
+<p>Mask to cut out an island. Every value should be either 1 (stays in) or 0 (gets cut out)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Clean</code></td>
+<td>
+<p>If TRUE axis, margins, ... surrounding the Umatrix image will be removed</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RemoveOcean</code></td>
+<td>
+<p>If TRUE, the surrounding blue area around an island will be reduced as much as possible (while still maintaining a rectangular form)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TransparentOcean</code></td>
+<td>
+<p>If TRUE, the surrounding blue area around an island will be transparent</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Title</code></td>
+<td>
+<p>A title that will be drawn above the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BestMatchesLabels</code></td>
+<td>
+<p>Vector of strings corresponding to the order of BestMatches which will be drawn on the plot as labels</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>BestMatchesShape</code></td>
+<td>
+<p>Numeric value of Shape that will be used. Responds to the usual shapes of ggplot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MarkDuplicatedBestMatches</code></td>
+<td>
+<p>If TRUE, BestMatches that are shown more than once within an island, will be marked</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>YellowCircle</code></td>
+<td>
+<p>If TRUE, a yellow circle is drawn around Bestmatches to distinct them better from background</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The heightScale (nrlevels) is set at the proportion of the 1 percent quantile against the 99 percent quantile of the matrix values.</p>
+
+
+<h3>Value</h3>
+
+<p>A 'ggplot' of a Matrix</p>
+
+
+<h3>References</h3>
+
+<p>Thrun, M. C., Lerch, F., Loetsch, J., Ultsch, A.: Visualization and 3D Printing of Multivariate Data of Biomarkers, in Skala, V. (Ed.), International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision,Plzen, 2016.
+</p>
+<p>Ultsch, A.: Maps for the visualization of high-dimensional data spaces, Proc. Workshop on Self organizing Maps (WSOM), pp. 225-230, Kyushu, Japan, 2003.
+</p>
+<p>Siemon, H.P., Ultsch,A.: Kohonen Networks on Transputers: Implementation and Animation, in: Proceedings Intern. Neural Networks, Kluwer Academic Press, Paris, pp. 643-646, 1990.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data("Hepta")
+e = esomTrain(Hepta$Data, Key = 1:nrow(Hepta$Data))
+plotMatrix(e$Umatrix,e$BestMatches)
+</code></pre>
+
+
+</div>

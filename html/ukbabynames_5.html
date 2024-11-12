@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ukbabynames</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UK baby names</h2>
+
+<h3>Description</h3>
+
+<p>Full baby name data 1974-2020 for the United Kingdom from all nations. Contains
+data from England and Wales (<code>ewbabynames</code>), Scotland (<code>scotbabynames</code>), and
+Northern Ireland (<code>nibabynames</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ukbabynames
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 565,817 observations on 6 variables.
+</p>
+
+<dl>
+<dt>year</dt>
+<dd>
+<p>A year (1974-2020).</p>
+</dd>
+<dt>sex</dt>
+<dd>
+<p>Sex, <code>M</code> for male and <code>F</code> for female.</p>
+</dd>
+<dt>name</dt>
+<dd>
+<p>A name.</p>
+</dd>
+<dt>n</dt>
+<dd>
+<p>Count of name within year and sex.</p>
+</dd>
+<dt>rank</dt>
+<dd>
+<p>Rank of name within year and sex.</p>
+</dd>
+<dt>nation</dt>
+<dd>
+<p>Nation of data source.</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p>Office of National Statistics. 2021. <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalesbabynamesstatisticsgirls">Baby Names Statistics Girls</a>.
+Office of National Statistics. 2021. <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalesbabynamesstatisticsboys">Baby Names Statistics Boys</a>.
+Northern Ireland Statistics and Research Agency. 2021. <a href="https://www.nisra.gov.uk/publications/baby-names-2020-0">Baby Names Statistics Boys and Girls</a>.
+National Records of Scotland. 2021. <a href="https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/names/babies-first-names/babies-first-names-2020">Baby Names Statistics Boys and Girls</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(ggplot2)
+library(dplyr)
+
+ukbabynames %&gt;%
+  filter(name == "Jack") %&gt;%
+  ggplot(aes(x = year, y = n, color = nation)) +
+  geom_line() +
+  labs(
+     title = "Popularity of the name `Jack` in the UK",
+     subtitle = "by Nation", 
+     x = "Year", y = "Number of babies",  color = NULL
+     )
+</code></pre>
+
+
+</div>

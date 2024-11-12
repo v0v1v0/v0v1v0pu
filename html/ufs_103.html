@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>exceptionalScore</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Find exceptional scores</h2>
+
+<h3>Description</h3>
+
+<p>This function can be used to detect exceptionally high or low scores in a
+vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">exceptionalScore(
+  x,
+  prob = 0.025,
+  both = TRUE,
+  silent = FALSE,
+  quantileCorrection = 1e-04,
+  quantileType = 8
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector in which to detect exceptional scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prob</code></td>
+<td>
+<p>Probability that a score is exceptionally positive or negative;
+i.e. scores with a quartile lower than <code>prob</code> or higher than
+1-<code>prob</code> are considered exceptional (if both is <code>TRUE</code>, at least). So,
+note that a <code>prob</code> of .025 means that if <code>both=TRUE</code>, the most
+exceptional 5% of the values is marked as such.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>both</code></td>
+<td>
+<p>Whether to consider values exceptional if they're below
+<code>prob</code> as well as above 1-<code>prob</code>, or whether to only consider
+values exceptional if they're below <code>prob</code> is <code>prob</code> is &lt; .5, or
+above <code>prob</code> if <code>prob</code> &gt; .5.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Can be used to suppress messages.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quantileCorrection</code></td>
+<td>
+<p>By how much to correct the computed quantiles;
+this is used because when a distribution is very right-skewed, the lowest
+quantile is the lowest value, which is then also the mode; without
+subtracting a correction, almost all values would be marked as
+'exceptional'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quantileType</code></td>
+<td>
+<p>The algorithm used to compute the quantiles; see
+<code>stats::quantile()</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that of course, by definition, <code>prob</code> or <code>2 * prob</code> percent of
+the values is exceptional, so it is usually not a wise idea to remove scores
+based on their 'exceptionalness'. Instead, use <code>exceptionalScores()</code>,
+which calls this function, to see how often participants answered
+exceptionally, and remove them based on that.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A logical vector, indicating for each value in the supplied vector
+whether it is exceptional.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">exceptionalScore(
+  c(1,1,2,2,2,3,3,3,4,4,4,5,5,5,5,6,6,7,8,20),
+  prob=.05
+);
+
+</code></pre>
+
+
+</div>

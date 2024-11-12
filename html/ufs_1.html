@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>%IN%</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Case insensitive version of %in%</h2>
+
+<h3>Description</h3>
+
+<p>This is simply 'in', but applies <code>base::toupper()</code> to both
+arguments, first.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">find %IN% table
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>find</code></td>
+<td>
+<p>The element(s) to look up in the vector or matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>The vector or matrix in which to look up the element(s).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A logical vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">letters[1:4] %IN% LETTERS
+
+</code></pre>
+
+
+</div>

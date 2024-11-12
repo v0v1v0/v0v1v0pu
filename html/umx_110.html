@@ -1,0 +1,203 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>umxMatrix</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make a mxMatrix with automatic labels. Also takes name as the first parameter for more readable code.</h2>
+
+<h3>Description</h3>
+
+<p>umxMatrix is a wrapper for mxMatrix which labels cells buy default, and has the name parameter first in order.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">umxMatrix(
+  name = NA,
+  type = "Full",
+  nrow = NA,
+  ncol = NA,
+  free = FALSE,
+  values = NA,
+  labels = TRUE,
+  lbound = NA,
+  ubound = NA,
+  byrow = getOption("mxByrow"),
+  baseName = NA,
+  dimnames = NA,
+  condenseSlots = getOption("mxCondenseMatrixSlots"),
+  ...,
+  joinKey = as.character(NA),
+  joinModel = as.character(NA),
+  jiggle = NA
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>The name of the matrix (Default = NA). Note the different order compared to mxMatrix!</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>The type of the matrix (Default = "Full")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nrow</code></td>
+<td>
+<p>Number of rows in the matrix: Must be set</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncol</code></td>
+<td>
+<p>Number of columns in the matrix: Must be set</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>free</code></td>
+<td>
+<p>Whether cells are free (Default FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>The values of the matrix (Default NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>Either whether to label the matrix (default TRUE), OR a vector of labels to apply.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lbound</code></td>
+<td>
+<p>Lower bounds on cells (Defaults to NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ubound</code></td>
+<td>
+<p>Upper bounds on cells (Defaults to NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>byrow</code></td>
+<td>
+<p>Whether to fill the matrix down columns or across rows first (Default = getOption('mxByrow')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>baseName</code></td>
+<td>
+<p>Set to override the default (which is to use the matrix name as the prefix).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dimnames</code></td>
+<td>
+<p>NA</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>condenseSlots</code></td>
+<td>
+<p>Whether to save memory by NULLing out unused matrix elements, like labels, ubound etc. Default = getOption('mxCondenseMatrixSlots')</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Additional parameters (!! not currently supported by umxMatrix)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>joinKey</code></td>
+<td>
+<p>See mxMatrix documentation: Defaults to as.character(NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>joinModel</code></td>
+<td>
+<p>See mxMatrix documentation: Defaults to as.character(NA)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>jiggle</code></td>
+<td>
+<p>= NA passed to xmuLabel to jiggle start values (default does nothing)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+
+<ul><li> <p><code>mxMatrix()</code>
+</p>
+</li></ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://github.com/tbates/umx">https://github.com/tbates/umx</a>, <a href="https://tbates.github.io">https://tbates.github.io</a>
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul><li> <p><code>xmu_simplex_corner()</code>, <code>mxMatrix()</code>, <code>xmuLabel()</code>, <code>umxRAM()</code>
+</p>
+</li></ul>
+<p>Other Core Model Building Functions: 
+<code>umxModify()</code>,
+<code>umxPath()</code>,
+<code>umxRAM()</code>,
+<code>umxSuperModel()</code>,
+<code>umx</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# ==================================================================================
+# = 1. Showing how name is first parameter, and how cells are labelled by default. =
+# ==================================================================================
+umxMatrix("test", "Full", 2, 2)$labels
+#      [,1]        [,2]
+# [1,] "test_r1c1" "test_r1c2"
+# [2,] "test_r2c1" "test_r2c2"
+
+# ===========================================================
+# = 2. Over-ride default (matrix name) as prefix for labels =
+# ===========================================================
+umxMatrix("test", "Full", 2, 2, baseName = "bob")$labels # bob_r1c1
+
+
+# ==========================================
+# = 3. User-provided labels are left as-is =
+# ==========================================
+umxMatrix("foo", "Lower", nrow=2, ncol=2, labels= c(NA, "beta1", NA))
+#      [,1]    [,2]
+# [1,] NA      NA  
+# [2,] "beta1" NA  
+
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>param_get</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>get the values of a URL's parameters</h2>
+
+<h3>Description</h3>
+
+<p>URLs can have parameters, taking the form of <code>name=value</code>, chained together
+with <code>&amp;</code> symbols. <code>param_get</code>, when provided with a vector of URLs and a vector
+of parameter names, will generate a data.frame consisting of the values of each parameter
+for each URL.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">param_get(urls, parameter_names = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>urls</code></td>
+<td>
+<p>a vector of URLs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parameter_names</code></td>
+<td>
+<p>a vector of parameter names. If <code>NULL</code> (default), will extract
+all parameters that are present.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame containing one column for each provided parameter name. Values that
+cannot be found within a particular URL are represented by an NA.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>url_parse</code> for decomposing URLs into their constituent parts and
+<code>param_set</code> for inserting or modifying key/value pairs within a query string.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#A very simple example
+url &lt;- "https://google.com:80/foo.php?this_parameter=selfreferencing&amp;hiphop=awesome"
+parameter_values &lt;- param_get(url, c("this_parameter","hiphop"))
+
+</code></pre>
+
+
+</div>

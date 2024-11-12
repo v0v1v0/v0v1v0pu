@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>confint.htest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Produce confidence interval for objects of class <code>htest</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>Simple means to output a confidence interval for an <code>htest</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">  ## S3 method for class 'htest'
+confint(object, parm, level, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+
+<p>A object of class <code>htest</code>, such as output from <code>t.test</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parm</code></td>
+<td>
+
+<p>ignored	
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+
+<p>ignored
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>can pass in function to transform via <code>transform</code> argument.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value, outputs interval through <code>cat</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">confint(t.test(rnorm(10)))	
+</code></pre>
+
+
+</div>

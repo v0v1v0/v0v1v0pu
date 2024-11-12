@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>CDsXML</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Import catchment descriptors from .xml files</h2>
+
+<h3>Description</h3>
+
+<p>Imports catchment descriptors from xml files either from an FEH webservice download or from the Peakflows dataset downloaded from the national river flow archive (NRFA) website
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">CDsXML(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the xml file path</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>File paths for importing data require forward slashes. On some operating systems, such as windows, the copy and pasted file paths will have backward slashes and would need to be changed accordingly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with columns; Descriptor and Value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Anthony Hammond
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#Import catchment descriptors from a NRFA peakflows xml file and display in console
+## Not run: CDs.4003 &lt;- CDsXML("C:/Data/NRFAPeakFlow_v11/Suitable for QMED/4003.xml")
+## Not run: CDs.4003
+#Import catchment descriptors from a FEH webserver xml file and display xml in the console
+## Not run: CDs.MySite &lt;- CDsXML("C:/Data/FEH_Catchment_384200_458200.xml")
+</code></pre>
+
+
+</div>

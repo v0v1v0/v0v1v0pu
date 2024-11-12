@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>latex_journal_format</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>UIUC Class Journal Format</h2>
+
+<h3>Description</h3>
+
+<p>Modified version of the Journal of Statistical Software (JSS) Format
+for creating a Journal of Statistical Software (JSS) articles. Adapted
+from <a href="http://www.jstatsoft.org/about/submissions">http://www.jstatsoft.org/about/submissions</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">latex_journal_format(..., keep_tex = TRUE, citation_package = "natbib")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Arguments to <code>rmarkdown::pdf_document</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keep_tex</code></td>
+<td>
+<p>Keep the intermediate tex file used in the conversion to PDF</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>citation_package</code></td>
+<td>
+<p>The LaTeX package to process citations, <code>natbib</code>
+or <code>biblatex</code>. Use <code>default</code> if neither package is to be used,
+which means citations will be processed via the command
+<code>pandoc-citeproc</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This format is largely based off of the <a href="https://github.com/rstudio/rticles"><code>rticles</code></a>
+of <code>jss_article</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>R Markdown output format to pass to
+<code>render</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>JSS Editorial Staff for the Journal format, RStudio for <code>jss_article</code>,
+James Balamuta for the theme hook, and David Dalpiaz for skeleton content
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/rstudio/rticles"><code>rticles</code></a> package by JJ Allaire, R Foundation, Hadley Wickham, Journal of Statistical Software, Yihui Xie, Ramnath
+Vaidyanathan, Association for Computing Machinery, Carl Boettiger, Elsevier, Karl Broman, Kirill
+Mueller, Bastiaan Quast, Randall Pruim, Ben Marwick, Charlotte Wickham, Oliver Keyes and Miao Yu
+(2017). rticles: Article Formats for R Markdown. R package version 0.4.1.
+<a href="https://CRAN.R-project.org/package=rticles">https://CRAN.R-project.org/package=rticles</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+library(rmarkdown)
+draft("MyArticle.Rmd", template = "latex_journal_format", package = "uiucthemes")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

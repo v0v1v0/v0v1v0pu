@@ -1,0 +1,38 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ugatsdb_reconnect</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reconnect to Database</h2>
+
+<h3>Description</h3>
+
+<p>This function terminates an existing connection to the database server and attempts to reconnect to it.
+It is now somewhat redundant by the safe query mechanism introduced in v0.2.1 of the package, where each query is evaluated inside
+<code>tryCatch</code> and the database connection is renewed if the query fails. This function can still be used to manually
+renew the database connection.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ugatsdb_reconnect()
+</code></pre>
+
+
+<h3>See Also</h3>
+
+<p><code>ugatsdb</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+ugatsdb_reconnect()
+
+</code></pre>
+
+
+</div>
